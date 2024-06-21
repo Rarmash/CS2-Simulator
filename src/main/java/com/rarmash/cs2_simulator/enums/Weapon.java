@@ -37,7 +37,7 @@ public enum Weapon {
     AUG ("AUG"),
     SG_553 ("SG 553"),
     // Sniper rifles
-    SSG_08 ("SSG-08"),
+    SSG_08 ("SSG 08"),
     AWP ("AWP"),
     SCAR_20 ("SCAR-20"),
     G3SG1 ("G3SG1"),
@@ -48,7 +48,7 @@ public enum Weapon {
     // Gloves
     GLOVES ("Gloves");
 
-    private String weaponTitle;
+    private final String weaponTitle;
 
     Weapon(String weaponTitle) {
         this.weaponTitle = weaponTitle;

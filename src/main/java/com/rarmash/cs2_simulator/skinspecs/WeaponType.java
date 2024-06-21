@@ -3,15 +3,15 @@ package com.rarmash.cs2_simulator.skinspecs;
 public enum WeaponType {
     PISTOL ("Pistol"),
     SMG ("SMG"),
-    SNIPER_RIFLE ("Sniper rifle"),
+    SNIPER_RIFLE ("Sniper Rifle"),
     RIFLE ("Rifle"),
     KNIFE ("Knife"),
     SHOTGUN ("Shotgun"),
-    MACHINE_GUN ("Machine gun"),
+    MACHINE_GUN ("Machine Gun"),
     GLOVES ("Gloves"),
     EQUIPMENT ("Equipment");
 
-    private String weaponType;
+    private final String weaponType;
 
     WeaponType(String weaponTypeString) {
         this.weaponType = weaponTypeString;

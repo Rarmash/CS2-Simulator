@@ -118,6 +118,7 @@ public class Skin {
             string += ((Gloves) item).getGlovesTitle();
         }
         string += " | " + name;
+        string += "\nRarity: " + rarity.getRarityTitle();
         if (!(weaponType == WeaponType.KNIFE && name == "Vanilla")) {
             string += "\nFloat: " + getSkinFloat();
             string += "\nExterior: " + getExterior().getExteriorTitle();
