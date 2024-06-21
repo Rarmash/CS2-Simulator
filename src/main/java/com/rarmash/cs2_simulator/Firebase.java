@@ -9,7 +9,6 @@ import com.rarmash.cs2_simulator.skinspecs.Rarity;
 import com.rarmash.cs2_simulator.enums.Weapon;
 import com.rarmash.cs2_simulator.skinspecs.WeaponType;
 
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -18,11 +17,10 @@ import java.util.concurrent.ExecutionException;
 public class Firebase {
     private static Firestore db;
     public Firebase() {
-        String firebaseConfig = "firebaseConfig.json";
 
         try {
             db = FirestoreOptions.newBuilder()
-                    .setCredentials(GoogleCredentials.fromStream(new FileInputStream(firebaseConfig)))
+                    .setCredentials(GoogleCredentials.fromStream(getClass().getClassLoader().getResourceAsStream("firebaseConfig.json")))
                     .build()
                     .getService();
         } catch (IOException e) {
