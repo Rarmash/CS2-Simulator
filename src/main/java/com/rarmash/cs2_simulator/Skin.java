@@ -9,6 +9,7 @@ import com.rarmash.cs2_simulator.skinspecs.WeaponType;
 
 public class Skin {
     private final String name;
+    private final String skinImage;
     private double skinFloat;
     private final double float_top;
     private final double float_bottom;
@@ -19,8 +20,9 @@ public class Skin {
     private final WeaponType weaponType;
     private final Object item;
 
-    public Skin(String name, double float_top, double float_bottom, boolean isSouvenir, Rarity rarity, WeaponType weaponType, Weapon weapon) {
+    public Skin(String name, String skinImage, double float_top, double float_bottom, boolean isSouvenir, Rarity rarity, WeaponType weaponType, Weapon weapon) {
         this.name = name;
+        this.skinImage = skinImage;
         this.float_top = float_top;
         this.float_bottom = float_bottom;
         this.isSouvenir = isSouvenir;
@@ -29,8 +31,9 @@ public class Skin {
         this.item = weapon;
     }
 
-    public Skin(String name, double float_top, double float_bottom, boolean isSouvenir, Rarity rarity, WeaponType weaponType, Knife knife) {
+    public Skin(String name, String skinImage, double float_top, double float_bottom, boolean isSouvenir, Rarity rarity, WeaponType weaponType, Knife knife) {
         this.name = name;
+        this.skinImage = skinImage;
         this.float_top = float_top;
         this.float_bottom = float_bottom;
         this.isSouvenir = isSouvenir;
@@ -39,8 +42,9 @@ public class Skin {
         this.item = knife;
     }
 
-    public Skin(String name, double float_top, double float_bottom, boolean isSouvenir, Rarity rarity, WeaponType weaponType, Gloves gloves) {
+    public Skin(String name, String skinImage, double float_top, double float_bottom, boolean isSouvenir, Rarity rarity, WeaponType weaponType, Gloves gloves) {
         this.name = name;
+        this.skinImage = skinImage;
         this.float_top = float_top;
         this.float_bottom = float_bottom;
         this.isSouvenir = isSouvenir;
@@ -51,6 +55,10 @@ public class Skin {
 
     public String getName() {
         return name;
+    }
+
+    public String getSkinImage() {
+        return skinImage;
     }
 
     public void setSkinFloat(double skinFloat) {

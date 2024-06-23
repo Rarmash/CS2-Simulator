@@ -45,6 +45,7 @@ public class Firebase {
                             Weapon weapon = Weapon.fromString(skinSnap.getString("weapon"));
                             skins.add(new Skin(
                                     skinSnap.getString("name"),
+                                    skinSnap.getString("skinImage"),
                                     skinSnap.getDouble("float_top"),
                                     skinSnap.getDouble("float_bottom"),
                                     skinSnap.getBoolean("isSouvenir"),
@@ -56,6 +57,7 @@ public class Firebase {
                             Knife knife = Knife.fromString(skinSnap.getString("knife"));
                             skins.add(new Skin(
                                     skinSnap.getString("name"),
+                                    skinSnap.getString("skinImage"),
                                     skinSnap.getDouble("float_top"),
                                     skinSnap.getDouble("float_bottom"),
                                     skinSnap.getBoolean("isSouvenir"),
@@ -67,6 +69,7 @@ public class Firebase {
                             Gloves gloves = Gloves.fromString(skinSnap.getString("gloves"));
                             skins.add(new Skin(
                                     skinSnap.getString("name"),
+                                    skinSnap.getString("skinImage"),
                                     skinSnap.getDouble("float_top"),
                                     skinSnap.getDouble("float_bottom"),
                                     skinSnap.getBoolean("isSouvenir"),
@@ -94,5 +97,18 @@ public class Firebase {
             e.printStackTrace();
         }
         return caseList;
+    }
+
+    public static String getCaseImage(String caseId) {
+        DocumentReference caseRef = db.collection("Cases").document(caseId);
+        try {
+            DocumentSnapshot caseSnap = caseRef.get().get();
+            if (caseSnap.exists()) {
+                return caseSnap.getString("caseImage");
+            }
+        } catch (InterruptedException | ExecutionException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 }

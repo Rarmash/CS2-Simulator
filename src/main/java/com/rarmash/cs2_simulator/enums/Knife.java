@@ -6,7 +6,7 @@ public enum Knife {
     FALCHION ("Falchion Knife"),
     FLIP ("Flip Knife"),
     GUT ("Gut Knife"),
-    HUNTSMAN ("Huntsman"),
+    HUNTSMAN ("Huntsman Knife"),
     KARAMBIT ("Karambit"),
     M9_BAYONET ("M9 Bayonet"),
     SHADOW_DAGGERS ("Shadow Daggers"),

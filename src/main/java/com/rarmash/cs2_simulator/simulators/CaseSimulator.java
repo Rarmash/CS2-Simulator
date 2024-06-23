@@ -6,9 +6,7 @@ import com.rarmash.cs2_simulator.Firebase;
 import com.rarmash.cs2_simulator.Skin;
 import com.rarmash.cs2_simulator.skinspecs.*;
 
-import java.util.ArrayList;
-import java.util.Random;
-import java.util.Scanner;
+import java.util.*;
 
 import static com.rarmash.cs2_simulator.Firebase.getCaseList;
 
@@ -16,20 +14,23 @@ public class CaseSimulator {
     public CaseSimulator() {
         Scanner scanner = new Scanner(System.in);
 
+        List<QueryDocumentSnapshot> documents = getCaseList();
+
+        Collections.sort(documents, Comparator.comparingInt(o -> Integer.parseInt(o.getId())));
+
         System.out.println("Choose case to start opening:");
         int n = 1;
-        for (QueryDocumentSnapshot document: getCaseList()) {
+        for (QueryDocumentSnapshot document: documents) {
             System.out.println(n + ". " + document.get("name"));
             n++;
         }
 
         int input = scanner.nextInt();
 
-        ArrayList<Skin> skinsList = Firebase.getSkinsFromCase(String.valueOf(input));
-
         Case caseObj = new Case(
                 (String) getCaseList().get(input - 1).get("name"),
-                skinsList
+                Firebase.getCaseImage(String.valueOf(input)),
+                Firebase.getSkinsFromCase(String.valueOf(input))
         );
 
         while (true) {
@@ -44,9 +45,7 @@ public class CaseSimulator {
 
             System.out.println(item);
 
-            Scanner scanner2 = new Scanner(System.in);
-            String inp = scanner2.nextLine();
-
+            new Scanner(System.in).nextLine();
         }
     }
 
@@ -92,7 +91,7 @@ public class CaseSimulator {
             case COVERT -> {
                 for (Skin skin: skins) {
                     if ((skin.getRarity() == Rarity.COVERT || skin.getRarity() == Rarity.CONTRABAND)
-                            && (skin.getWeaponType() != WeaponType.KNIFE || skin.getWeaponType() != WeaponType.GLOVES)) {
+                            && skin.getWeaponType() != WeaponType.KNIFE && skin.getWeaponType() != WeaponType.GLOVES) {
                         sortedSkins.add(skin);
                     }
                 }
