@@ -7,6 +7,8 @@ import com.rarmash.cs2_simulator.skinspecs.Rarity;
 import com.rarmash.cs2_simulator.enums.Weapon;
 import com.rarmash.cs2_simulator.skinspecs.WeaponType;
 
+import java.util.Objects;
+
 public class Skin {
     private final String name;
     private final String skinImage;
@@ -127,7 +129,7 @@ public class Skin {
         }
         string += " | " + name;
         string += "\nRarity: " + rarity.getRarityTitle();
-        if (!(weaponType == WeaponType.KNIFE && name == "Vanilla")) {
+        if (!(weaponType == WeaponType.KNIFE && Objects.equals(name, "Vanilla"))) {
             string += "\nFloat: " + getSkinFloat();
             string += "\nExterior: " + getExterior().getExteriorTitle();
         }

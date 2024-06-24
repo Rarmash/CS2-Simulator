@@ -2,6 +2,7 @@ package com.rarmash.cs2_simulator.skinspecs;
 
 public enum Rarity {
     CONTRABAND ("Contraband"),
+    EXTRAORDINARY ("Extraordinary"),
     COVERT ("Covert"),
     CLASSIFIED ("Classified"),
     RESTRICTED ("Restricted"),

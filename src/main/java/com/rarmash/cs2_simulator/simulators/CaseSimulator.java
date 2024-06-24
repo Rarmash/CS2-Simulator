@@ -16,7 +16,7 @@ public class CaseSimulator {
 
         List<QueryDocumentSnapshot> documents = getCaseList();
 
-        Collections.sort(documents, Comparator.comparingInt(o -> Integer.parseInt(o.getId())));
+        documents.sort(Comparator.comparingInt(o -> Integer.parseInt(o.getId())));
 
         System.out.println("Choose case to start opening:");
         int n = 1;
@@ -37,7 +37,11 @@ public class CaseSimulator {
             CaseOdds finalExterior = getRandomExterior();
 
             Skin item = selectSkin(caseObj.getSkins(), finalExterior);
-            item.setIsStattrak(generateStattrak());
+            if (item.getWeaponType() != WeaponType.GLOVES) {
+                item.setIsStattrak(generateStattrak());
+            } else {
+                item.setIsStattrak(false);
+            }
             if (!(item.getWeaponType() == WeaponType.KNIFE && item.getName() == "Vanilla")) {
                 item.setSkinFloat(generateFloat(item.getFloat_top(), item.getFloat_bottom()));
                 item.setExterior(FloatValue.getExterior(item.getSkinFloat()));
@@ -98,7 +102,7 @@ public class CaseSimulator {
             }
             case SPECIAL_ITEM -> {
                 for (Skin skin: skins) {
-                    if ((skin.getRarity() == Rarity.COVERT || skin.getRarity() == Rarity.CONTRABAND)
+                    if ((skin.getRarity() == Rarity.COVERT || skin.getRarity() == Rarity.EXTRAORDINARY)
                             && (skin.getWeaponType() == WeaponType.KNIFE || skin.getWeaponType() == WeaponType.GLOVES)) {
                         sortedSkins.add(skin);
                     }
