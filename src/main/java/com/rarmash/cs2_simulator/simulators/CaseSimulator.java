@@ -1,37 +1,26 @@
 package com.rarmash.cs2_simulator.simulators;
 
-import com.google.cloud.firestore.QueryDocumentSnapshot;
 import com.rarmash.cs2_simulator.Case;
-import com.rarmash.cs2_simulator.Firebase;
+import com.rarmash.cs2_simulator.DataStore;
 import com.rarmash.cs2_simulator.Skin;
 import com.rarmash.cs2_simulator.skinspecs.*;
 
 import java.util.*;
 
-import static com.rarmash.cs2_simulator.Firebase.getCaseList;
-
 public class CaseSimulator {
     public CaseSimulator() {
         Scanner scanner = new Scanner(System.in);
 
-        List<QueryDocumentSnapshot> documents = getCaseList();
-
-        documents.sort(Comparator.comparingInt(o -> Integer.parseInt(o.getId())));
-
         System.out.println("Choose case to start opening:");
         int n = 1;
-        for (QueryDocumentSnapshot document: documents) {
-            System.out.println(n + ". " + document.get("name"));
+        for (Case caseObj: DataStore.getCases()) {
+            System.out.println(n + ". " + caseObj.getName());
             n++;
         }
 
         int input = scanner.nextInt();
 
-        Case caseObj = new Case(
-                (String) getCaseList().get(input - 1).get("name"),
-                Firebase.getCaseImage(String.valueOf(input)),
-                Firebase.getSkinsFromCase(String.valueOf(input))
-        );
+        Case caseObj = DataStore.getCase(input);
 
         while (true) {
             CaseOdds finalExterior = getRandomExterior();
@@ -53,7 +42,7 @@ public class CaseSimulator {
         }
     }
 
-    private CaseOdds getRandomExterior() {
+    public static CaseOdds getRandomExterior() {
         Random rand = new Random();
         double randomValue = rand.nextDouble();
 
@@ -68,7 +57,7 @@ public class CaseSimulator {
         return CaseOdds.MIl_SPEC;
     }
 
-    private ArrayList<Skin> sortSkins(ArrayList<Skin> skins, CaseOdds exterior) {
+    private static ArrayList<Skin> sortSkins(ArrayList<Skin> skins, CaseOdds exterior) {
         ArrayList<Skin> sortedSkins = new ArrayList<>();
         switch (exterior) {
             case MIl_SPEC -> {
@@ -112,13 +101,13 @@ public class CaseSimulator {
         return sortedSkins;
     }
 
-    private double generateFloat(double float_top, double float_bottom) {
+    public static double generateFloat(double float_top, double float_bottom) {
         Random rand = new Random();
         double random = rand.nextDouble();
         return float_top + random * (float_bottom - float_top);
     }
 
-    private Skin selectSkin(ArrayList<Skin> skins, CaseOdds exterior) {
+    public static Skin selectSkin(ArrayList<Skin> skins, CaseOdds exterior) {
         Skin skin = null;
         switch (exterior) {
             case MIl_SPEC -> {
@@ -155,7 +144,7 @@ public class CaseSimulator {
         return skin;
     }
 
-    private boolean generateStattrak() {
+    public static boolean generateStattrak() {
         return new Random().nextInt(10) == 0;
     }
 }

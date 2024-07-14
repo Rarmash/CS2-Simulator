@@ -13,6 +13,7 @@ dependencies {
     testImplementation(platform("org.junit:junit-bom:5.10.0"))
     testImplementation("org.junit.jupiter:junit-jupiter")
     implementation("com.google.cloud:google-cloud-firestore:3.0.0")
+    implementation("com.google.cloud:google-cloud-storage:2.40.0")
 }
 
 tasks.test {

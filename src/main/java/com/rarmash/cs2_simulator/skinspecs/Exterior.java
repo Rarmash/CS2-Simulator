@@ -7,7 +7,7 @@ public enum Exterior {
     WELL_WORN ("Well-Worn"),
     BATTLE_SCARRED ("Battle-Scarred");
 
-    private String exteriorTitle;
+    private final String exteriorTitle;
 
     Exterior(String exteriorTitle) {
         this.exteriorTitle = exteriorTitle;
