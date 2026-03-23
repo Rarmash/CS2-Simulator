@@ -2,10 +2,10 @@ package com.rarmash.cs2_simulator;
 
 import com.rarmash.cs2_simulator.enums.Gloves;
 import com.rarmash.cs2_simulator.enums.Knife;
-import com.rarmash.cs2_simulator.skinspecs.Exterior;
-import com.rarmash.cs2_simulator.skinspecs.Rarity;
-import com.rarmash.cs2_simulator.enums.Weapon;
-import com.rarmash.cs2_simulator.skinspecs.WeaponType;
+import com.rarmash.cs2_simulator.model.enums.Rarity;
+import com.rarmash.cs2_simulator.model.enums.Exterior;
+import com.rarmash.cs2_simulator.model.enums.Weapon;
+import com.rarmash.cs2_simulator.model.enums.WeaponType;
 
 import java.util.Objects;
 

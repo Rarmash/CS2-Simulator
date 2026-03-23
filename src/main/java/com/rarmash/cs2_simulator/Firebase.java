@@ -5,9 +5,9 @@ import com.google.auth.oauth2.GoogleCredentials;
 import com.google.cloud.firestore.*;
 import com.rarmash.cs2_simulator.enums.Gloves;
 import com.rarmash.cs2_simulator.enums.Knife;
-import com.rarmash.cs2_simulator.skinspecs.Rarity;
-import com.rarmash.cs2_simulator.enums.Weapon;
-import com.rarmash.cs2_simulator.skinspecs.WeaponType;
+import com.rarmash.cs2_simulator.model.enums.Rarity;
+import com.rarmash.cs2_simulator.model.enums.Weapon;
+import com.rarmash.cs2_simulator.model.enums.WeaponType;
 
 import java.io.IOException;
 import java.util.ArrayList;
