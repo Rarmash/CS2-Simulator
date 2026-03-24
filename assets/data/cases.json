@@ -1,0 +1,254 @@
+[
+  {
+    "id": "2",
+    "name": "CS:GO Weapon Case",
+    "caseImage": "assets/cases/2.png",
+    "releaseDate": "2013-08-14"
+  },
+  {
+    "id": "3",
+    "name": "CS:GO Weapon Case 2",
+    "caseImage": "assets/cases/3.png",
+    "releaseDate": "2013-11-06"
+  },
+  {
+    "id": "4",
+    "name": "CS:GO Weapon Case 3",
+    "caseImage": "assets/cases/4.png",
+    "releaseDate": "2014-02-12"
+  },
+  {
+    "id": "21",
+    "name": "Operation Bravo Case",
+    "caseImage": "assets/cases/21.png",
+    "releaseDate": "2013-09-19"
+  },
+  {
+    "id": "39",
+    "name": "Winter Offensive Weapon Case",
+    "caseImage": "assets/cases/39.png",
+    "releaseDate": "2013-12-18"
+  },
+  {
+    "id": "19",
+    "name": "Huntsman Weapon Case",
+    "caseImage": "assets/cases/19.png",
+    "releaseDate": "2014-05-01"
+  },
+  {
+    "id": "22",
+    "name": "Operation Breakout Weapon Case",
+    "caseImage": "assets/cases/22.png",
+    "releaseDate": "2014-07-01"
+  },
+  {
+    "id": "40",
+    "name": "eSports 2013 Case",
+    "caseImage": "assets/cases/40.png",
+    "releaseDate": "2013-08-14"
+  },
+  {
+    "id": "41",
+    "name": "eSports 2013 Winter Case",
+    "caseImage": "assets/cases/41.png",
+    "releaseDate": "2013-12-18"
+  },
+  {
+    "id": "42",
+    "name": "eSports 2014 Summer Case",
+    "caseImage": "assets/cases/42.png",
+    "releaseDate": "2014-07-10"
+  },
+  {
+    "id": "27",
+    "name": "Operation Vanguard Weapon Case",
+    "caseImage": "assets/cases/27.png",
+    "releaseDate": "2014-11-11"
+  },
+  {
+    "id": "25",
+    "name": "Operation Phoenix Weapon Case",
+    "caseImage": "assets/cases/25.png",
+    "releaseDate": "2014-02-20"
+  },
+  {
+    "id": "33",
+    "name": "Revolver Case",
+    "caseImage": "assets/cases/33.png",
+    "releaseDate": "2015-12-08"
+  },
+  {
+    "id": "7",
+    "name": "Chroma Case",
+    "caseImage": "assets/cases/7.png",
+    "releaseDate": "2015-01-08"
+  },
+  {
+    "id": "5",
+    "name": "Chroma 2 Case",
+    "caseImage": "assets/cases/5.png",
+    "releaseDate": "2015-04-15"
+  },
+  {
+    "id": "11",
+    "name": "Falchion Case",
+    "caseImage": "assets/cases/11.png",
+    "releaseDate": "2015-05-26"
+  },
+  {
+    "id": "34",
+    "name": "Shadow Case",
+    "caseImage": "assets/cases/34.png",
+    "releaseDate": "2015-09-18"
+  },
+  {
+    "id": "28",
+    "name": "Operation Wildfire Case",
+    "caseImage": "assets/cases/28.png",
+    "releaseDate": "2016-02-17"
+  },
+  {
+    "id": "6",
+    "name": "Chroma 3 Case",
+    "caseImage": "assets/cases/6.png",
+    "releaseDate": "2016-04-27"
+  },
+  {
+    "id": "16",
+    "name": "Gamma Case",
+    "caseImage": "assets/cases/16.png",
+    "releaseDate": "2016-06-15"
+  },
+  {
+    "id": "15",
+    "name": "Gamma 2 Case",
+    "caseImage": "assets/cases/15.png",
+    "releaseDate": "2016-08-18"
+  },
+  {
+    "id": "17",
+    "name": "Glove Case",
+    "caseImage": "assets/cases/17.png",
+    "releaseDate": "2016-11-28"
+  },
+  {
+    "id": "38",
+    "name": "Spectrum Case",
+    "caseImage": "assets/cases/38.png",
+    "releaseDate": "2017-03-15"
+  },
+  {
+    "id": "24",
+    "name": "Operation Hydra Case",
+    "caseImage": "assets/cases/24.png",
+    "releaseDate": "2017-05-23"
+  },
+  {
+    "id": "37",
+    "name": "Spectrum 2 Case",
+    "caseImage": "assets/cases/37.png",
+    "releaseDate": "2017-09-14"
+  },
+  {
+    "id": "8",
+    "name": "Clutch Case",
+    "caseImage": "assets/cases/8.png",
+    "releaseDate": "2018-02-15"
+  },
+  {
+    "id": "18",
+    "name": "Horizon Case",
+    "caseImage": "assets/cases/18.png",
+    "releaseDate": "2018-08-03"
+  },
+  {
+    "id": "9",
+    "name": "Danger Zone Case",
+    "caseImage": "assets/cases/9.png",
+    "releaseDate": "2018-12-06"
+  },
+  {
+    "id": "30",
+    "name": "Prisma Case",
+    "caseImage": "assets/cases/30.png",
+    "releaseDate": "2019-03-13"
+  },
+  {
+    "id": "35",
+    "name": "Shattered Web Case",
+    "caseImage": "assets/cases/35.png",
+    "releaseDate": "2019-11-18"
+  },
+  {
+    "id": "1",
+    "name": "CS20 Case",
+    "caseImage": "assets/cases/1.png",
+    "releaseDate": "2019-10-18"
+  },
+  {
+    "id": "29",
+    "name": "Prisma 2 Case",
+    "caseImage": "assets/cases/29.png",
+    "releaseDate": "2020-03-31"
+  },
+  {
+    "id": "13",
+    "name": "Fracture Case",
+    "caseImage": "assets/cases/13.png",
+    "releaseDate": "2020-08-06"
+  },
+  {
+    "id": "23",
+    "name": "Operation Broken Fang Case",
+    "caseImage": "assets/cases/23.png",
+    "releaseDate": "2020-12-03"
+  },
+  {
+    "id": "36",
+    "name": "Snakebite Case",
+    "caseImage": "assets/cases/36.png",
+    "releaseDate": "2021-05-03"
+  },
+  {
+    "id": "26",
+    "name": "Operation Riptide Case",
+    "caseImage": "assets/cases/26.png",
+    "releaseDate": "2021-09-22"
+  },
+  {
+    "id": "10",
+    "name": "Dreams & Nightmares Case",
+    "caseImage": "assets/cases/10.png",
+    "releaseDate": "2022-01-20"
+  },
+  {
+    "id": "31",
+    "name": "Recoil Case",
+    "caseImage": "assets/cases/31.png",
+    "releaseDate": "2022-07-01"
+  },
+  {
+    "id": "32",
+    "name": "Revolution Case",
+    "caseImage": "assets/cases/32.png",
+    "releaseDate": "2023-02-09"
+  },
+  {
+    "id": "20",
+    "name": "Kilowatt Case",
+    "caseImage": "assets/cases/20.png",
+    "releaseDate": "2024-02-06"
+  },
+  {
+    "id": "14",
+    "name": "Gallery Case",
+    "caseImage": "assets/cases/14.png",
+    "releaseDate": "2024-10-02"
+  },
+  {
+    "id": "12",
+    "name": "Fever Case",
+    "caseImage": "assets/cases/12.png",
+    "releaseDate": "2025-03-31"
+  }
+]
