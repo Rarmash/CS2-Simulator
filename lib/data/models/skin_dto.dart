@@ -9,6 +9,7 @@ class SkinDto {
   final String weaponType;
   final String itemKind;
   final String itemId;
+  final String? collection;
 
   SkinDto({
     required this.id,
@@ -21,6 +22,7 @@ class SkinDto {
     required this.weaponType,
     required this.itemKind,
     required this.itemId,
+    required this.collection,
   });
 
   factory SkinDto.fromJson(Map<String, dynamic> json) {
@@ -35,6 +37,7 @@ class SkinDto {
       weaponType: json['weaponType'] as String,
       itemKind: json['itemKind'] as String,
       itemId: json['itemId'] as String,
+      collection: json['collection'] as String?,
     );
   }
 

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'data/repositories/local_data_repository.dart';
-import 'presentation/screens/case_list_screen.dart';
+import 'presentation/screens/home_screen.dart';
 
 void main() {
   runApp(const Cs2SimulatorApp());
@@ -15,7 +15,7 @@ class Cs2SimulatorApp extends StatelessWidget {
       title: 'CS2 Simulator',
       debugShowCheckedModeBanner: false,
       theme: ThemeData.dark(),
-      home: CaseListScreen(repository: LocalDataRepository()),
+      home: HomeScreen(repository: LocalDataRepository()),
     );
   }
 }

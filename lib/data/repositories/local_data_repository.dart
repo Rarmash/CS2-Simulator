@@ -13,8 +13,8 @@ class LocalDataRepository {
     list.map((e) => CaseDto.fromJson(e as Map<String, dynamic>)).toList();
 
     cases.sort((a, b) {
-      final ad = a.releaseDate ?? '9999-99-99';
-      final bd = b.releaseDate ?? '9999-99-99';
+      final ad = a.releaseDate ?? '9999/99/99';
+      final bd = b.releaseDate ?? '9999/99/99';
       return ad.compareTo(bd);
     });
 
@@ -35,6 +35,13 @@ class LocalDataRepository {
         .toList();
   }
 
+  Future<Map<String, List<String>>> loadCaseToSkinIds() async {
+    final caseContents = await loadCaseContents();
+    return {
+      for (final entry in caseContents) entry.caseId: List<String>.from(entry.skinIds),
+    };
+  }
+
   Future<List<SkinDto>> loadSkinsForCase(String caseId) async {
     final skins = await loadSkins();
     final contents = await loadCaseContents();
@@ -44,8 +51,7 @@ class LocalDataRepository {
     final result = skins.where((s) => ids.contains(s.id)).toList();
 
     result.sort((a, b) {
-      final rarityCompare =
-      _rarityOrder(a).compareTo(_rarityOrder(b));
+      final rarityCompare = _rarityOrder(a).compareTo(_rarityOrder(b));
       if (rarityCompare != 0) return rarityCompare;
       return int.parse(a.id).compareTo(int.parse(b.id));
     });
