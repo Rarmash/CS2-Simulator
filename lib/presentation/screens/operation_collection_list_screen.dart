@@ -2,7 +2,10 @@ import 'package:flutter/material.dart';
 
 import '../../data/models/operation_collection_dto.dart';
 import '../../data/repositories/local_data_repository.dart';
-import '../widgets/asset_collection_image.dart';
+import '../helpers/responsive_grid_helper.dart';
+import '../helpers/source_color_helper.dart';
+import '../widgets/chip_badge.dart';
+import '../widgets/collection_list_card.dart';
 import 'operation_collection_open_screen.dart';
 
 class OperationCollectionListScreen extends StatefulWidget {
@@ -29,66 +32,6 @@ class _OperationCollectionListScreenState
   void initState() {
     super.initState();
     _future = widget.repository.loadOperationCollections();
-  }
-
-  String? _formatReleaseDate(String? raw) {
-    if (raw == null || raw.isEmpty) return null;
-
-    final parts = raw.split('-');
-    if (parts.length != 3) return raw;
-
-    const months = {
-      '01': 'Jan',
-      '02': 'Feb',
-      '03': 'Mar',
-      '04': 'Apr',
-      '05': 'May',
-      '06': 'Jun',
-      '07': 'Jul',
-      '08': 'Aug',
-      '09': 'Sep',
-      '10': 'Oct',
-      '11': 'Nov',
-      '12': 'Dec',
-    };
-
-    final year = parts[0];
-    final month = months[parts[1]] ?? parts[1];
-    final day = parts[2];
-
-    return '$day $month $year';
-  }
-
-  int _crossAxisCount(double width) {
-    if (width >= 1500) return 4;
-    if (width >= 1100) return 3;
-    if (width >= 700) return 2;
-    return 1;
-  }
-
-  double _childAspectRatio(double width) {
-    if (width >= 1100) return 1.45;
-    if (width >= 700) return 1.35;
-    return 2.25;
-  }
-
-  Color _operationColor(String operationId) {
-    switch (operationId) {
-      case 'SHATTERED_WEB':
-        return Colors.deepPurpleAccent;
-      case 'BLOODHOUND':
-        return Colors.redAccent;
-      case 'BREAKOUT':
-        return Colors.lightBlueAccent;
-      case 'PHOENIX':
-        return Colors.orangeAccent;
-      case 'BRAVO':
-        return Colors.greenAccent;
-      case 'PAYBACK':
-        return Colors.blueAccent;
-      default:
-        return Colors.blueGrey;
-    }
   }
 
   List<String> _availableFilters(List<OperationCollectionDto> all) {
@@ -188,11 +131,19 @@ class _OperationCollectionListScreenState
   }
 
   Widget _buildCard(BuildContext context, OperationCollectionDto collection) {
-    final releaseDate = _formatReleaseDate(collection.releaseDate);
-    final color = _operationColor(collection.operationId);
+    final color = SourceColorHelper.operationColor(collection.operationId);
 
-    return InkWell(
-      borderRadius: BorderRadius.circular(16),
+    return CollectionListCard(
+      imagePath: collection.image,
+      title: collection.name,
+      releaseDate: collection.releaseDate,
+      chips: [
+        ChipBadge(
+          label: collection.operationName,
+          color: color,
+        ),
+      ],
+      metadata: const [],
       onTap: () {
         Navigator.push(
           context,
@@ -204,100 +155,6 @@ class _OperationCollectionListScreenState
           ),
         );
       },
-      child: Card(
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(16),
-          side: const BorderSide(color: Colors.white10),
-        ),
-        child: Padding(
-          padding: const EdgeInsets.all(14),
-          child: LayoutBuilder(
-            builder: (context, constraints) {
-              final compact = constraints.maxWidth < 320;
-
-              final image = AssetCollectionImage(
-                assetPath: collection.image,
-                fit: BoxFit.contain,
-              );
-
-              final textBlock = Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Container(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 8,
-                      vertical: 4,
-                    ),
-                    decoration: BoxDecoration(
-                      color: color.withOpacity(0.14),
-                      borderRadius: BorderRadius.circular(999),
-                      border: Border.all(color: color.withOpacity(0.5)),
-                    ),
-                    child: Text(
-                      collection.operationName,
-                      style: TextStyle(
-                        color: color,
-                        fontSize: 11,
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ),
-                  ),
-                  const SizedBox(height: 8),
-                  Text(
-                    collection.name,
-                    maxLines: compact ? 2 : 3,
-                    overflow: TextOverflow.ellipsis,
-                    style: const TextStyle(
-                      fontSize: 17,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  if (releaseDate != null) ...[
-                    const SizedBox(height: 8),
-                    Text(
-                      'Released: $releaseDate',
-                      style: const TextStyle(
-                        color: Colors.white70,
-                        fontSize: 13,
-                      ),
-                    ),
-                  ],
-                ],
-              );
-
-              if (constraints.maxWidth < 500) {
-                return Row(
-                  children: [
-                    SizedBox(
-                      width: 92,
-                      height: 92,
-                      child: Padding(
-                        padding: const EdgeInsets.only(right: 12),
-                        child: image,
-                      ),
-                    ),
-                    Expanded(child: textBlock),
-                  ],
-                );
-              }
-
-              return Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Expanded(
-                    child: Padding(
-                      padding: const EdgeInsets.only(bottom: 10),
-                      child: image,
-                    ),
-                  ),
-                  textBlock,
-                ],
-              );
-            },
-          ),
-        ),
-      ),
     );
   }
 
@@ -319,8 +176,10 @@ class _OperationCollectionListScreenState
 
           return LayoutBuilder(
             builder: (context, constraints) {
-              final crossAxisCount = _crossAxisCount(constraints.maxWidth);
-              final aspectRatio = _childAspectRatio(constraints.maxWidth);
+              final crossAxisCount =
+              ResponsiveGridHelper.listCrossAxisCount(constraints.maxWidth);
+              final aspectRatio =
+              ResponsiveGridHelper.listChildAspectRatio(constraints.maxWidth);
 
               return Column(
                 children: [

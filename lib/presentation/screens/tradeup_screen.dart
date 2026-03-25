@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import '../../data/models/skin_dto.dart';
 import '../../data/repositories/local_data_repository.dart';
 import '../../domain/tradeup_service.dart';
+import '../helpers/responsive_grid_helper.dart';
+import '../helpers/skin_ui_helper.dart';
 
 class TradeUpScreen extends StatefulWidget {
   final LocalDataRepository repository;
@@ -79,30 +81,6 @@ class _TradeUpScreenState extends State<TradeUpScreen> {
     );
   }
 
-  Color _rarityColor(SkinDto s) {
-    if (s.isSpecialItem) return Colors.amber;
-
-    switch (s.rarity) {
-      case 'CONSUMER':
-        return Colors.grey;
-      case 'INDUSTRIAL':
-        return Colors.lightBlueAccent;
-      case 'MIL_SPEC':
-        return Colors.blue;
-      case 'RESTRICTED':
-        return Colors.purple;
-      case 'CLASSIFIED':
-        return Colors.pink;
-      case 'COVERT':
-      case 'CONTRABAND':
-        return Colors.red;
-      case 'EXTRAORDINARY':
-        return Colors.amber;
-      default:
-        return Colors.white24;
-    }
-  }
-
   String _rarityLabel(String rarity) {
     switch (rarity) {
       case 'CONSUMER':
@@ -119,31 +97,6 @@ class _TradeUpScreenState extends State<TradeUpScreen> {
         return 'Covert';
       default:
         return rarity;
-    }
-  }
-
-  String _weaponTypeLabel(String type) {
-    switch (type) {
-      case 'PISTOL':
-        return 'Pistol';
-      case 'SMG':
-        return 'SMG';
-      case 'SNIPER_RIFLE':
-        return 'Sniper Rifle';
-      case 'RIFLE':
-        return 'Rifle';
-      case 'KNIFE':
-        return 'Knife';
-      case 'SHOTGUN':
-        return 'Shotgun';
-      case 'MACHINE_GUN':
-        return 'Machine Gun';
-      case 'GLOVES':
-        return 'Gloves';
-      case 'EQUIPMENT':
-        return 'Equipment';
-      default:
-        return type;
     }
   }
 
@@ -235,14 +188,6 @@ class _TradeUpScreenState extends State<TradeUpScreen> {
     }
   }
 
-  int _grid(double w) {
-    if (w > 1400) return 7;
-    if (w > 1100) return 6;
-    if (w > 800) return 5;
-    if (w > 600) return 4;
-    return 3;
-  }
-
   bool _matchesSearch(SkinDto s, _TradeUpData data) {
     final q = _search.trim().toLowerCase();
     if (q.isEmpty) return true;
@@ -270,7 +215,7 @@ class _TradeUpScreenState extends State<TradeUpScreen> {
       );
     }
 
-    final color = _rarityColor(skin);
+    final color = SkinUiHelper.rarityColor(skin);
 
     return GestureDetector(
       onTap: () => _removeAt(i, data),
@@ -306,7 +251,7 @@ class _TradeUpScreenState extends State<TradeUpScreen> {
   }
 
   Widget _skinTile(SkinDto s, _TradeUpData data) {
-    final color = _rarityColor(s);
+    final color = SkinUiHelper.rarityColor(s);
     final count = _selected.where((e) => e.id == s.id).length;
     final blocked = !_canAddMore();
     final caseNames = data.skinIdToCaseNames[s.id] ?? const [];
@@ -353,10 +298,7 @@ class _TradeUpScreenState extends State<TradeUpScreen> {
                           maxLines: 2,
                           overflow: TextOverflow.ellipsis,
                           textAlign: TextAlign.center,
-                          style: const TextStyle(
-                            fontSize: 10,
-                            color: Colors.white70,
-                          ),
+                          style: const TextStyle(fontSize: 10, color: Colors.white70),
                         ),
                         if (caseNames.isNotEmpty) ...[
                           const SizedBox(height: 3),
@@ -365,10 +307,7 @@ class _TradeUpScreenState extends State<TradeUpScreen> {
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
                             textAlign: TextAlign.center,
-                            style: const TextStyle(
-                              fontSize: 9,
-                              color: Colors.white54,
-                            ),
+                            style: const TextStyle(fontSize: 9, color: Colors.white54),
                           ),
                         ],
                         if (s.collection != null && s.collection!.isNotEmpty) ...[
@@ -378,10 +317,7 @@ class _TradeUpScreenState extends State<TradeUpScreen> {
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
                             textAlign: TextAlign.center,
-                            style: const TextStyle(
-                              fontSize: 9,
-                              color: Colors.white38,
-                            ),
+                            style: const TextStyle(fontSize: 9, color: Colors.white38),
                           ),
                         ],
                       ],
@@ -414,7 +350,7 @@ class _TradeUpScreenState extends State<TradeUpScreen> {
     if (_result == null) return const SizedBox();
 
     final s = _result!.skin;
-    final color = _rarityColor(s);
+    final color = SkinUiHelper.rarityColor(s);
 
     return Card(
       margin: const EdgeInsets.all(12),
@@ -443,7 +379,7 @@ class _TradeUpScreenState extends State<TradeUpScreen> {
             ),
             const SizedBox(height: 6),
             Text('Rarity: ${s.isSpecialItem ? 'Special Item' : _rarityLabel(s.rarity)}'),
-            Text('Weapon type: ${_weaponTypeLabel(s.weaponType)}'),
+            Text('Weapon type: ${SkinUiHelper.weaponTypeLabel(s.weaponType)}'),
             Text('Float: ${_result!.floatValue.toStringAsFixed(5)}'),
             Text(_result!.exterior),
           ],
@@ -454,7 +390,7 @@ class _TradeUpScreenState extends State<TradeUpScreen> {
 
   Widget _chanceCard(TradeUpChance chance) {
     final skin = chance.skin;
-    final color = _rarityColor(skin);
+    final color = SkinUiHelper.rarityColor(skin);
 
     return Card(
       margin: EdgeInsets.zero,
@@ -549,132 +485,157 @@ class _TradeUpScreenState extends State<TradeUpScreen> {
 
           filtered.sort((a, b) => int.parse(a.id).compareTo(int.parse(b.id)));
 
-          return LayoutBuilder(builder: (context, c) {
-            return CustomScrollView(
-              slivers: [
-                SliverToBoxAdapter(
-                  child: Padding(
-                    padding: const EdgeInsets.all(12),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        TextField(
-                          decoration: const InputDecoration(
-                            hintText: 'Search by skin, case, or collection...',
-                            prefixIcon: Icon(Icons.search),
+          return LayoutBuilder(
+            builder: (context, c) {
+              return CustomScrollView(
+                slivers: [
+                  SliverToBoxAdapter(
+                    child: Padding(
+                      padding: const EdgeInsets.all(12),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          TextField(
+                            decoration: const InputDecoration(
+                              hintText: 'Search by skin, case, or collection...',
+                              prefixIcon: Icon(Icons.search),
+                            ),
+                            onChanged: (v) => setState(() => _search = v),
                           ),
-                          onChanged: (v) => setState(() => _search = v),
-                        ),
-                        const SizedBox(height: 8),
-                        Wrap(
-                          spacing: 8,
-                          children: [
-                            for (final r in [
-                              'CONSUMER',
-                              'INDUSTRIAL',
-                              'MIL_SPEC',
-                              'RESTRICTED',
-                              'CLASSIFIED',
-                              'COVERT',
-                            ])
-                              ChoiceChip(
-                                label: Text(_rarityLabel(r)),
-                                selected: _rarity == r,
-                                onSelected: (_) {
-                                  setState(() {
-                                    _rarity = r;
-                                    _clear();
-                                  });
-                                },
+                          const SizedBox(height: 8),
+                          Wrap(
+                            spacing: 8,
+                            children: [
+                              for (final r in [
+                                'CONSUMER',
+                                'INDUSTRIAL',
+                                'MIL_SPEC',
+                                'RESTRICTED',
+                                'CLASSIFIED',
+                                'COVERT',
+                              ])
+                                ChoiceChip(
+                                  label: Text(_rarityLabel(r)),
+                                  selected: _rarity == r,
+                                  onSelected: (_) {
+                                    setState(() {
+                                      _rarity = r;
+                                      _clear();
+                                    });
+                                  },
+                                ),
+                            ],
+                          ),
+                          const SizedBox(height: 12),
+                          Text(
+                            _selected.isEmpty
+                                ? 'Select skins'
+                                : 'Selected: ${_selected.length}/${_maxSelectable()}',
+                            style: const TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          if (_selected.isNotEmpty && _selected.first.rarity == 'COVERT')
+                            const Padding(
+                              padding: EdgeInsets.only(top: 4),
+                              child: Text(
+                                'Covert trade-up uses exactly 5 skins',
+                                style: TextStyle(color: Colors.white70, fontSize: 12),
                               ),
-                          ],
+                            ),
+                          if (!_canAddMore())
+                            const Padding(
+                              padding: EdgeInsets.only(top: 4),
+                              child: Text(
+                                'Selection is full',
+                                style: TextStyle(color: Colors.amber, fontSize: 12),
+                              ),
+                            ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  SliverToBoxAdapter(
+                    child: Padding(
+                      padding: const EdgeInsets.all(12),
+                      child: GridView.builder(
+                        shrinkWrap: true,
+                        physics: const NeverScrollableScrollPhysics(),
+                        itemCount: 10,
+                        gridDelegate:
+                        const SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 5,
+                          crossAxisSpacing: 6,
+                          mainAxisSpacing: 6,
                         ),
-                        const SizedBox(height: 12),
-                        Text(
-                          _selected.isEmpty
-                              ? 'Select skins'
-                              : 'Selected: ${_selected.length}/${_maxSelectable()}',
-                          style: const TextStyle(
-                            fontSize: 16,
+                        itemBuilder: (_, i) => _slot(i, data),
+                      ),
+                    ),
+                  ),
+                  SliverToBoxAdapter(
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 12),
+                      child: Row(
+                        children: [
+                          Expanded(
+                            child: ElevatedButton(
+                              onPressed: _tradeReady() ? () => _trade(data) : null,
+                              child: Text(
+                                _selected.isNotEmpty &&
+                                    _selected.first.rarity == 'COVERT'
+                                    ? 'TRADE → SPECIAL ITEM'
+                                    : 'TRADE',
+                              ),
+                            ),
+                          ),
+                          const SizedBox(width: 8),
+                          OutlinedButton(
+                            onPressed: _selected.isNotEmpty ? _clear : null,
+                            child: const Text('CLEAR'),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  SliverToBoxAdapter(child: _resultCard()),
+                  if (_chances.isNotEmpty)
+                    const SliverToBoxAdapter(
+                      child: Padding(
+                        padding: EdgeInsets.fromLTRB(12, 12, 12, 8),
+                        child: Text(
+                          'Possible results',
+                          style: TextStyle(
+                            fontSize: 18,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
-                        if (_selected.isNotEmpty &&
-                            _selected.first.rarity == 'COVERT')
-                          const Padding(
-                            padding: EdgeInsets.only(top: 4),
-                            child: Text(
-                              'Covert trade-up uses exactly 5 skins',
-                              style: TextStyle(
-                                color: Colors.white70,
-                                fontSize: 12,
-                              ),
-                            ),
-                          ),
-                        if (!_canAddMore())
-                          const Padding(
-                            padding: EdgeInsets.only(top: 4),
-                            child: Text(
-                              'Selection is full',
-                              style: TextStyle(
-                                color: Colors.amber,
-                                fontSize: 12,
-                              ),
-                            ),
-                          ),
-                      ],
-                    ),
-                  ),
-                ),
-                SliverToBoxAdapter(
-                  child: Padding(
-                    padding: const EdgeInsets.all(12),
-                    child: GridView.builder(
-                      shrinkWrap: true,
-                      physics: const NeverScrollableScrollPhysics(),
-                      itemCount: 10,
-                      gridDelegate:
-                      const SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 5,
-                        crossAxisSpacing: 6,
-                        mainAxisSpacing: 6,
                       ),
-                      itemBuilder: (_, i) => _slot(i, data),
                     ),
-                  ),
-                ),
-                SliverToBoxAdapter(
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 12),
-                    child: Row(
-                      children: [
-                        Expanded(
-                          child: ElevatedButton(
-                            onPressed: _tradeReady() ? () => _trade(data) : null,
-                            child: Text(
-                              _selected.isNotEmpty &&
-                                  _selected.first.rarity == 'COVERT'
-                                  ? 'TRADE → SPECIAL ITEM'
-                                  : 'TRADE',
-                            ),
+                  if (_chances.isNotEmpty)
+                    SliverPadding(
+                      padding: const EdgeInsets.symmetric(horizontal: 12),
+                      sliver: SliverGrid(
+                        delegate: SliverChildBuilderDelegate(
+                              (_, i) => _chanceCard(_chances[i]),
+                          childCount: _chances.length,
+                        ),
+                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount:
+                          ResponsiveGridHelper.tradeGridCrossAxisCount(
+                            c.maxWidth,
                           ),
+                          crossAxisSpacing: 8,
+                          mainAxisSpacing: 8,
+                          childAspectRatio: 0.72,
                         ),
-                        const SizedBox(width: 8),
-                        OutlinedButton(
-                          onPressed: _selected.isNotEmpty ? _clear : null,
-                          child: const Text('CLEAR'),
-                        ),
-                      ],
+                      ),
                     ),
-                  ),
-                ),
-                SliverToBoxAdapter(child: _resultCard()),
-                if (_chances.isNotEmpty)
                   const SliverToBoxAdapter(
                     child: Padding(
                       padding: EdgeInsets.fromLTRB(12, 12, 12, 8),
                       child: Text(
-                        'Possible results',
+                        'Available skins',
                         style: TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.bold,
@@ -682,52 +643,28 @@ class _TradeUpScreenState extends State<TradeUpScreen> {
                       ),
                     ),
                   ),
-                if (_chances.isNotEmpty)
                   SliverPadding(
-                    padding: const EdgeInsets.symmetric(horizontal: 12),
+                    padding: const EdgeInsets.all(12),
                     sliver: SliverGrid(
                       delegate: SliverChildBuilderDelegate(
-                            (_, i) => _chanceCard(_chances[i]),
-                        childCount: _chances.length,
+                            (_, i) => _skinTile(filtered[i], data),
+                        childCount: filtered.length,
                       ),
                       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: _grid(c.maxWidth),
+                        crossAxisCount:
+                        ResponsiveGridHelper.tradeGridCrossAxisCount(
+                          c.maxWidth,
+                        ),
                         crossAxisSpacing: 8,
                         mainAxisSpacing: 8,
-                        childAspectRatio: 0.72,
+                        childAspectRatio: 0.75,
                       ),
                     ),
                   ),
-                const SliverToBoxAdapter(
-                  child: Padding(
-                    padding: EdgeInsets.fromLTRB(12, 12, 12, 8),
-                    child: Text(
-                      'Available skins',
-                      style: TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ),
-                ),
-                SliverPadding(
-                  padding: const EdgeInsets.all(12),
-                  sliver: SliverGrid(
-                    delegate: SliverChildBuilderDelegate(
-                          (_, i) => _skinTile(filtered[i], data),
-                      childCount: filtered.length,
-                    ),
-                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: _grid(c.maxWidth),
-                      crossAxisSpacing: 8,
-                      mainAxisSpacing: 8,
-                      childAspectRatio: 0.75,
-                    ),
-                  ),
-                ),
-              ],
-            );
-          });
+                ],
+              );
+            },
+          );
         },
       ),
     );
