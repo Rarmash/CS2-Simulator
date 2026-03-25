@@ -10,7 +10,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-
+  flutter_svg: ^2.0.10+1
   cupertino_icons: ^1.0.8
 
 dev_dependencies:
@@ -24,3 +24,4 @@ flutter:
     - assets/data/
     - assets/skins/
     - assets/cases/
+    - assets/reward_collections/

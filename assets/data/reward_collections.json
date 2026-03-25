@@ -1,0 +1,112 @@
+[
+  {
+    "id": "10003",
+    "name": "The Graphic Design Collection",
+    "image": "assets/reward_collections/10003.svg",
+    "sourceType": "ARMORY",
+    "sourceId": "ARMORY",
+    "currency": "CREDITS",
+    "cost": 4,
+    "releaseDate": "2024-10-02"
+  },
+  {
+    "id": "10004",
+    "name": "The Overpass 2024 Collection",
+    "image": "assets/reward_collections/10004.svg",
+    "sourceType": "ARMORY",
+    "sourceId": "ARMORY",
+    "currency": "CREDITS",
+    "cost": 4,
+    "releaseDate": "2024-10-02"
+  },
+  {
+    "id": "10006",
+    "name": "The Sport & Field Collection",
+    "image": "assets/reward_collections/10006.svg",
+    "sourceType": "ARMORY",
+    "sourceId": "ARMORY",
+    "currency": "CREDITS",
+    "cost": 4,
+    "releaseDate": "2024-10-02"
+  },
+  {
+    "id": "10010",
+    "name": "The Train 2025 Collection",
+    "image": "assets/reward_collections/10010.svg",
+    "sourceType": "ARMORY",
+    "sourceId": "ARMORY",
+    "currency": "CREDITS",
+    "cost": 4,
+    "releaseDate": "2025-03-31"
+  },
+  {
+    "id": "10001",
+    "name": "The Ancient Collection",
+    "image": "assets/reward_collections/10001.png",
+    "sourceType": "OPERATION",
+    "sourceId": "BROKEN_FANG",
+    "currency": "STARS",
+    "cost": 4,
+    "releaseDate": "2020-12-03"
+  },
+  {
+    "id": "10009",
+    "name": "The Control Collection",
+    "image": "assets/reward_collections/10009.png",
+    "sourceType": "OPERATION",
+    "sourceId": "BROKEN_FANG",
+    "currency": "STARS",
+    "cost": 4,
+    "releaseDate": "2020-12-03"
+  },
+  {
+    "id": "10002",
+    "name": "The Havoc Collection",
+    "image": "assets/reward_collections/10002.png",
+    "sourceType": "OPERATION",
+    "sourceId": "BROKEN_FANG",
+    "currency": "STARS",
+    "cost": 4,
+    "releaseDate": "2020-12-03"
+  },
+  {
+    "id": "10005",
+    "name": "The 2021 Dust 2 Collection",
+    "image": "assets/reward_collections/10005.png",
+    "sourceType": "OPERATION",
+    "sourceId": "RIPTIDE",
+    "currency": "STARS",
+    "cost": 4,
+    "releaseDate": "2021-09-21"
+  },
+  {
+    "id": "10011",
+    "name": "The 2021 Mirage Collection",
+    "image": "assets/reward_collections/10011.png",
+    "sourceType": "OPERATION",
+    "sourceId": "RIPTIDE",
+    "currency": "STARS",
+    "cost": 4,
+    "releaseDate": "2021-09-21"
+  },
+  {
+    "id": "10008",
+    "name": "The 2021 Train Collection",
+    "image": "assets/reward_collections/10008.png",
+    "sourceType": "OPERATION",
+    "sourceId": "RIPTIDE",
+    "currency": "STARS",
+    "cost": 4,
+    "releaseDate": "2021-09-21"
+  },
+  {
+    "id": "10007",
+    "name": "The 2021 Vertigo Collection",
+    "image": "assets/reward_collections/10007.png",
+    "sourceType": "OPERATION",
+    "sourceId": "RIPTIDE",
+    "currency": "STARS",
+    "cost": 4,
+    "releaseDate": "2021-09-21"
+  }
+]

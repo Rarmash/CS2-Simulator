@@ -14,6 +14,10 @@ class SkinDto {
   final String? phase;
   final String? apiPaintIndex;
 
+  final String? collectionSourceType; // OPERATION | ARMORY
+  final String? collectionSourceId; // BROKEN_FANG | RIPTIDE | ARMORY
+  final bool isRewardCollection;
+
   SkinDto({
     required this.id,
     required this.name,
@@ -29,6 +33,9 @@ class SkinDto {
     required this.variantName,
     required this.phase,
     required this.apiPaintIndex,
+    required this.collectionSourceType,
+    required this.collectionSourceId,
+    required this.isRewardCollection,
   });
 
   factory SkinDto.fromJson(Map<String, dynamic> json) {
@@ -47,6 +54,9 @@ class SkinDto {
       variantName: json['variantName'] as String?,
       phase: json['phase'] as String?,
       apiPaintIndex: json['apiPaintIndex'] as String?,
+      collectionSourceType: json['collectionSourceType'] as String?,
+      collectionSourceId: json['collectionSourceId'] as String?,
+      isRewardCollection: (json['isRewardCollection'] as bool?) ?? false,
     );
   }
 
@@ -66,6 +76,9 @@ class SkinDto {
   bool get isKnife => weaponType == 'KNIFE';
   bool get isGloves => weaponType == 'GLOVES';
   bool get isSpecialItem => isKnife || isGloves;
+
+  bool get isOperationRewardCollection => collectionSourceType == 'OPERATION';
+  bool get isArmoryRewardCollection => collectionSourceType == 'ARMORY';
 
   String? get displayVariant {
     if (variantName != null && variantName!.trim().isNotEmpty) {

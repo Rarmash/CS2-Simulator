@@ -1,5 +1,12 @@
 [
   {
+    "id": "196",
+    "name": "The X-Ray Collection",
+    "caseImage": "assets/cases/196.png",
+    "releaseDate": "2000-01-01",
+    "type": "XRAY_PACKAGE"
+  },
+  {
     "id": "2",
     "name": "CS:GO Weapon Case",
     "caseImage": "assets/cases/2.png",
@@ -861,6 +868,13 @@
     "type": "SOUVENIR_PACKAGE"
   },
   {
+    "id": "197",
+    "name": "X-Ray P250 Package",
+    "caseImage": "assets/cases/197.png",
+    "releaseDate": "2019-10-02",
+    "type": "XRAY_PACKAGE"
+  },
+  {
     "id": "1",
     "name": "CS20 Case",
     "caseImage": "assets/cases/1.png",
@@ -873,13 +887,6 @@
     "caseImage": "assets/cases/35.png",
     "releaseDate": "2019-11-18",
     "type": "CASE"
-  },
-  {
-    "id": "197",
-    "name": "X-Ray P250 Package",
-    "caseImage": "assets/cases/197.png",
-    "releaseDate": "2019-10-02",
-    "type": "XRAY_PACKAGE"
   },
   {
     "id": "29",

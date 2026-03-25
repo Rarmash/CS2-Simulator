@@ -6,17 +6,21 @@ import time
 import zlib
 from pathlib import Path
 from typing import Any
+from urllib.parse import urlparse
 
 import requests
 
-CRATES_URL = "https://raw.githubusercontent.com/ByMykel/CSGO-API/main/public/api/en/crates.json"
-SKINS_URL = "https://raw.githubusercontent.com/ByMykel/CSGO-API/main/public/api/en/skins.json"
+BASE_URL = "https://raw.githubusercontent.com/ByMykel/CSGO-API/main/public/api/en"
+CRATES_URL = f"{BASE_URL}/crates.json"
+SKINS_URL = f"{BASE_URL}/skins.json"
+COLLECTIONS_URL = f"{BASE_URL}/collections.json"
 
 OUT_ROOT = Path(".")
 ASSETS_DIR = OUT_ROOT / "assets"
 DATA_DIR = ASSETS_DIR / "data"
 CASES_DIR = ASSETS_DIR / "cases"
 SKINS_DIR = ASSETS_DIR / "skins"
+REWARD_COLLECTIONS_DIR = ASSETS_DIR / "reward_collections"
 
 TIMEOUT = 30
 
@@ -123,8 +127,92 @@ CONTAINER_TYPE_OVERRIDES = {
     "X-Ray P250 Package": "XRAY_PACKAGE",
 }
 
+COLLECTION_NAME_ALIASES: dict[str, str] = {}
+
+DEFAULT_REWARD_SOURCE_OVERRIDES: dict[str, dict[str, Any]] = {
+    "The Ancient Collection": {
+        "sourceType": "OPERATION",
+        "sourceId": "BROKEN_FANG",
+        "currency": "STARS",
+        "cost": 4,
+        "releaseDate": "2020-12-03",
+    },
+    "The Control Collection": {
+        "sourceType": "OPERATION",
+        "sourceId": "BROKEN_FANG",
+        "currency": "STARS",
+        "cost": 4,
+        "releaseDate": "2020-12-03",
+    },
+    "The Havoc Collection": {
+        "sourceType": "OPERATION",
+        "sourceId": "BROKEN_FANG",
+        "currency": "STARS",
+        "cost": 4,
+        "releaseDate": "2020-12-03",
+    },
+    "The 2021 Dust 2 Collection": {
+        "sourceType": "OPERATION",
+        "sourceId": "RIPTIDE",
+        "currency": "STARS",
+        "cost": 4,
+        "releaseDate": "2021-09-21",
+    },
+    "The 2021 Mirage Collection": {
+        "sourceType": "OPERATION",
+        "sourceId": "RIPTIDE",
+        "currency": "STARS",
+        "cost": 4,
+        "releaseDate": "2021-09-21",
+    },
+    "The 2021 Train Collection": {
+        "sourceType": "OPERATION",
+        "sourceId": "RIPTIDE",
+        "currency": "STARS",
+        "cost": 4,
+        "releaseDate": "2021-09-21",
+    },
+    "The 2021 Vertigo Collection": {
+        "sourceType": "OPERATION",
+        "sourceId": "RIPTIDE",
+        "currency": "STARS",
+        "cost": 4,
+        "releaseDate": "2021-09-21",
+    },
+    "The Overpass 2024 Collection": {
+        "sourceType": "ARMORY",
+        "sourceId": "ARMORY",
+        "currency": "CREDITS",
+        "cost": 4,
+        "releaseDate": "2024-10-02",
+    },
+    "The Graphic Design Collection": {
+        "sourceType": "ARMORY",
+        "sourceId": "ARMORY",
+        "currency": "CREDITS",
+        "cost": 4,
+        "releaseDate": "2024-10-02",
+    },
+    "The Sport & Field Collection": {
+        "sourceType": "ARMORY",
+        "sourceId": "ARMORY",
+        "currency": "CREDITS",
+        "cost": 4,
+        "releaseDate": "2024-10-02",
+    },
+    "The Train 2025 Collection": {
+        "sourceType": "ARMORY",
+        "sourceId": "ARMORY",
+        "currency": "CREDITS",
+        "cost": 4,
+        "releaseDate": "2025-03-31",
+    },
+}
+
+OVERRIDES_PATH = OUT_ROOT / "reward_collection_overrides.json"
+
 session = requests.Session()
-session.headers.update({"User-Agent": "cs2-simulator-parser/2.1"})
+session.headers.update({"User-Agent": "cs2-simulator-parser/3.3"})
 
 
 def fetch_json(url: str) -> Any:
@@ -137,6 +225,7 @@ def ensure_dirs() -> None:
     DATA_DIR.mkdir(parents=True, exist_ok=True)
     CASES_DIR.mkdir(parents=True, exist_ok=True)
     SKINS_DIR.mkdir(parents=True, exist_ok=True)
+    REWARD_COLLECTIONS_DIR.mkdir(parents=True, exist_ok=True)
 
 
 def load_json_list(path: Path) -> list[dict[str, Any]]:
@@ -183,6 +272,13 @@ def canonical_name(name: str) -> str:
         n,
     )
     return n.strip().lower()
+
+
+def normalize_collection_name(name: str | None) -> str | None:
+    if not name:
+        return None
+    cleaned = str(name).strip()
+    return COLLECTION_NAME_ALIASES.get(cleaned, cleaned)
 
 
 def split_item_and_skin(full_name: str) -> tuple[str, str]:
@@ -313,6 +409,33 @@ def make_stable_numeric_id(source_id: str, prefix: int) -> str:
     return str(prefix + value)
 
 
+def detect_image_extension(url: str, content_type: str | None = None) -> str:
+    content_type = (content_type or "").lower()
+
+    if "image/svg+xml" in content_type:
+        return ".svg"
+    if "image/png" in content_type:
+        return ".png"
+    if "image/webp" in content_type:
+        return ".webp"
+    if "image/jpeg" in content_type or "image/jpg" in content_type:
+        return ".jpg"
+
+    parsed = urlparse(url)
+    lower_path = parsed.path.lower()
+
+    if lower_path.endswith(".svg"):
+        return ".svg"
+    if lower_path.endswith(".png"):
+        return ".png"
+    if lower_path.endswith(".webp"):
+        return ".webp"
+    if lower_path.endswith(".jpg") or lower_path.endswith(".jpeg"):
+        return ".jpg"
+
+    return ".png"
+
+
 def download_file(url: str, path: Path) -> None:
     if not url or path.exists():
         return
@@ -328,6 +451,33 @@ def download_file(url: str, path: Path) -> None:
         print(f"[WARN] failed to download {url} -> {path}: {exc}")
 
 
+def download_file_with_real_extension(url: str, path_without_ext: Path) -> str | None:
+    if not url:
+        return None
+
+    try:
+        response = session.get(url, timeout=TIMEOUT)
+        response.raise_for_status()
+
+        ext = detect_image_extension(
+            url=url,
+            content_type=response.headers.get("Content-Type"),
+        )
+
+        final_path = path_without_ext.with_suffix(ext)
+
+        if final_path.exists():
+            return ext
+
+        final_path.parent.mkdir(parents=True, exist_ok=True)
+        final_path.write_bytes(response.content)
+        return ext
+
+    except Exception as exc:
+        print(f"[WARN] failed to download {url} -> {path_without_ext}: {exc}")
+        return None
+
+
 def existing_skin_key(skin: dict[str, Any]) -> tuple[str, str, str, str]:
     return (
         str(skin.get("itemKind", "")),
@@ -339,6 +489,10 @@ def existing_skin_key(skin: dict[str, Any]) -> tuple[str, str, str, str]:
 
 def existing_case_key(case: dict[str, Any]) -> str:
     return str(case.get("name", "")).strip()
+
+
+def existing_reward_collection_key(item: dict[str, Any]) -> str:
+    return normalize_collection_name(str(item.get("name", "")).strip()) or ""
 
 
 def extract_phase_and_variant(
@@ -372,15 +526,27 @@ def extract_phase_and_variant(
     return None, None
 
 
-def choose_collection_name(meta: dict[str, Any]) -> str | None:
+def choose_collection_name_and_image(meta: dict[str, Any]) -> tuple[str | None, str | None]:
     collections = meta.get("collections")
     if isinstance(collections, list) and collections:
         first = collections[0]
         if isinstance(first, dict):
-            name = first.get("name")
-            if name:
-                return str(name)
-    return None
+            raw_name = first.get("name")
+            raw_image = first.get("image")
+            normalized_name = normalize_collection_name(str(raw_name)) if raw_name else None
+            image = str(raw_image) if raw_image else None
+            return normalized_name, image
+    return None, None
+
+
+def choose_collection_name(meta: dict[str, Any]) -> str | None:
+    name, _ = choose_collection_name_and_image(meta)
+    return name
+
+
+def choose_collection_image_url_from_skin(meta: dict[str, Any]) -> str | None:
+    _, image = choose_collection_name_and_image(meta)
+    return image
 
 
 def choose_image_url(meta: dict[str, Any]) -> str | None:
@@ -404,17 +570,53 @@ def get_explicit_phase(meta: dict[str, Any]) -> str | None:
     return None
 
 
+def load_reward_source_overrides() -> dict[str, dict[str, Any]]:
+    overrides = {
+        normalize_collection_name(k) or k: dict(v)
+        for k, v in DEFAULT_REWARD_SOURCE_OVERRIDES.items()
+    }
+
+    if OVERRIDES_PATH.exists():
+        try:
+            user_data = json.loads(OVERRIDES_PATH.read_text(encoding="utf-8"))
+            if isinstance(user_data, dict):
+                for name, meta in user_data.items():
+                    if isinstance(meta, dict):
+                        normalized_name = normalize_collection_name(str(name).strip()) or str(name).strip()
+                        overrides[normalized_name] = dict(meta)
+        except Exception as exc:
+            print(f"[WARN] failed to load {OVERRIDES_PATH}: {exc}")
+
+    return overrides
+
+
+def build_collection_index(collections_data: list[dict[str, Any]]) -> dict[str, dict[str, Any]]:
+    result: dict[str, dict[str, Any]] = {}
+    for item in collections_data:
+        name = normalize_collection_name(str(item.get("name", "")).strip())
+        if not name:
+            continue
+        result[name] = item
+    return result
+
+
 def main() -> None:
     ensure_dirs()
 
+    reward_source_overrides = load_reward_source_overrides()
+
     existing_skins = load_json_list(DATA_DIR / "skins.json")
     existing_cases = load_json_list(DATA_DIR / "cases.json")
+    existing_reward_collections = load_json_list(DATA_DIR / "reward_collections.json")
 
     existing_skin_by_key: dict[tuple[str, str, str, str], dict[str, Any]] = {
         existing_skin_key(s): dict(s) for s in existing_skins
     }
     existing_case_by_name: dict[str, dict[str, Any]] = {
         existing_case_key(c): dict(c) for c in existing_cases
+    }
+    existing_reward_collection_by_name: dict[str, dict[str, Any]] = {
+        existing_reward_collection_key(c): dict(c) for c in existing_reward_collections
     }
 
     used_skin_ids = {
@@ -423,9 +625,13 @@ def main() -> None:
     used_case_ids = {
         int(c["id"]) for c in existing_cases if str(c.get("id", "")).isdigit()
     }
+    used_reward_collection_ids = {
+        int(c["id"]) for c in existing_reward_collections if str(c.get("id", "")).isdigit()
+    }
 
     next_skin_id = max(used_skin_ids, default=0) + 1
     next_case_id = max(used_case_ids, default=0) + 1
+    next_reward_collection_id = max(used_reward_collection_ids, default=10_000) + 1
 
     print("Fetching crates.json ...")
     crates = fetch_json(CRATES_URL)
@@ -433,11 +639,29 @@ def main() -> None:
     print("Fetching skins.json ...")
     skins_data = fetch_json(SKINS_URL)
 
+    print("Fetching collections.json ...")
+    collections_data = fetch_json(COLLECTIONS_URL)
+    build_collection_index(collections_data)
+
     new_cases: dict[str, dict[str, Any]] = {c["id"]: dict(c) for c in existing_cases}
     case_name_to_id: dict[str, str] = {
         str(c["name"]).strip(): str(c["id"])
         for c in existing_cases
     }
+
+    new_reward_collections: dict[str, dict[str, Any]] = {
+        c["id"]: dict(c) for c in existing_reward_collections
+    }
+    reward_collection_name_to_id: dict[str, str] = {
+        existing_reward_collection_key(c): str(c["id"])
+        for c in existing_reward_collections
+    }
+
+    reward_collection_image_by_name: dict[str, str] = {}
+    for skin_meta in skins_data:
+        collection_name, collection_image = choose_collection_name_and_image(skin_meta)
+        if collection_name and collection_image and collection_name not in reward_collection_image_by_name:
+            reward_collection_image_by_name[collection_name] = collection_image
 
     supported_crates = [crate for crate in crates if is_supported_container(crate)]
     supported_crates.sort(key=lambda x: str(x.get("name", "")))
@@ -471,12 +695,20 @@ def main() -> None:
             download_file(str(crate["image"]), CASES_DIR / f"{case_id}.png")
 
     new_skins: dict[str, dict[str, Any]] = {}
-    case_contents_map: dict[str, set[str]] = {case_id: set() for case_id in new_cases.keys()}
+    case_contents_map: dict[str, set[str]] = {
+        case_id: set() for case_id in new_cases.keys()
+    }
+    reward_collection_contents_map: dict[str, set[str]] = {
+        collection_id: set() for collection_id in new_reward_collections.keys()
+    }
 
     created_skin_count = 0
     reused_skin_count = 0
     skipped_unknown_items = 0
     container_refs_created_from_skin_meta = 0
+    reward_collections_created = 0
+    reward_collection_images_downloaded = 0
+    reward_collection_images_missing = 0
 
     for meta in skins_data:
         full_name = str(meta.get("name", "")).strip()
@@ -513,7 +745,7 @@ def main() -> None:
             str((meta.get("category") or {}).get("name")),
             fallback_weapon_type,
         )
-        collection_name = choose_collection_name(meta)
+        collection_name, _collection_image_from_skin = choose_collection_name_and_image(meta)
         image_url = choose_image_url(meta)
 
         key = (
@@ -548,6 +780,7 @@ def main() -> None:
 
             created_skin_count += 1
 
+        reward_meta = reward_source_overrides.get(collection_name or "")
         old_skin = new_skins.get(skin_id) or existing_skin or {}
 
         skin_record = {
@@ -565,6 +798,9 @@ def main() -> None:
             "variantName": variant_name if variant_name else old_skin.get("variantName"),
             "phase": phase if phase else old_skin.get("phase"),
             "apiPaintIndex": str(meta.get("paint_index")) if meta.get("paint_index") is not None else old_skin.get("apiPaintIndex"),
+            "collectionSourceType": reward_meta.get("sourceType") if reward_meta else old_skin.get("collectionSourceType"),
+            "collectionSourceId": reward_meta.get("sourceId") if reward_meta else old_skin.get("collectionSourceId"),
+            "isRewardCollection": bool(reward_meta) if reward_meta else old_skin.get("isRewardCollection", False),
         }
 
         new_skins[skin_id] = skin_record
@@ -572,6 +808,59 @@ def main() -> None:
 
         if image_url:
             download_file(image_url, SKINS_DIR / f"{skin_id}.png")
+
+        if reward_meta and collection_name:
+            existing_reward_collection = existing_reward_collection_by_name.get(collection_name)
+            if existing_reward_collection:
+                reward_collection_id = str(existing_reward_collection["id"])
+            elif collection_name in reward_collection_name_to_id:
+                reward_collection_id = reward_collection_name_to_id[collection_name]
+            else:
+                reward_collection_id = str(next_reward_collection_id)
+                next_reward_collection_id += 1
+
+            reward_collection_name_to_id[collection_name] = reward_collection_id
+
+            collection_image = reward_collection_image_by_name.get(collection_name)
+            image_ext = None
+
+            if collection_image:
+                image_ext = download_file_with_real_extension(
+                    collection_image,
+                    REWARD_COLLECTIONS_DIR / reward_collection_id,
+                )
+                if image_ext is not None:
+                    reward_collection_images_downloaded += 1
+                else:
+                    reward_collection_images_missing += 1
+            else:
+                reward_collection_images_missing += 1
+
+            if image_ext is None:
+                old_reward = new_reward_collections.get(reward_collection_id) or existing_reward_collection or {}
+                old_image = str(old_reward.get("image") or "").strip()
+                if old_image:
+                    image_path = Path(old_image)
+                    image_ext = image_path.suffix or ".png"
+                else:
+                    image_ext = ".png"
+
+            reward_record = {
+                "id": reward_collection_id,
+                "name": collection_name,
+                "image": f"assets/reward_collections/{reward_collection_id}{image_ext}",
+                "sourceType": reward_meta["sourceType"],
+                "sourceId": reward_meta["sourceId"],
+                "currency": reward_meta.get("currency", "STARS"),
+                "cost": int(reward_meta.get("cost", 4)),
+                "releaseDate": reward_meta.get("releaseDate"),
+            }
+
+            if reward_collection_id not in new_reward_collections:
+                reward_collections_created += 1
+
+            new_reward_collections[reward_collection_id] = reward_record
+            reward_collection_contents_map.setdefault(reward_collection_id, set()).add(skin_id)
 
         crates_refs = meta.get("crates")
         if isinstance(crates_refs, list):
@@ -634,26 +923,70 @@ def main() -> None:
         ),
         key=lambda x: int(x["caseId"]),
     )
+    reward_collections_out = sorted(
+        new_reward_collections.values(),
+        key=lambda x: (
+            x.get("sourceType", ""),
+            x.get("releaseDate") or "9999-99-99",
+            x.get("name", ""),
+        ),
+    )
+    reward_collection_contents_out = sorted(
+        (
+            {
+                "rewardCollectionId": reward_collection_id,
+                "skinIds": sort_numeric_str(list(skin_ids)),
+            }
+            for reward_collection_id, skin_ids in reward_collection_contents_map.items()
+            if skin_ids
+        ),
+        key=lambda x: int(x["rewardCollectionId"]),
+    )
 
     write_json(DATA_DIR / "cases.json", cases_out)
     write_json(DATA_DIR / "skins.json", skins_out)
     write_json(DATA_DIR / "case_contents.json", case_contents_out)
+    write_json(DATA_DIR / "reward_collections.json", reward_collections_out)
+    write_json(DATA_DIR / "reward_collection_contents.json", reward_collection_contents_out)
 
     type_counts: dict[str, int] = {}
     for case in cases_out:
         container_type = str(case.get("type") or "UNKNOWN")
         type_counts[container_type] = type_counts.get(container_type, 0) + 1
 
+    reward_source_counts: dict[str, int] = {}
+    for collection in reward_collections_out:
+        key = str(collection.get("sourceId") or "UNKNOWN")
+        reward_source_counts[key] = reward_source_counts.get(key, 0) + 1
+
     print("Done.")
     print(f"Containers: {len(cases_out)}")
     for container_type, count in sorted(type_counts.items()):
         print(f"  {container_type}: {count}")
+    print(f"Reward collections: {len(reward_collections_out)}")
+    for source_id, count in sorted(reward_source_counts.items()):
+        print(f"  {source_id}: {count}")
     print(f"Skins: {len(skins_out)}")
     print(f"Case contents: {len(case_contents_out)}")
+    print(f"Reward collection contents: {len(reward_collection_contents_out)}")
     print(f"Created skins: {created_skin_count}")
     print(f"Reused skins: {reused_skin_count}")
     print(f"Unknown items skipped: {skipped_unknown_items}")
     print(f"Containers created from skin.crates fallback: {container_refs_created_from_skin_meta}")
+    print(f"Reward collections created: {reward_collections_created}")
+    print(f"Reward collection images downloaded: {reward_collection_images_downloaded}")
+    print(f"Reward collection image misses: {reward_collection_images_missing}")
+    print(f"Reward override file: {OVERRIDES_PATH.resolve()}")
+
+    for reward in reward_collections_out:
+        if reward["name"] == "The 2021 Vertigo Collection":
+            reward_id = reward["id"]
+            count = 0
+            for row in reward_collection_contents_out:
+                if row["rewardCollectionId"] == reward_id:
+                    count = len(row["skinIds"])
+                    break
+            print(f"[DEBUG] The 2021 Vertigo Collection skins: {count}")
 
 
 if __name__ == "__main__":
