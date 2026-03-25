@@ -144,20 +144,37 @@ jobs:
       - name: Build iOS (no codesign)
         run: flutter build ios --release --no-codesign
 
+      - name: Inspect macOS build output
+        shell: bash
+        run: |
+          pwd
+          ls -la
+          ls -la build/macos/Build/Products || true
+          ls -la build/macos/Build/Products/Release || true
+
       - name: Prepare Apple artifacts
         shell: bash
         run: |
           mkdir -p dist
 
-          cd build/macos/Build/Products/Release
-          ditto -c -k --sequesterRsrc --keepParent "Runner.app" \
-            "../../../../dist/${APP_NAME}-${TAG}-macos.zip"
-          cd ../../../../../
+          echo "macOS Release contents:"
+          ls -la build/macos/Build/Products/Release || true
+
+          MACOS_APP="$(find build/macos/Build/Products/Release -maxdepth 1 -name "*.app" | head -n 1)"
+
+          if [ -z "$MACOS_APP" ]; then
+            echo "No .app found in build/macos/Build/Products/Release"
+            exit 1
+          fi
+
+          echo "Using macOS app: $MACOS_APP"
+          ditto -c -k --sequesterRsrc --keepParent "$MACOS_APP" \
+            "dist/${APP_NAME}-${TAG}-macos.zip"
 
           mkdir -p Payload
           cp -R build/ios/iphoneos/Runner.app Payload/
           cd Payload/..
-          zip -r "dist/${APP_NAME}-${TAG}-ios-unsigned.ipa" Payload
+          zip -r -y "dist/${APP_NAME}-${TAG}-ios-unsigned.ipa" Payload
           rm -rf Payload
 
       - name: Upload assets to release
