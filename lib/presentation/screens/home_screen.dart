@@ -44,7 +44,7 @@ class HomeScreen extends StatelessWidget {
                 const SizedBox(height: 16),
                 _menuButton(
                   context,
-                  title: '⭐ Operation / Armory Rewards',
+                  title: '🎖️ Operation / Armory Rewards',
                   onTap: () {
                     Navigator.push(
                       context,
@@ -59,7 +59,7 @@ class HomeScreen extends StatelessWidget {
                 const SizedBox(height: 16),
                 _menuButton(
                   context,
-                  title: '🗂️ Operation Collections',
+                  title: '🗃️ Legacy️ Operation Collections',
                   onTap: () {
                     Navigator.push(
                       context,
