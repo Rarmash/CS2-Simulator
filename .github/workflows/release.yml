@@ -7,6 +7,14 @@ on:
 permissions:
   contents: write
 
+concurrency:
+  group: release-${{ github.event.release.tag_name }}
+  cancel-in-progress: false
+
+env:
+  APP_NAME: cs2-simulator
+  TAG: ${{ github.event.release.tag_name }}
+
 jobs:
   build-linux-android-web:
     runs-on: ubuntu-latest
@@ -25,6 +33,7 @@ jobs:
         uses: subosito/flutter-action@v2
         with:
           channel: stable
+          cache: true
 
       - name: Flutter pub get
         run: flutter pub get
@@ -34,11 +43,11 @@ jobs:
           flutter config --enable-linux-desktop
           flutter config --enable-web
 
-      - name: Install Linux build deps
+      - name: Install Linux dependencies
         run: |
           sudo apt-get update
           sudo apt-get install -y \
-            clang cmake ninja-build pkg-config libgtk-3-dev libstdc++-12-dev
+            clang cmake ninja-build pkg-config libgtk-3-dev libstdc++-12-dev zip
 
       - name: Build Android APK
         run: flutter build apk --release
@@ -49,29 +58,29 @@ jobs:
       - name: Build Web
         run: flutter build web --release
 
-      - name: Prepare release files
+      - name: Prepare artifacts
         shell: bash
         run: |
-          TAG="${GITHUB_REF_NAME}"
+          mkdir -p dist
 
           cp build/app/outputs/flutter-apk/app-release.apk \
-            "cs2-simulator-${TAG}-android.apk"
+            "dist/${APP_NAME}-${TAG}-android.apk"
 
           cd build/linux/x64/release
-          zip -r "../../../../cs2-simulator-${TAG}-linux-x64.zip" bundle
+          zip -r "../../../../dist/${APP_NAME}-${TAG}-linux-x64.zip" bundle
           cd ../../../../
 
           cd build/web
-          zip -r "../../cs2-simulator-${TAG}-web.zip" .
+          zip -r "../../dist/${APP_NAME}-${TAG}-web.zip" .
           cd ../..
 
-      - name: Upload Linux/Android/Web to release
+      - name: Upload assets to release
         uses: softprops/action-gh-release@v2
         with:
           files: |
-            cs2-simulator-${{ github.ref_name }}-android.apk
-            cs2-simulator-${{ github.ref_name }}-linux-x64.zip
-            cs2-simulator-${{ github.ref_name }}-web.zip
+            dist/${{ env.APP_NAME }}-${{ env.TAG }}-android.apk
+            dist/${{ env.APP_NAME }}-${{ env.TAG }}-linux-x64.zip
+            dist/${{ env.APP_NAME }}-${{ env.TAG }}-web.zip
 
   build-windows:
     runs-on: windows-latest
@@ -84,6 +93,7 @@ jobs:
         uses: subosito/flutter-action@v2
         with:
           channel: stable
+          cache: true
 
       - name: Flutter pub get
         run: flutter pub get
@@ -97,13 +107,62 @@ jobs:
       - name: Pack Windows build
         shell: pwsh
         run: |
-          $tag = "${{ github.ref_name }}"
+          New-Item -ItemType Directory -Force -Path dist | Out-Null
           Compress-Archive `
             -Path "build\windows\x64\runner\Release\*" `
-            -DestinationPath "cs2-simulator-$tag-windows-x64.zip" `
+            -DestinationPath "dist\${env:APP_NAME}-${env:TAG}-windows-x64.zip" `
             -Force
 
-      - name: Upload Windows to release
+      - name: Upload asset to release
         uses: softprops/action-gh-release@v2
         with:
-          files: cs2-simulator-${{ github.ref_name }}-windows-x64.zip
+          files: dist/${{ env.APP_NAME }}-${{ env.TAG }}-windows-x64.zip
+
+  build-apple:
+    runs-on: macos-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+          cache: true
+
+      - name: Flutter pub get
+        run: flutter pub get
+
+      - name: Enable Apple platforms
+        run: |
+          flutter config --enable-macos-desktop
+
+      - name: Build macOS
+        run: flutter build macos --release
+
+      - name: Build iOS (no codesign)
+        run: flutter build ios --release --no-codesign
+
+      - name: Prepare Apple artifacts
+        shell: bash
+        run: |
+          mkdir -p dist
+
+          cd build/macos/Build/Products/Release
+          ditto -c -k --sequesterRsrc --keepParent "Runner.app" \
+            "../../../../dist/${APP_NAME}-${TAG}-macos.zip"
+          cd ../../../../../
+
+          mkdir -p Payload
+          cp -R build/ios/iphoneos/Runner.app Payload/
+          cd Payload/..
+          zip -r "dist/${APP_NAME}-${TAG}-ios-unsigned.ipa" Payload
+          rm -rf Payload
+
+      - name: Upload assets to release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: |
+            dist/${{ env.APP_NAME }}-${{ env.TAG }}-macos.zip
+            dist/${{ env.APP_NAME }}-${{ env.TAG }}-ios-unsigned.ipa
