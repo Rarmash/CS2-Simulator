@@ -357,8 +357,14 @@ class _CaseOpenScreenState extends State<CaseOpenScreen> {
   }
 
   _RollSequenceData _buildRollSequence(List<SkinDto> allSkins, DroppedSkin drop) {
-    final allowSpecialItems = _isRegularCase || _isSouvenirPackage;
+    if (_isSouvenirPackage || _isCollectionPackage) {
+      return _buildPackageRollSequence(allSkins, drop);
+    }
 
+    return _buildCaseRollSequence(allSkins, drop);
+  }
+
+  _RollSequenceData _buildCaseRollSequence(List<SkinDto> allSkins, DroppedSkin drop) {
     final flyoverPool = allSkins.where((s) => !s.isSpecialItem).toList();
 
     final milSpec = flyoverPool.where((s) => s.rarity == 'MIL_SPEC').toList();
@@ -372,31 +378,31 @@ class _CaseOpenScreenState extends State<CaseOpenScreen> {
       return list[_random.nextInt(list.length)];
     }
 
-    SkinDto pickByRealOdds() {
+    SkinDto pickByRealCaseOdds() {
       final availableBuckets = <_RarityBucket>[];
 
       if (milSpec.isNotEmpty) {
         availableBuckets.add(_RarityBucket(
           skins: milSpec,
-          weight: CaseOdds.milSpec.chance,
+          weight: 0.7992327,
         ));
       }
       if (restricted.isNotEmpty) {
         availableBuckets.add(_RarityBucket(
           skins: restricted,
-          weight: CaseOdds.restricted.chance,
+          weight: 0.1598465,
         ));
       }
       if (classified.isNotEmpty) {
         availableBuckets.add(_RarityBucket(
           skins: classified,
-          weight: CaseOdds.classified.chance,
+          weight: 0.0319693,
         ));
       }
       if (covert.isNotEmpty) {
         availableBuckets.add(_RarityBucket(
           skins: covert,
-          weight: CaseOdds.covert.chance,
+          weight: 0.0063939,
         ));
       }
 
@@ -423,8 +429,6 @@ class _CaseOpenScreenState extends State<CaseOpenScreen> {
     }
 
     SkinDto pickNearWinner() {
-      // Перед выигрышем чуть повышаем шанс на редкий предмет,
-      // но всё равно без золота.
       final availableBuckets = <_RarityBucket>[];
 
       if (milSpec.isNotEmpty) {
@@ -473,18 +477,177 @@ class _CaseOpenScreenState extends State<CaseOpenScreen> {
     final sequence = <SkinDto>[];
 
     for (int i = 0; i < 28; i++) {
-      sequence.add(pickByRealOdds());
+      sequence.add(pickByRealCaseOdds());
     }
 
     sequence.add(pickNearWinner());
-    sequence.add(pickByRealOdds());
-    sequence.add(pickByRealOdds());
+    sequence.add(pickByRealCaseOdds());
+    sequence.add(pickByRealCaseOdds());
 
     final winnerIndex = sequence.length;
     sequence.add(drop.skin);
 
     for (int i = 0; i < 8; i++) {
-      sequence.add(pickByRealOdds());
+      sequence.add(pickByRealCaseOdds());
+    }
+
+    return _RollSequenceData(
+      items: sequence,
+      winnerIndex: winnerIndex,
+    );
+  }
+
+  _RollSequenceData _buildPackageRollSequence(List<SkinDto> allSkins, DroppedSkin drop) {
+    final flyoverPool = allSkins.where((s) => !s.isSpecialItem).toList();
+
+    final consumer = flyoverPool.where((s) => s.rarity == 'CONSUMER').toList();
+    final industrial = flyoverPool.where((s) => s.rarity == 'INDUSTRIAL').toList();
+    final milSpec = flyoverPool.where((s) => s.rarity == 'MIL_SPEC').toList();
+    final restricted = flyoverPool.where((s) => s.rarity == 'RESTRICTED').toList();
+    final classified = flyoverPool.where((s) => s.rarity == 'CLASSIFIED').toList();
+    final covert = flyoverPool
+        .where((s) => s.rarity == 'COVERT' || s.rarity == 'CONTRABAND')
+        .toList();
+
+    SkinDto pickRandom(List<SkinDto> list) {
+      return list[_random.nextInt(list.length)];
+    }
+
+    SkinDto pickByRealPackageOdds() {
+      final availableBuckets = <_RarityBucket>[];
+
+      if (consumer.isNotEmpty) {
+        availableBuckets.add(_RarityBucket(
+          skins: consumer,
+          weight: 0.80,
+        ));
+      }
+      if (industrial.isNotEmpty) {
+        availableBuckets.add(_RarityBucket(
+          skins: industrial,
+          weight: 0.16,
+        ));
+      }
+      if (milSpec.isNotEmpty) {
+        availableBuckets.add(_RarityBucket(
+          skins: milSpec,
+          weight: 0.032,
+        ));
+      }
+      if (restricted.isNotEmpty) {
+        availableBuckets.add(_RarityBucket(
+          skins: restricted,
+          weight: 0.0064,
+        ));
+      }
+      if (classified.isNotEmpty) {
+        availableBuckets.add(_RarityBucket(
+          skins: classified,
+          weight: 0.00128,
+        ));
+      }
+      if (covert.isNotEmpty) {
+        availableBuckets.add(_RarityBucket(
+          skins: covert,
+          weight: 0.000256,
+        ));
+      }
+
+      if (availableBuckets.isEmpty) {
+        throw Exception('No package flyover skins available');
+      }
+
+      final totalWeight = availableBuckets.fold<double>(
+        0,
+            (sum, bucket) => sum + bucket.weight,
+      );
+
+      final roll = _random.nextDouble() * totalWeight;
+      double cumulative = 0;
+
+      for (final bucket in availableBuckets) {
+        cumulative += bucket.weight;
+        if (roll <= cumulative) {
+          return pickRandom(bucket.skins);
+        }
+      }
+
+      return pickRandom(availableBuckets.last.skins);
+    }
+
+    SkinDto pickNearWinner() {
+      final availableBuckets = <_RarityBucket>[];
+
+      if (consumer.isNotEmpty) {
+        availableBuckets.add(_RarityBucket(
+          skins: consumer,
+          weight: 0.58,
+        ));
+      }
+      if (industrial.isNotEmpty) {
+        availableBuckets.add(_RarityBucket(
+          skins: industrial,
+          weight: 0.24,
+        ));
+      }
+      if (milSpec.isNotEmpty) {
+        availableBuckets.add(_RarityBucket(
+          skins: milSpec,
+          weight: 0.11,
+        ));
+      }
+      if (restricted.isNotEmpty) {
+        availableBuckets.add(_RarityBucket(
+          skins: restricted,
+          weight: 0.05,
+        ));
+      }
+      if (classified.isNotEmpty) {
+        availableBuckets.add(_RarityBucket(
+          skins: classified,
+          weight: 0.015,
+        ));
+      }
+      if (covert.isNotEmpty) {
+        availableBuckets.add(_RarityBucket(
+          skins: covert,
+          weight: 0.005,
+        ));
+      }
+
+      final totalWeight = availableBuckets.fold<double>(
+        0,
+            (sum, bucket) => sum + bucket.weight,
+      );
+
+      final roll = _random.nextDouble() * totalWeight;
+      double cumulative = 0;
+
+      for (final bucket in availableBuckets) {
+        cumulative += bucket.weight;
+        if (roll <= cumulative) {
+          return pickRandom(bucket.skins);
+        }
+      }
+
+      return pickRandom(availableBuckets.last.skins);
+    }
+
+    final sequence = <SkinDto>[];
+
+    for (int i = 0; i < 28; i++) {
+      sequence.add(pickByRealPackageOdds());
+    }
+
+    sequence.add(pickNearWinner());
+    sequence.add(pickByRealPackageOdds());
+    sequence.add(pickByRealPackageOdds());
+
+    final winnerIndex = sequence.length;
+    sequence.add(drop.skin);
+
+    for (int i = 0; i < 8; i++) {
+      sequence.add(pickByRealPackageOdds());
     }
 
     return _RollSequenceData(
