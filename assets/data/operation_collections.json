@@ -1,0 +1,202 @@
+[
+  {
+    "id": "20023",
+    "name": "The Chop Shop Collection",
+    "image": "assets/operation_collections/20023.png",
+    "operationId": "BLOODHOUND",
+    "operationName": "Operation Bloodhound",
+    "releaseDate": "2015-05-26"
+  },
+  {
+    "id": "20015",
+    "name": "The Gods and Monsters Collection",
+    "image": "assets/operation_collections/20015.png",
+    "operationId": "BLOODHOUND",
+    "operationName": "Operation Bloodhound",
+    "releaseDate": "2015-05-26"
+  },
+  {
+    "id": "20001",
+    "name": "The Rising Sun Collection",
+    "image": "assets/operation_collections/20001.png",
+    "operationId": "BLOODHOUND",
+    "operationName": "Operation Bloodhound",
+    "releaseDate": "2015-05-26"
+  },
+  {
+    "id": "20007",
+    "name": "The Dust 2 Collection",
+    "image": "assets/operation_collections/20007.png",
+    "operationId": "BRAVO",
+    "operationName": "Operation Bravo",
+    "releaseDate": "2013-09-19"
+  },
+  {
+    "id": "20009",
+    "name": "The Dust Collection",
+    "image": "assets/operation_collections/20009.png",
+    "operationId": "BRAVO",
+    "operationName": "Operation Bravo",
+    "releaseDate": "2013-09-19"
+  },
+  {
+    "id": "20012",
+    "name": "The Italy Collection",
+    "image": "assets/operation_collections/20012.png",
+    "operationId": "BRAVO",
+    "operationName": "Operation Bravo",
+    "releaseDate": "2013-09-19"
+  },
+  {
+    "id": "20014",
+    "name": "The Lake Collection",
+    "image": "assets/operation_collections/20014.png",
+    "operationId": "BRAVO",
+    "operationName": "Operation Bravo",
+    "releaseDate": "2013-09-19"
+  },
+  {
+    "id": "20013",
+    "name": "The Mirage Collection",
+    "image": "assets/operation_collections/20013.png",
+    "operationId": "BRAVO",
+    "operationName": "Operation Bravo",
+    "releaseDate": "2013-09-19"
+  },
+  {
+    "id": "20016",
+    "name": "The Safehouse Collection",
+    "image": "assets/operation_collections/20016.png",
+    "operationId": "BRAVO",
+    "operationName": "Operation Bravo",
+    "releaseDate": "2013-09-19"
+  },
+  {
+    "id": "20022",
+    "name": "The Train Collection",
+    "image": "assets/operation_collections/20022.png",
+    "operationId": "BRAVO",
+    "operationName": "Operation Bravo",
+    "releaseDate": "2013-09-19"
+  },
+  {
+    "id": "20003",
+    "name": "The Baggage Collection",
+    "image": "assets/operation_collections/20003.png",
+    "operationId": "BREAKOUT",
+    "operationName": "Operation Breakout",
+    "releaseDate": "2014-07-01"
+  },
+  {
+    "id": "20017",
+    "name": "The Cache Collection",
+    "image": "assets/operation_collections/20017.png",
+    "operationId": "BREAKOUT",
+    "operationName": "Operation Breakout",
+    "releaseDate": "2014-07-01"
+  },
+  {
+    "id": "20018",
+    "name": "The Cobblestone Collection",
+    "image": "assets/operation_collections/20018.png",
+    "operationId": "BREAKOUT",
+    "operationName": "Operation Breakout",
+    "releaseDate": "2014-07-01"
+  },
+  {
+    "id": "20019",
+    "name": "The Overpass Collection",
+    "image": "assets/operation_collections/20019.png",
+    "operationId": "BREAKOUT",
+    "operationName": "Operation Breakout",
+    "releaseDate": "2014-07-01"
+  },
+  {
+    "id": "20011",
+    "name": "The Assault Collection",
+    "image": "assets/operation_collections/20011.png",
+    "operationId": "PAYBACK",
+    "operationName": "Operation Payback",
+    "releaseDate": "2013-04-25"
+  },
+  {
+    "id": "20008",
+    "name": "The Aztec Collection",
+    "image": "assets/operation_collections/20008.png",
+    "operationId": "PAYBACK",
+    "operationName": "Operation Payback",
+    "releaseDate": "2013-04-25"
+  },
+  {
+    "id": "20024",
+    "name": "The Inferno Collection",
+    "image": "assets/operation_collections/20024.png",
+    "operationId": "PAYBACK",
+    "operationName": "Operation Payback",
+    "releaseDate": "2013-04-25"
+  },
+  {
+    "id": "20020",
+    "name": "The Militia Collection",
+    "image": "assets/operation_collections/20020.png",
+    "operationId": "PAYBACK",
+    "operationName": "Operation Payback",
+    "releaseDate": "2013-04-25"
+  },
+  {
+    "id": "20021",
+    "name": "The Nuke Collection",
+    "image": "assets/operation_collections/20021.png",
+    "operationId": "PAYBACK",
+    "operationName": "Operation Payback",
+    "releaseDate": "2013-04-25"
+  },
+  {
+    "id": "20025",
+    "name": "The Office Collection",
+    "image": "assets/operation_collections/20025.png",
+    "operationId": "PAYBACK",
+    "operationName": "Operation Payback",
+    "releaseDate": "2013-04-25"
+  },
+  {
+    "id": "20005",
+    "name": "The Vertigo Collection",
+    "image": "assets/operation_collections/20005.png",
+    "operationId": "PAYBACK",
+    "operationName": "Operation Payback",
+    "releaseDate": "2013-04-25"
+  },
+  {
+    "id": "20004",
+    "name": "The Bank Collection",
+    "image": "assets/operation_collections/20004.png",
+    "operationId": "PHOENIX",
+    "operationName": "Operation Phoenix",
+    "releaseDate": "2014-02-20"
+  },
+  {
+    "id": "20006",
+    "name": "The Canals Collection",
+    "image": "assets/operation_collections/20006.png",
+    "operationId": "SHATTERED_WEB",
+    "operationName": "Operation Shattered Web",
+    "releaseDate": "2019-11-18"
+  },
+  {
+    "id": "20010",
+    "name": "The Norse Collection",
+    "image": "assets/operation_collections/20010.png",
+    "operationId": "SHATTERED_WEB",
+    "operationName": "Operation Shattered Web",
+    "releaseDate": "2019-11-18"
+  },
+  {
+    "id": "20002",
+    "name": "The St. Marc Collection",
+    "image": "assets/operation_collections/20002.png",
+    "operationId": "SHATTERED_WEB",
+    "operationName": "Operation Shattered Web",
+    "releaseDate": "2019-11-18"
+  }
+]

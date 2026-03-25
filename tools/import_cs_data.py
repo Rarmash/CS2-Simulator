@@ -21,6 +21,7 @@ DATA_DIR = ASSETS_DIR / "data"
 CASES_DIR = ASSETS_DIR / "cases"
 SKINS_DIR = ASSETS_DIR / "skins"
 REWARD_COLLECTIONS_DIR = ASSETS_DIR / "reward_collections"
+OPERATION_COLLECTIONS_DIR = ASSETS_DIR / "operation_collections"
 
 TIMEOUT = 30
 
@@ -209,10 +210,51 @@ DEFAULT_REWARD_SOURCE_OVERRIDES: dict[str, dict[str, Any]] = {
     },
 }
 
-OVERRIDES_PATH = OUT_ROOT / "reward_collection_overrides.json"
+DEFAULT_OPERATION_COLLECTION_OVERRIDES: list[dict[str, Any]] = [
+    # Payback
+    {"name": "The Aztec Collection", "operationId": "PAYBACK", "operationName": "Operation Payback", "releaseDate": "2013-04-25"},
+    {"name": "The Assault Collection", "operationId": "PAYBACK", "operationName": "Operation Payback", "releaseDate": "2013-04-25"},
+    {"name": "The Office Collection", "operationId": "PAYBACK", "operationName": "Operation Payback", "releaseDate": "2013-04-25"},
+    {"name": "The Nuke Collection", "operationId": "PAYBACK", "operationName": "Operation Payback", "releaseDate": "2013-04-25"},
+    {"name": "The Vertigo Collection", "operationId": "PAYBACK", "operationName": "Operation Payback", "releaseDate": "2013-04-25"},
+    {"name": "The Inferno Collection", "operationId": "PAYBACK", "operationName": "Operation Payback", "releaseDate": "2013-04-25"},
+    {"name": "The Militia Collection", "operationId": "PAYBACK", "operationName": "Operation Payback", "releaseDate": "2013-04-25"},
+
+    # Bravo
+    {"name": "Alpha Collection", "operationId": "BRAVO", "operationName": "Operation Bravo", "releaseDate": "2013-09-19"},
+    {"name": "The Italy Collection", "operationId": "BRAVO", "operationName": "Operation Bravo", "releaseDate": "2013-09-19"},
+    {"name": "The Dust 2 Collection", "operationId": "BRAVO", "operationName": "Operation Bravo", "releaseDate": "2013-09-19"},
+    {"name": "The Dust Collection", "operationId": "BRAVO", "operationName": "Operation Bravo", "releaseDate": "2013-09-19"},
+    {"name": "The Lake Collection", "operationId": "BRAVO", "operationName": "Operation Bravo", "releaseDate": "2013-09-19"},
+    {"name": "The Safehouse Collection", "operationId": "BRAVO", "operationName": "Operation Bravo", "releaseDate": "2013-09-19"},
+    {"name": "The Mirage Collection", "operationId": "BRAVO", "operationName": "Operation Bravo", "releaseDate": "2013-09-19"},
+    {"name": "The Train Collection", "operationId": "BRAVO", "operationName": "Operation Bravo", "releaseDate": "2013-09-19"},
+
+    # Phoenix
+    {"name": "The Bank Collection", "operationId": "PHOENIX", "operationName": "Operation Phoenix", "releaseDate": "2014-02-20"},
+
+    # Breakout
+    {"name": "The Baggage Collection", "operationId": "BREAKOUT", "operationName": "Operation Breakout", "releaseDate": "2014-07-01"},
+    {"name": "The Cache Collection", "operationId": "BREAKOUT", "operationName": "Operation Breakout", "releaseDate": "2014-07-01"},
+    {"name": "The Overpass Collection", "operationId": "BREAKOUT", "operationName": "Operation Breakout", "releaseDate": "2014-07-01"},
+    {"name": "The Cobblestone Collection", "operationId": "BREAKOUT", "operationName": "Operation Breakout", "releaseDate": "2014-07-01"},
+
+    # Bloodhound
+    {"name": "The Chop Shop Collection", "operationId": "BLOODHOUND", "operationName": "Operation Bloodhound", "releaseDate": "2015-05-26"},
+    {"name": "The Rising Sun Collection", "operationId": "BLOODHOUND", "operationName": "Operation Bloodhound", "releaseDate": "2015-05-26"},
+    {"name": "The Gods and Monsters Collection", "operationId": "BLOODHOUND", "operationName": "Operation Bloodhound", "releaseDate": "2015-05-26"},
+
+    # Shattered Web
+    {"name": "The Norse Collection", "operationId": "SHATTERED_WEB", "operationName": "Operation Shattered Web", "releaseDate": "2019-11-18"},
+    {"name": "The St. Marc Collection", "operationId": "SHATTERED_WEB", "operationName": "Operation Shattered Web", "releaseDate": "2019-11-18"},
+    {"name": "The Canals Collection", "operationId": "SHATTERED_WEB", "operationName": "Operation Shattered Web", "releaseDate": "2019-11-18"},
+]
+
+REWARD_OVERRIDES_PATH = OUT_ROOT / "reward_collection_overrides.json"
+OPERATION_OVERRIDES_PATH = OUT_ROOT / "operation_collection_overrides.json"
 
 session = requests.Session()
-session.headers.update({"User-Agent": "cs2-simulator-parser/3.3"})
+session.headers.update({"User-Agent": "cs2-simulator-parser/4.1"})
 
 
 def fetch_json(url: str) -> Any:
@@ -226,11 +268,18 @@ def ensure_dirs() -> None:
     CASES_DIR.mkdir(parents=True, exist_ok=True)
     SKINS_DIR.mkdir(parents=True, exist_ok=True)
     REWARD_COLLECTIONS_DIR.mkdir(parents=True, exist_ok=True)
+    OPERATION_COLLECTIONS_DIR.mkdir(parents=True, exist_ok=True)
 
 
 def load_json_list(path: Path) -> list[dict[str, Any]]:
     if not path.exists():
         return []
+    return json.loads(path.read_text(encoding="utf-8"))
+
+
+def load_json_any(path: Path) -> Any:
+    if not path.exists():
+        return None
     return json.loads(path.read_text(encoding="utf-8"))
 
 
@@ -491,8 +540,13 @@ def existing_case_key(case: dict[str, Any]) -> str:
     return str(case.get("name", "")).strip()
 
 
-def existing_reward_collection_key(item: dict[str, Any]) -> str:
+def reward_key_from_item(item: dict[str, Any]) -> str:
     return normalize_collection_name(str(item.get("name", "")).strip()) or ""
+
+
+def operation_key(name: str, operation_id: str) -> str:
+    normalized_name = normalize_collection_name(name) or name
+    return f"{operation_id}::{normalized_name}"
 
 
 def extract_phase_and_variant(
@@ -539,16 +593,6 @@ def choose_collection_name_and_image(meta: dict[str, Any]) -> tuple[str | None, 
     return None, None
 
 
-def choose_collection_name(meta: dict[str, Any]) -> str | None:
-    name, _ = choose_collection_name_and_image(meta)
-    return name
-
-
-def choose_collection_image_url_from_skin(meta: dict[str, Any]) -> str | None:
-    _, image = choose_collection_name_and_image(meta)
-    return image
-
-
 def choose_image_url(meta: dict[str, Any]) -> str | None:
     image = meta.get("image")
     if image:
@@ -570,44 +614,75 @@ def get_explicit_phase(meta: dict[str, Any]) -> str | None:
     return None
 
 
-def load_reward_source_overrides() -> dict[str, dict[str, Any]]:
+def load_reward_overrides() -> dict[str, dict[str, Any]]:
     overrides = {
         normalize_collection_name(k) or k: dict(v)
         for k, v in DEFAULT_REWARD_SOURCE_OVERRIDES.items()
     }
 
-    if OVERRIDES_PATH.exists():
+    if REWARD_OVERRIDES_PATH.exists():
         try:
-            user_data = json.loads(OVERRIDES_PATH.read_text(encoding="utf-8"))
+            user_data = load_json_any(REWARD_OVERRIDES_PATH)
             if isinstance(user_data, dict):
                 for name, meta in user_data.items():
                     if isinstance(meta, dict):
                         normalized_name = normalize_collection_name(str(name).strip()) or str(name).strip()
                         overrides[normalized_name] = dict(meta)
         except Exception as exc:
-            print(f"[WARN] failed to load {OVERRIDES_PATH}: {exc}")
+            print(f"[WARN] failed to load {REWARD_OVERRIDES_PATH}: {exc}")
 
     return overrides
 
 
-def build_collection_index(collections_data: list[dict[str, Any]]) -> dict[str, dict[str, Any]]:
-    result: dict[str, dict[str, Any]] = {}
-    for item in collections_data:
+def load_operation_overrides() -> list[dict[str, Any]]:
+    entries = [dict(x) for x in DEFAULT_OPERATION_COLLECTION_OVERRIDES]
+
+    if OPERATION_OVERRIDES_PATH.exists():
+        try:
+            user_data = load_json_any(OPERATION_OVERRIDES_PATH)
+            if isinstance(user_data, list):
+                for item in user_data:
+                    if isinstance(item, dict):
+                        entries.append(dict(item))
+        except Exception as exc:
+            print(f"[WARN] failed to load {OPERATION_OVERRIDES_PATH}: {exc}")
+
+    normalized_entries: list[dict[str, Any]] = []
+    for item in entries:
         name = normalize_collection_name(str(item.get("name", "")).strip())
-        if not name:
+        operation_id = str(item.get("operationId", "")).strip()
+        operation_name = str(item.get("operationName", "")).strip()
+        if not name or not operation_id or not operation_name:
             continue
-        result[name] = item
+        normalized_entries.append({
+            "name": name,
+            "operationId": operation_id,
+            "operationName": operation_name,
+            "releaseDate": item.get("releaseDate"),
+        })
+
+    return normalized_entries
+
+
+def build_collection_image_map(skins_data: list[dict[str, Any]]) -> dict[str, str]:
+    result: dict[str, str] = {}
+    for skin_meta in skins_data:
+        collection_name, collection_image = choose_collection_name_and_image(skin_meta)
+        if collection_name and collection_image and collection_name not in result:
+            result[collection_name] = collection_image
     return result
 
 
 def main() -> None:
     ensure_dirs()
 
-    reward_source_overrides = load_reward_source_overrides()
+    reward_source_overrides = load_reward_overrides()
+    operation_collection_overrides = load_operation_overrides()
 
     existing_skins = load_json_list(DATA_DIR / "skins.json")
     existing_cases = load_json_list(DATA_DIR / "cases.json")
     existing_reward_collections = load_json_list(DATA_DIR / "reward_collections.json")
+    existing_operation_collections = load_json_list(DATA_DIR / "operation_collections.json")
 
     existing_skin_by_key: dict[tuple[str, str, str, str], dict[str, Any]] = {
         existing_skin_key(s): dict(s) for s in existing_skins
@@ -615,8 +690,12 @@ def main() -> None:
     existing_case_by_name: dict[str, dict[str, Any]] = {
         existing_case_key(c): dict(c) for c in existing_cases
     }
-    existing_reward_collection_by_name: dict[str, dict[str, Any]] = {
-        existing_reward_collection_key(c): dict(c) for c in existing_reward_collections
+    existing_reward_by_key: dict[str, dict[str, Any]] = {
+        reward_key_from_item(c): dict(c) for c in existing_reward_collections
+    }
+    existing_operation_by_key: dict[str, dict[str, Any]] = {
+        operation_key(str(c.get("name", "")), str(c.get("operationId", ""))): dict(c)
+        for c in existing_operation_collections
     }
 
     used_skin_ids = {
@@ -625,13 +704,17 @@ def main() -> None:
     used_case_ids = {
         int(c["id"]) for c in existing_cases if str(c.get("id", "")).isdigit()
     }
-    used_reward_collection_ids = {
+    used_reward_ids = {
         int(c["id"]) for c in existing_reward_collections if str(c.get("id", "")).isdigit()
+    }
+    used_operation_ids = {
+        int(c["id"]) for c in existing_operation_collections if str(c.get("id", "")).isdigit()
     }
 
     next_skin_id = max(used_skin_ids, default=0) + 1
     next_case_id = max(used_case_ids, default=0) + 1
-    next_reward_collection_id = max(used_reward_collection_ids, default=10_000) + 1
+    next_reward_id = max(used_reward_ids, default=10_000) + 1
+    next_operation_id = max(used_operation_ids, default=20_000) + 1
 
     print("Fetching crates.json ...")
     crates = fetch_json(CRATES_URL)
@@ -640,8 +723,9 @@ def main() -> None:
     skins_data = fetch_json(SKINS_URL)
 
     print("Fetching collections.json ...")
-    collections_data = fetch_json(COLLECTIONS_URL)
-    build_collection_index(collections_data)
+    _ = fetch_json(COLLECTIONS_URL)
+
+    collection_image_by_name = build_collection_image_map(skins_data)
 
     new_cases: dict[str, dict[str, Any]] = {c["id"]: dict(c) for c in existing_cases}
     case_name_to_id: dict[str, str] = {
@@ -652,16 +736,18 @@ def main() -> None:
     new_reward_collections: dict[str, dict[str, Any]] = {
         c["id"]: dict(c) for c in existing_reward_collections
     }
-    reward_collection_name_to_id: dict[str, str] = {
-        existing_reward_collection_key(c): str(c["id"])
+    reward_name_to_id: dict[str, str] = {
+        reward_key_from_item(c): str(c["id"])
         for c in existing_reward_collections
     }
 
-    reward_collection_image_by_name: dict[str, str] = {}
-    for skin_meta in skins_data:
-        collection_name, collection_image = choose_collection_name_and_image(skin_meta)
-        if collection_name and collection_image and collection_name not in reward_collection_image_by_name:
-            reward_collection_image_by_name[collection_name] = collection_image
+    new_operation_collections: dict[str, dict[str, Any]] = {
+        c["id"]: dict(c) for c in existing_operation_collections
+    }
+    operation_key_to_id: dict[str, str] = {
+        operation_key(str(c.get("name", "")), str(c.get("operationId", ""))): str(c["id"])
+        for c in existing_operation_collections
+    }
 
     supported_crates = [crate for crate in crates if is_supported_container(crate)]
     supported_crates.sort(key=lambda x: str(x.get("name", "")))
@@ -698,8 +784,11 @@ def main() -> None:
     case_contents_map: dict[str, set[str]] = {
         case_id: set() for case_id in new_cases.keys()
     }
-    reward_collection_contents_map: dict[str, set[str]] = {
+    reward_contents_map: dict[str, set[str]] = {
         collection_id: set() for collection_id in new_reward_collections.keys()
+    }
+    operation_contents_map: dict[str, set[str]] = {
+        collection_id: set() for collection_id in new_operation_collections.keys()
     }
 
     created_skin_count = 0
@@ -707,8 +796,7 @@ def main() -> None:
     skipped_unknown_items = 0
     container_refs_created_from_skin_meta = 0
     reward_collections_created = 0
-    reward_collection_images_downloaded = 0
-    reward_collection_images_missing = 0
+    operation_collections_created = 0
 
     for meta in skins_data:
         full_name = str(meta.get("name", "")).strip()
@@ -745,7 +833,7 @@ def main() -> None:
             str((meta.get("category") or {}).get("name")),
             fallback_weapon_type,
         )
-        collection_name, _collection_image_from_skin = choose_collection_name_and_image(meta)
+        collection_name, _collection_image = choose_collection_name_and_image(meta)
         image_url = choose_image_url(meta)
 
         key = (
@@ -781,6 +869,11 @@ def main() -> None:
             created_skin_count += 1
 
         reward_meta = reward_source_overrides.get(collection_name or "")
+        operation_metas = [
+            item for item in operation_collection_overrides
+            if item["name"] == collection_name
+        ]
+
         old_skin = new_skins.get(skin_id) or existing_skin or {}
 
         skin_record = {
@@ -801,6 +894,8 @@ def main() -> None:
             "collectionSourceType": reward_meta.get("sourceType") if reward_meta else old_skin.get("collectionSourceType"),
             "collectionSourceId": reward_meta.get("sourceId") if reward_meta else old_skin.get("collectionSourceId"),
             "isRewardCollection": bool(reward_meta) if reward_meta else old_skin.get("isRewardCollection", False),
+            "operationCollectionIds": [x["operationId"] for x in operation_metas] if operation_metas else old_skin.get("operationCollectionIds", []),
+            "isOperationCollection": bool(operation_metas) if operation_metas else old_skin.get("isOperationCollection", False),
         }
 
         new_skins[skin_id] = skin_record
@@ -810,45 +905,37 @@ def main() -> None:
             download_file(image_url, SKINS_DIR / f"{skin_id}.png")
 
         if reward_meta and collection_name:
-            existing_reward_collection = existing_reward_collection_by_name.get(collection_name)
-            if existing_reward_collection:
-                reward_collection_id = str(existing_reward_collection["id"])
-            elif collection_name in reward_collection_name_to_id:
-                reward_collection_id = reward_collection_name_to_id[collection_name]
+            reward_key = collection_name
+            existing_reward = existing_reward_by_key.get(reward_key)
+            if existing_reward:
+                reward_id = str(existing_reward["id"])
+            elif reward_key in reward_name_to_id:
+                reward_id = reward_name_to_id[reward_key]
             else:
-                reward_collection_id = str(next_reward_collection_id)
-                next_reward_collection_id += 1
+                reward_id = str(next_reward_id)
+                next_reward_id += 1
 
-            reward_collection_name_to_id[collection_name] = reward_collection_id
+            reward_name_to_id[reward_key] = reward_id
 
-            collection_image = reward_collection_image_by_name.get(collection_name)
+            collection_image = collection_image_by_name.get(collection_name)
             image_ext = None
-
             if collection_image:
                 image_ext = download_file_with_real_extension(
                     collection_image,
-                    REWARD_COLLECTIONS_DIR / reward_collection_id,
+                    REWARD_COLLECTIONS_DIR / reward_id,
                 )
-                if image_ext is not None:
-                    reward_collection_images_downloaded += 1
-                else:
-                    reward_collection_images_missing += 1
-            else:
-                reward_collection_images_missing += 1
 
             if image_ext is None:
-                old_reward = new_reward_collections.get(reward_collection_id) or existing_reward_collection or {}
+                old_reward = new_reward_collections.get(reward_id) or existing_reward or {}
                 old_image = str(old_reward.get("image") or "").strip()
-                if old_image:
-                    image_path = Path(old_image)
-                    image_ext = image_path.suffix or ".png"
-                else:
+                image_ext = Path(old_image).suffix if old_image else ".png"
+                if not image_ext:
                     image_ext = ".png"
 
             reward_record = {
-                "id": reward_collection_id,
+                "id": reward_id,
                 "name": collection_name,
-                "image": f"assets/reward_collections/{reward_collection_id}{image_ext}",
+                "image": f"assets/reward_collections/{reward_id}{image_ext}",
                 "sourceType": reward_meta["sourceType"],
                 "sourceId": reward_meta["sourceId"],
                 "currency": reward_meta.get("currency", "STARS"),
@@ -856,11 +943,55 @@ def main() -> None:
                 "releaseDate": reward_meta.get("releaseDate"),
             }
 
-            if reward_collection_id not in new_reward_collections:
+            if reward_id not in new_reward_collections:
                 reward_collections_created += 1
 
-            new_reward_collections[reward_collection_id] = reward_record
-            reward_collection_contents_map.setdefault(reward_collection_id, set()).add(skin_id)
+            new_reward_collections[reward_id] = reward_record
+            reward_contents_map.setdefault(reward_id, set()).add(skin_id)
+
+        for operation_meta in operation_metas:
+            op_key = operation_key(collection_name or "", operation_meta["operationId"])
+            existing_operation = existing_operation_by_key.get(op_key)
+
+            if existing_operation:
+                op_id = str(existing_operation["id"])
+            elif op_key in operation_key_to_id:
+                op_id = operation_key_to_id[op_key]
+            else:
+                op_id = str(next_operation_id)
+                next_operation_id += 1
+
+            operation_key_to_id[op_key] = op_id
+
+            collection_image = collection_image_by_name.get(collection_name or "")
+            image_ext = None
+            if collection_image:
+                image_ext = download_file_with_real_extension(
+                    collection_image,
+                    OPERATION_COLLECTIONS_DIR / op_id,
+                )
+
+            if image_ext is None:
+                old_operation = new_operation_collections.get(op_id) or existing_operation or {}
+                old_image = str(old_operation.get("image") or "").strip()
+                image_ext = Path(old_image).suffix if old_image else ".png"
+                if not image_ext:
+                    image_ext = ".png"
+
+            operation_record = {
+                "id": op_id,
+                "name": collection_name,
+                "image": f"assets/operation_collections/{op_id}{image_ext}",
+                "operationId": operation_meta["operationId"],
+                "operationName": operation_meta["operationName"],
+                "releaseDate": operation_meta.get("releaseDate"),
+            }
+
+            if op_id not in new_operation_collections:
+                operation_collections_created += 1
+
+            new_operation_collections[op_id] = operation_record
+            operation_contents_map.setdefault(op_id, set()).add(skin_id)
 
         crates_refs = meta.get("crates")
         if isinstance(crates_refs, list):
@@ -906,41 +1037,43 @@ def main() -> None:
 
     cases_out = sorted(
         new_cases.values(),
-        key=lambda x: (
-            x.get("releaseDate") or "9999-99-99",
-            x.get("name", ""),
-        ),
+        key=lambda x: (x.get("releaseDate") or "9999-99-99", x.get("name", "")),
     )
     skins_out = sorted(new_skins.values(), key=lambda x: int(x["id"]))
+
     case_contents_out = sorted(
         (
-            {
-                "caseId": case_id,
-                "skinIds": sort_numeric_str(list(skin_ids)),
-            }
+            {"caseId": case_id, "skinIds": sort_numeric_str(list(skin_ids))}
             for case_id, skin_ids in case_contents_map.items()
             if skin_ids
         ),
         key=lambda x: int(x["caseId"]),
     )
+
     reward_collections_out = sorted(
         new_reward_collections.values(),
-        key=lambda x: (
-            x.get("sourceType", ""),
-            x.get("releaseDate") or "9999-99-99",
-            x.get("name", ""),
-        ),
+        key=lambda x: (x.get("sourceType", ""), x.get("releaseDate") or "9999-99-99", x.get("name", "")),
     )
     reward_collection_contents_out = sorted(
         (
-            {
-                "rewardCollectionId": reward_collection_id,
-                "skinIds": sort_numeric_str(list(skin_ids)),
-            }
-            for reward_collection_id, skin_ids in reward_collection_contents_map.items()
+            {"rewardCollectionId": reward_id, "skinIds": sort_numeric_str(list(skin_ids))}
+            for reward_id, skin_ids in reward_contents_map.items()
             if skin_ids
         ),
         key=lambda x: int(x["rewardCollectionId"]),
+    )
+
+    operation_collections_out = sorted(
+        new_operation_collections.values(),
+        key=lambda x: (x.get("operationName", ""), x.get("releaseDate") or "9999-99-99", x.get("name", "")),
+    )
+    operation_collection_contents_out = sorted(
+        (
+            {"operationCollectionId": op_id, "skinIds": sort_numeric_str(list(skin_ids))}
+            for op_id, skin_ids in operation_contents_map.items()
+            if skin_ids
+        ),
+        key=lambda x: int(x["operationCollectionId"]),
     )
 
     write_json(DATA_DIR / "cases.json", cases_out)
@@ -948,46 +1081,23 @@ def main() -> None:
     write_json(DATA_DIR / "case_contents.json", case_contents_out)
     write_json(DATA_DIR / "reward_collections.json", reward_collections_out)
     write_json(DATA_DIR / "reward_collection_contents.json", reward_collection_contents_out)
-
-    type_counts: dict[str, int] = {}
-    for case in cases_out:
-        container_type = str(case.get("type") or "UNKNOWN")
-        type_counts[container_type] = type_counts.get(container_type, 0) + 1
-
-    reward_source_counts: dict[str, int] = {}
-    for collection in reward_collections_out:
-        key = str(collection.get("sourceId") or "UNKNOWN")
-        reward_source_counts[key] = reward_source_counts.get(key, 0) + 1
+    write_json(DATA_DIR / "operation_collections.json", operation_collections_out)
+    write_json(DATA_DIR / "operation_collection_contents.json", operation_collection_contents_out)
 
     print("Done.")
     print(f"Containers: {len(cases_out)}")
-    for container_type, count in sorted(type_counts.items()):
-        print(f"  {container_type}: {count}")
     print(f"Reward collections: {len(reward_collections_out)}")
-    for source_id, count in sorted(reward_source_counts.items()):
-        print(f"  {source_id}: {count}")
+    print(f"Operation collections: {len(operation_collections_out)}")
     print(f"Skins: {len(skins_out)}")
     print(f"Case contents: {len(case_contents_out)}")
     print(f"Reward collection contents: {len(reward_collection_contents_out)}")
+    print(f"Operation collection contents: {len(operation_collection_contents_out)}")
     print(f"Created skins: {created_skin_count}")
     print(f"Reused skins: {reused_skin_count}")
     print(f"Unknown items skipped: {skipped_unknown_items}")
     print(f"Containers created from skin.crates fallback: {container_refs_created_from_skin_meta}")
     print(f"Reward collections created: {reward_collections_created}")
-    print(f"Reward collection images downloaded: {reward_collection_images_downloaded}")
-    print(f"Reward collection image misses: {reward_collection_images_missing}")
-    print(f"Reward override file: {OVERRIDES_PATH.resolve()}")
-
-    for reward in reward_collections_out:
-        if reward["name"] == "The 2021 Vertigo Collection":
-            reward_id = reward["id"]
-            count = 0
-            for row in reward_collection_contents_out:
-                if row["rewardCollectionId"] == reward_id:
-                    count = len(row["skinIds"])
-                    break
-            print(f"[DEBUG] The 2021 Vertigo Collection skins: {count}")
-
+    print(f"Operation collections created: {operation_collections_created}")
 
 if __name__ == "__main__":
     main()

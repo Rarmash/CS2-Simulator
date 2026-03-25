@@ -18,6 +18,9 @@ class SkinDto {
   final String? collectionSourceId; // BROKEN_FANG | RIPTIDE | ARMORY
   final bool isRewardCollection;
 
+  final List<String> operationCollectionIds;
+  final bool isOperationCollection;
+
   SkinDto({
     required this.id,
     required this.name,
@@ -36,6 +39,8 @@ class SkinDto {
     required this.collectionSourceType,
     required this.collectionSourceId,
     required this.isRewardCollection,
+    required this.operationCollectionIds,
+    required this.isOperationCollection,
   });
 
   factory SkinDto.fromJson(Map<String, dynamic> json) {
@@ -57,6 +62,12 @@ class SkinDto {
       collectionSourceType: json['collectionSourceType'] as String?,
       collectionSourceId: json['collectionSourceId'] as String?,
       isRewardCollection: (json['isRewardCollection'] as bool?) ?? false,
+      operationCollectionIds:
+      (json['operationCollectionIds'] as List<dynamic>?)
+          ?.map((e) => e as String)
+          .toList() ??
+          const [],
+      isOperationCollection: (json['isOperationCollection'] as bool?) ?? false,
     );
   }
 
@@ -79,6 +90,8 @@ class SkinDto {
 
   bool get isOperationRewardCollection => collectionSourceType == 'OPERATION';
   bool get isArmoryRewardCollection => collectionSourceType == 'ARMORY';
+
+  bool get belongsToAnyOperationCollection => operationCollectionIds.isNotEmpty;
 
   String? get displayVariant {
     if (variantName != null && variantName!.trim().isNotEmpty) {

@@ -30,6 +30,8 @@ class TradeUpService {
   TradeUpResult tradeUp({
     required List<SkinDto> input,
     required List<SkinDto> allSkins,
+    required Map<String, List<String>> skinIdToRegularCaseIds,
+    required Map<String, List<String>> regularCaseIdToSkinIds,
   }) {
     if (input.isEmpty) {
       throw Exception('No skins selected');
@@ -54,6 +56,8 @@ class TradeUpService {
       return _covertToSpecial(
         input: input,
         allSkins: allSkins,
+        skinIdToRegularCaseIds: skinIdToRegularCaseIds,
+        regularCaseIdToSkinIds: regularCaseIdToSkinIds,
       );
     }
 
@@ -88,6 +92,8 @@ class TradeUpService {
   List<TradeUpChance> getTradeUpChances({
     required List<SkinDto> input,
     required List<SkinDto> allSkins,
+    required Map<String, List<String>> skinIdToRegularCaseIds,
+    required Map<String, List<String>> regularCaseIdToSkinIds,
   }) {
     if (input.isEmpty) return const [];
 
@@ -100,18 +106,50 @@ class TradeUpService {
     if (isSpecialTrade && input.length != 5) return const [];
     if (!isSpecialTrade && input.length != 10) return const [];
 
-    final collectionWeights = _buildCollectionWeights(input: input);
-
-    final String targetRarity;
-    final bool specialOnly;
+    final skinById = {for (final s in allSkins) s.id: s};
 
     if (isSpecialTrade) {
-      targetRarity = '';
-      specialOnly = true;
-    } else {
-      targetRarity = _nextRarity(rarity);
-      specialOnly = false;
+      final caseWeights = _buildRegularCaseWeights(
+        input: input,
+        skinIdToRegularCaseIds: skinIdToRegularCaseIds,
+      );
+
+      final Map<String, double> skinProbabilityById = {};
+
+      for (final entry in caseWeights.entries) {
+        final caseId = entry.key;
+        final caseProbability = entry.value;
+
+        final possibleSpecialSkins = _getSpecialSkinsForRegularCase(
+          caseId: caseId,
+          allSkins: allSkins,
+          regularCaseIdToSkinIds: regularCaseIdToSkinIds,
+        );
+
+        if (possibleSpecialSkins.isEmpty) continue;
+
+        final perSkinProbability =
+            caseProbability / possibleSpecialSkins.length;
+
+        for (final skin in possibleSpecialSkins) {
+          skinProbabilityById[skin.id] =
+              (skinProbabilityById[skin.id] ?? 0) + perSkinProbability;
+        }
+      }
+
+      final chances = skinProbabilityById.entries
+          .map((e) => TradeUpChance(
+        skin: skinById[e.key]!,
+        probability: e.value,
+      ))
+          .toList();
+
+      chances.sort((a, b) => b.probability.compareTo(a.probability));
+      return chances;
     }
+
+    final collectionWeights = _buildCollectionWeights(input: input);
+    final targetRarity = _nextRarity(rarity);
 
     final Map<String, double> skinProbabilityById = {};
 
@@ -120,13 +158,9 @@ class TradeUpService {
       final collectionProbability = entry.value;
 
       final possibleSkins = allSkins.where((s) {
-        if (!_sameCollection(s.collection, collectionName)) return false;
-
-        if (specialOnly) {
-          return s.isSpecialItem;
-        }
-
-        return s.rarity == targetRarity && !s.isSpecialItem;
+        return _sameCollection(s.collection, collectionName) &&
+            s.rarity == targetRarity &&
+            !s.isSpecialItem;
       }).toList();
 
       if (possibleSkins.isEmpty) continue;
@@ -138,8 +172,6 @@ class TradeUpService {
             (skinProbabilityById[skin.id] ?? 0) + perSkinProbability;
       }
     }
-
-    final skinById = {for (final s in allSkins) s.id: s};
 
     final chances = skinProbabilityById.entries
         .map((e) => TradeUpChance(
@@ -155,15 +187,22 @@ class TradeUpService {
   TradeUpResult _covertToSpecial({
     required List<SkinDto> input,
     required List<SkinDto> allSkins,
+    required Map<String, List<String>> skinIdToRegularCaseIds,
+    required Map<String, List<String>> regularCaseIdToSkinIds,
   }) {
-    final selectedCollection = _weightedCollectionChoice(input: input);
+    final selectedCaseId = _weightedRegularCaseChoice(
+      input: input,
+      skinIdToRegularCaseIds: skinIdToRegularCaseIds,
+    );
 
-    final possibleSkins = allSkins.where((s) {
-      return _sameCollection(s.collection, selectedCollection) && s.isSpecialItem;
-    }).toList();
+    final possibleSkins = _getSpecialSkinsForRegularCase(
+      caseId: selectedCaseId,
+      allSkins: allSkins,
+      regularCaseIdToSkinIds: regularCaseIdToSkinIds,
+    );
 
     if (possibleSkins.isEmpty) {
-      throw Exception('No knives/gloves found in selected collection');
+      throw Exception('No knives/gloves found in related regular cases');
     }
 
     final resultSkin = possibleSkins[_random.nextInt(possibleSkins.length)];
@@ -174,6 +213,19 @@ class TradeUpService {
       floatValue: floatValue,
       exterior: _getExterior(floatValue),
     );
+  }
+
+  List<SkinDto> _getSpecialSkinsForRegularCase({
+    required String caseId,
+    required List<SkinDto> allSkins,
+    required Map<String, List<String>> regularCaseIdToSkinIds,
+  }) {
+    final ids = regularCaseIdToSkinIds[caseId] ?? const [];
+    final idSet = ids.toSet();
+
+    return allSkins.where((s) {
+      return idSet.contains(s.id) && s.isSpecialItem;
+    }).toList();
   }
 
   double _calculateOutputFloat(List<SkinDto> input, SkinDto resultSkin) {
@@ -238,6 +290,54 @@ class TradeUpService {
     required List<SkinDto> input,
   }) {
     final weights = _buildCollectionWeights(input: input);
+
+    final roll = _random.nextDouble();
+    double cumulative = 0.0;
+
+    for (final entry in weights.entries) {
+      cumulative += entry.value;
+      if (roll <= cumulative) {
+        return entry.key;
+      }
+    }
+
+    return weights.keys.first;
+  }
+
+  Map<String, double> _buildRegularCaseWeights({
+    required List<SkinDto> input,
+    required Map<String, List<String>> skinIdToRegularCaseIds,
+  }) {
+    final counts = <String, double>{};
+
+    for (final skin in input) {
+      final caseIds = (skinIdToRegularCaseIds[skin.id] ?? const []).toSet().toList();
+      if (caseIds.isEmpty) continue;
+
+      final contribution = 1.0 / caseIds.length;
+      for (final caseId in caseIds) {
+        counts[caseId] = (counts[caseId] ?? 0) + contribution;
+      }
+    }
+
+    final total = counts.values.fold<double>(0, (a, b) => a + b);
+    if (total == 0) {
+      throw Exception('Could not determine related regular cases for selected skins');
+    }
+
+    return {
+      for (final entry in counts.entries) entry.key: entry.value / total,
+    };
+  }
+
+  String _weightedRegularCaseChoice({
+    required List<SkinDto> input,
+    required Map<String, List<String>> skinIdToRegularCaseIds,
+  }) {
+    final weights = _buildRegularCaseWeights(
+      input: input,
+      skinIdToRegularCaseIds: skinIdToRegularCaseIds,
+    );
 
     final roll = _random.nextDouble();
     double cumulative = 0.0;

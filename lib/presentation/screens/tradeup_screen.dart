@@ -43,19 +43,39 @@ class _TradeUpScreenState extends State<TradeUpScreen> {
       for (final c in cases) c.id: c.name,
     };
 
+    final regularCases = {
+      for (final c in cases.where((c) => c.isRegularCase)) c.id: c,
+    };
+
     final skinIdToCaseNames = <String, List<String>>{};
+    final skinIdToRegularCaseIds = <String, List<String>>{};
+    final regularCaseIdToSkinIds = <String, List<String>>{};
+
     for (final entry in caseToSkinIds.entries) {
-      final caseName = caseNameById[entry.key];
+      final caseId = entry.key;
+      final caseName = caseNameById[caseId];
       if (caseName == null) continue;
+
+      final isRegularCase = regularCases.containsKey(caseId);
+
+      if (isRegularCase) {
+        regularCaseIdToSkinIds[caseId] = List<String>.from(entry.value);
+      }
 
       for (final skinId in entry.value) {
         skinIdToCaseNames.putIfAbsent(skinId, () => []).add(caseName);
+
+        if (isRegularCase) {
+          skinIdToRegularCaseIds.putIfAbsent(skinId, () => []).add(caseId);
+        }
       }
     }
 
     return _TradeUpData(
       skins: skins,
       skinIdToCaseNames: skinIdToCaseNames,
+      skinIdToRegularCaseIds: skinIdToRegularCaseIds,
+      regularCaseIdToSkinIds: regularCaseIdToSkinIds,
     );
   }
 
@@ -151,6 +171,8 @@ class _TradeUpScreenState extends State<TradeUpScreen> {
       _chances = _service.getTradeUpChances(
         input: _selected,
         allSkins: data.skins,
+        skinIdToRegularCaseIds: data.skinIdToRegularCaseIds,
+        regularCaseIdToSkinIds: data.regularCaseIdToSkinIds,
       );
     } else {
       _chances = [];
@@ -199,6 +221,8 @@ class _TradeUpScreenState extends State<TradeUpScreen> {
       final result = _service.tradeUp(
         input: _selected,
         allSkins: data.skins,
+        skinIdToRegularCaseIds: data.skinIdToRegularCaseIds,
+        regularCaseIdToSkinIds: data.regularCaseIdToSkinIds,
       );
 
       setState(() {
@@ -329,7 +353,10 @@ class _TradeUpScreenState extends State<TradeUpScreen> {
                           maxLines: 2,
                           overflow: TextOverflow.ellipsis,
                           textAlign: TextAlign.center,
-                          style: const TextStyle(fontSize: 10, color: Colors.white70),
+                          style: const TextStyle(
+                            fontSize: 10,
+                            color: Colors.white70,
+                          ),
                         ),
                         if (caseNames.isNotEmpty) ...[
                           const SizedBox(height: 3),
@@ -338,7 +365,10 @@ class _TradeUpScreenState extends State<TradeUpScreen> {
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
                             textAlign: TextAlign.center,
-                            style: const TextStyle(fontSize: 9, color: Colors.white54),
+                            style: const TextStyle(
+                              fontSize: 9,
+                              color: Colors.white54,
+                            ),
                           ),
                         ],
                         if (s.collection != null && s.collection!.isNotEmpty) ...[
@@ -348,7 +378,10 @@ class _TradeUpScreenState extends State<TradeUpScreen> {
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
                             textAlign: TextAlign.center,
-                            style: const TextStyle(fontSize: 9, color: Colors.white38),
+                            style: const TextStyle(
+                              fontSize: 9,
+                              color: Colors.white38,
+                            ),
                           ),
                         ],
                       ],
@@ -367,8 +400,7 @@ class _TradeUpScreenState extends State<TradeUpScreen> {
                       color: Colors.black,
                       borderRadius: BorderRadius.circular(6),
                     ),
-                    child: Text('x$count',
-                        style: const TextStyle(fontSize: 10)),
+                    child: Text('x$count', style: const TextStyle(fontSize: 10)),
                   ),
                 ),
             ],
@@ -567,12 +599,16 @@ class _TradeUpScreenState extends State<TradeUpScreen> {
                             fontWeight: FontWeight.bold,
                           ),
                         ),
-                        if (_selected.isNotEmpty && _selected.first.rarity == 'COVERT')
+                        if (_selected.isNotEmpty &&
+                            _selected.first.rarity == 'COVERT')
                           const Padding(
                             padding: EdgeInsets.only(top: 4),
                             child: Text(
                               'Covert trade-up uses exactly 5 skins',
-                              style: TextStyle(color: Colors.white70, fontSize: 12),
+                              style: TextStyle(
+                                color: Colors.white70,
+                                fontSize: 12,
+                              ),
                             ),
                           ),
                         if (!_canAddMore())
@@ -580,14 +616,16 @@ class _TradeUpScreenState extends State<TradeUpScreen> {
                             padding: EdgeInsets.only(top: 4),
                             child: Text(
                               'Selection is full',
-                              style: TextStyle(color: Colors.amber, fontSize: 12),
+                              style: TextStyle(
+                                color: Colors.amber,
+                                fontSize: 12,
+                              ),
                             ),
                           ),
                       ],
                     ),
                   ),
                 ),
-
                 SliverToBoxAdapter(
                   child: Padding(
                     padding: const EdgeInsets.all(12),
@@ -605,7 +643,6 @@ class _TradeUpScreenState extends State<TradeUpScreen> {
                     ),
                   ),
                 ),
-
                 SliverToBoxAdapter(
                   child: Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 12),
@@ -631,9 +668,7 @@ class _TradeUpScreenState extends State<TradeUpScreen> {
                     ),
                   ),
                 ),
-
                 SliverToBoxAdapter(child: _resultCard()),
-
                 if (_chances.isNotEmpty)
                   const SliverToBoxAdapter(
                     child: Padding(
@@ -647,7 +682,6 @@ class _TradeUpScreenState extends State<TradeUpScreen> {
                       ),
                     ),
                   ),
-
                 if (_chances.isNotEmpty)
                   SliverPadding(
                     padding: const EdgeInsets.symmetric(horizontal: 12),
@@ -664,7 +698,6 @@ class _TradeUpScreenState extends State<TradeUpScreen> {
                       ),
                     ),
                   ),
-
                 const SliverToBoxAdapter(
                   child: Padding(
                     padding: EdgeInsets.fromLTRB(12, 12, 12, 8),
@@ -677,7 +710,6 @@ class _TradeUpScreenState extends State<TradeUpScreen> {
                     ),
                   ),
                 ),
-
                 SliverPadding(
                   padding: const EdgeInsets.all(12),
                   sliver: SliverGrid(
@@ -705,9 +737,13 @@ class _TradeUpScreenState extends State<TradeUpScreen> {
 class _TradeUpData {
   final List<SkinDto> skins;
   final Map<String, List<String>> skinIdToCaseNames;
+  final Map<String, List<String>> skinIdToRegularCaseIds;
+  final Map<String, List<String>> regularCaseIdToSkinIds;
 
   const _TradeUpData({
     required this.skins,
     required this.skinIdToCaseNames,
+    required this.skinIdToRegularCaseIds,
+    required this.regularCaseIdToSkinIds,
   });
 }

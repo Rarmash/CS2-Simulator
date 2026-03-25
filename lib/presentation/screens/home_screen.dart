@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../data/repositories/local_data_repository.dart';
 import 'case_list_screen.dart';
+import 'operation_collection_list_screen.dart';
 import 'reward_collection_list_screen.dart';
 import 'tradeup_screen.dart';
 
@@ -49,6 +50,21 @@ class HomeScreen extends StatelessWidget {
                       context,
                       MaterialPageRoute(
                         builder: (_) => RewardCollectionListScreen(
+                          repository: repository,
+                        ),
+                      ),
+                    );
+                  },
+                ),
+                const SizedBox(height: 16),
+                _menuButton(
+                  context,
+                  title: '🗂️ Operation Collections',
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) => OperationCollectionListScreen(
                           repository: repository,
                         ),
                       ),
