@@ -30,7 +30,6 @@ class TradeUpService {
   TradeUpResult tradeUp({
     required List<SkinDto> input,
     required List<SkinDto> allSkins,
-    required Map<String, List<String>> caseToSkinIds,
   }) {
     if (input.isEmpty) {
       throw Exception('No skins selected');
@@ -55,7 +54,6 @@ class TradeUpService {
       return _covertToSpecial(
         input: input,
         allSkins: allSkins,
-        caseToSkinIds: caseToSkinIds,
       );
     }
 
@@ -65,21 +63,16 @@ class TradeUpService {
 
     final nextRarity = _nextRarity(rarity);
 
-    final selectedCaseId = _weightedCaseChoice(
-      input: input,
-      caseToSkinIds: caseToSkinIds,
-    );
-
-    final possibleSkinIds = caseToSkinIds[selectedCaseId] ?? [];
+    final selectedCollection = _weightedCollectionChoice(input: input);
 
     final possibleSkins = allSkins.where((s) {
-      return possibleSkinIds.contains(s.id) &&
+      return _sameCollection(s.collection, selectedCollection) &&
           s.rarity == nextRarity &&
           !s.isSpecialItem;
     }).toList();
 
     if (possibleSkins.isEmpty) {
-      throw Exception('No skins found for next rarity in selected case');
+      throw Exception('No skins found for next rarity in selected collection');
     }
 
     final resultSkin = possibleSkins[_random.nextInt(possibleSkins.length)];
@@ -95,7 +88,6 @@ class TradeUpService {
   List<TradeUpChance> getTradeUpChances({
     required List<SkinDto> input,
     required List<SkinDto> allSkins,
-    required Map<String, List<String>> caseToSkinIds,
   }) {
     if (input.isEmpty) return const [];
 
@@ -108,10 +100,7 @@ class TradeUpService {
     if (isSpecialTrade && input.length != 5) return const [];
     if (!isSpecialTrade && input.length != 10) return const [];
 
-    final caseWeights = _buildCaseWeights(
-      input: input,
-      caseToSkinIds: caseToSkinIds,
-    );
+    final collectionWeights = _buildCollectionWeights(input: input);
 
     final String targetRarity;
     final bool specialOnly;
@@ -126,15 +115,12 @@ class TradeUpService {
 
     final Map<String, double> skinProbabilityById = {};
 
-    for (final entry in caseWeights.entries) {
-      final caseId = entry.key;
-      final caseProbability = entry.value;
-
-      final possibleSkinIds = caseToSkinIds[caseId] ?? [];
+    for (final entry in collectionWeights.entries) {
+      final collectionName = entry.key;
+      final collectionProbability = entry.value;
 
       final possibleSkins = allSkins.where((s) {
-        final inCase = possibleSkinIds.contains(s.id);
-        if (!inCase) return false;
+        if (!_sameCollection(s.collection, collectionName)) return false;
 
         if (specialOnly) {
           return s.isSpecialItem;
@@ -145,7 +131,7 @@ class TradeUpService {
 
       if (possibleSkins.isEmpty) continue;
 
-      final perSkinProbability = caseProbability / possibleSkins.length;
+      final perSkinProbability = collectionProbability / possibleSkins.length;
 
       for (final skin in possibleSkins) {
         skinProbabilityById[skin.id] =
@@ -169,21 +155,15 @@ class TradeUpService {
   TradeUpResult _covertToSpecial({
     required List<SkinDto> input,
     required List<SkinDto> allSkins,
-    required Map<String, List<String>> caseToSkinIds,
   }) {
-    final selectedCaseId = _weightedCaseChoice(
-      input: input,
-      caseToSkinIds: caseToSkinIds,
-    );
-
-    final possibleSkinIds = caseToSkinIds[selectedCaseId] ?? [];
+    final selectedCollection = _weightedCollectionChoice(input: input);
 
     final possibleSkins = allSkins.where((s) {
-      return possibleSkinIds.contains(s.id) && s.isSpecialItem;
+      return _sameCollection(s.collection, selectedCollection) && s.isSpecialItem;
     }).toList();
 
     if (possibleSkins.isEmpty) {
-      throw Exception('No knives/gloves found in selected case');
+      throw Exception('No knives/gloves found in selected collection');
     }
 
     final resultSkin = possibleSkins[_random.nextInt(possibleSkins.length)];
@@ -208,6 +188,10 @@ class TradeUpService {
 
   String _nextRarity(String rarity) {
     switch (rarity) {
+      case 'CONSUMER':
+        return 'INDUSTRIAL';
+      case 'INDUSTRIAL':
+        return 'MIL_SPEC';
       case 'MIL_SPEC':
         return 'RESTRICTED';
       case 'RESTRICTED':
@@ -215,34 +199,34 @@ class TradeUpService {
       case 'CLASSIFIED':
         return 'COVERT';
       default:
-        throw Exception('Trade-up is supported only up to Classified -> Covert');
+        throw Exception('Trade-up is not supported for rarity: $rarity');
     }
   }
 
-  String? _findCaseId(String skinId, Map<String, List<String>> map) {
-    for (final entry in map.entries) {
-      if (entry.value.contains(skinId)) {
-        return entry.key;
-      }
-    }
-    return null;
+  String? _normalizedCollection(String? collection) {
+    final value = collection?.trim();
+    if (value == null || value.isEmpty) return null;
+    return value;
   }
 
-  Map<String, double> _buildCaseWeights({
+  bool _sameCollection(String? a, String? b) {
+    return _normalizedCollection(a) == _normalizedCollection(b);
+  }
+
+  Map<String, double> _buildCollectionWeights({
     required List<SkinDto> input,
-    required Map<String, List<String>> caseToSkinIds,
   }) {
     final counts = <String, int>{};
 
     for (final skin in input) {
-      final caseId = _findCaseId(skin.id, caseToSkinIds);
-      if (caseId == null) continue;
-      counts[caseId] = (counts[caseId] ?? 0) + 1;
+      final collection = _normalizedCollection(skin.collection);
+      if (collection == null) continue;
+      counts[collection] = (counts[collection] ?? 0) + 1;
     }
 
     final total = counts.values.fold<int>(0, (a, b) => a + b);
     if (total == 0) {
-      throw Exception('Could not determine source cases for selected skins');
+      throw Exception('Could not determine collections for selected skins');
     }
 
     return {
@@ -250,14 +234,10 @@ class TradeUpService {
     };
   }
 
-  String _weightedCaseChoice({
+  String _weightedCollectionChoice({
     required List<SkinDto> input,
-    required Map<String, List<String>> caseToSkinIds,
   }) {
-    final weights = _buildCaseWeights(
-      input: input,
-      caseToSkinIds: caseToSkinIds,
-    );
+    final weights = _buildCollectionWeights(input: input);
 
     final roll = _random.nextDouble();
     double cumulative = 0.0;

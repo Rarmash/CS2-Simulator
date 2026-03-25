@@ -55,7 +55,6 @@ class _TradeUpScreenState extends State<TradeUpScreen> {
 
     return _TradeUpData(
       skins: skins,
-      caseToSkinIds: caseToSkinIds,
       skinIdToCaseNames: skinIdToCaseNames,
     );
   }
@@ -64,6 +63,10 @@ class _TradeUpScreenState extends State<TradeUpScreen> {
     if (s.isSpecialItem) return Colors.amber;
 
     switch (s.rarity) {
+      case 'CONSUMER':
+        return Colors.grey;
+      case 'INDUSTRIAL':
+        return Colors.lightBlueAccent;
       case 'MIL_SPEC':
         return Colors.blue;
       case 'RESTRICTED':
@@ -82,6 +85,10 @@ class _TradeUpScreenState extends State<TradeUpScreen> {
 
   String _rarityLabel(String rarity) {
     switch (rarity) {
+      case 'CONSUMER':
+        return 'Consumer';
+      case 'INDUSTRIAL':
+        return 'Industrial';
       case 'MIL_SPEC':
         return 'Mil-Spec';
       case 'RESTRICTED':
@@ -144,7 +151,6 @@ class _TradeUpScreenState extends State<TradeUpScreen> {
       _chances = _service.getTradeUpChances(
         input: _selected,
         allSkins: data.skins,
-        caseToSkinIds: data.caseToSkinIds,
       );
     } else {
       _chances = [];
@@ -193,7 +199,6 @@ class _TradeUpScreenState extends State<TradeUpScreen> {
       final result = _service.tradeUp(
         input: _selected,
         allSkins: data.skins,
-        caseToSkinIds: data.caseToSkinIds,
       );
 
       setState(() {
@@ -490,10 +495,16 @@ class _TradeUpScreenState extends State<TradeUpScreen> {
           final filtered = all.where((s) {
             if (s.isSpecialItem) return false;
 
-            if (s.rarity != 'MIL_SPEC' &&
-                s.rarity != 'RESTRICTED' &&
-                s.rarity != 'CLASSIFIED' &&
-                s.rarity != 'COVERT') {
+            const allowedRarities = {
+              'CONSUMER',
+              'INDUSTRIAL',
+              'MIL_SPEC',
+              'RESTRICTED',
+              'CLASSIFIED',
+              'COVERT',
+            };
+
+            if (!allowedRarities.contains(s.rarity)) {
               return false;
             }
 
@@ -527,6 +538,8 @@ class _TradeUpScreenState extends State<TradeUpScreen> {
                           spacing: 8,
                           children: [
                             for (final r in [
+                              'CONSUMER',
+                              'INDUSTRIAL',
                               'MIL_SPEC',
                               'RESTRICTED',
                               'CLASSIFIED',
@@ -691,12 +704,10 @@ class _TradeUpScreenState extends State<TradeUpScreen> {
 
 class _TradeUpData {
   final List<SkinDto> skins;
-  final Map<String, List<String>> caseToSkinIds;
   final Map<String, List<String>> skinIdToCaseNames;
 
   const _TradeUpData({
     required this.skins,
-    required this.caseToSkinIds,
     required this.skinIdToCaseNames,
   });
 }
