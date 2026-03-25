@@ -16,6 +16,9 @@ class CaseListScreen extends StatefulWidget {
 class _CaseListScreenState extends State<CaseListScreen> {
   late Future<List<CaseDto>> _casesFuture;
 
+  static const String _filterAll = 'ALL';
+  String _selectedFilter = _filterAll;
+
   @override
   void initState() {
     super.initState();
@@ -63,8 +66,111 @@ class _CaseListScreenState extends State<CaseListScreen> {
     return 2.4;
   }
 
+  Color _typeColor(CaseDto caseDto) {
+    if (caseDto.isSouvenirPackage) return Colors.amber;
+    if (caseDto.isCollectionPackage) return Colors.lightBlueAccent;
+    if (caseDto.isTerminal) return Colors.deepPurpleAccent;
+    return Colors.blueAccent;
+  }
+
+  List<String> _availableFilters(List<CaseDto> cases) {
+    final types = <String>{_filterAll};
+
+    for (final caseDto in cases) {
+      if (caseDto.isXrayPackage) continue;
+      types.add(caseDto.type);
+    }
+
+    final ordered = <String>[_filterAll];
+    const preferredOrder = [
+      'CASE',
+      'SOUVENIR_PACKAGE',
+      'COLLECTION_PACKAGE',
+      'TERMINAL',
+    ];
+
+    for (final type in preferredOrder) {
+      if (types.contains(type)) {
+        ordered.add(type);
+      }
+    }
+
+    for (final type in types) {
+      if (!ordered.contains(type)) {
+        ordered.add(type);
+      }
+    }
+
+    return ordered;
+  }
+
+  String _filterLabel(String type) {
+    switch (type) {
+      case _filterAll:
+        return 'All';
+      case 'CASE':
+        return 'Cases';
+      case 'SOUVENIR_PACKAGE':
+        return 'Souvenir';
+      case 'COLLECTION_PACKAGE':
+        return 'Collection';
+      case 'TERMINAL':
+        return 'Terminal';
+      default:
+        return type;
+    }
+  }
+
+  List<CaseDto> _applyFilters(List<CaseDto> cases) {
+    var filtered = List<CaseDto>.from(cases);
+
+    filtered = filtered.where((c) => !c.isXrayPackage).toList();
+
+    if (_selectedFilter != _filterAll) {
+      filtered = filtered.where((c) => c.type == _selectedFilter).toList();
+    }
+
+    filtered.sort((a, b) {
+      final ad = a.releaseDate ?? '9999-99-99';
+      final bd = b.releaseDate ?? '9999-99-99';
+      final byDate = ad.compareTo(bd);
+      if (byDate != 0) return byDate;
+      return a.name.compareTo(b.name);
+    });
+
+    return filtered;
+  }
+
+  Widget _buildFilterBar(List<CaseDto> allCases) {
+    final filters = _availableFilters(allCases);
+
+    if (_selectedFilter != _filterAll && !filters.contains(_selectedFilter)) {
+      _selectedFilter = _filterAll;
+    }
+
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(12, 12, 12, 0),
+      child: Wrap(
+        spacing: 8,
+        runSpacing: 8,
+        children: filters.map((type) {
+          return ChoiceChip(
+            label: Text(_filterLabel(type)),
+            selected: _selectedFilter == type,
+            onSelected: (_) {
+              setState(() {
+                _selectedFilter = type;
+              });
+            },
+          );
+        }).toList(),
+      ),
+    );
+  }
+
   Widget _buildCaseCard(BuildContext context, CaseDto caseDto) {
     final releaseDate = _formatReleaseDate(caseDto.releaseDate);
+    final typeColor = _typeColor(caseDto);
 
     return InkWell(
       borderRadius: BorderRadius.circular(16),
@@ -105,6 +211,23 @@ class _CaseListScreenState extends State<CaseListScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
+                  Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                    decoration: BoxDecoration(
+                      color: typeColor.withOpacity(0.14),
+                      borderRadius: BorderRadius.circular(999),
+                      border: Border.all(color: typeColor.withOpacity(0.5)),
+                    ),
+                    child: Text(
+                      caseDto.typeLabel,
+                      style: TextStyle(
+                        color: typeColor,
+                        fontSize: 11,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 8),
                   Text(
                     caseDto.name,
                     maxLines: compact ? 2 : 3,
@@ -174,30 +297,40 @@ class _CaseListScreenState extends State<CaseListScreen> {
             return const Center(child: CircularProgressIndicator());
           }
 
-          final cases = List<CaseDto>.from(snapshot.data!)
-            ..sort((a, b) {
-              final ad = a.releaseDate ?? '9999-99-99';
-              final bd = b.releaseDate ?? '9999-99-99';
-              return ad.compareTo(bd);
-            });
+          final allCases = List<CaseDto>.from(snapshot.data!);
+          final visibleCases = _applyFilters(allCases);
 
           return LayoutBuilder(
             builder: (context, constraints) {
               final crossAxisCount = _crossAxisCount(constraints.maxWidth);
               final aspectRatio = _childAspectRatio(constraints.maxWidth);
 
-              return GridView.builder(
-                padding: const EdgeInsets.all(12),
-                itemCount: cases.length,
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: crossAxisCount,
-                  crossAxisSpacing: 12,
-                  mainAxisSpacing: 12,
-                  childAspectRatio: aspectRatio,
-                ),
-                itemBuilder: (context, index) {
-                  return _buildCaseCard(context, cases[index]);
-                },
+              return Column(
+                children: [
+                  _buildFilterBar(allCases),
+                  Expanded(
+                    child: visibleCases.isEmpty
+                        ? const Center(
+                      child: Text(
+                        'No containers match the selected filters.',
+                        style: TextStyle(color: Colors.white70),
+                      ),
+                    )
+                        : GridView.builder(
+                      padding: const EdgeInsets.all(12),
+                      itemCount: visibleCases.length,
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: crossAxisCount,
+                        crossAxisSpacing: 12,
+                        mainAxisSpacing: 12,
+                        childAspectRatio: aspectRatio,
+                      ),
+                      itemBuilder: (context, index) {
+                        return _buildCaseCard(context, visibleCases[index]);
+                      },
+                    ),
+                  ),
+                ],
               );
             },
           );

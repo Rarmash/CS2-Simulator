@@ -3,252 +3,1372 @@
     "id": "2",
     "name": "CS:GO Weapon Case",
     "caseImage": "assets/cases/2.png",
-    "releaseDate": "2013-08-14"
-  },
-  {
-    "id": "3",
-    "name": "CS:GO Weapon Case 2",
-    "caseImage": "assets/cases/3.png",
-    "releaseDate": "2013-11-06"
-  },
-  {
-    "id": "4",
-    "name": "CS:GO Weapon Case 3",
-    "caseImage": "assets/cases/4.png",
-    "releaseDate": "2014-02-12"
-  },
-  {
-    "id": "21",
-    "name": "Operation Bravo Case",
-    "caseImage": "assets/cases/21.png",
-    "releaseDate": "2013-09-19"
-  },
-  {
-    "id": "39",
-    "name": "Winter Offensive Weapon Case",
-    "caseImage": "assets/cases/39.png",
-    "releaseDate": "2013-12-18"
-  },
-  {
-    "id": "19",
-    "name": "Huntsman Weapon Case",
-    "caseImage": "assets/cases/19.png",
-    "releaseDate": "2014-05-01"
-  },
-  {
-    "id": "22",
-    "name": "Operation Breakout Weapon Case",
-    "caseImage": "assets/cases/22.png",
-    "releaseDate": "2014-07-01"
+    "releaseDate": "2013-08-14",
+    "type": "CASE"
   },
   {
     "id": "40",
     "name": "eSports 2013 Case",
     "caseImage": "assets/cases/40.png",
-    "releaseDate": "2013-08-14"
+    "releaseDate": "2013-08-14",
+    "type": "CASE"
+  },
+  {
+    "id": "21",
+    "name": "Operation Bravo Case",
+    "caseImage": "assets/cases/21.png",
+    "releaseDate": "2013-09-19",
+    "type": "CASE"
+  },
+  {
+    "id": "3",
+    "name": "CS:GO Weapon Case 2",
+    "caseImage": "assets/cases/3.png",
+    "releaseDate": "2013-11-06",
+    "type": "CASE"
+  },
+  {
+    "id": "99",
+    "name": "DreamHack 2013 Souvenir Package",
+    "caseImage": "assets/cases/99.png",
+    "releaseDate": "2013-11-28",
+    "type": "SOUVENIR_PACKAGE"
+  },
+  {
+    "id": "39",
+    "name": "Winter Offensive Weapon Case",
+    "caseImage": "assets/cases/39.png",
+    "releaseDate": "2013-12-18",
+    "type": "CASE"
   },
   {
     "id": "41",
     "name": "eSports 2013 Winter Case",
     "caseImage": "assets/cases/41.png",
-    "releaseDate": "2013-12-18"
+    "releaseDate": "2013-12-18",
+    "type": "CASE"
   },
   {
-    "id": "42",
-    "name": "eSports 2014 Summer Case",
-    "caseImage": "assets/cases/42.png",
-    "releaseDate": "2014-07-10"
-  },
-  {
-    "id": "27",
-    "name": "Operation Vanguard Weapon Case",
-    "caseImage": "assets/cases/27.png",
-    "releaseDate": "2014-11-11"
+    "id": "4",
+    "name": "CS:GO Weapon Case 3",
+    "caseImage": "assets/cases/4.png",
+    "releaseDate": "2014-02-12",
+    "type": "CASE"
   },
   {
     "id": "25",
     "name": "Operation Phoenix Weapon Case",
     "caseImage": "assets/cases/25.png",
-    "releaseDate": "2014-02-20"
+    "releaseDate": "2014-02-20",
+    "type": "CASE"
   },
   {
-    "id": "33",
-    "name": "Revolver Case",
-    "caseImage": "assets/cases/33.png",
-    "releaseDate": "2015-12-08"
+    "id": "114",
+    "name": "EMS One 2014 Souvenir Package",
+    "caseImage": "assets/cases/114.png",
+    "releaseDate": "2014-03-13",
+    "type": "SOUVENIR_PACKAGE"
+  },
+  {
+    "id": "19",
+    "name": "Huntsman Weapon Case",
+    "caseImage": "assets/cases/19.png",
+    "releaseDate": "2014-05-01",
+    "type": "CASE"
+  },
+  {
+    "id": "22",
+    "name": "Operation Breakout Weapon Case",
+    "caseImage": "assets/cases/22.png",
+    "releaseDate": "2014-07-01",
+    "type": "CASE"
+  },
+  {
+    "id": "42",
+    "name": "eSports 2014 Summer Case",
+    "caseImage": "assets/cases/42.png",
+    "releaseDate": "2014-07-10",
+    "type": "CASE"
+  },
+  {
+    "id": "115",
+    "name": "ESL One Cologne 2014 Cache Souvenir Package",
+    "caseImage": "assets/cases/115.png",
+    "releaseDate": "2014-08-14",
+    "type": "SOUVENIR_PACKAGE"
+  },
+  {
+    "id": "116",
+    "name": "ESL One Cologne 2014 Cobblestone Souvenir Package",
+    "caseImage": "assets/cases/116.png",
+    "releaseDate": "2014-08-14",
+    "type": "SOUVENIR_PACKAGE"
+  },
+  {
+    "id": "117",
+    "name": "ESL One Cologne 2014 Dust II Souvenir Package",
+    "caseImage": "assets/cases/117.png",
+    "releaseDate": "2014-08-14",
+    "type": "SOUVENIR_PACKAGE"
+  },
+  {
+    "id": "118",
+    "name": "ESL One Cologne 2014 Inferno Souvenir Package",
+    "caseImage": "assets/cases/118.png",
+    "releaseDate": "2014-08-14",
+    "type": "SOUVENIR_PACKAGE"
+  },
+  {
+    "id": "119",
+    "name": "ESL One Cologne 2014 Mirage Souvenir Package",
+    "caseImage": "assets/cases/119.png",
+    "releaseDate": "2014-08-14",
+    "type": "SOUVENIR_PACKAGE"
+  },
+  {
+    "id": "120",
+    "name": "ESL One Cologne 2014 Nuke Souvenir Package",
+    "caseImage": "assets/cases/120.png",
+    "releaseDate": "2014-08-14",
+    "type": "SOUVENIR_PACKAGE"
+  },
+  {
+    "id": "121",
+    "name": "ESL One Cologne 2014 Overpass Souvenir Package",
+    "caseImage": "assets/cases/121.png",
+    "releaseDate": "2014-08-14",
+    "type": "SOUVENIR_PACKAGE"
+  },
+  {
+    "id": "27",
+    "name": "Operation Vanguard Weapon Case",
+    "caseImage": "assets/cases/27.png",
+    "releaseDate": "2014-11-11",
+    "type": "CASE"
+  },
+  {
+    "id": "100",
+    "name": "DreamHack 2014 Cache Souvenir Package",
+    "caseImage": "assets/cases/100.png",
+    "releaseDate": "2014-11-27",
+    "type": "SOUVENIR_PACKAGE"
+  },
+  {
+    "id": "101",
+    "name": "DreamHack 2014 Cobblestone Souvenir Package",
+    "caseImage": "assets/cases/101.png",
+    "releaseDate": "2014-11-27",
+    "type": "SOUVENIR_PACKAGE"
+  },
+  {
+    "id": "102",
+    "name": "DreamHack 2014 Dust II Souvenir Package",
+    "caseImage": "assets/cases/102.png",
+    "releaseDate": "2014-11-27",
+    "type": "SOUVENIR_PACKAGE"
+  },
+  {
+    "id": "103",
+    "name": "DreamHack 2014 Inferno Souvenir Package",
+    "caseImage": "assets/cases/103.png",
+    "releaseDate": "2014-11-27",
+    "type": "SOUVENIR_PACKAGE"
+  },
+  {
+    "id": "104",
+    "name": "DreamHack 2014 Mirage Souvenir Package",
+    "caseImage": "assets/cases/104.png",
+    "releaseDate": "2014-11-27",
+    "type": "SOUVENIR_PACKAGE"
+  },
+  {
+    "id": "105",
+    "name": "DreamHack 2014 Nuke Souvenir Package",
+    "caseImage": "assets/cases/105.png",
+    "releaseDate": "2014-11-27",
+    "type": "SOUVENIR_PACKAGE"
+  },
+  {
+    "id": "106",
+    "name": "DreamHack 2014 Overpass Souvenir Package",
+    "caseImage": "assets/cases/106.png",
+    "releaseDate": "2014-11-27",
+    "type": "SOUVENIR_PACKAGE"
   },
   {
     "id": "7",
     "name": "Chroma Case",
     "caseImage": "assets/cases/7.png",
-    "releaseDate": "2015-01-08"
+    "releaseDate": "2015-01-08",
+    "type": "CASE"
+  },
+  {
+    "id": "129",
+    "name": "ESL One Katowice 2015 Cache Souvenir Package",
+    "caseImage": "assets/cases/129.png",
+    "releaseDate": "2015-03-12",
+    "type": "SOUVENIR_PACKAGE"
+  },
+  {
+    "id": "130",
+    "name": "ESL One Katowice 2015 Cobblestone Souvenir Package",
+    "caseImage": "assets/cases/130.png",
+    "releaseDate": "2015-03-12",
+    "type": "SOUVENIR_PACKAGE"
+  },
+  {
+    "id": "131",
+    "name": "ESL One Katowice 2015 Dust II Souvenir Package",
+    "caseImage": "assets/cases/131.png",
+    "releaseDate": "2015-03-12",
+    "type": "SOUVENIR_PACKAGE"
+  },
+  {
+    "id": "132",
+    "name": "ESL One Katowice 2015 Inferno Souvenir Package",
+    "caseImage": "assets/cases/132.png",
+    "releaseDate": "2015-03-12",
+    "type": "SOUVENIR_PACKAGE"
+  },
+  {
+    "id": "133",
+    "name": "ESL One Katowice 2015 Mirage Souvenir Package",
+    "caseImage": "assets/cases/133.png",
+    "releaseDate": "2015-03-12",
+    "type": "SOUVENIR_PACKAGE"
+  },
+  {
+    "id": "134",
+    "name": "ESL One Katowice 2015 Nuke Souvenir Package",
+    "caseImage": "assets/cases/134.png",
+    "releaseDate": "2015-03-12",
+    "type": "SOUVENIR_PACKAGE"
+  },
+  {
+    "id": "135",
+    "name": "ESL One Katowice 2015 Overpass Souvenir Package",
+    "caseImage": "assets/cases/135.png",
+    "releaseDate": "2015-03-12",
+    "type": "SOUVENIR_PACKAGE"
   },
   {
     "id": "5",
     "name": "Chroma 2 Case",
     "caseImage": "assets/cases/5.png",
-    "releaseDate": "2015-04-15"
+    "releaseDate": "2015-04-15",
+    "type": "CASE"
   },
   {
     "id": "11",
     "name": "Falchion Case",
     "caseImage": "assets/cases/11.png",
-    "releaseDate": "2015-05-26"
+    "releaseDate": "2015-05-26",
+    "type": "CASE"
+  },
+  {
+    "id": "122",
+    "name": "ESL One Cologne 2015 Cache Souvenir Package",
+    "caseImage": "assets/cases/122.png",
+    "releaseDate": "2015-08-20",
+    "type": "SOUVENIR_PACKAGE"
+  },
+  {
+    "id": "123",
+    "name": "ESL One Cologne 2015 Cobblestone Souvenir Package",
+    "caseImage": "assets/cases/123.png",
+    "releaseDate": "2015-08-20",
+    "type": "SOUVENIR_PACKAGE"
+  },
+  {
+    "id": "124",
+    "name": "ESL One Cologne 2015 Dust II Souvenir Package",
+    "caseImage": "assets/cases/124.png",
+    "releaseDate": "2015-08-20",
+    "type": "SOUVENIR_PACKAGE"
+  },
+  {
+    "id": "125",
+    "name": "ESL One Cologne 2015 Inferno Souvenir Package",
+    "caseImage": "assets/cases/125.png",
+    "releaseDate": "2015-08-20",
+    "type": "SOUVENIR_PACKAGE"
+  },
+  {
+    "id": "126",
+    "name": "ESL One Cologne 2015 Mirage Souvenir Package",
+    "caseImage": "assets/cases/126.png",
+    "releaseDate": "2015-08-20",
+    "type": "SOUVENIR_PACKAGE"
+  },
+  {
+    "id": "127",
+    "name": "ESL One Cologne 2015 Overpass Souvenir Package",
+    "caseImage": "assets/cases/127.png",
+    "releaseDate": "2015-08-20",
+    "type": "SOUVENIR_PACKAGE"
+  },
+  {
+    "id": "128",
+    "name": "ESL One Cologne 2015 Train Souvenir Package",
+    "caseImage": "assets/cases/128.png",
+    "releaseDate": "2015-08-20",
+    "type": "SOUVENIR_PACKAGE"
   },
   {
     "id": "34",
     "name": "Shadow Case",
     "caseImage": "assets/cases/34.png",
-    "releaseDate": "2015-09-18"
+    "releaseDate": "2015-09-18",
+    "type": "CASE"
+  },
+  {
+    "id": "107",
+    "name": "DreamHack Cluj-Napoca 2015 Cache Souvenir Package",
+    "caseImage": "assets/cases/107.png",
+    "releaseDate": "2015-10-28",
+    "type": "SOUVENIR_PACKAGE"
+  },
+  {
+    "id": "108",
+    "name": "DreamHack Cluj-Napoca 2015 Cobblestone Souvenir Package",
+    "caseImage": "assets/cases/108.png",
+    "releaseDate": "2015-10-28",
+    "type": "SOUVENIR_PACKAGE"
+  },
+  {
+    "id": "109",
+    "name": "DreamHack Cluj-Napoca 2015 Dust II Souvenir Package",
+    "caseImage": "assets/cases/109.png",
+    "releaseDate": "2015-10-28",
+    "type": "SOUVENIR_PACKAGE"
+  },
+  {
+    "id": "110",
+    "name": "DreamHack Cluj-Napoca 2015 Inferno Souvenir Package",
+    "caseImage": "assets/cases/110.png",
+    "releaseDate": "2015-10-28",
+    "type": "SOUVENIR_PACKAGE"
+  },
+  {
+    "id": "111",
+    "name": "DreamHack Cluj-Napoca 2015 Mirage Souvenir Package",
+    "caseImage": "assets/cases/111.png",
+    "releaseDate": "2015-10-28",
+    "type": "SOUVENIR_PACKAGE"
+  },
+  {
+    "id": "112",
+    "name": "DreamHack Cluj-Napoca 2015 Overpass Souvenir Package",
+    "caseImage": "assets/cases/112.png",
+    "releaseDate": "2015-10-28",
+    "type": "SOUVENIR_PACKAGE"
+  },
+  {
+    "id": "113",
+    "name": "DreamHack Cluj-Napoca 2015 Train Souvenir Package",
+    "caseImage": "assets/cases/113.png",
+    "releaseDate": "2015-10-28",
+    "type": "SOUVENIR_PACKAGE"
+  },
+  {
+    "id": "33",
+    "name": "Revolver Case",
+    "caseImage": "assets/cases/33.png",
+    "releaseDate": "2015-12-08",
+    "type": "CASE"
   },
   {
     "id": "28",
     "name": "Operation Wildfire Case",
     "caseImage": "assets/cases/28.png",
-    "releaseDate": "2016-02-17"
+    "releaseDate": "2016-02-17",
+    "type": "CASE"
+  },
+  {
+    "id": "157",
+    "name": "MLG Columbus 2016 Cache Souvenir Package",
+    "caseImage": "assets/cases/157.png",
+    "releaseDate": "2016-03-29",
+    "type": "SOUVENIR_PACKAGE"
+  },
+  {
+    "id": "158",
+    "name": "MLG Columbus 2016 Cobblestone Souvenir Package",
+    "caseImage": "assets/cases/158.png",
+    "releaseDate": "2016-03-29",
+    "type": "SOUVENIR_PACKAGE"
+  },
+  {
+    "id": "159",
+    "name": "MLG Columbus 2016 Dust II Souvenir Package",
+    "caseImage": "assets/cases/159.png",
+    "releaseDate": "2016-03-29",
+    "type": "SOUVENIR_PACKAGE"
+  },
+  {
+    "id": "160",
+    "name": "MLG Columbus 2016 Inferno Souvenir Package",
+    "caseImage": "assets/cases/160.png",
+    "releaseDate": "2016-03-29",
+    "type": "SOUVENIR_PACKAGE"
+  },
+  {
+    "id": "161",
+    "name": "MLG Columbus 2016 Mirage Souvenir Package",
+    "caseImage": "assets/cases/161.png",
+    "releaseDate": "2016-03-29",
+    "type": "SOUVENIR_PACKAGE"
+  },
+  {
+    "id": "162",
+    "name": "MLG Columbus 2016 Nuke Souvenir Package",
+    "caseImage": "assets/cases/162.png",
+    "releaseDate": "2016-03-29",
+    "type": "SOUVENIR_PACKAGE"
+  },
+  {
+    "id": "163",
+    "name": "MLG Columbus 2016 Overpass Souvenir Package",
+    "caseImage": "assets/cases/163.png",
+    "releaseDate": "2016-03-29",
+    "type": "SOUVENIR_PACKAGE"
+  },
+  {
+    "id": "164",
+    "name": "MLG Columbus 2016 Train Souvenir Package",
+    "caseImage": "assets/cases/164.png",
+    "releaseDate": "2016-03-29",
+    "type": "SOUVENIR_PACKAGE"
   },
   {
     "id": "6",
     "name": "Chroma 3 Case",
     "caseImage": "assets/cases/6.png",
-    "releaseDate": "2016-04-27"
+    "releaseDate": "2016-04-27",
+    "type": "CASE"
   },
   {
     "id": "16",
     "name": "Gamma Case",
     "caseImage": "assets/cases/16.png",
-    "releaseDate": "2016-06-15"
+    "releaseDate": "2016-06-15",
+    "type": "CASE"
+  },
+  {
+    "id": "85",
+    "name": "Cologne 2016 Cache Souvenir Package",
+    "caseImage": "assets/cases/85.png",
+    "releaseDate": "2016-07-05",
+    "type": "SOUVENIR_PACKAGE"
+  },
+  {
+    "id": "86",
+    "name": "Cologne 2016 Cobblestone Souvenir Package",
+    "caseImage": "assets/cases/86.png",
+    "releaseDate": "2016-07-05",
+    "type": "SOUVENIR_PACKAGE"
+  },
+  {
+    "id": "87",
+    "name": "Cologne 2016 Dust II Souvenir Package",
+    "caseImage": "assets/cases/87.png",
+    "releaseDate": "2016-07-05",
+    "type": "SOUVENIR_PACKAGE"
+  },
+  {
+    "id": "88",
+    "name": "Cologne 2016 Mirage Souvenir Package",
+    "caseImage": "assets/cases/88.png",
+    "releaseDate": "2016-07-05",
+    "type": "SOUVENIR_PACKAGE"
+  },
+  {
+    "id": "89",
+    "name": "Cologne 2016 Nuke Souvenir Package",
+    "caseImage": "assets/cases/89.png",
+    "releaseDate": "2016-07-05",
+    "type": "SOUVENIR_PACKAGE"
+  },
+  {
+    "id": "90",
+    "name": "Cologne 2016 Overpass Souvenir Package",
+    "caseImage": "assets/cases/90.png",
+    "releaseDate": "2016-07-05",
+    "type": "SOUVENIR_PACKAGE"
+  },
+  {
+    "id": "91",
+    "name": "Cologne 2016 Train Souvenir Package",
+    "caseImage": "assets/cases/91.png",
+    "releaseDate": "2016-07-05",
+    "type": "SOUVENIR_PACKAGE"
   },
   {
     "id": "15",
     "name": "Gamma 2 Case",
     "caseImage": "assets/cases/15.png",
-    "releaseDate": "2016-08-18"
+    "releaseDate": "2016-08-18",
+    "type": "CASE"
   },
   {
     "id": "17",
     "name": "Glove Case",
     "caseImage": "assets/cases/17.png",
-    "releaseDate": "2016-11-28"
+    "releaseDate": "2016-11-28",
+    "type": "CASE"
+  },
+  {
+    "id": "50",
+    "name": "Atlanta 2017 Cache Souvenir Package",
+    "caseImage": "assets/cases/50.png",
+    "releaseDate": "2017-01-22",
+    "type": "SOUVENIR_PACKAGE"
+  },
+  {
+    "id": "51",
+    "name": "Atlanta 2017 Cobblestone Souvenir Package",
+    "caseImage": "assets/cases/51.png",
+    "releaseDate": "2017-01-22",
+    "type": "SOUVENIR_PACKAGE"
+  },
+  {
+    "id": "52",
+    "name": "Atlanta 2017 Dust II Souvenir Package",
+    "caseImage": "assets/cases/52.png",
+    "releaseDate": "2017-01-22",
+    "type": "SOUVENIR_PACKAGE"
+  },
+  {
+    "id": "53",
+    "name": "Atlanta 2017 Mirage Souvenir Package",
+    "caseImage": "assets/cases/53.png",
+    "releaseDate": "2017-01-22",
+    "type": "SOUVENIR_PACKAGE"
+  },
+  {
+    "id": "54",
+    "name": "Atlanta 2017 Nuke Souvenir Package",
+    "caseImage": "assets/cases/54.png",
+    "releaseDate": "2017-01-22",
+    "type": "SOUVENIR_PACKAGE"
+  },
+  {
+    "id": "55",
+    "name": "Atlanta 2017 Overpass Souvenir Package",
+    "caseImage": "assets/cases/55.png",
+    "releaseDate": "2017-01-22",
+    "type": "SOUVENIR_PACKAGE"
+  },
+  {
+    "id": "56",
+    "name": "Atlanta 2017 Train Souvenir Package",
+    "caseImage": "assets/cases/56.png",
+    "releaseDate": "2017-01-22",
+    "type": "SOUVENIR_PACKAGE"
   },
   {
     "id": "38",
     "name": "Spectrum Case",
     "caseImage": "assets/cases/38.png",
-    "releaseDate": "2017-03-15"
+    "releaseDate": "2017-03-15",
+    "type": "CASE"
   },
   {
     "id": "24",
     "name": "Operation Hydra Case",
     "caseImage": "assets/cases/24.png",
-    "releaseDate": "2017-05-23"
+    "releaseDate": "2017-05-23",
+    "type": "CASE"
+  },
+  {
+    "id": "143",
+    "name": "Krakow 2017 Cache Souvenir Package",
+    "caseImage": "assets/cases/143.png",
+    "releaseDate": "2017-07-16",
+    "type": "SOUVENIR_PACKAGE"
+  },
+  {
+    "id": "144",
+    "name": "Krakow 2017 Cobblestone Souvenir Package",
+    "caseImage": "assets/cases/144.png",
+    "releaseDate": "2017-07-16",
+    "type": "SOUVENIR_PACKAGE"
+  },
+  {
+    "id": "145",
+    "name": "Krakow 2017 Inferno Souvenir Package",
+    "caseImage": "assets/cases/145.png",
+    "releaseDate": "2017-07-16",
+    "type": "SOUVENIR_PACKAGE"
+  },
+  {
+    "id": "146",
+    "name": "Krakow 2017 Mirage Souvenir Package",
+    "caseImage": "assets/cases/146.png",
+    "releaseDate": "2017-07-16",
+    "type": "SOUVENIR_PACKAGE"
+  },
+  {
+    "id": "147",
+    "name": "Krakow 2017 Nuke Souvenir Package",
+    "caseImage": "assets/cases/147.png",
+    "releaseDate": "2017-07-16",
+    "type": "SOUVENIR_PACKAGE"
+  },
+  {
+    "id": "148",
+    "name": "Krakow 2017 Overpass Souvenir Package",
+    "caseImage": "assets/cases/148.png",
+    "releaseDate": "2017-07-16",
+    "type": "SOUVENIR_PACKAGE"
+  },
+  {
+    "id": "149",
+    "name": "Krakow 2017 Train Souvenir Package",
+    "caseImage": "assets/cases/149.png",
+    "releaseDate": "2017-07-16",
+    "type": "SOUVENIR_PACKAGE"
   },
   {
     "id": "37",
     "name": "Spectrum 2 Case",
     "caseImage": "assets/cases/37.png",
-    "releaseDate": "2017-09-14"
+    "releaseDate": "2017-09-14",
+    "type": "CASE"
+  },
+  {
+    "id": "71",
+    "name": "Boston 2018 Cache Souvenir Package",
+    "caseImage": "assets/cases/71.png",
+    "releaseDate": "2018-01-12",
+    "type": "SOUVENIR_PACKAGE"
+  },
+  {
+    "id": "72",
+    "name": "Boston 2018 Cobblestone Souvenir Package",
+    "caseImage": "assets/cases/72.png",
+    "releaseDate": "2018-01-12",
+    "type": "SOUVENIR_PACKAGE"
+  },
+  {
+    "id": "73",
+    "name": "Boston 2018 Inferno Souvenir Package",
+    "caseImage": "assets/cases/73.png",
+    "releaseDate": "2018-01-12",
+    "type": "SOUVENIR_PACKAGE"
+  },
+  {
+    "id": "74",
+    "name": "Boston 2018 Mirage Souvenir Package",
+    "caseImage": "assets/cases/74.png",
+    "releaseDate": "2018-01-12",
+    "type": "SOUVENIR_PACKAGE"
+  },
+  {
+    "id": "75",
+    "name": "Boston 2018 Nuke Souvenir Package",
+    "caseImage": "assets/cases/75.png",
+    "releaseDate": "2018-01-12",
+    "type": "SOUVENIR_PACKAGE"
+  },
+  {
+    "id": "76",
+    "name": "Boston 2018 Overpass Souvenir Package",
+    "caseImage": "assets/cases/76.png",
+    "releaseDate": "2018-01-12",
+    "type": "SOUVENIR_PACKAGE"
+  },
+  {
+    "id": "77",
+    "name": "Boston 2018 Train Souvenir Package",
+    "caseImage": "assets/cases/77.png",
+    "releaseDate": "2018-01-12",
+    "type": "SOUVENIR_PACKAGE"
   },
   {
     "id": "8",
     "name": "Clutch Case",
     "caseImage": "assets/cases/8.png",
-    "releaseDate": "2018-02-15"
+    "releaseDate": "2018-02-15",
+    "type": "CASE"
   },
   {
     "id": "18",
     "name": "Horizon Case",
     "caseImage": "assets/cases/18.png",
-    "releaseDate": "2018-08-03"
+    "releaseDate": "2018-08-03",
+    "type": "CASE"
+  },
+  {
+    "id": "150",
+    "name": "London 2018 Cache Souvenir Package",
+    "caseImage": "assets/cases/150.png",
+    "releaseDate": "2018-09-05",
+    "type": "SOUVENIR_PACKAGE"
+  },
+  {
+    "id": "151",
+    "name": "London 2018 Dust II Souvenir Package",
+    "caseImage": "assets/cases/151.png",
+    "releaseDate": "2018-09-05",
+    "type": "SOUVENIR_PACKAGE"
+  },
+  {
+    "id": "152",
+    "name": "London 2018 Inferno Souvenir Package",
+    "caseImage": "assets/cases/152.png",
+    "releaseDate": "2018-09-05",
+    "type": "SOUVENIR_PACKAGE"
+  },
+  {
+    "id": "153",
+    "name": "London 2018 Mirage Souvenir Package",
+    "caseImage": "assets/cases/153.png",
+    "releaseDate": "2018-09-05",
+    "type": "SOUVENIR_PACKAGE"
+  },
+  {
+    "id": "154",
+    "name": "London 2018 Nuke Souvenir Package",
+    "caseImage": "assets/cases/154.png",
+    "releaseDate": "2018-09-05",
+    "type": "SOUVENIR_PACKAGE"
+  },
+  {
+    "id": "155",
+    "name": "London 2018 Overpass Souvenir Package",
+    "caseImage": "assets/cases/155.png",
+    "releaseDate": "2018-09-05",
+    "type": "SOUVENIR_PACKAGE"
+  },
+  {
+    "id": "156",
+    "name": "London 2018 Train Souvenir Package",
+    "caseImage": "assets/cases/156.png",
+    "releaseDate": "2018-09-05",
+    "type": "SOUVENIR_PACKAGE"
   },
   {
     "id": "9",
     "name": "Danger Zone Case",
     "caseImage": "assets/cases/9.png",
-    "releaseDate": "2018-12-06"
+    "releaseDate": "2018-12-06",
+    "type": "CASE"
+  },
+  {
+    "id": "136",
+    "name": "Katowice 2019 Cache Souvenir Package",
+    "caseImage": "assets/cases/136.png",
+    "releaseDate": "2019-02-13",
+    "type": "SOUVENIR_PACKAGE"
+  },
+  {
+    "id": "137",
+    "name": "Katowice 2019 Dust II Souvenir Package",
+    "caseImage": "assets/cases/137.png",
+    "releaseDate": "2019-02-13",
+    "type": "SOUVENIR_PACKAGE"
+  },
+  {
+    "id": "138",
+    "name": "Katowice 2019 Inferno Souvenir Package",
+    "caseImage": "assets/cases/138.png",
+    "releaseDate": "2019-02-13",
+    "type": "SOUVENIR_PACKAGE"
+  },
+  {
+    "id": "139",
+    "name": "Katowice 2019 Mirage Souvenir Package",
+    "caseImage": "assets/cases/139.png",
+    "releaseDate": "2019-02-13",
+    "type": "SOUVENIR_PACKAGE"
+  },
+  {
+    "id": "140",
+    "name": "Katowice 2019 Nuke Souvenir Package",
+    "caseImage": "assets/cases/140.png",
+    "releaseDate": "2019-02-13",
+    "type": "SOUVENIR_PACKAGE"
+  },
+  {
+    "id": "141",
+    "name": "Katowice 2019 Overpass Souvenir Package",
+    "caseImage": "assets/cases/141.png",
+    "releaseDate": "2019-02-13",
+    "type": "SOUVENIR_PACKAGE"
+  },
+  {
+    "id": "142",
+    "name": "Katowice 2019 Train Souvenir Package",
+    "caseImage": "assets/cases/142.png",
+    "releaseDate": "2019-02-13",
+    "type": "SOUVENIR_PACKAGE"
   },
   {
     "id": "30",
     "name": "Prisma Case",
     "caseImage": "assets/cases/30.png",
-    "releaseDate": "2019-03-13"
+    "releaseDate": "2019-03-13",
+    "type": "CASE"
   },
   {
-    "id": "35",
-    "name": "Shattered Web Case",
-    "caseImage": "assets/cases/35.png",
-    "releaseDate": "2019-11-18"
+    "id": "64",
+    "name": "Berlin 2019 Dust II Souvenir Package",
+    "caseImage": "assets/cases/64.png",
+    "releaseDate": "2019-08-23",
+    "type": "SOUVENIR_PACKAGE"
+  },
+  {
+    "id": "65",
+    "name": "Berlin 2019 Inferno Souvenir Package",
+    "caseImage": "assets/cases/65.png",
+    "releaseDate": "2019-08-23",
+    "type": "SOUVENIR_PACKAGE"
+  },
+  {
+    "id": "66",
+    "name": "Berlin 2019 Mirage Souvenir Package",
+    "caseImage": "assets/cases/66.png",
+    "releaseDate": "2019-08-23",
+    "type": "SOUVENIR_PACKAGE"
+  },
+  {
+    "id": "67",
+    "name": "Berlin 2019 Nuke Souvenir Package",
+    "caseImage": "assets/cases/67.png",
+    "releaseDate": "2019-08-23",
+    "type": "SOUVENIR_PACKAGE"
+  },
+  {
+    "id": "68",
+    "name": "Berlin 2019 Overpass Souvenir Package",
+    "caseImage": "assets/cases/68.png",
+    "releaseDate": "2019-08-23",
+    "type": "SOUVENIR_PACKAGE"
+  },
+  {
+    "id": "69",
+    "name": "Berlin 2019 Train Souvenir Package",
+    "caseImage": "assets/cases/69.png",
+    "releaseDate": "2019-08-23",
+    "type": "SOUVENIR_PACKAGE"
+  },
+  {
+    "id": "70",
+    "name": "Berlin 2019 Vertigo Souvenir Package",
+    "caseImage": "assets/cases/70.png",
+    "releaseDate": "2019-08-23",
+    "type": "SOUVENIR_PACKAGE"
   },
   {
     "id": "1",
     "name": "CS20 Case",
     "caseImage": "assets/cases/1.png",
-    "releaseDate": "2019-10-18"
+    "releaseDate": "2019-10-18",
+    "type": "CASE"
+  },
+  {
+    "id": "35",
+    "name": "Shattered Web Case",
+    "caseImage": "assets/cases/35.png",
+    "releaseDate": "2019-11-18",
+    "type": "CASE"
+  },
+  {
+    "id": "197",
+    "name": "X-Ray P250 Package",
+    "caseImage": "assets/cases/197.png",
+    "releaseDate": "2019-10-02",
+    "type": "XRAY_PACKAGE"
   },
   {
     "id": "29",
     "name": "Prisma 2 Case",
     "caseImage": "assets/cases/29.png",
-    "releaseDate": "2020-03-31"
+    "releaseDate": "2020-03-31",
+    "type": "CASE"
   },
   {
     "id": "13",
     "name": "Fracture Case",
     "caseImage": "assets/cases/13.png",
-    "releaseDate": "2020-08-06"
+    "releaseDate": "2020-08-06",
+    "type": "CASE"
   },
   {
     "id": "23",
     "name": "Operation Broken Fang Case",
     "caseImage": "assets/cases/23.png",
-    "releaseDate": "2020-12-03"
+    "releaseDate": "2020-12-03",
+    "type": "CASE"
   },
   {
     "id": "36",
     "name": "Snakebite Case",
     "caseImage": "assets/cases/36.png",
-    "releaseDate": "2021-05-03"
+    "releaseDate": "2021-05-03",
+    "type": "CASE"
   },
   {
     "id": "26",
     "name": "Operation Riptide Case",
     "caseImage": "assets/cases/26.png",
-    "releaseDate": "2021-09-22"
+    "releaseDate": "2021-09-22",
+    "type": "CASE"
+  },
+  {
+    "id": "186",
+    "name": "Stockholm 2021 Ancient Souvenir Package",
+    "caseImage": "assets/cases/186.png",
+    "releaseDate": "2021-10-26",
+    "type": "SOUVENIR_PACKAGE"
+  },
+  {
+    "id": "187",
+    "name": "Stockholm 2021 Dust II Souvenir Package",
+    "caseImage": "assets/cases/187.png",
+    "releaseDate": "2021-10-26",
+    "type": "SOUVENIR_PACKAGE"
+  },
+  {
+    "id": "188",
+    "name": "Stockholm 2021 Inferno Souvenir Package",
+    "caseImage": "assets/cases/188.png",
+    "releaseDate": "2021-10-26",
+    "type": "SOUVENIR_PACKAGE"
+  },
+  {
+    "id": "189",
+    "name": "Stockholm 2021 Mirage Souvenir Package",
+    "caseImage": "assets/cases/189.png",
+    "releaseDate": "2021-10-26",
+    "type": "SOUVENIR_PACKAGE"
+  },
+  {
+    "id": "190",
+    "name": "Stockholm 2021 Nuke Souvenir Package",
+    "caseImage": "assets/cases/190.png",
+    "releaseDate": "2021-10-26",
+    "type": "SOUVENIR_PACKAGE"
+  },
+  {
+    "id": "191",
+    "name": "Stockholm 2021 Overpass Souvenir Package",
+    "caseImage": "assets/cases/191.png",
+    "releaseDate": "2021-10-26",
+    "type": "SOUVENIR_PACKAGE"
+  },
+  {
+    "id": "192",
+    "name": "Stockholm 2021 Vertigo Souvenir Package",
+    "caseImage": "assets/cases/192.png",
+    "releaseDate": "2021-10-26",
+    "type": "SOUVENIR_PACKAGE"
   },
   {
     "id": "10",
     "name": "Dreams & Nightmares Case",
     "caseImage": "assets/cases/10.png",
-    "releaseDate": "2022-01-20"
+    "releaseDate": "2022-01-20",
+    "type": "CASE"
+  },
+  {
+    "id": "43",
+    "name": "Antwerp 2022 Ancient Souvenir Package",
+    "caseImage": "assets/cases/43.png",
+    "releaseDate": "2022-05-09",
+    "type": "SOUVENIR_PACKAGE"
+  },
+  {
+    "id": "44",
+    "name": "Antwerp 2022 Dust II Souvenir Package",
+    "caseImage": "assets/cases/44.png",
+    "releaseDate": "2022-05-09",
+    "type": "SOUVENIR_PACKAGE"
+  },
+  {
+    "id": "45",
+    "name": "Antwerp 2022 Inferno Souvenir Package",
+    "caseImage": "assets/cases/45.png",
+    "releaseDate": "2022-05-09",
+    "type": "SOUVENIR_PACKAGE"
+  },
+  {
+    "id": "46",
+    "name": "Antwerp 2022 Mirage Souvenir Package",
+    "caseImage": "assets/cases/46.png",
+    "releaseDate": "2022-05-09",
+    "type": "SOUVENIR_PACKAGE"
+  },
+  {
+    "id": "47",
+    "name": "Antwerp 2022 Nuke Souvenir Package",
+    "caseImage": "assets/cases/47.png",
+    "releaseDate": "2022-05-09",
+    "type": "SOUVENIR_PACKAGE"
+  },
+  {
+    "id": "48",
+    "name": "Antwerp 2022 Overpass Souvenir Package",
+    "caseImage": "assets/cases/48.png",
+    "releaseDate": "2022-05-09",
+    "type": "SOUVENIR_PACKAGE"
+  },
+  {
+    "id": "49",
+    "name": "Antwerp 2022 Vertigo Souvenir Package",
+    "caseImage": "assets/cases/49.png",
+    "releaseDate": "2022-05-09",
+    "type": "SOUVENIR_PACKAGE"
   },
   {
     "id": "31",
     "name": "Recoil Case",
     "caseImage": "assets/cases/31.png",
-    "releaseDate": "2022-07-01"
+    "releaseDate": "2022-07-01",
+    "type": "CASE"
+  },
+  {
+    "id": "172",
+    "name": "Rio 2022 Ancient Souvenir Package",
+    "caseImage": "assets/cases/172.png",
+    "releaseDate": "2022-10-31",
+    "type": "SOUVENIR_PACKAGE"
+  },
+  {
+    "id": "173",
+    "name": "Rio 2022 Dust II Souvenir Package",
+    "caseImage": "assets/cases/173.png",
+    "releaseDate": "2022-10-31",
+    "type": "SOUVENIR_PACKAGE"
+  },
+  {
+    "id": "174",
+    "name": "Rio 2022 Inferno Souvenir Package",
+    "caseImage": "assets/cases/174.png",
+    "releaseDate": "2022-10-31",
+    "type": "SOUVENIR_PACKAGE"
+  },
+  {
+    "id": "175",
+    "name": "Rio 2022 Mirage Souvenir Package",
+    "caseImage": "assets/cases/175.png",
+    "releaseDate": "2022-10-31",
+    "type": "SOUVENIR_PACKAGE"
+  },
+  {
+    "id": "176",
+    "name": "Rio 2022 Nuke Souvenir Package",
+    "caseImage": "assets/cases/176.png",
+    "releaseDate": "2022-10-31",
+    "type": "SOUVENIR_PACKAGE"
+  },
+  {
+    "id": "177",
+    "name": "Rio 2022 Overpass Souvenir Package",
+    "caseImage": "assets/cases/177.png",
+    "releaseDate": "2022-10-31",
+    "type": "SOUVENIR_PACKAGE"
+  },
+  {
+    "id": "178",
+    "name": "Rio 2022 Vertigo Souvenir Package",
+    "caseImage": "assets/cases/178.png",
+    "releaseDate": "2022-10-31",
+    "type": "SOUVENIR_PACKAGE"
   },
   {
     "id": "32",
     "name": "Revolution Case",
     "caseImage": "assets/cases/32.png",
-    "releaseDate": "2023-02-09"
+    "releaseDate": "2023-02-09",
+    "type": "CASE"
+  },
+  {
+    "id": "195",
+    "name": "Anubis Collection Package",
+    "caseImage": "assets/cases/195.png",
+    "releaseDate": "2023-04-24",
+    "type": "COLLECTION_PACKAGE"
+  },
+  {
+    "id": "165",
+    "name": "Paris 2023 Ancient Souvenir Package",
+    "caseImage": "assets/cases/165.png",
+    "releaseDate": "2023-05-08",
+    "type": "SOUVENIR_PACKAGE"
+  },
+  {
+    "id": "166",
+    "name": "Paris 2023 Anubis Souvenir Package",
+    "caseImage": "assets/cases/166.png",
+    "releaseDate": "2023-05-08",
+    "type": "SOUVENIR_PACKAGE"
+  },
+  {
+    "id": "167",
+    "name": "Paris 2023 Inferno Souvenir Package",
+    "caseImage": "assets/cases/167.png",
+    "releaseDate": "2023-05-08",
+    "type": "SOUVENIR_PACKAGE"
+  },
+  {
+    "id": "168",
+    "name": "Paris 2023 Mirage Souvenir Package",
+    "caseImage": "assets/cases/168.png",
+    "releaseDate": "2023-05-08",
+    "type": "SOUVENIR_PACKAGE"
+  },
+  {
+    "id": "169",
+    "name": "Paris 2023 Nuke Souvenir Package",
+    "caseImage": "assets/cases/169.png",
+    "releaseDate": "2023-05-08",
+    "type": "SOUVENIR_PACKAGE"
+  },
+  {
+    "id": "170",
+    "name": "Paris 2023 Overpass Souvenir Package",
+    "caseImage": "assets/cases/170.png",
+    "releaseDate": "2023-05-08",
+    "type": "SOUVENIR_PACKAGE"
+  },
+  {
+    "id": "171",
+    "name": "Paris 2023 Vertigo Souvenir Package",
+    "caseImage": "assets/cases/171.png",
+    "releaseDate": "2023-05-08",
+    "type": "SOUVENIR_PACKAGE"
   },
   {
     "id": "20",
     "name": "Kilowatt Case",
     "caseImage": "assets/cases/20.png",
-    "releaseDate": "2024-02-06"
+    "releaseDate": "2024-02-06",
+    "type": "CASE"
+  },
+  {
+    "id": "92",
+    "name": "Copenhagen 2024 Ancient Souvenir Package",
+    "caseImage": "assets/cases/92.png",
+    "releaseDate": "2024-03-17",
+    "type": "SOUVENIR_PACKAGE"
+  },
+  {
+    "id": "93",
+    "name": "Copenhagen 2024 Anubis Souvenir Package",
+    "caseImage": "assets/cases/93.png",
+    "releaseDate": "2024-03-17",
+    "type": "SOUVENIR_PACKAGE"
+  },
+  {
+    "id": "94",
+    "name": "Copenhagen 2024 Inferno Souvenir Package",
+    "caseImage": "assets/cases/94.png",
+    "releaseDate": "2024-03-17",
+    "type": "SOUVENIR_PACKAGE"
+  },
+  {
+    "id": "95",
+    "name": "Copenhagen 2024 Mirage Souvenir Package",
+    "caseImage": "assets/cases/95.png",
+    "releaseDate": "2024-03-17",
+    "type": "SOUVENIR_PACKAGE"
+  },
+  {
+    "id": "96",
+    "name": "Copenhagen 2024 Nuke Souvenir Package",
+    "caseImage": "assets/cases/96.png",
+    "releaseDate": "2024-03-17",
+    "type": "SOUVENIR_PACKAGE"
+  },
+  {
+    "id": "97",
+    "name": "Copenhagen 2024 Overpass Souvenir Package",
+    "caseImage": "assets/cases/97.png",
+    "releaseDate": "2024-03-17",
+    "type": "SOUVENIR_PACKAGE"
+  },
+  {
+    "id": "98",
+    "name": "Copenhagen 2024 Vertigo Souvenir Package",
+    "caseImage": "assets/cases/98.png",
+    "releaseDate": "2024-03-17",
+    "type": "SOUVENIR_PACKAGE"
   },
   {
     "id": "14",
     "name": "Gallery Case",
     "caseImage": "assets/cases/14.png",
-    "releaseDate": "2024-10-02"
+    "releaseDate": "2024-10-02",
+    "type": "CASE"
+  },
+  {
+    "id": "179",
+    "name": "Shanghai 2024 Ancient Souvenir Package",
+    "caseImage": "assets/cases/179.png",
+    "releaseDate": "2024-11-30",
+    "type": "SOUVENIR_PACKAGE"
+  },
+  {
+    "id": "180",
+    "name": "Shanghai 2024 Anubis Souvenir Package",
+    "caseImage": "assets/cases/180.png",
+    "releaseDate": "2024-11-30",
+    "type": "SOUVENIR_PACKAGE"
+  },
+  {
+    "id": "181",
+    "name": "Shanghai 2024 Dust II Souvenir Package",
+    "caseImage": "assets/cases/181.png",
+    "releaseDate": "2024-11-30",
+    "type": "SOUVENIR_PACKAGE"
+  },
+  {
+    "id": "182",
+    "name": "Shanghai 2024 Inferno Souvenir Package",
+    "caseImage": "assets/cases/182.png",
+    "releaseDate": "2024-11-30",
+    "type": "SOUVENIR_PACKAGE"
+  },
+  {
+    "id": "183",
+    "name": "Shanghai 2024 Mirage Souvenir Package",
+    "caseImage": "assets/cases/183.png",
+    "releaseDate": "2024-11-30",
+    "type": "SOUVENIR_PACKAGE"
+  },
+  {
+    "id": "184",
+    "name": "Shanghai 2024 Nuke Souvenir Package",
+    "caseImage": "assets/cases/184.png",
+    "releaseDate": "2024-11-30",
+    "type": "SOUVENIR_PACKAGE"
+  },
+  {
+    "id": "185",
+    "name": "Shanghai 2024 Vertigo Souvenir Package",
+    "caseImage": "assets/cases/185.png",
+    "releaseDate": "2024-11-30",
+    "type": "SOUVENIR_PACKAGE"
   },
   {
     "id": "12",
     "name": "Fever Case",
     "caseImage": "assets/cases/12.png",
-    "releaseDate": "2025-03-31"
+    "releaseDate": "2025-03-31",
+    "type": "CASE"
+  },
+  {
+    "id": "57",
+    "name": "Austin 2025 Ancient Souvenir Package",
+    "caseImage": "assets/cases/57.png",
+    "releaseDate": "2025-06-03",
+    "type": "SOUVENIR_PACKAGE"
+  },
+  {
+    "id": "58",
+    "name": "Austin 2025 Anubis Souvenir Package",
+    "caseImage": "assets/cases/58.png",
+    "releaseDate": "2025-06-03",
+    "type": "SOUVENIR_PACKAGE"
+  },
+  {
+    "id": "59",
+    "name": "Austin 2025 Dust II Souvenir Package",
+    "caseImage": "assets/cases/59.png",
+    "releaseDate": "2025-06-03",
+    "type": "SOUVENIR_PACKAGE"
+  },
+  {
+    "id": "60",
+    "name": "Austin 2025 Inferno Souvenir Package",
+    "caseImage": "assets/cases/60.png",
+    "releaseDate": "2025-06-03",
+    "type": "SOUVENIR_PACKAGE"
+  },
+  {
+    "id": "61",
+    "name": "Austin 2025 Mirage Souvenir Package",
+    "caseImage": "assets/cases/61.png",
+    "releaseDate": "2025-06-03",
+    "type": "SOUVENIR_PACKAGE"
+  },
+  {
+    "id": "62",
+    "name": "Austin 2025 Nuke Souvenir Package",
+    "caseImage": "assets/cases/62.png",
+    "releaseDate": "2025-06-03",
+    "type": "SOUVENIR_PACKAGE"
+  },
+  {
+    "id": "63",
+    "name": "Austin 2025 Train Souvenir Package",
+    "caseImage": "assets/cases/63.png",
+    "releaseDate": "2025-06-03",
+    "type": "SOUVENIR_PACKAGE"
+  },
+  {
+    "id": "194",
+    "name": "Sealed Genesis Terminal",
+    "caseImage": "assets/cases/194.png",
+    "releaseDate": "2025-09-17",
+    "type": "TERMINAL"
+  },
+  {
+    "id": "78",
+    "name": "Budapest 2025 Ancient Souvenir Package",
+    "caseImage": "assets/cases/78.png",
+    "releaseDate": "2025-11-24",
+    "type": "SOUVENIR_PACKAGE"
+  },
+  {
+    "id": "79",
+    "name": "Budapest 2025 Dust II Souvenir Package",
+    "caseImage": "assets/cases/79.png",
+    "releaseDate": "2025-11-24",
+    "type": "SOUVENIR_PACKAGE"
+  },
+  {
+    "id": "80",
+    "name": "Budapest 2025 Inferno Souvenir Package",
+    "caseImage": "assets/cases/80.png",
+    "releaseDate": "2025-11-24",
+    "type": "SOUVENIR_PACKAGE"
+  },
+  {
+    "id": "81",
+    "name": "Budapest 2025 Mirage Souvenir Package",
+    "caseImage": "assets/cases/81.png",
+    "releaseDate": "2025-11-24",
+    "type": "SOUVENIR_PACKAGE"
+  },
+  {
+    "id": "82",
+    "name": "Budapest 2025 Nuke Souvenir Package",
+    "caseImage": "assets/cases/82.png",
+    "releaseDate": "2025-11-24",
+    "type": "SOUVENIR_PACKAGE"
+  },
+  {
+    "id": "83",
+    "name": "Budapest 2025 Overpass Souvenir Package",
+    "caseImage": "assets/cases/83.png",
+    "releaseDate": "2025-11-24",
+    "type": "SOUVENIR_PACKAGE"
+  },
+  {
+    "id": "84",
+    "name": "Budapest 2025 Train Souvenir Package",
+    "caseImage": "assets/cases/84.png",
+    "releaseDate": "2025-11-24",
+    "type": "SOUVENIR_PACKAGE"
+  },
+  {
+    "id": "193",
+    "name": "Sealed Dead Hand Terminal",
+    "caseImage": "assets/cases/193.png",
+    "releaseDate": "2026-03-11",
+    "type": "TERMINAL"
   }
 ]

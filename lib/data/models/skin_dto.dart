@@ -4,12 +4,15 @@ class SkinDto {
   final String skinImage;
   final double floatTop;
   final double floatBottom;
-  final bool isSouvenir;
   final String rarity;
   final String weaponType;
   final String itemKind;
   final String itemId;
   final String? collection;
+  final String? finishCatalogName;
+  final String? variantName;
+  final String? phase;
+  final String? apiPaintIndex;
 
   SkinDto({
     required this.id,
@@ -17,12 +20,15 @@ class SkinDto {
     required this.skinImage,
     required this.floatTop,
     required this.floatBottom,
-    required this.isSouvenir,
     required this.rarity,
     required this.weaponType,
     required this.itemKind,
     required this.itemId,
     required this.collection,
+    required this.finishCatalogName,
+    required this.variantName,
+    required this.phase,
+    required this.apiPaintIndex,
   });
 
   factory SkinDto.fromJson(Map<String, dynamic> json) {
@@ -32,12 +38,15 @@ class SkinDto {
       skinImage: json['skinImage'] as String,
       floatTop: (json['floatTop'] as num).toDouble(),
       floatBottom: (json['floatBottom'] as num).toDouble(),
-      isSouvenir: json['isSouvenir'] as bool,
       rarity: json['rarity'] as String,
       weaponType: json['weaponType'] as String,
       itemKind: json['itemKind'] as String,
       itemId: json['itemId'] as String,
       collection: json['collection'] as String?,
+      finishCatalogName: json['finishCatalogName'] as String?,
+      variantName: json['variantName'] as String?,
+      phase: json['phase'] as String?,
+      apiPaintIndex: json['apiPaintIndex'] as String?,
     );
   }
 
@@ -57,6 +66,16 @@ class SkinDto {
   bool get isKnife => weaponType == 'KNIFE';
   bool get isGloves => weaponType == 'GLOVES';
   bool get isSpecialItem => isKnife || isGloves;
+
+  String? get displayVariant {
+    if (variantName != null && variantName!.trim().isNotEmpty) {
+      return variantName!.trim();
+    }
+    if (phase != null && phase!.trim().isNotEmpty) {
+      return phase!.trim();
+    }
+    return null;
+  }
 
   static String _mapWeapon(String id) {
     const map = {

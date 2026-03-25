@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:math';
 
 import 'package:flutter/material.dart';
@@ -5,8 +6,10 @@ import 'package:flutter/material.dart';
 import '../../data/models/case_dto.dart';
 import '../../data/models/skin_dto.dart';
 import '../../data/repositories/local_data_repository.dart';
+import '../../domain/case_odds.dart';
 import '../../domain/case_simulator_service.dart';
 import '../../domain/dropped_skin.dart';
+import '../../domain/terminal_offer.dart';
 
 class CaseOpenScreen extends StatefulWidget {
   final CaseDto caseDto;
@@ -22,6 +25,16 @@ class CaseOpenScreen extends StatefulWidget {
   State<CaseOpenScreen> createState() => _CaseOpenScreenState();
 }
 
+class _RarityBucket {
+  final List<SkinDto> skins;
+  final double weight;
+
+  const _RarityBucket({
+    required this.skins,
+    required this.weight,
+  });
+}
+
 class _CaseOpenScreenState extends State<CaseOpenScreen> {
   late Future<List<SkinDto>> _skinsFuture;
   final CaseSimulatorService _simulator = CaseSimulatorService();
@@ -35,8 +48,42 @@ class _CaseOpenScreenState extends State<CaseOpenScreen> {
   List<SkinDto> _rollSequence = const [];
   int _winningIndex = 0;
 
+  List<TerminalOffer> _terminalOffers = const [];
+  int _terminalOfferIndex = 0;
+  TerminalOffer? _acceptedTerminalOffer;
+  bool _terminalStarted = false;
+  bool _isTerminalLoading = false;
+
   static const double _rollItemGap = 10;
   static const double _rollViewportPadding = 12;
+
+  bool get _isRegularCase => widget.caseDto.isRegularCase;
+  bool get _isSouvenirPackage => widget.caseDto.isSouvenirPackage;
+  bool get _isCollectionPackage => widget.caseDto.isCollectionPackage;
+  bool get _isXrayPackage => widget.caseDto.isXrayPackage;
+  bool get _isTerminal => widget.caseDto.isTerminal;
+
+  bool get _supportsAnimatedOpening =>
+      _isRegularCase || _isSouvenirPackage || _isCollectionPackage;
+
+  bool get _hasActiveTerminalOffer =>
+      _isTerminal &&
+          _terminalStarted &&
+          !_isTerminalLoading &&
+          _acceptedTerminalOffer == null &&
+          _terminalOfferIndex < _terminalOffers.length;
+
+  TerminalOffer? get _currentTerminalOffer {
+    if (!_hasActiveTerminalOffer) return null;
+    return _terminalOffers[_terminalOfferIndex];
+  }
+
+  bool get _isTerminalFinishedWithoutAccept =>
+      _isTerminal &&
+          _terminalStarted &&
+          !_isTerminalLoading &&
+          _acceptedTerminalOffer == null &&
+          _terminalOfferIndex >= _terminalOffers.length;
 
   @override
   void initState() {
@@ -56,28 +103,6 @@ class _CaseOpenScreenState extends State<CaseOpenScreen> {
     }
 
     switch (skin.rarity) {
-      case 'MIL_SPEC':
-        return Colors.blue;
-      case 'RESTRICTED':
-        return Colors.purple;
-      case 'CLASSIFIED':
-        return Colors.pink;
-      case 'COVERT':
-      case 'CONTRABAND':
-        return Colors.red;
-      case 'EXTRAORDINARY':
-        return Colors.amber;
-      case 'INDUSTRIAL':
-        return Colors.lightBlueAccent;
-      case 'CONSUMER':
-        return Colors.grey;
-      default:
-        return Colors.white24;
-    }
-  }
-
-  Color _rarityColor(String rarity) {
-    switch (rarity) {
       case 'MIL_SPEC':
         return Colors.blue;
       case 'RESTRICTED':
@@ -176,10 +201,45 @@ class _CaseOpenScreenState extends State<CaseOpenScreen> {
     return '$day $month $year';
   }
 
-  Future<void> _openCase(List<SkinDto> skins) async {
-    if (_isRolling || skins.isEmpty) return;
+  String _skinSecondaryText(SkinDto skin) {
+    final variant = skin.displayVariant;
+    if (variant != null && variant.isNotEmpty) {
+      return '${skin.name} • $variant';
+    }
+    return skin.name;
+  }
 
-    final drop = _simulator.openCase(skins);
+  void _resetTerminalState() {
+    _terminalOffers = const [];
+    _terminalOfferIndex = 0;
+    _acceptedTerminalOffer = null;
+    _terminalStarted = false;
+    _isTerminalLoading = false;
+  }
+
+  Future<void> _openCase(List<SkinDto> skins) async {
+    if (_isRolling || skins.isEmpty || _isTerminalLoading) return;
+
+    if (_isTerminal) {
+      await _startTerminal(skins);
+      return;
+    }
+
+    final drop = _simulator.openCase(
+      skins: skins,
+      caseDto: widget.caseDto,
+    );
+
+    if (_isXrayPackage) {
+      setState(() {
+        _dropped = drop;
+        _rollSequence = const [];
+        _isRolling = false;
+        _resetTerminalState();
+      });
+      return;
+    }
+
     final rollData = _buildRollSequence(skins, drop);
 
     setState(() {
@@ -187,6 +247,7 @@ class _CaseOpenScreenState extends State<CaseOpenScreen> {
       _dropped = null;
       _rollSequence = rollData.items;
       _winningIndex = rollData.winnerIndex;
+      _resetTerminalState();
     });
 
     await Future.delayed(const Duration(milliseconds: 50));
@@ -219,6 +280,64 @@ class _CaseOpenScreenState extends State<CaseOpenScreen> {
     });
   }
 
+  Future<void> _startTerminal(List<SkinDto> skins) async {
+    final offers = _simulator.buildTerminalOffers(skins: skins);
+
+    setState(() {
+      _terminalOffers = offers;
+      _terminalOfferIndex = 0;
+      _acceptedTerminalOffer = null;
+      _terminalStarted = true;
+      _dropped = null;
+      _rollSequence = const [];
+      _isRolling = false;
+      _isTerminalLoading = true;
+    });
+
+    await Future.delayed(const Duration(milliseconds: 1400));
+
+    if (!mounted) return;
+
+    setState(() {
+      _isTerminalLoading = false;
+    });
+  }
+
+  Future<void> _acceptTerminalOffer() async {
+    if (_isTerminalLoading) return;
+
+    final offer = _currentTerminalOffer;
+    if (offer == null) return;
+
+    setState(() {
+      _acceptedTerminalOffer = offer;
+      _dropped = DroppedSkin(
+        skin: offer.skin,
+        isStatTrak: offer.isStatTrak,
+        isSouvenir: false,
+        skinFloat: offer.skinFloat,
+        exterior: offer.exterior,
+      );
+    });
+  }
+
+  Future<void> _skipTerminalOffer() async {
+    if (!_hasActiveTerminalOffer) return;
+
+    setState(() {
+      _isTerminalLoading = true;
+    });
+
+    await Future.delayed(const Duration(milliseconds: 1100));
+
+    if (!mounted) return;
+
+    setState(() {
+      _terminalOfferIndex += 1;
+      _isTerminalLoading = false;
+    });
+  }
+
   double _rollItemWidth(double viewportWidth) {
     final raw = viewportWidth * 0.18;
     return raw.clamp(120.0, 170.0);
@@ -238,60 +357,134 @@ class _CaseOpenScreenState extends State<CaseOpenScreen> {
   }
 
   _RollSequenceData _buildRollSequence(List<SkinDto> allSkins, DroppedSkin drop) {
-    final nonSpecial = allSkins.where((s) => !s.isSpecialItem).toList();
-    final milSpec = nonSpecial.where((s) => s.rarity == 'MIL_SPEC').toList();
-    final restricted = nonSpecial.where((s) => s.rarity == 'RESTRICTED').toList();
-    final classified = nonSpecial.where((s) => s.rarity == 'CLASSIFIED').toList();
-    final covert =
-    nonSpecial.where((s) => s.rarity == 'COVERT' || s.rarity == 'CONTRABAND').toList();
+    final allowSpecialItems = _isRegularCase || _isSouvenirPackage;
 
-    SkinDto pickFrom(List<SkinDto> list, List<SkinDto> fallback) {
-      if (list.isNotEmpty) return list[_random.nextInt(list.length)];
-      return fallback[_random.nextInt(fallback.length)];
+    final flyoverPool = allSkins.where((s) => !s.isSpecialItem).toList();
+
+    final milSpec = flyoverPool.where((s) => s.rarity == 'MIL_SPEC').toList();
+    final restricted = flyoverPool.where((s) => s.rarity == 'RESTRICTED').toList();
+    final classified = flyoverPool.where((s) => s.rarity == 'CLASSIFIED').toList();
+    final covert = flyoverPool
+        .where((s) => s.rarity == 'COVERT' || s.rarity == 'CONTRABAND')
+        .toList();
+
+    SkinDto pickRandom(List<SkinDto> list) {
+      return list[_random.nextInt(list.length)];
     }
 
-    SkinDto pickFlyover() {
-      final roll = _random.nextDouble();
+    SkinDto pickByRealOdds() {
+      final availableBuckets = <_RarityBucket>[];
 
-      if (covert.isNotEmpty && roll < 0.03) {
-        return pickFrom(covert, nonSpecial);
-      }
-      if (classified.isNotEmpty && roll < 0.14) {
-        return pickFrom(classified, nonSpecial);
-      }
-      if (restricted.isNotEmpty && roll < 0.42) {
-        return pickFrom(restricted, nonSpecial);
-      }
       if (milSpec.isNotEmpty) {
-        return pickFrom(milSpec, nonSpecial);
+        availableBuckets.add(_RarityBucket(
+          skins: milSpec,
+          weight: CaseOdds.milSpec.chance,
+        ));
       }
-      return nonSpecial[_random.nextInt(nonSpecial.length)];
+      if (restricted.isNotEmpty) {
+        availableBuckets.add(_RarityBucket(
+          skins: restricted,
+          weight: CaseOdds.restricted.chance,
+        ));
+      }
+      if (classified.isNotEmpty) {
+        availableBuckets.add(_RarityBucket(
+          skins: classified,
+          weight: CaseOdds.classified.chance,
+        ));
+      }
+      if (covert.isNotEmpty) {
+        availableBuckets.add(_RarityBucket(
+          skins: covert,
+          weight: CaseOdds.covert.chance,
+        ));
+      }
+
+      if (availableBuckets.isEmpty) {
+        throw Exception('No flyover skins available');
+      }
+
+      final totalWeight = availableBuckets.fold<double>(
+        0,
+            (sum, bucket) => sum + bucket.weight,
+      );
+
+      final roll = _random.nextDouble() * totalWeight;
+      double cumulative = 0;
+
+      for (final bucket in availableBuckets) {
+        cumulative += bucket.weight;
+        if (roll <= cumulative) {
+          return pickRandom(bucket.skins);
+        }
+      }
+
+      return pickRandom(availableBuckets.last.skins);
+    }
+
+    SkinDto pickNearWinner() {
+      // Перед выигрышем чуть повышаем шанс на редкий предмет,
+      // но всё равно без золота.
+      final availableBuckets = <_RarityBucket>[];
+
+      if (milSpec.isNotEmpty) {
+        availableBuckets.add(_RarityBucket(
+          skins: milSpec,
+          weight: 0.55,
+        ));
+      }
+      if (restricted.isNotEmpty) {
+        availableBuckets.add(_RarityBucket(
+          skins: restricted,
+          weight: 0.28,
+        ));
+      }
+      if (classified.isNotEmpty) {
+        availableBuckets.add(_RarityBucket(
+          skins: classified,
+          weight: 0.12,
+        ));
+      }
+      if (covert.isNotEmpty) {
+        availableBuckets.add(_RarityBucket(
+          skins: covert,
+          weight: 0.05,
+        ));
+      }
+
+      final totalWeight = availableBuckets.fold<double>(
+        0,
+            (sum, bucket) => sum + bucket.weight,
+      );
+
+      final roll = _random.nextDouble() * totalWeight;
+      double cumulative = 0;
+
+      for (final bucket in availableBuckets) {
+        cumulative += bucket.weight;
+        if (roll <= cumulative) {
+          return pickRandom(bucket.skins);
+        }
+      }
+
+      return pickRandom(availableBuckets.last.skins);
     }
 
     final sequence = <SkinDto>[];
 
     for (int i = 0; i < 28; i++) {
-      sequence.add(pickFlyover());
+      sequence.add(pickByRealOdds());
     }
 
-    if (!drop.skin.isSpecialItem && covert.isNotEmpty && _random.nextDouble() < 0.35) {
-      sequence.add(pickFrom(covert, nonSpecial));
-    } else if (classified.isNotEmpty && _random.nextDouble() < 0.55) {
-      sequence.add(pickFrom(classified, nonSpecial));
-    } else if (restricted.isNotEmpty) {
-      sequence.add(pickFrom(restricted, nonSpecial));
-    } else {
-      sequence.add(pickFlyover());
-    }
-
-    sequence.add(pickFlyover());
-    sequence.add(pickFlyover());
+    sequence.add(pickNearWinner());
+    sequence.add(pickByRealOdds());
+    sequence.add(pickByRealOdds());
 
     final winnerIndex = sequence.length;
     sequence.add(drop.skin);
 
     for (int i = 0; i < 8; i++) {
-      sequence.add(pickFlyover());
+      sequence.add(pickByRealOdds());
     }
 
     return _RollSequenceData(
@@ -302,6 +495,7 @@ class _CaseOpenScreenState extends State<CaseOpenScreen> {
 
   Widget _buildDropCard(DroppedSkin drop) {
     final rarityColor = _rarityColorForSkin(drop.skin);
+    final variantText = _skinSecondaryText(drop.skin);
 
     return Card(
       margin: const EdgeInsets.all(12),
@@ -347,14 +541,24 @@ class _CaseOpenScreenState extends State<CaseOpenScreen> {
                       color: rarityColor,
                     ),
                   ),
+                  if (variantText != drop.skin.name) ...[
+                    const SizedBox(height: 6),
+                    Text(
+                      variantText,
+                      textAlign: isNarrow ? TextAlign.center : TextAlign.left,
+                      style: const TextStyle(
+                        color: Colors.white70,
+                        fontSize: 13,
+                      ),
+                    ),
+                  ],
                   const SizedBox(height: 10),
                   _infoRow('Rarity', _rarityLabelForSkin(drop.skin), valueColor: rarityColor),
                   _infoRow('Weapon type', _weaponTypeLabel(drop.skin.weaponType)),
-                  _infoRow('Item', drop.skin.itemDisplayName),
-                  _infoRow('Souvenir', drop.skin.isSouvenir ? 'Yes' : 'No'),
-                  _infoRow('StatTrak', drop.isStatTrak ? 'Yes' : 'No'),
                   _infoRow('Float', drop.skinFloat?.toStringAsFixed(6) ?? '-'),
                   _infoRow('Exterior', drop.exterior ?? '-'),
+                  if (drop.skin.collection != null && drop.skin.collection!.isNotEmpty)
+                    _infoRow('Collection', drop.skin.collection!),
                 ],
               );
 
@@ -384,6 +588,125 @@ class _CaseOpenScreenState extends State<CaseOpenScreen> {
               );
             },
           ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildTerminalLoadingCard() {
+    return const Padding(
+      padding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+      child: Card(
+        child: Padding(
+          padding: EdgeInsets.all(20),
+          child: Column(
+            children: [
+              SizedBox(
+                width: 42,
+                height: 42,
+                child: CircularProgressIndicator(),
+              ),
+              SizedBox(height: 14),
+              Text(
+                'Loading terminal offer...',
+                style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+              SizedBox(height: 6),
+              Text(
+                'Please wait',
+                style: TextStyle(
+                  color: Colors.white70,
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildTerminalOfferCard(TerminalOffer offer) {
+    final rarityColor = _rarityColorForSkin(offer.skin);
+
+    return Card(
+      margin: const EdgeInsets.all(12),
+      shape: RoundedRectangleBorder(
+        side: BorderSide(color: rarityColor, width: 2),
+        borderRadius: BorderRadius.circular(14),
+      ),
+      child: Padding(
+        padding: const EdgeInsets.all(16),
+        child: Column(
+          children: [
+            Text(
+              'Offer ${offer.offerIndex} / ${_terminalOffers.length}',
+              style: const TextStyle(
+                color: Colors.white70,
+                fontSize: 13,
+              ),
+            ),
+            const SizedBox(height: 12),
+            Image.asset(
+              offer.skin.skinImage,
+              height: 140,
+              errorBuilder: (_, __, ___) =>
+              const Icon(Icons.image_not_supported, size: 72),
+            ),
+            const SizedBox(height: 12),
+            Text(
+              '${offer.isStatTrak ? 'StatTrak™ ' : ''}${offer.skin.itemDisplayName} | ${offer.skin.name}',
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
+                color: rarityColor,
+              ),
+            ),
+            if (offer.skin.displayVariant != null) ...[
+              const SizedBox(height: 6),
+              Text(
+                offer.skin.displayVariant!,
+                style: const TextStyle(
+                  color: Colors.white70,
+                  fontSize: 13,
+                ),
+              ),
+            ],
+            const SizedBox(height: 10),
+            _infoRow('Rarity', _rarityLabelForSkin(offer.skin), valueColor: rarityColor),
+            _infoRow('Weapon type', _weaponTypeLabel(offer.skin.weaponType)),
+            _infoRow('Item', offer.skin.itemDisplayName),
+            _infoRow('StatTrak', offer.isStatTrak ? 'Yes' : 'No'),
+            _infoRow('Float', offer.skinFloat?.toStringAsFixed(6) ?? '-'),
+            _infoRow('Exterior', offer.exterior ?? '-'),
+            if (offer.skin.collection != null && offer.skin.collection!.isNotEmpty)
+              _infoRow('Collection', offer.skin.collection!),
+            const SizedBox(height: 16),
+            Row(
+              children: [
+                Expanded(
+                  child: HoldToConfirmButton(
+                    label: 'SKIP OFFER',
+                    duration: const Duration(milliseconds: 950),
+                    onCompleted: _skipTerminalOffer,
+                    isPrimary: false,
+                  ),
+                ),
+                const SizedBox(width: 12),
+                Expanded(
+                  child: HoldToConfirmButton(
+                    label: 'TAKE OFFER',
+                    duration: const Duration(milliseconds: 950),
+                    onCompleted: _acceptTerminalOffer,
+                    isPrimary: true,
+                  ),
+                ),
+              ],
+            ),
+          ],
         ),
       ),
     );
@@ -472,7 +795,7 @@ class _CaseOpenScreenState extends State<CaseOpenScreen> {
                   ),
                   const SizedBox(height: 4),
                   Text(
-                    skin.name,
+                    _skinSecondaryText(skin),
                     textAlign: TextAlign.center,
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,
@@ -490,6 +813,21 @@ class _CaseOpenScreenState extends State<CaseOpenScreen> {
                       fontWeight: FontWeight.w600,
                     ),
                   ),
+                  if (skin.collection != null &&
+                      skin.collection!.isNotEmpty &&
+                      !compact) ...[
+                    const SizedBox(height: 4),
+                    Text(
+                      skin.collection!,
+                      textAlign: TextAlign.center,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: const TextStyle(
+                        color: Colors.white54,
+                        fontSize: 10,
+                      ),
+                    ),
+                  ],
                 ],
               ),
             ),
@@ -561,11 +899,14 @@ class _CaseOpenScreenState extends State<CaseOpenScreen> {
                     ),
                     const SizedBox(height: 3),
                     Text(
-                      skin.name,
+                      _skinSecondaryText(skin),
                       textAlign: TextAlign.center,
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
-                      style: const TextStyle(color: Colors.white70, fontSize: 11),
+                      style: const TextStyle(
+                        color: Colors.white70,
+                        fontSize: 11,
+                      ),
                     ),
                   ],
                 ),
@@ -653,6 +994,102 @@ class _CaseOpenScreenState extends State<CaseOpenScreen> {
     return 0.7;
   }
 
+  Widget _buildContainerTypeBadge() {
+    Color color = Colors.blueGrey;
+
+    if (_isSouvenirPackage) {
+      color = Colors.amber;
+    } else if (_isCollectionPackage) {
+      color = Colors.lightBlueAccent;
+    } else if (_isXrayPackage) {
+      color = Colors.greenAccent;
+    } else if (_isTerminal) {
+      color = Colors.deepPurpleAccent;
+    } else if (_isRegularCase) {
+      color = Colors.blueAccent;
+    }
+
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+      decoration: BoxDecoration(
+        color: color.withOpacity(0.14),
+        borderRadius: BorderRadius.circular(999),
+        border: Border.all(color: color.withOpacity(0.5)),
+      ),
+      child: Text(
+        widget.caseDto.typeLabel,
+        style: TextStyle(
+          color: color,
+          fontWeight: FontWeight.w600,
+          fontSize: 12,
+        ),
+      ),
+    );
+  }
+
+  String _openButtonLabel() {
+    if (_isRolling) {
+      if (_isSouvenirPackage || _isCollectionPackage) {
+        return 'OPENING PACKAGE...';
+      }
+      if (_isXrayPackage) {
+        return 'REVEALING...';
+      }
+      return 'OPENING...';
+    }
+
+    if (_isTerminal) return _terminalStarted ? 'RESTART TERMINAL' : 'OPEN TERMINAL';
+    if (_isXrayPackage) return 'REVEAL ITEM';
+    if (_isSouvenirPackage || _isCollectionPackage) return 'OPEN PACKAGE';
+    return 'OPEN CASE';
+  }
+
+  Widget? _buildInfoNote(List<SkinDto> skins) {
+    if (_isXrayPackage && skins.length == 1) {
+      return const Padding(
+        padding: EdgeInsets.only(top: 8),
+        child: Text(
+          'This package contains exactly one item.',
+          textAlign: TextAlign.center,
+          style: TextStyle(
+            color: Colors.white70,
+            fontSize: 13,
+          ),
+        ),
+      );
+    }
+
+    if (_isCollectionPackage) {
+      return const Padding(
+        padding: EdgeInsets.only(top: 8),
+        child: Text(
+          'Collection packages open without special items.',
+          textAlign: TextAlign.center,
+          style: TextStyle(
+            color: Colors.white70,
+            fontSize: 13,
+          ),
+        ),
+      );
+    }
+
+    if (_isTerminal) {
+      return const Padding(
+        padding: EdgeInsets.only(top: 8),
+        child: Text(
+          'Terminal opening is offer-based: open for free, then hold to take or skip up to five offers.',
+          textAlign: TextAlign.center,
+          style: TextStyle(
+            color: Colors.white70,
+            fontSize: 13,
+          ),
+        ),
+      );
+    }
+
+    return null;
+  }
+
   @override
   Widget build(BuildContext context) {
     final formattedReleaseDate = _formatReleaseDate(widget.caseDto.releaseDate);
@@ -669,6 +1106,7 @@ class _CaseOpenScreenState extends State<CaseOpenScreen> {
           }
 
           final skins = snapshot.data!;
+          final infoNote = _buildInfoNote(skins);
 
           return LayoutBuilder(
             builder: (context, constraints) {
@@ -688,6 +1126,8 @@ class _CaseOpenScreenState extends State<CaseOpenScreen> {
                             errorBuilder: (_, __, ___) =>
                             const Icon(Icons.inventory_2, size: 64),
                           ),
+                          const SizedBox(height: 10),
+                          _buildContainerTypeBadge(),
                           const SizedBox(height: 8),
                           if (formattedReleaseDate != null)
                             Text(
@@ -697,21 +1137,47 @@ class _CaseOpenScreenState extends State<CaseOpenScreen> {
                                 fontSize: 13,
                               ),
                             ),
+                          if (infoNote != null) infoNote,
                           const SizedBox(height: 12),
                           SizedBox(
                             width: double.infinity,
                             child: ElevatedButton(
-                              onPressed: _isRolling ? null : () => _openCase(skins),
-                              child: Text(_isRolling ? 'OPENING...' : 'OPEN CASE'),
+                              onPressed: (_isRolling || skins.isEmpty || _isTerminalLoading)
+                                  ? null
+                                  : () => _openCase(skins),
+                              child: Text(_openButtonLabel()),
                             ),
                           ),
                         ],
                       ),
                     ),
                   ),
-                  if (_rollSequence.isNotEmpty)
+                  if (_supportsAnimatedOpening && _rollSequence.isNotEmpty)
                     SliverToBoxAdapter(
                       child: _buildRoller(),
+                    ),
+                  if (_isTerminalLoading)
+                    SliverToBoxAdapter(
+                      child: _buildTerminalLoadingCard(),
+                    ),
+                  if (_hasActiveTerminalOffer)
+                    SliverToBoxAdapter(
+                      child: _buildTerminalOfferCard(_currentTerminalOffer!),
+                    ),
+                  if (_isTerminalFinishedWithoutAccept)
+                    const SliverToBoxAdapter(
+                      child: Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                        child: Card(
+                          child: Padding(
+                            padding: EdgeInsets.all(16),
+                            child: Text(
+                              'No offers were accepted. This terminal session is finished.',
+                              textAlign: TextAlign.center,
+                            ),
+                          ),
+                        ),
+                      ),
                     ),
                   if (_dropped != null)
                     SliverToBoxAdapter(
@@ -774,4 +1240,143 @@ class _RollSequenceData {
     required this.items,
     required this.winnerIndex,
   });
+}
+
+class HoldToConfirmButton extends StatefulWidget {
+  final String label;
+  final Duration duration;
+  final FutureOr<void> Function() onCompleted;
+  final bool isPrimary;
+
+  const HoldToConfirmButton({
+    super.key,
+    required this.label,
+    required this.duration,
+    required this.onCompleted,
+    required this.isPrimary,
+  });
+
+  @override
+  State<HoldToConfirmButton> createState() => _HoldToConfirmButtonState();
+}
+
+class _HoldToConfirmButtonState extends State<HoldToConfirmButton>
+    with SingleTickerProviderStateMixin {
+  late final AnimationController _controller;
+  bool _triggered = false;
+  bool _busy = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = AnimationController(
+      vsync: this,
+      duration: widget.duration,
+    )..addStatusListener((status) async {
+      if (status == AnimationStatus.completed && !_triggered && !_busy) {
+        _triggered = true;
+        _busy = true;
+        try {
+          await widget.onCompleted();
+        } finally {
+          if (mounted) {
+            _controller.reset();
+            _triggered = false;
+            _busy = false;
+          }
+        }
+      }
+    });
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  void _startHold() {
+    if (_busy) return;
+    _triggered = false;
+    _controller.forward(from: 0);
+  }
+
+  void _cancelHold() {
+    if (_busy) return;
+    if (_controller.isAnimating || _controller.value > 0) {
+      _controller.stop();
+      _controller.reset();
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final baseStyle = widget.isPrimary
+        ? ElevatedButton.styleFrom(
+      padding: const EdgeInsets.symmetric(vertical: 14),
+    )
+        : OutlinedButton.styleFrom(
+      padding: const EdgeInsets.symmetric(vertical: 14),
+    );
+
+    final child = AnimatedBuilder(
+      animation: _controller,
+      builder: (context, _) {
+        return Stack(
+          alignment: Alignment.center,
+          children: [
+            Positioned.fill(
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(10),
+                child: Align(
+                  alignment: Alignment.centerLeft,
+                  child: FractionallySizedBox(
+                    widthFactor: _controller.value,
+                    child: Container(
+                      color: widget.isPrimary
+                          ? Colors.white.withOpacity(0.18)
+                          : Colors.white.withOpacity(0.08),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                if (_busy) ...[
+                  const SizedBox(
+                    width: 14,
+                    height: 14,
+                    child: CircularProgressIndicator(strokeWidth: 2),
+                  ),
+                  const SizedBox(width: 8),
+                ],
+                Text(_busy ? 'PROCESSING...' : widget.label),
+              ],
+            ),
+          ],
+        );
+      },
+    );
+
+    final button = widget.isPrimary
+        ? ElevatedButton(
+      onPressed: _busy ? null : () {},
+      style: baseStyle,
+      child: child,
+    )
+        : OutlinedButton(
+      onPressed: _busy ? null : () {},
+      style: baseStyle,
+      child: child,
+    );
+
+    return Listener(
+      onPointerDown: (_) => _startHold(),
+      onPointerUp: (_) => _cancelHold(),
+      onPointerCancel: (_) => _cancelHold(),
+      child: button,
+    );
+  }
 }

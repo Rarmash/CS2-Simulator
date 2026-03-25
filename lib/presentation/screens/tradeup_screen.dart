@@ -397,7 +397,7 @@ class _TradeUpScreenState extends State<TradeUpScreen> {
             ),
             const SizedBox(height: 8),
             Text(
-              '${s.itemDisplayName} | ${s.name}',
+              '${s.isSpecialItem ? '★ ' : ''}${s.itemDisplayName} | ${s.name}',
               style: TextStyle(
                 color: color,
                 fontWeight: FontWeight.bold,
