@@ -1,19 +1,23 @@
 import 'package:flutter/material.dart';
 
-import '../../core/utils/date_format_helper.dart';
+import '../../core/settings/settings_controller.dart';
 import '../../data/models/case_dto.dart';
 import '../../data/repositories/local_data_repository.dart';
 import '../helpers/responsive_grid_helper.dart';
 import '../helpers/source_color_helper.dart';
-import '../widgets/asset_collection_image.dart';
 import '../widgets/chip_badge.dart';
 import '../widgets/collection_list_card.dart';
 import 'case_open_screen.dart';
 
 class CaseListScreen extends StatefulWidget {
   final LocalDataRepository repository;
+  final SettingsController settingsController;
 
-  const CaseListScreen({super.key, required this.repository});
+  const CaseListScreen({
+    super.key,
+    required this.repository,
+    required this.settingsController,
+  });
 
   @override
   State<CaseListScreen> createState() => _CaseListScreenState();
@@ -147,6 +151,7 @@ class _CaseListScreenState extends State<CaseListScreen> {
             builder: (_) => CaseOpenScreen(
               caseDto: caseDto,
               repository: widget.repository,
+              settingsController: widget.settingsController,
             ),
           ),
         );

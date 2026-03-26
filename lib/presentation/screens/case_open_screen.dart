@@ -3,6 +3,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 
+import '../../core/settings/settings_controller.dart';
 import '../../core/utils/date_format_helper.dart';
 import '../../data/models/case_dto.dart';
 import '../../data/models/skin_dto.dart';
@@ -19,15 +20,18 @@ import '../widgets/info_row.dart';
 import '../widgets/opening_loading_card.dart';
 import '../widgets/skin_drop_card.dart';
 import '../widgets/skin_grid_tile.dart';
+import '../widgets/xray_reveal_card.dart';
 
 class CaseOpenScreen extends StatefulWidget {
   final CaseDto caseDto;
   final LocalDataRepository repository;
+  final SettingsController settingsController;
 
   const CaseOpenScreen({
     super.key,
     required this.caseDto,
     required this.repository,
+    required this.settingsController,
   });
 
   @override
@@ -63,6 +67,9 @@ class _CaseOpenScreenState extends State<CaseOpenScreen> {
   bool _terminalStarted = false;
   bool _isTerminalLoading = false;
 
+  DroppedSkin? _pendingXrayDrop;
+  bool _xrayRevealActive = false;
+
   static const double _rollItemGap = 10;
   static const double _rollViewportPadding = 12;
 
@@ -72,8 +79,14 @@ class _CaseOpenScreenState extends State<CaseOpenScreen> {
   bool get _isXrayPackage => widget.caseDto.isXrayPackage;
   bool get _isTerminal => widget.caseDto.isTerminal;
 
+  bool get _xrayModeEnabled => widget.settingsController.xrayOpeningEnabled;
+
+  bool get _shouldUseSettingsXrayMode =>
+      _xrayModeEnabled && _isRegularCase && !_isTerminal && !_isXrayPackage;
+
   bool get _supportsAnimatedOpening =>
-      _isRegularCase || _isSouvenirPackage || _isCollectionPackage;
+      !_shouldUseSettingsXrayMode &&
+          (_isRegularCase || _isSouvenirPackage || _isCollectionPackage);
 
   bool get _hasActiveTerminalOffer =>
       _isTerminal &&
@@ -114,8 +127,15 @@ class _CaseOpenScreenState extends State<CaseOpenScreen> {
     _isTerminalLoading = false;
   }
 
+  void _resetXrayState() {
+    _pendingXrayDrop = null;
+    _xrayRevealActive = false;
+  }
+
   Future<void> _openCase(List<SkinDto> skins) async {
-    if (_isRolling || skins.isEmpty || _isTerminalLoading) return;
+    if (_isRolling || skins.isEmpty || _isTerminalLoading || _xrayRevealActive) {
+      return;
+    }
 
     if (_isTerminal) {
       await _startTerminal(skins);
@@ -133,6 +153,19 @@ class _CaseOpenScreenState extends State<CaseOpenScreen> {
         _rollSequence = const [];
         _isRolling = false;
         _resetTerminalState();
+        _resetXrayState();
+      });
+      return;
+    }
+
+    if (_shouldUseSettingsXrayMode) {
+      setState(() {
+        _pendingXrayDrop = drop;
+        _xrayRevealActive = true;
+        _dropped = null;
+        _rollSequence = const [];
+        _isRolling = false;
+        _resetTerminalState();
       });
       return;
     }
@@ -145,6 +178,7 @@ class _CaseOpenScreenState extends State<CaseOpenScreen> {
       _rollSequence = rollData.items;
       _winningIndex = rollData.winnerIndex;
       _resetTerminalState();
+      _resetXrayState();
     });
 
     await Future.delayed(const Duration(milliseconds: 50));
@@ -177,6 +211,24 @@ class _CaseOpenScreenState extends State<CaseOpenScreen> {
     });
   }
 
+  Future<void> _claimXrayDrop() async {
+    if (_pendingXrayDrop == null) return;
+
+    setState(() {
+      _dropped = _pendingXrayDrop;
+      _pendingXrayDrop = null;
+      _xrayRevealActive = false;
+    });
+  }
+
+  Future<void> _destroyXrayDrop() async {
+    setState(() {
+      _pendingXrayDrop = null;
+      _dropped = null;
+      _xrayRevealActive = false;
+    });
+  }
+
   Future<void> _startTerminal(List<SkinDto> skins) async {
     final offers = _simulator.buildTerminalOffers(skins: skins);
 
@@ -189,6 +241,7 @@ class _CaseOpenScreenState extends State<CaseOpenScreen> {
       _rollSequence = const [];
       _isRolling = false;
       _isTerminalLoading = true;
+      _resetXrayState();
     });
 
     await Future.delayed(const Duration(milliseconds: 1400));
@@ -628,6 +681,10 @@ class _CaseOpenScreenState extends State<CaseOpenScreen> {
   }
 
   String _openButtonLabel() {
+    if (_xrayRevealActive) {
+      return 'ITEM REVEALED';
+    }
+
     if (_isRolling) {
       if (_isSouvenirPackage || _isCollectionPackage) {
         return 'OPENING PACKAGE...';
@@ -640,11 +697,26 @@ class _CaseOpenScreenState extends State<CaseOpenScreen> {
 
     if (_isTerminal) return _terminalStarted ? 'RESTART TERMINAL' : 'OPEN TERMINAL';
     if (_isXrayPackage) return 'REVEAL ITEM';
+    if (_shouldUseSettingsXrayMode) return 'OPEN CASE (X-RAY)';
     if (_isSouvenirPackage || _isCollectionPackage) return 'OPEN PACKAGE';
     return 'OPEN CASE';
   }
 
   Widget? _buildInfoNote(List<SkinDto> skins) {
+    if (_shouldUseSettingsXrayMode) {
+      return const Padding(
+        padding: EdgeInsets.only(top: 8),
+        child: Text(
+          'X-Ray mode is enabled for regular cases: the item is revealed first, then you choose whether to claim or destroy it.',
+          textAlign: TextAlign.center,
+          style: TextStyle(
+            color: Colors.white70,
+            fontSize: 13,
+          ),
+        ),
+      );
+    }
+
     if (_isXrayPackage && skins.length == 1) {
       return const Padding(
         padding: EdgeInsets.only(top: 8),
@@ -805,6 +877,46 @@ class _CaseOpenScreenState extends State<CaseOpenScreen> {
     );
   }
 
+  Widget _buildXrayRevealCard(DroppedSkin drop) {
+    return Card(
+      margin: const EdgeInsets.all(12),
+      child: Padding(
+        padding: const EdgeInsets.all(16),
+        child: Column(
+          children: [
+            const Text(
+              'X-Ray revealed item',
+              style: TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            const SizedBox(height: 12),
+            SkinDropCard(drop: drop),
+            const SizedBox(height: 12),
+            Row(
+              children: [
+                Expanded(
+                  child: OutlinedButton(
+                    onPressed: _destroyXrayDrop,
+                    child: const Text('DESTROY'),
+                  ),
+                ),
+                const SizedBox(width: 12),
+                Expanded(
+                  child: ElevatedButton(
+                    onPressed: _claimXrayDrop,
+                    child: const Text('CLAIM ITEM'),
+                  ),
+                ),
+              ],
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final formattedReleaseDate =
@@ -862,7 +974,10 @@ class _CaseOpenScreenState extends State<CaseOpenScreen> {
                           SizedBox(
                             width: double.infinity,
                             child: ElevatedButton(
-                              onPressed: (_isRolling || skins.isEmpty || _isTerminalLoading)
+                              onPressed: (_isRolling ||
+                                  skins.isEmpty ||
+                                  _isTerminalLoading ||
+                                  _xrayRevealActive)
                                   ? null
                                   : () => _openCase(skins),
                               child: Text(_openButtonLabel()),
@@ -901,6 +1016,14 @@ class _CaseOpenScreenState extends State<CaseOpenScreen> {
                         ),
                       ),
                     ),
+                  if (_xrayRevealActive && _pendingXrayDrop != null)
+                    SliverToBoxAdapter(
+                      child: XrayRevealCard(
+                        drop: _pendingXrayDrop!,
+                        onClaim: _claimXrayDrop,
+                        onDestroy: _destroyXrayDrop,
+                      ),
+                    ),
                   if (_dropped != null)
                     SliverToBoxAdapter(
                       child: SkinDropCard(drop: _dropped!),
@@ -926,7 +1049,8 @@ class _CaseOpenScreenState extends State<CaseOpenScreen> {
                       delegate: SliverChildBuilderDelegate(
                             (_, index) {
                           final skin = skins[index];
-                          final isDropped = _dropped?.skin.id == skin.id;
+                          final isDropped = _dropped?.skin.id == skin.id ||
+                              _pendingXrayDrop?.skin.id == skin.id;
 
                           return SkinGridTile(
                             skin: skin,
