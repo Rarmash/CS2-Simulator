@@ -16,7 +16,7 @@ env:
   TAG: ${{ github.event.release.tag_name }}
 
 jobs:
-  build-linux-android-web:
+  build-android:
     runs-on: ubuntu-latest
 
     steps:
@@ -38,10 +38,51 @@ jobs:
       - name: Flutter pub get
         run: flutter pub get
 
-      - name: Enable platforms
+      - name: Generate latest app icon source
+        run: dart run tool/generate_app_icon.dart
+
+      - name: Generate launcher icons
+        run: dart run flutter_launcher_icons
+
+      - name: Build Android APK
+        run: flutter build apk --release
+
+      - name: Prepare Android artifact
+        shell: bash
         run: |
-          flutter config --enable-linux-desktop
-          flutter config --enable-web
+          mkdir -p dist
+          cp build/app/outputs/flutter-apk/app-release.apk \
+            "dist/${APP_NAME}-${TAG}-android.apk"
+
+      - name: Upload Android asset to release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: dist/${{ env.APP_NAME }}-${{ env.TAG }}-android.apk
+
+  build-linux:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+          cache: true
+
+      - name: Flutter pub get
+        run: flutter pub get
+
+      - name: Generate latest app icon source
+        run: dart run tool/generate_app_icon.dart
+
+      - name: Generate launcher icons
+        run: dart run flutter_launcher_icons
+
+      - name: Enable Linux desktop
+        run: flutter config --enable-linux-desktop
 
       - name: Install Linux dependencies
         run: |
@@ -49,38 +90,56 @@ jobs:
           sudo apt-get install -y \
             clang cmake ninja-build pkg-config libgtk-3-dev libstdc++-12-dev zip
 
-      - name: Build Android APK
-        run: flutter build apk --release
-
       - name: Build Linux
         run: flutter build linux --release
 
-      - name: Build Web
-        run: flutter build web --release
-
-      - name: Prepare artifacts
+      - name: Pack Linux build
         shell: bash
         run: |
           mkdir -p dist
-
-          cp build/app/outputs/flutter-apk/app-release.apk \
-            "dist/${APP_NAME}-${TAG}-android.apk"
-
           cd build/linux/x64/release
           zip -r "../../../../dist/${APP_NAME}-${TAG}-linux-x64.zip" bundle
           cd ../../../../
 
+      - name: Upload Linux asset to release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: dist/${{ env.APP_NAME }}-${{ env.TAG }}-linux-x64.zip
+
+  build-web:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+          cache: true
+
+      - name: Flutter pub get
+        run: flutter pub get
+
+      - name: Enable Web
+        run: flutter config --enable-web
+
+      - name: Build Web
+        run: flutter build web --release
+
+      - name: Pack Web build
+        shell: bash
+        run: |
+          mkdir -p dist
           cd build/web
           zip -r "../../dist/${APP_NAME}-${TAG}-web.zip" .
           cd ../..
 
-      - name: Upload assets to release
+      - name: Upload Web asset to release
         uses: softprops/action-gh-release@v2
         with:
-          files: |
-            dist/${{ env.APP_NAME }}-${{ env.TAG }}-android.apk
-            dist/${{ env.APP_NAME }}-${{ env.TAG }}-linux-x64.zip
-            dist/${{ env.APP_NAME }}-${{ env.TAG }}-web.zip
+          files: dist/${{ env.APP_NAME }}-${{ env.TAG }}-web.zip
 
   build-windows:
     runs-on: windows-latest
@@ -98,6 +157,12 @@ jobs:
       - name: Flutter pub get
         run: flutter pub get
 
+      - name: Generate latest app icon source
+        run: dart run tool/generate_app_icon.dart
+
+      - name: Generate launcher icons
+        run: dart run flutter_launcher_icons
+
       - name: Enable Windows desktop
         run: flutter config --enable-windows-desktop
 
@@ -113,12 +178,12 @@ jobs:
             -DestinationPath "dist\${env:APP_NAME}-${env:TAG}-windows-x64.zip" `
             -Force
 
-      - name: Upload asset to release
+      - name: Upload Windows asset to release
         uses: softprops/action-gh-release@v2
         with:
           files: dist/${{ env.APP_NAME }}-${{ env.TAG }}-windows-x64.zip
 
-  build-apple:
+  build-macos:
     runs-on: macos-latest
 
     steps:
@@ -134,31 +199,22 @@ jobs:
       - name: Flutter pub get
         run: flutter pub get
 
-      - name: Enable Apple platforms
-        run: |
-          flutter config --enable-macos-desktop
+      - name: Generate latest app icon source
+        run: dart run tool/generate_app_icon.dart
+
+      - name: Generate launcher icons
+        run: dart run flutter_launcher_icons
+
+      - name: Enable macOS desktop
+        run: flutter config --enable-macos-desktop
 
       - name: Build macOS
         run: flutter build macos --release
 
-      - name: Build iOS (no codesign)
-        run: flutter build ios --release --no-codesign
-
-      - name: Inspect macOS build output
-        shell: bash
-        run: |
-          pwd
-          ls -la
-          ls -la build/macos/Build/Products || true
-          ls -la build/macos/Build/Products/Release || true
-
-      - name: Prepare Apple artifacts
+      - name: Pack macOS build
         shell: bash
         run: |
           mkdir -p dist
-
-          echo "macOS Release contents:"
-          ls -la build/macos/Build/Products/Release || true
 
           MACOS_APP="$(find build/macos/Build/Products/Release -maxdepth 1 -name "*.app" | head -n 1)"
 
@@ -167,19 +223,50 @@ jobs:
             exit 1
           fi
 
-          echo "Using macOS app: $MACOS_APP"
           ditto -c -k --sequesterRsrc --keepParent "$MACOS_APP" \
             "dist/${APP_NAME}-${TAG}-macos.zip"
 
+      - name: Upload macOS asset to release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: dist/${{ env.APP_NAME }}-${{ env.TAG }}-macos.zip
+
+  build-ios-unsigned:
+    runs-on: macos-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+          cache: true
+
+      - name: Flutter pub get
+        run: flutter pub get
+
+      - name: Generate latest app icon source
+        run: dart run tool/generate_app_icon.dart
+
+      - name: Generate launcher icons
+        run: dart run flutter_launcher_icons
+
+      - name: Build iOS (no codesign)
+        run: flutter build ios --release --no-codesign
+
+      - name: Pack iOS unsigned IPA
+        shell: bash
+        run: |
+          mkdir -p dist
           mkdir -p Payload
           cp -R build/ios/iphoneos/Runner.app Payload/
           cd Payload/..
           zip -r -y "dist/${APP_NAME}-${TAG}-ios-unsigned.ipa" Payload
           rm -rf Payload
 
-      - name: Upload assets to release
+      - name: Upload iOS asset to release
         uses: softprops/action-gh-release@v2
         with:
-          files: |
-            dist/${{ env.APP_NAME }}-${{ env.TAG }}-macos.zip
-            dist/${{ env.APP_NAME }}-${{ env.TAG }}-ios-unsigned.ipa
+          files: dist/${{ env.APP_NAME }}-${{ env.TAG }}-ios-unsigned.ipa

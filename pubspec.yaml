@@ -17,6 +17,40 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^6.0.0
+  flutter_launcher_icons: ^0.14.4
+  image: ^4.2.0
+
+flutter_launcher_icons:
+  image_path: assets/app_icon/latest_case.png
+
+  android: true
+  adaptive_icon_background: assets/app_icon/transparent_bg.png
+  adaptive_icon_foreground: assets/app_icon/latest_case_foreground.png
+  adaptive_icon_monochrome: assets/app_icon/latest_case_monochrome.png
+  adaptive_icon_foreground_inset: 18
+
+  ios: true
+  remove_alpha_ios: false
+  image_path_ios_dark_transparent: assets/app_icon/latest_case_ios_dark.png
+  image_path_ios_tinted_grayscale: assets/app_icon/latest_case_ios_tinted.png
+  desaturate_tinted_to_grayscale_ios: false
+
+  macos:
+    generate: true
+    image_path: assets/app_icon/latest_case.png
+
+  windows:
+    generate: true
+    image_path: assets/app_icon/latest_case.png
+    icon_size: 256
+
+  linux: true
+
+  web:
+    generate: true
+    image_path: assets/app_icon/latest_case.png
+    background_color: "#00000000"
+    theme_color: "#00000000"
 
 flutter:
   uses-material-design: true
