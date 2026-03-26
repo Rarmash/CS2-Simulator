@@ -14,6 +14,7 @@ BASE_URL = "https://raw.githubusercontent.com/ByMykel/CSGO-API/main/public/api/e
 CRATES_URL = f"{BASE_URL}/crates.json"
 SKINS_URL = f"{BASE_URL}/skins.json"
 COLLECTIONS_URL = f"{BASE_URL}/collections.json"
+STICKERS_URL = f"{BASE_URL}/stickers.json"
 
 OUT_ROOT = Path(".")
 ASSETS_DIR = OUT_ROOT / "assets"
@@ -22,6 +23,7 @@ CASES_DIR = ASSETS_DIR / "cases"
 SKINS_DIR = ASSETS_DIR / "skins"
 REWARD_COLLECTIONS_DIR = ASSETS_DIR / "reward_collections"
 OPERATION_COLLECTIONS_DIR = ASSETS_DIR / "operation_collections"
+TOURNAMENT_LOGOS_DIR = ASSETS_DIR / "tournament_logos"
 
 TIMEOUT = 30
 
@@ -246,7 +248,6 @@ DEFAULT_OPERATION_COLLECTION_OVERRIDES: list[dict[str, Any]] = [
     {"name": "The Vertigo Collection", "operationId": "PAYBACK", "operationName": "Operation Payback", "releaseDate": "2013-04-25"},
     {"name": "The Inferno Collection", "operationId": "PAYBACK", "operationName": "Operation Payback", "releaseDate": "2013-04-25"},
     {"name": "The Militia Collection", "operationId": "PAYBACK", "operationName": "Operation Payback", "releaseDate": "2013-04-25"},
-
     {"name": "Alpha Collection", "operationId": "BRAVO", "operationName": "Operation Bravo", "releaseDate": "2013-09-19"},
     {"name": "The Italy Collection", "operationId": "BRAVO", "operationName": "Operation Bravo", "releaseDate": "2013-09-19"},
     {"name": "The Dust 2 Collection", "operationId": "BRAVO", "operationName": "Operation Bravo", "releaseDate": "2013-09-19"},
@@ -255,18 +256,14 @@ DEFAULT_OPERATION_COLLECTION_OVERRIDES: list[dict[str, Any]] = [
     {"name": "The Safehouse Collection", "operationId": "BRAVO", "operationName": "Operation Bravo", "releaseDate": "2013-09-19"},
     {"name": "The Mirage Collection", "operationId": "BRAVO", "operationName": "Operation Bravo", "releaseDate": "2013-09-19"},
     {"name": "The Train Collection", "operationId": "BRAVO", "operationName": "Operation Bravo", "releaseDate": "2013-09-19"},
-
     {"name": "The Bank Collection", "operationId": "PHOENIX", "operationName": "Operation Phoenix", "releaseDate": "2014-02-20"},
-
     {"name": "The Baggage Collection", "operationId": "BREAKOUT", "operationName": "Operation Breakout", "releaseDate": "2014-07-01"},
     {"name": "The Cache Collection", "operationId": "BREAKOUT", "operationName": "Operation Breakout", "releaseDate": "2014-07-01"},
     {"name": "The Overpass Collection", "operationId": "BREAKOUT", "operationName": "Operation Breakout", "releaseDate": "2014-07-01"},
     {"name": "The Cobblestone Collection", "operationId": "BREAKOUT", "operationName": "Operation Breakout", "releaseDate": "2014-07-01"},
-
     {"name": "The Chop Shop Collection", "operationId": "BLOODHOUND", "operationName": "Operation Bloodhound", "releaseDate": "2015-05-26"},
     {"name": "The Rising Sun Collection", "operationId": "BLOODHOUND", "operationName": "Operation Bloodhound", "releaseDate": "2015-05-26"},
     {"name": "The Gods and Monsters Collection", "operationId": "BLOODHOUND", "operationName": "Operation Bloodhound", "releaseDate": "2015-05-26"},
-
     {"name": "The Norse Collection", "operationId": "SHATTERED_WEB", "operationName": "Operation Shattered Web", "releaseDate": "2019-11-18"},
     {"name": "The St. Marc Collection", "operationId": "SHATTERED_WEB", "operationName": "Operation Shattered Web", "releaseDate": "2019-11-18"},
     {"name": "The Canals Collection", "operationId": "SHATTERED_WEB", "operationName": "Operation Shattered Web", "releaseDate": "2019-11-18"},
@@ -275,8 +272,60 @@ DEFAULT_OPERATION_COLLECTION_OVERRIDES: list[dict[str, Any]] = [
 REWARD_OVERRIDES_PATH = OUT_ROOT / "reward_collection_overrides.json"
 OPERATION_OVERRIDES_PATH = OUT_ROOT / "operation_collection_overrides.json"
 
+MAP_SUFFIXES = [
+    "Dust 2",
+    "Dust II",
+    "Train",
+    "Inferno",
+    "Mirage",
+    "Nuke",
+    "Overpass",
+    "Ancient",
+    "Anubis",
+    "Vertigo",
+    "Cobblestone",
+    "Cache",
+    "Canals",
+    "St. Marc",
+    "Safehouse",
+    "Lake",
+    "Italy",
+    "Office",
+    "Assault",
+    "Militia",
+    "Baggage",
+    "Bank",
+    "Aztec",
+    "Chop Shop",
+    "Gods and Monsters",
+    "Rising Sun",
+    "Control",
+    "Havoc",
+]
+
+TOURNAMENT_NAME_ALIASES = {
+    "Antwerp 2022": "PGL Antwerp 2022",
+    "Stockholm 2021": "PGL Stockholm 2021",
+    "Rio 2022": "IEM Rio 2022",
+    "Paris 2023": "BLAST.tv Paris 2023",
+    "Copenhagen 2024": "PGL Copenhagen 2024",
+    "Shanghai 2024": "Perfect World Shanghai 2024",
+    "Austin 2025": "BLAST.tv Austin 2025",
+    "Budapest 2025": "StarLadder Budapest 2025",
+    "Katowice 2019": "IEM Katowice 2019",
+    "Krakow 2017": "PGL Kraków 2017",
+    "London 2018": "FACEIT London 2018",
+    "Boston 2018": "ELEAGUE Boston 2018",
+    "Atlanta 2017": "ELEAGUE Atlanta 2017",
+    "Berlin 2019": "StarLadder Berlin 2019",
+    "DreamHack 2013": "DreamHack Winter 2013",
+    "DreamHack 2014": "DreamHack Winter 2014",
+    "Cologne 2016": "ESL One Cologne 2016",
+    "EMS One": "EMS One Katowice 2014",
+}
+
 session = requests.Session()
-session.headers.update({"User-Agent": "cs2-simulator-parser/4.1"})
+session.headers.update({"User-Agent": "cs2-simulator-parser/4.4"})
 
 
 def fetch_json(url: str) -> Any:
@@ -291,6 +340,7 @@ def ensure_dirs() -> None:
     SKINS_DIR.mkdir(parents=True, exist_ok=True)
     REWARD_COLLECTIONS_DIR.mkdir(parents=True, exist_ok=True)
     OPERATION_COLLECTIONS_DIR.mkdir(parents=True, exist_ok=True)
+    TOURNAMENT_LOGOS_DIR.mkdir(parents=True, exist_ok=True)
 
 
 def load_json_list(path: Path) -> list[dict[str, Any]]:
@@ -350,6 +400,86 @@ def normalize_collection_name(name: str | None) -> str | None:
         return None
     cleaned = str(name).strip()
     return COLLECTION_NAME_ALIASES.get(cleaned, cleaned)
+
+
+def normalize_name_key(value: str | None) -> str:
+    text = str(value or "").strip().lower()
+    text = text.replace("blast.tv", "blast tv")
+    text = text.replace("cs:go", "csgo")
+    text = text.replace("cs2", "cs 2")
+    text = text.replace("kraków", "krakow")
+    text = re.sub(r"[^a-z0-9]+", " ", text)
+    return re.sub(r"\s+", " ", text).strip()
+
+
+def make_safe_slug(value: str | None) -> str:
+    text = str(value or "").strip().lower()
+    text = text.replace("blast.tv", "blast_tv")
+    text = text.replace("kraków", "krakow")
+    text = re.sub(r"[^a-z0-9]+", "_", text)
+    text = re.sub(r"_+", "_", text).strip("_")
+    return text or "unknown"
+
+
+def tournament_name_candidates(raw_name: str | None) -> list[str]:
+    text = str(raw_name or "").strip()
+    if not text:
+        return []
+
+    candidates = {normalize_name_key(text)}
+
+    match = re.match(r"^(.*?)(?:\s+)(\d{4})$", text)
+    if match:
+        left = match.group(1).strip()
+        year = match.group(2).strip()
+        candidates.add(normalize_name_key(f"{year} {left}"))
+
+    match = re.match(r"^(\d{4})(?:\s+)(.*)$", text)
+    if match:
+        year = match.group(1).strip()
+        right = match.group(2).strip()
+        candidates.add(normalize_name_key(f"{right} {year}"))
+
+    return [c for c in candidates if c]
+
+
+def infer_tournament_name_from_souvenir_package(crate_name: str) -> str | None:
+    name = crate_name.strip()
+    if not name.lower().endswith("souvenir package"):
+        return None
+
+    base = re.sub(r"\s+souvenir package$", "", name, flags=re.IGNORECASE).strip()
+    if not base:
+        return None
+
+    known_suffixes = sorted(set(MAP_SUFFIXES), key=len, reverse=True)
+
+    for suffix in known_suffixes:
+        if base.lower().endswith(f" {suffix.lower()}"):
+            return base[: -(len(suffix) + 1)].strip()
+
+    parts = base.split()
+    if len(parts) >= 3:
+        return " ".join(parts[:-1]).strip()
+
+    return base
+
+
+def expand_tournament_name_variants(name: str | None) -> list[str]:
+    if not name:
+        return []
+
+    variants = [name]
+    alias = TOURNAMENT_NAME_ALIASES.get(name)
+    if alias and alias not in variants:
+        variants.append(alias)
+
+    # обратные мягкие варианты на случай, если в API лежит короткое имя
+    for short_name, official_name in TOURNAMENT_NAME_ALIASES.items():
+        if official_name == name and short_name not in variants:
+            variants.append(short_name)
+
+    return variants
 
 
 def split_item_and_skin(full_name: str) -> tuple[str, str]:
@@ -699,6 +829,84 @@ def build_collection_image_map(skins_data: list[dict[str, Any]]) -> dict[str, st
     return result
 
 
+def build_collection_meta_map(
+    collections_data: list[dict[str, Any]],
+) -> dict[str, dict[str, str]]:
+    result: dict[str, dict[str, str]] = {}
+
+    for collection in collections_data:
+        collection_name = normalize_collection_name(str(collection.get("name", "")).strip())
+        collection_image = str(collection.get("image", "")).strip()
+        crates = collection.get("crates")
+
+        if not collection_name or not collection_image or not isinstance(crates, list):
+            continue
+
+        for crate in crates:
+            if not isinstance(crate, dict):
+                continue
+
+            crate_name = str(crate.get("name", "")).strip()
+            if not crate_name:
+                continue
+
+    return result
+
+
+def build_tournament_logo_map(
+    stickers_data: list[dict[str, Any]],
+) -> dict[str, str]:
+    result: dict[str, str] = {}
+
+    for sticker in stickers_data:
+        if not isinstance(sticker, dict):
+            continue
+
+        tournament = sticker.get("tournament")
+        image = str(sticker.get("image", "")).strip()
+        sticker_type = str(sticker.get("type", "")).strip().lower()
+
+        if not isinstance(tournament, dict) or not image:
+            continue
+
+        if sticker_type != "event":
+            continue
+
+        tournament_name = str(tournament.get("name", "")).strip()
+        if not tournament_name:
+            continue
+
+        for key in tournament_name_candidates(tournament_name):
+            result.setdefault(key, image)
+
+    return result
+
+
+def find_existing_logo_path_by_slug(logo_slug: str) -> str | None:
+    for ext in (".png", ".svg", ".webp", ".jpg"):
+        candidate = TOURNAMENT_LOGOS_DIR / f"{logo_slug}{ext}"
+        if candidate.exists():
+            return f"assets/tournament_logos/{logo_slug}{ext}"
+    return None
+
+
+def resolve_souvenir_logo_and_name(
+    crate_name: str,
+    tournament_logo_by_name: dict[str, str],
+) -> tuple[str | None, str | None]:
+    parsed_name = infer_tournament_name_from_souvenir_package(crate_name)
+    if not parsed_name:
+        return None, None
+
+    for variant in expand_tournament_name_variants(parsed_name):
+        for key in tournament_name_candidates(variant):
+            logo_url = tournament_logo_by_name.get(key)
+            if logo_url:
+                return variant, logo_url
+
+    return parsed_name, None
+
+
 def main() -> None:
     ensure_dirs()
 
@@ -749,9 +957,19 @@ def main() -> None:
     skins_data = fetch_json(SKINS_URL)
 
     print("Fetching collections.json ...")
-    _ = fetch_json(COLLECTIONS_URL)
+    collections_data = fetch_json(COLLECTIONS_URL)
+
+    print("Fetching stickers.json ...")
+    stickers_data = fetch_json(STICKERS_URL)
 
     collection_image_by_name = build_collection_image_map(skins_data)
+    collection_meta_by_crate_name = build_collection_meta_map(collections_data)
+    tournament_logo_by_name = build_tournament_logo_map(stickers_data)
+
+    print(f"Tournament logo candidates: {len(tournament_logo_by_name)}")
+    print("Tournament logo keys:")
+    for key in sorted(tournament_logo_by_name.keys()):
+        print(f"  {key}")
 
     new_cases: dict[str, dict[str, Any]] = {c["id"]: dict(c) for c in existing_cases}
     case_name_to_id: dict[str, str] = {
@@ -778,6 +996,14 @@ def main() -> None:
     supported_crates = [crate for crate in crates if is_supported_container(crate)]
     supported_crates.sort(key=lambda x: str(x.get("name", "")))
 
+    souvenir_crates = [
+        crate for crate in supported_crates
+        if infer_container_type(crate.get("name"), crate.get("type")) == "SOUVENIR_PACKAGE"
+    ]
+    print(f"Souvenir crates: {len(souvenir_crates)}")
+
+    tournament_logos_created = 0
+
     for crate in supported_crates:
         crate_name = str(crate.get("name", "")).strip()
         if not crate_name:
@@ -792,12 +1018,49 @@ def main() -> None:
             next_case_id += 1
             release_date = parse_release_date(crate)
 
+        container_type = infer_container_type(crate_name, crate.get("type"))
+
+        collection_name = None
+        collection_image = None
+        tournament_name = None
+        tournament_logo_rel = None
+
+        collection_meta = collection_meta_by_crate_name.get(crate_name)
+
+        if container_type == "SOUVENIR_PACKAGE":
+            tournament_name, tournament_logo_url = resolve_souvenir_logo_and_name(
+                crate_name,
+                tournament_logo_by_name,
+            )
+
+            if tournament_name:
+                logo_slug = make_safe_slug(tournament_name)
+                existing_logo_rel = find_existing_logo_path_by_slug(logo_slug)
+                if existing_logo_rel:
+                    tournament_logo_rel = existing_logo_rel
+                elif tournament_logo_url:
+                    ext = download_file_with_real_extension(
+                        tournament_logo_url,
+                        TOURNAMENT_LOGOS_DIR / logo_slug,
+                    )
+                    if ext:
+                        tournament_logo_rel = f"assets/tournament_logos/{logo_slug}{ext}"
+                        tournament_logos_created += 1
+
+            print(
+                f"[SOUVENIR] crate={crate_name} | "
+                f"parsed_tournament={tournament_name} | "
+                f"logo_found={'yes' if tournament_logo_rel else 'no'}"
+            )
+
         case_record = {
             "id": case_id,
             "name": crate_name,
             "caseImage": f"assets/cases/{case_id}.png",
             "releaseDate": release_date,
-            "type": infer_container_type(crate_name, crate.get("type")),
+            "type": container_type,
+            "tournamentName": tournament_name,
+            "tournamentLogo": tournament_logo_rel,
         }
 
         new_cases[case_id] = case_record
@@ -1043,12 +1306,43 @@ def main() -> None:
                         next_case_id += 1
                         release_date = "2000-01-01"
 
+                    container_type = infer_container_type(crate_name, crate_ref.get("type"))
+
+                    collection_name = None
+                    collection_image = None
+                    tournament_name = None
+                    tournament_logo_rel = None
+
+                    collection_meta = collection_meta_by_crate_name.get(crate_name)
+
+                    if container_type == "SOUVENIR_PACKAGE":
+                        tournament_name, tournament_logo_url = resolve_souvenir_logo_and_name(
+                            crate_name,
+                            tournament_logo_by_name,
+                        )
+
+                        if tournament_name:
+                            logo_slug = make_safe_slug(tournament_name)
+                            existing_logo_rel = find_existing_logo_path_by_slug(logo_slug)
+                            if existing_logo_rel:
+                                tournament_logo_rel = existing_logo_rel
+                            elif tournament_logo_url:
+                                ext = download_file_with_real_extension(
+                                    tournament_logo_url,
+                                    TOURNAMENT_LOGOS_DIR / logo_slug,
+                                )
+                                if ext:
+                                    tournament_logo_rel = f"assets/tournament_logos/{logo_slug}{ext}"
+                                    tournament_logos_created += 1
+
                     case_record = {
                         "id": case_id,
                         "name": crate_name,
                         "caseImage": f"assets/cases/{case_id}.png",
                         "releaseDate": release_date,
-                        "type": infer_container_type(crate_name, crate_ref.get("type")),
+                        "type": container_type,
+                        "tournamentName": tournament_name,
+                        "tournamentLogo": tournament_logo_rel,
                     }
 
                     new_cases[case_id] = case_record
@@ -1090,6 +1384,8 @@ def main() -> None:
             "caseImage": case_image_path,
             "releaseDate": str(legacy_case.get("releaseDate") or "2000-01-01"),
             "type": str(legacy_case.get("type") or "CASE"),
+            "tournamentName": None,
+            "tournamentLogo": None,
         }
 
         new_cases[legacy_case_id] = legacy_case_record
@@ -1192,6 +1488,7 @@ def main() -> None:
     print(f"Containers created from skin.crates fallback: {container_refs_created_from_skin_meta}")
     print(f"Reward collections created: {reward_collections_created}")
     print(f"Operation collections created: {operation_collections_created}")
+    print(f"Tournament logos downloaded: {tournament_logos_created}")
 
 
 if __name__ == "__main__":
