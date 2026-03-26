@@ -18,8 +18,9 @@ class SkinUiHelper {
       case 'CLASSIFIED':
         return Colors.pink;
       case 'COVERT':
-      case 'CONTRABAND':
         return Colors.red;
+      case 'CONTRABAND':
+        return const Color(0xFFFF8A00);
       case 'EXTRAORDINARY':
         return Colors.amber;
       default:

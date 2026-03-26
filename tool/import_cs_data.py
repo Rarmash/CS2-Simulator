@@ -128,6 +128,34 @@ CONTAINER_TYPE_OVERRIDES = {
     "X-Ray P250 Package": "XRAY_PACKAGE",
 }
 
+LEGACY_CASE_OVERRIDES: list[dict[str, Any]] = [
+    {
+        "name": "Huntsman Weapon Case (Legacy)",
+        "baseCaseName": "Huntsman Weapon Case",
+        "type": "CASE",
+        "releaseDate": "2014-05-01",
+        "copyImageFromBase": True,
+        "copySpecialItemsFromBase": True,
+        "contents": [
+            "Tec-9 | Isaac",
+            "SSG 08 | Slashed",
+            "Dual Berettas | Retribution",
+            "Galil AR | Kami",
+            "P90 | Desert Warfare",
+            "CZ75-Auto | Poison Dart",
+            "AUG | Torque",
+            "PP-Bizon | Antique",
+            "MAC-10 | Curse",
+            "XM1014 | Heaven Guard",
+            "M4A1-S | Atomic Alloy",
+            "SCAR-20 | Cyrex",
+            "USP-S | Orion",
+            "AK-47 | Vulcan",
+            "M4A4 | Howl",
+        ],
+    },
+]
+
 COLLECTION_NAME_ALIASES: dict[str, str] = {}
 
 DEFAULT_REWARD_SOURCE_OVERRIDES: dict[str, dict[str, Any]] = {
@@ -211,7 +239,6 @@ DEFAULT_REWARD_SOURCE_OVERRIDES: dict[str, dict[str, Any]] = {
 }
 
 DEFAULT_OPERATION_COLLECTION_OVERRIDES: list[dict[str, Any]] = [
-    # Payback
     {"name": "The Aztec Collection", "operationId": "PAYBACK", "operationName": "Operation Payback", "releaseDate": "2013-04-25"},
     {"name": "The Assault Collection", "operationId": "PAYBACK", "operationName": "Operation Payback", "releaseDate": "2013-04-25"},
     {"name": "The Office Collection", "operationId": "PAYBACK", "operationName": "Operation Payback", "releaseDate": "2013-04-25"},
@@ -220,7 +247,6 @@ DEFAULT_OPERATION_COLLECTION_OVERRIDES: list[dict[str, Any]] = [
     {"name": "The Inferno Collection", "operationId": "PAYBACK", "operationName": "Operation Payback", "releaseDate": "2013-04-25"},
     {"name": "The Militia Collection", "operationId": "PAYBACK", "operationName": "Operation Payback", "releaseDate": "2013-04-25"},
 
-    # Bravo
     {"name": "Alpha Collection", "operationId": "BRAVO", "operationName": "Operation Bravo", "releaseDate": "2013-09-19"},
     {"name": "The Italy Collection", "operationId": "BRAVO", "operationName": "Operation Bravo", "releaseDate": "2013-09-19"},
     {"name": "The Dust 2 Collection", "operationId": "BRAVO", "operationName": "Operation Bravo", "releaseDate": "2013-09-19"},
@@ -230,21 +256,17 @@ DEFAULT_OPERATION_COLLECTION_OVERRIDES: list[dict[str, Any]] = [
     {"name": "The Mirage Collection", "operationId": "BRAVO", "operationName": "Operation Bravo", "releaseDate": "2013-09-19"},
     {"name": "The Train Collection", "operationId": "BRAVO", "operationName": "Operation Bravo", "releaseDate": "2013-09-19"},
 
-    # Phoenix
     {"name": "The Bank Collection", "operationId": "PHOENIX", "operationName": "Operation Phoenix", "releaseDate": "2014-02-20"},
 
-    # Breakout
     {"name": "The Baggage Collection", "operationId": "BREAKOUT", "operationName": "Operation Breakout", "releaseDate": "2014-07-01"},
     {"name": "The Cache Collection", "operationId": "BREAKOUT", "operationName": "Operation Breakout", "releaseDate": "2014-07-01"},
     {"name": "The Overpass Collection", "operationId": "BREAKOUT", "operationName": "Operation Breakout", "releaseDate": "2014-07-01"},
     {"name": "The Cobblestone Collection", "operationId": "BREAKOUT", "operationName": "Operation Breakout", "releaseDate": "2014-07-01"},
 
-    # Bloodhound
     {"name": "The Chop Shop Collection", "operationId": "BLOODHOUND", "operationName": "Operation Bloodhound", "releaseDate": "2015-05-26"},
     {"name": "The Rising Sun Collection", "operationId": "BLOODHOUND", "operationName": "Operation Bloodhound", "releaseDate": "2015-05-26"},
     {"name": "The Gods and Monsters Collection", "operationId": "BLOODHOUND", "operationName": "Operation Bloodhound", "releaseDate": "2015-05-26"},
 
-    # Shattered Web
     {"name": "The Norse Collection", "operationId": "SHATTERED_WEB", "operationName": "Operation Shattered Web", "releaseDate": "2019-11-18"},
     {"name": "The St. Marc Collection", "operationId": "SHATTERED_WEB", "operationName": "Operation Shattered Web", "releaseDate": "2019-11-18"},
     {"name": "The Canals Collection", "operationId": "SHATTERED_WEB", "operationName": "Operation Shattered Web", "releaseDate": "2019-11-18"},
@@ -540,6 +562,10 @@ def existing_case_key(case: dict[str, Any]) -> str:
     return str(case.get("name", "")).strip()
 
 
+def full_skin_name_key(name: str) -> str:
+    return canonical_name(name)
+
+
 def reward_key_from_item(item: dict[str, Any]) -> str:
     return normalize_collection_name(str(item.get("name", "")).strip()) or ""
 
@@ -781,6 +807,8 @@ def main() -> None:
             download_file(str(crate["image"]), CASES_DIR / f"{case_id}.png")
 
     new_skins: dict[str, dict[str, Any]] = {}
+    skin_id_by_full_name: dict[str, str] = {}
+
     case_contents_map: dict[str, set[str]] = {
         case_id: set() for case_id in new_cases.keys()
     }
@@ -900,6 +928,7 @@ def main() -> None:
 
         new_skins[skin_id] = skin_record
         existing_skin_by_key[key] = skin_record
+        skin_id_by_full_name[full_skin_name_key(f"{base_item_name} | {full_skin_name}")] = skin_id
 
         if image_url:
             download_file(image_url, SKINS_DIR / f"{skin_id}.png")
@@ -1035,6 +1064,71 @@ def main() -> None:
 
         time.sleep(0.003)
 
+    for legacy_case in LEGACY_CASE_OVERRIDES:
+        legacy_name = str(legacy_case.get("name", "")).strip()
+        if not legacy_name:
+            continue
+
+        existing_case = existing_case_by_name.get(legacy_name)
+        if existing_case:
+            legacy_case_id = str(existing_case["id"])
+        elif legacy_name in case_name_to_id:
+            legacy_case_id = case_name_to_id[legacy_name]
+        else:
+            legacy_case_id = str(next_case_id)
+            next_case_id += 1
+
+        base_case_name = str(legacy_case.get("baseCaseName", "")).strip()
+        base_case_id = case_name_to_id.get(base_case_name)
+        base_case = new_cases.get(base_case_id) if base_case_id else None
+
+        case_image_path = f"assets/cases/{legacy_case_id}.png"
+
+        legacy_case_record = {
+            "id": legacy_case_id,
+            "name": legacy_name,
+            "caseImage": case_image_path,
+            "releaseDate": str(legacy_case.get("releaseDate") or "2000-01-01"),
+            "type": str(legacy_case.get("type") or "CASE"),
+        }
+
+        new_cases[legacy_case_id] = legacy_case_record
+        case_name_to_id[legacy_name] = legacy_case_id
+        case_contents_map.setdefault(legacy_case_id, set())
+
+        if legacy_case.get("copyImageFromBase") and base_case:
+            base_image_rel = str(base_case.get("caseImage") or "").strip()
+            base_image_name = Path(base_image_rel).name
+            base_image_path = CASES_DIR / base_image_name
+            legacy_image_path = CASES_DIR / f"{legacy_case_id}.png"
+
+            if base_image_path.exists() and not legacy_image_path.exists():
+                legacy_image_path.write_bytes(base_image_path.read_bytes())
+
+        for full_skin_name in legacy_case.get("contents", []):
+            if not isinstance(full_skin_name, str):
+                continue
+
+            skin_id = skin_id_by_full_name.get(full_skin_name_key(full_skin_name))
+            if skin_id is None:
+                print(
+                    f"[WARN] legacy case '{legacy_name}' references missing skin: {full_skin_name}"
+                )
+                continue
+
+            case_contents_map.setdefault(legacy_case_id, set()).add(skin_id)
+
+        if legacy_case.get("copySpecialItemsFromBase") and base_case_id:
+            base_skin_ids = case_contents_map.get(base_case_id, set())
+            for skin_id in base_skin_ids:
+                skin = new_skins.get(skin_id)
+                if not skin:
+                    continue
+                weapon_type = str(skin.get("weaponType", ""))
+                item_kind = str(skin.get("itemKind", ""))
+                if weapon_type in {"KNIFE", "GLOVES"} or item_kind in {"KNIFE", "GLOVES"}:
+                    case_contents_map.setdefault(legacy_case_id, set()).add(skin_id)
+
     cases_out = sorted(
         new_cases.values(),
         key=lambda x: (x.get("releaseDate") or "9999-99-99", x.get("name", "")),
@@ -1098,6 +1192,7 @@ def main() -> None:
     print(f"Containers created from skin.crates fallback: {container_refs_created_from_skin_meta}")
     print(f"Reward collections created: {reward_collections_created}")
     print(f"Operation collections created: {operation_collections_created}")
+
 
 if __name__ == "__main__":
     main()

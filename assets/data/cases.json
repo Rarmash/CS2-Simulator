@@ -84,6 +84,13 @@
     "type": "CASE"
   },
   {
+    "id": "198",
+    "name": "Huntsman Weapon Case (Legacy)",
+    "caseImage": "assets/cases/198.png",
+    "releaseDate": "2014-05-01",
+    "type": "CASE"
+  },
+  {
     "id": "22",
     "name": "Operation Breakout Weapon Case",
     "caseImage": "assets/cases/22.png",

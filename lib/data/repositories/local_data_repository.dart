@@ -196,7 +196,7 @@ class LocalDataRepository {
   }
 
   int _rarityOrder(SkinDto skin) {
-    if (skin.isSpecialItem) return 6;
+    if (skin.isSpecialItem) return 7;
 
     switch (skin.rarity) {
       case 'CONSUMER':
@@ -210,10 +210,11 @@ class LocalDataRepository {
       case 'CLASSIFIED':
         return 4;
       case 'COVERT':
-      case 'CONTRABAND':
         return 5;
-      case 'EXTRAORDINARY':
+      case 'CONTRABAND':
         return 6;
+      case 'EXTRAORDINARY':
+        return 7;
       default:
         return 999;
     }
