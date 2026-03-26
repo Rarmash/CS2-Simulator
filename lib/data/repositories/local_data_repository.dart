@@ -195,6 +195,80 @@ class LocalDataRepository {
     return result;
   }
 
+  Future<List<CaseDto>> loadCasesForSkin(String skinId) async {
+    final cases = await loadCases();
+    final contents = await loadCaseContents();
+
+    final caseIds = contents
+        .where((entry) => entry.skinIds.contains(skinId))
+        .map((entry) => entry.caseId)
+        .toSet();
+
+    final result = cases.where((c) => caseIds.contains(c.id)).toList();
+
+    result.sort((a, b) {
+      final ad = a.releaseDate ?? '9999-99-99';
+      final bd = b.releaseDate ?? '9999-99-99';
+      final byDate = ad.compareTo(bd);
+      if (byDate != 0) return byDate;
+      return a.name.compareTo(b.name);
+    });
+
+    return result;
+  }
+
+  Future<List<RewardCollectionDto>> loadRewardCollectionsForSkin(
+      String skinId,
+      ) async {
+    final collections = await loadRewardCollections();
+    final contents = await loadRewardCollectionContents();
+
+    final ids = contents
+        .where((entry) => entry.skinIds.contains(skinId))
+        .map((entry) => entry.rewardCollectionId)
+        .toSet();
+
+    final result = collections.where((c) => ids.contains(c.id)).toList();
+
+    result.sort((a, b) {
+      final ad = a.releaseDate ?? '9999-99-99';
+      final bd = b.releaseDate ?? '9999-99-99';
+      final byDate = ad.compareTo(bd);
+      if (byDate != 0) return byDate;
+      return a.name.compareTo(b.name);
+    });
+
+    return result;
+  }
+
+  Future<List<OperationCollectionDto>> loadOperationCollectionsForSkin(
+      String skinId,
+      ) async {
+    final collections = await loadOperationCollections();
+    final contents = await loadOperationCollectionContents();
+
+    final ids = contents
+        .where((entry) => entry.skinIds.contains(skinId))
+        .map((entry) => entry.operationCollectionId)
+        .toSet();
+
+    final result = collections.where((c) => ids.contains(c.id)).toList();
+
+    result.sort((a, b) {
+      final byOperation = a.operationName.compareTo(b.operationName);
+      if (byOperation != 0) return byOperation;
+
+      final ad = a.releaseDate ?? '9999-99-99';
+      final bd = b.releaseDate ?? '9999-99-99';
+      final byDate = ad.compareTo(bd);
+      if (byDate != 0) return byDate;
+
+      return a.name.compareTo(b.name);
+    });
+
+    return result;
+  }
+
   int _rarityOrder(SkinDto skin) {
     if (skin.isSpecialItem) return 7;
 

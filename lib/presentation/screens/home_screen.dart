@@ -6,6 +6,7 @@ import 'case_list_screen.dart';
 import 'operation_collection_list_screen.dart';
 import 'reward_collection_list_screen.dart';
 import 'settings_screen.dart';
+import 'skin_glossary_screen.dart';
 import 'tradeup_screen.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -67,6 +68,22 @@ class HomeScreen extends StatelessWidget {
                 const SizedBox(height: 16),
                 _menuButton(
                   context,
+                  title: '📘 Skin Glossary',
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) => SkinGlossaryScreen(
+                          repository: repository,
+                          settingsController: settingsController,
+                        ),
+                      ),
+                    );
+                  },
+                ),
+                const SizedBox(height: 16),
+                _menuButton(
+                  context,
                   title: '🎖️ Operation / Armory Rewards',
                   onTap: () {
                     Navigator.push(
@@ -82,7 +99,7 @@ class HomeScreen extends StatelessWidget {
                 const SizedBox(height: 16),
                 _menuButton(
                   context,
-                  title: '🗃️ Legacy️ Operation Collections',
+                  title: '🗃️ Legacy Operation Collections',
                   onTap: () {
                     Navigator.push(
                       context,
