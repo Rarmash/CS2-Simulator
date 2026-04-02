@@ -2100,6 +2100,30 @@
     "sourceName": null
   },
   {
+    "id": "2231",
+    "name": "CS:GO Graffiti Box",
+    "caseImage": "assets/cases/2231.webp",
+    "releaseDate": "2016-10-06",
+    "type": "GRAFFITI_BOX",
+    "tournamentName": null,
+    "tournamentLogo": null,
+    "sourceType": null,
+    "sourceId": null,
+    "sourceName": null
+  },
+  {
+    "id": "2232",
+    "name": "Community Graffiti Box 1",
+    "caseImage": "assets/cases/2232.webp",
+    "releaseDate": "2016-10-06",
+    "type": "GRAFFITI_BOX",
+    "tournamentName": null,
+    "tournamentLogo": null,
+    "sourceType": null,
+    "sourceId": null,
+    "sourceName": null
+  },
+  {
     "id": "255",
     "name": "Glove Case",
     "caseImage": "assets/cases/255.webp",
@@ -2587,6 +2611,18 @@
     "type": "SOUVENIR_PACKAGE",
     "tournamentName": "PGL Kraków 2017",
     "tournamentLogo": "assets/tournament_logos/pgl_krakow_2017.png",
+    "sourceType": null,
+    "sourceId": null,
+    "sourceName": null
+  },
+  {
+    "id": "2233",
+    "name": "Perfect World Graffiti Box",
+    "caseImage": "assets/cases/2233.webp",
+    "releaseDate": "2017-09-14",
+    "type": "GRAFFITI_BOX",
+    "tournamentName": null,
+    "tournamentLogo": null,
     "sourceType": null,
     "sourceId": null,
     "sourceName": null
@@ -3492,11 +3528,47 @@
     "sourceName": null
   },
   {
+    "id": "2234",
+    "name": "CS:GO Patch Pack",
+    "caseImage": "assets/cases/2234.webp",
+    "releaseDate": "2020-02-24",
+    "type": "PATCH_PACK",
+    "tournamentName": null,
+    "tournamentLogo": null,
+    "sourceType": null,
+    "sourceId": null,
+    "sourceName": null
+  },
+  {
+    "id": "2236",
+    "name": "Metal Skill Group Patch Collection",
+    "caseImage": "assets/cases/2236.webp",
+    "releaseDate": "2020-02-24",
+    "type": "PATCH_COLLECTION",
+    "tournamentName": null,
+    "tournamentLogo": null,
+    "sourceType": "GENERAL",
+    "sourceId": "METAL_SKILL_GROUP",
+    "sourceName": "Metal Skill Group"
+  },
+  {
     "id": "2121",
     "name": "Half-Life: Alyx Collectible Pins Capsule",
     "caseImage": "assets/cases/2121.webp",
     "releaseDate": "2020-03-23",
     "type": "PIN_CAPSULE",
+    "tournamentName": null,
+    "tournamentLogo": null,
+    "sourceType": null,
+    "sourceId": null,
+    "sourceName": null
+  },
+  {
+    "id": "2235",
+    "name": "Half-Life: Alyx Patch Pack",
+    "caseImage": "assets/cases/2235.webp",
+    "releaseDate": "2020-03-23",
+    "type": "PATCH_PACK",
     "tournamentName": null,
     "tournamentLogo": null,
     "sourceType": null,
@@ -3708,6 +3780,18 @@
     "sourceName": null
   },
   {
+    "id": "2237",
+    "name": "Operation Riptide Patch Collection",
+    "caseImage": "assets/cases/2237.webp",
+    "releaseDate": "2021-09-21",
+    "type": "PATCH_COLLECTION",
+    "tournamentName": null,
+    "tournamentLogo": null,
+    "sourceType": "OPERATION_REWARD",
+    "sourceId": "RIPTIDE",
+    "sourceName": "Operation Riptide"
+  },
+  {
     "id": "2227",
     "name": "Operation Riptide Sticker Collection",
     "caseImage": "assets/cases/2227.webp",
@@ -3768,6 +3852,18 @@
     "sourceName": null
   },
   {
+    "id": "2238",
+    "name": "Stockholm 2021 Challengers Patch Pack",
+    "caseImage": "assets/cases/2238.webp",
+    "releaseDate": "2021-10-26",
+    "type": "PATCH_PACK",
+    "tournamentName": null,
+    "tournamentLogo": null,
+    "sourceType": null,
+    "sourceId": null,
+    "sourceName": null
+  },
+  {
     "id": "2172",
     "name": "Stockholm 2021 Challengers Sticker Capsule",
     "caseImage": "assets/cases/2172.webp",
@@ -3785,6 +3881,18 @@
     "caseImage": "assets/cases/2173.webp",
     "releaseDate": "2021-10-26",
     "type": "STICKER_CAPSULE",
+    "tournamentName": null,
+    "tournamentLogo": null,
+    "sourceType": null,
+    "sourceId": null,
+    "sourceName": null
+  },
+  {
+    "id": "2239",
+    "name": "Stockholm 2021 Contenders Patch Pack",
+    "caseImage": "assets/cases/2239.webp",
+    "releaseDate": "2021-10-26",
+    "type": "PATCH_PACK",
     "tournamentName": null,
     "tournamentLogo": null,
     "sourceType": null,
@@ -3835,6 +3943,18 @@
     "type": "SOUVENIR_PACKAGE",
     "tournamentName": "PGL Stockholm 2021",
     "tournamentLogo": "assets/tournament_logos/pgl_stockholm_2021.png",
+    "sourceType": null,
+    "sourceId": null,
+    "sourceName": null
+  },
+  {
+    "id": "2240",
+    "name": "Stockholm 2021 Legends Patch Pack",
+    "caseImage": "assets/cases/2240.webp",
+    "releaseDate": "2021-10-26",
+    "type": "PATCH_PACK",
+    "tournamentName": null,
+    "tournamentLogo": null,
     "sourceType": null,
     "sourceId": null,
     "sourceName": null

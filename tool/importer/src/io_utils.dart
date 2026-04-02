@@ -48,8 +48,12 @@ class IoUtils {
       stickersDir,
       pinsDir,
       musicKitsDir,
+      agentsDir,
+      graffitiDir,
+      patchesDir,
       rewardCollectionsDir,
       operationCollectionsDir,
+      agentCollectionsDir,
       tournamentLogosDir,
     ]) {
       if (!dir.existsSync()) {
@@ -66,6 +70,13 @@ class IoUtils {
       File('${dataDir.path}/pin_contents.json'),
       File('${dataDir.path}/music_kits.json'),
       File('${dataDir.path}/music_kit_contents.json'),
+      File('${dataDir.path}/agents.json'),
+      File('${dataDir.path}/agent_collections.json'),
+      File('${dataDir.path}/agent_collection_contents.json'),
+      File('${dataDir.path}/graffiti.json'),
+      File('${dataDir.path}/graffiti_contents.json'),
+      File('${dataDir.path}/patches.json'),
+      File('${dataDir.path}/patch_contents.json'),
     ]) {
       if (file.existsSync()) {
         await file.delete();

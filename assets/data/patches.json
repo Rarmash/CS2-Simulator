@@ -1,0 +1,814 @@
+[
+  {
+    "id": "4550",
+    "name": "Crazy Banana",
+    "patchImage": "assets/patches/4550.webp",
+    "rarity": "REMARKABLE",
+    "collection": "CS:GO"
+  },
+  {
+    "id": "4551",
+    "name": "The Boss",
+    "patchImage": "assets/patches/4551.webp",
+    "rarity": "EXOTIC",
+    "collection": "CS:GO"
+  },
+  {
+    "id": "4552",
+    "name": "Chicken Lover",
+    "patchImage": "assets/patches/4552.webp",
+    "rarity": "REMARKABLE",
+    "collection": "CS:GO"
+  },
+  {
+    "id": "4553",
+    "name": "Welcome to the Clutch",
+    "patchImage": "assets/patches/4553.webp",
+    "rarity": "REMARKABLE",
+    "collection": "CS:GO"
+  },
+  {
+    "id": "4554",
+    "name": "Dragon",
+    "patchImage": "assets/patches/4554.webp",
+    "rarity": "EXOTIC",
+    "collection": "CS:GO"
+  },
+  {
+    "id": "4555",
+    "name": "Easy Peasy",
+    "patchImage": "assets/patches/4555.webp",
+    "rarity": "REMARKABLE",
+    "collection": "CS:GO"
+  },
+  {
+    "id": "4556",
+    "name": "Rage",
+    "patchImage": "assets/patches/4556.webp",
+    "rarity": "EXOTIC",
+    "collection": "CS:GO"
+  },
+  {
+    "id": "4557",
+    "name": "Howl",
+    "patchImage": "assets/patches/4557.webp",
+    "rarity": "EXOTIC",
+    "collection": "CS:GO"
+  },
+  {
+    "id": "4558",
+    "name": "Koi",
+    "patchImage": "assets/patches/4558.webp",
+    "rarity": "REMARKABLE",
+    "collection": "CS:GO"
+  },
+  {
+    "id": "4559",
+    "name": "Longevity",
+    "patchImage": "assets/patches/4559.webp",
+    "rarity": "REMARKABLE",
+    "collection": "CS:GO"
+  },
+  {
+    "id": "4560",
+    "name": "Wildfire",
+    "patchImage": "assets/patches/4560.webp",
+    "rarity": "HIGH_GRADE",
+    "collection": "CS:GO"
+  },
+  {
+    "id": "4561",
+    "name": "Vigilance",
+    "patchImage": "assets/patches/4561.webp",
+    "rarity": "REMARKABLE",
+    "collection": "CS:GO"
+  },
+  {
+    "id": "4562",
+    "name": "Bloodhound",
+    "patchImage": "assets/patches/4562.webp",
+    "rarity": "HIGH_GRADE",
+    "collection": "CS:GO"
+  },
+  {
+    "id": "4563",
+    "name": "Bravo",
+    "patchImage": "assets/patches/4563.webp",
+    "rarity": "HIGH_GRADE",
+    "collection": "CS:GO"
+  },
+  {
+    "id": "4564",
+    "name": "Breakout",
+    "patchImage": "assets/patches/4564.webp",
+    "rarity": "HIGH_GRADE",
+    "collection": "CS:GO"
+  },
+  {
+    "id": "4565",
+    "name": "Danger Zone",
+    "patchImage": "assets/patches/4565.webp",
+    "rarity": "REMARKABLE",
+    "collection": "CS:GO"
+  },
+  {
+    "id": "4566",
+    "name": "Hydra",
+    "patchImage": "assets/patches/4566.webp",
+    "rarity": "HIGH_GRADE",
+    "collection": "CS:GO"
+  },
+  {
+    "id": "4567",
+    "name": "Payback",
+    "patchImage": "assets/patches/4567.webp",
+    "rarity": "HIGH_GRADE",
+    "collection": "CS:GO"
+  },
+  {
+    "id": "4568",
+    "name": "Phoenix",
+    "patchImage": "assets/patches/4568.webp",
+    "rarity": "HIGH_GRADE",
+    "collection": "CS:GO"
+  },
+  {
+    "id": "4569",
+    "name": "Shattered Web",
+    "patchImage": "assets/patches/4569.webp",
+    "rarity": "HIGH_GRADE",
+    "collection": "CS:GO"
+  },
+  {
+    "id": "4570",
+    "name": "Vanguard",
+    "patchImage": "assets/patches/4570.webp",
+    "rarity": "HIGH_GRADE",
+    "collection": "CS:GO"
+  },
+  {
+    "id": "4571",
+    "name": "Metal Silver",
+    "patchImage": "assets/patches/4571.webp",
+    "rarity": "HIGH_GRADE",
+    "collection": "Metal Skill Group"
+  },
+  {
+    "id": "4572",
+    "name": "Metal Gold Nova I",
+    "patchImage": "assets/patches/4572.webp",
+    "rarity": "HIGH_GRADE",
+    "collection": "Metal Skill Group"
+  },
+  {
+    "id": "4575",
+    "name": "Metal Gold Nova Master",
+    "patchImage": "assets/patches/4575.webp",
+    "rarity": "HIGH_GRADE",
+    "collection": "Metal Skill Group"
+  },
+  {
+    "id": "4576",
+    "name": "Metal Master Guardian I",
+    "patchImage": "assets/patches/4576.webp",
+    "rarity": "HIGH_GRADE",
+    "collection": "Metal Skill Group"
+  },
+  {
+    "id": "4578",
+    "name": "Metal Master Guardian Elite",
+    "patchImage": "assets/patches/4578.webp",
+    "rarity": "HIGH_GRADE",
+    "collection": "Metal Skill Group"
+  },
+  {
+    "id": "4579",
+    "name": "Metal Distinguished Master Guardian ★",
+    "patchImage": "assets/patches/4579.webp",
+    "rarity": "REMARKABLE",
+    "collection": "Metal Skill Group"
+  },
+  {
+    "id": "4581",
+    "name": "Metal Legendary Eagle Master ★",
+    "patchImage": "assets/patches/4581.webp",
+    "rarity": "REMARKABLE",
+    "collection": "Metal Skill Group"
+  },
+  {
+    "id": "4582",
+    "name": "Metal Supreme Master First Class",
+    "patchImage": "assets/patches/4582.webp",
+    "rarity": "REMARKABLE",
+    "collection": "Metal Skill Group"
+  },
+  {
+    "id": "4583",
+    "name": "Metal The Global Elite ★",
+    "patchImage": "assets/patches/4583.webp",
+    "rarity": "EXOTIC",
+    "collection": "Metal Skill Group"
+  },
+  {
+    "id": "4584",
+    "name": "Metal Distinguished Master Guardian",
+    "patchImage": "assets/patches/4584.webp",
+    "rarity": "HIGH_GRADE",
+    "collection": "Metal Skill Group"
+  },
+  {
+    "id": "4585",
+    "name": "Metal Legendary Eagle",
+    "patchImage": "assets/patches/4585.webp",
+    "rarity": "HIGH_GRADE",
+    "collection": "Metal Skill Group"
+  },
+  {
+    "id": "4586",
+    "name": "Metal Legendary Eagle Master",
+    "patchImage": "assets/patches/4586.webp",
+    "rarity": "HIGH_GRADE",
+    "collection": "Metal Skill Group"
+  },
+  {
+    "id": "4587",
+    "name": "Metal Silver Demon",
+    "patchImage": "assets/patches/4587.webp",
+    "rarity": "EXOTIC",
+    "collection": "Metal Skill Group"
+  },
+  {
+    "id": "4588",
+    "name": "Metal Supreme Master",
+    "patchImage": "assets/patches/4588.webp",
+    "rarity": "HIGH_GRADE",
+    "collection": "Metal Skill Group"
+  },
+  {
+    "id": "4589",
+    "name": "Alyx",
+    "patchImage": "assets/patches/4589.webp",
+    "rarity": "EXOTIC",
+    "collection": "Half-Life: Alyx"
+  },
+  {
+    "id": "4591",
+    "name": "Sustenance!",
+    "patchImage": "assets/patches/4591.webp",
+    "rarity": "REMARKABLE",
+    "collection": "Half-Life: Alyx"
+  },
+  {
+    "id": "4592",
+    "name": "Vortigaunt",
+    "patchImage": "assets/patches/4592.webp",
+    "rarity": "HIGH_GRADE",
+    "collection": "Half-Life: Alyx"
+  },
+  {
+    "id": "4593",
+    "name": "Headcrab Glyph",
+    "patchImage": "assets/patches/4593.webp",
+    "rarity": "HIGH_GRADE",
+    "collection": "Half-Life: Alyx"
+  },
+  {
+    "id": "4594",
+    "name": "Copper Lambda",
+    "patchImage": "assets/patches/4594.webp",
+    "rarity": "EXOTIC",
+    "collection": "Half-Life: Alyx"
+  },
+  {
+    "id": "4595",
+    "name": "Health",
+    "patchImage": "assets/patches/4595.webp",
+    "rarity": "EXOTIC",
+    "collection": "Half-Life: Alyx"
+  },
+  {
+    "id": "4596",
+    "name": "Combine Helmet",
+    "patchImage": "assets/patches/4596.webp",
+    "rarity": "HIGH_GRADE",
+    "collection": "Half-Life: Alyx"
+  },
+  {
+    "id": "4597",
+    "name": "Black Mesa",
+    "patchImage": "assets/patches/4597.webp",
+    "rarity": "REMARKABLE",
+    "collection": "Half-Life: Alyx"
+  },
+  {
+    "id": "4598",
+    "name": "CMB",
+    "patchImage": "assets/patches/4598.webp",
+    "rarity": "HIGH_GRADE",
+    "collection": "Half-Life: Alyx"
+  },
+  {
+    "id": "4599",
+    "name": "Lambda",
+    "patchImage": "assets/patches/4599.webp",
+    "rarity": "REMARKABLE",
+    "collection": "Half-Life: Alyx"
+  },
+  {
+    "id": "4600",
+    "name": "City 17",
+    "patchImage": "assets/patches/4600.webp",
+    "rarity": "HIGH_GRADE",
+    "collection": "Half-Life: Alyx"
+  },
+  {
+    "id": "4697",
+    "name": "Metal The Global Elite",
+    "patchImage": "assets/patches/4697.webp",
+    "rarity": "HIGH_GRADE",
+    "collection": "Metal Skill Group"
+  },
+  {
+    "id": "4699",
+    "name": "Metal Master Guardian",
+    "patchImage": "assets/patches/4699.webp",
+    "rarity": "REMARKABLE",
+    "collection": "Metal Skill Group"
+  },
+  {
+    "id": "4700",
+    "name": "Metal Gold Nova",
+    "patchImage": "assets/patches/4700.webp",
+    "rarity": "REMARKABLE",
+    "collection": "Metal Skill Group"
+  },
+  {
+    "id": "4937",
+    "name": "Abandon Hope",
+    "patchImage": "assets/patches/4937.webp",
+    "rarity": "HIGH_GRADE",
+    "collection": "Operation Riptide"
+  },
+  {
+    "id": "4938",
+    "name": "Anchors Aweigh",
+    "patchImage": "assets/patches/4938.webp",
+    "rarity": "HIGH_GRADE",
+    "collection": "Operation Riptide"
+  },
+  {
+    "id": "4939",
+    "name": "Cruising Ray",
+    "patchImage": "assets/patches/4939.webp",
+    "rarity": "HIGH_GRADE",
+    "collection": "Operation Riptide"
+  },
+  {
+    "id": "4940",
+    "name": "Bayonet Frog",
+    "patchImage": "assets/patches/4940.webp",
+    "rarity": "EXOTIC",
+    "collection": "Operation Riptide"
+  },
+  {
+    "id": "4941",
+    "name": "Mad Sushi",
+    "patchImage": "assets/patches/4941.webp",
+    "rarity": "HIGH_GRADE",
+    "collection": "Operation Riptide"
+  },
+  {
+    "id": "4942",
+    "name": "Giant Squid",
+    "patchImage": "assets/patches/4942.webp",
+    "rarity": "HIGH_GRADE",
+    "collection": "Operation Riptide"
+  },
+  {
+    "id": "4943",
+    "name": "El Pirata",
+    "patchImage": "assets/patches/4943.webp",
+    "rarity": "HIGH_GRADE",
+    "collection": "Operation Riptide"
+  },
+  {
+    "id": "4944",
+    "name": "Death From Below",
+    "patchImage": "assets/patches/4944.webp",
+    "rarity": "REMARKABLE",
+    "collection": "Operation Riptide"
+  },
+  {
+    "id": "4945",
+    "name": "Dead Men",
+    "patchImage": "assets/patches/4945.webp",
+    "rarity": "REMARKABLE",
+    "collection": "Operation Riptide"
+  },
+  {
+    "id": "4946",
+    "name": "Sunset Wave",
+    "patchImage": "assets/patches/4946.webp",
+    "rarity": "REMARKABLE",
+    "collection": "Operation Riptide"
+  },
+  {
+    "id": "4947",
+    "name": "Aquatic Offensive",
+    "patchImage": "assets/patches/4947.webp",
+    "rarity": "EXOTIC",
+    "collection": "Operation Riptide"
+  },
+  {
+    "id": "4948",
+    "name": "Elder God",
+    "patchImage": "assets/patches/4948.webp",
+    "rarity": "EXOTIC",
+    "collection": "Operation Riptide"
+  },
+  {
+    "id": "4949",
+    "name": "Meal Time",
+    "patchImage": "assets/patches/4949.webp",
+    "rarity": "REMARKABLE",
+    "collection": "Operation Riptide"
+  },
+  {
+    "id": "5079",
+    "name": "Ninjas in Pyjamas | Stockholm 2021",
+    "patchImage": "assets/patches/5079.webp",
+    "rarity": "HIGH_GRADE",
+    "collection": "Stockholm 2021 Legends"
+  },
+  {
+    "id": "5080",
+    "name": "Ninjas in Pyjamas (Gold) | Stockholm 2021",
+    "patchImage": "assets/patches/5080.webp",
+    "rarity": "REMARKABLE",
+    "collection": "Stockholm 2021 Legends"
+  },
+  {
+    "id": "5081",
+    "name": "FURIA | Stockholm 2021",
+    "patchImage": "assets/patches/5081.webp",
+    "rarity": "HIGH_GRADE",
+    "collection": "Stockholm 2021 Legends"
+  },
+  {
+    "id": "5082",
+    "name": "FURIA (Gold) | Stockholm 2021",
+    "patchImage": "assets/patches/5082.webp",
+    "rarity": "REMARKABLE",
+    "collection": "Stockholm 2021 Legends"
+  },
+  {
+    "id": "5083",
+    "name": "Natus Vincere | Stockholm 2021",
+    "patchImage": "assets/patches/5083.webp",
+    "rarity": "HIGH_GRADE",
+    "collection": "Stockholm 2021 Legends"
+  },
+  {
+    "id": "5084",
+    "name": "Natus Vincere (Gold) | Stockholm 2021",
+    "patchImage": "assets/patches/5084.webp",
+    "rarity": "REMARKABLE",
+    "collection": "Stockholm 2021 Legends"
+  },
+  {
+    "id": "5085",
+    "name": "Vitality | Stockholm 2021",
+    "patchImage": "assets/patches/5085.webp",
+    "rarity": "HIGH_GRADE",
+    "collection": "Stockholm 2021 Legends"
+  },
+  {
+    "id": "5086",
+    "name": "Vitality (Gold) | Stockholm 2021",
+    "patchImage": "assets/patches/5086.webp",
+    "rarity": "REMARKABLE",
+    "collection": "Stockholm 2021 Legends"
+  },
+  {
+    "id": "5087",
+    "name": "Team Liquid | Stockholm 2021",
+    "patchImage": "assets/patches/5087.webp",
+    "rarity": "HIGH_GRADE",
+    "collection": "Stockholm 2021 Legends"
+  },
+  {
+    "id": "5088",
+    "name": "Team Liquid (Gold) | Stockholm 2021",
+    "patchImage": "assets/patches/5088.webp",
+    "rarity": "REMARKABLE",
+    "collection": "Stockholm 2021 Legends"
+  },
+  {
+    "id": "5089",
+    "name": "Gambit Gaming | Stockholm 2021",
+    "patchImage": "assets/patches/5089.webp",
+    "rarity": "HIGH_GRADE",
+    "collection": "Stockholm 2021 Legends"
+  },
+  {
+    "id": "5090",
+    "name": "Gambit Gaming (Gold) | Stockholm 2021",
+    "patchImage": "assets/patches/5090.webp",
+    "rarity": "REMARKABLE",
+    "collection": "Stockholm 2021 Legends"
+  },
+  {
+    "id": "5091",
+    "name": "G2 Esports | Stockholm 2021",
+    "patchImage": "assets/patches/5091.webp",
+    "rarity": "HIGH_GRADE",
+    "collection": "Stockholm 2021 Legends"
+  },
+  {
+    "id": "5092",
+    "name": "G2 Esports (Gold) | Stockholm 2021",
+    "patchImage": "assets/patches/5092.webp",
+    "rarity": "REMARKABLE",
+    "collection": "Stockholm 2021 Legends"
+  },
+  {
+    "id": "5093",
+    "name": "Evil Geniuses | Stockholm 2021",
+    "patchImage": "assets/patches/5093.webp",
+    "rarity": "HIGH_GRADE",
+    "collection": "Stockholm 2021 Legends"
+  },
+  {
+    "id": "5094",
+    "name": "Evil Geniuses (Gold) | Stockholm 2021",
+    "patchImage": "assets/patches/5094.webp",
+    "rarity": "REMARKABLE",
+    "collection": "Stockholm 2021 Legends"
+  },
+  {
+    "id": "5095",
+    "name": "Team Spirit | Stockholm 2021",
+    "patchImage": "assets/patches/5095.webp",
+    "rarity": "HIGH_GRADE",
+    "collection": "Stockholm 2021 Challengers"
+  },
+  {
+    "id": "5096",
+    "name": "Team Spirit (Gold) | Stockholm 2021",
+    "patchImage": "assets/patches/5096.webp",
+    "rarity": "REMARKABLE",
+    "collection": "Stockholm 2021 Challengers"
+  },
+  {
+    "id": "5097",
+    "name": "Astralis | Stockholm 2021",
+    "patchImage": "assets/patches/5097.webp",
+    "rarity": "HIGH_GRADE",
+    "collection": "Stockholm 2021 Challengers"
+  },
+  {
+    "id": "5098",
+    "name": "Astralis (Gold) | Stockholm 2021",
+    "patchImage": "assets/patches/5098.webp",
+    "rarity": "REMARKABLE",
+    "collection": "Stockholm 2021 Challengers"
+  },
+  {
+    "id": "5099",
+    "name": "paiN Gaming | Stockholm 2021",
+    "patchImage": "assets/patches/5099.webp",
+    "rarity": "HIGH_GRADE",
+    "collection": "Stockholm 2021 Challengers"
+  },
+  {
+    "id": "5100",
+    "name": "paiN Gaming (Gold) | Stockholm 2021",
+    "patchImage": "assets/patches/5100.webp",
+    "rarity": "REMARKABLE",
+    "collection": "Stockholm 2021 Challengers"
+  },
+  {
+    "id": "5101",
+    "name": "ENCE | Stockholm 2021",
+    "patchImage": "assets/patches/5101.webp",
+    "rarity": "HIGH_GRADE",
+    "collection": "Stockholm 2021 Challengers"
+  },
+  {
+    "id": "5102",
+    "name": "ENCE (Gold) | Stockholm 2021",
+    "patchImage": "assets/patches/5102.webp",
+    "rarity": "REMARKABLE",
+    "collection": "Stockholm 2021 Challengers"
+  },
+  {
+    "id": "5103",
+    "name": "BIG | Stockholm 2021",
+    "patchImage": "assets/patches/5103.webp",
+    "rarity": "HIGH_GRADE",
+    "collection": "Stockholm 2021 Challengers"
+  },
+  {
+    "id": "5104",
+    "name": "BIG (Gold) | Stockholm 2021",
+    "patchImage": "assets/patches/5104.webp",
+    "rarity": "REMARKABLE",
+    "collection": "Stockholm 2021 Challengers"
+  },
+  {
+    "id": "5105",
+    "name": "Movistar Riders | Stockholm 2021",
+    "patchImage": "assets/patches/5105.webp",
+    "rarity": "HIGH_GRADE",
+    "collection": "Stockholm 2021 Challengers"
+  },
+  {
+    "id": "5106",
+    "name": "Movistar Riders (Gold) | Stockholm 2021",
+    "patchImage": "assets/patches/5106.webp",
+    "rarity": "REMARKABLE",
+    "collection": "Stockholm 2021 Challengers"
+  },
+  {
+    "id": "5107",
+    "name": "Heroic | Stockholm 2021",
+    "patchImage": "assets/patches/5107.webp",
+    "rarity": "HIGH_GRADE",
+    "collection": "Stockholm 2021 Challengers"
+  },
+  {
+    "id": "5108",
+    "name": "Heroic (Gold) | Stockholm 2021",
+    "patchImage": "assets/patches/5108.webp",
+    "rarity": "REMARKABLE",
+    "collection": "Stockholm 2021 Challengers"
+  },
+  {
+    "id": "5109",
+    "name": "MOUZ | Stockholm 2021",
+    "patchImage": "assets/patches/5109.webp",
+    "rarity": "HIGH_GRADE",
+    "collection": "Stockholm 2021 Challengers"
+  },
+  {
+    "id": "5110",
+    "name": "MOUZ (Gold) | Stockholm 2021",
+    "patchImage": "assets/patches/5110.webp",
+    "rarity": "REMARKABLE",
+    "collection": "Stockholm 2021 Challengers"
+  },
+  {
+    "id": "5111",
+    "name": "Sharks Esports | Stockholm 2021",
+    "patchImage": "assets/patches/5111.webp",
+    "rarity": "HIGH_GRADE",
+    "collection": "Stockholm 2021 Contenders"
+  },
+  {
+    "id": "5112",
+    "name": "Sharks Esports (Gold) | Stockholm 2021",
+    "patchImage": "assets/patches/5112.webp",
+    "rarity": "REMARKABLE",
+    "collection": "Stockholm 2021 Contenders"
+  },
+  {
+    "id": "5113",
+    "name": "Tyloo | Stockholm 2021",
+    "patchImage": "assets/patches/5113.webp",
+    "rarity": "HIGH_GRADE",
+    "collection": "Stockholm 2021 Contenders"
+  },
+  {
+    "id": "5114",
+    "name": "Tyloo (Gold) | Stockholm 2021",
+    "patchImage": "assets/patches/5114.webp",
+    "rarity": "REMARKABLE",
+    "collection": "Stockholm 2021 Contenders"
+  },
+  {
+    "id": "5115",
+    "name": "Renegades | Stockholm 2021",
+    "patchImage": "assets/patches/5115.webp",
+    "rarity": "HIGH_GRADE",
+    "collection": "Stockholm 2021 Contenders"
+  },
+  {
+    "id": "5116",
+    "name": "Renegades (Gold) | Stockholm 2021",
+    "patchImage": "assets/patches/5116.webp",
+    "rarity": "REMARKABLE",
+    "collection": "Stockholm 2021 Contenders"
+  },
+  {
+    "id": "5117",
+    "name": "Entropiq | Stockholm 2021",
+    "patchImage": "assets/patches/5117.webp",
+    "rarity": "HIGH_GRADE",
+    "collection": "Stockholm 2021 Contenders"
+  },
+  {
+    "id": "5118",
+    "name": "Entropiq (Gold) | Stockholm 2021",
+    "patchImage": "assets/patches/5118.webp",
+    "rarity": "REMARKABLE",
+    "collection": "Stockholm 2021 Contenders"
+  },
+  {
+    "id": "5119",
+    "name": "GODSENT | Stockholm 2021",
+    "patchImage": "assets/patches/5119.webp",
+    "rarity": "HIGH_GRADE",
+    "collection": "Stockholm 2021 Contenders"
+  },
+  {
+    "id": "5120",
+    "name": "GODSENT (Gold) | Stockholm 2021",
+    "patchImage": "assets/patches/5120.webp",
+    "rarity": "REMARKABLE",
+    "collection": "Stockholm 2021 Contenders"
+  },
+  {
+    "id": "5121",
+    "name": "Virtus.Pro | Stockholm 2021",
+    "patchImage": "assets/patches/5121.webp",
+    "rarity": "HIGH_GRADE",
+    "collection": "Stockholm 2021 Contenders"
+  },
+  {
+    "id": "5122",
+    "name": "Virtus.Pro (Gold) | Stockholm 2021",
+    "patchImage": "assets/patches/5122.webp",
+    "rarity": "REMARKABLE",
+    "collection": "Stockholm 2021 Contenders"
+  },
+  {
+    "id": "5123",
+    "name": "Copenhagen Flames | Stockholm 2021",
+    "patchImage": "assets/patches/5123.webp",
+    "rarity": "HIGH_GRADE",
+    "collection": "Stockholm 2021 Contenders"
+  },
+  {
+    "id": "5124",
+    "name": "Copenhagen Flames (Gold) | Stockholm 2021",
+    "patchImage": "assets/patches/5124.webp",
+    "rarity": "REMARKABLE",
+    "collection": "Stockholm 2021 Contenders"
+  },
+  {
+    "id": "5125",
+    "name": "FaZe Clan | Stockholm 2021",
+    "patchImage": "assets/patches/5125.webp",
+    "rarity": "HIGH_GRADE",
+    "collection": "Stockholm 2021 Contenders"
+  },
+  {
+    "id": "5126",
+    "name": "FaZe Clan (Gold) | Stockholm 2021",
+    "patchImage": "assets/patches/5126.webp",
+    "rarity": "REMARKABLE",
+    "collection": "Stockholm 2021 Contenders"
+  },
+  {
+    "id": "5127",
+    "name": "PGL | Stockholm 2021",
+    "patchImage": "assets/patches/5127.webp",
+    "rarity": "HIGH_GRADE",
+    "collection": "Stockholm 2021 Challengers"
+  },
+  {
+    "id": "5128",
+    "name": "PGL (Gold) | Stockholm 2021",
+    "patchImage": "assets/patches/5128.webp",
+    "rarity": "REMARKABLE",
+    "collection": "Stockholm 2021 Challengers"
+  },
+  {
+    "id": "995000001",
+    "name": "PGL | Stockholm 2021",
+    "patchImage": "assets/patches/995000001.webp",
+    "rarity": "HIGH_GRADE",
+    "collection": "Stockholm 2021 Contenders"
+  },
+  {
+    "id": "995000002",
+    "name": "PGL (Gold) | Stockholm 2021",
+    "patchImage": "assets/patches/995000002.webp",
+    "rarity": "REMARKABLE",
+    "collection": "Stockholm 2021 Contenders"
+  },
+  {
+    "id": "995000003",
+    "name": "PGL | Stockholm 2021",
+    "patchImage": "assets/patches/995000003.webp",
+    "rarity": "HIGH_GRADE",
+    "collection": "Stockholm 2021 Legends"
+  },
+  {
+    "id": "995000004",
+    "name": "PGL (Gold) | Stockholm 2021",
+    "patchImage": "assets/patches/995000004.webp",
+    "rarity": "REMARKABLE",
+    "collection": "Stockholm 2021 Legends"
+  }
+]

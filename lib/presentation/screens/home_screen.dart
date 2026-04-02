@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 
 import '../../core/settings/settings_controller.dart';
 import '../../data/repositories/local_data_repository.dart';
+import 'agent_collection_list_screen.dart';
 import 'case_list_screen.dart';
 import 'operation_collection_list_screen.dart';
+import 'patch_collection_list_screen.dart';
 import 'reward_collection_list_screen.dart';
 import 'settings_screen.dart';
 import 'skin_glossary_screen.dart';
@@ -52,7 +54,8 @@ class HomeScreen extends StatelessWidget {
               children: [
                 _menuButton(
                   context,
-                  title: '🎁 Open Containers',
+                  icon: Icons.inventory_2,
+                  title: 'Open Containers',
                   onTap: () {
                     Navigator.push(
                       context,
@@ -68,7 +71,8 @@ class HomeScreen extends StatelessWidget {
                 const SizedBox(height: 16),
                 _menuButton(
                   context,
-                  title: '📘 Skin Glossary',
+                  icon: Icons.menu_book,
+                  title: 'Skin Glossary',
                   onTap: () {
                     Navigator.push(
                       context,
@@ -84,7 +88,8 @@ class HomeScreen extends StatelessWidget {
                 const SizedBox(height: 16),
                 _menuButton(
                   context,
-                  title: '⭐ Operation / Armory Rewards',
+                  icon: Icons.stars,
+                  title: 'Operation / Armory Rewards',
                   onTap: () {
                     Navigator.push(
                       context,
@@ -98,7 +103,8 @@ class HomeScreen extends StatelessWidget {
                 const SizedBox(height: 16),
                 _menuButton(
                   context,
-                  title: '🗂️ Legacy Operation Collections',
+                  icon: Icons.collections_bookmark,
+                  title: 'Legacy Operation Collections',
                   onTap: () {
                     Navigator.push(
                       context,
@@ -113,7 +119,23 @@ class HomeScreen extends StatelessWidget {
                 const SizedBox(height: 16),
                 _menuButton(
                   context,
-                  title: '🏷️ Sticker Collections',
+                  icon: Icons.badge,
+                  title: 'Agent Collections',
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) =>
+                            AgentCollectionListScreen(repository: repository),
+                      ),
+                    );
+                  },
+                ),
+                const SizedBox(height: 16),
+                _menuButton(
+                  context,
+                  icon: Icons.sell,
+                  title: 'Sticker Collections',
                   onTap: () {
                     Navigator.push(
                       context,
@@ -127,7 +149,23 @@ class HomeScreen extends StatelessWidget {
                 const SizedBox(height: 16),
                 _menuButton(
                   context,
-                  title: '🔁 Trade-Up',
+                  icon: Icons.style,
+                  title: 'Patch Collections',
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) =>
+                            PatchCollectionListScreen(repository: repository),
+                      ),
+                    );
+                  },
+                ),
+                const SizedBox(height: 16),
+                _menuButton(
+                  context,
+                  icon: Icons.swap_horiz,
+                  title: 'Trade-Up',
                   onTap: () {
                     Navigator.push(
                       context,
@@ -147,6 +185,7 @@ class HomeScreen extends StatelessWidget {
 
   Widget _menuButton(
     BuildContext context, {
+    required IconData icon,
     required String title,
     required VoidCallback onTap,
   }) {
@@ -155,7 +194,14 @@ class HomeScreen extends StatelessWidget {
       height: 64,
       child: ElevatedButton(
         onPressed: onTap,
-        child: Text(title, style: const TextStyle(fontSize: 18)),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Icon(icon),
+            const SizedBox(width: 10),
+            Text(title, style: const TextStyle(fontSize: 18)),
+          ],
+        ),
       ),
     );
   }

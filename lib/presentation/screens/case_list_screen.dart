@@ -8,7 +8,9 @@ import '../helpers/source_color_helper.dart';
 import '../widgets/chip_badge.dart';
 import '../widgets/collection_list_card.dart';
 import 'case_open_screen.dart';
+import 'graffiti_box_open_screen.dart';
 import 'music_kit_box_open_screen.dart';
+import 'patch_container_open_screen.dart';
 import 'pin_container_open_screen.dart';
 import 'sticker_container_open_screen.dart';
 
@@ -42,7 +44,11 @@ class _CaseListScreenState extends State<CaseListScreen> {
     final types = <String>{_filterAll};
 
     for (final caseDto in cases) {
-      if (caseDto.isXrayPackage || caseDto.isStickerCollection) continue;
+      if (caseDto.isXrayPackage ||
+          caseDto.isStickerCollection ||
+          caseDto.isPatchCollection) {
+        continue;
+      }
       types.add(caseDto.type);
     }
 
@@ -54,6 +60,8 @@ class _CaseListScreenState extends State<CaseListScreen> {
       'STICKER_CAPSULE',
       'PIN_CAPSULE',
       'MUSIC_KIT_BOX',
+      'GRAFFITI_BOX',
+      'PATCH_PACK',
       'TERMINAL',
     ];
 
@@ -88,6 +96,10 @@ class _CaseListScreenState extends State<CaseListScreen> {
         return 'Pin Capsule';
       case 'MUSIC_KIT_BOX':
         return 'Music Kit Box';
+      case 'GRAFFITI_BOX':
+        return 'Graffiti Box';
+      case 'PATCH_PACK':
+        return 'Patch Pack';
       case 'TERMINAL':
         return 'Terminal';
       default:
@@ -99,7 +111,10 @@ class _CaseListScreenState extends State<CaseListScreen> {
     var filtered = List<CaseDto>.from(cases);
 
     filtered = filtered
-        .where((c) => !c.isXrayPackage && !c.isStickerCollection)
+        .where(
+          (c) =>
+              !c.isXrayPackage && !c.isStickerCollection && !c.isPatchCollection,
+        )
         .toList();
 
     if (_selectedFilter != _filterAll) {
@@ -185,6 +200,16 @@ class _CaseListScreenState extends State<CaseListScreen> {
                   )
                 : caseDto.isMusicKitBox
                 ? MusicKitBoxOpenScreen(
+                    caseDto: caseDto,
+                    repository: widget.repository,
+                  )
+                : caseDto.isGraffitiBox
+                ? GraffitiBoxOpenScreen(
+                    caseDto: caseDto,
+                    repository: widget.repository,
+                  )
+                : caseDto.isPatchPack
+                ? PatchContainerOpenScreen(
                     caseDto: caseDto,
                     repository: widget.repository,
                   )

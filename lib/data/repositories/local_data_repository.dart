@@ -4,12 +4,19 @@ import 'package:flutter/services.dart';
 
 import '../models/case_content_dto.dart';
 import '../models/case_dto.dart';
+import '../models/agent_collection_content_dto.dart';
+import '../models/agent_collection_dto.dart';
+import '../models/agent_dto.dart';
+import '../models/graffiti_content_dto.dart';
+import '../models/graffiti_dto.dart';
 import '../models/operation_collection_content_dto.dart';
 import '../models/operation_collection_dto.dart';
 import '../models/music_kit_content_dto.dart';
 import '../models/music_kit_dto.dart';
 import '../models/pin_content_dto.dart';
 import '../models/pin_dto.dart';
+import '../models/patch_content_dto.dart';
+import '../models/patch_dto.dart';
 import '../models/reward_collection_content_dto.dart';
 import '../models/reward_collection_dto.dart';
 import '../models/skin_dto.dart';
@@ -65,6 +72,30 @@ class LocalDataRepository {
         .toList();
   }
 
+  Future<List<AgentDto>> loadAgents() async {
+    final raw = await rootBundle.loadString('assets/data/agents.json');
+    final list = jsonDecode(raw) as List<dynamic>;
+    return list
+        .map((e) => AgentDto.fromJson(e as Map<String, dynamic>))
+        .toList();
+  }
+
+  Future<List<GraffitiDto>> loadGraffiti() async {
+    final raw = await rootBundle.loadString('assets/data/graffiti.json');
+    final list = jsonDecode(raw) as List<dynamic>;
+    return list
+        .map((e) => GraffitiDto.fromJson(e as Map<String, dynamic>))
+        .toList();
+  }
+
+  Future<List<PatchDto>> loadPatches() async {
+    final raw = await rootBundle.loadString('assets/data/patches.json');
+    final list = jsonDecode(raw) as List<dynamic>;
+    return list
+        .map((e) => PatchDto.fromJson(e as Map<String, dynamic>))
+        .toList();
+  }
+
   Future<List<CaseContentDto>> loadCaseContents() async {
     final raw = await rootBundle.loadString('assets/data/case_contents.json');
     final list = jsonDecode(raw) as List<dynamic>;
@@ -98,6 +129,50 @@ class LocalDataRepository {
     final list = jsonDecode(raw) as List<dynamic>;
     return list
         .map((e) => MusicKitContentDto.fromJson(e as Map<String, dynamic>))
+        .toList();
+  }
+
+  Future<List<AgentCollectionDto>> loadAgentCollections() async {
+    final raw = await rootBundle.loadString('assets/data/agent_collections.json');
+    final list = jsonDecode(raw) as List<dynamic>;
+    final items = list
+        .map((e) => AgentCollectionDto.fromJson(e as Map<String, dynamic>))
+        .toList();
+    items.sort((a, b) {
+      final ad = a.releaseDate ?? '9999-99-99';
+      final bd = b.releaseDate ?? '9999-99-99';
+      final byDate = ad.compareTo(bd);
+      if (byDate != 0) return byDate;
+      return a.name.compareTo(b.name);
+    });
+    return items;
+  }
+
+  Future<List<AgentCollectionContentDto>> loadAgentCollectionContents() async {
+    final raw = await rootBundle.loadString(
+      'assets/data/agent_collection_contents.json',
+    );
+    final list = jsonDecode(raw) as List<dynamic>;
+    return list
+        .map(
+          (e) => AgentCollectionContentDto.fromJson(e as Map<String, dynamic>),
+        )
+        .toList();
+  }
+
+  Future<List<GraffitiContentDto>> loadGraffitiContents() async {
+    final raw = await rootBundle.loadString('assets/data/graffiti_contents.json');
+    final list = jsonDecode(raw) as List<dynamic>;
+    return list
+        .map((e) => GraffitiContentDto.fromJson(e as Map<String, dynamic>))
+        .toList();
+  }
+
+  Future<List<PatchContentDto>> loadPatchContents() async {
+    final raw = await rootBundle.loadString('assets/data/patch_contents.json');
+    final list = jsonDecode(raw) as List<dynamic>;
+    return list
+        .map((e) => PatchContentDto.fromJson(e as Map<String, dynamic>))
         .toList();
   }
 
@@ -272,6 +347,55 @@ class LocalDataRepository {
     return result;
   }
 
+  Future<List<GraffitiDto>> loadGraffitiForCase(String caseId) async {
+    final graffiti = await loadGraffiti();
+    final contents = await loadGraffitiContents();
+    final content = contents.firstWhere((c) => c.caseId == caseId);
+    final ids = content.graffitiIds.toSet();
+
+    final result = graffiti.where((g) => ids.contains(g.id)).toList();
+    result.sort((a, b) {
+      final rarityCompare = _graffitiRarityOrder(a).compareTo(
+        _graffitiRarityOrder(b),
+      );
+      if (rarityCompare != 0) return rarityCompare;
+      return int.parse(a.id).compareTo(int.parse(b.id));
+    });
+    return result;
+  }
+
+  Future<List<PatchDto>> loadPatchesForCase(String caseId) async {
+    final patches = await loadPatches();
+    final contents = await loadPatchContents();
+    final content = contents.firstWhere((c) => c.caseId == caseId);
+    final ids = content.patchIds.toSet();
+
+    final result = patches.where((p) => ids.contains(p.id)).toList();
+    result.sort((a, b) {
+      final rarityCompare = _patchRarityOrder(a).compareTo(_patchRarityOrder(b));
+      if (rarityCompare != 0) return rarityCompare;
+      return int.parse(a.id).compareTo(int.parse(b.id));
+    });
+    return result;
+  }
+
+  Future<List<AgentDto>> loadAgentsForCollection(String agentCollectionId) async {
+    final agents = await loadAgents();
+    final contents = await loadAgentCollectionContents();
+    final content = contents.firstWhere(
+      (c) => c.agentCollectionId == agentCollectionId,
+    );
+    final ids = content.agentIds.toSet();
+
+    final result = agents.where((a) => ids.contains(a.id)).toList();
+    result.sort((a, b) {
+      final rarityCompare = _agentRarityOrder(a).compareTo(_agentRarityOrder(b));
+      if (rarityCompare != 0) return rarityCompare;
+      return int.parse(a.id).compareTo(int.parse(b.id));
+    });
+    return result;
+  }
+
   Future<List<SkinDto>> loadSkinsForRewardCollection(
     String rewardCollectionId,
   ) async {
@@ -380,6 +504,69 @@ class LocalDataRepository {
     });
 
     return result;
+  }
+
+  Future<List<CaseDto>> loadPatchCollections() async {
+    final cases = await loadCases();
+    final result = cases.where((c) => c.isPatchCollection).toList();
+
+    result.sort((a, b) {
+      final sourceA = a.sourceType ?? '';
+      final sourceB = b.sourceType ?? '';
+      final bySource = sourceA.compareTo(sourceB);
+      if (bySource != 0) return bySource;
+
+      final ad = a.releaseDate ?? '9999-99-99';
+      final bd = b.releaseDate ?? '9999-99-99';
+      final byDate = ad.compareTo(bd);
+      if (byDate != 0) return byDate;
+      return a.name.compareTo(b.name);
+    });
+
+    return result;
+  }
+
+  int _agentRarityOrder(AgentDto agent) {
+    switch (agent.rarity) {
+      case 'DISTINGUISHED':
+        return 0;
+      case 'EXCEPTIONAL':
+        return 1;
+      case 'SUPERIOR':
+        return 2;
+      case 'MASTER':
+        return 3;
+      default:
+        return 99;
+    }
+  }
+
+  int _graffitiRarityOrder(GraffitiDto graffiti) {
+    switch (graffiti.rarity) {
+      case 'BASE_GRADE':
+        return 0;
+      case 'HIGH_GRADE':
+        return 1;
+      case 'REMARKABLE':
+        return 2;
+      case 'EXOTIC':
+        return 3;
+      default:
+        return 99;
+    }
+  }
+
+  int _patchRarityOrder(PatchDto patch) {
+    switch (patch.rarity) {
+      case 'HIGH_GRADE':
+        return 0;
+      case 'REMARKABLE':
+        return 1;
+      case 'EXOTIC':
+        return 2;
+      default:
+        return 99;
+    }
   }
 
   Future<List<RewardCollectionDto>> loadRewardCollectionsForSkin(

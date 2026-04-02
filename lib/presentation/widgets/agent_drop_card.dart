@@ -1,0 +1,100 @@
+import 'package:flutter/material.dart';
+
+import '../../domain/dropped_agent.dart';
+import '../helpers/agent_ui_helper.dart';
+import 'info_row.dart';
+
+class AgentDropCard extends StatelessWidget {
+  final DroppedAgent drop;
+
+  const AgentDropCard({super.key, required this.drop});
+
+  @override
+  Widget build(BuildContext context) {
+    final rarityColor = AgentUiHelper.rarityColor(drop.agent);
+    final sideText = AgentUiHelper.secondaryText(drop.agent);
+
+    return Card(
+      margin: const EdgeInsets.all(12),
+      shape: RoundedRectangleBorder(
+        side: BorderSide(color: rarityColor, width: 2),
+        borderRadius: BorderRadius.circular(14),
+      ),
+      child: Container(
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(14),
+          gradient: LinearGradient(
+            colors: [rarityColor.withValues(alpha: 0.18), Colors.transparent],
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+          ),
+        ),
+        child: Padding(
+          padding: const EdgeInsets.all(16),
+          child: LayoutBuilder(
+            builder: (context, constraints) {
+              final isNarrow = constraints.maxWidth < 700;
+
+              final image = Image.asset(
+                drop.agent.agentImage,
+                height: isNarrow ? 120 : 160,
+                errorBuilder: (_, __, ___) => Icon(
+                  Icons.image_not_supported,
+                  size: isNarrow ? 64 : 80,
+                ),
+              );
+
+              final info = Column(
+                crossAxisAlignment:
+                    isNarrow ? CrossAxisAlignment.center : CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    drop.agent.name,
+                    textAlign: isNarrow ? TextAlign.center : TextAlign.left,
+                    style: TextStyle(
+                      fontSize: isNarrow ? 17 : 19,
+                      fontWeight: FontWeight.bold,
+                      color: rarityColor,
+                    ),
+                  ),
+                  const SizedBox(height: 6),
+                  Text(
+                    sideText,
+                    textAlign: isNarrow ? TextAlign.center : TextAlign.left,
+                    style: const TextStyle(color: Colors.white70, fontSize: 13),
+                  ),
+                  const SizedBox(height: 10),
+                  InfoRow(
+                    title: 'Rarity',
+                    value: AgentUiHelper.rarityLabel(drop.agent),
+                    valueColor: rarityColor,
+                  ),
+                  InfoRow(title: 'Type', value: 'Agent'),
+                  InfoRow(title: 'Side', value: sideText),
+                  if (drop.agent.collection != null &&
+                      drop.agent.collection!.isNotEmpty)
+                    InfoRow(title: 'Collection', value: drop.agent.collection!),
+                ],
+              );
+
+              if (isNarrow) {
+                return Column(
+                  children: [image, const SizedBox(height: 12), info],
+                );
+              }
+
+              return Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Expanded(flex: 4, child: Center(child: image)),
+                  const SizedBox(width: 16),
+                  Expanded(flex: 5, child: info),
+                ],
+              );
+            },
+          ),
+        ),
+      ),
+    );
+  }
+}

@@ -38,6 +38,12 @@ class SourceColorHelper {
         return Colors.cyanAccent;
       case 'MUSIC_KIT_BOX':
         return Colors.greenAccent;
+      case 'GRAFFITI_BOX':
+        return Colors.lightGreenAccent;
+      case 'PATCH_PACK':
+        return Colors.pinkAccent;
+      case 'PATCH_COLLECTION':
+        return Colors.pinkAccent;
       case 'TERMINAL':
         return Colors.deepPurpleAccent;
       case 'XRAY_PACKAGE':
