@@ -10,6 +10,14 @@ Counter-Strike 2 container opening and Trade-Up simulator built with Flutter and
 
 The project focuses on reproducing CS2-style opening behavior and keeping the local item database generated from external data in a reproducible way.
 
+## Disclaimer
+
+This project is an unofficial fan-made simulator and is not affiliated with Valve.
+
+Counter-Strike, Counter-Strike 2, item names, icons, images, and other related game assets are trademarks or property of their respective owners.
+
+Unless explicitly stated otherwise, the repository license applies to the source code of this project and does not automatically grant rights to third-party game content, trademarks, or externally sourced assets or data.
+
 ## Features
 
 - Case opening with roulette animation
@@ -112,6 +120,10 @@ dart run tool/prune_generated_assets.dart
 ## Data Source
 
 The importer consumes public CS data from ByMykel's API and then normalizes it locally for simulator-specific behavior.
+
+## License
+
+The source code in this repository is licensed under `AGPL-3.0`.
 
 ## Status
 
