@@ -2,7 +2,7 @@
   {
     "id": "172",
     "name": "CS:GO Weapon Case",
-    "caseImage": "assets/cases/172.png",
+    "caseImage": "assets/cases/172.webp",
     "releaseDate": "2013-08-14",
     "type": "CASE",
     "tournamentName": null,
@@ -14,7 +14,7 @@
   {
     "id": "403",
     "name": "eSports 2013 Case",
-    "caseImage": "assets/cases/403.png",
+    "caseImage": "assets/cases/403.webp",
     "releaseDate": "2013-08-14",
     "type": "CASE",
     "tournamentName": null,
@@ -26,7 +26,7 @@
   {
     "id": "303",
     "name": "Operation Bravo Case",
-    "caseImage": "assets/cases/303.png",
+    "caseImage": "assets/cases/303.webp",
     "releaseDate": "2013-09-19",
     "type": "CASE",
     "tournamentName": null,
@@ -38,7 +38,7 @@
   {
     "id": "173",
     "name": "CS:GO Weapon Case 2",
-    "caseImage": "assets/cases/173.png",
+    "caseImage": "assets/cases/173.webp",
     "releaseDate": "2013-11-08",
     "type": "CASE",
     "tournamentName": null,
@@ -50,7 +50,7 @@
   {
     "id": "208",
     "name": "DreamHack 2013 Souvenir Package",
-    "caseImage": "assets/cases/208.png",
+    "caseImage": "assets/cases/208.webp",
     "releaseDate": "2013-11-28",
     "type": "SOUVENIR_PACKAGE",
     "tournamentName": "DreamHack Winter 2013",
@@ -62,7 +62,7 @@
   {
     "id": "401",
     "name": "Winter Offensive Weapon Case",
-    "caseImage": "assets/cases/401.png",
+    "caseImage": "assets/cases/401.webp",
     "releaseDate": "2013-12-18",
     "type": "CASE",
     "tournamentName": null,
@@ -74,7 +74,7 @@
   {
     "id": "404",
     "name": "eSports 2013 Winter Case",
-    "caseImage": "assets/cases/404.png",
+    "caseImage": "assets/cases/404.webp",
     "releaseDate": "2013-12-18",
     "type": "CASE",
     "tournamentName": null,
@@ -84,9 +84,9 @@
     "sourceName": null
   },
   {
-    "id": "646",
+    "id": "2170",
     "name": "Sticker Capsule",
-    "caseImage": "assets/cases/646.png",
+    "caseImage": "assets/cases/2170.webp",
     "releaseDate": "2014-01-29",
     "type": "STICKER_CAPSULE",
     "tournamentName": null,
@@ -96,9 +96,9 @@
     "sourceName": null
   },
   {
-    "id": "647",
+    "id": "2171",
     "name": "Sticker Capsule 2",
-    "caseImage": "assets/cases/647.png",
+    "caseImage": "assets/cases/2171.webp",
     "releaseDate": "2014-01-29",
     "type": "STICKER_CAPSULE",
     "tournamentName": null,
@@ -110,7 +110,7 @@
   {
     "id": "174",
     "name": "CS:GO Weapon Case 3",
-    "caseImage": "assets/cases/174.png",
+    "caseImage": "assets/cases/174.webp",
     "releaseDate": "2014-02-12",
     "type": "CASE",
     "tournamentName": null,
@@ -122,7 +122,7 @@
   {
     "id": "307",
     "name": "Operation Phoenix Weapon Case",
-    "caseImage": "assets/cases/307.png",
+    "caseImage": "assets/cases/307.webp",
     "releaseDate": "2014-02-20",
     "type": "CASE",
     "tournamentName": null,
@@ -132,9 +132,9 @@
     "sourceName": null
   },
   {
-    "id": "662",
+    "id": "2186",
     "name": "EMS Katowice 2014 Challengers",
-    "caseImage": "assets/cases/662.png",
+    "caseImage": "assets/cases/2186.webp",
     "releaseDate": "2014-03-13",
     "type": "STICKER_CAPSULE",
     "tournamentName": null,
@@ -144,9 +144,9 @@
     "sourceName": null
   },
   {
-    "id": "663",
+    "id": "2187",
     "name": "EMS Katowice 2014 Legends",
-    "caseImage": "assets/cases/663.png",
+    "caseImage": "assets/cases/2187.webp",
     "releaseDate": "2014-03-13",
     "type": "STICKER_CAPSULE",
     "tournamentName": null,
@@ -158,7 +158,7 @@
   {
     "id": "224",
     "name": "EMS One 2014 Souvenir Package",
-    "caseImage": "assets/cases/224.png",
+    "caseImage": "assets/cases/224.webp",
     "releaseDate": "2014-03-13",
     "type": "SOUVENIR_PACKAGE",
     "tournamentName": "EMS One Katowice 2014",
@@ -170,7 +170,7 @@
   {
     "id": "260",
     "name": "Huntsman Weapon Case",
-    "caseImage": "assets/cases/260.png",
+    "caseImage": "assets/cases/260.webp",
     "releaseDate": "2014-05-01",
     "type": "CASE",
     "tournamentName": null,
@@ -182,7 +182,7 @@
   {
     "id": "452",
     "name": "Huntsman Weapon Case (Legacy)",
-    "caseImage": "assets/cases/452.png",
+    "caseImage": "assets/cases/452.webp",
     "releaseDate": "2014-05-01",
     "type": "CASE",
     "tournamentName": null,
@@ -192,9 +192,9 @@
     "sourceName": null
   },
   {
-    "id": "585",
+    "id": "2109",
     "name": "Community Sticker Capsule 1",
-    "caseImage": "assets/cases/585.png",
+    "caseImage": "assets/cases/2109.webp",
     "releaseDate": "2014-06-11",
     "type": "STICKER_CAPSULE",
     "tournamentName": null,
@@ -206,7 +206,7 @@
   {
     "id": "304",
     "name": "Operation Breakout Weapon Case",
-    "caseImage": "assets/cases/304.png",
+    "caseImage": "assets/cases/304.webp",
     "releaseDate": "2014-07-01",
     "type": "CASE",
     "tournamentName": null,
@@ -218,7 +218,7 @@
   {
     "id": "405",
     "name": "eSports 2014 Summer Case",
-    "caseImage": "assets/cases/405.png",
+    "caseImage": "assets/cases/405.webp",
     "releaseDate": "2014-07-10",
     "type": "CASE",
     "tournamentName": null,
@@ -230,7 +230,7 @@
   {
     "id": "225",
     "name": "ESL One Cologne 2014 Cache Souvenir Package",
-    "caseImage": "assets/cases/225.png",
+    "caseImage": "assets/cases/225.webp",
     "releaseDate": "2014-08-14",
     "type": "SOUVENIR_PACKAGE",
     "tournamentName": "ESL One Cologne 2014",
@@ -240,9 +240,9 @@
     "sourceName": null
   },
   {
-    "id": "665",
+    "id": "2189",
     "name": "ESL One Cologne 2014 Challengers",
-    "caseImage": "assets/cases/665.png",
+    "caseImage": "assets/cases/2189.webp",
     "releaseDate": "2014-08-14",
     "type": "STICKER_CAPSULE",
     "tournamentName": null,
@@ -254,7 +254,7 @@
   {
     "id": "226",
     "name": "ESL One Cologne 2014 Cobblestone Souvenir Package",
-    "caseImage": "assets/cases/226.png",
+    "caseImage": "assets/cases/226.webp",
     "releaseDate": "2014-08-14",
     "type": "SOUVENIR_PACKAGE",
     "tournamentName": "ESL One Cologne 2014",
@@ -266,7 +266,7 @@
   {
     "id": "227",
     "name": "ESL One Cologne 2014 Dust II Souvenir Package",
-    "caseImage": "assets/cases/227.png",
+    "caseImage": "assets/cases/227.webp",
     "releaseDate": "2014-08-14",
     "type": "SOUVENIR_PACKAGE",
     "tournamentName": "ESL One Cologne 2014",
@@ -278,7 +278,7 @@
   {
     "id": "228",
     "name": "ESL One Cologne 2014 Inferno Souvenir Package",
-    "caseImage": "assets/cases/228.png",
+    "caseImage": "assets/cases/228.webp",
     "releaseDate": "2014-08-14",
     "type": "SOUVENIR_PACKAGE",
     "tournamentName": "ESL One Cologne 2014",
@@ -288,9 +288,9 @@
     "sourceName": null
   },
   {
-    "id": "664",
+    "id": "2188",
     "name": "ESL One Cologne 2014 Legends",
-    "caseImage": "assets/cases/664.png",
+    "caseImage": "assets/cases/2188.webp",
     "releaseDate": "2014-08-14",
     "type": "STICKER_CAPSULE",
     "tournamentName": null,
@@ -302,7 +302,7 @@
   {
     "id": "229",
     "name": "ESL One Cologne 2014 Mirage Souvenir Package",
-    "caseImage": "assets/cases/229.png",
+    "caseImage": "assets/cases/229.webp",
     "releaseDate": "2014-08-14",
     "type": "SOUVENIR_PACKAGE",
     "tournamentName": "ESL One Cologne 2014",
@@ -314,7 +314,7 @@
   {
     "id": "230",
     "name": "ESL One Cologne 2014 Nuke Souvenir Package",
-    "caseImage": "assets/cases/230.png",
+    "caseImage": "assets/cases/230.webp",
     "releaseDate": "2014-08-14",
     "type": "SOUVENIR_PACKAGE",
     "tournamentName": "ESL One Cologne 2014",
@@ -326,7 +326,7 @@
   {
     "id": "231",
     "name": "ESL One Cologne 2014 Overpass Souvenir Package",
-    "caseImage": "assets/cases/231.png",
+    "caseImage": "assets/cases/231.webp",
     "releaseDate": "2014-08-14",
     "type": "SOUVENIR_PACKAGE",
     "tournamentName": "ESL One Cologne 2014",
@@ -338,7 +338,7 @@
   {
     "id": "309",
     "name": "Operation Vanguard Weapon Case",
-    "caseImage": "assets/cases/309.png",
+    "caseImage": "assets/cases/309.webp",
     "releaseDate": "2014-11-11",
     "type": "CASE",
     "tournamentName": null,
@@ -350,7 +350,7 @@
   {
     "id": "209",
     "name": "DreamHack 2014 Cache Souvenir Package",
-    "caseImage": "assets/cases/209.png",
+    "caseImage": "assets/cases/209.webp",
     "releaseDate": "2014-11-27",
     "type": "SOUVENIR_PACKAGE",
     "tournamentName": "DreamHack Winter 2014",
@@ -362,7 +362,7 @@
   {
     "id": "210",
     "name": "DreamHack 2014 Cobblestone Souvenir Package",
-    "caseImage": "assets/cases/210.png",
+    "caseImage": "assets/cases/210.webp",
     "releaseDate": "2014-11-27",
     "type": "SOUVENIR_PACKAGE",
     "tournamentName": "DreamHack Winter 2014",
@@ -374,7 +374,7 @@
   {
     "id": "211",
     "name": "DreamHack 2014 Dust II Souvenir Package",
-    "caseImage": "assets/cases/211.png",
+    "caseImage": "assets/cases/211.webp",
     "releaseDate": "2014-11-27",
     "type": "SOUVENIR_PACKAGE",
     "tournamentName": "DreamHack Winter 2014",
@@ -386,7 +386,7 @@
   {
     "id": "212",
     "name": "DreamHack 2014 Inferno Souvenir Package",
-    "caseImage": "assets/cases/212.png",
+    "caseImage": "assets/cases/212.webp",
     "releaseDate": "2014-11-27",
     "type": "SOUVENIR_PACKAGE",
     "tournamentName": "DreamHack Winter 2014",
@@ -396,9 +396,9 @@
     "sourceName": null
   },
   {
-    "id": "666",
+    "id": "2190",
     "name": "DreamHack 2014 Legends (Holo/Foil)",
-    "caseImage": "assets/cases/666.png",
+    "caseImage": "assets/cases/2190.webp",
     "releaseDate": "2014-11-27",
     "type": "STICKER_CAPSULE",
     "tournamentName": null,
@@ -410,7 +410,7 @@
   {
     "id": "213",
     "name": "DreamHack 2014 Mirage Souvenir Package",
-    "caseImage": "assets/cases/213.png",
+    "caseImage": "assets/cases/213.webp",
     "releaseDate": "2014-11-27",
     "type": "SOUVENIR_PACKAGE",
     "tournamentName": "DreamHack Winter 2014",
@@ -422,7 +422,7 @@
   {
     "id": "214",
     "name": "DreamHack 2014 Nuke Souvenir Package",
-    "caseImage": "assets/cases/214.png",
+    "caseImage": "assets/cases/214.webp",
     "releaseDate": "2014-11-27",
     "type": "SOUVENIR_PACKAGE",
     "tournamentName": "DreamHack Winter 2014",
@@ -434,7 +434,7 @@
   {
     "id": "215",
     "name": "DreamHack 2014 Overpass Souvenir Package",
-    "caseImage": "assets/cases/215.png",
+    "caseImage": "assets/cases/215.webp",
     "releaseDate": "2014-11-27",
     "type": "SOUVENIR_PACKAGE",
     "tournamentName": "DreamHack Winter 2014",
@@ -446,7 +446,7 @@
   {
     "id": "178",
     "name": "Chroma Case",
-    "caseImage": "assets/cases/178.png",
+    "caseImage": "assets/cases/178.webp",
     "releaseDate": "2015-01-08",
     "type": "CASE",
     "tournamentName": null,
@@ -458,7 +458,7 @@
   {
     "id": "239",
     "name": "ESL One Katowice 2015 Cache Souvenir Package",
-    "caseImage": "assets/cases/239.png",
+    "caseImage": "assets/cases/239.webp",
     "releaseDate": "2015-03-12",
     "type": "SOUVENIR_PACKAGE",
     "tournamentName": "ESL One Katowice 2015",
@@ -468,9 +468,9 @@
     "sourceName": null
   },
   {
-    "id": "667",
+    "id": "2191",
     "name": "ESL One Katowice 2015 Challengers (Holo/Foil)",
-    "caseImage": "assets/cases/667.png",
+    "caseImage": "assets/cases/2191.webp",
     "releaseDate": "2015-03-12",
     "type": "STICKER_CAPSULE",
     "tournamentName": null,
@@ -482,7 +482,7 @@
   {
     "id": "240",
     "name": "ESL One Katowice 2015 Cobblestone Souvenir Package",
-    "caseImage": "assets/cases/240.png",
+    "caseImage": "assets/cases/240.webp",
     "releaseDate": "2015-03-12",
     "type": "SOUVENIR_PACKAGE",
     "tournamentName": "ESL One Katowice 2015",
@@ -494,7 +494,7 @@
   {
     "id": "241",
     "name": "ESL One Katowice 2015 Dust II Souvenir Package",
-    "caseImage": "assets/cases/241.png",
+    "caseImage": "assets/cases/241.webp",
     "releaseDate": "2015-03-12",
     "type": "SOUVENIR_PACKAGE",
     "tournamentName": "ESL One Katowice 2015",
@@ -506,7 +506,7 @@
   {
     "id": "242",
     "name": "ESL One Katowice 2015 Inferno Souvenir Package",
-    "caseImage": "assets/cases/242.png",
+    "caseImage": "assets/cases/242.webp",
     "releaseDate": "2015-03-12",
     "type": "SOUVENIR_PACKAGE",
     "tournamentName": "ESL One Katowice 2015",
@@ -516,9 +516,9 @@
     "sourceName": null
   },
   {
-    "id": "668",
+    "id": "2192",
     "name": "ESL One Katowice 2015 Legends (Holo/Foil)",
-    "caseImage": "assets/cases/668.png",
+    "caseImage": "assets/cases/2192.webp",
     "releaseDate": "2015-03-12",
     "type": "STICKER_CAPSULE",
     "tournamentName": null,
@@ -530,7 +530,7 @@
   {
     "id": "243",
     "name": "ESL One Katowice 2015 Mirage Souvenir Package",
-    "caseImage": "assets/cases/243.png",
+    "caseImage": "assets/cases/243.webp",
     "releaseDate": "2015-03-12",
     "type": "SOUVENIR_PACKAGE",
     "tournamentName": "ESL One Katowice 2015",
@@ -542,7 +542,7 @@
   {
     "id": "244",
     "name": "ESL One Katowice 2015 Nuke Souvenir Package",
-    "caseImage": "assets/cases/244.png",
+    "caseImage": "assets/cases/244.webp",
     "releaseDate": "2015-03-12",
     "type": "SOUVENIR_PACKAGE",
     "tournamentName": "ESL One Katowice 2015",
@@ -554,7 +554,7 @@
   {
     "id": "245",
     "name": "ESL One Katowice 2015 Overpass Souvenir Package",
-    "caseImage": "assets/cases/245.png",
+    "caseImage": "assets/cases/245.webp",
     "releaseDate": "2015-03-12",
     "type": "SOUVENIR_PACKAGE",
     "tournamentName": "ESL One Katowice 2015",
@@ -566,7 +566,7 @@
   {
     "id": "176",
     "name": "Chroma 2 Case",
-    "caseImage": "assets/cases/176.png",
+    "caseImage": "assets/cases/176.webp",
     "releaseDate": "2015-04-15",
     "type": "CASE",
     "tournamentName": null,
@@ -576,9 +576,9 @@
     "sourceName": null
   },
   {
-    "id": "594",
+    "id": "2118",
     "name": "Enfu Sticker Capsule",
-    "caseImage": "assets/cases/594.png",
+    "caseImage": "assets/cases/2118.webp",
     "releaseDate": "2015-04-22",
     "type": "STICKER_CAPSULE",
     "tournamentName": null,
@@ -590,7 +590,7 @@
   {
     "id": "248",
     "name": "Falchion Case",
-    "caseImage": "assets/cases/248.png",
+    "caseImage": "assets/cases/248.webp",
     "releaseDate": "2015-05-26",
     "type": "CASE",
     "tournamentName": null,
@@ -600,9 +600,9 @@
     "sourceName": null
   },
   {
-    "id": "477",
+    "id": "2001",
     "name": "Autograph Capsule | Cloud9 G2A | Cologne 2015",
-    "caseImage": "assets/cases/477.png",
+    "caseImage": "assets/cases/2001.webp",
     "releaseDate": "2015-08-14",
     "type": "STICKER_CAPSULE",
     "tournamentName": null,
@@ -612,9 +612,9 @@
     "sourceName": null
   },
   {
-    "id": "481",
+    "id": "2005",
     "name": "Autograph Capsule | Counter Logic Gaming | Cologne 2015",
-    "caseImage": "assets/cases/481.png",
+    "caseImage": "assets/cases/2005.webp",
     "releaseDate": "2015-08-14",
     "type": "STICKER_CAPSULE",
     "tournamentName": null,
@@ -624,9 +624,9 @@
     "sourceName": null
   },
   {
-    "id": "489",
+    "id": "2013",
     "name": "Autograph Capsule | Flipsid3 Tactics | Cologne 2015",
-    "caseImage": "assets/cases/489.png",
+    "caseImage": "assets/cases/2013.webp",
     "releaseDate": "2015-08-14",
     "type": "STICKER_CAPSULE",
     "tournamentName": null,
@@ -636,9 +636,9 @@
     "sourceName": null
   },
   {
-    "id": "494",
+    "id": "2018",
     "name": "Autograph Capsule | Fnatic | Cologne 2015",
-    "caseImage": "assets/cases/494.png",
+    "caseImage": "assets/cases/2018.webp",
     "releaseDate": "2015-08-14",
     "type": "STICKER_CAPSULE",
     "tournamentName": null,
@@ -648,9 +648,9 @@
     "sourceName": null
   },
   {
-    "id": "505",
+    "id": "2029",
     "name": "Autograph Capsule | Group A (Foil) | Cologne 2015",
-    "caseImage": "assets/cases/505.png",
+    "caseImage": "assets/cases/2029.webp",
     "releaseDate": "2015-08-14",
     "type": "STICKER_CAPSULE",
     "tournamentName": null,
@@ -660,9 +660,9 @@
     "sourceName": null
   },
   {
-    "id": "506",
+    "id": "2030",
     "name": "Autograph Capsule | Group B (Foil) | Cologne 2015",
-    "caseImage": "assets/cases/506.png",
+    "caseImage": "assets/cases/2030.webp",
     "releaseDate": "2015-08-14",
     "type": "STICKER_CAPSULE",
     "tournamentName": null,
@@ -672,9 +672,9 @@
     "sourceName": null
   },
   {
-    "id": "507",
+    "id": "2031",
     "name": "Autograph Capsule | Group C (Foil) | Cologne 2015",
-    "caseImage": "assets/cases/507.png",
+    "caseImage": "assets/cases/2031.webp",
     "releaseDate": "2015-08-14",
     "type": "STICKER_CAPSULE",
     "tournamentName": null,
@@ -684,9 +684,9 @@
     "sourceName": null
   },
   {
-    "id": "508",
+    "id": "2032",
     "name": "Autograph Capsule | Group D (Foil) | Cologne 2015",
-    "caseImage": "assets/cases/508.png",
+    "caseImage": "assets/cases/2032.webp",
     "releaseDate": "2015-08-14",
     "type": "STICKER_CAPSULE",
     "tournamentName": null,
@@ -696,9 +696,9 @@
     "sourceName": null
   },
   {
-    "id": "515",
+    "id": "2039",
     "name": "Autograph Capsule | Luminosity Gaming | Cologne 2015",
-    "caseImage": "assets/cases/515.png",
+    "caseImage": "assets/cases/2039.webp",
     "releaseDate": "2015-08-14",
     "type": "STICKER_CAPSULE",
     "tournamentName": null,
@@ -708,9 +708,9 @@
     "sourceName": null
   },
   {
-    "id": "519",
+    "id": "2043",
     "name": "Autograph Capsule | Natus Vincere | Cologne 2015",
-    "caseImage": "assets/cases/519.png",
+    "caseImage": "assets/cases/2043.webp",
     "releaseDate": "2015-08-14",
     "type": "STICKER_CAPSULE",
     "tournamentName": null,
@@ -720,9 +720,9 @@
     "sourceName": null
   },
   {
-    "id": "523",
+    "id": "2047",
     "name": "Autograph Capsule | Ninjas in Pyjamas | Cologne 2015",
-    "caseImage": "assets/cases/523.png",
+    "caseImage": "assets/cases/2047.webp",
     "releaseDate": "2015-08-14",
     "type": "STICKER_CAPSULE",
     "tournamentName": null,
@@ -732,9 +732,9 @@
     "sourceName": null
   },
   {
-    "id": "529",
+    "id": "2053",
     "name": "Autograph Capsule | Renegades | Cologne 2015",
-    "caseImage": "assets/cases/529.png",
+    "caseImage": "assets/cases/2053.webp",
     "releaseDate": "2015-08-14",
     "type": "STICKER_CAPSULE",
     "tournamentName": null,
@@ -744,9 +744,9 @@
     "sourceName": null
   },
   {
-    "id": "537",
+    "id": "2061",
     "name": "Autograph Capsule | Team EnVyUs | Cologne 2015",
-    "caseImage": "assets/cases/537.png",
+    "caseImage": "assets/cases/2061.webp",
     "releaseDate": "2015-08-14",
     "type": "STICKER_CAPSULE",
     "tournamentName": null,
@@ -756,9 +756,9 @@
     "sourceName": null
   },
   {
-    "id": "540",
+    "id": "2064",
     "name": "Autograph Capsule | Team Immunity | Cologne 2015",
-    "caseImage": "assets/cases/540.png",
+    "caseImage": "assets/cases/2064.webp",
     "releaseDate": "2015-08-14",
     "type": "STICKER_CAPSULE",
     "tournamentName": null,
@@ -768,9 +768,9 @@
     "sourceName": null
   },
   {
-    "id": "541",
+    "id": "2065",
     "name": "Autograph Capsule | Team Kinguin | Cologne 2015",
-    "caseImage": "assets/cases/541.png",
+    "caseImage": "assets/cases/2065.webp",
     "releaseDate": "2015-08-14",
     "type": "STICKER_CAPSULE",
     "tournamentName": null,
@@ -780,9 +780,9 @@
     "sourceName": null
   },
   {
-    "id": "547",
+    "id": "2071",
     "name": "Autograph Capsule | Team SoloMid | Cologne 2015",
-    "caseImage": "assets/cases/547.png",
+    "caseImage": "assets/cases/2071.webp",
     "releaseDate": "2015-08-14",
     "type": "STICKER_CAPSULE",
     "tournamentName": null,
@@ -792,9 +792,9 @@
     "sourceName": null
   },
   {
-    "id": "548",
+    "id": "2072",
     "name": "Autograph Capsule | Team eBettle | Cologne 2015",
-    "caseImage": "assets/cases/548.png",
+    "caseImage": "assets/cases/2072.webp",
     "releaseDate": "2015-08-14",
     "type": "STICKER_CAPSULE",
     "tournamentName": null,
@@ -804,9 +804,9 @@
     "sourceName": null
   },
   {
-    "id": "550",
+    "id": "2074",
     "name": "Autograph Capsule | Titan | Cologne 2015",
-    "caseImage": "assets/cases/550.png",
+    "caseImage": "assets/cases/2074.webp",
     "releaseDate": "2015-08-14",
     "type": "STICKER_CAPSULE",
     "tournamentName": null,
@@ -816,9 +816,9 @@
     "sourceName": null
   },
   {
-    "id": "554",
+    "id": "2078",
     "name": "Autograph Capsule | Virtus.Pro | Cologne 2015",
-    "caseImage": "assets/cases/554.png",
+    "caseImage": "assets/cases/2078.webp",
     "releaseDate": "2015-08-14",
     "type": "STICKER_CAPSULE",
     "tournamentName": null,
@@ -828,9 +828,9 @@
     "sourceName": null
   },
   {
-    "id": "559",
+    "id": "2083",
     "name": "Autograph Capsule | mousesports | Cologne 2015",
-    "caseImage": "assets/cases/559.png",
+    "caseImage": "assets/cases/2083.webp",
     "releaseDate": "2015-08-14",
     "type": "STICKER_CAPSULE",
     "tournamentName": null,
@@ -842,7 +842,7 @@
   {
     "id": "232",
     "name": "ESL One Cologne 2015 Cache Souvenir Package",
-    "caseImage": "assets/cases/232.png",
+    "caseImage": "assets/cases/232.webp",
     "releaseDate": "2015-08-14",
     "type": "SOUVENIR_PACKAGE",
     "tournamentName": "ESL One Cologne 2015",
@@ -852,9 +852,9 @@
     "sourceName": null
   },
   {
-    "id": "670",
+    "id": "2194",
     "name": "ESL One Cologne 2015 Challengers (Foil)",
-    "caseImage": "assets/cases/670.png",
+    "caseImage": "assets/cases/2194.webp",
     "releaseDate": "2015-08-14",
     "type": "STICKER_CAPSULE",
     "tournamentName": null,
@@ -866,7 +866,7 @@
   {
     "id": "233",
     "name": "ESL One Cologne 2015 Cobblestone Souvenir Package",
-    "caseImage": "assets/cases/233.png",
+    "caseImage": "assets/cases/233.webp",
     "releaseDate": "2015-08-14",
     "type": "SOUVENIR_PACKAGE",
     "tournamentName": "ESL One Cologne 2015",
@@ -878,7 +878,7 @@
   {
     "id": "234",
     "name": "ESL One Cologne 2015 Dust II Souvenir Package",
-    "caseImage": "assets/cases/234.png",
+    "caseImage": "assets/cases/234.webp",
     "releaseDate": "2015-08-14",
     "type": "SOUVENIR_PACKAGE",
     "tournamentName": "ESL One Cologne 2015",
@@ -890,7 +890,7 @@
   {
     "id": "235",
     "name": "ESL One Cologne 2015 Inferno Souvenir Package",
-    "caseImage": "assets/cases/235.png",
+    "caseImage": "assets/cases/235.webp",
     "releaseDate": "2015-08-14",
     "type": "SOUVENIR_PACKAGE",
     "tournamentName": "ESL One Cologne 2015",
@@ -900,9 +900,9 @@
     "sourceName": null
   },
   {
-    "id": "669",
+    "id": "2193",
     "name": "ESL One Cologne 2015 Legends (Foil)",
-    "caseImage": "assets/cases/669.png",
+    "caseImage": "assets/cases/2193.webp",
     "releaseDate": "2015-08-14",
     "type": "STICKER_CAPSULE",
     "tournamentName": null,
@@ -914,7 +914,7 @@
   {
     "id": "236",
     "name": "ESL One Cologne 2015 Mirage Souvenir Package",
-    "caseImage": "assets/cases/236.png",
+    "caseImage": "assets/cases/236.webp",
     "releaseDate": "2015-08-14",
     "type": "SOUVENIR_PACKAGE",
     "tournamentName": "ESL One Cologne 2015",
@@ -926,7 +926,7 @@
   {
     "id": "237",
     "name": "ESL One Cologne 2015 Overpass Souvenir Package",
-    "caseImage": "assets/cases/237.png",
+    "caseImage": "assets/cases/237.webp",
     "releaseDate": "2015-08-14",
     "type": "SOUVENIR_PACKAGE",
     "tournamentName": "ESL One Cologne 2015",
@@ -938,7 +938,7 @@
   {
     "id": "238",
     "name": "ESL One Cologne 2015 Train Souvenir Package",
-    "caseImage": "assets/cases/238.png",
+    "caseImage": "assets/cases/238.webp",
     "releaseDate": "2015-08-14",
     "type": "SOUVENIR_PACKAGE",
     "tournamentName": "ESL One Cologne 2015",
@@ -950,7 +950,7 @@
   {
     "id": "350",
     "name": "Shadow Case",
-    "caseImage": "assets/cases/350.png",
+    "caseImage": "assets/cases/350.webp",
     "releaseDate": "2015-09-17",
     "type": "CASE",
     "tournamentName": null,
@@ -960,9 +960,9 @@
     "sourceName": null
   },
   {
-    "id": "474",
+    "id": "1998",
     "name": "Autograph Capsule | Challengers (Foil) | Cluj-Napoca 2015",
-    "caseImage": "assets/cases/474.png",
+    "caseImage": "assets/cases/1998.webp",
     "releaseDate": "2015-10-28",
     "type": "STICKER_CAPSULE",
     "tournamentName": null,
@@ -972,9 +972,9 @@
     "sourceName": null
   },
   {
-    "id": "478",
+    "id": "2002",
     "name": "Autograph Capsule | Cloud9 | Cluj-Napoca 2015",
-    "caseImage": "assets/cases/478.png",
+    "caseImage": "assets/cases/2002.webp",
     "releaseDate": "2015-10-28",
     "type": "STICKER_CAPSULE",
     "tournamentName": null,
@@ -984,9 +984,9 @@
     "sourceName": null
   },
   {
-    "id": "480",
+    "id": "2004",
     "name": "Autograph Capsule | Counter Logic Gaming | Cluj-Napoca 2015",
-    "caseImage": "assets/cases/480.png",
+    "caseImage": "assets/cases/2004.webp",
     "releaseDate": "2015-10-28",
     "type": "STICKER_CAPSULE",
     "tournamentName": null,
@@ -996,9 +996,9 @@
     "sourceName": null
   },
   {
-    "id": "488",
+    "id": "2012",
     "name": "Autograph Capsule | Flipsid3 Tactics | Cluj-Napoca 2015",
-    "caseImage": "assets/cases/488.png",
+    "caseImage": "assets/cases/2012.webp",
     "releaseDate": "2015-10-28",
     "type": "STICKER_CAPSULE",
     "tournamentName": null,
@@ -1008,9 +1008,9 @@
     "sourceName": null
   },
   {
-    "id": "493",
+    "id": "2017",
     "name": "Autograph Capsule | Fnatic | Cluj-Napoca 2015",
-    "caseImage": "assets/cases/493.png",
+    "caseImage": "assets/cases/2017.webp",
     "releaseDate": "2015-10-28",
     "type": "STICKER_CAPSULE",
     "tournamentName": null,
@@ -1020,9 +1020,9 @@
     "sourceName": null
   },
   {
-    "id": "498",
+    "id": "2022",
     "name": "Autograph Capsule | G2 Esports | Cluj-Napoca 2015",
-    "caseImage": "assets/cases/498.png",
+    "caseImage": "assets/cases/2022.webp",
     "releaseDate": "2015-10-28",
     "type": "STICKER_CAPSULE",
     "tournamentName": null,
@@ -1032,9 +1032,9 @@
     "sourceName": null
   },
   {
-    "id": "511",
+    "id": "2035",
     "name": "Autograph Capsule | Legends (Foil) | Cluj-Napoca 2015",
-    "caseImage": "assets/cases/511.png",
+    "caseImage": "assets/cases/2035.webp",
     "releaseDate": "2015-10-28",
     "type": "STICKER_CAPSULE",
     "tournamentName": null,
@@ -1044,9 +1044,9 @@
     "sourceName": null
   },
   {
-    "id": "514",
+    "id": "2038",
     "name": "Autograph Capsule | Luminosity Gaming | Cluj-Napoca 2015",
-    "caseImage": "assets/cases/514.png",
+    "caseImage": "assets/cases/2038.webp",
     "releaseDate": "2015-10-28",
     "type": "STICKER_CAPSULE",
     "tournamentName": null,
@@ -1056,9 +1056,9 @@
     "sourceName": null
   },
   {
-    "id": "518",
+    "id": "2042",
     "name": "Autograph Capsule | Natus Vincere | Cluj-Napoca 2015",
-    "caseImage": "assets/cases/518.png",
+    "caseImage": "assets/cases/2042.webp",
     "releaseDate": "2015-10-28",
     "type": "STICKER_CAPSULE",
     "tournamentName": null,
@@ -1068,9 +1068,9 @@
     "sourceName": null
   },
   {
-    "id": "522",
+    "id": "2046",
     "name": "Autograph Capsule | Ninjas in Pyjamas | Cluj-Napoca 2015",
-    "caseImage": "assets/cases/522.png",
+    "caseImage": "assets/cases/2046.webp",
     "releaseDate": "2015-10-28",
     "type": "STICKER_CAPSULE",
     "tournamentName": null,
@@ -1080,9 +1080,9 @@
     "sourceName": null
   },
   {
-    "id": "533",
+    "id": "2057",
     "name": "Autograph Capsule | Team Dignitas | Cluj-Napoca 2015",
-    "caseImage": "assets/cases/533.png",
+    "caseImage": "assets/cases/2057.webp",
     "releaseDate": "2015-10-28",
     "type": "STICKER_CAPSULE",
     "tournamentName": null,
@@ -1092,9 +1092,9 @@
     "sourceName": null
   },
   {
-    "id": "536",
+    "id": "2060",
     "name": "Autograph Capsule | Team EnVyUs | Cluj-Napoca 2015",
-    "caseImage": "assets/cases/536.png",
+    "caseImage": "assets/cases/2060.webp",
     "releaseDate": "2015-10-28",
     "type": "STICKER_CAPSULE",
     "tournamentName": null,
@@ -1104,9 +1104,9 @@
     "sourceName": null
   },
   {
-    "id": "543",
+    "id": "2067",
     "name": "Autograph Capsule | Team Liquid | Cluj-Napoca 2015",
-    "caseImage": "assets/cases/543.png",
+    "caseImage": "assets/cases/2067.webp",
     "releaseDate": "2015-10-28",
     "type": "STICKER_CAPSULE",
     "tournamentName": null,
@@ -1116,9 +1116,9 @@
     "sourceName": null
   },
   {
-    "id": "546",
+    "id": "2070",
     "name": "Autograph Capsule | Team SoloMid | Cluj-Napoca 2015",
-    "caseImage": "assets/cases/546.png",
+    "caseImage": "assets/cases/2070.webp",
     "releaseDate": "2015-10-28",
     "type": "STICKER_CAPSULE",
     "tournamentName": null,
@@ -1128,9 +1128,9 @@
     "sourceName": null
   },
   {
-    "id": "549",
+    "id": "2073",
     "name": "Autograph Capsule | Titan | Cluj-Napoca 2015",
-    "caseImage": "assets/cases/549.png",
+    "caseImage": "assets/cases/2073.webp",
     "releaseDate": "2015-10-28",
     "type": "STICKER_CAPSULE",
     "tournamentName": null,
@@ -1140,9 +1140,9 @@
     "sourceName": null
   },
   {
-    "id": "551",
+    "id": "2075",
     "name": "Autograph Capsule | Vexed Gaming | Cluj-Napoca 2015",
-    "caseImage": "assets/cases/551.png",
+    "caseImage": "assets/cases/2075.webp",
     "releaseDate": "2015-10-28",
     "type": "STICKER_CAPSULE",
     "tournamentName": null,
@@ -1152,9 +1152,9 @@
     "sourceName": null
   },
   {
-    "id": "553",
+    "id": "2077",
     "name": "Autograph Capsule | Virtus.Pro | Cluj-Napoca 2015",
-    "caseImage": "assets/cases/553.png",
+    "caseImage": "assets/cases/2077.webp",
     "releaseDate": "2015-10-28",
     "type": "STICKER_CAPSULE",
     "tournamentName": null,
@@ -1164,9 +1164,9 @@
     "sourceName": null
   },
   {
-    "id": "558",
+    "id": "2082",
     "name": "Autograph Capsule | mousesports | Cluj-Napoca 2015",
-    "caseImage": "assets/cases/558.png",
+    "caseImage": "assets/cases/2082.webp",
     "releaseDate": "2015-10-28",
     "type": "STICKER_CAPSULE",
     "tournamentName": null,
@@ -1178,7 +1178,7 @@
   {
     "id": "216",
     "name": "DreamHack Cluj-Napoca 2015 Cache Souvenir Package",
-    "caseImage": "assets/cases/216.png",
+    "caseImage": "assets/cases/216.webp",
     "releaseDate": "2015-10-28",
     "type": "SOUVENIR_PACKAGE",
     "tournamentName": "DreamHack Cluj-Napoca 2015",
@@ -1188,9 +1188,9 @@
     "sourceName": null
   },
   {
-    "id": "672",
+    "id": "2196",
     "name": "DreamHack Cluj-Napoca 2015 Challengers (Foil)",
-    "caseImage": "assets/cases/672.png",
+    "caseImage": "assets/cases/2196.webp",
     "releaseDate": "2015-10-28",
     "type": "STICKER_CAPSULE",
     "tournamentName": null,
@@ -1202,7 +1202,7 @@
   {
     "id": "217",
     "name": "DreamHack Cluj-Napoca 2015 Cobblestone Souvenir Package",
-    "caseImage": "assets/cases/217.png",
+    "caseImage": "assets/cases/217.webp",
     "releaseDate": "2015-10-28",
     "type": "SOUVENIR_PACKAGE",
     "tournamentName": "DreamHack Cluj-Napoca 2015",
@@ -1214,7 +1214,7 @@
   {
     "id": "218",
     "name": "DreamHack Cluj-Napoca 2015 Dust II Souvenir Package",
-    "caseImage": "assets/cases/218.png",
+    "caseImage": "assets/cases/218.webp",
     "releaseDate": "2015-10-28",
     "type": "SOUVENIR_PACKAGE",
     "tournamentName": "DreamHack Cluj-Napoca 2015",
@@ -1226,7 +1226,7 @@
   {
     "id": "219",
     "name": "DreamHack Cluj-Napoca 2015 Inferno Souvenir Package",
-    "caseImage": "assets/cases/219.png",
+    "caseImage": "assets/cases/219.webp",
     "releaseDate": "2015-10-28",
     "type": "SOUVENIR_PACKAGE",
     "tournamentName": "DreamHack Cluj-Napoca 2015",
@@ -1236,9 +1236,9 @@
     "sourceName": null
   },
   {
-    "id": "671",
+    "id": "2195",
     "name": "DreamHack Cluj-Napoca 2015 Legends (Foil)",
-    "caseImage": "assets/cases/671.png",
+    "caseImage": "assets/cases/2195.webp",
     "releaseDate": "2015-10-28",
     "type": "STICKER_CAPSULE",
     "tournamentName": null,
@@ -1250,7 +1250,7 @@
   {
     "id": "220",
     "name": "DreamHack Cluj-Napoca 2015 Mirage Souvenir Package",
-    "caseImage": "assets/cases/220.png",
+    "caseImage": "assets/cases/220.webp",
     "releaseDate": "2015-10-28",
     "type": "SOUVENIR_PACKAGE",
     "tournamentName": "DreamHack Cluj-Napoca 2015",
@@ -1262,7 +1262,7 @@
   {
     "id": "221",
     "name": "DreamHack Cluj-Napoca 2015 Overpass Souvenir Package",
-    "caseImage": "assets/cases/221.png",
+    "caseImage": "assets/cases/221.webp",
     "releaseDate": "2015-10-28",
     "type": "SOUVENIR_PACKAGE",
     "tournamentName": "DreamHack Cluj-Napoca 2015",
@@ -1274,7 +1274,7 @@
   {
     "id": "222",
     "name": "DreamHack Cluj-Napoca 2015 Train Souvenir Package",
-    "caseImage": "assets/cases/222.png",
+    "caseImage": "assets/cases/222.webp",
     "releaseDate": "2015-10-28",
     "type": "SOUVENIR_PACKAGE",
     "tournamentName": "DreamHack Cluj-Napoca 2015",
@@ -1284,9 +1284,9 @@
     "sourceName": null
   },
   {
-    "id": "621",
+    "id": "2145",
     "name": "Pinups Capsule",
-    "caseImage": "assets/cases/621.png",
+    "caseImage": "assets/cases/2145.webp",
     "releaseDate": "2015-12-01",
     "type": "STICKER_CAPSULE",
     "tournamentName": null,
@@ -1296,9 +1296,9 @@
     "sourceName": null
   },
   {
-    "id": "638",
+    "id": "2162",
     "name": "Slid3 Capsule",
-    "caseImage": "assets/cases/638.png",
+    "caseImage": "assets/cases/2162.webp",
     "releaseDate": "2015-12-01",
     "type": "STICKER_CAPSULE",
     "tournamentName": null,
@@ -1308,9 +1308,9 @@
     "sourceName": null
   },
   {
-    "id": "655",
+    "id": "2179",
     "name": "Team Roles Capsule",
-    "caseImage": "assets/cases/655.png",
+    "caseImage": "assets/cases/2179.webp",
     "releaseDate": "2015-12-01",
     "type": "STICKER_CAPSULE",
     "tournamentName": null,
@@ -1322,7 +1322,7 @@
   {
     "id": "333",
     "name": "Revolver Case",
-    "caseImage": "assets/cases/333.png",
+    "caseImage": "assets/cases/333.webp",
     "releaseDate": "2015-12-08",
     "type": "CASE",
     "tournamentName": null,
@@ -1334,7 +1334,7 @@
   {
     "id": "310",
     "name": "Operation Wildfire Case",
-    "caseImage": "assets/cases/310.png",
+    "caseImage": "assets/cases/310.webp",
     "releaseDate": "2016-02-17",
     "type": "CASE",
     "tournamentName": null,
@@ -1344,9 +1344,9 @@
     "sourceName": null
   },
   {
-    "id": "472",
+    "id": "1996",
     "name": "Autograph Capsule | Astralis | MLG Columbus 2016",
-    "caseImage": "assets/cases/472.png",
+    "caseImage": "assets/cases/1996.webp",
     "releaseDate": "2016-03-29",
     "type": "STICKER_CAPSULE",
     "tournamentName": null,
@@ -1356,9 +1356,9 @@
     "sourceName": null
   },
   {
-    "id": "476",
+    "id": "2000",
     "name": "Autograph Capsule | Challengers (Foil) | MLG Columbus 2016",
-    "caseImage": "assets/cases/476.png",
+    "caseImage": "assets/cases/2000.webp",
     "releaseDate": "2016-03-29",
     "type": "STICKER_CAPSULE",
     "tournamentName": null,
@@ -1368,9 +1368,9 @@
     "sourceName": null
   },
   {
-    "id": "479",
+    "id": "2003",
     "name": "Autograph Capsule | Cloud9 | MLG Columbus 2016",
-    "caseImage": "assets/cases/479.png",
+    "caseImage": "assets/cases/2003.webp",
     "releaseDate": "2016-03-29",
     "type": "STICKER_CAPSULE",
     "tournamentName": null,
@@ -1380,9 +1380,9 @@
     "sourceName": null
   },
   {
-    "id": "483",
+    "id": "2007",
     "name": "Autograph Capsule | Counter Logic Gaming | MLG Columbus 2016",
-    "caseImage": "assets/cases/483.png",
+    "caseImage": "assets/cases/2007.webp",
     "releaseDate": "2016-03-29",
     "type": "STICKER_CAPSULE",
     "tournamentName": null,
@@ -1392,9 +1392,9 @@
     "sourceName": null
   },
   {
-    "id": "486",
+    "id": "2010",
     "name": "Autograph Capsule | FaZe Clan | MLG Columbus 2016",
-    "caseImage": "assets/cases/486.png",
+    "caseImage": "assets/cases/2010.webp",
     "releaseDate": "2016-03-29",
     "type": "STICKER_CAPSULE",
     "tournamentName": null,
@@ -1404,9 +1404,9 @@
     "sourceName": null
   },
   {
-    "id": "491",
+    "id": "2015",
     "name": "Autograph Capsule | Flipsid3 Tactics | MLG Columbus 2016",
-    "caseImage": "assets/cases/491.png",
+    "caseImage": "assets/cases/2015.webp",
     "releaseDate": "2016-03-29",
     "type": "STICKER_CAPSULE",
     "tournamentName": null,
@@ -1416,9 +1416,9 @@
     "sourceName": null
   },
   {
-    "id": "496",
+    "id": "2020",
     "name": "Autograph Capsule | Fnatic | MLG Columbus 2016",
-    "caseImage": "assets/cases/496.png",
+    "caseImage": "assets/cases/2020.webp",
     "releaseDate": "2016-03-29",
     "type": "STICKER_CAPSULE",
     "tournamentName": null,
@@ -1428,9 +1428,9 @@
     "sourceName": null
   },
   {
-    "id": "500",
+    "id": "2024",
     "name": "Autograph Capsule | G2 Esports | MLG Columbus 2016",
-    "caseImage": "assets/cases/500.png",
+    "caseImage": "assets/cases/2024.webp",
     "releaseDate": "2016-03-29",
     "type": "STICKER_CAPSULE",
     "tournamentName": null,
@@ -1440,9 +1440,9 @@
     "sourceName": null
   },
   {
-    "id": "504",
+    "id": "2028",
     "name": "Autograph Capsule | Gambit Gaming | MLG Columbus 2016",
-    "caseImage": "assets/cases/504.png",
+    "caseImage": "assets/cases/2028.webp",
     "releaseDate": "2016-03-29",
     "type": "STICKER_CAPSULE",
     "tournamentName": null,
@@ -1452,9 +1452,9 @@
     "sourceName": null
   },
   {
-    "id": "513",
+    "id": "2037",
     "name": "Autograph Capsule | Legends (Foil) | MLG Columbus 2016",
-    "caseImage": "assets/cases/513.png",
+    "caseImage": "assets/cases/2037.webp",
     "releaseDate": "2016-03-29",
     "type": "STICKER_CAPSULE",
     "tournamentName": null,
@@ -1464,9 +1464,9 @@
     "sourceName": null
   },
   {
-    "id": "516",
+    "id": "2040",
     "name": "Autograph Capsule | Luminosity Gaming | MLG Columbus 2016",
-    "caseImage": "assets/cases/516.png",
+    "caseImage": "assets/cases/2040.webp",
     "releaseDate": "2016-03-29",
     "type": "STICKER_CAPSULE",
     "tournamentName": null,
@@ -1476,9 +1476,9 @@
     "sourceName": null
   },
   {
-    "id": "521",
+    "id": "2045",
     "name": "Autograph Capsule | Natus Vincere | MLG Columbus 2016",
-    "caseImage": "assets/cases/521.png",
+    "caseImage": "assets/cases/2045.webp",
     "releaseDate": "2016-03-29",
     "type": "STICKER_CAPSULE",
     "tournamentName": null,
@@ -1488,9 +1488,9 @@
     "sourceName": null
   },
   {
-    "id": "525",
+    "id": "2049",
     "name": "Autograph Capsule | Ninjas in Pyjamas | MLG Columbus 2016",
-    "caseImage": "assets/cases/525.png",
+    "caseImage": "assets/cases/2049.webp",
     "releaseDate": "2016-03-29",
     "type": "STICKER_CAPSULE",
     "tournamentName": null,
@@ -1500,9 +1500,9 @@
     "sourceName": null
   },
   {
-    "id": "532",
+    "id": "2056",
     "name": "Autograph Capsule | Splyce | MLG Columbus 2016",
-    "caseImage": "assets/cases/532.png",
+    "caseImage": "assets/cases/2056.webp",
     "releaseDate": "2016-03-29",
     "type": "STICKER_CAPSULE",
     "tournamentName": null,
@@ -1512,9 +1512,9 @@
     "sourceName": null
   },
   {
-    "id": "539",
+    "id": "2063",
     "name": "Autograph Capsule | Team EnVyUs | MLG Columbus 2016",
-    "caseImage": "assets/cases/539.png",
+    "caseImage": "assets/cases/2063.webp",
     "releaseDate": "2016-03-29",
     "type": "STICKER_CAPSULE",
     "tournamentName": null,
@@ -1524,9 +1524,9 @@
     "sourceName": null
   },
   {
-    "id": "545",
+    "id": "2069",
     "name": "Autograph Capsule | Team Liquid | MLG Columbus 2016",
-    "caseImage": "assets/cases/545.png",
+    "caseImage": "assets/cases/2069.webp",
     "releaseDate": "2016-03-29",
     "type": "STICKER_CAPSULE",
     "tournamentName": null,
@@ -1536,9 +1536,9 @@
     "sourceName": null
   },
   {
-    "id": "556",
+    "id": "2080",
     "name": "Autograph Capsule | Virtus.Pro | MLG Columbus 2016",
-    "caseImage": "assets/cases/556.png",
+    "caseImage": "assets/cases/2080.webp",
     "releaseDate": "2016-03-29",
     "type": "STICKER_CAPSULE",
     "tournamentName": null,
@@ -1548,9 +1548,9 @@
     "sourceName": null
   },
   {
-    "id": "561",
+    "id": "2085",
     "name": "Autograph Capsule | mousesports | MLG Columbus 2016",
-    "caseImage": "assets/cases/561.png",
+    "caseImage": "assets/cases/2085.webp",
     "releaseDate": "2016-03-29",
     "type": "STICKER_CAPSULE",
     "tournamentName": null,
@@ -1562,7 +1562,7 @@
   {
     "id": "292",
     "name": "MLG Columbus 2016 Cache Souvenir Package",
-    "caseImage": "assets/cases/292.png",
+    "caseImage": "assets/cases/292.webp",
     "releaseDate": "2016-03-29",
     "type": "SOUVENIR_PACKAGE",
     "tournamentName": "MLG Columbus 2016",
@@ -1572,9 +1572,9 @@
     "sourceName": null
   },
   {
-    "id": "674",
+    "id": "2198",
     "name": "MLG Columbus 2016 Challengers (Holo/Foil)",
-    "caseImage": "assets/cases/674.png",
+    "caseImage": "assets/cases/2198.webp",
     "releaseDate": "2016-03-29",
     "type": "STICKER_CAPSULE",
     "tournamentName": null,
@@ -1586,7 +1586,7 @@
   {
     "id": "293",
     "name": "MLG Columbus 2016 Cobblestone Souvenir Package",
-    "caseImage": "assets/cases/293.png",
+    "caseImage": "assets/cases/293.webp",
     "releaseDate": "2016-03-29",
     "type": "SOUVENIR_PACKAGE",
     "tournamentName": "MLG Columbus 2016",
@@ -1598,7 +1598,7 @@
   {
     "id": "294",
     "name": "MLG Columbus 2016 Dust II Souvenir Package",
-    "caseImage": "assets/cases/294.png",
+    "caseImage": "assets/cases/294.webp",
     "releaseDate": "2016-03-29",
     "type": "SOUVENIR_PACKAGE",
     "tournamentName": "MLG Columbus 2016",
@@ -1610,7 +1610,7 @@
   {
     "id": "295",
     "name": "MLG Columbus 2016 Inferno Souvenir Package",
-    "caseImage": "assets/cases/295.png",
+    "caseImage": "assets/cases/295.webp",
     "releaseDate": "2016-03-29",
     "type": "SOUVENIR_PACKAGE",
     "tournamentName": "MLG Columbus 2016",
@@ -1620,9 +1620,9 @@
     "sourceName": null
   },
   {
-    "id": "673",
+    "id": "2197",
     "name": "MLG Columbus 2016 Legends (Holo/Foil)",
-    "caseImage": "assets/cases/673.png",
+    "caseImage": "assets/cases/2197.webp",
     "releaseDate": "2016-03-29",
     "type": "STICKER_CAPSULE",
     "tournamentName": null,
@@ -1634,7 +1634,7 @@
   {
     "id": "296",
     "name": "MLG Columbus 2016 Mirage Souvenir Package",
-    "caseImage": "assets/cases/296.png",
+    "caseImage": "assets/cases/296.webp",
     "releaseDate": "2016-03-29",
     "type": "SOUVENIR_PACKAGE",
     "tournamentName": "MLG Columbus 2016",
@@ -1646,7 +1646,7 @@
   {
     "id": "297",
     "name": "MLG Columbus 2016 Nuke Souvenir Package",
-    "caseImage": "assets/cases/297.png",
+    "caseImage": "assets/cases/297.webp",
     "releaseDate": "2016-03-29",
     "type": "SOUVENIR_PACKAGE",
     "tournamentName": "MLG Columbus 2016",
@@ -1658,7 +1658,7 @@
   {
     "id": "298",
     "name": "MLG Columbus 2016 Overpass Souvenir Package",
-    "caseImage": "assets/cases/298.png",
+    "caseImage": "assets/cases/298.webp",
     "releaseDate": "2016-03-29",
     "type": "SOUVENIR_PACKAGE",
     "tournamentName": "MLG Columbus 2016",
@@ -1670,7 +1670,7 @@
   {
     "id": "299",
     "name": "MLG Columbus 2016 Train Souvenir Package",
-    "caseImage": "assets/cases/299.png",
+    "caseImage": "assets/cases/299.webp",
     "releaseDate": "2016-03-29",
     "type": "SOUVENIR_PACKAGE",
     "tournamentName": "MLG Columbus 2016",
@@ -1682,7 +1682,7 @@
   {
     "id": "177",
     "name": "Chroma 3 Case",
-    "caseImage": "assets/cases/177.png",
+    "caseImage": "assets/cases/177.webp",
     "releaseDate": "2016-04-27",
     "type": "CASE",
     "tournamentName": null,
@@ -1692,9 +1692,9 @@
     "sourceName": null
   },
   {
-    "id": "581",
+    "id": "2105",
     "name": "Collectible Pins Capsule Series 1",
-    "caseImage": "assets/cases/581.png",
+    "caseImage": "assets/cases/2105.webp",
     "releaseDate": "2016-06-01",
     "type": "PIN_CAPSULE",
     "tournamentName": null,
@@ -1706,7 +1706,7 @@
   {
     "id": "254",
     "name": "Gamma Case",
-    "caseImage": "assets/cases/254.png",
+    "caseImage": "assets/cases/254.webp",
     "releaseDate": "2016-06-15",
     "type": "CASE",
     "tournamentName": null,
@@ -1716,9 +1716,9 @@
     "sourceName": null
   },
   {
-    "id": "471",
+    "id": "1995",
     "name": "Autograph Capsule | Astralis | Cologne 2016",
-    "caseImage": "assets/cases/471.png",
+    "caseImage": "assets/cases/1995.webp",
     "releaseDate": "2016-07-08",
     "type": "STICKER_CAPSULE",
     "tournamentName": null,
@@ -1728,9 +1728,9 @@
     "sourceName": null
   },
   {
-    "id": "475",
+    "id": "1999",
     "name": "Autograph Capsule | Challengers (Foil) | Cologne 2016",
-    "caseImage": "assets/cases/475.png",
+    "caseImage": "assets/cases/1999.webp",
     "releaseDate": "2016-07-08",
     "type": "STICKER_CAPSULE",
     "tournamentName": null,
@@ -1740,9 +1740,9 @@
     "sourceName": null
   },
   {
-    "id": "482",
+    "id": "2006",
     "name": "Autograph Capsule | Counter Logic Gaming | Cologne 2016",
-    "caseImage": "assets/cases/482.png",
+    "caseImage": "assets/cases/2006.webp",
     "releaseDate": "2016-07-08",
     "type": "STICKER_CAPSULE",
     "tournamentName": null,
@@ -1752,9 +1752,9 @@
     "sourceName": null
   },
   {
-    "id": "485",
+    "id": "2009",
     "name": "Autograph Capsule | FaZe Clan | Cologne 2016",
-    "caseImage": "assets/cases/485.png",
+    "caseImage": "assets/cases/2009.webp",
     "releaseDate": "2016-07-08",
     "type": "STICKER_CAPSULE",
     "tournamentName": null,
@@ -1764,9 +1764,9 @@
     "sourceName": null
   },
   {
-    "id": "490",
+    "id": "2014",
     "name": "Autograph Capsule | Flipsid3 Tactics | Cologne 2016",
-    "caseImage": "assets/cases/490.png",
+    "caseImage": "assets/cases/2014.webp",
     "releaseDate": "2016-07-08",
     "type": "STICKER_CAPSULE",
     "tournamentName": null,
@@ -1776,9 +1776,9 @@
     "sourceName": null
   },
   {
-    "id": "495",
+    "id": "2019",
     "name": "Autograph Capsule | Fnatic | Cologne 2016",
-    "caseImage": "assets/cases/495.png",
+    "caseImage": "assets/cases/2019.webp",
     "releaseDate": "2016-07-08",
     "type": "STICKER_CAPSULE",
     "tournamentName": null,
@@ -1788,9 +1788,9 @@
     "sourceName": null
   },
   {
-    "id": "499",
+    "id": "2023",
     "name": "Autograph Capsule | G2 Esports | Cologne 2016",
-    "caseImage": "assets/cases/499.png",
+    "caseImage": "assets/cases/2023.webp",
     "releaseDate": "2016-07-08",
     "type": "STICKER_CAPSULE",
     "tournamentName": null,
@@ -1800,9 +1800,9 @@
     "sourceName": null
   },
   {
-    "id": "503",
+    "id": "2027",
     "name": "Autograph Capsule | Gambit Gaming | Cologne 2016",
-    "caseImage": "assets/cases/503.png",
+    "caseImage": "assets/cases/2027.webp",
     "releaseDate": "2016-07-08",
     "type": "STICKER_CAPSULE",
     "tournamentName": null,
@@ -1812,9 +1812,9 @@
     "sourceName": null
   },
   {
-    "id": "512",
+    "id": "2036",
     "name": "Autograph Capsule | Legends (Foil) | Cologne 2016",
-    "caseImage": "assets/cases/512.png",
+    "caseImage": "assets/cases/2036.webp",
     "releaseDate": "2016-07-08",
     "type": "STICKER_CAPSULE",
     "tournamentName": null,
@@ -1824,9 +1824,9 @@
     "sourceName": null
   },
   {
-    "id": "520",
+    "id": "2044",
     "name": "Autograph Capsule | Natus Vincere | Cologne 2016",
-    "caseImage": "assets/cases/520.png",
+    "caseImage": "assets/cases/2044.webp",
     "releaseDate": "2016-07-08",
     "type": "STICKER_CAPSULE",
     "tournamentName": null,
@@ -1836,9 +1836,9 @@
     "sourceName": null
   },
   {
-    "id": "524",
+    "id": "2048",
     "name": "Autograph Capsule | Ninjas in Pyjamas | Cologne 2016",
-    "caseImage": "assets/cases/524.png",
+    "caseImage": "assets/cases/2048.webp",
     "releaseDate": "2016-07-08",
     "type": "STICKER_CAPSULE",
     "tournamentName": null,
@@ -1848,9 +1848,9 @@
     "sourceName": null
   },
   {
-    "id": "528",
+    "id": "2052",
     "name": "Autograph Capsule | OpTic Gaming | Cologne 2016",
-    "caseImage": "assets/cases/528.png",
+    "caseImage": "assets/cases/2052.webp",
     "releaseDate": "2016-07-08",
     "type": "STICKER_CAPSULE",
     "tournamentName": null,
@@ -1860,9 +1860,9 @@
     "sourceName": null
   },
   {
-    "id": "531",
+    "id": "2055",
     "name": "Autograph Capsule | SK Gaming | Cologne 2016",
-    "caseImage": "assets/cases/531.png",
+    "caseImage": "assets/cases/2055.webp",
     "releaseDate": "2016-07-08",
     "type": "STICKER_CAPSULE",
     "tournamentName": null,
@@ -1872,9 +1872,9 @@
     "sourceName": null
   },
   {
-    "id": "534",
+    "id": "2058",
     "name": "Autograph Capsule | Team Dignitas | Cologne 2016",
-    "caseImage": "assets/cases/534.png",
+    "caseImage": "assets/cases/2058.webp",
     "releaseDate": "2016-07-08",
     "type": "STICKER_CAPSULE",
     "tournamentName": null,
@@ -1884,9 +1884,9 @@
     "sourceName": null
   },
   {
-    "id": "538",
+    "id": "2062",
     "name": "Autograph Capsule | Team EnVyUs | Cologne 2016",
-    "caseImage": "assets/cases/538.png",
+    "caseImage": "assets/cases/2062.webp",
     "releaseDate": "2016-07-08",
     "type": "STICKER_CAPSULE",
     "tournamentName": null,
@@ -1896,9 +1896,9 @@
     "sourceName": null
   },
   {
-    "id": "544",
+    "id": "2068",
     "name": "Autograph Capsule | Team Liquid | Cologne 2016",
-    "caseImage": "assets/cases/544.png",
+    "caseImage": "assets/cases/2068.webp",
     "releaseDate": "2016-07-08",
     "type": "STICKER_CAPSULE",
     "tournamentName": null,
@@ -1908,9 +1908,9 @@
     "sourceName": null
   },
   {
-    "id": "555",
+    "id": "2079",
     "name": "Autograph Capsule | Virtus.Pro | Cologne 2016",
-    "caseImage": "assets/cases/555.png",
+    "caseImage": "assets/cases/2079.webp",
     "releaseDate": "2016-07-08",
     "type": "STICKER_CAPSULE",
     "tournamentName": null,
@@ -1920,9 +1920,9 @@
     "sourceName": null
   },
   {
-    "id": "560",
+    "id": "2084",
     "name": "Autograph Capsule | mousesports | Cologne 2016",
-    "caseImage": "assets/cases/560.png",
+    "caseImage": "assets/cases/2084.webp",
     "releaseDate": "2016-07-08",
     "type": "STICKER_CAPSULE",
     "tournamentName": null,
@@ -1934,7 +1934,7 @@
   {
     "id": "183",
     "name": "Cologne 2016 Cache Souvenir Package",
-    "caseImage": "assets/cases/183.png",
+    "caseImage": "assets/cases/183.webp",
     "releaseDate": "2016-07-08",
     "type": "SOUVENIR_PACKAGE",
     "tournamentName": "ESL One Cologne 2016",
@@ -1944,9 +1944,9 @@
     "sourceName": null
   },
   {
-    "id": "676",
+    "id": "2200",
     "name": "Cologne 2016 Challengers (Holo/Foil)",
-    "caseImage": "assets/cases/676.png",
+    "caseImage": "assets/cases/2200.webp",
     "releaseDate": "2016-07-08",
     "type": "STICKER_CAPSULE",
     "tournamentName": null,
@@ -1958,7 +1958,7 @@
   {
     "id": "184",
     "name": "Cologne 2016 Cobblestone Souvenir Package",
-    "caseImage": "assets/cases/184.png",
+    "caseImage": "assets/cases/184.webp",
     "releaseDate": "2016-07-08",
     "type": "SOUVENIR_PACKAGE",
     "tournamentName": "ESL One Cologne 2016",
@@ -1970,7 +1970,7 @@
   {
     "id": "185",
     "name": "Cologne 2016 Dust II Souvenir Package",
-    "caseImage": "assets/cases/185.png",
+    "caseImage": "assets/cases/185.webp",
     "releaseDate": "2016-07-08",
     "type": "SOUVENIR_PACKAGE",
     "tournamentName": "ESL One Cologne 2016",
@@ -1980,9 +1980,9 @@
     "sourceName": null
   },
   {
-    "id": "675",
+    "id": "2199",
     "name": "Cologne 2016 Legends (Holo/Foil)",
-    "caseImage": "assets/cases/675.png",
+    "caseImage": "assets/cases/2199.webp",
     "releaseDate": "2016-07-08",
     "type": "STICKER_CAPSULE",
     "tournamentName": null,
@@ -1994,7 +1994,7 @@
   {
     "id": "186",
     "name": "Cologne 2016 Mirage Souvenir Package",
-    "caseImage": "assets/cases/186.png",
+    "caseImage": "assets/cases/186.webp",
     "releaseDate": "2016-07-08",
     "type": "SOUVENIR_PACKAGE",
     "tournamentName": "ESL One Cologne 2016",
@@ -2006,7 +2006,7 @@
   {
     "id": "187",
     "name": "Cologne 2016 Nuke Souvenir Package",
-    "caseImage": "assets/cases/187.png",
+    "caseImage": "assets/cases/187.webp",
     "releaseDate": "2016-07-08",
     "type": "SOUVENIR_PACKAGE",
     "tournamentName": "ESL One Cologne 2016",
@@ -2018,7 +2018,7 @@
   {
     "id": "188",
     "name": "Cologne 2016 Overpass Souvenir Package",
-    "caseImage": "assets/cases/188.png",
+    "caseImage": "assets/cases/188.webp",
     "releaseDate": "2016-07-08",
     "type": "SOUVENIR_PACKAGE",
     "tournamentName": "ESL One Cologne 2016",
@@ -2030,7 +2030,7 @@
   {
     "id": "189",
     "name": "Cologne 2016 Train Souvenir Package",
-    "caseImage": "assets/cases/189.png",
+    "caseImage": "assets/cases/189.webp",
     "releaseDate": "2016-07-08",
     "type": "SOUVENIR_PACKAGE",
     "tournamentName": "ESL One Cologne 2016",
@@ -2040,9 +2040,9 @@
     "sourceName": null
   },
   {
-    "id": "566",
+    "id": "2090",
     "name": "Bestiary Capsule",
-    "caseImage": "assets/cases/566.png",
+    "caseImage": "assets/cases/2090.webp",
     "releaseDate": "2016-08-16",
     "type": "STICKER_CAPSULE",
     "tournamentName": null,
@@ -2052,9 +2052,9 @@
     "sourceName": null
   },
   {
-    "id": "644",
+    "id": "2168",
     "name": "StatTrak™ Radicals Box",
-    "caseImage": "assets/cases/644.png",
+    "caseImage": "assets/cases/2168.webp",
     "releaseDate": "2016-08-16",
     "type": "MUSIC_KIT_BOX",
     "tournamentName": null,
@@ -2064,9 +2064,9 @@
     "sourceName": null
   },
   {
-    "id": "653",
+    "id": "2177",
     "name": "Sugarface Capsule",
-    "caseImage": "assets/cases/653.png",
+    "caseImage": "assets/cases/2177.webp",
     "releaseDate": "2016-08-16",
     "type": "STICKER_CAPSULE",
     "tournamentName": null,
@@ -2078,7 +2078,7 @@
   {
     "id": "253",
     "name": "Gamma 2 Case",
-    "caseImage": "assets/cases/253.png",
+    "caseImage": "assets/cases/253.webp",
     "releaseDate": "2016-08-18",
     "type": "CASE",
     "tournamentName": null,
@@ -2088,9 +2088,9 @@
     "sourceName": null
   },
   {
-    "id": "582",
+    "id": "2106",
     "name": "Collectible Pins Capsule Series 2",
-    "caseImage": "assets/cases/582.png",
+    "caseImage": "assets/cases/2106.webp",
     "releaseDate": "2016-09-28",
     "type": "PIN_CAPSULE",
     "tournamentName": null,
@@ -2102,7 +2102,7 @@
   {
     "id": "255",
     "name": "Glove Case",
-    "caseImage": "assets/cases/255.png",
+    "caseImage": "assets/cases/255.webp",
     "releaseDate": "2016-11-28",
     "type": "CASE",
     "tournamentName": null,
@@ -2114,7 +2114,7 @@
   {
     "id": "19",
     "name": "Atlanta 2017 Cache Souvenir Package",
-    "caseImage": "assets/cases/19.png",
+    "caseImage": "assets/cases/19.webp",
     "releaseDate": "2017-01-22",
     "type": "SOUVENIR_PACKAGE",
     "tournamentName": "ELEAGUE Atlanta 2017",
@@ -2124,9 +2124,9 @@
     "sourceName": null
   },
   {
-    "id": "678",
+    "id": "2202",
     "name": "Atlanta 2017 Challengers (Holo/Foil)",
-    "caseImage": "assets/cases/678.png",
+    "caseImage": "assets/cases/2202.webp",
     "releaseDate": "2017-01-22",
     "type": "STICKER_CAPSULE",
     "tournamentName": null,
@@ -2138,7 +2138,7 @@
   {
     "id": "20",
     "name": "Atlanta 2017 Cobblestone Souvenir Package",
-    "caseImage": "assets/cases/20.png",
+    "caseImage": "assets/cases/20.webp",
     "releaseDate": "2017-01-22",
     "type": "SOUVENIR_PACKAGE",
     "tournamentName": "ELEAGUE Atlanta 2017",
@@ -2150,7 +2150,7 @@
   {
     "id": "21",
     "name": "Atlanta 2017 Dust II Souvenir Package",
-    "caseImage": "assets/cases/21.png",
+    "caseImage": "assets/cases/21.webp",
     "releaseDate": "2017-01-22",
     "type": "SOUVENIR_PACKAGE",
     "tournamentName": "ELEAGUE Atlanta 2017",
@@ -2160,9 +2160,9 @@
     "sourceName": null
   },
   {
-    "id": "677",
+    "id": "2201",
     "name": "Atlanta 2017 Legends (Holo/Foil)",
-    "caseImage": "assets/cases/677.png",
+    "caseImage": "assets/cases/2201.webp",
     "releaseDate": "2017-01-22",
     "type": "STICKER_CAPSULE",
     "tournamentName": null,
@@ -2174,7 +2174,7 @@
   {
     "id": "22",
     "name": "Atlanta 2017 Mirage Souvenir Package",
-    "caseImage": "assets/cases/22.png",
+    "caseImage": "assets/cases/22.webp",
     "releaseDate": "2017-01-22",
     "type": "SOUVENIR_PACKAGE",
     "tournamentName": "ELEAGUE Atlanta 2017",
@@ -2186,7 +2186,7 @@
   {
     "id": "23",
     "name": "Atlanta 2017 Nuke Souvenir Package",
-    "caseImage": "assets/cases/23.png",
+    "caseImage": "assets/cases/23.webp",
     "releaseDate": "2017-01-22",
     "type": "SOUVENIR_PACKAGE",
     "tournamentName": "ELEAGUE Atlanta 2017",
@@ -2198,7 +2198,7 @@
   {
     "id": "24",
     "name": "Atlanta 2017 Overpass Souvenir Package",
-    "caseImage": "assets/cases/24.png",
+    "caseImage": "assets/cases/24.webp",
     "releaseDate": "2017-01-22",
     "type": "SOUVENIR_PACKAGE",
     "tournamentName": "ELEAGUE Atlanta 2017",
@@ -2210,7 +2210,7 @@
   {
     "id": "25",
     "name": "Atlanta 2017 Train Souvenir Package",
-    "caseImage": "assets/cases/25.png",
+    "caseImage": "assets/cases/25.webp",
     "releaseDate": "2017-01-22",
     "type": "SOUVENIR_PACKAGE",
     "tournamentName": "ELEAGUE Atlanta 2017",
@@ -2220,9 +2220,9 @@
     "sourceName": null
   },
   {
-    "id": "470",
+    "id": "1994",
     "name": "Autograph Capsule | Astralis | Atlanta 2017",
-    "caseImage": "assets/cases/470.png",
+    "caseImage": "assets/cases/1994.webp",
     "releaseDate": "2017-01-22",
     "type": "STICKER_CAPSULE",
     "tournamentName": null,
@@ -2232,9 +2232,9 @@
     "sourceName": null
   },
   {
-    "id": "473",
+    "id": "1997",
     "name": "Autograph Capsule | Challengers (Foil) | Atlanta 2017",
-    "caseImage": "assets/cases/473.png",
+    "caseImage": "assets/cases/1997.webp",
     "releaseDate": "2017-01-22",
     "type": "STICKER_CAPSULE",
     "tournamentName": null,
@@ -2244,9 +2244,9 @@
     "sourceName": null
   },
   {
-    "id": "484",
+    "id": "2008",
     "name": "Autograph Capsule | FaZe Clan | Atlanta 2017",
-    "caseImage": "assets/cases/484.png",
+    "caseImage": "assets/cases/2008.webp",
     "releaseDate": "2017-01-22",
     "type": "STICKER_CAPSULE",
     "tournamentName": null,
@@ -2256,9 +2256,9 @@
     "sourceName": null
   },
   {
-    "id": "487",
+    "id": "2011",
     "name": "Autograph Capsule | Flipsid3 Tactics | Atlanta 2017",
-    "caseImage": "assets/cases/487.png",
+    "caseImage": "assets/cases/2011.webp",
     "releaseDate": "2017-01-22",
     "type": "STICKER_CAPSULE",
     "tournamentName": null,
@@ -2268,9 +2268,9 @@
     "sourceName": null
   },
   {
-    "id": "492",
+    "id": "2016",
     "name": "Autograph Capsule | Fnatic | Atlanta 2017",
-    "caseImage": "assets/cases/492.png",
+    "caseImage": "assets/cases/2016.webp",
     "releaseDate": "2017-01-22",
     "type": "STICKER_CAPSULE",
     "tournamentName": null,
@@ -2280,9 +2280,9 @@
     "sourceName": null
   },
   {
-    "id": "497",
+    "id": "2021",
     "name": "Autograph Capsule | G2 Esports | Atlanta 2017",
-    "caseImage": "assets/cases/497.png",
+    "caseImage": "assets/cases/2021.webp",
     "releaseDate": "2017-01-22",
     "type": "STICKER_CAPSULE",
     "tournamentName": null,
@@ -2292,9 +2292,9 @@
     "sourceName": null
   },
   {
-    "id": "501",
+    "id": "2025",
     "name": "Autograph Capsule | GODSENT | Atlanta 2017",
-    "caseImage": "assets/cases/501.png",
+    "caseImage": "assets/cases/2025.webp",
     "releaseDate": "2017-01-22",
     "type": "STICKER_CAPSULE",
     "tournamentName": null,
@@ -2304,9 +2304,9 @@
     "sourceName": null
   },
   {
-    "id": "502",
+    "id": "2026",
     "name": "Autograph Capsule | Gambit Gaming | Atlanta 2017",
-    "caseImage": "assets/cases/502.png",
+    "caseImage": "assets/cases/2026.webp",
     "releaseDate": "2017-01-22",
     "type": "STICKER_CAPSULE",
     "tournamentName": null,
@@ -2316,9 +2316,9 @@
     "sourceName": null
   },
   {
-    "id": "509",
+    "id": "2033",
     "name": "Autograph Capsule | HellRaisers | Atlanta 2017",
-    "caseImage": "assets/cases/509.png",
+    "caseImage": "assets/cases/2033.webp",
     "releaseDate": "2017-01-22",
     "type": "STICKER_CAPSULE",
     "tournamentName": null,
@@ -2328,9 +2328,9 @@
     "sourceName": null
   },
   {
-    "id": "510",
+    "id": "2034",
     "name": "Autograph Capsule | Legends (Foil) | Atlanta 2017",
-    "caseImage": "assets/cases/510.png",
+    "caseImage": "assets/cases/2034.webp",
     "releaseDate": "2017-01-22",
     "type": "STICKER_CAPSULE",
     "tournamentName": null,
@@ -2340,9 +2340,9 @@
     "sourceName": null
   },
   {
-    "id": "517",
+    "id": "2041",
     "name": "Autograph Capsule | Natus Vincere | Atlanta 2017",
-    "caseImage": "assets/cases/517.png",
+    "caseImage": "assets/cases/2041.webp",
     "releaseDate": "2017-01-22",
     "type": "STICKER_CAPSULE",
     "tournamentName": null,
@@ -2352,9 +2352,9 @@
     "sourceName": null
   },
   {
-    "id": "526",
+    "id": "2050",
     "name": "Autograph Capsule | North | Atlanta 2017",
-    "caseImage": "assets/cases/526.png",
+    "caseImage": "assets/cases/2050.webp",
     "releaseDate": "2017-01-22",
     "type": "STICKER_CAPSULE",
     "tournamentName": null,
@@ -2364,9 +2364,9 @@
     "sourceName": null
   },
   {
-    "id": "527",
+    "id": "2051",
     "name": "Autograph Capsule | OpTic Gaming | Atlanta 2017",
-    "caseImage": "assets/cases/527.png",
+    "caseImage": "assets/cases/2051.webp",
     "releaseDate": "2017-01-22",
     "type": "STICKER_CAPSULE",
     "tournamentName": null,
@@ -2376,9 +2376,9 @@
     "sourceName": null
   },
   {
-    "id": "530",
+    "id": "2054",
     "name": "Autograph Capsule | SK Gaming | Atlanta 2017",
-    "caseImage": "assets/cases/530.png",
+    "caseImage": "assets/cases/2054.webp",
     "releaseDate": "2017-01-22",
     "type": "STICKER_CAPSULE",
     "tournamentName": null,
@@ -2388,9 +2388,9 @@
     "sourceName": null
   },
   {
-    "id": "535",
+    "id": "2059",
     "name": "Autograph Capsule | Team EnVyUs | Atlanta 2017",
-    "caseImage": "assets/cases/535.png",
+    "caseImage": "assets/cases/2059.webp",
     "releaseDate": "2017-01-22",
     "type": "STICKER_CAPSULE",
     "tournamentName": null,
@@ -2400,9 +2400,9 @@
     "sourceName": null
   },
   {
-    "id": "542",
+    "id": "2066",
     "name": "Autograph Capsule | Team Liquid | Atlanta 2017",
-    "caseImage": "assets/cases/542.png",
+    "caseImage": "assets/cases/2066.webp",
     "releaseDate": "2017-01-22",
     "type": "STICKER_CAPSULE",
     "tournamentName": null,
@@ -2412,9 +2412,9 @@
     "sourceName": null
   },
   {
-    "id": "552",
+    "id": "2076",
     "name": "Autograph Capsule | Virtus.Pro | Atlanta 2017",
-    "caseImage": "assets/cases/552.png",
+    "caseImage": "assets/cases/2076.webp",
     "releaseDate": "2017-01-22",
     "type": "STICKER_CAPSULE",
     "tournamentName": null,
@@ -2424,9 +2424,9 @@
     "sourceName": null
   },
   {
-    "id": "557",
+    "id": "2081",
     "name": "Autograph Capsule | mousesports | Atlanta 2017",
-    "caseImage": "assets/cases/557.png",
+    "caseImage": "assets/cases/2081.webp",
     "releaseDate": "2017-01-22",
     "type": "STICKER_CAPSULE",
     "tournamentName": null,
@@ -2438,7 +2438,7 @@
   {
     "id": "370",
     "name": "Spectrum Case",
-    "caseImage": "assets/cases/370.png",
+    "caseImage": "assets/cases/370.webp",
     "releaseDate": "2017-03-15",
     "type": "CASE",
     "tournamentName": null,
@@ -2450,7 +2450,7 @@
   {
     "id": "306",
     "name": "Operation Hydra Case",
-    "caseImage": "assets/cases/306.png",
+    "caseImage": "assets/cases/306.webp",
     "releaseDate": "2017-05-23",
     "type": "CASE",
     "tournamentName": null,
@@ -2462,7 +2462,7 @@
   {
     "id": "273",
     "name": "Krakow 2017 Cache Souvenir Package",
-    "caseImage": "assets/cases/273.png",
+    "caseImage": "assets/cases/273.webp",
     "releaseDate": "2017-07-16",
     "type": "SOUVENIR_PACKAGE",
     "tournamentName": "PGL Kraków 2017",
@@ -2472,9 +2472,9 @@
     "sourceName": null
   },
   {
-    "id": "680",
+    "id": "2204",
     "name": "Krakow 2017 Challengers (Holo/Foil)",
-    "caseImage": "assets/cases/680.png",
+    "caseImage": "assets/cases/2204.webp",
     "releaseDate": "2017-07-16",
     "type": "STICKER_CAPSULE",
     "tournamentName": null,
@@ -2484,9 +2484,9 @@
     "sourceName": null
   },
   {
-    "id": "604",
+    "id": "2128",
     "name": "Krakow 2017 Challengers Autograph Capsule",
-    "caseImage": "assets/cases/604.png",
+    "caseImage": "assets/cases/2128.webp",
     "releaseDate": "2017-07-16",
     "type": "STICKER_CAPSULE",
     "tournamentName": null,
@@ -2498,7 +2498,7 @@
   {
     "id": "275",
     "name": "Krakow 2017 Cobblestone Souvenir Package",
-    "caseImage": "assets/cases/275.png",
+    "caseImage": "assets/cases/275.webp",
     "releaseDate": "2017-07-16",
     "type": "SOUVENIR_PACKAGE",
     "tournamentName": "PGL Kraków 2017",
@@ -2510,7 +2510,7 @@
   {
     "id": "276",
     "name": "Krakow 2017 Inferno Souvenir Package",
-    "caseImage": "assets/cases/276.png",
+    "caseImage": "assets/cases/276.webp",
     "releaseDate": "2017-07-16",
     "type": "SOUVENIR_PACKAGE",
     "tournamentName": "PGL Kraków 2017",
@@ -2520,9 +2520,9 @@
     "sourceName": null
   },
   {
-    "id": "679",
+    "id": "2203",
     "name": "Krakow 2017 Legends (Holo/Foil)",
-    "caseImage": "assets/cases/679.png",
+    "caseImage": "assets/cases/2203.webp",
     "releaseDate": "2017-07-16",
     "type": "STICKER_CAPSULE",
     "tournamentName": null,
@@ -2532,9 +2532,9 @@
     "sourceName": null
   },
   {
-    "id": "605",
+    "id": "2129",
     "name": "Krakow 2017 Legends Autograph Capsule",
-    "caseImage": "assets/cases/605.png",
+    "caseImage": "assets/cases/2129.webp",
     "releaseDate": "2017-07-16",
     "type": "STICKER_CAPSULE",
     "tournamentName": null,
@@ -2546,7 +2546,7 @@
   {
     "id": "278",
     "name": "Krakow 2017 Mirage Souvenir Package",
-    "caseImage": "assets/cases/278.png",
+    "caseImage": "assets/cases/278.webp",
     "releaseDate": "2017-07-16",
     "type": "SOUVENIR_PACKAGE",
     "tournamentName": "PGL Kraków 2017",
@@ -2558,7 +2558,7 @@
   {
     "id": "279",
     "name": "Krakow 2017 Nuke Souvenir Package",
-    "caseImage": "assets/cases/279.png",
+    "caseImage": "assets/cases/279.webp",
     "releaseDate": "2017-07-16",
     "type": "SOUVENIR_PACKAGE",
     "tournamentName": "PGL Kraków 2017",
@@ -2570,7 +2570,7 @@
   {
     "id": "280",
     "name": "Krakow 2017 Overpass Souvenir Package",
-    "caseImage": "assets/cases/280.png",
+    "caseImage": "assets/cases/280.webp",
     "releaseDate": "2017-07-16",
     "type": "SOUVENIR_PACKAGE",
     "tournamentName": "PGL Kraków 2017",
@@ -2582,7 +2582,7 @@
   {
     "id": "281",
     "name": "Krakow 2017 Train Souvenir Package",
-    "caseImage": "assets/cases/281.png",
+    "caseImage": "assets/cases/281.webp",
     "releaseDate": "2017-07-16",
     "type": "SOUVENIR_PACKAGE",
     "tournamentName": "PGL Kraków 2017",
@@ -2594,7 +2594,7 @@
   {
     "id": "369",
     "name": "Spectrum 2 Case",
-    "caseImage": "assets/cases/369.png",
+    "caseImage": "assets/cases/369.webp",
     "releaseDate": "2017-09-14",
     "type": "CASE",
     "tournamentName": null,
@@ -2604,9 +2604,9 @@
     "sourceName": null
   },
   {
-    "id": "619",
+    "id": "2143",
     "name": "Perfect World Sticker Capsule 1",
-    "caseImage": "assets/cases/619.png",
+    "caseImage": "assets/cases/2143.webp",
     "releaseDate": "2017-09-15",
     "type": "STICKER_CAPSULE",
     "tournamentName": null,
@@ -2616,9 +2616,9 @@
     "sourceName": null
   },
   {
-    "id": "620",
+    "id": "2144",
     "name": "Perfect World Sticker Capsule 2",
-    "caseImage": "assets/cases/620.png",
+    "caseImage": "assets/cases/2144.webp",
     "releaseDate": "2017-09-15",
     "type": "STICKER_CAPSULE",
     "tournamentName": null,
@@ -2628,9 +2628,9 @@
     "sourceName": null
   },
   {
-    "id": "584",
+    "id": "2108",
     "name": "Community Capsule 2018",
-    "caseImage": "assets/cases/584.png",
+    "caseImage": "assets/cases/2108.webp",
     "releaseDate": "2017-12-11",
     "type": "STICKER_CAPSULE",
     "tournamentName": null,
@@ -2640,9 +2640,9 @@
     "sourceName": null
   },
   {
-    "id": "682",
+    "id": "2206",
     "name": "Boston 2018 Attending Legends (Holo/Foil)",
-    "caseImage": "assets/cases/682.png",
+    "caseImage": "assets/cases/2206.webp",
     "releaseDate": "2018-01-12",
     "type": "STICKER_CAPSULE",
     "tournamentName": null,
@@ -2652,9 +2652,9 @@
     "sourceName": null
   },
   {
-    "id": "567",
+    "id": "2091",
     "name": "Boston 2018 Attending Legends Autograph Capsule",
-    "caseImage": "assets/cases/567.png",
+    "caseImage": "assets/cases/2091.webp",
     "releaseDate": "2018-01-12",
     "type": "STICKER_CAPSULE",
     "tournamentName": null,
@@ -2666,7 +2666,7 @@
   {
     "id": "145",
     "name": "Boston 2018 Cache Souvenir Package",
-    "caseImage": "assets/cases/145.png",
+    "caseImage": "assets/cases/145.webp",
     "releaseDate": "2018-01-12",
     "type": "SOUVENIR_PACKAGE",
     "tournamentName": "ELEAGUE Boston 2018",
@@ -2678,7 +2678,7 @@
   {
     "id": "146",
     "name": "Boston 2018 Cobblestone Souvenir Package",
-    "caseImage": "assets/cases/146.png",
+    "caseImage": "assets/cases/146.webp",
     "releaseDate": "2018-01-12",
     "type": "SOUVENIR_PACKAGE",
     "tournamentName": "ELEAGUE Boston 2018",
@@ -2690,7 +2690,7 @@
   {
     "id": "147",
     "name": "Boston 2018 Inferno Souvenir Package",
-    "caseImage": "assets/cases/147.png",
+    "caseImage": "assets/cases/147.webp",
     "releaseDate": "2018-01-12",
     "type": "SOUVENIR_PACKAGE",
     "tournamentName": "ELEAGUE Boston 2018",
@@ -2700,9 +2700,9 @@
     "sourceName": null
   },
   {
-    "id": "681",
+    "id": "2205",
     "name": "Boston 2018 Legends (Holo/Foil)",
-    "caseImage": "assets/cases/681.png",
+    "caseImage": "assets/cases/2205.webp",
     "releaseDate": "2018-01-12",
     "type": "STICKER_CAPSULE",
     "tournamentName": null,
@@ -2712,9 +2712,9 @@
     "sourceName": null
   },
   {
-    "id": "568",
+    "id": "2092",
     "name": "Boston 2018 Legends Autograph Capsule",
-    "caseImage": "assets/cases/568.png",
+    "caseImage": "assets/cases/2092.webp",
     "releaseDate": "2018-01-12",
     "type": "STICKER_CAPSULE",
     "tournamentName": null,
@@ -2724,9 +2724,9 @@
     "sourceName": null
   },
   {
-    "id": "684",
+    "id": "2208",
     "name": "Boston 2018 Minor Challengers (Holo/Foil)",
-    "caseImage": "assets/cases/684.png",
+    "caseImage": "assets/cases/2208.webp",
     "releaseDate": "2018-01-12",
     "type": "STICKER_CAPSULE",
     "tournamentName": null,
@@ -2736,9 +2736,9 @@
     "sourceName": null
   },
   {
-    "id": "569",
+    "id": "2093",
     "name": "Boston 2018 Minor Challengers Autograph Capsule",
-    "caseImage": "assets/cases/569.png",
+    "caseImage": "assets/cases/2093.webp",
     "releaseDate": "2018-01-12",
     "type": "STICKER_CAPSULE",
     "tournamentName": null,
@@ -2748,9 +2748,9 @@
     "sourceName": null
   },
   {
-    "id": "685",
+    "id": "2209",
     "name": "Boston 2018 Minor Challengers with Flash Gaming (Holo/Foil)",
-    "caseImage": "assets/cases/685.png",
+    "caseImage": "assets/cases/2209.webp",
     "releaseDate": "2018-01-12",
     "type": "STICKER_CAPSULE",
     "tournamentName": null,
@@ -2760,9 +2760,9 @@
     "sourceName": null
   },
   {
-    "id": "570",
+    "id": "2094",
     "name": "Boston 2018 Minor Challengers with Flash Gaming Autograph Capsule",
-    "caseImage": "assets/cases/570.png",
+    "caseImage": "assets/cases/2094.webp",
     "releaseDate": "2018-01-12",
     "type": "STICKER_CAPSULE",
     "tournamentName": null,
@@ -2774,7 +2774,7 @@
   {
     "id": "151",
     "name": "Boston 2018 Mirage Souvenir Package",
-    "caseImage": "assets/cases/151.png",
+    "caseImage": "assets/cases/151.webp",
     "releaseDate": "2018-01-12",
     "type": "SOUVENIR_PACKAGE",
     "tournamentName": "ELEAGUE Boston 2018",
@@ -2786,7 +2786,7 @@
   {
     "id": "152",
     "name": "Boston 2018 Nuke Souvenir Package",
-    "caseImage": "assets/cases/152.png",
+    "caseImage": "assets/cases/152.webp",
     "releaseDate": "2018-01-12",
     "type": "SOUVENIR_PACKAGE",
     "tournamentName": "ELEAGUE Boston 2018",
@@ -2798,7 +2798,7 @@
   {
     "id": "153",
     "name": "Boston 2018 Overpass Souvenir Package",
-    "caseImage": "assets/cases/153.png",
+    "caseImage": "assets/cases/153.webp",
     "releaseDate": "2018-01-12",
     "type": "SOUVENIR_PACKAGE",
     "tournamentName": "ELEAGUE Boston 2018",
@@ -2808,9 +2808,9 @@
     "sourceName": null
   },
   {
-    "id": "683",
+    "id": "2207",
     "name": "Boston 2018 Returning Challengers (Holo/Foil)",
-    "caseImage": "assets/cases/683.png",
+    "caseImage": "assets/cases/2207.webp",
     "releaseDate": "2018-01-12",
     "type": "STICKER_CAPSULE",
     "tournamentName": null,
@@ -2820,9 +2820,9 @@
     "sourceName": null
   },
   {
-    "id": "571",
+    "id": "2095",
     "name": "Boston 2018 Returning Challengers Autograph Capsule",
-    "caseImage": "assets/cases/571.png",
+    "caseImage": "assets/cases/2095.webp",
     "releaseDate": "2018-01-12",
     "type": "STICKER_CAPSULE",
     "tournamentName": null,
@@ -2834,7 +2834,7 @@
   {
     "id": "155",
     "name": "Boston 2018 Train Souvenir Package",
-    "caseImage": "assets/cases/155.png",
+    "caseImage": "assets/cases/155.webp",
     "releaseDate": "2018-01-12",
     "type": "SOUVENIR_PACKAGE",
     "tournamentName": "ELEAGUE Boston 2018",
@@ -2846,7 +2846,7 @@
   {
     "id": "179",
     "name": "Clutch Case",
-    "caseImage": "assets/cases/179.png",
+    "caseImage": "assets/cases/179.webp",
     "releaseDate": "2018-02-14",
     "type": "CASE",
     "tournamentName": null,
@@ -2856,9 +2856,9 @@
     "sourceName": null
   },
   {
-    "id": "583",
+    "id": "2107",
     "name": "Collectible Pins Capsule Series 3",
-    "caseImage": "assets/cases/583.png",
+    "caseImage": "assets/cases/2107.webp",
     "releaseDate": "2018-03-01",
     "type": "PIN_CAPSULE",
     "tournamentName": null,
@@ -2870,7 +2870,7 @@
   {
     "id": "259",
     "name": "Horizon Case",
-    "caseImage": "assets/cases/259.png",
+    "caseImage": "assets/cases/259.webp",
     "releaseDate": "2018-08-02",
     "type": "CASE",
     "tournamentName": null,
@@ -2882,7 +2882,7 @@
   {
     "id": "282",
     "name": "London 2018 Cache Souvenir Package",
-    "caseImage": "assets/cases/282.png",
+    "caseImage": "assets/cases/282.webp",
     "releaseDate": "2018-09-05",
     "type": "SOUVENIR_PACKAGE",
     "tournamentName": "FACEIT London 2018",
@@ -2894,7 +2894,7 @@
   {
     "id": "283",
     "name": "London 2018 Dust II Souvenir Package",
-    "caseImage": "assets/cases/283.png",
+    "caseImage": "assets/cases/283.webp",
     "releaseDate": "2018-09-05",
     "type": "SOUVENIR_PACKAGE",
     "tournamentName": "FACEIT London 2018",
@@ -2906,7 +2906,7 @@
   {
     "id": "284",
     "name": "London 2018 Inferno Souvenir Package",
-    "caseImage": "assets/cases/284.png",
+    "caseImage": "assets/cases/284.webp",
     "releaseDate": "2018-09-05",
     "type": "SOUVENIR_PACKAGE",
     "tournamentName": "FACEIT London 2018",
@@ -2916,9 +2916,9 @@
     "sourceName": null
   },
   {
-    "id": "686",
+    "id": "2210",
     "name": "London 2018 Legends (Holo/Foil)",
-    "caseImage": "assets/cases/686.png",
+    "caseImage": "assets/cases/2210.webp",
     "releaseDate": "2018-09-05",
     "type": "STICKER_CAPSULE",
     "tournamentName": null,
@@ -2928,9 +2928,9 @@
     "sourceName": null
   },
   {
-    "id": "606",
+    "id": "2130",
     "name": "London 2018 Legends Autograph Capsule",
-    "caseImage": "assets/cases/606.png",
+    "caseImage": "assets/cases/2130.webp",
     "releaseDate": "2018-09-05",
     "type": "STICKER_CAPSULE",
     "tournamentName": null,
@@ -2940,9 +2940,9 @@
     "sourceName": null
   },
   {
-    "id": "688",
+    "id": "2212",
     "name": "London 2018 Minor Challengers (Holo/Foil)",
-    "caseImage": "assets/cases/688.png",
+    "caseImage": "assets/cases/2212.webp",
     "releaseDate": "2018-09-05",
     "type": "STICKER_CAPSULE",
     "tournamentName": null,
@@ -2952,9 +2952,9 @@
     "sourceName": null
   },
   {
-    "id": "607",
+    "id": "2131",
     "name": "London 2018 Minor Challengers Autograph Capsule",
-    "caseImage": "assets/cases/607.png",
+    "caseImage": "assets/cases/2131.webp",
     "releaseDate": "2018-09-05",
     "type": "STICKER_CAPSULE",
     "tournamentName": null,
@@ -2966,7 +2966,7 @@
   {
     "id": "287",
     "name": "London 2018 Mirage Souvenir Package",
-    "caseImage": "assets/cases/287.png",
+    "caseImage": "assets/cases/287.webp",
     "releaseDate": "2018-09-05",
     "type": "SOUVENIR_PACKAGE",
     "tournamentName": "FACEIT London 2018",
@@ -2978,7 +2978,7 @@
   {
     "id": "288",
     "name": "London 2018 Nuke Souvenir Package",
-    "caseImage": "assets/cases/288.png",
+    "caseImage": "assets/cases/288.webp",
     "releaseDate": "2018-09-05",
     "type": "SOUVENIR_PACKAGE",
     "tournamentName": "FACEIT London 2018",
@@ -2990,7 +2990,7 @@
   {
     "id": "289",
     "name": "London 2018 Overpass Souvenir Package",
-    "caseImage": "assets/cases/289.png",
+    "caseImage": "assets/cases/289.webp",
     "releaseDate": "2018-09-05",
     "type": "SOUVENIR_PACKAGE",
     "tournamentName": "FACEIT London 2018",
@@ -3000,9 +3000,9 @@
     "sourceName": null
   },
   {
-    "id": "687",
+    "id": "2211",
     "name": "London 2018 Returning Challengers (Holo/Foil)",
-    "caseImage": "assets/cases/687.png",
+    "caseImage": "assets/cases/2211.webp",
     "releaseDate": "2018-09-05",
     "type": "STICKER_CAPSULE",
     "tournamentName": null,
@@ -3012,9 +3012,9 @@
     "sourceName": null
   },
   {
-    "id": "608",
+    "id": "2132",
     "name": "London 2018 Returning Challengers Autograph Capsule",
-    "caseImage": "assets/cases/608.png",
+    "caseImage": "assets/cases/2132.webp",
     "releaseDate": "2018-09-05",
     "type": "STICKER_CAPSULE",
     "tournamentName": null,
@@ -3026,7 +3026,7 @@
   {
     "id": "291",
     "name": "London 2018 Train Souvenir Package",
-    "caseImage": "assets/cases/291.png",
+    "caseImage": "assets/cases/291.webp",
     "releaseDate": "2018-09-05",
     "type": "SOUVENIR_PACKAGE",
     "tournamentName": "FACEIT London 2018",
@@ -3036,9 +3036,9 @@
     "sourceName": null
   },
   {
-    "id": "637",
+    "id": "2161",
     "name": "Skill Groups Capsule",
-    "caseImage": "assets/cases/637.png",
+    "caseImage": "assets/cases/2161.webp",
     "releaseDate": "2018-11-15",
     "type": "STICKER_CAPSULE",
     "tournamentName": null,
@@ -3050,7 +3050,7 @@
   {
     "id": "206",
     "name": "Danger Zone Case",
-    "caseImage": "assets/cases/206.png",
+    "caseImage": "assets/cases/206.webp",
     "releaseDate": "2018-12-06",
     "type": "CASE",
     "tournamentName": null,
@@ -3062,7 +3062,7 @@
   {
     "id": "262",
     "name": "Katowice 2019 Cache Souvenir Package",
-    "caseImage": "assets/cases/262.png",
+    "caseImage": "assets/cases/262.webp",
     "releaseDate": "2019-02-13",
     "type": "SOUVENIR_PACKAGE",
     "tournamentName": "IEM Katowice 2019",
@@ -3074,7 +3074,7 @@
   {
     "id": "263",
     "name": "Katowice 2019 Dust II Souvenir Package",
-    "caseImage": "assets/cases/263.png",
+    "caseImage": "assets/cases/263.webp",
     "releaseDate": "2019-02-13",
     "type": "SOUVENIR_PACKAGE",
     "tournamentName": "IEM Katowice 2019",
@@ -3086,7 +3086,7 @@
   {
     "id": "264",
     "name": "Katowice 2019 Inferno Souvenir Package",
-    "caseImage": "assets/cases/264.png",
+    "caseImage": "assets/cases/264.webp",
     "releaseDate": "2019-02-13",
     "type": "SOUVENIR_PACKAGE",
     "tournamentName": "IEM Katowice 2019",
@@ -3096,9 +3096,9 @@
     "sourceName": null
   },
   {
-    "id": "689",
+    "id": "2213",
     "name": "Katowice 2019 Legends (Holo/Foil)",
-    "caseImage": "assets/cases/689.png",
+    "caseImage": "assets/cases/2213.webp",
     "releaseDate": "2019-02-13",
     "type": "STICKER_CAPSULE",
     "tournamentName": null,
@@ -3108,9 +3108,9 @@
     "sourceName": null
   },
   {
-    "id": "601",
+    "id": "2125",
     "name": "Katowice 2019 Legends Autograph Capsule",
-    "caseImage": "assets/cases/601.png",
+    "caseImage": "assets/cases/2125.webp",
     "releaseDate": "2019-02-13",
     "type": "STICKER_CAPSULE",
     "tournamentName": null,
@@ -3120,9 +3120,9 @@
     "sourceName": null
   },
   {
-    "id": "690",
+    "id": "2214",
     "name": "Katowice 2019 Minor Challengers (Holo/Foil)",
-    "caseImage": "assets/cases/690.png",
+    "caseImage": "assets/cases/2214.webp",
     "releaseDate": "2019-02-13",
     "type": "STICKER_CAPSULE",
     "tournamentName": null,
@@ -3132,9 +3132,9 @@
     "sourceName": null
   },
   {
-    "id": "602",
+    "id": "2126",
     "name": "Katowice 2019 Minor Challengers Autograph Capsule",
-    "caseImage": "assets/cases/602.png",
+    "caseImage": "assets/cases/2126.webp",
     "releaseDate": "2019-02-13",
     "type": "STICKER_CAPSULE",
     "tournamentName": null,
@@ -3146,7 +3146,7 @@
   {
     "id": "267",
     "name": "Katowice 2019 Mirage Souvenir Package",
-    "caseImage": "assets/cases/267.png",
+    "caseImage": "assets/cases/267.webp",
     "releaseDate": "2019-02-13",
     "type": "SOUVENIR_PACKAGE",
     "tournamentName": "IEM Katowice 2019",
@@ -3158,7 +3158,7 @@
   {
     "id": "268",
     "name": "Katowice 2019 Nuke Souvenir Package",
-    "caseImage": "assets/cases/268.png",
+    "caseImage": "assets/cases/268.webp",
     "releaseDate": "2019-02-13",
     "type": "SOUVENIR_PACKAGE",
     "tournamentName": "IEM Katowice 2019",
@@ -3170,7 +3170,7 @@
   {
     "id": "269",
     "name": "Katowice 2019 Overpass Souvenir Package",
-    "caseImage": "assets/cases/269.png",
+    "caseImage": "assets/cases/269.webp",
     "releaseDate": "2019-02-13",
     "type": "SOUVENIR_PACKAGE",
     "tournamentName": "IEM Katowice 2019",
@@ -3180,9 +3180,9 @@
     "sourceName": null
   },
   {
-    "id": "691",
+    "id": "2215",
     "name": "Katowice 2019 Returning Challengers (Holo/Foil)",
-    "caseImage": "assets/cases/691.png",
+    "caseImage": "assets/cases/2215.webp",
     "releaseDate": "2019-02-13",
     "type": "STICKER_CAPSULE",
     "tournamentName": null,
@@ -3192,9 +3192,9 @@
     "sourceName": null
   },
   {
-    "id": "603",
+    "id": "2127",
     "name": "Katowice 2019 Returning Challengers Autograph Capsule",
-    "caseImage": "assets/cases/603.png",
+    "caseImage": "assets/cases/2127.webp",
     "releaseDate": "2019-02-13",
     "type": "STICKER_CAPSULE",
     "tournamentName": null,
@@ -3206,7 +3206,7 @@
   {
     "id": "271",
     "name": "Katowice 2019 Train Souvenir Package",
-    "caseImage": "assets/cases/271.png",
+    "caseImage": "assets/cases/271.webp",
     "releaseDate": "2019-02-13",
     "type": "SOUVENIR_PACKAGE",
     "tournamentName": "IEM Katowice 2019",
@@ -3218,7 +3218,7 @@
   {
     "id": "330",
     "name": "Prisma Case",
-    "caseImage": "assets/cases/330.png",
+    "caseImage": "assets/cases/330.webp",
     "releaseDate": "2019-03-13",
     "type": "CASE",
     "tournamentName": null,
@@ -3228,9 +3228,9 @@
     "sourceName": null
   },
   {
-    "id": "596",
+    "id": "2120",
     "name": "Feral Predators Capsule",
-    "caseImage": "assets/cases/596.png",
+    "caseImage": "assets/cases/2120.webp",
     "releaseDate": "2019-04-15",
     "type": "STICKER_CAPSULE",
     "tournamentName": null,
@@ -3240,9 +3240,9 @@
     "sourceName": null
   },
   {
-    "id": "580",
+    "id": "2104",
     "name": "Chicken Capsule",
-    "caseImage": "assets/cases/580.png",
+    "caseImage": "assets/cases/2104.webp",
     "releaseDate": "2019-06-10",
     "type": "STICKER_CAPSULE",
     "tournamentName": null,
@@ -3254,7 +3254,7 @@
   {
     "id": "133",
     "name": "Berlin 2019 Dust II Souvenir Package",
-    "caseImage": "assets/cases/133.png",
+    "caseImage": "assets/cases/133.webp",
     "releaseDate": "2019-08-23",
     "type": "SOUVENIR_PACKAGE",
     "tournamentName": "StarLadder Berlin 2019",
@@ -3266,7 +3266,7 @@
   {
     "id": "134",
     "name": "Berlin 2019 Inferno Souvenir Package",
-    "caseImage": "assets/cases/134.png",
+    "caseImage": "assets/cases/134.webp",
     "releaseDate": "2019-08-23",
     "type": "SOUVENIR_PACKAGE",
     "tournamentName": "StarLadder Berlin 2019",
@@ -3276,9 +3276,9 @@
     "sourceName": null
   },
   {
-    "id": "692",
+    "id": "2216",
     "name": "Berlin 2019 Legends (Holo/Foil)",
-    "caseImage": "assets/cases/692.png",
+    "caseImage": "assets/cases/2216.webp",
     "releaseDate": "2019-08-23",
     "type": "STICKER_CAPSULE",
     "tournamentName": null,
@@ -3288,9 +3288,9 @@
     "sourceName": null
   },
   {
-    "id": "563",
+    "id": "2087",
     "name": "Berlin 2019 Legends Autograph Capsule",
-    "caseImage": "assets/cases/563.png",
+    "caseImage": "assets/cases/2087.webp",
     "releaseDate": "2019-08-23",
     "type": "STICKER_CAPSULE",
     "tournamentName": null,
@@ -3300,9 +3300,9 @@
     "sourceName": null
   },
   {
-    "id": "694",
+    "id": "2218",
     "name": "Berlin 2019 Minor Challengers (Holo/Foil)",
-    "caseImage": "assets/cases/694.png",
+    "caseImage": "assets/cases/2218.webp",
     "releaseDate": "2019-08-23",
     "type": "STICKER_CAPSULE",
     "tournamentName": null,
@@ -3312,9 +3312,9 @@
     "sourceName": null
   },
   {
-    "id": "564",
+    "id": "2088",
     "name": "Berlin 2019 Minor Challengers Autograph Capsule",
-    "caseImage": "assets/cases/564.png",
+    "caseImage": "assets/cases/2088.webp",
     "releaseDate": "2019-08-23",
     "type": "STICKER_CAPSULE",
     "tournamentName": null,
@@ -3326,7 +3326,7 @@
   {
     "id": "137",
     "name": "Berlin 2019 Mirage Souvenir Package",
-    "caseImage": "assets/cases/137.png",
+    "caseImage": "assets/cases/137.webp",
     "releaseDate": "2019-08-23",
     "type": "SOUVENIR_PACKAGE",
     "tournamentName": "StarLadder Berlin 2019",
@@ -3338,7 +3338,7 @@
   {
     "id": "138",
     "name": "Berlin 2019 Nuke Souvenir Package",
-    "caseImage": "assets/cases/138.png",
+    "caseImage": "assets/cases/138.webp",
     "releaseDate": "2019-08-23",
     "type": "SOUVENIR_PACKAGE",
     "tournamentName": "StarLadder Berlin 2019",
@@ -3350,7 +3350,7 @@
   {
     "id": "139",
     "name": "Berlin 2019 Overpass Souvenir Package",
-    "caseImage": "assets/cases/139.png",
+    "caseImage": "assets/cases/139.webp",
     "releaseDate": "2019-08-23",
     "type": "SOUVENIR_PACKAGE",
     "tournamentName": "StarLadder Berlin 2019",
@@ -3360,9 +3360,9 @@
     "sourceName": null
   },
   {
-    "id": "693",
+    "id": "2217",
     "name": "Berlin 2019 Returning Challengers (Holo/Foil)",
-    "caseImage": "assets/cases/693.png",
+    "caseImage": "assets/cases/2217.webp",
     "releaseDate": "2019-08-23",
     "type": "STICKER_CAPSULE",
     "tournamentName": null,
@@ -3372,9 +3372,9 @@
     "sourceName": null
   },
   {
-    "id": "565",
+    "id": "2089",
     "name": "Berlin 2019 Returning Challengers Autograph Capsule",
-    "caseImage": "assets/cases/565.png",
+    "caseImage": "assets/cases/2089.webp",
     "releaseDate": "2019-08-23",
     "type": "STICKER_CAPSULE",
     "tournamentName": null,
@@ -3386,7 +3386,7 @@
   {
     "id": "141",
     "name": "Berlin 2019 Train Souvenir Package",
-    "caseImage": "assets/cases/141.png",
+    "caseImage": "assets/cases/141.webp",
     "releaseDate": "2019-08-23",
     "type": "SOUVENIR_PACKAGE",
     "tournamentName": "StarLadder Berlin 2019",
@@ -3398,7 +3398,7 @@
   {
     "id": "142",
     "name": "Berlin 2019 Vertigo Souvenir Package",
-    "caseImage": "assets/cases/142.png",
+    "caseImage": "assets/cases/142.webp",
     "releaseDate": "2019-08-23",
     "type": "SOUVENIR_PACKAGE",
     "tournamentName": "StarLadder Berlin 2019",
@@ -3422,7 +3422,7 @@
   {
     "id": "402",
     "name": "X-Ray P250 Package",
-    "caseImage": "assets/cases/402.png",
+    "caseImage": "assets/cases/402.webp",
     "releaseDate": "2019-09-30",
     "type": "XRAY_PACKAGE",
     "tournamentName": null,
@@ -3432,9 +3432,9 @@
     "sourceName": null
   },
   {
-    "id": "579",
+    "id": "2103",
     "name": "CS20 Sticker Capsule",
-    "caseImage": "assets/cases/579.png",
+    "caseImage": "assets/cases/2103.webp",
     "releaseDate": "2019-10-16",
     "type": "STICKER_CAPSULE",
     "tournamentName": null,
@@ -3446,7 +3446,7 @@
   {
     "id": "170",
     "name": "CS20 Case",
-    "caseImage": "assets/cases/170.png",
+    "caseImage": "assets/cases/170.webp",
     "releaseDate": "2019-10-18",
     "type": "CASE",
     "tournamentName": null,
@@ -3458,7 +3458,7 @@
   {
     "id": "365",
     "name": "Shattered Web Case",
-    "caseImage": "assets/cases/365.png",
+    "caseImage": "assets/cases/365.webp",
     "releaseDate": "2019-11-18",
     "type": "CASE",
     "tournamentName": null,
@@ -3468,9 +3468,9 @@
     "sourceName": null
   },
   {
-    "id": "695",
+    "id": "2219",
     "name": "Shattered Web Sticker Collection",
-    "caseImage": "assets/cases/695.png",
+    "caseImage": "assets/cases/2219.webp",
     "releaseDate": "2019-11-18",
     "type": "STICKER_COLLECTION",
     "tournamentName": null,
@@ -3480,9 +3480,9 @@
     "sourceName": "Operation Shattered Web"
   },
   {
-    "id": "599",
+    "id": "2123",
     "name": "Halo Capsule",
-    "caseImage": "assets/cases/599.png",
+    "caseImage": "assets/cases/2123.webp",
     "releaseDate": "2019-11-25",
     "type": "STICKER_CAPSULE",
     "tournamentName": null,
@@ -3492,9 +3492,9 @@
     "sourceName": null
   },
   {
-    "id": "597",
+    "id": "2121",
     "name": "Half-Life: Alyx Collectible Pins Capsule",
-    "caseImage": "assets/cases/597.png",
+    "caseImage": "assets/cases/2121.webp",
     "releaseDate": "2020-03-23",
     "type": "PIN_CAPSULE",
     "tournamentName": null,
@@ -3504,9 +3504,9 @@
     "sourceName": null
   },
   {
-    "id": "598",
+    "id": "2122",
     "name": "Half-Life: Alyx Sticker Capsule",
-    "caseImage": "assets/cases/598.png",
+    "caseImage": "assets/cases/2122.webp",
     "releaseDate": "2020-03-23",
     "type": "STICKER_CAPSULE",
     "tournamentName": null,
@@ -3518,7 +3518,7 @@
   {
     "id": "329",
     "name": "Prisma 2 Case",
-    "caseImage": "assets/cases/329.png",
+    "caseImage": "assets/cases/329.webp",
     "releaseDate": "2020-03-31",
     "type": "CASE",
     "tournamentName": null,
@@ -3528,9 +3528,9 @@
     "sourceName": null
   },
   {
-    "id": "610",
+    "id": "2134",
     "name": "Masterminds Music Kit Box",
-    "caseImage": "assets/cases/610.png",
+    "caseImage": "assets/cases/2134.webp",
     "releaseDate": "2020-04-22",
     "type": "MUSIC_KIT_BOX",
     "tournamentName": null,
@@ -3540,9 +3540,9 @@
     "sourceName": null
   },
   {
-    "id": "642",
+    "id": "2166",
     "name": "StatTrak™ Masterminds Music Kit Box",
-    "caseImage": "assets/cases/642.png",
+    "caseImage": "assets/cases/2166.webp",
     "releaseDate": "2020-04-22",
     "type": "MUSIC_KIT_BOX",
     "tournamentName": null,
@@ -3552,9 +3552,9 @@
     "sourceName": null
   },
   {
-    "id": "659",
+    "id": "2183",
     "name": "Warhammer 40,000 Sticker Capsule",
-    "caseImage": "assets/cases/659.png",
+    "caseImage": "assets/cases/2183.webp",
     "releaseDate": "2020-05-28",
     "type": "STICKER_CAPSULE",
     "tournamentName": null,
@@ -3566,7 +3566,7 @@
   {
     "id": "251",
     "name": "Fracture Case",
-    "caseImage": "assets/cases/251.png",
+    "caseImage": "assets/cases/251.webp",
     "releaseDate": "2020-08-06",
     "type": "CASE",
     "tournamentName": null,
@@ -3576,9 +3576,9 @@
     "sourceName": null
   },
   {
-    "id": "698",
+    "id": "2222",
     "name": "Broken Fang Sticker Collection",
-    "caseImage": "assets/cases/698.png",
+    "caseImage": "assets/cases/2222.webp",
     "releaseDate": "2020-12-03",
     "type": "STICKER_COLLECTION",
     "tournamentName": null,
@@ -3590,7 +3590,7 @@
   {
     "id": "305",
     "name": "Operation Broken Fang Case",
-    "caseImage": "assets/cases/305.png",
+    "caseImage": "assets/cases/305.webp",
     "releaseDate": "2020-12-03",
     "type": "CASE",
     "tournamentName": null,
@@ -3600,9 +3600,9 @@
     "sourceName": null
   },
   {
-    "id": "697",
+    "id": "2221",
     "name": "Recoil Sticker Collection",
-    "caseImage": "assets/cases/697.png",
+    "caseImage": "assets/cases/2221.webp",
     "releaseDate": "2020-12-03",
     "type": "STICKER_COLLECTION",
     "tournamentName": null,
@@ -3612,9 +3612,9 @@
     "sourceName": "Operation Broken Fang"
   },
   {
-    "id": "700",
+    "id": "2224",
     "name": "2020 RMR Challengers",
-    "caseImage": "assets/cases/700.png",
+    "caseImage": "assets/cases/2224.webp",
     "releaseDate": "2021-01-27",
     "type": "STICKER_CAPSULE",
     "tournamentName": null,
@@ -3624,9 +3624,9 @@
     "sourceName": null
   },
   {
-    "id": "701",
+    "id": "2225",
     "name": "2020 RMR Contenders",
-    "caseImage": "assets/cases/701.png",
+    "caseImage": "assets/cases/2225.webp",
     "releaseDate": "2021-01-27",
     "type": "STICKER_CAPSULE",
     "tournamentName": null,
@@ -3636,9 +3636,9 @@
     "sourceName": null
   },
   {
-    "id": "699",
+    "id": "2223",
     "name": "2020 RMR Legends",
-    "caseImage": "assets/cases/699.png",
+    "caseImage": "assets/cases/2223.webp",
     "releaseDate": "2021-01-27",
     "type": "STICKER_CAPSULE",
     "tournamentName": null,
@@ -3648,9 +3648,9 @@
     "sourceName": null
   },
   {
-    "id": "622",
+    "id": "2146",
     "name": "Poorly Drawn Capsule",
-    "caseImage": "assets/cases/622.png",
+    "caseImage": "assets/cases/2146.webp",
     "releaseDate": "2021-02-14",
     "type": "STICKER_CAPSULE",
     "tournamentName": null,
@@ -3662,7 +3662,7 @@
   {
     "id": "368",
     "name": "Snakebite Case",
-    "caseImage": "assets/cases/368.png",
+    "caseImage": "assets/cases/368.webp",
     "releaseDate": "2021-05-03",
     "type": "CASE",
     "tournamentName": null,
@@ -3672,9 +3672,9 @@
     "sourceName": null
   },
   {
-    "id": "645",
+    "id": "2169",
     "name": "StatTrak™ Tacticians Music Kit Box",
-    "caseImage": "assets/cases/645.png",
+    "caseImage": "assets/cases/2169.webp",
     "releaseDate": "2021-07-20",
     "type": "MUSIC_KIT_BOX",
     "tournamentName": null,
@@ -3684,9 +3684,9 @@
     "sourceName": null
   },
   {
-    "id": "654",
+    "id": "2178",
     "name": "Tacticians Music Kit Box",
-    "caseImage": "assets/cases/654.png",
+    "caseImage": "assets/cases/2178.webp",
     "releaseDate": "2021-07-20",
     "type": "MUSIC_KIT_BOX",
     "tournamentName": null,
@@ -3696,9 +3696,9 @@
     "sourceName": null
   },
   {
-    "id": "454",
+    "id": "1978",
     "name": "2021 Community Sticker Capsule",
-    "caseImage": "assets/cases/454.png",
+    "caseImage": "assets/cases/1978.webp",
     "releaseDate": "2021-09-02",
     "type": "STICKER_CAPSULE",
     "tournamentName": null,
@@ -3708,9 +3708,9 @@
     "sourceName": null
   },
   {
-    "id": "703",
+    "id": "2227",
     "name": "Operation Riptide Sticker Collection",
-    "caseImage": "assets/cases/703.png",
+    "caseImage": "assets/cases/2227.webp",
     "releaseDate": "2021-09-21",
     "type": "STICKER_COLLECTION",
     "tournamentName": null,
@@ -3720,9 +3720,9 @@
     "sourceName": "Operation Riptide"
   },
   {
-    "id": "702",
+    "id": "2226",
     "name": "Riptide Surf Shop Sticker Collection",
-    "caseImage": "assets/cases/702.png",
+    "caseImage": "assets/cases/2226.webp",
     "releaseDate": "2021-09-21",
     "type": "STICKER_COLLECTION",
     "tournamentName": null,
@@ -3734,7 +3734,7 @@
   {
     "id": "308",
     "name": "Operation Riptide Case",
-    "caseImage": "assets/cases/308.png",
+    "caseImage": "assets/cases/308.webp",
     "releaseDate": "2021-09-22",
     "type": "CASE",
     "tournamentName": null,
@@ -3744,9 +3744,9 @@
     "sourceName": null
   },
   {
-    "id": "562",
+    "id": "2086",
     "name": "Battlefield 2042 Sticker Capsule",
-    "caseImage": "assets/cases/562.png",
+    "caseImage": "assets/cases/2086.webp",
     "releaseDate": "2021-10-07",
     "type": "STICKER_CAPSULE",
     "tournamentName": null,
@@ -3758,7 +3758,7 @@
   {
     "id": "380",
     "name": "Stockholm 2021 Ancient Souvenir Package",
-    "caseImage": "assets/cases/380.png",
+    "caseImage": "assets/cases/380.webp",
     "releaseDate": "2021-10-26",
     "type": "SOUVENIR_PACKAGE",
     "tournamentName": "PGL Stockholm 2021",
@@ -3768,9 +3768,9 @@
     "sourceName": null
   },
   {
-    "id": "648",
+    "id": "2172",
     "name": "Stockholm 2021 Challengers Sticker Capsule",
-    "caseImage": "assets/cases/648.png",
+    "caseImage": "assets/cases/2172.webp",
     "releaseDate": "2021-10-26",
     "type": "STICKER_CAPSULE",
     "tournamentName": null,
@@ -3780,9 +3780,9 @@
     "sourceName": null
   },
   {
-    "id": "649",
+    "id": "2173",
     "name": "Stockholm 2021 Champions Autograph Capsule",
-    "caseImage": "assets/cases/649.png",
+    "caseImage": "assets/cases/2173.webp",
     "releaseDate": "2021-10-26",
     "type": "STICKER_CAPSULE",
     "tournamentName": null,
@@ -3792,9 +3792,9 @@
     "sourceName": null
   },
   {
-    "id": "650",
+    "id": "2174",
     "name": "Stockholm 2021 Contenders Sticker Capsule",
-    "caseImage": "assets/cases/650.png",
+    "caseImage": "assets/cases/2174.webp",
     "releaseDate": "2021-10-26",
     "type": "STICKER_CAPSULE",
     "tournamentName": null,
@@ -3806,7 +3806,7 @@
   {
     "id": "384",
     "name": "Stockholm 2021 Dust II Souvenir Package",
-    "caseImage": "assets/cases/384.png",
+    "caseImage": "assets/cases/384.webp",
     "releaseDate": "2021-10-26",
     "type": "SOUVENIR_PACKAGE",
     "tournamentName": "PGL Stockholm 2021",
@@ -3816,9 +3816,9 @@
     "sourceName": null
   },
   {
-    "id": "651",
+    "id": "2175",
     "name": "Stockholm 2021 Finalists Autograph Capsule",
-    "caseImage": "assets/cases/651.png",
+    "caseImage": "assets/cases/2175.webp",
     "releaseDate": "2021-10-26",
     "type": "STICKER_CAPSULE",
     "tournamentName": null,
@@ -3830,7 +3830,7 @@
   {
     "id": "386",
     "name": "Stockholm 2021 Inferno Souvenir Package",
-    "caseImage": "assets/cases/386.png",
+    "caseImage": "assets/cases/386.webp",
     "releaseDate": "2021-10-26",
     "type": "SOUVENIR_PACKAGE",
     "tournamentName": "PGL Stockholm 2021",
@@ -3840,9 +3840,9 @@
     "sourceName": null
   },
   {
-    "id": "652",
+    "id": "2176",
     "name": "Stockholm 2021 Legends Sticker Capsule",
-    "caseImage": "assets/cases/652.png",
+    "caseImage": "assets/cases/2176.webp",
     "releaseDate": "2021-10-26",
     "type": "STICKER_CAPSULE",
     "tournamentName": null,
@@ -3854,7 +3854,7 @@
   {
     "id": "388",
     "name": "Stockholm 2021 Mirage Souvenir Package",
-    "caseImage": "assets/cases/388.png",
+    "caseImage": "assets/cases/388.webp",
     "releaseDate": "2021-10-26",
     "type": "SOUVENIR_PACKAGE",
     "tournamentName": "PGL Stockholm 2021",
@@ -3866,7 +3866,7 @@
   {
     "id": "389",
     "name": "Stockholm 2021 Nuke Souvenir Package",
-    "caseImage": "assets/cases/389.png",
+    "caseImage": "assets/cases/389.webp",
     "releaseDate": "2021-10-26",
     "type": "SOUVENIR_PACKAGE",
     "tournamentName": "PGL Stockholm 2021",
@@ -3878,7 +3878,7 @@
   {
     "id": "390",
     "name": "Stockholm 2021 Overpass Souvenir Package",
-    "caseImage": "assets/cases/390.png",
+    "caseImage": "assets/cases/390.webp",
     "releaseDate": "2021-10-26",
     "type": "SOUVENIR_PACKAGE",
     "tournamentName": "PGL Stockholm 2021",
@@ -3890,7 +3890,7 @@
   {
     "id": "391",
     "name": "Stockholm 2021 Vertigo Souvenir Package",
-    "caseImage": "assets/cases/391.png",
+    "caseImage": "assets/cases/391.webp",
     "releaseDate": "2021-10-26",
     "type": "SOUVENIR_PACKAGE",
     "tournamentName": "PGL Stockholm 2021",
@@ -3902,7 +3902,7 @@
   {
     "id": "223",
     "name": "Dreams & Nightmares Case",
-    "caseImage": "assets/cases/223.png",
+    "caseImage": "assets/cases/223.webp",
     "releaseDate": "2022-01-20",
     "type": "CASE",
     "tournamentName": null,
@@ -3912,9 +3912,9 @@
     "sourceName": null
   },
   {
-    "id": "656",
+    "id": "2180",
     "name": "The Boardroom Sticker Capsule",
-    "caseImage": "assets/cases/656.png",
+    "caseImage": "assets/cases/2180.webp",
     "releaseDate": "2022-02-20",
     "type": "STICKER_CAPSULE",
     "tournamentName": null,
@@ -3926,7 +3926,7 @@
   {
     "id": "4",
     "name": "Antwerp 2022 Ancient Souvenir Package",
-    "caseImage": "assets/cases/4.png",
+    "caseImage": "assets/cases/4.webp",
     "releaseDate": "2022-05-09",
     "type": "SOUVENIR_PACKAGE",
     "tournamentName": "PGL Antwerp 2022",
@@ -3936,9 +3936,9 @@
     "sourceName": null
   },
   {
-    "id": "456",
+    "id": "1980",
     "name": "Antwerp 2022 Challengers Autograph Capsule",
-    "caseImage": "assets/cases/456.png",
+    "caseImage": "assets/cases/1980.webp",
     "releaseDate": "2022-05-09",
     "type": "STICKER_CAPSULE",
     "tournamentName": null,
@@ -3948,9 +3948,9 @@
     "sourceName": null
   },
   {
-    "id": "457",
+    "id": "1981",
     "name": "Antwerp 2022 Challengers Sticker Capsule",
-    "caseImage": "assets/cases/457.png",
+    "caseImage": "assets/cases/1981.webp",
     "releaseDate": "2022-05-09",
     "type": "STICKER_CAPSULE",
     "tournamentName": null,
@@ -3960,9 +3960,9 @@
     "sourceName": null
   },
   {
-    "id": "458",
+    "id": "1982",
     "name": "Antwerp 2022 Champions Autograph Capsule",
-    "caseImage": "assets/cases/458.png",
+    "caseImage": "assets/cases/1982.webp",
     "releaseDate": "2022-05-09",
     "type": "STICKER_CAPSULE",
     "tournamentName": null,
@@ -3972,9 +3972,9 @@
     "sourceName": null
   },
   {
-    "id": "459",
+    "id": "1983",
     "name": "Antwerp 2022 Contenders Autograph Capsule",
-    "caseImage": "assets/cases/459.png",
+    "caseImage": "assets/cases/1983.webp",
     "releaseDate": "2022-05-09",
     "type": "STICKER_CAPSULE",
     "tournamentName": null,
@@ -3984,9 +3984,9 @@
     "sourceName": null
   },
   {
-    "id": "460",
+    "id": "1984",
     "name": "Antwerp 2022 Contenders Sticker Capsule",
-    "caseImage": "assets/cases/460.png",
+    "caseImage": "assets/cases/1984.webp",
     "releaseDate": "2022-05-09",
     "type": "STICKER_CAPSULE",
     "tournamentName": null,
@@ -3998,7 +3998,7 @@
   {
     "id": "10",
     "name": "Antwerp 2022 Dust II Souvenir Package",
-    "caseImage": "assets/cases/10.png",
+    "caseImage": "assets/cases/10.webp",
     "releaseDate": "2022-05-09",
     "type": "SOUVENIR_PACKAGE",
     "tournamentName": "PGL Antwerp 2022",
@@ -4010,7 +4010,7 @@
   {
     "id": "11",
     "name": "Antwerp 2022 Inferno Souvenir Package",
-    "caseImage": "assets/cases/11.png",
+    "caseImage": "assets/cases/11.webp",
     "releaseDate": "2022-05-09",
     "type": "SOUVENIR_PACKAGE",
     "tournamentName": "PGL Antwerp 2022",
@@ -4020,9 +4020,9 @@
     "sourceName": null
   },
   {
-    "id": "461",
+    "id": "1985",
     "name": "Antwerp 2022 Legends Autograph Capsule",
-    "caseImage": "assets/cases/461.png",
+    "caseImage": "assets/cases/1985.webp",
     "releaseDate": "2022-05-09",
     "type": "STICKER_CAPSULE",
     "tournamentName": null,
@@ -4032,9 +4032,9 @@
     "sourceName": null
   },
   {
-    "id": "462",
+    "id": "1986",
     "name": "Antwerp 2022 Legends Sticker Capsule",
-    "caseImage": "assets/cases/462.png",
+    "caseImage": "assets/cases/1986.webp",
     "releaseDate": "2022-05-09",
     "type": "STICKER_CAPSULE",
     "tournamentName": null,
@@ -4046,7 +4046,7 @@
   {
     "id": "14",
     "name": "Antwerp 2022 Mirage Souvenir Package",
-    "caseImage": "assets/cases/14.png",
+    "caseImage": "assets/cases/14.webp",
     "releaseDate": "2022-05-09",
     "type": "SOUVENIR_PACKAGE",
     "tournamentName": "PGL Antwerp 2022",
@@ -4058,7 +4058,7 @@
   {
     "id": "15",
     "name": "Antwerp 2022 Nuke Souvenir Package",
-    "caseImage": "assets/cases/15.png",
+    "caseImage": "assets/cases/15.webp",
     "releaseDate": "2022-05-09",
     "type": "SOUVENIR_PACKAGE",
     "tournamentName": "PGL Antwerp 2022",
@@ -4070,7 +4070,7 @@
   {
     "id": "16",
     "name": "Antwerp 2022 Overpass Souvenir Package",
-    "caseImage": "assets/cases/16.png",
+    "caseImage": "assets/cases/16.webp",
     "releaseDate": "2022-05-09",
     "type": "SOUVENIR_PACKAGE",
     "tournamentName": "PGL Antwerp 2022",
@@ -4082,7 +4082,7 @@
   {
     "id": "17",
     "name": "Antwerp 2022 Vertigo Souvenir Package",
-    "caseImage": "assets/cases/17.png",
+    "caseImage": "assets/cases/17.webp",
     "releaseDate": "2022-05-09",
     "type": "SOUVENIR_PACKAGE",
     "tournamentName": "PGL Antwerp 2022",
@@ -4092,9 +4092,9 @@
     "sourceName": null
   },
   {
-    "id": "453",
+    "id": "1977",
     "name": "10 Year Birthday Sticker Capsule",
-    "caseImage": "assets/cases/453.png",
+    "caseImage": "assets/cases/1977.webp",
     "releaseDate": "2022-06-15",
     "type": "STICKER_CAPSULE",
     "tournamentName": null,
@@ -4106,7 +4106,7 @@
   {
     "id": "331",
     "name": "Recoil Case",
-    "caseImage": "assets/cases/331.png",
+    "caseImage": "assets/cases/331.webp",
     "releaseDate": "2022-07-01",
     "type": "CASE",
     "tournamentName": null,
@@ -4116,9 +4116,9 @@
     "sourceName": null
   },
   {
-    "id": "600",
+    "id": "2124",
     "name": "Initiators Music Kit Box",
-    "caseImage": "assets/cases/600.png",
+    "caseImage": "assets/cases/2124.webp",
     "releaseDate": "2022-08-15",
     "type": "MUSIC_KIT_BOX",
     "tournamentName": null,
@@ -4128,9 +4128,9 @@
     "sourceName": null
   },
   {
-    "id": "640",
+    "id": "2164",
     "name": "StatTrak™ Initiators Music Kit Box",
-    "caseImage": "assets/cases/640.png",
+    "caseImage": "assets/cases/2164.webp",
     "releaseDate": "2022-08-15",
     "type": "MUSIC_KIT_BOX",
     "tournamentName": null,
@@ -4142,7 +4142,7 @@
   {
     "id": "334",
     "name": "Rio 2022 Ancient Souvenir Package",
-    "caseImage": "assets/cases/334.png",
+    "caseImage": "assets/cases/334.webp",
     "releaseDate": "2022-10-31",
     "type": "SOUVENIR_PACKAGE",
     "tournamentName": "IEM Rio 2022",
@@ -4152,9 +4152,9 @@
     "sourceName": null
   },
   {
-    "id": "623",
+    "id": "2147",
     "name": "Rio 2022 Challengers Autograph Capsule",
-    "caseImage": "assets/cases/623.png",
+    "caseImage": "assets/cases/2147.webp",
     "releaseDate": "2022-10-31",
     "type": "STICKER_CAPSULE",
     "tournamentName": null,
@@ -4164,9 +4164,9 @@
     "sourceName": null
   },
   {
-    "id": "624",
+    "id": "2148",
     "name": "Rio 2022 Challengers Sticker Capsule",
-    "caseImage": "assets/cases/624.png",
+    "caseImage": "assets/cases/2148.webp",
     "releaseDate": "2022-10-31",
     "type": "STICKER_CAPSULE",
     "tournamentName": null,
@@ -4176,9 +4176,9 @@
     "sourceName": null
   },
   {
-    "id": "625",
+    "id": "2149",
     "name": "Rio 2022 Champions Autograph Capsule",
-    "caseImage": "assets/cases/625.png",
+    "caseImage": "assets/cases/2149.webp",
     "releaseDate": "2022-10-31",
     "type": "STICKER_CAPSULE",
     "tournamentName": null,
@@ -4188,9 +4188,9 @@
     "sourceName": null
   },
   {
-    "id": "626",
+    "id": "2150",
     "name": "Rio 2022 Contenders Autograph Capsule",
-    "caseImage": "assets/cases/626.png",
+    "caseImage": "assets/cases/2150.webp",
     "releaseDate": "2022-10-31",
     "type": "STICKER_CAPSULE",
     "tournamentName": null,
@@ -4200,9 +4200,9 @@
     "sourceName": null
   },
   {
-    "id": "627",
+    "id": "2151",
     "name": "Rio 2022 Contenders Sticker Capsule",
-    "caseImage": "assets/cases/627.png",
+    "caseImage": "assets/cases/2151.webp",
     "releaseDate": "2022-10-31",
     "type": "STICKER_CAPSULE",
     "tournamentName": null,
@@ -4214,7 +4214,7 @@
   {
     "id": "340",
     "name": "Rio 2022 Dust II Souvenir Package",
-    "caseImage": "assets/cases/340.png",
+    "caseImage": "assets/cases/340.webp",
     "releaseDate": "2022-10-31",
     "type": "SOUVENIR_PACKAGE",
     "tournamentName": "IEM Rio 2022",
@@ -4226,7 +4226,7 @@
   {
     "id": "341",
     "name": "Rio 2022 Inferno Souvenir Package",
-    "caseImage": "assets/cases/341.png",
+    "caseImage": "assets/cases/341.webp",
     "releaseDate": "2022-10-31",
     "type": "SOUVENIR_PACKAGE",
     "tournamentName": "IEM Rio 2022",
@@ -4236,9 +4236,9 @@
     "sourceName": null
   },
   {
-    "id": "628",
+    "id": "2152",
     "name": "Rio 2022 Legends Autograph Capsule",
-    "caseImage": "assets/cases/628.png",
+    "caseImage": "assets/cases/2152.webp",
     "releaseDate": "2022-10-31",
     "type": "STICKER_CAPSULE",
     "tournamentName": null,
@@ -4248,9 +4248,9 @@
     "sourceName": null
   },
   {
-    "id": "629",
+    "id": "2153",
     "name": "Rio 2022 Legends Sticker Capsule",
-    "caseImage": "assets/cases/629.png",
+    "caseImage": "assets/cases/2153.webp",
     "releaseDate": "2022-10-31",
     "type": "STICKER_CAPSULE",
     "tournamentName": null,
@@ -4262,7 +4262,7 @@
   {
     "id": "344",
     "name": "Rio 2022 Mirage Souvenir Package",
-    "caseImage": "assets/cases/344.png",
+    "caseImage": "assets/cases/344.webp",
     "releaseDate": "2022-10-31",
     "type": "SOUVENIR_PACKAGE",
     "tournamentName": "IEM Rio 2022",
@@ -4274,7 +4274,7 @@
   {
     "id": "345",
     "name": "Rio 2022 Nuke Souvenir Package",
-    "caseImage": "assets/cases/345.png",
+    "caseImage": "assets/cases/345.webp",
     "releaseDate": "2022-10-31",
     "type": "SOUVENIR_PACKAGE",
     "tournamentName": "IEM Rio 2022",
@@ -4286,7 +4286,7 @@
   {
     "id": "346",
     "name": "Rio 2022 Overpass Souvenir Package",
-    "caseImage": "assets/cases/346.png",
+    "caseImage": "assets/cases/346.webp",
     "releaseDate": "2022-10-31",
     "type": "SOUVENIR_PACKAGE",
     "tournamentName": "IEM Rio 2022",
@@ -4298,7 +4298,7 @@
   {
     "id": "347",
     "name": "Rio 2022 Vertigo Souvenir Package",
-    "caseImage": "assets/cases/347.png",
+    "caseImage": "assets/cases/347.webp",
     "releaseDate": "2022-10-31",
     "type": "SOUVENIR_PACKAGE",
     "tournamentName": "IEM Rio 2022",
@@ -4308,9 +4308,9 @@
     "sourceName": null
   },
   {
-    "id": "595",
+    "id": "2119",
     "name": "Espionage Sticker Capsule",
-    "caseImage": "assets/cases/595.png",
+    "caseImage": "assets/cases/2119.webp",
     "releaseDate": "2023-01-05",
     "type": "STICKER_CAPSULE",
     "tournamentName": null,
@@ -4322,7 +4322,7 @@
   {
     "id": "332",
     "name": "Revolution Case",
-    "caseImage": "assets/cases/332.png",
+    "caseImage": "assets/cases/332.webp",
     "releaseDate": "2023-02-09",
     "type": "CASE",
     "tournamentName": null,
@@ -4334,7 +4334,7 @@
   {
     "id": "18",
     "name": "Anubis Collection Package",
-    "caseImage": "assets/cases/18.png",
+    "caseImage": "assets/cases/18.webp",
     "releaseDate": "2023-03-22",
     "type": "COLLECTION_PACKAGE",
     "tournamentName": null,
@@ -4346,7 +4346,7 @@
   {
     "id": "311",
     "name": "Paris 2023 Ancient Souvenir Package",
-    "caseImage": "assets/cases/311.png",
+    "caseImage": "assets/cases/311.webp",
     "releaseDate": "2023-05-08",
     "type": "SOUVENIR_PACKAGE",
     "tournamentName": "BLAST.tv Paris 2023",
@@ -4358,7 +4358,7 @@
   {
     "id": "312",
     "name": "Paris 2023 Anubis Souvenir Package",
-    "caseImage": "assets/cases/312.png",
+    "caseImage": "assets/cases/312.webp",
     "releaseDate": "2023-05-08",
     "type": "SOUVENIR_PACKAGE",
     "tournamentName": "BLAST.tv Paris 2023",
@@ -4368,9 +4368,9 @@
     "sourceName": null
   },
   {
-    "id": "612",
+    "id": "2136",
     "name": "Paris 2023 Challengers Autograph Capsule",
-    "caseImage": "assets/cases/612.png",
+    "caseImage": "assets/cases/2136.webp",
     "releaseDate": "2023-05-08",
     "type": "STICKER_CAPSULE",
     "tournamentName": null,
@@ -4380,9 +4380,9 @@
     "sourceName": null
   },
   {
-    "id": "613",
+    "id": "2137",
     "name": "Paris 2023 Challengers Sticker Capsule",
-    "caseImage": "assets/cases/613.png",
+    "caseImage": "assets/cases/2137.webp",
     "releaseDate": "2023-05-08",
     "type": "STICKER_CAPSULE",
     "tournamentName": null,
@@ -4392,9 +4392,9 @@
     "sourceName": null
   },
   {
-    "id": "614",
+    "id": "2138",
     "name": "Paris 2023 Champions Autograph Capsule",
-    "caseImage": "assets/cases/614.png",
+    "caseImage": "assets/cases/2138.webp",
     "releaseDate": "2023-05-08",
     "type": "STICKER_CAPSULE",
     "tournamentName": null,
@@ -4404,9 +4404,9 @@
     "sourceName": null
   },
   {
-    "id": "615",
+    "id": "2139",
     "name": "Paris 2023 Contenders Autograph Capsule",
-    "caseImage": "assets/cases/615.png",
+    "caseImage": "assets/cases/2139.webp",
     "releaseDate": "2023-05-08",
     "type": "STICKER_CAPSULE",
     "tournamentName": null,
@@ -4416,9 +4416,9 @@
     "sourceName": null
   },
   {
-    "id": "616",
+    "id": "2140",
     "name": "Paris 2023 Contenders Sticker Capsule",
-    "caseImage": "assets/cases/616.png",
+    "caseImage": "assets/cases/2140.webp",
     "releaseDate": "2023-05-08",
     "type": "STICKER_CAPSULE",
     "tournamentName": null,
@@ -4430,7 +4430,7 @@
   {
     "id": "318",
     "name": "Paris 2023 Inferno Souvenir Package",
-    "caseImage": "assets/cases/318.png",
+    "caseImage": "assets/cases/318.webp",
     "releaseDate": "2023-05-08",
     "type": "SOUVENIR_PACKAGE",
     "tournamentName": "BLAST.tv Paris 2023",
@@ -4440,9 +4440,9 @@
     "sourceName": null
   },
   {
-    "id": "617",
+    "id": "2141",
     "name": "Paris 2023 Legends Autograph Capsule",
-    "caseImage": "assets/cases/617.png",
+    "caseImage": "assets/cases/2141.webp",
     "releaseDate": "2023-05-08",
     "type": "STICKER_CAPSULE",
     "tournamentName": null,
@@ -4452,9 +4452,9 @@
     "sourceName": null
   },
   {
-    "id": "618",
+    "id": "2142",
     "name": "Paris 2023 Legends Sticker Capsule",
-    "caseImage": "assets/cases/618.png",
+    "caseImage": "assets/cases/2142.webp",
     "releaseDate": "2023-05-08",
     "type": "STICKER_CAPSULE",
     "tournamentName": null,
@@ -4466,7 +4466,7 @@
   {
     "id": "321",
     "name": "Paris 2023 Mirage Souvenir Package",
-    "caseImage": "assets/cases/321.png",
+    "caseImage": "assets/cases/321.webp",
     "releaseDate": "2023-05-08",
     "type": "SOUVENIR_PACKAGE",
     "tournamentName": "BLAST.tv Paris 2023",
@@ -4478,7 +4478,7 @@
   {
     "id": "322",
     "name": "Paris 2023 Nuke Souvenir Package",
-    "caseImage": "assets/cases/322.png",
+    "caseImage": "assets/cases/322.webp",
     "releaseDate": "2023-05-08",
     "type": "SOUVENIR_PACKAGE",
     "tournamentName": "BLAST.tv Paris 2023",
@@ -4490,7 +4490,7 @@
   {
     "id": "323",
     "name": "Paris 2023 Overpass Souvenir Package",
-    "caseImage": "assets/cases/323.png",
+    "caseImage": "assets/cases/323.webp",
     "releaseDate": "2023-05-08",
     "type": "SOUVENIR_PACKAGE",
     "tournamentName": "BLAST.tv Paris 2023",
@@ -4502,7 +4502,7 @@
   {
     "id": "324",
     "name": "Paris 2023 Vertigo Souvenir Package",
-    "caseImage": "assets/cases/324.png",
+    "caseImage": "assets/cases/324.webp",
     "releaseDate": "2023-05-08",
     "type": "SOUVENIR_PACKAGE",
     "tournamentName": "BLAST.tv Paris 2023",
@@ -4512,9 +4512,9 @@
     "sourceName": null
   },
   {
-    "id": "611",
+    "id": "2135",
     "name": "NIGHTMODE Music Kit Box",
-    "caseImage": "assets/cases/611.png",
+    "caseImage": "assets/cases/2135.webp",
     "releaseDate": "2024-01-24",
     "type": "MUSIC_KIT_BOX",
     "tournamentName": null,
@@ -4524,9 +4524,9 @@
     "sourceName": null
   },
   {
-    "id": "643",
+    "id": "2167",
     "name": "StatTrak™ NIGHTMODE Music Kit Box",
-    "caseImage": "assets/cases/643.png",
+    "caseImage": "assets/cases/2167.webp",
     "releaseDate": "2024-01-24",
     "type": "MUSIC_KIT_BOX",
     "tournamentName": null,
@@ -4536,9 +4536,9 @@
     "sourceName": null
   },
   {
-    "id": "455",
+    "id": "1979",
     "name": "Ambush Sticker Capsule",
-    "caseImage": "assets/cases/455.png",
+    "caseImage": "assets/cases/1979.webp",
     "releaseDate": "2024-01-25",
     "type": "STICKER_CAPSULE",
     "tournamentName": null,
@@ -4550,7 +4550,7 @@
   {
     "id": "272",
     "name": "Kilowatt Case",
-    "caseImage": "assets/cases/272.png",
+    "caseImage": "assets/cases/272.webp",
     "releaseDate": "2024-02-06",
     "type": "CASE",
     "tournamentName": null,
@@ -4562,7 +4562,7 @@
   {
     "id": "192",
     "name": "Copenhagen 2024 Ancient Souvenir Package",
-    "caseImage": "assets/cases/192.png",
+    "caseImage": "assets/cases/192.webp",
     "releaseDate": "2024-03-17",
     "type": "SOUVENIR_PACKAGE",
     "tournamentName": "PGL Copenhagen 2024",
@@ -4574,7 +4574,7 @@
   {
     "id": "193",
     "name": "Copenhagen 2024 Anubis Souvenir Package",
-    "caseImage": "assets/cases/193.png",
+    "caseImage": "assets/cases/193.webp",
     "releaseDate": "2024-03-17",
     "type": "SOUVENIR_PACKAGE",
     "tournamentName": "PGL Copenhagen 2024",
@@ -4584,9 +4584,9 @@
     "sourceName": null
   },
   {
-    "id": "586",
+    "id": "2110",
     "name": "Copenhagen 2024 Challengers Autograph Capsule",
-    "caseImage": "assets/cases/586.png",
+    "caseImage": "assets/cases/2110.webp",
     "releaseDate": "2024-03-17",
     "type": "STICKER_CAPSULE",
     "tournamentName": null,
@@ -4596,9 +4596,9 @@
     "sourceName": null
   },
   {
-    "id": "587",
+    "id": "2111",
     "name": "Copenhagen 2024 Challengers Sticker Capsule",
-    "caseImage": "assets/cases/587.png",
+    "caseImage": "assets/cases/2111.webp",
     "releaseDate": "2024-03-17",
     "type": "STICKER_CAPSULE",
     "tournamentName": null,
@@ -4608,9 +4608,9 @@
     "sourceName": null
   },
   {
-    "id": "588",
+    "id": "2112",
     "name": "Copenhagen 2024 Champions Autograph Capsule",
-    "caseImage": "assets/cases/588.png",
+    "caseImage": "assets/cases/2112.webp",
     "releaseDate": "2024-03-17",
     "type": "STICKER_CAPSULE",
     "tournamentName": null,
@@ -4620,9 +4620,9 @@
     "sourceName": null
   },
   {
-    "id": "589",
+    "id": "2113",
     "name": "Copenhagen 2024 Contenders Autograph Capsule",
-    "caseImage": "assets/cases/589.png",
+    "caseImage": "assets/cases/2113.webp",
     "releaseDate": "2024-03-17",
     "type": "STICKER_CAPSULE",
     "tournamentName": null,
@@ -4632,9 +4632,9 @@
     "sourceName": null
   },
   {
-    "id": "590",
+    "id": "2114",
     "name": "Copenhagen 2024 Contenders Sticker Capsule",
-    "caseImage": "assets/cases/590.png",
+    "caseImage": "assets/cases/2114.webp",
     "releaseDate": "2024-03-17",
     "type": "STICKER_CAPSULE",
     "tournamentName": null,
@@ -4646,7 +4646,7 @@
   {
     "id": "199",
     "name": "Copenhagen 2024 Inferno Souvenir Package",
-    "caseImage": "assets/cases/199.png",
+    "caseImage": "assets/cases/199.webp",
     "releaseDate": "2024-03-17",
     "type": "SOUVENIR_PACKAGE",
     "tournamentName": "PGL Copenhagen 2024",
@@ -4656,9 +4656,9 @@
     "sourceName": null
   },
   {
-    "id": "591",
+    "id": "2115",
     "name": "Copenhagen 2024 Legends Autograph Capsule",
-    "caseImage": "assets/cases/591.png",
+    "caseImage": "assets/cases/2115.webp",
     "releaseDate": "2024-03-17",
     "type": "STICKER_CAPSULE",
     "tournamentName": null,
@@ -4668,9 +4668,9 @@
     "sourceName": null
   },
   {
-    "id": "592",
+    "id": "2116",
     "name": "Copenhagen 2024 Legends Sticker Capsule",
-    "caseImage": "assets/cases/592.png",
+    "caseImage": "assets/cases/2116.webp",
     "releaseDate": "2024-03-17",
     "type": "STICKER_CAPSULE",
     "tournamentName": null,
@@ -4682,7 +4682,7 @@
   {
     "id": "202",
     "name": "Copenhagen 2024 Mirage Souvenir Package",
-    "caseImage": "assets/cases/202.png",
+    "caseImage": "assets/cases/202.webp",
     "releaseDate": "2024-03-17",
     "type": "SOUVENIR_PACKAGE",
     "tournamentName": "PGL Copenhagen 2024",
@@ -4694,7 +4694,7 @@
   {
     "id": "203",
     "name": "Copenhagen 2024 Nuke Souvenir Package",
-    "caseImage": "assets/cases/203.png",
+    "caseImage": "assets/cases/203.webp",
     "releaseDate": "2024-03-17",
     "type": "SOUVENIR_PACKAGE",
     "tournamentName": "PGL Copenhagen 2024",
@@ -4706,7 +4706,7 @@
   {
     "id": "204",
     "name": "Copenhagen 2024 Overpass Souvenir Package",
-    "caseImage": "assets/cases/204.png",
+    "caseImage": "assets/cases/204.webp",
     "releaseDate": "2024-03-17",
     "type": "SOUVENIR_PACKAGE",
     "tournamentName": "PGL Copenhagen 2024",
@@ -4718,7 +4718,7 @@
   {
     "id": "205",
     "name": "Copenhagen 2024 Vertigo Souvenir Package",
-    "caseImage": "assets/cases/205.png",
+    "caseImage": "assets/cases/205.webp",
     "releaseDate": "2024-03-17",
     "type": "SOUVENIR_PACKAGE",
     "tournamentName": "PGL Copenhagen 2024",
@@ -4728,9 +4728,9 @@
     "sourceName": null
   },
   {
-    "id": "609",
+    "id": "2133",
     "name": "Masterminds 2 Music Kit Box",
-    "caseImage": "assets/cases/609.png",
+    "caseImage": "assets/cases/2133.webp",
     "releaseDate": "2024-08-15",
     "type": "MUSIC_KIT_BOX",
     "tournamentName": null,
@@ -4740,9 +4740,9 @@
     "sourceName": null
   },
   {
-    "id": "641",
+    "id": "2165",
     "name": "StatTrak™ Masterminds 2 Music Kit Box",
-    "caseImage": "assets/cases/641.png",
+    "caseImage": "assets/cases/2165.webp",
     "releaseDate": "2024-08-15",
     "type": "MUSIC_KIT_BOX",
     "tournamentName": null,
@@ -4752,9 +4752,9 @@
     "sourceName": null
   },
   {
-    "id": "696",
+    "id": "2220",
     "name": "Character Craft Sticker Pack",
-    "caseImage": "assets/cases/696.png",
+    "caseImage": "assets/cases/2220.webp",
     "releaseDate": "2024-10-02",
     "type": "STICKER_COLLECTION",
     "tournamentName": null,
@@ -4764,9 +4764,9 @@
     "sourceName": "The Armory"
   },
   {
-    "id": "704",
+    "id": "2228",
     "name": "Elemental Craft Sticker Pack",
-    "caseImage": "assets/cases/704.png",
+    "caseImage": "assets/cases/2228.webp",
     "releaseDate": "2024-10-02",
     "type": "STICKER_COLLECTION",
     "tournamentName": null,
@@ -4778,7 +4778,7 @@
   {
     "id": "252",
     "name": "Gallery Case",
-    "caseImage": "assets/cases/252.png",
+    "caseImage": "assets/cases/252.webp",
     "releaseDate": "2024-10-02",
     "type": "CASE",
     "tournamentName": null,
@@ -4790,7 +4790,7 @@
   {
     "id": "351",
     "name": "Shanghai 2024 Ancient Souvenir Package",
-    "caseImage": "assets/cases/351.png",
+    "caseImage": "assets/cases/351.webp",
     "releaseDate": "2024-11-30",
     "type": "SOUVENIR_PACKAGE",
     "tournamentName": "Perfect World Shanghai 2024",
@@ -4802,7 +4802,7 @@
   {
     "id": "352",
     "name": "Shanghai 2024 Anubis Souvenir Package",
-    "caseImage": "assets/cases/352.png",
+    "caseImage": "assets/cases/352.webp",
     "releaseDate": "2024-11-30",
     "type": "SOUVENIR_PACKAGE",
     "tournamentName": "Perfect World Shanghai 2024",
@@ -4812,9 +4812,9 @@
     "sourceName": null
   },
   {
-    "id": "630",
+    "id": "2154",
     "name": "Shanghai 2024 Challengers Autograph Capsule",
-    "caseImage": "assets/cases/630.png",
+    "caseImage": "assets/cases/2154.webp",
     "releaseDate": "2024-11-30",
     "type": "STICKER_CAPSULE",
     "tournamentName": null,
@@ -4824,9 +4824,9 @@
     "sourceName": null
   },
   {
-    "id": "631",
+    "id": "2155",
     "name": "Shanghai 2024 Challengers Sticker Capsule",
-    "caseImage": "assets/cases/631.png",
+    "caseImage": "assets/cases/2155.webp",
     "releaseDate": "2024-11-30",
     "type": "STICKER_CAPSULE",
     "tournamentName": null,
@@ -4836,9 +4836,9 @@
     "sourceName": null
   },
   {
-    "id": "632",
+    "id": "2156",
     "name": "Shanghai 2024 Champions Autograph Capsule",
-    "caseImage": "assets/cases/632.png",
+    "caseImage": "assets/cases/2156.webp",
     "releaseDate": "2024-11-30",
     "type": "STICKER_CAPSULE",
     "tournamentName": null,
@@ -4848,9 +4848,9 @@
     "sourceName": null
   },
   {
-    "id": "633",
+    "id": "2157",
     "name": "Shanghai 2024 Contenders Autograph Capsule",
-    "caseImage": "assets/cases/633.png",
+    "caseImage": "assets/cases/2157.webp",
     "releaseDate": "2024-11-30",
     "type": "STICKER_CAPSULE",
     "tournamentName": null,
@@ -4860,9 +4860,9 @@
     "sourceName": null
   },
   {
-    "id": "634",
+    "id": "2158",
     "name": "Shanghai 2024 Contenders Sticker Capsule",
-    "caseImage": "assets/cases/634.png",
+    "caseImage": "assets/cases/2158.webp",
     "releaseDate": "2024-11-30",
     "type": "STICKER_CAPSULE",
     "tournamentName": null,
@@ -4874,7 +4874,7 @@
   {
     "id": "358",
     "name": "Shanghai 2024 Dust II Souvenir Package",
-    "caseImage": "assets/cases/358.png",
+    "caseImage": "assets/cases/358.webp",
     "releaseDate": "2024-11-30",
     "type": "SOUVENIR_PACKAGE",
     "tournamentName": "Perfect World Shanghai 2024",
@@ -4886,7 +4886,7 @@
   {
     "id": "359",
     "name": "Shanghai 2024 Inferno Souvenir Package",
-    "caseImage": "assets/cases/359.png",
+    "caseImage": "assets/cases/359.webp",
     "releaseDate": "2024-11-30",
     "type": "SOUVENIR_PACKAGE",
     "tournamentName": "Perfect World Shanghai 2024",
@@ -4896,9 +4896,9 @@
     "sourceName": null
   },
   {
-    "id": "635",
+    "id": "2159",
     "name": "Shanghai 2024 Legends Autograph Capsule",
-    "caseImage": "assets/cases/635.png",
+    "caseImage": "assets/cases/2159.webp",
     "releaseDate": "2024-11-30",
     "type": "STICKER_CAPSULE",
     "tournamentName": null,
@@ -4908,9 +4908,9 @@
     "sourceName": null
   },
   {
-    "id": "636",
+    "id": "2160",
     "name": "Shanghai 2024 Legends Sticker Capsule",
-    "caseImage": "assets/cases/636.png",
+    "caseImage": "assets/cases/2160.webp",
     "releaseDate": "2024-11-30",
     "type": "STICKER_CAPSULE",
     "tournamentName": null,
@@ -4922,7 +4922,7 @@
   {
     "id": "362",
     "name": "Shanghai 2024 Mirage Souvenir Package",
-    "caseImage": "assets/cases/362.png",
+    "caseImage": "assets/cases/362.webp",
     "releaseDate": "2024-11-30",
     "type": "SOUVENIR_PACKAGE",
     "tournamentName": "Perfect World Shanghai 2024",
@@ -4934,7 +4934,7 @@
   {
     "id": "363",
     "name": "Shanghai 2024 Nuke Souvenir Package",
-    "caseImage": "assets/cases/363.png",
+    "caseImage": "assets/cases/363.webp",
     "releaseDate": "2024-11-30",
     "type": "SOUVENIR_PACKAGE",
     "tournamentName": "Perfect World Shanghai 2024",
@@ -4946,7 +4946,7 @@
   {
     "id": "364",
     "name": "Shanghai 2024 Vertigo Souvenir Package",
-    "caseImage": "assets/cases/364.png",
+    "caseImage": "assets/cases/364.webp",
     "releaseDate": "2024-11-30",
     "type": "SOUVENIR_PACKAGE",
     "tournamentName": "Perfect World Shanghai 2024",
@@ -4958,7 +4958,7 @@
   {
     "id": "250",
     "name": "Fever Case",
-    "caseImage": "assets/cases/250.png",
+    "caseImage": "assets/cases/250.webp",
     "releaseDate": "2025-03-31",
     "type": "CASE",
     "tournamentName": null,
@@ -4968,9 +4968,9 @@
     "sourceName": null
   },
   {
-    "id": "657",
+    "id": "2181",
     "name": "Warhammer 40,000 Adeptus Astartes Sticker Capsule",
-    "caseImage": "assets/cases/657.png",
+    "caseImage": "assets/cases/2181.webp",
     "releaseDate": "2025-05-22",
     "type": "STICKER_CAPSULE",
     "tournamentName": null,
@@ -4980,9 +4980,9 @@
     "sourceName": null
   },
   {
-    "id": "658",
+    "id": "2182",
     "name": "Warhammer 40,000 Imperium Sticker Capsule",
-    "caseImage": "assets/cases/658.png",
+    "caseImage": "assets/cases/2182.webp",
     "releaseDate": "2025-05-22",
     "type": "STICKER_CAPSULE",
     "tournamentName": null,
@@ -4992,9 +4992,9 @@
     "sourceName": null
   },
   {
-    "id": "660",
+    "id": "2184",
     "name": "Warhammer 40,000 Traitor Astartes Sticker Capsule",
-    "caseImage": "assets/cases/660.png",
+    "caseImage": "assets/cases/2184.webp",
     "releaseDate": "2025-05-22",
     "type": "STICKER_CAPSULE",
     "tournamentName": null,
@@ -5004,9 +5004,9 @@
     "sourceName": null
   },
   {
-    "id": "661",
+    "id": "2185",
     "name": "Warhammer 40,000 Xenos Sticker Capsule",
-    "caseImage": "assets/cases/661.png",
+    "caseImage": "assets/cases/2185.webp",
     "releaseDate": "2025-05-22",
     "type": "STICKER_CAPSULE",
     "tournamentName": null,
@@ -5018,7 +5018,7 @@
   {
     "id": "26",
     "name": "Austin 2025 Ancient Souvenir Package",
-    "caseImage": "assets/cases/26.png",
+    "caseImage": "assets/cases/26.webp",
     "releaseDate": "2025-06-03",
     "type": "SOUVENIR_PACKAGE",
     "tournamentName": "BLAST.tv Austin 2025",
@@ -5030,7 +5030,7 @@
   {
     "id": "27",
     "name": "Austin 2025 Anubis Souvenir Package",
-    "caseImage": "assets/cases/27.png",
+    "caseImage": "assets/cases/27.webp",
     "releaseDate": "2025-06-03",
     "type": "SOUVENIR_PACKAGE",
     "tournamentName": "BLAST.tv Austin 2025",
@@ -5040,9 +5040,9 @@
     "sourceName": null
   },
   {
-    "id": "463",
+    "id": "1987",
     "name": "Austin 2025 Challengers Autograph Capsule",
-    "caseImage": "assets/cases/463.png",
+    "caseImage": "assets/cases/1987.webp",
     "releaseDate": "2025-06-03",
     "type": "STICKER_CAPSULE",
     "tournamentName": null,
@@ -5052,9 +5052,9 @@
     "sourceName": null
   },
   {
-    "id": "464",
+    "id": "1988",
     "name": "Austin 2025 Challengers Sticker Capsule",
-    "caseImage": "assets/cases/464.png",
+    "caseImage": "assets/cases/1988.webp",
     "releaseDate": "2025-06-03",
     "type": "STICKER_CAPSULE",
     "tournamentName": null,
@@ -5064,9 +5064,9 @@
     "sourceName": null
   },
   {
-    "id": "465",
+    "id": "1989",
     "name": "Austin 2025 Champions Autograph Capsule",
-    "caseImage": "assets/cases/465.png",
+    "caseImage": "assets/cases/1989.webp",
     "releaseDate": "2025-06-03",
     "type": "STICKER_CAPSULE",
     "tournamentName": null,
@@ -5076,9 +5076,9 @@
     "sourceName": null
   },
   {
-    "id": "466",
+    "id": "1990",
     "name": "Austin 2025 Contenders Autograph Capsule",
-    "caseImage": "assets/cases/466.png",
+    "caseImage": "assets/cases/1990.webp",
     "releaseDate": "2025-06-03",
     "type": "STICKER_CAPSULE",
     "tournamentName": null,
@@ -5088,9 +5088,9 @@
     "sourceName": null
   },
   {
-    "id": "467",
+    "id": "1991",
     "name": "Austin 2025 Contenders Sticker Capsule",
-    "caseImage": "assets/cases/467.png",
+    "caseImage": "assets/cases/1991.webp",
     "releaseDate": "2025-06-03",
     "type": "STICKER_CAPSULE",
     "tournamentName": null,
@@ -5102,7 +5102,7 @@
   {
     "id": "33",
     "name": "Austin 2025 Dust II Souvenir Package",
-    "caseImage": "assets/cases/33.png",
+    "caseImage": "assets/cases/33.webp",
     "releaseDate": "2025-06-03",
     "type": "SOUVENIR_PACKAGE",
     "tournamentName": "BLAST.tv Austin 2025",
@@ -5114,7 +5114,7 @@
   {
     "id": "34",
     "name": "Austin 2025 Inferno Souvenir Package",
-    "caseImage": "assets/cases/34.png",
+    "caseImage": "assets/cases/34.webp",
     "releaseDate": "2025-06-03",
     "type": "SOUVENIR_PACKAGE",
     "tournamentName": "BLAST.tv Austin 2025",
@@ -5124,9 +5124,9 @@
     "sourceName": null
   },
   {
-    "id": "468",
+    "id": "1992",
     "name": "Austin 2025 Legends Autograph Capsule",
-    "caseImage": "assets/cases/468.png",
+    "caseImage": "assets/cases/1992.webp",
     "releaseDate": "2025-06-03",
     "type": "STICKER_CAPSULE",
     "tournamentName": null,
@@ -5136,9 +5136,9 @@
     "sourceName": null
   },
   {
-    "id": "469",
+    "id": "1993",
     "name": "Austin 2025 Legends Sticker Capsule",
-    "caseImage": "assets/cases/469.png",
+    "caseImage": "assets/cases/1993.webp",
     "releaseDate": "2025-06-03",
     "type": "STICKER_CAPSULE",
     "tournamentName": null,
@@ -5150,7 +5150,7 @@
   {
     "id": "37",
     "name": "Austin 2025 Mirage Souvenir Package",
-    "caseImage": "assets/cases/37.png",
+    "caseImage": "assets/cases/37.webp",
     "releaseDate": "2025-06-03",
     "type": "SOUVENIR_PACKAGE",
     "tournamentName": "BLAST.tv Austin 2025",
@@ -5162,7 +5162,7 @@
   {
     "id": "38",
     "name": "Austin 2025 Nuke Souvenir Package",
-    "caseImage": "assets/cases/38.png",
+    "caseImage": "assets/cases/38.webp",
     "releaseDate": "2025-06-03",
     "type": "SOUVENIR_PACKAGE",
     "tournamentName": "BLAST.tv Austin 2025",
@@ -5174,7 +5174,7 @@
   {
     "id": "39",
     "name": "Austin 2025 Train Souvenir Package",
-    "caseImage": "assets/cases/39.png",
+    "caseImage": "assets/cases/39.webp",
     "releaseDate": "2025-06-03",
     "type": "SOUVENIR_PACKAGE",
     "tournamentName": "BLAST.tv Austin 2025",
@@ -5184,9 +5184,9 @@
     "sourceName": null
   },
   {
-    "id": "593",
+    "id": "2117",
     "name": "Deluge Music Kit Box",
-    "caseImage": "assets/cases/593.png",
+    "caseImage": "assets/cases/2117.webp",
     "releaseDate": "2025-06-27",
     "type": "MUSIC_KIT_BOX",
     "tournamentName": null,
@@ -5196,9 +5196,9 @@
     "sourceName": null
   },
   {
-    "id": "639",
+    "id": "2163",
     "name": "StatTrak™ Deluge Music Kit Box",
-    "caseImage": "assets/cases/639.png",
+    "caseImage": "assets/cases/2163.webp",
     "releaseDate": "2025-06-27",
     "type": "MUSIC_KIT_BOX",
     "tournamentName": null,
@@ -5210,7 +5210,7 @@
   {
     "id": "349",
     "name": "Sealed Genesis Terminal",
-    "caseImage": "assets/cases/349.png",
+    "caseImage": "assets/cases/349.webp",
     "releaseDate": "2025-09-16",
     "type": "TERMINAL",
     "tournamentName": null,
@@ -5220,9 +5220,9 @@
     "sourceName": null
   },
   {
-    "id": "705",
+    "id": "2229",
     "name": "2025 Community Sticker Collection",
-    "caseImage": "assets/cases/705.png",
+    "caseImage": "assets/cases/2229.webp",
     "releaseDate": "2025-10-02",
     "type": "STICKER_COLLECTION",
     "tournamentName": null,
@@ -5232,9 +5232,9 @@
     "sourceName": "The Armory"
   },
   {
-    "id": "706",
+    "id": "2230",
     "name": "Sugarface 2 Sticker Collection",
-    "caseImage": "assets/cases/706.png",
+    "caseImage": "assets/cases/2230.webp",
     "releaseDate": "2025-10-02",
     "type": "STICKER_COLLECTION",
     "tournamentName": null,
@@ -5246,7 +5246,7 @@
   {
     "id": "156",
     "name": "Budapest 2025 Ancient Souvenir Package",
-    "caseImage": "assets/cases/156.png",
+    "caseImage": "assets/cases/156.webp",
     "releaseDate": "2025-11-24",
     "type": "SOUVENIR_PACKAGE",
     "tournamentName": "StarLadder Budapest 2025",
@@ -5256,9 +5256,9 @@
     "sourceName": null
   },
   {
-    "id": "572",
+    "id": "2096",
     "name": "Budapest 2025 Challengers Autograph Capsule",
-    "caseImage": "assets/cases/572.png",
+    "caseImage": "assets/cases/2096.webp",
     "releaseDate": "2025-11-24",
     "type": "STICKER_CAPSULE",
     "tournamentName": null,
@@ -5268,9 +5268,9 @@
     "sourceName": null
   },
   {
-    "id": "573",
+    "id": "2097",
     "name": "Budapest 2025 Challengers Sticker Capsule",
-    "caseImage": "assets/cases/573.png",
+    "caseImage": "assets/cases/2097.webp",
     "releaseDate": "2025-11-24",
     "type": "STICKER_CAPSULE",
     "tournamentName": null,
@@ -5280,9 +5280,9 @@
     "sourceName": null
   },
   {
-    "id": "574",
+    "id": "2098",
     "name": "Budapest 2025 Champions Autograph Capsule",
-    "caseImage": "assets/cases/574.png",
+    "caseImage": "assets/cases/2098.webp",
     "releaseDate": "2025-11-24",
     "type": "STICKER_CAPSULE",
     "tournamentName": null,
@@ -5292,9 +5292,9 @@
     "sourceName": null
   },
   {
-    "id": "575",
+    "id": "2099",
     "name": "Budapest 2025 Contenders Autograph Capsule",
-    "caseImage": "assets/cases/575.png",
+    "caseImage": "assets/cases/2099.webp",
     "releaseDate": "2025-11-24",
     "type": "STICKER_CAPSULE",
     "tournamentName": null,
@@ -5304,9 +5304,9 @@
     "sourceName": null
   },
   {
-    "id": "576",
+    "id": "2100",
     "name": "Budapest 2025 Contenders Sticker Capsule",
-    "caseImage": "assets/cases/576.png",
+    "caseImage": "assets/cases/2100.webp",
     "releaseDate": "2025-11-24",
     "type": "STICKER_CAPSULE",
     "tournamentName": null,
@@ -5318,7 +5318,7 @@
   {
     "id": "162",
     "name": "Budapest 2025 Dust II Souvenir Package",
-    "caseImage": "assets/cases/162.png",
+    "caseImage": "assets/cases/162.webp",
     "releaseDate": "2025-11-24",
     "type": "SOUVENIR_PACKAGE",
     "tournamentName": "StarLadder Budapest 2025",
@@ -5330,7 +5330,7 @@
   {
     "id": "163",
     "name": "Budapest 2025 Inferno Souvenir Package",
-    "caseImage": "assets/cases/163.png",
+    "caseImage": "assets/cases/163.webp",
     "releaseDate": "2025-11-24",
     "type": "SOUVENIR_PACKAGE",
     "tournamentName": "StarLadder Budapest 2025",
@@ -5340,9 +5340,9 @@
     "sourceName": null
   },
   {
-    "id": "577",
+    "id": "2101",
     "name": "Budapest 2025 Legends Autograph Capsule",
-    "caseImage": "assets/cases/577.png",
+    "caseImage": "assets/cases/2101.webp",
     "releaseDate": "2025-11-24",
     "type": "STICKER_CAPSULE",
     "tournamentName": null,
@@ -5352,9 +5352,9 @@
     "sourceName": null
   },
   {
-    "id": "578",
+    "id": "2102",
     "name": "Budapest 2025 Legends Sticker Capsule",
-    "caseImage": "assets/cases/578.png",
+    "caseImage": "assets/cases/2102.webp",
     "releaseDate": "2025-11-24",
     "type": "STICKER_CAPSULE",
     "tournamentName": null,
@@ -5366,7 +5366,7 @@
   {
     "id": "166",
     "name": "Budapest 2025 Mirage Souvenir Package",
-    "caseImage": "assets/cases/166.png",
+    "caseImage": "assets/cases/166.webp",
     "releaseDate": "2025-11-24",
     "type": "SOUVENIR_PACKAGE",
     "tournamentName": "StarLadder Budapest 2025",
@@ -5378,7 +5378,7 @@
   {
     "id": "167",
     "name": "Budapest 2025 Nuke Souvenir Package",
-    "caseImage": "assets/cases/167.png",
+    "caseImage": "assets/cases/167.webp",
     "releaseDate": "2025-11-24",
     "type": "SOUVENIR_PACKAGE",
     "tournamentName": "StarLadder Budapest 2025",
@@ -5390,7 +5390,7 @@
   {
     "id": "168",
     "name": "Budapest 2025 Overpass Souvenir Package",
-    "caseImage": "assets/cases/168.png",
+    "caseImage": "assets/cases/168.webp",
     "releaseDate": "2025-11-24",
     "type": "SOUVENIR_PACKAGE",
     "tournamentName": "StarLadder Budapest 2025",
@@ -5402,7 +5402,7 @@
   {
     "id": "169",
     "name": "Budapest 2025 Train Souvenir Package",
-    "caseImage": "assets/cases/169.png",
+    "caseImage": "assets/cases/169.webp",
     "releaseDate": "2025-11-24",
     "type": "SOUVENIR_PACKAGE",
     "tournamentName": "StarLadder Budapest 2025",
@@ -5414,7 +5414,7 @@
   {
     "id": "348",
     "name": "Sealed Dead Hand Terminal",
-    "caseImage": "assets/cases/348.png",
+    "caseImage": "assets/cases/348.webp",
     "releaseDate": "2026-03-11",
     "type": "TERMINAL",
     "tournamentName": null,

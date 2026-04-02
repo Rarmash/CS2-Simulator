@@ -42,7 +42,7 @@
   {
     "id": "10001",
     "name": "The Ancient Collection",
-    "image": "assets/reward_collections/10001.png",
+    "image": "assets/reward_collections/10001.webp",
     "sourceType": "OPERATION",
     "sourceId": "BROKEN_FANG",
     "currency": "STARS",
@@ -52,7 +52,7 @@
   {
     "id": "10009",
     "name": "The Control Collection",
-    "image": "assets/reward_collections/10009.png",
+    "image": "assets/reward_collections/10009.webp",
     "sourceType": "OPERATION",
     "sourceId": "BROKEN_FANG",
     "currency": "STARS",
@@ -62,7 +62,7 @@
   {
     "id": "10002",
     "name": "The Havoc Collection",
-    "image": "assets/reward_collections/10002.png",
+    "image": "assets/reward_collections/10002.webp",
     "sourceType": "OPERATION",
     "sourceId": "BROKEN_FANG",
     "currency": "STARS",
@@ -72,7 +72,7 @@
   {
     "id": "10005",
     "name": "The 2021 Dust 2 Collection",
-    "image": "assets/reward_collections/10005.png",
+    "image": "assets/reward_collections/10005.webp",
     "sourceType": "OPERATION",
     "sourceId": "RIPTIDE",
     "currency": "STARS",
@@ -82,7 +82,7 @@
   {
     "id": "10011",
     "name": "The 2021 Mirage Collection",
-    "image": "assets/reward_collections/10011.png",
+    "image": "assets/reward_collections/10011.webp",
     "sourceType": "OPERATION",
     "sourceId": "RIPTIDE",
     "currency": "STARS",
@@ -92,7 +92,7 @@
   {
     "id": "10008",
     "name": "The 2021 Train Collection",
-    "image": "assets/reward_collections/10008.png",
+    "image": "assets/reward_collections/10008.webp",
     "sourceType": "OPERATION",
     "sourceId": "RIPTIDE",
     "currency": "STARS",
@@ -102,7 +102,7 @@
   {
     "id": "10007",
     "name": "The 2021 Vertigo Collection",
-    "image": "assets/reward_collections/10007.png",
+    "image": "assets/reward_collections/10007.webp",
     "sourceType": "OPERATION",
     "sourceId": "RIPTIDE",
     "currency": "STARS",

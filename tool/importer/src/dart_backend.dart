@@ -1,0 +1,1429 @@
+import 'dart:io';
+
+import 'backend.dart';
+import 'config.dart';
+import 'io_utils.dart';
+import 'normalization.dart';
+
+class DartImporterBackend implements ImporterBackend {
+  DartImporterBackend(this._io);
+
+  final IoUtils _io;
+
+  @override
+  Future<void> run() async {
+    await _io.ensureDirs();
+    await _io.resetCollectibleOutputs();
+
+    final rewardSourceOverrides = _loadRewardOverrides();
+    final operationCollectionOverrides = _loadOperationOverrides();
+
+    final allExistingCases = _io.loadJsonList(
+      File('${dataDir.path}/cases.json'),
+    );
+    final existingSkins = _io.loadJsonList(File('${dataDir.path}/skins.json'));
+    final existingStickers = <Map<String, dynamic>>[];
+    final existingPins = <Map<String, dynamic>>[];
+    final existingMusicKits = <Map<String, dynamic>>[];
+    final existingCases = allExistingCases.where((item) {
+      final type = (item['type'] ?? '').toString().trim().toUpperCase();
+      return !{
+        'STICKER_CAPSULE',
+        'STICKER_COLLECTION',
+        'PIN_CAPSULE',
+        'MUSIC_KIT_BOX',
+      }.contains(type);
+    }).toList();
+    final existingRewardCollections = _io.loadJsonList(
+      File('${dataDir.path}/reward_collections.json'),
+    );
+    final existingOperationCollections = _io.loadJsonList(
+      File('${dataDir.path}/operation_collections.json'),
+    );
+
+    final existingSkinByKey =
+        <(String, String, String, String), Map<String, dynamic>>{
+          for (final s in existingSkins)
+            existingSkinKey(s): Map<String, dynamic>.from(s),
+        };
+    final existingStickerByKey =
+        <(String, String, String, String), Map<String, dynamic>>{
+          for (final s in existingStickers)
+            existingStickerKey(s): Map<String, dynamic>.from(s),
+        };
+    final existingPinByKey = <(String, String), Map<String, dynamic>>{
+      for (final p in existingPins)
+        existingPinKey(p): Map<String, dynamic>.from(p),
+    };
+    final existingMusicKitByKey =
+        <(String, String, bool), Map<String, dynamic>>{
+          for (final m in existingMusicKits)
+            existingMusicKitKey(m): Map<String, dynamic>.from(m),
+        };
+    final existingCaseByName = <String, Map<String, dynamic>>{
+      for (final c in allExistingCases)
+        existingCaseKey(c): Map<String, dynamic>.from(c),
+    };
+    final existingRewardByKey = <String, Map<String, dynamic>>{
+      for (final c in existingRewardCollections)
+        rewardKeyFromItem(c): Map<String, dynamic>.from(c),
+    };
+    final existingOperationByKey = <String, Map<String, dynamic>>{
+      for (final c in existingOperationCollections)
+        operationKey(
+          (c['name'] ?? '').toString(),
+          (c['operationId'] ?? '').toString(),
+        ): Map<String, dynamic>.from(
+          c,
+        ),
+    };
+
+    final usedSkinIds = _extractUsedIds(existingSkins);
+    final usedStickerIds = _extractUsedIds(existingStickers);
+    final usedPinIds = _extractUsedIds(existingPins);
+    final usedMusicKitIds = _extractUsedIds(existingMusicKits);
+    final usedCaseIds = _extractUsedIds(allExistingCases);
+    final usedRewardIds = _extractUsedIds(existingRewardCollections);
+    final usedOperationIds = _extractUsedIds(existingOperationCollections);
+
+    var nextSkinId = _nextId(usedSkinIds, 0);
+    var nextStickerId = _nextId(usedStickerIds, 900000000);
+    var nextPinId = _nextId(usedPinIds, 950000000);
+    var nextMusicKitId = _nextId(usedMusicKitIds, 970000000);
+    var nextCaseId = _nextId(usedCaseIds, 0);
+    var nextRewardId = _nextId(usedRewardIds, 10000);
+    var nextOperationId = _nextId(usedOperationIds, 20000);
+
+    _io.printInfo('Fetching crates.json ...');
+    final crates = _asJsonList(await _io.fetchJson(cratesUrl));
+    _io.printInfo('Fetching skins.json ...');
+    final skinsData = _asJsonList(await _io.fetchJson(skinsUrl));
+    _io.printInfo('Fetching collections.json ...');
+    final collectionsData = _asJsonList(await _io.fetchJson(collectionsUrl));
+    _io.printInfo('Fetching stickers.json ...');
+    final stickersData = _asJsonList(await _io.fetchJson(stickersUrl));
+    _io.printInfo('Fetching music_kits.json ...');
+    final musicKitsData = _asJsonList(await _io.fetchJson(musicKitsUrl));
+
+    final collectionImageByName = buildCollectionImageMap(skinsData);
+    buildCollectionMetaMap(collectionsData);
+    final tournamentLogoByName = buildTournamentLogoMap(stickersData);
+
+    _io.printInfo('Tournament logo candidates: ${tournamentLogoByName.length}');
+
+    final newCases = <String, Map<String, dynamic>>{
+      for (final c in existingCases)
+        c['id'].toString(): Map<String, dynamic>.from(c),
+    };
+    final caseNameToId = <String, String>{
+      for (final c in existingCases)
+        (c['name'] ?? '').toString().trim(): (c['id'] ?? '').toString(),
+    };
+    final newRewardCollections = <String, Map<String, dynamic>>{
+      for (final c in existingRewardCollections)
+        c['id'].toString(): Map<String, dynamic>.from(c),
+    };
+    final rewardNameToId = <String, String>{
+      for (final c in existingRewardCollections)
+        rewardKeyFromItem(c): (c['id'] ?? '').toString(),
+    };
+    final newOperationCollections = <String, Map<String, dynamic>>{
+      for (final c in existingOperationCollections)
+        c['id'].toString(): Map<String, dynamic>.from(c),
+    };
+    final operationKeyToId = <String, String>{
+      for (final c in existingOperationCollections)
+        operationKey(
+          (c['name'] ?? '').toString(),
+          (c['operationId'] ?? '').toString(),
+        ): (c['id'] ?? '')
+            .toString(),
+    };
+
+    final supportedCrates = crates.where(isSupportedContainer).toList()
+      ..sort(
+        (a, b) => ((a['name'] ?? '').toString()).compareTo(
+          (b['name'] ?? '').toString(),
+        ),
+      );
+
+    final unresolvedReleaseDates = <String>[];
+    for (final crate in supportedCrates) {
+      final crateName = (crate['name'] ?? '').toString().trim();
+      if (crateName.isEmpty) {
+        continue;
+      }
+
+      final containerType = inferContainerType(
+        crateName,
+        crate['type']?.toString(),
+      );
+      final releaseDate = resolveContainerReleaseDate(
+        crateName: crateName,
+        containerType: containerType,
+      );
+      if (releaseDate == '2000-01-01') {
+        unresolvedReleaseDates.add('$containerType: $crateName');
+      }
+    }
+
+    if (unresolvedReleaseDates.isNotEmpty) {
+      throw StateError(
+        'Missing hardcoded release dates for supported containers:\n'
+        '${unresolvedReleaseDates.take(20).join('\n')}',
+      );
+    }
+
+    var tournamentLogosCreated = 0;
+    for (final crate in supportedCrates) {
+      final crateName = (crate['name'] ?? '').toString().trim();
+      if (crateName.isEmpty) {
+        continue;
+      }
+
+      final existingCase = existingCaseByName[crateName];
+      final caseId = existingCase != null
+          ? existingCase['id'].toString()
+          : (nextCaseId++).toString();
+      var releaseDate = existingCase?['releaseDate'];
+      final containerType = inferContainerType(
+        crateName,
+        crate['type']?.toString(),
+      );
+      releaseDate = resolveContainerReleaseDate(
+        crateName: crateName,
+        containerType: containerType,
+        crateMeta: crate,
+        existingReleaseDate: releaseDate,
+      );
+
+      String? tournamentName;
+      String? tournamentLogoRel;
+
+      if (containerType == 'SOUVENIR_PACKAGE') {
+        final resolved = resolveSouvenirLogoAndName(
+          crateName,
+          tournamentLogoByName,
+        );
+        tournamentName = resolved.$1;
+        final tournamentLogoUrl = resolved.$2;
+
+        if (tournamentName != null) {
+          final logoSlug = makeSafeSlug(tournamentName);
+          final existingLogoRel = findExistingLogoPathBySlug(logoSlug);
+          if (existingLogoRel != null) {
+            tournamentLogoRel = existingLogoRel;
+          } else if (tournamentLogoUrl != null) {
+            final ext = await _io.downloadFileWithRealExtension(
+              tournamentLogoUrl,
+              '${tournamentLogosDir.path}/$logoSlug',
+            );
+            if (ext != null) {
+              tournamentLogoRel = 'assets/tournament_logos/$logoSlug$ext';
+              tournamentLogosCreated += 1;
+            }
+          }
+        }
+      }
+
+      final caseImagePath = await _syncAsset(
+        imageUrl: crate['image']?.toString(),
+        dirPath: casesDir.path,
+        relativeDir: 'assets/cases',
+        id: caseId,
+        existingRelativePath: existingCase?['caseImage']?.toString(),
+      );
+
+      final caseRecord = <String, dynamic>{
+        'id': caseId,
+        'name': crateName,
+        'caseImage': caseImagePath,
+        'releaseDate': releaseDate,
+        'type': containerType,
+        'tournamentName': tournamentName,
+        'tournamentLogo': tournamentLogoRel,
+        'sourceType': null,
+        'sourceId': null,
+        'sourceName': null,
+      };
+
+      newCases[caseId] = caseRecord;
+      caseNameToId[crateName] = caseId;
+    }
+
+    final newSkins = <String, Map<String, dynamic>>{};
+    final newStickers = <String, Map<String, dynamic>>{};
+    final newPins = <String, Map<String, dynamic>>{};
+    final newMusicKits = <String, Map<String, dynamic>>{};
+    final skinIdByFullName = <String, String>{};
+
+    final caseContentsMap = <String, Set<String>>{
+      for (final caseId in newCases.keys) caseId: <String>{},
+    };
+    final stickerContentsMap = <String, Set<String>>{};
+    final pinContentsMap = <String, Set<String>>{};
+    final musicKitContentsMap = <String, Set<String>>{};
+    final rewardContentsMap = <String, Set<String>>{
+      for (final collectionId in newRewardCollections.keys)
+        collectionId: <String>{},
+    };
+    final operationContentsMap = <String, Set<String>>{
+      for (final collectionId in newOperationCollections.keys)
+        collectionId: <String>{},
+    };
+
+    var createdSkinCount = 0;
+    var createdStickerCount = 0;
+    var createdPinCount = 0;
+    var createdMusicKitCount = 0;
+    var reusedSkinCount = 0;
+    var reusedStickerCount = 0;
+    var reusedPinCount = 0;
+    var reusedMusicKitCount = 0;
+    var skippedUnknownItems = 0;
+    var containerRefsCreatedFromSkinMeta = 0;
+    var rewardCollectionsCreated = 0;
+    var operationCollectionsCreated = 0;
+
+    for (final meta in skinsData) {
+      final fullName = (meta['name'] ?? '').toString().trim();
+      if (fullName.isEmpty || !fullName.contains(' | ')) {
+        continue;
+      }
+
+      final itemAndSkin = splitItemAndSkin(fullName);
+      final baseItemName = itemAndSkin.$1;
+      final fullSkinName = itemAndSkin.$2;
+
+      String itemKind;
+      String itemId;
+      String fallbackWeaponType;
+      try {
+        final result = inferItemKindAndId(baseItemName);
+        itemKind = result.$1;
+        itemId = result.$2;
+        fallbackWeaponType = result.$3;
+      } catch (_) {
+        skippedUnknownItems += 1;
+        continue;
+      }
+
+      final patternObj = meta['pattern'] is Map
+          ? Map<String, dynamic>.from(meta['pattern'] as Map)
+          : const <String, dynamic>{};
+      final patternName = (patternObj['name'] ?? '').toString().trim();
+      final explicitPhase = getExplicitPhase(meta);
+      final phaseAndVariant = extractPhaseAndVariant(
+        fullSkinName: fullSkinName,
+        patternName: patternName.isEmpty ? null : patternName,
+        explicitPhase: explicitPhase,
+      );
+      final phase = phaseAndVariant.$1;
+      final variantName = phaseAndVariant.$2;
+
+      var floatTop = safeFloat(meta['min_float'], 0.0);
+      var floatBottom = safeFloat(meta['max_float'], 1.0);
+      if (floatBottom < floatTop) {
+        floatBottom = 1.0;
+      }
+
+      final rarity =
+          rarityMap[((meta['rarity'] as Map?)?['name'] ?? '').toString()] ??
+          'MIL_SPEC';
+      final weaponType =
+          weaponTypeMap[((meta['category'] as Map?)?['name'] ?? '')
+              .toString()] ??
+          fallbackWeaponType;
+      final collectionPair = chooseCollectionNameAndImage(meta);
+      final collectionName = collectionPair.$1;
+      final imageUrl = chooseImageUrl(meta);
+
+      final key = (
+        itemKind,
+        itemId,
+        canonicalName(fullSkinName),
+        canonicalName(phase ?? variantName ?? ''),
+      );
+
+      final existingSkin = existingSkinByKey[key];
+      late String skinId;
+      if (existingSkin != null) {
+        skinId = existingSkin['id'].toString();
+        reusedSkinCount += 1;
+      } else {
+        final sourceSkinId = (meta['id'] ?? '').toString();
+        final candidate = makeStableNumericId(sourceSkinId, 800000000);
+
+        if (RegExp(r'^\d+$').hasMatch(candidate) &&
+            !usedSkinIds.contains(int.parse(candidate)) &&
+            !newSkins.containsKey(candidate)) {
+          skinId = candidate;
+          usedSkinIds.add(int.parse(candidate));
+        } else {
+          while (usedSkinIds.contains(nextSkinId)) {
+            nextSkinId += 1;
+          }
+          skinId = nextSkinId.toString();
+          usedSkinIds.add(nextSkinId);
+          nextSkinId += 1;
+        }
+        createdSkinCount += 1;
+      }
+
+      final rewardMeta = collectionName == null
+          ? null
+          : rewardSourceOverrides[collectionName];
+      final operationMetas = operationCollectionOverrides
+          .where((item) => item['name'] == collectionName)
+          .toList();
+      final oldSkin =
+          newSkins[skinId] ?? existingSkin ?? const <String, dynamic>{};
+
+      final skinImagePath = await _syncAsset(
+        imageUrl: imageUrl,
+        dirPath: skinsDir.path,
+        relativeDir: 'assets/skins',
+        id: skinId,
+        existingRelativePath: existingSkin?['skinImage']?.toString(),
+      );
+
+      final skinRecord = <String, dynamic>{
+        'id': skinId,
+        'name': fullSkinName,
+        'skinImage': skinImagePath,
+        'floatTop': double.parse(floatTop.toStringAsFixed(6)),
+        'floatBottom': double.parse(floatBottom.toStringAsFixed(6)),
+        'rarity': rarity,
+        'weaponType': weaponType,
+        'itemKind': itemKind,
+        'itemId': itemId,
+        'collection': collectionName ?? oldSkin['collection'],
+        'finishCatalogName': patternName.isNotEmpty
+            ? patternName
+            : oldSkin['finishCatalogName'],
+        'variantName': variantName ?? oldSkin['variantName'],
+        'phase': phase ?? oldSkin['phase'],
+        'apiPaintIndex': meta['paint_index'] != null
+            ? meta['paint_index'].toString()
+            : oldSkin['apiPaintIndex'],
+        'collectionSourceType':
+            rewardMeta?['sourceType'] ?? oldSkin['collectionSourceType'],
+        'collectionSourceId':
+            rewardMeta?['sourceId'] ?? oldSkin['collectionSourceId'],
+        'isRewardCollection': rewardMeta != null
+            ? true
+            : (oldSkin['isRewardCollection'] ?? false),
+        'operationCollectionIds': operationMetas.isNotEmpty
+            ? operationMetas
+                  .map((item) => item['operationId'])
+                  .whereType<String>()
+                  .toList()
+            : (oldSkin['operationCollectionIds'] ?? <String>[]),
+        'isOperationCollection': operationMetas.isNotEmpty
+            ? true
+            : (oldSkin['isOperationCollection'] ?? false),
+      };
+
+      newSkins[skinId] = skinRecord;
+      existingSkinByKey[key] = skinRecord;
+      skinIdByFullName[fullSkinNameKey('$baseItemName | $fullSkinName')] =
+          skinId;
+
+      if (rewardMeta != null && collectionName != null) {
+        final rewardKey = collectionName;
+        final existingReward = existingRewardByKey[rewardKey];
+        late String rewardId;
+        if (existingReward != null) {
+          rewardId = existingReward['id'].toString();
+        } else if (rewardNameToId.containsKey(rewardKey)) {
+          rewardId = rewardNameToId[rewardKey]!;
+        } else {
+          rewardId = (nextRewardId++).toString();
+        }
+        rewardNameToId[rewardKey] = rewardId;
+
+        final rewardImagePath = await _syncAsset(
+          imageUrl: collectionImageByName[collectionName],
+          dirPath: rewardCollectionsDir.path,
+          relativeDir: 'assets/reward_collections',
+          id: rewardId,
+          existingRelativePath:
+              (newRewardCollections[rewardId] ?? existingReward)?['image']
+                  ?.toString(),
+        );
+
+        final rewardRecord = <String, dynamic>{
+          'id': rewardId,
+          'name': collectionName,
+          'image': rewardImagePath,
+          'sourceType': rewardMeta['sourceType'],
+          'sourceId': rewardMeta['sourceId'],
+          'currency': rewardMeta['currency'] ?? 'STARS',
+          'cost': rewardMeta['cost'] ?? 4,
+          'releaseDate': rewardMeta['releaseDate'],
+        };
+
+        if (!newRewardCollections.containsKey(rewardId)) {
+          rewardCollectionsCreated += 1;
+        }
+        newRewardCollections[rewardId] = rewardRecord;
+        rewardContentsMap.putIfAbsent(rewardId, () => <String>{}).add(skinId);
+      }
+
+      for (final operationMeta in operationMetas) {
+        final opKey = operationKey(
+          collectionName ?? '',
+          operationMeta['operationId'] ?? '',
+        );
+        final existingOperation = existingOperationByKey[opKey];
+        late String opId;
+        if (existingOperation != null) {
+          opId = existingOperation['id'].toString();
+        } else if (operationKeyToId.containsKey(opKey)) {
+          opId = operationKeyToId[opKey]!;
+        } else {
+          opId = (nextOperationId++).toString();
+        }
+        operationKeyToId[opKey] = opId;
+
+        final operationImagePath = await _syncAsset(
+          imageUrl: collectionImageByName[collectionName ?? ''],
+          dirPath: operationCollectionsDir.path,
+          relativeDir: 'assets/operation_collections',
+          id: opId,
+          existingRelativePath:
+              (newOperationCollections[opId] ?? existingOperation)?['image']
+                  ?.toString(),
+        );
+
+        final operationRecord = <String, dynamic>{
+          'id': opId,
+          'name': collectionName,
+          'image': operationImagePath,
+          'operationId': operationMeta['operationId'],
+          'operationName': operationMeta['operationName'],
+          'releaseDate': operationMeta['releaseDate'],
+        };
+
+        if (!newOperationCollections.containsKey(opId)) {
+          operationCollectionsCreated += 1;
+        }
+        newOperationCollections[opId] = operationRecord;
+        operationContentsMap.putIfAbsent(opId, () => <String>{}).add(skinId);
+      }
+
+      final cratesRefs = meta['crates'];
+      if (cratesRefs is List) {
+        for (final crateRefRaw in cratesRefs) {
+          if (crateRefRaw is! Map) {
+            continue;
+          }
+          final crateRef = crateRefRaw.map((k, v) => MapEntry(k.toString(), v));
+          final crateName = (crateRef['name'] ?? '').toString().trim();
+          if (crateName.isEmpty) {
+            continue;
+          }
+
+          var caseId = caseNameToId[crateName];
+          if (caseId == null) {
+            final existingCaseMeta = existingCaseByName[crateName];
+            final releaseDate = resolveContainerReleaseDate(
+              crateName: crateName,
+              containerType: 'STICKER_CAPSULE',
+              crateMeta: Map<String, dynamic>.from(crateRef),
+              existingReleaseDate: existingCaseMeta?['releaseDate'],
+            );
+            caseId = existingCaseMeta != null
+                ? existingCaseMeta['id'].toString()
+                : (nextCaseId++).toString();
+            final caseImagePath = await _syncAsset(
+              imageUrl: crateRef['image']?.toString(),
+              dirPath: casesDir.path,
+              relativeDir: 'assets/cases',
+              id: caseId,
+              existingRelativePath: existingCaseMeta?['caseImage']?.toString(),
+            );
+            newCases[caseId] = {
+              'id': caseId,
+              'name': crateName,
+              'caseImage': caseImagePath,
+              'releaseDate': releaseDate,
+              'type': 'STICKER_CAPSULE',
+              'tournamentName': null,
+              'tournamentLogo': null,
+              'sourceType': null,
+              'sourceId': null,
+              'sourceName': null,
+            };
+            caseNameToId[crateName] = caseId;
+            caseContentsMap.putIfAbsent(caseId, () => <String>{});
+            containerRefsCreatedFromSkinMeta += 1;
+          }
+
+          caseContentsMap.putIfAbsent(caseId, () => <String>{}).add(skinId);
+        }
+      }
+    }
+
+    final stickerCollectionNameToId = <String, String>{};
+    for (final meta in stickersData) {
+      final rawName = (meta['name'] ?? '').toString().trim();
+      final stickerName = normalizeStickerName(rawName);
+      if (stickerName.isEmpty) {
+        continue;
+      }
+
+      final stickerType = inferStickerType(meta);
+      final effect = (meta['effect'] ?? 'Other')
+          .toString()
+          .trim()
+          .toUpperCase();
+      final rarity =
+          stickerRarityMap[((meta['rarity'] as Map?)?['name'] ?? '')
+              .toString()] ??
+          'HIGH_GRADE';
+      final collectionPair = chooseCollectionNameAndImage(meta);
+      final collectionName = collectionPair.$1;
+      final tournament = meta['tournament'] is Map
+          ? Map<String, dynamic>.from(meta['tournament'] as Map)
+          : const <String, dynamic>{};
+      final tournamentNameRaw = (tournament['name'] ?? '').toString().trim();
+      final tournamentName = tournamentNameRaw.isEmpty
+          ? null
+          : tournamentNameRaw;
+      final imageUrl = chooseImageUrl(meta);
+
+      final key = (
+        canonicalName(stickerName),
+        stickerType,
+        effect.isEmpty ? 'OTHER' : effect,
+        canonicalName(collectionName ?? tournamentName ?? ''),
+      );
+      final existingSticker = existingStickerByKey[key];
+      late String stickerId;
+      if (existingSticker != null) {
+        stickerId = existingSticker['id'].toString();
+        reusedStickerCount += 1;
+      } else {
+        final sourceStickerId = (meta['id'] ?? '').toString();
+        final candidate = makeStableNumericId(sourceStickerId, 900000000);
+
+        if (RegExp(r'^\d+$').hasMatch(candidate) &&
+            !usedStickerIds.contains(int.parse(candidate)) &&
+            !newStickers.containsKey(candidate)) {
+          stickerId = candidate;
+          usedStickerIds.add(int.parse(candidate));
+        } else {
+          while (usedStickerIds.contains(nextStickerId)) {
+            nextStickerId += 1;
+          }
+          stickerId = nextStickerId.toString();
+          usedStickerIds.add(nextStickerId);
+          nextStickerId += 1;
+        }
+        createdStickerCount += 1;
+      }
+
+      final stickerImagePath = await _syncAsset(
+        imageUrl: imageUrl,
+        dirPath: stickersDir.path,
+        relativeDir: 'assets/stickers',
+        id: stickerId,
+        existingRelativePath: existingSticker?['stickerImage']?.toString(),
+      );
+
+      final stickerRecord = <String, dynamic>{
+        'id': stickerId,
+        'name': stickerName,
+        'stickerImage': stickerImagePath,
+        'rarity': rarity,
+        'stickerType': stickerType,
+        'effect': effect.isEmpty ? 'OTHER' : effect,
+        'collection': collectionName,
+        'tournament': tournamentName,
+      };
+
+      newStickers[stickerId] = stickerRecord;
+      existingStickerByKey[key] = stickerRecord;
+
+      final cratesRefs = meta['crates'];
+      if (cratesRefs is List) {
+        for (final crateRefRaw in cratesRefs) {
+          if (crateRefRaw is! Map) {
+            continue;
+          }
+          final crateRef = crateRefRaw.map((k, v) => MapEntry(k.toString(), v));
+          final crateName = (crateRef['name'] ?? '').toString().trim();
+          if (crateName.isEmpty) {
+            continue;
+          }
+
+          var caseId = caseNameToId[crateName];
+          final containerType = inferStickerContainerType(crateName);
+
+          if (caseId == null) {
+            final existingCaseMeta = existingCaseByName[crateName];
+            var releaseDate = resolveContainerReleaseDate(
+              crateName: crateName,
+              containerType: containerType,
+              crateMeta: Map<String, dynamic>.from(crateRef),
+              existingReleaseDate: existingCaseMeta?['releaseDate'],
+            );
+            final sourceMeta = containerType == 'STICKER_COLLECTION'
+                ? resolveStickerCollectionSource(crateName)
+                : const {
+                    'sourceType': null,
+                    'sourceId': null,
+                    'sourceName': null,
+                    'releaseDate': null,
+                  };
+            if (sourceMeta['releaseDate'] != null) {
+              releaseDate = sourceMeta['releaseDate']!;
+            }
+
+            caseId = existingCaseMeta != null
+                ? existingCaseMeta['id'].toString()
+                : (nextCaseId++).toString();
+            final caseImagePath = await _syncAsset(
+              imageUrl: crateRef['image']?.toString(),
+              dirPath: casesDir.path,
+              relativeDir: 'assets/cases',
+              id: caseId,
+              existingRelativePath: existingCaseMeta?['caseImage']?.toString(),
+            );
+            newCases[caseId] = {
+              'id': caseId,
+              'name': crateName,
+              'caseImage': caseImagePath,
+              'releaseDate': releaseDate,
+              'type': containerType,
+              'tournamentName': null,
+              'tournamentLogo': null,
+              'sourceType': sourceMeta['sourceType'],
+              'sourceId': sourceMeta['sourceId'],
+              'sourceName': sourceMeta['sourceName'],
+            };
+            caseNameToId[crateName] = caseId;
+            containerRefsCreatedFromSkinMeta += 1;
+          } else {
+            final existingCaseRecord = newCases[caseId];
+            if (existingCaseRecord != null) {
+              var releaseDate = resolveContainerReleaseDate(
+                crateName: crateName,
+                containerType: containerType,
+                crateMeta: Map<String, dynamic>.from(crateRef),
+                existingReleaseDate: existingCaseRecord['releaseDate'],
+              );
+              final sourceMeta = containerType == 'STICKER_COLLECTION'
+                  ? resolveStickerCollectionSource(crateName)
+                  : const {
+                      'sourceType': null,
+                      'sourceId': null,
+                      'sourceName': null,
+                      'releaseDate': null,
+                    };
+              if (sourceMeta['releaseDate'] != null) {
+                releaseDate = sourceMeta['releaseDate']!;
+              }
+
+              existingCaseRecord['releaseDate'] = releaseDate;
+              existingCaseRecord['type'] = containerType;
+              existingCaseRecord['sourceType'] = sourceMeta['sourceType'];
+              existingCaseRecord['sourceId'] = sourceMeta['sourceId'];
+              existingCaseRecord['sourceName'] = sourceMeta['sourceName'];
+            }
+          }
+
+          stickerContentsMap
+              .putIfAbsent(caseId, () => <String>{})
+              .add(stickerId);
+        }
+      }
+
+      final collectionsRefs = meta['collections'];
+      if (collectionsRefs is List) {
+        for (final collectionRefRaw in collectionsRefs) {
+          if (collectionRefRaw is! Map) {
+            continue;
+          }
+          final collectionRef = collectionRefRaw.map(
+            (k, v) => MapEntry(k.toString(), v),
+          );
+          final stickerCollectionName = normalizeCollectionName(
+            (collectionRef['name'] ?? '').toString().trim(),
+          );
+          if (stickerCollectionName == null || stickerCollectionName.isEmpty) {
+            continue;
+          }
+
+          var caseId = stickerCollectionNameToId[stickerCollectionName];
+          if (caseId == null) {
+            final existingCaseMeta = existingCaseByName[stickerCollectionName];
+            String releaseDate;
+            if (existingCaseMeta != null) {
+              caseId = existingCaseMeta['id'].toString();
+              releaseDate = (existingCaseMeta['releaseDate'] ?? '').toString();
+            } else if (caseNameToId.containsKey(stickerCollectionName)) {
+              caseId = caseNameToId[stickerCollectionName]!;
+              releaseDate = (newCases[caseId]?['releaseDate'] ?? '').toString();
+            } else {
+              caseId = (nextCaseId++).toString();
+              releaseDate = '2000-01-01';
+            }
+
+            final sourceMeta = resolveStickerCollectionSource(
+              stickerCollectionName,
+            );
+            if (sourceMeta['releaseDate'] != null) {
+              releaseDate = sourceMeta['releaseDate']!;
+            }
+
+            newCases[caseId] = {
+              'id': caseId,
+              'name': stickerCollectionName,
+              'caseImage': await _syncAsset(
+                imageUrl: collectionRef['image']?.toString(),
+                dirPath: casesDir.path,
+                relativeDir: 'assets/cases',
+                id: caseId,
+                existingRelativePath:
+                    existingCaseMeta?['caseImage']?.toString() ??
+                    newCases[caseId]?['caseImage']?.toString(),
+              ),
+              'releaseDate': releaseDate,
+              'type': 'STICKER_COLLECTION',
+              'tournamentName': null,
+              'tournamentLogo': null,
+              'sourceType': sourceMeta['sourceType'],
+              'sourceId': sourceMeta['sourceId'],
+              'sourceName': sourceMeta['sourceName'],
+            };
+            caseNameToId[stickerCollectionName] = caseId;
+            stickerCollectionNameToId[stickerCollectionName] = caseId;
+          }
+
+          stickerContentsMap
+              .putIfAbsent(caseId, () => <String>{})
+              .add(stickerId);
+          final existingCaseRecord = newCases[caseId];
+          if (existingCaseRecord != null) {
+            final sourceMeta = resolveStickerCollectionSource(
+              stickerCollectionName,
+            );
+            existingCaseRecord['type'] = 'STICKER_COLLECTION';
+            existingCaseRecord['sourceType'] = sourceMeta['sourceType'];
+            existingCaseRecord['sourceId'] = sourceMeta['sourceId'];
+            existingCaseRecord['sourceName'] = sourceMeta['sourceName'];
+            if (sourceMeta['releaseDate'] != null) {
+              existingCaseRecord['releaseDate'] = sourceMeta['releaseDate'];
+            }
+          }
+        }
+      }
+    }
+
+    for (final crate in supportedCrates) {
+      final crateName = (crate['name'] ?? '').toString().trim();
+      if (crateName.isEmpty) {
+        continue;
+      }
+      if (inferContainerType(crateName, crate['type']?.toString()) !=
+          'PIN_CAPSULE') {
+        continue;
+      }
+
+      final caseId = caseNameToId[crateName];
+      if (caseId == null) {
+        continue;
+      }
+
+      final pinCollection = inferPinCollection(crateName);
+      final contains = crate['contains'];
+      if (contains is! List) {
+        continue;
+      }
+
+      for (final collectibleRaw in contains) {
+        if (collectibleRaw is! Map) {
+          continue;
+        }
+        final collectible = collectibleRaw.map(
+          (k, v) => MapEntry(k.toString(), v),
+        );
+        final pinName = (collectible['name'] ?? '').toString().trim();
+        if (pinName.isEmpty) {
+          continue;
+        }
+
+        final rarity =
+            pinRarityMap[((collectible['rarity'] as Map?)?['name'] ?? '')
+                .toString()] ??
+            'HIGH_GRADE';
+        final imageUrl = (collectible['image'] ?? '').toString().trim();
+
+        final key = (
+          canonicalName(pinName),
+          canonicalName(pinCollection ?? ''),
+        );
+        final existingPin = existingPinByKey[key];
+        late String pinId;
+        if (existingPin != null) {
+          pinId = existingPin['id'].toString();
+          reusedPinCount += 1;
+        } else {
+          final sourcePinId = (collectible['id'] ?? '').toString();
+          final candidate = makeStableNumericId(sourcePinId, 950000000);
+
+          if (RegExp(r'^\d+$').hasMatch(candidate) &&
+              !usedPinIds.contains(int.parse(candidate)) &&
+              !newPins.containsKey(candidate)) {
+            pinId = candidate;
+            usedPinIds.add(int.parse(candidate));
+          } else {
+            while (usedPinIds.contains(nextPinId)) {
+              nextPinId += 1;
+            }
+            pinId = nextPinId.toString();
+            usedPinIds.add(nextPinId);
+            nextPinId += 1;
+          }
+          createdPinCount += 1;
+        }
+
+        final pinImagePath = await _syncAsset(
+          imageUrl: imageUrl.isEmpty ? null : imageUrl,
+          dirPath: pinsDir.path,
+          relativeDir: 'assets/pins',
+          id: pinId,
+          existingRelativePath: existingPin?['pinImage']?.toString(),
+        );
+
+        final pinRecord = <String, dynamic>{
+          'id': pinId,
+          'name': pinName,
+          'pinImage': pinImagePath,
+          'rarity': rarity,
+          'collection': pinCollection,
+        };
+        newPins[pinId] = pinRecord;
+        existingPinByKey[key] = pinRecord;
+        pinContentsMap.putIfAbsent(caseId, () => <String>{}).add(pinId);
+      }
+    }
+
+    final musicKitMetaById = <String, Map<String, dynamic>>{
+      for (final item in musicKitsData)
+        if ((item['id'] ?? '').toString().trim().isNotEmpty)
+          (item['id'] ?? '').toString().trim(): item,
+    };
+
+    for (final crate in supportedCrates) {
+      final crateName = (crate['name'] ?? '').toString().trim();
+      if (crateName.isEmpty) {
+        continue;
+      }
+      if (inferContainerType(crateName, crate['type']?.toString()) !=
+          'MUSIC_KIT_BOX') {
+        continue;
+      }
+
+      final caseId = caseNameToId[crateName];
+      if (caseId == null) {
+        continue;
+      }
+
+      final musicKitCollection = inferMusicKitCollection(crateName);
+      final contains = crate['contains'];
+      if (contains is! List) {
+        continue;
+      }
+
+      for (final collectibleRaw in contains) {
+        if (collectibleRaw is! Map) {
+          continue;
+        }
+        final collectible = collectibleRaw.map(
+          (k, v) => MapEntry(k.toString(), v),
+        );
+        final normalizedMusicKitName = normalizeMusicKitName(
+          (collectible['name'] ?? '').toString().trim(),
+        );
+        final musicKitName = normalizedMusicKitName.$1;
+        final isStatTrak = normalizedMusicKitName.$2;
+        if (musicKitName.isEmpty) {
+          continue;
+        }
+
+        final sourceMusicKitId = (collectible['id'] ?? '').toString().trim();
+        if (sourceMusicKitId.isEmpty) {
+          continue;
+        }
+
+        final musicKitMeta =
+            musicKitMetaById[sourceMusicKitId] ?? const <String, dynamic>{};
+        final rarity =
+            musicKitRarityMap[((collectible['rarity'] as Map?)?['name'] ??
+                    (musicKitMeta['rarity'] as Map?)?['name'] ??
+                    '')
+                .toString()] ??
+            'HIGH_GRADE';
+        final collectibleImage = (collectible['image'] ?? '').toString().trim();
+        final metaImage = (musicKitMeta['image'] ?? '').toString().trim();
+        final imageUrl = collectibleImage.isNotEmpty
+            ? collectibleImage
+            : (metaImage.isNotEmpty ? metaImage : null);
+
+        final key = (
+          canonicalName(musicKitName),
+          canonicalName(musicKitCollection ?? ''),
+          isStatTrak,
+        );
+        final existingMusicKit = existingMusicKitByKey[key];
+        late String musicKitId;
+        if (existingMusicKit != null) {
+          musicKitId = existingMusicKit['id'].toString();
+          reusedMusicKitCount += 1;
+        } else {
+          final candidate = makeHashedNumericId(sourceMusicKitId, 970000000);
+
+          if (RegExp(r'^\d+$').hasMatch(candidate) &&
+              !usedMusicKitIds.contains(int.parse(candidate)) &&
+              !newMusicKits.containsKey(candidate)) {
+            musicKitId = candidate;
+            usedMusicKitIds.add(int.parse(candidate));
+          } else {
+            while (usedMusicKitIds.contains(nextMusicKitId)) {
+              nextMusicKitId += 1;
+            }
+            musicKitId = nextMusicKitId.toString();
+            usedMusicKitIds.add(nextMusicKitId);
+            nextMusicKitId += 1;
+          }
+          createdMusicKitCount += 1;
+        }
+
+        final musicKitImagePath = await _syncAsset(
+          imageUrl: imageUrl,
+          dirPath: musicKitsDir.path,
+          relativeDir: 'assets/music_kits',
+          id: musicKitId,
+          existingRelativePath: existingMusicKit?['musicKitImage']?.toString(),
+        );
+
+        final musicKitRecord = <String, dynamic>{
+          'id': musicKitId,
+          'name': musicKitName,
+          'musicKitImage': musicKitImagePath,
+          'rarity': rarity,
+          'collection': musicKitCollection,
+          'isStatTrak': isStatTrak,
+        };
+        newMusicKits[musicKitId] = musicKitRecord;
+        existingMusicKitByKey[key] = musicKitRecord;
+        musicKitContentsMap
+            .putIfAbsent(caseId, () => <String>{})
+            .add(musicKitId);
+      }
+    }
+
+    for (final legacyCase in legacyCaseOverrides) {
+      final legacyName = (legacyCase['name'] ?? '').toString().trim();
+      if (legacyName.isEmpty) {
+        continue;
+      }
+
+      final existingCase = existingCaseByName[legacyName];
+      final legacyCaseId = existingCase != null
+          ? existingCase['id'].toString()
+          : (caseNameToId[legacyName] ?? (nextCaseId++).toString());
+      final baseCaseName = (legacyCase['baseCaseName'] ?? '').toString().trim();
+      final baseCaseId = caseNameToId[baseCaseName];
+      final baseCase = baseCaseId == null ? null : newCases[baseCaseId];
+
+      newCases[legacyCaseId] = {
+        'id': legacyCaseId,
+        'name': legacyName,
+        'caseImage':
+            existingCase?['caseImage']?.toString() ??
+            (baseCase?['caseImage']?.toString()) ??
+            'assets/cases/$legacyCaseId.png',
+        'releaseDate': (legacyCase['releaseDate'] ?? '2000-01-01').toString(),
+        'type': (legacyCase['type'] ?? 'CASE').toString(),
+        'tournamentName': null,
+        'tournamentLogo': null,
+        'sourceType': null,
+        'sourceId': null,
+        'sourceName': null,
+      };
+      caseNameToId[legacyName] = legacyCaseId;
+      caseContentsMap.putIfAbsent(legacyCaseId, () => <String>{});
+
+      if (legacyCase['copyImageFromBase'] == true && baseCase != null) {
+        final baseImageName = basename(
+          (baseCase['caseImage'] ?? '').toString(),
+        );
+        final baseImageFile = File('${casesDir.path}/$baseImageName');
+        final baseExt = suffixFromPath(baseImageName);
+        final legacyImageFile = File('${casesDir.path}/$legacyCaseId$baseExt');
+        if (baseImageFile.existsSync() && !legacyImageFile.existsSync()) {
+          await legacyImageFile.writeAsBytes(await baseImageFile.readAsBytes());
+          newCases[legacyCaseId]!['caseImage'] =
+              'assets/cases/$legacyCaseId$baseExt';
+        }
+      }
+
+      final contents = legacyCase['contents'];
+      if (contents is List) {
+        for (final fullSkinName in contents) {
+          if (fullSkinName is! String) {
+            continue;
+          }
+          final skinId = skinIdByFullName[fullSkinNameKey(fullSkinName)];
+          if (skinId == null) {
+            _io.printInfo(
+              "[WARN] legacy case '$legacyName' references missing skin: $fullSkinName",
+            );
+            continue;
+          }
+          caseContentsMap
+              .putIfAbsent(legacyCaseId, () => <String>{})
+              .add(skinId);
+        }
+      }
+
+      if (legacyCase['copySpecialItemsFromBase'] == true &&
+          baseCaseId != null) {
+        for (final skinId in caseContentsMap[baseCaseId] ?? const <String>{}) {
+          final skin = newSkins[skinId];
+          if (skin == null) {
+            continue;
+          }
+          final weaponType = (skin['weaponType'] ?? '').toString();
+          final itemKind = (skin['itemKind'] ?? '').toString();
+          if (weaponType == 'KNIFE' ||
+              weaponType == 'GLOVES' ||
+              itemKind == 'KNIFE' ||
+              itemKind == 'GLOVES') {
+            caseContentsMap
+                .putIfAbsent(legacyCaseId, () => <String>{})
+                .add(skinId);
+          }
+        }
+      }
+    }
+
+    for (final caseRecord in newCases.values) {
+      final caseName = (caseRecord['name'] ?? '').toString().trim();
+      final forcedType = containerTypeOverrides[caseName];
+      if (forcedType != null) {
+        caseRecord['type'] = forcedType;
+      }
+    }
+
+    final casesOut = newCases.values.toList()
+      ..sort((a, b) {
+        final dateCompare = (a['releaseDate'] ?? '9999-99-99')
+            .toString()
+            .compareTo((b['releaseDate'] ?? '9999-99-99').toString());
+        if (dateCompare != 0) {
+          return dateCompare;
+        }
+        return (a['name'] ?? '').toString().compareTo(
+          (b['name'] ?? '').toString(),
+        );
+      });
+    final skinsOut = newSkins.values.toList()
+      ..sort(
+        (a, b) => int.parse(
+          a['id'].toString(),
+        ).compareTo(int.parse(b['id'].toString())),
+      );
+    final stickersOut = newStickers.values.toList()
+      ..sort(
+        (a, b) => int.parse(
+          a['id'].toString(),
+        ).compareTo(int.parse(b['id'].toString())),
+      );
+    final pinsOut = newPins.values.toList()
+      ..sort(
+        (a, b) => int.parse(
+          a['id'].toString(),
+        ).compareTo(int.parse(b['id'].toString())),
+      );
+    final musicKitsOut = newMusicKits.values.toList()
+      ..sort(
+        (a, b) => int.parse(
+          a['id'].toString(),
+        ).compareTo(int.parse(b['id'].toString())),
+      );
+
+    final caseContentsOut = buildContents(caseContentsMap, 'caseId', 'skinIds');
+    final stickerContentsOut = buildContents(
+      stickerContentsMap,
+      'caseId',
+      'stickerIds',
+    );
+    final pinContentsOut = buildContents(pinContentsMap, 'caseId', 'pinIds');
+    final musicKitContentsOut = buildContents(
+      musicKitContentsMap,
+      'caseId',
+      'musicKitIds',
+    );
+    final rewardCollectionsOut = newRewardCollections.values.toList()
+      ..sort((a, b) {
+        final sourceCompare = (a['sourceType'] ?? '').toString().compareTo(
+          (b['sourceType'] ?? '').toString(),
+        );
+        if (sourceCompare != 0) {
+          return sourceCompare;
+        }
+        final dateCompare = (a['releaseDate'] ?? '9999-99-99')
+            .toString()
+            .compareTo((b['releaseDate'] ?? '9999-99-99').toString());
+        if (dateCompare != 0) {
+          return dateCompare;
+        }
+        return (a['name'] ?? '').toString().compareTo(
+          (b['name'] ?? '').toString(),
+        );
+      });
+    final rewardCollectionContentsOut = buildContents(
+      rewardContentsMap,
+      'rewardCollectionId',
+      'skinIds',
+    );
+    final operationCollectionsOut = newOperationCollections.values.toList()
+      ..sort((a, b) {
+        final opCompare = (a['operationName'] ?? '').toString().compareTo(
+          (b['operationName'] ?? '').toString(),
+        );
+        if (opCompare != 0) {
+          return opCompare;
+        }
+        final dateCompare = (a['releaseDate'] ?? '9999-99-99')
+            .toString()
+            .compareTo((b['releaseDate'] ?? '9999-99-99').toString());
+        if (dateCompare != 0) {
+          return dateCompare;
+        }
+        return (a['name'] ?? '').toString().compareTo(
+          (b['name'] ?? '').toString(),
+        );
+      });
+    final operationCollectionContentsOut = buildContents(
+      operationContentsMap,
+      'operationCollectionId',
+      'skinIds',
+    );
+
+    await _io.writeJson(File('${dataDir.path}/cases.json'), casesOut);
+    await _io.writeJson(File('${dataDir.path}/skins.json'), skinsOut);
+    await _io.writeJson(File('${dataDir.path}/stickers.json'), stickersOut);
+    await _io.writeJson(File('${dataDir.path}/pins.json'), pinsOut);
+    await _io.writeJson(File('${dataDir.path}/music_kits.json'), musicKitsOut);
+    await _io.writeJson(
+      File('${dataDir.path}/case_contents.json'),
+      caseContentsOut,
+    );
+    await _io.writeJson(
+      File('${dataDir.path}/sticker_contents.json'),
+      stickerContentsOut,
+    );
+    await _io.writeJson(
+      File('${dataDir.path}/pin_contents.json'),
+      pinContentsOut,
+    );
+    await _io.writeJson(
+      File('${dataDir.path}/music_kit_contents.json'),
+      musicKitContentsOut,
+    );
+    await _io.writeJson(
+      File('${dataDir.path}/reward_collections.json'),
+      rewardCollectionsOut,
+    );
+    await _io.writeJson(
+      File('${dataDir.path}/reward_collection_contents.json'),
+      rewardCollectionContentsOut,
+    );
+    await _io.writeJson(
+      File('${dataDir.path}/operation_collections.json'),
+      operationCollectionsOut,
+    );
+    await _io.writeJson(
+      File('${dataDir.path}/operation_collection_contents.json'),
+      operationCollectionContentsOut,
+    );
+
+    _io.printInfo('Done.');
+    _io.printInfo('Containers: ${casesOut.length}');
+    _io.printInfo('Reward collections: ${rewardCollectionsOut.length}');
+    _io.printInfo('Operation collections: ${operationCollectionsOut.length}');
+    _io.printInfo('Skins: ${skinsOut.length}');
+    _io.printInfo('Stickers: ${stickersOut.length}');
+    _io.printInfo('Pins: ${pinsOut.length}');
+    _io.printInfo('Music kits: ${musicKitsOut.length}');
+    _io.printInfo('Case contents: ${caseContentsOut.length}');
+    _io.printInfo('Sticker contents: ${stickerContentsOut.length}');
+    _io.printInfo('Pin contents: ${pinContentsOut.length}');
+    _io.printInfo('Music kit contents: ${musicKitContentsOut.length}');
+    _io.printInfo(
+      'Reward collection contents: ${rewardCollectionContentsOut.length}',
+    );
+    _io.printInfo(
+      'Operation collection contents: ${operationCollectionContentsOut.length}',
+    );
+    _io.printInfo('Created skins: $createdSkinCount');
+    _io.printInfo('Created stickers: $createdStickerCount');
+    _io.printInfo('Created pins: $createdPinCount');
+    _io.printInfo('Created music kits: $createdMusicKitCount');
+    _io.printInfo('Reused skins: $reusedSkinCount');
+    _io.printInfo('Reused stickers: $reusedStickerCount');
+    _io.printInfo('Reused pins: $reusedPinCount');
+    _io.printInfo('Reused music kits: $reusedMusicKitCount');
+    _io.printInfo('Unknown items skipped: $skippedUnknownItems');
+    _io.printInfo(
+      'Containers created from skin.crates fallback: $containerRefsCreatedFromSkinMeta',
+    );
+    _io.printInfo('Reward collections created: $rewardCollectionsCreated');
+    _io.printInfo(
+      'Operation collections created: $operationCollectionsCreated',
+    );
+    _io.printInfo('Tournament logos downloaded: $tournamentLogosCreated');
+  }
+
+  Map<String, Map<String, dynamic>> _loadRewardOverrides() {
+    final overrides = <String, Map<String, dynamic>>{
+      for (final entry in defaultRewardSourceOverrides.entries)
+        normalizeCollectionName(entry.key) ?? entry.key:
+            Map<String, dynamic>.from(entry.value),
+    };
+
+    if (rewardOverridesPath.existsSync()) {
+      try {
+        final userData = _io.loadJsonAny(rewardOverridesPath);
+        if (userData is Map) {
+          for (final entry in userData.entries) {
+            if (entry.value is Map) {
+              final name =
+                  normalizeCollectionName(entry.key.toString().trim()) ??
+                  entry.key.toString().trim();
+              overrides[name] = Map<String, dynamic>.from(
+                (entry.value as Map).map((k, v) => MapEntry(k.toString(), v)),
+              );
+            }
+          }
+        }
+      } catch (exc) {
+        _io.printInfo(
+          '[WARN] failed to load ${rewardOverridesPath.path}: $exc',
+        );
+      }
+    }
+
+    return overrides;
+  }
+
+  List<Map<String, String>> _loadOperationOverrides() {
+    final entries = defaultOperationCollectionOverrides
+        .map((item) => Map<String, String>.from(item))
+        .toList();
+
+    if (operationOverridesPath.existsSync()) {
+      try {
+        final userData = _io.loadJsonAny(operationOverridesPath);
+        if (userData is List) {
+          for (final item in userData) {
+            if (item is Map) {
+              entries.add(
+                item.map((k, v) => MapEntry(k.toString(), v?.toString() ?? '')),
+              );
+            }
+          }
+        }
+      } catch (exc) {
+        _io.printInfo(
+          '[WARN] failed to load ${operationOverridesPath.path}: $exc',
+        );
+      }
+    }
+
+    final normalizedEntries = <Map<String, String>>[];
+    for (final item in entries) {
+      final name = normalizeCollectionName(item['name']?.trim()) ?? '';
+      final operationId = item['operationId']?.trim() ?? '';
+      final operationName = item['operationName']?.trim() ?? '';
+      if (name.isEmpty || operationId.isEmpty || operationName.isEmpty) {
+        continue;
+      }
+      normalizedEntries.add({
+        'name': name,
+        'operationId': operationId,
+        'operationName': operationName,
+        'releaseDate': item['releaseDate'] ?? '',
+      });
+    }
+
+    return normalizedEntries;
+  }
+
+  List<Map<String, dynamic>> _asJsonList(dynamic decoded) {
+    if (decoded is! List) {
+      throw StateError('Expected JSON array');
+    }
+    return decoded
+        .whereType<Map>()
+        .map((e) => e.map((k, v) => MapEntry(k.toString(), v)))
+        .toList();
+  }
+
+  Future<String> _syncAsset({
+    required String? imageUrl,
+    required String dirPath,
+    required String relativeDir,
+    required String id,
+    String? existingRelativePath,
+  }) async {
+    final existing = (existingRelativePath ?? '').trim();
+    if (existing.isNotEmpty && File(existing).existsSync()) {
+      return existing;
+    }
+
+    for (final ext in ['.webp', '.png', '.jpg', '.svg']) {
+      final file = File('$dirPath/$id$ext');
+      if (file.existsSync()) {
+        return '$relativeDir/$id$ext';
+      }
+    }
+
+    if (imageUrl != null && imageUrl.isNotEmpty) {
+      final ext = await _io.downloadOptimizedAsset(imageUrl, '$dirPath/$id');
+      if (ext != null) {
+        return '$relativeDir/$id$ext';
+      }
+    }
+
+    if (existing.isNotEmpty) {
+      return existing;
+    }
+
+    return '$relativeDir/$id.png';
+  }
+
+  Set<int> _extractUsedIds(List<Map<String, dynamic>> items) {
+    final result = <int>{};
+    for (final item in items) {
+      final id = (item['id'] ?? '').toString();
+      if (RegExp(r'^\d+$').hasMatch(id)) {
+        result.add(int.parse(id));
+      }
+    }
+    return result;
+  }
+
+  int _nextId(Set<int> used, int fallbackBase) {
+    return (used.isEmpty
+            ? fallbackBase
+            : used.reduce((a, b) => a > b ? a : b)) +
+        1;
+  }
+}
