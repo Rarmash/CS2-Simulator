@@ -10,9 +10,9 @@ import '../../domain/graffiti_simulator_service.dart';
 import '../helpers/collectible_open_flow_helper.dart';
 import '../helpers/graffiti_ui_helper.dart';
 import '../helpers/opening_roll_sequence_builder.dart';
-import '../helpers/responsive_grid_helper.dart';
 import '../helpers/source_color_helper.dart';
 import '../widgets/chip_badge.dart';
+import '../widgets/collectible_open_body.dart';
 import '../widgets/collectible_contents_title.dart';
 import '../widgets/collectible_grid_sliver.dart';
 import '../widgets/collectible_open_header.dart';
@@ -136,75 +136,56 @@ class _GraffitiBoxOpenScreenState extends State<GraffitiBoxOpenScreen> {
 
     return Scaffold(
       appBar: AppBar(title: Text(widget.caseDto.name)),
-      body: FutureBuilder<List<GraffitiDto>>(
+      body: CollectibleOpenBody<GraffitiDto>(
         future: _graffitiFuture,
-        builder: (context, snapshot) {
-          if (!snapshot.hasData) {
-            return const Center(child: CircularProgressIndicator());
-          }
-          final graffiti = snapshot.data!;
-
-          return LayoutBuilder(
-            builder: (context, constraints) {
-              final gridCount = ResponsiveGridHelper.skinGridCrossAxisCount(
-                constraints.maxWidth,
-              );
-              final aspectRatio = ResponsiveGridHelper.skinGridChildAspectRatio(
-                constraints.maxWidth,
-              );
-
-              return CustomScrollView(
-                slivers: [
-                  SliverToBoxAdapter(
-                    child: CollectibleOpenHeader(
-                      assetPath: widget.caseDto.caseImage,
-                      imageHeight: constraints.maxWidth < 700 ? 90 : 120,
-                      badges: [
-                        ChipBadge(label: widget.caseDto.typeLabel, color: color),
-                      ],
-                      releaseDateText: formattedReleaseDate,
-                      description:
-                          'Graffiti boxes use roulette opening and are not affected by X-Ray mode.',
-                      buttonLabel:
-                          _isOpening ? 'OPENING...' : 'OPEN GRAFFITI BOX',
-                      onPressed: (_isOpening || graffiti.isEmpty)
-                          ? null
-                          : () => _openContainer(graffiti),
-                    ),
-                  ),
-                  CollectibleRollerSliver<GraffitiDto>(
-                    controller: _rollController,
-                    items: _rollSequence,
-                    winningIndex: _winningIndex,
-                    isRolling: _isOpening,
-                    itemBuilder: (item, isWinner, itemWidth) => _buildRollItem(
-                      item,
-                      isWinner: isWinner,
-                      itemWidth: itemWidth,
-                    ),
-                  ),
-                  if (_dropped != null)
-                    SliverToBoxAdapter(child: GraffitiDropCard(drop: _dropped!)),
-                  const SliverToBoxAdapter(
-                    child: CollectibleContentsTitle(title: 'Graffiti contents'),
-                  ),
-                  CollectibleGridSliver<GraffitiDto>(
-                    items: graffiti,
-                    crossAxisCount: gridCount,
-                    childAspectRatio: aspectRatio,
-                    itemBuilder: (item) {
-                      final isDropped = _dropped?.graffiti.id == item.id;
-                      return GraffitiGridTile(
-                        graffiti: item,
-                        highlighted: isDropped,
-                        crossAxisCount: gridCount,
-                      );
-                    },
-                  ),
+        sliverBuilder: (context, constraints, graffiti, gridCount, aspectRatio) {
+          return [
+            SliverToBoxAdapter(
+              child: CollectibleOpenHeader(
+                assetPath: widget.caseDto.caseImage,
+                imageHeight: constraints.maxWidth < 700 ? 90 : 120,
+                badges: [
+                  ChipBadge(label: widget.caseDto.typeLabel, color: color),
                 ],
-              );
-            },
-          );
+                releaseDateText: formattedReleaseDate,
+                description:
+                    'Graffiti boxes use roulette opening and are not affected by X-Ray mode.',
+                buttonLabel: _isOpening ? 'OPENING...' : 'OPEN GRAFFITI BOX',
+                onPressed: (_isOpening || graffiti.isEmpty)
+                    ? null
+                    : () => _openContainer(graffiti),
+              ),
+            ),
+            CollectibleRollerSliver<GraffitiDto>(
+              controller: _rollController,
+              items: _rollSequence,
+              winningIndex: _winningIndex,
+              isRolling: _isOpening,
+              itemBuilder: (item, isWinner, itemWidth) => _buildRollItem(
+                item,
+                isWinner: isWinner,
+                itemWidth: itemWidth,
+              ),
+            ),
+            if (_dropped != null)
+              SliverToBoxAdapter(child: GraffitiDropCard(drop: _dropped!)),
+            const SliverToBoxAdapter(
+              child: CollectibleContentsTitle(title: 'Graffiti contents'),
+            ),
+            CollectibleGridSliver<GraffitiDto>(
+              items: graffiti,
+              crossAxisCount: gridCount,
+              childAspectRatio: aspectRatio,
+              itemBuilder: (item) {
+                final isDropped = _dropped?.graffiti.id == item.id;
+                return GraffitiGridTile(
+                  graffiti: item,
+                  highlighted: isDropped,
+                  crossAxisCount: gridCount,
+                );
+              },
+            ),
+          ];
         },
       ),
     );

@@ -9,9 +9,9 @@ import '../../data/repositories/local_data_repository.dart';
 import '../../domain/dropped_patch.dart';
 import '../../domain/patch_simulator_service.dart';
 import '../helpers/collectible_open_flow_helper.dart';
-import '../helpers/responsive_grid_helper.dart';
 import '../helpers/source_color_helper.dart';
 import '../widgets/chip_badge.dart';
+import '../widgets/collectible_open_body.dart';
 import '../widgets/collectible_contents_title.dart';
 import '../widgets/collectible_grid_sliver.dart';
 import '../widgets/collectible_open_header.dart';
@@ -80,92 +80,68 @@ class _PatchCollectionOpenScreenState extends State<PatchCollectionOpenScreen> {
 
     return Scaffold(
       appBar: AppBar(title: Text(widget.collection.name)),
-      body: FutureBuilder<List<PatchDto>>(
+      body: CollectibleOpenBody<PatchDto>(
         future: _patchesFuture,
-        builder: (context, snapshot) {
-          if (!snapshot.hasData) {
-            return const Center(child: CircularProgressIndicator());
-          }
-          final patches = snapshot.data!;
-
-          return LayoutBuilder(
-            builder: (context, constraints) {
-              final gridCount = ResponsiveGridHelper.skinGridCrossAxisCount(
-                constraints.maxWidth,
-              );
-              final aspectRatio = ResponsiveGridHelper.skinGridChildAspectRatio(
-                constraints.maxWidth,
-              );
-
-              return CustomScrollView(
-                slivers: [
-                  SliverToBoxAdapter(
-                    child: CollectibleOpenHeader(
-                      assetPath: widget.collection.caseImage,
-                      imageHeight: constraints.maxWidth < 700 ? 90 : 120,
-                      badges: [
-                        ChipBadge(
-                          label: widget.collection.typeLabel,
-                          color: typeColor,
-                        ),
-                        if (widget.collection.sourceTypeLabel != null)
-                          ChipBadge(
-                            label: widget.collection.sourceTypeLabel!,
-                            color: sourceColor,
-                          ),
-                      ],
-                      metadata: [
-                        if ((widget.collection.sourceName ?? '').isNotEmpty) ...[
-                          const SizedBox(height: 8),
-                          Text(
-                            widget.collection.sourceName!,
-                            style: TextStyle(
-                              color: sourceColor,
-                              fontSize: 13,
-                              fontWeight: FontWeight.w600,
-                            ),
-                          ),
-                        ],
-                      ],
-                      releaseDateText: formattedReleaseDate,
-                      description:
-                          'Patch collections open like reward collections: no roulette, just the final reveal.',
-                      buttonLabel: _isOpening
-                          ? 'OPENING...'
-                          : 'OPEN PATCH COLLECTION',
-                      onPressed: (_isOpening || patches.isEmpty)
-                          ? null
-                          : () => _openCollection(patches),
+        sliverBuilder: (context, constraints, patches, gridCount, aspectRatio) {
+          return [
+            SliverToBoxAdapter(
+              child: CollectibleOpenHeader(
+                assetPath: widget.collection.caseImage,
+                imageHeight: constraints.maxWidth < 700 ? 90 : 120,
+                badges: [
+                  ChipBadge(label: widget.collection.typeLabel, color: typeColor),
+                  if (widget.collection.sourceTypeLabel != null)
+                    ChipBadge(
+                      label: widget.collection.sourceTypeLabel!,
+                      color: sourceColor,
                     ),
-                  ),
-                  if (_isOpening)
-                    const SliverToBoxAdapter(
-                      child: OpeningLoadingCard(
-                        title: 'Opening patch collection...',
+                ],
+                metadata: [
+                  if ((widget.collection.sourceName ?? '').isNotEmpty) ...[
+                    const SizedBox(height: 8),
+                    Text(
+                      widget.collection.sourceName!,
+                      style: TextStyle(
+                        color: sourceColor,
+                        fontSize: 13,
+                        fontWeight: FontWeight.w600,
                       ),
                     ),
-                  if (_dropped != null)
-                    SliverToBoxAdapter(child: PatchDropCard(drop: _dropped!)),
-                  const SliverToBoxAdapter(
-                    child: CollectibleContentsTitle(title: 'Collection contents'),
-                  ),
-                  CollectibleGridSliver<PatchDto>(
-                    items: patches,
-                    crossAxisCount: gridCount,
-                    childAspectRatio: aspectRatio,
-                    itemBuilder: (patch) {
-                      final isDropped = _dropped?.patch.id == patch.id;
-                      return PatchGridTile(
-                        patch: patch,
-                        highlighted: isDropped,
-                        crossAxisCount: gridCount,
-                      );
-                    },
-                  ),
+                  ],
                 ],
-              );
-            },
-          );
+                releaseDateText: formattedReleaseDate,
+                description:
+                    'Patch collections open like reward collections: no roulette, just the final reveal.',
+                buttonLabel:
+                    _isOpening ? 'OPENING...' : 'OPEN PATCH COLLECTION',
+                onPressed: (_isOpening || patches.isEmpty)
+                    ? null
+                    : () => _openCollection(patches),
+              ),
+            ),
+            if (_isOpening)
+              const SliverToBoxAdapter(
+                child: OpeningLoadingCard(title: 'Opening patch collection...'),
+              ),
+            if (_dropped != null)
+              SliverToBoxAdapter(child: PatchDropCard(drop: _dropped!)),
+            const SliverToBoxAdapter(
+              child: CollectibleContentsTitle(title: 'Collection contents'),
+            ),
+            CollectibleGridSliver<PatchDto>(
+              items: patches,
+              crossAxisCount: gridCount,
+              childAspectRatio: aspectRatio,
+              itemBuilder: (patch) {
+                final isDropped = _dropped?.patch.id == patch.id;
+                return PatchGridTile(
+                  patch: patch,
+                  highlighted: isDropped,
+                  crossAxisCount: gridCount,
+                );
+              },
+            ),
+          ];
         },
       ),
     );

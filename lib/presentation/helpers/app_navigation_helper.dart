@@ -9,6 +9,7 @@ import '../screens/music_kit_box_open_screen.dart';
 import '../screens/patch_container_open_screen.dart';
 import '../screens/pin_container_open_screen.dart';
 import '../screens/sticker_container_open_screen.dart';
+import '../screens/terminal_open_screen.dart';
 
 class AppNavigationHelper {
   const AppNavigationHelper._();
@@ -51,6 +52,12 @@ class AppNavigationHelper {
     }
     if (caseDto.isPatchPack) {
       return PatchContainerOpenScreen(
+        caseDto: caseDto,
+        repository: repository,
+      );
+    }
+    if (caseDto.isTerminal) {
+      return TerminalOpenScreen(
         caseDto: caseDto,
         repository: repository,
       );

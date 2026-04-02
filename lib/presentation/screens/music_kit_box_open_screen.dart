@@ -10,9 +10,9 @@ import '../../domain/music_kit_simulator_service.dart';
 import '../helpers/collectible_open_flow_helper.dart';
 import '../helpers/music_kit_ui_helper.dart';
 import '../helpers/opening_roll_sequence_builder.dart';
-import '../helpers/responsive_grid_helper.dart';
 import '../helpers/source_color_helper.dart';
 import '../widgets/chip_badge.dart';
+import '../widgets/collectible_open_body.dart';
 import '../widgets/collectible_contents_title.dart';
 import '../widgets/collectible_grid_sliver.dart';
 import '../widgets/collectible_open_header.dart';
@@ -122,83 +122,56 @@ class _MusicKitBoxOpenScreenState extends State<MusicKitBoxOpenScreen> {
 
     return Scaffold(
       appBar: AppBar(title: Text(widget.caseDto.name)),
-      body: FutureBuilder<List<MusicKitDto>>(
+      body: CollectibleOpenBody<MusicKitDto>(
         future: _musicKitsFuture,
-        builder: (context, snapshot) {
-          if (!snapshot.hasData) {
-            return const Center(child: CircularProgressIndicator());
-          }
-
-          final musicKits = snapshot.data!;
-
-          return LayoutBuilder(
-            builder: (context, constraints) {
-              final gridCount = ResponsiveGridHelper.skinGridCrossAxisCount(
-                constraints.maxWidth,
-              );
-              final aspectRatio = ResponsiveGridHelper.skinGridChildAspectRatio(
-                constraints.maxWidth,
-              );
-
-              return CustomScrollView(
-                slivers: [
-                  SliverToBoxAdapter(
-                    child: CollectibleOpenHeader(
-                      assetPath: widget.caseDto.caseImage,
-                      imageHeight: constraints.maxWidth < 700 ? 90 : 120,
-                      badges: [
-                        ChipBadge(
-                          label: widget.caseDto.typeLabel,
-                          color: color,
-                        ),
-                      ],
-                      releaseDateText: formattedReleaseDate,
-                      description:
-                          'Music Kit Boxes roll music kits only. StatTrak variants are supported through their dedicated boxes.',
-                      buttonLabel: _isOpening
-                          ? 'OPENING...'
-                          : 'OPEN MUSIC KIT BOX',
-                      onPressed: (_isOpening || musicKits.isEmpty)
-                          ? null
-                          : () => _openContainer(musicKits),
-                    ),
-                  ),
-                  CollectibleRollerSliver<MusicKitDto>(
-                    controller: _rollController,
-                    items: _rollSequence,
-                    winningIndex: _winningIndex,
-                    isRolling: _isOpening,
-                    itemBuilder: (musicKit, isWinner, itemWidth) =>
-                        _buildRollItem(
-                          musicKit,
-                          isWinner: isWinner,
-                          itemWidth: itemWidth,
-                        ),
-                  ),
-                  if (_dropped != null)
-                    SliverToBoxAdapter(
-                      child: MusicKitDropCard(drop: _dropped!),
-                    ),
-                  const SliverToBoxAdapter(
-                    child: CollectibleContentsTitle(title: 'Music kit contents'),
-                  ),
-                  CollectibleGridSliver<MusicKitDto>(
-                    items: musicKits,
-                    crossAxisCount: gridCount,
-                    childAspectRatio: aspectRatio,
-                    itemBuilder: (musicKit) {
-                      final isDropped = _dropped?.musicKit.id == musicKit.id;
-                      return MusicKitGridTile(
-                        musicKit: musicKit,
-                        highlighted: isDropped,
-                        crossAxisCount: gridCount,
-                      );
-                    },
-                  ),
+        sliverBuilder: (context, constraints, musicKits, gridCount, aspectRatio) {
+          return [
+            SliverToBoxAdapter(
+              child: CollectibleOpenHeader(
+                assetPath: widget.caseDto.caseImage,
+                imageHeight: constraints.maxWidth < 700 ? 90 : 120,
+                badges: [
+                  ChipBadge(label: widget.caseDto.typeLabel, color: color),
                 ],
-              );
-            },
-          );
+                releaseDateText: formattedReleaseDate,
+                description:
+                    'Music Kit Boxes roll music kits only. StatTrak variants are supported through their dedicated boxes.',
+                buttonLabel: _isOpening ? 'OPENING...' : 'OPEN MUSIC KIT BOX',
+                onPressed: (_isOpening || musicKits.isEmpty)
+                    ? null
+                    : () => _openContainer(musicKits),
+              ),
+            ),
+            CollectibleRollerSliver<MusicKitDto>(
+              controller: _rollController,
+              items: _rollSequence,
+              winningIndex: _winningIndex,
+              isRolling: _isOpening,
+              itemBuilder: (musicKit, isWinner, itemWidth) => _buildRollItem(
+                musicKit,
+                isWinner: isWinner,
+                itemWidth: itemWidth,
+              ),
+            ),
+            if (_dropped != null)
+              SliverToBoxAdapter(child: MusicKitDropCard(drop: _dropped!)),
+            const SliverToBoxAdapter(
+              child: CollectibleContentsTitle(title: 'Music kit contents'),
+            ),
+            CollectibleGridSliver<MusicKitDto>(
+              items: musicKits,
+              crossAxisCount: gridCount,
+              childAspectRatio: aspectRatio,
+              itemBuilder: (musicKit) {
+                final isDropped = _dropped?.musicKit.id == musicKit.id;
+                return MusicKitGridTile(
+                  musicKit: musicKit,
+                  highlighted: isDropped,
+                  crossAxisCount: gridCount,
+                );
+              },
+            ),
+          ];
         },
       ),
     );

@@ -149,6 +149,7 @@ The project is actively evolving, with current work focused on:
 - Asset size optimization to reduce how much users need to download
 - Agent, graffiti, and patch support polish
 - General glossary support for more item types
+- Shared glossary for collectibles, either unified or grouped by item type
 
 ### Future
 

@@ -9,10 +9,10 @@ import '../../data/repositories/local_data_repository.dart';
 import '../../domain/agent_collection_simulator_service.dart';
 import '../../domain/dropped_agent.dart';
 import '../helpers/collectible_open_flow_helper.dart';
-import '../helpers/responsive_grid_helper.dart';
 import '../helpers/source_color_helper.dart';
 import '../widgets/agent_drop_card.dart';
 import '../widgets/agent_grid_tile.dart';
+import '../widgets/collectible_open_body.dart';
 import '../widgets/collectible_contents_title.dart';
 import '../widgets/collectible_grid_sliver.dart';
 import '../widgets/collectible_open_header.dart';
@@ -82,72 +82,52 @@ class _AgentCollectionOpenScreenState extends State<AgentCollectionOpenScreen> {
 
     return Scaffold(
       appBar: AppBar(title: Text(widget.collection.name)),
-      body: FutureBuilder<List<AgentDto>>(
+      body: CollectibleOpenBody<AgentDto>(
         future: _agentsFuture,
-        builder: (context, snapshot) {
-          if (!snapshot.hasData) {
-            return const Center(child: CircularProgressIndicator());
-          }
-          final agents = snapshot.data!;
-
-          return LayoutBuilder(
-            builder: (context, constraints) {
-              final gridCount = ResponsiveGridHelper.skinGridCrossAxisCount(
-                constraints.maxWidth,
-              );
-              final aspectRatio = ResponsiveGridHelper.skinGridChildAspectRatio(
-                constraints.maxWidth,
-              );
-
-              return CustomScrollView(
-                slivers: [
-                  SliverToBoxAdapter(
-                    child: CollectibleOpenHeader(
-                      assetPath: widget.collection.image,
-                      imageHeight: constraints.maxWidth < 700 ? 90 : 120,
-                      badges: [
-                        SourceBadge(
-                          label: widget.collection.operationName,
-                          color: color,
-                        ),
-                      ],
-                      releaseDateText: formattedReleaseDate,
-                      description:
-                          'Agent collections open like operation rewards: no roulette, just the final reveal.',
-                      buttonLabel: _isOpening
-                          ? 'OPENING...'
-                          : 'OPEN AGENT COLLECTION',
-                      onPressed: (_isOpening || agents.isEmpty)
-                          ? null
-                          : () => _openCollection(agents),
-                    ),
-                  ),
-                  if (_isOpening)
-                    const SliverToBoxAdapter(
-                      child: OpeningLoadingCard(title: 'Opening agent collection...'),
-                    ),
-                  if (_dropped != null)
-                    SliverToBoxAdapter(child: AgentDropCard(drop: _dropped!)),
-                  const SliverToBoxAdapter(
-                    child: CollectibleContentsTitle(title: 'Collection contents'),
-                  ),
-                  CollectibleGridSliver<AgentDto>(
-                    items: agents,
-                    crossAxisCount: gridCount,
-                    childAspectRatio: aspectRatio,
-                    itemBuilder: (agent) {
-                      final isDropped = _dropped?.agent.id == agent.id;
-                      return AgentGridTile(
-                        agent: agent,
-                        highlighted: isDropped,
-                        crossAxisCount: gridCount,
-                      );
-                    },
+        sliverBuilder: (context, constraints, agents, gridCount, aspectRatio) {
+          return [
+            SliverToBoxAdapter(
+              child: CollectibleOpenHeader(
+                assetPath: widget.collection.image,
+                imageHeight: constraints.maxWidth < 700 ? 90 : 120,
+                badges: [
+                  SourceBadge(
+                    label: widget.collection.operationName,
+                    color: color,
                   ),
                 ],
-              );
-            },
-          );
+                releaseDateText: formattedReleaseDate,
+                description:
+                    'Agent collections open like operation rewards: no roulette, just the final reveal.',
+                buttonLabel: _isOpening ? 'OPENING...' : 'OPEN AGENT COLLECTION',
+                onPressed: (_isOpening || agents.isEmpty)
+                    ? null
+                    : () => _openCollection(agents),
+              ),
+            ),
+            if (_isOpening)
+              const SliverToBoxAdapter(
+                child: OpeningLoadingCard(title: 'Opening agent collection...'),
+              ),
+            if (_dropped != null)
+              SliverToBoxAdapter(child: AgentDropCard(drop: _dropped!)),
+            const SliverToBoxAdapter(
+              child: CollectibleContentsTitle(title: 'Collection contents'),
+            ),
+            CollectibleGridSliver<AgentDto>(
+              items: agents,
+              crossAxisCount: gridCount,
+              childAspectRatio: aspectRatio,
+              itemBuilder: (agent) {
+                final isDropped = _dropped?.agent.id == agent.id;
+                return AgentGridTile(
+                  agent: agent,
+                  highlighted: isDropped,
+                  crossAxisCount: gridCount,
+                );
+              },
+            ),
+          ];
         },
       ),
     );

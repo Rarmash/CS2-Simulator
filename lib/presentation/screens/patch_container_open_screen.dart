@@ -10,9 +10,9 @@ import '../../domain/patch_simulator_service.dart';
 import '../helpers/collectible_open_flow_helper.dart';
 import '../helpers/opening_roll_sequence_builder.dart';
 import '../helpers/patch_ui_helper.dart';
-import '../helpers/responsive_grid_helper.dart';
 import '../helpers/source_color_helper.dart';
 import '../widgets/chip_badge.dart';
+import '../widgets/collectible_open_body.dart';
 import '../widgets/collectible_contents_title.dart';
 import '../widgets/collectible_grid_sliver.dart';
 import '../widgets/collectible_open_header.dart';
@@ -133,75 +133,56 @@ class _PatchContainerOpenScreenState extends State<PatchContainerOpenScreen> {
 
     return Scaffold(
       appBar: AppBar(title: Text(widget.caseDto.name)),
-      body: FutureBuilder<List<PatchDto>>(
+      body: CollectibleOpenBody<PatchDto>(
         future: _patchesFuture,
-        builder: (context, snapshot) {
-          if (!snapshot.hasData) {
-            return const Center(child: CircularProgressIndicator());
-          }
-          final patches = snapshot.data!;
-
-          return LayoutBuilder(
-            builder: (context, constraints) {
-              final gridCount = ResponsiveGridHelper.skinGridCrossAxisCount(
-                constraints.maxWidth,
-              );
-              final aspectRatio = ResponsiveGridHelper.skinGridChildAspectRatio(
-                constraints.maxWidth,
-              );
-
-              return CustomScrollView(
-                slivers: [
-                  SliverToBoxAdapter(
-                    child: CollectibleOpenHeader(
-                      assetPath: widget.caseDto.caseImage,
-                      imageHeight: constraints.maxWidth < 700 ? 90 : 120,
-                      badges: [
-                        ChipBadge(label: widget.caseDto.typeLabel, color: color),
-                      ],
-                      releaseDateText: formattedReleaseDate,
-                      description:
-                          'Patch packs use roulette opening and are not affected by X-Ray mode.',
-                      buttonLabel:
-                          _isOpening ? 'OPENING...' : 'OPEN PATCH PACK',
-                      onPressed: (_isOpening || patches.isEmpty)
-                          ? null
-                          : () => _openContainer(patches),
-                    ),
-                  ),
-                  CollectibleRollerSliver<PatchDto>(
-                    controller: _rollController,
-                    items: _rollSequence,
-                    winningIndex: _winningIndex,
-                    isRolling: _isOpening,
-                    itemBuilder: (item, isWinner, itemWidth) => _buildRollItem(
-                      item,
-                      isWinner: isWinner,
-                      itemWidth: itemWidth,
-                    ),
-                  ),
-                  if (_dropped != null)
-                    SliverToBoxAdapter(child: PatchDropCard(drop: _dropped!)),
-                  const SliverToBoxAdapter(
-                    child: CollectibleContentsTitle(title: 'Patch contents'),
-                  ),
-                  CollectibleGridSliver<PatchDto>(
-                    items: patches,
-                    crossAxisCount: gridCount,
-                    childAspectRatio: aspectRatio,
-                    itemBuilder: (item) {
-                      final isDropped = _dropped?.patch.id == item.id;
-                      return PatchGridTile(
-                        patch: item,
-                        highlighted: isDropped,
-                        crossAxisCount: gridCount,
-                      );
-                    },
-                  ),
+        sliverBuilder: (context, constraints, patches, gridCount, aspectRatio) {
+          return [
+            SliverToBoxAdapter(
+              child: CollectibleOpenHeader(
+                assetPath: widget.caseDto.caseImage,
+                imageHeight: constraints.maxWidth < 700 ? 90 : 120,
+                badges: [
+                  ChipBadge(label: widget.caseDto.typeLabel, color: color),
                 ],
-              );
-            },
-          );
+                releaseDateText: formattedReleaseDate,
+                description:
+                    'Patch packs use roulette opening and are not affected by X-Ray mode.',
+                buttonLabel: _isOpening ? 'OPENING...' : 'OPEN PATCH PACK',
+                onPressed: (_isOpening || patches.isEmpty)
+                    ? null
+                    : () => _openContainer(patches),
+              ),
+            ),
+            CollectibleRollerSliver<PatchDto>(
+              controller: _rollController,
+              items: _rollSequence,
+              winningIndex: _winningIndex,
+              isRolling: _isOpening,
+              itemBuilder: (item, isWinner, itemWidth) => _buildRollItem(
+                item,
+                isWinner: isWinner,
+                itemWidth: itemWidth,
+              ),
+            ),
+            if (_dropped != null)
+              SliverToBoxAdapter(child: PatchDropCard(drop: _dropped!)),
+            const SliverToBoxAdapter(
+              child: CollectibleContentsTitle(title: 'Patch contents'),
+            ),
+            CollectibleGridSliver<PatchDto>(
+              items: patches,
+              crossAxisCount: gridCount,
+              childAspectRatio: aspectRatio,
+              itemBuilder: (item) {
+                final isDropped = _dropped?.patch.id == item.id;
+                return PatchGridTile(
+                  patch: item,
+                  highlighted: isDropped,
+                  crossAxisCount: gridCount,
+                );
+              },
+            ),
+          ];
         },
       ),
     );

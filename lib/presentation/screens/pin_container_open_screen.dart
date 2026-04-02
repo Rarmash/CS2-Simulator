@@ -10,9 +10,9 @@ import '../../domain/pin_simulator_service.dart';
 import '../helpers/collectible_open_flow_helper.dart';
 import '../helpers/opening_roll_sequence_builder.dart';
 import '../helpers/pin_ui_helper.dart';
-import '../helpers/responsive_grid_helper.dart';
 import '../helpers/source_color_helper.dart';
 import '../widgets/chip_badge.dart';
+import '../widgets/collectible_open_body.dart';
 import '../widgets/collectible_contents_title.dart';
 import '../widgets/collectible_grid_sliver.dart';
 import '../widgets/collectible_open_header.dart';
@@ -144,78 +144,55 @@ class _PinContainerOpenScreenState extends State<PinContainerOpenScreen> {
 
     return Scaffold(
       appBar: AppBar(title: Text(widget.caseDto.name)),
-      body: FutureBuilder<List<PinDto>>(
+      body: CollectibleOpenBody<PinDto>(
         future: _pinsFuture,
-        builder: (context, snapshot) {
-          if (!snapshot.hasData) {
-            return const Center(child: CircularProgressIndicator());
-          }
-
-          final pins = snapshot.data!;
-
-          return LayoutBuilder(
-            builder: (context, constraints) {
-              final gridCount = ResponsiveGridHelper.skinGridCrossAxisCount(
-                constraints.maxWidth,
-              );
-              final aspectRatio = ResponsiveGridHelper.skinGridChildAspectRatio(
-                constraints.maxWidth,
-              );
-
-              return CustomScrollView(
-                slivers: [
-                  SliverToBoxAdapter(
-                    child: CollectibleOpenHeader(
-                      assetPath: widget.caseDto.caseImage,
-                      imageHeight: constraints.maxWidth < 700 ? 90 : 120,
-                      badges: [
-                        ChipBadge(
-                          label: widget.caseDto.typeLabel,
-                          color: color,
-                        ),
-                      ],
-                      releaseDateText: formattedReleaseDate,
-                      description: 'Pin capsules roll collectible pins only.',
-                      buttonLabel:
-                          _isOpening ? 'OPENING...' : 'OPEN PIN CAPSULE',
-                      onPressed: (_isOpening || pins.isEmpty)
-                          ? null
-                          : () => _openContainer(pins),
-                    ),
-                  ),
-                  CollectibleRollerSliver<PinDto>(
-                    controller: _rollController,
-                    items: _rollSequence,
-                    winningIndex: _winningIndex,
-                    isRolling: _isOpening,
-                    itemBuilder: (pin, isWinner, itemWidth) => _buildRollItem(
-                      pin,
-                      isWinner: isWinner,
-                      itemWidth: itemWidth,
-                    ),
-                  ),
-                  if (_dropped != null)
-                    SliverToBoxAdapter(child: PinDropCard(drop: _dropped!)),
-                  const SliverToBoxAdapter(
-                    child: CollectibleContentsTitle(title: 'Pin contents'),
-                  ),
-                  CollectibleGridSliver<PinDto>(
-                    items: pins,
-                    crossAxisCount: gridCount,
-                    childAspectRatio: aspectRatio,
-                    itemBuilder: (pin) {
-                      final isDropped = _dropped?.pin.id == pin.id;
-                      return PinGridTile(
-                        pin: pin,
-                        highlighted: isDropped,
-                        crossAxisCount: gridCount,
-                      );
-                    },
-                  ),
+        sliverBuilder: (context, constraints, pins, gridCount, aspectRatio) {
+          return [
+            SliverToBoxAdapter(
+              child: CollectibleOpenHeader(
+                assetPath: widget.caseDto.caseImage,
+                imageHeight: constraints.maxWidth < 700 ? 90 : 120,
+                badges: [
+                  ChipBadge(label: widget.caseDto.typeLabel, color: color),
                 ],
-              );
-            },
-          );
+                releaseDateText: formattedReleaseDate,
+                description: 'Pin capsules roll collectible pins only.',
+                buttonLabel: _isOpening ? 'OPENING...' : 'OPEN PIN CAPSULE',
+                onPressed: (_isOpening || pins.isEmpty)
+                    ? null
+                    : () => _openContainer(pins),
+              ),
+            ),
+            CollectibleRollerSliver<PinDto>(
+              controller: _rollController,
+              items: _rollSequence,
+              winningIndex: _winningIndex,
+              isRolling: _isOpening,
+              itemBuilder: (pin, isWinner, itemWidth) => _buildRollItem(
+                pin,
+                isWinner: isWinner,
+                itemWidth: itemWidth,
+              ),
+            ),
+            if (_dropped != null)
+              SliverToBoxAdapter(child: PinDropCard(drop: _dropped!)),
+            const SliverToBoxAdapter(
+              child: CollectibleContentsTitle(title: 'Pin contents'),
+            ),
+            CollectibleGridSliver<PinDto>(
+              items: pins,
+              crossAxisCount: gridCount,
+              childAspectRatio: aspectRatio,
+              itemBuilder: (pin) {
+                final isDropped = _dropped?.pin.id == pin.id;
+                return PinGridTile(
+                  pin: pin,
+                  highlighted: isDropped,
+                  crossAxisCount: gridCount,
+                );
+              },
+            ),
+          ];
         },
       ),
     );
