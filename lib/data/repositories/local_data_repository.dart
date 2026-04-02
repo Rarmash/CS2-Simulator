@@ -6,16 +6,23 @@ import '../models/case_content_dto.dart';
 import '../models/case_dto.dart';
 import '../models/operation_collection_content_dto.dart';
 import '../models/operation_collection_dto.dart';
+import '../models/music_kit_content_dto.dart';
+import '../models/music_kit_dto.dart';
+import '../models/pin_content_dto.dart';
+import '../models/pin_dto.dart';
 import '../models/reward_collection_content_dto.dart';
 import '../models/reward_collection_dto.dart';
 import '../models/skin_dto.dart';
+import '../models/sticker_content_dto.dart';
+import '../models/sticker_dto.dart';
 
 class LocalDataRepository {
   Future<List<CaseDto>> loadCases() async {
     final raw = await rootBundle.loadString('assets/data/cases.json');
     final list = jsonDecode(raw) as List<dynamic>;
-    final cases =
-    list.map((e) => CaseDto.fromJson(e as Map<String, dynamic>)).toList();
+    final cases = list
+        .map((e) => CaseDto.fromJson(e as Map<String, dynamic>))
+        .toList();
 
     cases.sort((a, b) {
       final ad = a.releaseDate ?? '9999-99-99';
@@ -31,7 +38,31 @@ class LocalDataRepository {
   Future<List<SkinDto>> loadSkins() async {
     final raw = await rootBundle.loadString('assets/data/skins.json');
     final list = jsonDecode(raw) as List<dynamic>;
-    return list.map((e) => SkinDto.fromJson(e as Map<String, dynamic>)).toList();
+    return list
+        .map((e) => SkinDto.fromJson(e as Map<String, dynamic>))
+        .toList();
+  }
+
+  Future<List<StickerDto>> loadStickers() async {
+    final raw = await rootBundle.loadString('assets/data/stickers.json');
+    final list = jsonDecode(raw) as List<dynamic>;
+    return list
+        .map((e) => StickerDto.fromJson(e as Map<String, dynamic>))
+        .toList();
+  }
+
+  Future<List<PinDto>> loadPins() async {
+    final raw = await rootBundle.loadString('assets/data/pins.json');
+    final list = jsonDecode(raw) as List<dynamic>;
+    return list.map((e) => PinDto.fromJson(e as Map<String, dynamic>)).toList();
+  }
+
+  Future<List<MusicKitDto>> loadMusicKits() async {
+    final raw = await rootBundle.loadString('assets/data/music_kits.json');
+    final list = jsonDecode(raw) as List<dynamic>;
+    return list
+        .map((e) => MusicKitDto.fromJson(e as Map<String, dynamic>))
+        .toList();
   }
 
   Future<List<CaseContentDto>> loadCaseContents() async {
@@ -42,9 +73,38 @@ class LocalDataRepository {
         .toList();
   }
 
+  Future<List<StickerContentDto>> loadStickerContents() async {
+    final raw = await rootBundle.loadString(
+      'assets/data/sticker_contents.json',
+    );
+    final list = jsonDecode(raw) as List<dynamic>;
+    return list
+        .map((e) => StickerContentDto.fromJson(e as Map<String, dynamic>))
+        .toList();
+  }
+
+  Future<List<PinContentDto>> loadPinContents() async {
+    final raw = await rootBundle.loadString('assets/data/pin_contents.json');
+    final list = jsonDecode(raw) as List<dynamic>;
+    return list
+        .map((e) => PinContentDto.fromJson(e as Map<String, dynamic>))
+        .toList();
+  }
+
+  Future<List<MusicKitContentDto>> loadMusicKitContents() async {
+    final raw = await rootBundle.loadString(
+      'assets/data/music_kit_contents.json',
+    );
+    final list = jsonDecode(raw) as List<dynamic>;
+    return list
+        .map((e) => MusicKitContentDto.fromJson(e as Map<String, dynamic>))
+        .toList();
+  }
+
   Future<List<RewardCollectionDto>> loadRewardCollections() async {
-    final raw =
-    await rootBundle.loadString('assets/data/reward_collections.json');
+    final raw = await rootBundle.loadString(
+      'assets/data/reward_collections.json',
+    );
     final list = jsonDecode(raw) as List<dynamic>;
     final items = list
         .map((e) => RewardCollectionDto.fromJson(e as Map<String, dynamic>))
@@ -61,20 +121,23 @@ class LocalDataRepository {
     return items;
   }
 
-  Future<List<RewardCollectionContentDto>> loadRewardCollectionContents() async {
-    final raw =
-    await rootBundle.loadString('assets/data/reward_collection_contents.json');
+  Future<List<RewardCollectionContentDto>>
+  loadRewardCollectionContents() async {
+    final raw = await rootBundle.loadString(
+      'assets/data/reward_collection_contents.json',
+    );
     final list = jsonDecode(raw) as List<dynamic>;
     return list
         .map(
           (e) => RewardCollectionContentDto.fromJson(e as Map<String, dynamic>),
-    )
+        )
         .toList();
   }
 
   Future<List<OperationCollectionDto>> loadOperationCollections() async {
-    final raw =
-    await rootBundle.loadString('assets/data/operation_collections.json');
+    final raw = await rootBundle.loadString(
+      'assets/data/operation_collections.json',
+    );
     final list = jsonDecode(raw) as List<dynamic>;
     final items = list
         .map((e) => OperationCollectionDto.fromJson(e as Map<String, dynamic>))
@@ -97,14 +160,15 @@ class LocalDataRepository {
 
   Future<List<OperationCollectionContentDto>>
   loadOperationCollectionContents() async {
-    final raw = await rootBundle
-        .loadString('assets/data/operation_collection_contents.json');
+    final raw = await rootBundle.loadString(
+      'assets/data/operation_collection_contents.json',
+    );
     final list = jsonDecode(raw) as List<dynamic>;
     return list
         .map(
           (e) =>
-          OperationCollectionContentDto.fromJson(e as Map<String, dynamic>),
-    )
+              OperationCollectionContentDto.fromJson(e as Map<String, dynamic>),
+        )
         .toList();
   }
 
@@ -149,13 +213,72 @@ class LocalDataRepository {
     return result;
   }
 
+  Future<List<StickerDto>> loadStickersForCase(String caseId) async {
+    final stickers = await loadStickers();
+    final contents = await loadStickerContents();
+    final content = contents.firstWhere((c) => c.caseId == caseId);
+    final ids = content.stickerIds.toSet();
+
+    final result = stickers.where((s) => ids.contains(s.id)).toList();
+
+    result.sort((a, b) {
+      final rarityCompare = _stickerRarityOrder(
+        a,
+      ).compareTo(_stickerRarityOrder(b));
+      if (rarityCompare != 0) return rarityCompare;
+      return int.parse(a.id).compareTo(int.parse(b.id));
+    });
+
+    return result;
+  }
+
+  Future<List<PinDto>> loadPinsForCase(String caseId) async {
+    final pins = await loadPins();
+    final contents = await loadPinContents();
+    final content = contents.firstWhere((c) => c.caseId == caseId);
+    final ids = content.pinIds.toSet();
+
+    final result = pins.where((p) => ids.contains(p.id)).toList();
+
+    result.sort((a, b) {
+      final rarityCompare = _pinRarityOrder(a).compareTo(_pinRarityOrder(b));
+      if (rarityCompare != 0) return rarityCompare;
+      return int.parse(a.id).compareTo(int.parse(b.id));
+    });
+
+    return result;
+  }
+
+  Future<List<MusicKitDto>> loadMusicKitsForCase(String caseId) async {
+    final musicKits = await loadMusicKits();
+    final contents = await loadMusicKitContents();
+    final content = contents.firstWhere((c) => c.caseId == caseId);
+    final ids = content.musicKitIds.toSet();
+
+    final result = musicKits.where((m) => ids.contains(m.id)).toList();
+
+    result.sort((a, b) {
+      final rarityCompare = _musicKitRarityOrder(
+        a,
+      ).compareTo(_musicKitRarityOrder(b));
+      if (rarityCompare != 0) return rarityCompare;
+      final statTrakCompare = a.isStatTrak == b.isStatTrak
+          ? 0
+          : (a.isStatTrak ? 1 : -1);
+      if (statTrakCompare != 0) return statTrakCompare;
+      return int.parse(a.id).compareTo(int.parse(b.id));
+    });
+
+    return result;
+  }
+
   Future<List<SkinDto>> loadSkinsForRewardCollection(
-      String rewardCollectionId,
-      ) async {
+    String rewardCollectionId,
+  ) async {
     final skins = await loadSkins();
     final contents = await loadRewardCollectionContents();
     final content = contents.firstWhere(
-          (c) => c.rewardCollectionId == rewardCollectionId,
+      (c) => c.rewardCollectionId == rewardCollectionId,
     );
     final ids = content.skinIds.toSet();
 
@@ -173,12 +296,12 @@ class LocalDataRepository {
   }
 
   Future<List<SkinDto>> loadSkinsForOperationCollection(
-      String operationCollectionId,
-      ) async {
+    String operationCollectionId,
+  ) async {
     final skins = await loadSkins();
     final contents = await loadOperationCollectionContents();
     final content = contents.firstWhere(
-          (c) => c.operationCollectionId == operationCollectionId,
+      (c) => c.operationCollectionId == operationCollectionId,
     );
     final ids = content.skinIds.toSet();
 
@@ -217,9 +340,51 @@ class LocalDataRepository {
     return result;
   }
 
+  Future<List<CaseDto>> loadCasesForSticker(String stickerId) async {
+    final cases = await loadCases();
+    final contents = await loadStickerContents();
+
+    final caseIds = contents
+        .where((entry) => entry.stickerIds.contains(stickerId))
+        .map((entry) => entry.caseId)
+        .toSet();
+
+    final result = cases.where((c) => caseIds.contains(c.id)).toList();
+
+    result.sort((a, b) {
+      final ad = a.releaseDate ?? '9999-99-99';
+      final bd = b.releaseDate ?? '9999-99-99';
+      final byDate = ad.compareTo(bd);
+      if (byDate != 0) return byDate;
+      return a.name.compareTo(b.name);
+    });
+
+    return result;
+  }
+
+  Future<List<CaseDto>> loadStickerCollections() async {
+    final cases = await loadCases();
+    final result = cases.where((c) => c.isStickerCollection).toList();
+
+    result.sort((a, b) {
+      final sourceA = a.sourceType ?? '';
+      final sourceB = b.sourceType ?? '';
+      final bySource = sourceA.compareTo(sourceB);
+      if (bySource != 0) return bySource;
+
+      final ad = a.releaseDate ?? '9999-99-99';
+      final bd = b.releaseDate ?? '9999-99-99';
+      final byDate = ad.compareTo(bd);
+      if (byDate != 0) return byDate;
+      return a.name.compareTo(b.name);
+    });
+
+    return result;
+  }
+
   Future<List<RewardCollectionDto>> loadRewardCollectionsForSkin(
-      String skinId,
-      ) async {
+    String skinId,
+  ) async {
     final collections = await loadRewardCollections();
     final contents = await loadRewardCollectionContents();
 
@@ -242,8 +407,8 @@ class LocalDataRepository {
   }
 
   Future<List<OperationCollectionDto>> loadOperationCollectionsForSkin(
-      String skinId,
-      ) async {
+    String skinId,
+  ) async {
     final collections = await loadOperationCollections();
     final contents = await loadOperationCollectionContents();
 
@@ -289,6 +454,47 @@ class LocalDataRepository {
         return 6;
       case 'EXTRAORDINARY':
         return 7;
+      default:
+        return 999;
+    }
+  }
+
+  int _stickerRarityOrder(StickerDto sticker) {
+    switch (sticker.rarity) {
+      case 'HIGH_GRADE':
+        return 0;
+      case 'REMARKABLE':
+        return 1;
+      case 'EXOTIC':
+        return 2;
+      case 'EXTRAORDINARY':
+        return 3;
+      case 'CONTRABAND':
+        return 4;
+      default:
+        return 999;
+    }
+  }
+
+  int _pinRarityOrder(PinDto pin) {
+    switch (pin.rarity) {
+      case 'HIGH_GRADE':
+        return 0;
+      case 'REMARKABLE':
+        return 1;
+      case 'EXOTIC':
+        return 2;
+      case 'EXTRAORDINARY':
+        return 3;
+      default:
+        return 999;
+    }
+  }
+
+  int _musicKitRarityOrder(MusicKitDto musicKit) {
+    switch (musicKit.rarity) {
+      case 'HIGH_GRADE':
+        return 0;
       default:
         return 999;
     }

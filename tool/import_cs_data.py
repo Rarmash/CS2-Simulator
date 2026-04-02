@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import json
 import re
+import sys
 import time
 import zlib
 from pathlib import Path
@@ -15,12 +16,16 @@ CRATES_URL = f"{BASE_URL}/crates.json"
 SKINS_URL = f"{BASE_URL}/skins.json"
 COLLECTIONS_URL = f"{BASE_URL}/collections.json"
 STICKERS_URL = f"{BASE_URL}/stickers.json"
+MUSIC_KITS_URL = f"{BASE_URL}/music_kits.json"
 
 OUT_ROOT = Path(".")
 ASSETS_DIR = OUT_ROOT / "assets"
 DATA_DIR = ASSETS_DIR / "data"
 CASES_DIR = ASSETS_DIR / "cases"
 SKINS_DIR = ASSETS_DIR / "skins"
+STICKERS_DIR = ASSETS_DIR / "stickers"
+PINS_DIR = ASSETS_DIR / "pins"
+MUSIC_KITS_DIR = ASSETS_DIR / "music_kits"
 REWARD_COLLECTIONS_DIR = ASSETS_DIR / "reward_collections"
 OPERATION_COLLECTIONS_DIR = ASSETS_DIR / "operation_collections"
 TOURNAMENT_LOGOS_DIR = ASSETS_DIR / "tournament_logos"
@@ -36,6 +41,85 @@ RARITY_MAP = {
     "Covert": "COVERT",
     "Contraband": "CONTRABAND",
     "Extraordinary": "EXTRAORDINARY",
+}
+
+STICKER_RARITY_MAP = {
+    "High Grade": "HIGH_GRADE",
+    "Remarkable": "REMARKABLE",
+    "Exotic": "EXOTIC",
+    "Extraordinary": "EXTRAORDINARY",
+    "Contraband": "CONTRABAND",
+    "Default": "DEFAULT",
+}
+
+PIN_RARITY_MAP = {
+    "High Grade": "HIGH_GRADE",
+    "Remarkable": "REMARKABLE",
+    "Exotic": "EXOTIC",
+    "Extraordinary": "EXTRAORDINARY",
+    "Default": "DEFAULT",
+}
+
+MUSIC_KIT_RARITY_MAP = {
+    "High Grade": "HIGH_GRADE",
+    "Default": "DEFAULT",
+}
+
+STICKER_COLLECTION_SOURCE_OVERRIDES: dict[str, dict[str, str]] = {
+    "Shattered Web Sticker Collection": {
+        "sourceType": "LEGACY_OPERATION",
+        "sourceId": "SHATTERED_WEB",
+        "sourceName": "Operation Shattered Web",
+        "releaseDate": "2019-11-18",
+    },
+    "Broken Fang Sticker Collection": {
+        "sourceType": "OPERATION_REWARD",
+        "sourceId": "BROKEN_FANG",
+        "sourceName": "Operation Broken Fang",
+        "releaseDate": "2020-12-03",
+    },
+    "Operation Riptide Sticker Collection": {
+        "sourceType": "OPERATION_REWARD",
+        "sourceId": "RIPTIDE",
+        "sourceName": "Operation Riptide",
+        "releaseDate": "2021-09-21",
+    },
+    "Riptide Surf Shop Sticker Collection": {
+        "sourceType": "OPERATION_REWARD",
+        "sourceId": "RIPTIDE",
+        "sourceName": "Operation Riptide",
+        "releaseDate": "2021-09-21",
+    },
+    "Recoil Sticker Collection": {
+        "sourceType": "OPERATION_REWARD",
+        "sourceId": "BROKEN_FANG",
+        "sourceName": "Operation Broken Fang",
+        "releaseDate": "2020-12-03",
+    },
+    "Character Craft Sticker Pack": {
+        "sourceType": "ARMORY_REWARD",
+        "sourceId": "ARMORY",
+        "sourceName": "The Armory",
+        "releaseDate": "2024-10-02",
+    },
+    "Elemental Craft Sticker Pack": {
+        "sourceType": "ARMORY_REWARD",
+        "sourceId": "ARMORY",
+        "sourceName": "The Armory",
+        "releaseDate": "2024-10-02",
+    },
+    "2025 Community Sticker Collection": {
+        "sourceType": "ARMORY_REWARD",
+        "sourceId": "ARMORY",
+        "sourceName": "The Armory",
+        "releaseDate": "2025-10-02",
+    },
+    "Sugarface 2 Sticker Collection": {
+        "sourceType": "ARMORY_REWARD",
+        "sourceId": "ARMORY",
+        "sourceName": "The Armory",
+        "releaseDate": "2025-10-02",
+    },
 }
 
 WEAPON_TYPE_MAP = {
@@ -324,8 +408,154 @@ TOURNAMENT_NAME_ALIASES = {
     "EMS One": "EMS One Katowice 2014",
 }
 
+TOURNAMENT_START_DATES = {
+    "Antwerp 2022": "2022-05-09",
+    "Rio 2022": "2022-10-31",
+    "Paris 2023": "2023-05-08",
+    "Copenhagen 2024": "2024-03-17",
+    "Shanghai 2024": "2024-11-30",
+    "Austin 2025": "2025-06-03",
+    "Budapest 2025": "2025-11-24",
+}
+
+TOURNAMENT_CONTAINER_START_DATES = {
+    "DreamHack 2013": "2013-11-28",
+    "2020 RMR": "2021-01-27",
+    "EMS One 2014": "2014-03-13",
+    "EMS Katowice 2014": "2014-03-13",
+    "Cologne 2015": "2015-08-14",
+    "Cluj-Napoca 2015": "2015-10-28",
+    "ESL One Cologne 2014": "2014-08-14",
+    "DreamHack 2014": "2014-11-27",
+    "ESL One Katowice 2015": "2015-03-12",
+    "ESL One Cologne 2015": "2015-08-14",
+    "DreamHack Cluj-Napoca 2015": "2015-10-28",
+    "MLG Columbus 2016": "2016-03-29",
+    "Cologne 2016": "2016-07-08",
+    "Atlanta 2017": "2017-01-22",
+    "Krakow 2017": "2017-07-16",
+    "Boston 2018": "2018-01-12",
+    "London 2018": "2018-09-05",
+    "Katowice 2019": "2019-02-13",
+    "Berlin 2019": "2019-08-23",
+    "Stockholm 2021": "2021-10-26",
+    "Antwerp 2022": "2022-05-09",
+    "Rio 2022": "2022-10-31",
+    "Paris 2023": "2023-05-08",
+    "Copenhagen 2024": "2024-03-17",
+    "Shanghai 2024": "2024-11-30",
+    "Austin 2025": "2025-06-03",
+    "Budapest 2025": "2025-11-24",
+}
+
+CONTAINER_RELEASE_DATE_OVERRIDES: dict[str, str] = {
+    # Cases
+    "CS:GO Weapon Case": "2013-08-14",
+    "CS:GO Weapon Case 2": "2013-11-08",
+    "CS:GO Weapon Case 3": "2014-02-12",
+    "Operation Bravo Case": "2013-09-19",
+    "Winter Offensive Weapon Case": "2013-12-18",
+    "Operation Phoenix Weapon Case": "2014-02-20",
+    "Huntsman Weapon Case (Legacy)": "2014-05-01",
+    "Huntsman Weapon Case": "2014-05-01",
+    "Operation Breakout Weapon Case": "2014-07-01",
+    "eSports 2013 Case": "2013-08-14",
+    "eSports 2013 Winter Case": "2013-12-18",
+    "eSports 2014 Summer Case": "2014-07-10",
+    "Operation Vanguard Weapon Case": "2014-11-11",
+    "Chroma Case": "2015-01-08",
+    "Chroma 2 Case": "2015-04-15",
+    "Falchion Case": "2015-05-26",
+    "Shadow Case": "2015-09-17",
+    "Revolver Case": "2015-12-08",
+    "Operation Wildfire Case": "2016-02-17",
+    "Chroma 3 Case": "2016-04-27",
+    "Gamma Case": "2016-06-15",
+    "Gamma 2 Case": "2016-08-18",
+    "Glove Case": "2016-11-28",
+    "Spectrum Case": "2017-03-15",
+    "Operation Hydra Case": "2017-05-23",
+    "Spectrum 2 Case": "2017-09-14",
+    "Clutch Case": "2018-02-14",
+    "Horizon Case": "2018-08-02",
+    "Danger Zone Case": "2018-12-06",
+    "Prisma Case": "2019-03-13",
+    "Shattered Web Case": "2019-11-18",
+    "CS20 Case": "2019-10-18",
+    "Prisma 2 Case": "2020-03-31",
+    "Fracture Case": "2020-08-06",
+    "Operation Broken Fang Case": "2020-12-03",
+    "Snakebite Case": "2021-05-03",
+    "Operation Riptide Case": "2021-09-22",
+    "Dreams & Nightmares Case": "2022-01-20",
+    "Recoil Case": "2022-07-01",
+    "Revolution Case": "2023-02-09",
+    "Kilowatt Case": "2024-02-06",
+    "Gallery Case": "2024-10-02",
+    "Fever Case": "2025-03-31",
+    # Sticker capsules
+    "Sticker Capsule": "2014-01-29",
+    "Sticker Capsule 2": "2014-01-29",
+    "Community Sticker Capsule 1": "2014-06-11",
+    "Enfu Sticker Capsule": "2015-04-22",
+    "Pinups Capsule": "2015-12-01",
+    "Slid3 Capsule": "2015-12-01",
+    "Team Roles Capsule": "2015-12-01",
+    "Bestiary Capsule": "2016-08-16",
+    "Sugarface Capsule": "2016-08-16",
+    "Perfect World Sticker Capsule 1": "2017-09-15",
+    "Perfect World Sticker Capsule 2": "2017-09-15",
+    "Community Capsule 2018": "2017-12-11",
+    "Skill Groups Capsule": "2018-11-15",
+    "Feral Predators Capsule": "2019-04-15",
+    "Chicken Capsule": "2019-06-10",
+    "CS20 Sticker Capsule": "2019-10-16",
+    "Halo Capsule": "2019-11-25",
+    "Half-Life: Alyx Sticker Capsule": "2020-03-23",
+    "Warhammer 40,000 Sticker Capsule": "2020-05-28",
+    "Poorly Drawn Capsule": "2021-02-14",
+    "2021 Community Sticker Capsule": "2021-09-02",
+    "Battlefield 2042 Sticker Capsule": "2021-10-07",
+    "The Boardroom Sticker Capsule": "2022-02-20",
+    "10 Year Birthday Sticker Capsule": "2022-06-15",
+    "Espionage Sticker Capsule": "2023-01-05",
+    "Ambush Sticker Capsule": "2024-01-25",
+    "Warhammer 40,000 Adeptus Astartes Sticker Capsule": "2025-05-22",
+    "Warhammer 40,000 Imperium Sticker Capsule": "2025-05-22",
+    "Warhammer 40,000 Traitor Astartes Sticker Capsule": "2025-05-22",
+    "Warhammer 40,000 Xenos Sticker Capsule": "2025-05-22",
+    # Pin capsules
+    "Collectible Pins Capsule Series 1": "2016-06-01",
+    "Collectible Pins Capsule Series 2": "2016-09-28",
+    "Collectible Pins Capsule Series 3": "2018-03-01",
+    "Half-Life: Alyx Collectible Pins Capsule": "2020-03-23",
+    # Music kit boxes
+    "StatTrak™ Radicals Box": "2016-08-16",
+    "Masterminds Music Kit Box": "2020-04-22",
+    "StatTrak™ Masterminds Music Kit Box": "2020-04-22",
+    "Tacticians Music Kit Box": "2021-07-20",
+    "StatTrak™ Tacticians Music Kit Box": "2021-07-20",
+    "Initiators Music Kit Box": "2022-08-15",
+    "StatTrak™ Initiators Music Kit Box": "2022-08-15",
+    "NIGHTMODE Music Kit Box": "2024-01-24",
+    "StatTrak™ NIGHTMODE Music Kit Box": "2024-01-24",
+    "Masterminds 2 Music Kit Box": "2024-08-15",
+    "StatTrak™ Masterminds 2 Music Kit Box": "2024-08-15",
+    "Deluge Music Kit Box": "2025-06-27",
+    "StatTrak™ Deluge Music Kit Box": "2025-06-27",
+    # Special containers
+    "The X-Ray Collection": "2019-09-30",
+    "X-Ray P250 Package": "2019-09-30",
+    "Anubis Collection Package": "2023-03-22",
+    "Sealed Genesis Terminal": "2025-09-16",
+    "Sealed Dead Hand Terminal": "2026-03-11",
+}
+
 session = requests.Session()
 session.headers.update({"User-Agent": "cs2-simulator-parser/4.4"})
+
+if hasattr(sys.stdout, "reconfigure"):
+    sys.stdout.reconfigure(encoding="utf-8", errors="replace")
 
 
 def fetch_json(url: str) -> Any:
@@ -338,9 +568,27 @@ def ensure_dirs() -> None:
     DATA_DIR.mkdir(parents=True, exist_ok=True)
     CASES_DIR.mkdir(parents=True, exist_ok=True)
     SKINS_DIR.mkdir(parents=True, exist_ok=True)
+    STICKERS_DIR.mkdir(parents=True, exist_ok=True)
+    PINS_DIR.mkdir(parents=True, exist_ok=True)
+    MUSIC_KITS_DIR.mkdir(parents=True, exist_ok=True)
     REWARD_COLLECTIONS_DIR.mkdir(parents=True, exist_ok=True)
     OPERATION_COLLECTIONS_DIR.mkdir(parents=True, exist_ok=True)
     TOURNAMENT_LOGOS_DIR.mkdir(parents=True, exist_ok=True)
+
+
+def reset_collectible_outputs() -> None:
+    for data_path in [
+        DATA_DIR / "stickers.json",
+        DATA_DIR / "sticker_contents.json",
+        DATA_DIR / "pins.json",
+        DATA_DIR / "pin_contents.json",
+        DATA_DIR / "music_kits.json",
+        DATA_DIR / "music_kit_contents.json",
+    ]:
+        if data_path.exists():
+            data_path.unlink()
+
+    ensure_dirs()
 
 
 def load_json_list(path: Path) -> list[dict[str, Any]]:
@@ -375,10 +623,27 @@ def sort_numeric_str(values: list[str]) -> list[str]:
     return sorted(values, key=lambda x: int(x))
 
 
+def normalize_release_date_string(value: Any) -> str | None:
+    text = str(value or "").strip()
+    if not text:
+        return None
+
+    text = text.split("T")[0].strip().replace("/", "-")
+    parts = text.split("-")
+    if len(parts) != 3:
+        return None
+
+    year, month, day = parts
+    if not (year.isdigit() and month.isdigit() and day.isdigit()):
+        return None
+
+    return f"{int(year):04d}-{int(month):02d}-{int(day):02d}"
+
+
 def parse_release_date(crate: dict[str, Any]) -> str:
-    date = crate.get("first_sale_date")
-    if date:
-        return str(date).split("T")[0]
+    normalized = normalize_release_date_string(crate.get("first_sale_date"))
+    if normalized:
+        return normalized
     return "2000-01-01"
 
 
@@ -463,6 +728,36 @@ def infer_tournament_name_from_souvenir_package(crate_name: str) -> str | None:
         return " ".join(parts[:-1]).strip()
 
     return base
+
+
+def infer_tournament_name_from_sticker_capsule(crate_name: str) -> str | None:
+    name = str(crate_name).strip()
+    if not name.lower().endswith("capsule"):
+        return None
+
+    known_names = sorted(TOURNAMENT_START_DATES.keys(), key=len, reverse=True)
+    for tournament_name in known_names:
+        if name.startswith(f"{tournament_name} "):
+            return tournament_name
+
+    return None
+
+
+def infer_tournament_container_date(crate_name: str) -> str | None:
+    name = str(crate_name).strip()
+    normalized_name = normalize_name_key(name)
+    known_names = sorted(TOURNAMENT_CONTAINER_START_DATES.keys(), key=len, reverse=True)
+
+    for tournament_name in known_names:
+        normalized_tournament_name = normalize_name_key(tournament_name)
+        if (
+            name.startswith(f"{tournament_name} ")
+            or name == tournament_name
+            or normalized_tournament_name in normalized_name
+        ):
+            return TOURNAMENT_CONTAINER_START_DATES[tournament_name]
+
+    return None
 
 
 def expand_tournament_name_variants(name: str | None) -> list[str]:
@@ -563,6 +858,14 @@ def is_supported_container(crate: dict[str, Any]) -> bool:
         return True
     if "collection package" in lower_name:
         return True
+    if "patch" in lower_name or "patch" in lower_type:
+        return False
+    if crate_type == "Pins" or "pins" in lower_type:
+        return True
+    if crate_type == "Music Kit Box" or "music kit box" in lower_type:
+        return True
+    if "capsule" in lower_name:
+        return True
     if "terminal" in lower_name or "terminal" in lower_type:
         return True
     if "x-ray" in lower_name or "xray" in lower_name:
@@ -592,6 +895,18 @@ def infer_container_type(crate_name: str | None, crate_type: str | None) -> str:
 
     if "collection package" in lower_name or "collection package" in lower_type:
         return "COLLECTION_PACKAGE"
+
+    if crate_type == "Pins" or "pins" in lower_type:
+        return "PIN_CAPSULE"
+
+    if crate_type == "Music Kit Box" or "music kit box" in lower_type:
+        return "MUSIC_KIT_BOX"
+
+    if lower_name.endswith("sticker collection"):
+        return "STICKER_COLLECTION"
+
+    if "capsule" in lower_name:
+        return "STICKER_CAPSULE"
 
     if crate_type == "Case":
         return "CASE"
@@ -688,6 +1003,30 @@ def existing_skin_key(skin: dict[str, Any]) -> tuple[str, str, str, str]:
     )
 
 
+def existing_sticker_key(sticker: dict[str, Any]) -> tuple[str, str, str, str]:
+    return (
+        canonical_name(str(sticker.get("name", ""))),
+        str(sticker.get("stickerType", "")).strip().upper(),
+        str(sticker.get("effect", "")).strip().upper(),
+        canonical_name(str(sticker.get("collection") or sticker.get("tournament") or "")),
+    )
+
+
+def existing_pin_key(pin: dict[str, Any]) -> tuple[str, str]:
+    return (
+        canonical_name(str(pin.get("name", ""))),
+        canonical_name(str(pin.get("collection", ""))),
+    )
+
+
+def existing_music_kit_key(music_kit: dict[str, Any]) -> tuple[str, str, bool]:
+    return (
+        canonical_name(str(music_kit.get("name", ""))),
+        canonical_name(str(music_kit.get("collection", ""))),
+        bool(music_kit.get("isStatTrak")),
+    )
+
+
 def existing_case_key(case: dict[str, Any]) -> str:
     return str(case.get("name", "")).strip()
 
@@ -754,6 +1093,92 @@ def choose_image_url(meta: dict[str, Any]) -> str | None:
     if image:
         return str(image)
     return None
+
+
+def normalize_sticker_name(name: str) -> str:
+    normalized = str(name).strip()
+    if " | " in normalized:
+        _, sticker_name = normalized.split(" | ", 1)
+        return sticker_name.strip()
+    return normalized
+
+
+def infer_sticker_type(meta: dict[str, Any]) -> str:
+    raw_type = str(meta.get("type", "")).strip().lower()
+    if raw_type == "autograph":
+        return "AUTOGRAPH"
+    if raw_type == "event":
+        return "EVENT"
+    return "STICKER"
+
+
+def infer_sticker_container_type(crate_name: str | None) -> str:
+    normalized_name = str(crate_name or "").strip()
+    if normalized_name in CONTAINER_TYPE_OVERRIDES:
+        return CONTAINER_TYPE_OVERRIDES[normalized_name]
+
+    name = normalized_name.lower()
+
+    if name.endswith("sticker collection") or name.endswith("sticker pack"):
+        return "STICKER_COLLECTION"
+
+    return "STICKER_CAPSULE"
+
+
+def infer_pin_collection(crate_name: str | None) -> str | None:
+    name = str(crate_name or "").strip()
+    if not name:
+        return None
+
+    match = re.match(r"^Collectible Pins Capsule Series (\d+)$", name)
+    if match:
+        return f"Series {match.group(1)}"
+
+    name = re.sub(r"\s+Collectible Pins Capsule$", "", name).strip()
+    name = re.sub(r"\s+Pins Capsule$", "", name).strip()
+    return name or None
+
+
+def infer_music_kit_collection(crate_name: str | None) -> str | None:
+    name = str(crate_name or "").strip()
+    if not name:
+        return None
+
+    name = name.replace("StatTrak™ ", "").strip()
+    name = re.sub(r"\s+Music Kit Box$", "", name).strip()
+    name = re.sub(r"\s+Box$", "", name).strip()
+    return name or None
+
+
+def normalize_music_kit_name(name: str | None) -> tuple[str, bool]:
+    normalized = str(name or "").strip()
+    is_stat_trak = normalized.startswith("StatTrak™ ")
+
+    if is_stat_trak:
+        normalized = normalized[len("StatTrak™ ") :].strip()
+
+    if normalized.startswith("Music Kit | "):
+        normalized = normalized[len("Music Kit | ") :].strip()
+
+    return normalized, is_stat_trak
+
+
+def make_hashed_numeric_id(source_id: str, prefix: int) -> str:
+    value = zlib.crc32(source_id.encode("utf-8")) % 100_000_000
+    return str(prefix + value)
+
+
+def resolve_sticker_collection_source(
+    collection_name: str | None,
+) -> dict[str, str | None]:
+    normalized_name = str(collection_name or "").strip()
+    source = STICKER_COLLECTION_SOURCE_OVERRIDES.get(normalized_name, {})
+    return {
+        "sourceType": str(source.get("sourceType") or "").strip() or None,
+        "sourceId": str(source.get("sourceId") or "").strip() or None,
+        "sourceName": str(source.get("sourceName") or "").strip() or None,
+        "releaseDate": str(source.get("releaseDate") or "").strip() or None,
+    }
 
 
 def get_explicit_phase(meta: dict[str, Any]) -> str | None:
@@ -907,19 +1332,60 @@ def resolve_souvenir_logo_and_name(
     return parsed_name, None
 
 
+def resolve_container_release_date(
+    *,
+    crate_name: str,
+    container_type: str,
+    crate_meta: dict[str, Any] | None = None,
+    existing_release_date: Any = None,
+) -> str:
+    explicit = CONTAINER_RELEASE_DATE_OVERRIDES.get(crate_name)
+    if explicit:
+        return explicit
+
+    tournament_start_date = infer_tournament_container_date(crate_name)
+    if tournament_start_date:
+        return tournament_start_date
+
+    existing = normalize_release_date_string(existing_release_date)
+    if existing:
+        return existing
+
+    return "2000-01-01"
+
+
 def main() -> None:
     ensure_dirs()
+    reset_collectible_outputs()
 
     reward_source_overrides = load_reward_overrides()
     operation_collection_overrides = load_operation_overrides()
 
+    all_existing_cases = load_json_list(DATA_DIR / "cases.json")
     existing_skins = load_json_list(DATA_DIR / "skins.json")
-    existing_cases = load_json_list(DATA_DIR / "cases.json")
+    existing_stickers: list[dict[str, Any]] = []
+    existing_pins: list[dict[str, Any]] = []
+    existing_music_kits: list[dict[str, Any]] = []
+    existing_cases = [
+        item
+        for item in all_existing_cases
+        if str(item.get("type", "")).strip().upper()
+        not in {"STICKER_CAPSULE", "STICKER_COLLECTION", "PIN_CAPSULE", "MUSIC_KIT_BOX"}
+    ]
     existing_reward_collections = load_json_list(DATA_DIR / "reward_collections.json")
     existing_operation_collections = load_json_list(DATA_DIR / "operation_collections.json")
 
     existing_skin_by_key: dict[tuple[str, str, str, str], dict[str, Any]] = {
         existing_skin_key(s): dict(s) for s in existing_skins
+    }
+    existing_sticker_by_key: dict[tuple[str, str, str, str], dict[str, Any]] = {
+        existing_sticker_key(s): dict(s) for s in existing_stickers
+    }
+    existing_pin_by_key: dict[tuple[str, str], dict[str, Any]] = {
+        existing_pin_key(p): dict(p) for p in existing_pins
+    }
+    existing_music_kit_by_key: dict[tuple[str, str, bool], dict[str, Any]] = {
+        existing_music_kit_key(m): dict(m) for m in existing_music_kits
     }
     existing_case_by_name: dict[str, dict[str, Any]] = {
         existing_case_key(c): dict(c) for c in existing_cases
@@ -935,8 +1401,17 @@ def main() -> None:
     used_skin_ids = {
         int(s["id"]) for s in existing_skins if str(s.get("id", "")).isdigit()
     }
+    used_sticker_ids = {
+        int(s["id"]) for s in existing_stickers if str(s.get("id", "")).isdigit()
+    }
+    used_pin_ids = {
+        int(p["id"]) for p in existing_pins if str(p.get("id", "")).isdigit()
+    }
+    used_music_kit_ids = {
+        int(m["id"]) for m in existing_music_kits if str(m.get("id", "")).isdigit()
+    }
     used_case_ids = {
-        int(c["id"]) for c in existing_cases if str(c.get("id", "")).isdigit()
+        int(c["id"]) for c in all_existing_cases if str(c.get("id", "")).isdigit()
     }
     used_reward_ids = {
         int(c["id"]) for c in existing_reward_collections if str(c.get("id", "")).isdigit()
@@ -946,6 +1421,9 @@ def main() -> None:
     }
 
     next_skin_id = max(used_skin_ids, default=0) + 1
+    next_sticker_id = max(used_sticker_ids, default=900_000_000) + 1
+    next_pin_id = max(used_pin_ids, default=950_000_000) + 1
+    next_music_kit_id = max(used_music_kit_ids, default=970_000_000) + 1
     next_case_id = max(used_case_ids, default=0) + 1
     next_reward_id = max(used_reward_ids, default=10_000) + 1
     next_operation_id = max(used_operation_ids, default=20_000) + 1
@@ -961,6 +1439,9 @@ def main() -> None:
 
     print("Fetching stickers.json ...")
     stickers_data = fetch_json(STICKERS_URL)
+
+    print("Fetching music_kits.json ...")
+    music_kits_data = fetch_json(MUSIC_KITS_URL)
 
     collection_image_by_name = build_collection_image_map(skins_data)
     collection_meta_by_crate_name = build_collection_meta_map(collections_data)
@@ -996,6 +1477,29 @@ def main() -> None:
     supported_crates = [crate for crate in crates if is_supported_container(crate)]
     supported_crates.sort(key=lambda x: str(x.get("name", "")))
 
+    unresolved_release_dates: list[str] = []
+    for crate in supported_crates:
+        crate_name = str(crate.get("name", "")).strip()
+        if not crate_name:
+            continue
+
+        container_type = infer_container_type(crate_name, crate.get("type"))
+        release_date = resolve_container_release_date(
+            crate_name=crate_name,
+            container_type=container_type,
+            crate_meta=None,
+            existing_release_date=None,
+        )
+        if release_date == "2000-01-01":
+            unresolved_release_dates.append(f"{container_type}: {crate_name}")
+
+    if unresolved_release_dates:
+        preview = "\n".join(unresolved_release_dates[:20])
+        raise RuntimeError(
+            "Missing hardcoded release dates for supported containers:\n"
+            f"{preview}"
+        )
+
     souvenir_crates = [
         crate for crate in supported_crates
         if infer_container_type(crate.get("name"), crate.get("type")) == "SOUVENIR_PACKAGE"
@@ -1016,9 +1520,15 @@ def main() -> None:
         else:
             case_id = str(next_case_id)
             next_case_id += 1
-            release_date = parse_release_date(crate)
+            release_date = None
 
         container_type = infer_container_type(crate_name, crate.get("type"))
+        release_date = resolve_container_release_date(
+            crate_name=crate_name,
+            container_type=container_type,
+            crate_meta=crate,
+            existing_release_date=release_date,
+        )
 
         collection_name = None
         collection_image = None
@@ -1061,6 +1571,9 @@ def main() -> None:
             "type": container_type,
             "tournamentName": tournament_name,
             "tournamentLogo": tournament_logo_rel,
+            "sourceType": None,
+            "sourceId": None,
+            "sourceName": None,
         }
 
         new_cases[case_id] = case_record
@@ -1070,11 +1583,17 @@ def main() -> None:
             download_file(str(crate["image"]), CASES_DIR / f"{case_id}.png")
 
     new_skins: dict[str, dict[str, Any]] = {}
+    new_stickers: dict[str, dict[str, Any]] = {}
+    new_pins: dict[str, dict[str, Any]] = {}
+    new_music_kits: dict[str, dict[str, Any]] = {}
     skin_id_by_full_name: dict[str, str] = {}
 
     case_contents_map: dict[str, set[str]] = {
         case_id: set() for case_id in new_cases.keys()
     }
+    sticker_contents_map: dict[str, set[str]] = {}
+    pin_contents_map: dict[str, set[str]] = {}
+    music_kit_contents_map: dict[str, set[str]] = {}
     reward_contents_map: dict[str, set[str]] = {
         collection_id: set() for collection_id in new_reward_collections.keys()
     }
@@ -1083,7 +1602,13 @@ def main() -> None:
     }
 
     created_skin_count = 0
+    created_sticker_count = 0
+    created_pin_count = 0
+    created_music_kit_count = 0
     reused_skin_count = 0
+    reused_sticker_count = 0
+    reused_pin_count = 0
+    reused_music_kit_count = 0
     skipped_unknown_items = 0
     container_refs_created_from_skin_meta = 0
     reward_collections_created = 0
@@ -1304,9 +1829,15 @@ def main() -> None:
                     else:
                         case_id = str(next_case_id)
                         next_case_id += 1
-                        release_date = "2000-01-01"
+                        release_date = None
 
-                    container_type = infer_container_type(crate_name, crate_ref.get("type"))
+                    container_type = "STICKER_CAPSULE"
+                    release_date = resolve_container_release_date(
+                        crate_name=crate_name,
+                        container_type=container_type,
+                        crate_meta=crate_ref if isinstance(crate_ref, dict) else None,
+                        existing_release_date=release_date,
+                    )
 
                     collection_name = None
                     collection_image = None
@@ -1343,6 +1874,9 @@ def main() -> None:
                         "type": container_type,
                         "tournamentName": tournament_name,
                         "tournamentLogo": tournament_logo_rel,
+                        "sourceType": None,
+                        "sourceId": None,
+                        "sourceName": None,
                     }
 
                     new_cases[case_id] = case_record
@@ -1357,6 +1891,390 @@ def main() -> None:
                 case_contents_map.setdefault(case_id, set()).add(skin_id)
 
         time.sleep(0.003)
+
+    sticker_collection_name_to_id: dict[str, str] = {}
+
+    for meta in stickers_data:
+        raw_name = str(meta.get("name", "")).strip()
+        sticker_name = normalize_sticker_name(raw_name)
+        if not sticker_name:
+            continue
+
+        sticker_type = infer_sticker_type(meta)
+        effect = str(meta.get("effect", "Other")).strip().upper() or "OTHER"
+        rarity = STICKER_RARITY_MAP.get(
+            str((meta.get("rarity") or {}).get("name")),
+            "HIGH_GRADE",
+        )
+
+        collection_name, _collection_image = choose_collection_name_and_image(meta)
+        tournament = meta.get("tournament") if isinstance(meta.get("tournament"), dict) else {}
+        tournament_name = str(tournament.get("name", "")).strip() or None
+        image_url = choose_image_url(meta)
+
+        key = (
+            canonical_name(sticker_name),
+            sticker_type,
+            effect,
+            canonical_name(collection_name or tournament_name or ""),
+        )
+        existing_sticker = existing_sticker_by_key.get(key)
+
+        if existing_sticker:
+            sticker_id = str(existing_sticker["id"])
+            reused_sticker_count += 1
+        else:
+            source_sticker_id = str(meta.get("id", ""))
+            candidate = make_stable_numeric_id(source_sticker_id, 900_000_000)
+
+            if (
+                candidate.isdigit()
+                and int(candidate) not in used_sticker_ids
+                and candidate not in new_stickers
+            ):
+                sticker_id = candidate
+                used_sticker_ids.add(int(candidate))
+            else:
+                while next_sticker_id in used_sticker_ids:
+                    next_sticker_id += 1
+                sticker_id = str(next_sticker_id)
+                used_sticker_ids.add(next_sticker_id)
+                next_sticker_id += 1
+
+            created_sticker_count += 1
+
+        sticker_record = {
+            "id": sticker_id,
+            "name": sticker_name,
+            "stickerImage": f"assets/stickers/{sticker_id}.png",
+            "rarity": rarity,
+            "stickerType": sticker_type,
+            "effect": effect,
+            "collection": collection_name,
+            "tournament": tournament_name,
+        }
+
+        new_stickers[sticker_id] = sticker_record
+        existing_sticker_by_key[key] = sticker_record
+
+        if image_url:
+            download_file(image_url, STICKERS_DIR / f"{sticker_id}.png")
+
+        crates_refs = meta.get("crates")
+        if isinstance(crates_refs, list):
+            for crate_ref in crates_refs:
+                if not isinstance(crate_ref, dict):
+                    continue
+
+                crate_name = str(crate_ref.get("name", "")).strip()
+                if not crate_name:
+                    continue
+
+                case_id = case_name_to_id.get(crate_name)
+                if case_id is None:
+                    existing_case = existing_case_by_name.get(crate_name)
+                    if existing_case:
+                        case_id = str(existing_case["id"])
+                        release_date = existing_case.get("releaseDate")
+                    else:
+                        case_id = str(next_case_id)
+                        next_case_id += 1
+                        release_date = None
+
+                    container_type = infer_sticker_container_type(crate_name)
+                    release_date = resolve_container_release_date(
+                        crate_name=crate_name,
+                        container_type=container_type,
+                        crate_meta=crate_ref if isinstance(crate_ref, dict) else None,
+                        existing_release_date=release_date,
+                    )
+                    source_meta = (
+                        resolve_sticker_collection_source(crate_name)
+                        if container_type == "STICKER_COLLECTION"
+                        else {"sourceType": None, "sourceId": None, "sourceName": None, "releaseDate": None}
+                    )
+                    if source_meta["releaseDate"]:
+                        release_date = source_meta["releaseDate"]
+
+                    case_record = {
+                        "id": case_id,
+                        "name": crate_name,
+                        "caseImage": f"assets/cases/{case_id}.png",
+                        "releaseDate": release_date,
+                        "type": container_type,
+                        "tournamentName": None,
+                        "tournamentLogo": None,
+                        "sourceType": source_meta["sourceType"],
+                        "sourceId": source_meta["sourceId"],
+                        "sourceName": source_meta["sourceName"],
+                    }
+
+                    new_cases[case_id] = case_record
+                    case_name_to_id[crate_name] = case_id
+                    container_refs_created_from_skin_meta += 1
+
+                    image = crate_ref.get("image")
+                    if image:
+                        download_file(str(image), CASES_DIR / f"{case_id}.png")
+                else:
+                    container_type = infer_sticker_container_type(crate_name)
+                    existing_case_record = new_cases.get(case_id)
+                    if existing_case_record:
+                        release_date = resolve_container_release_date(
+                            crate_name=crate_name,
+                            container_type=container_type,
+                            crate_meta=crate_ref if isinstance(crate_ref, dict) else None,
+                            existing_release_date=existing_case_record.get("releaseDate"),
+                        )
+                        source_meta = (
+                            resolve_sticker_collection_source(crate_name)
+                            if container_type == "STICKER_COLLECTION"
+                            else {"sourceType": None, "sourceId": None, "sourceName": None, "releaseDate": None}
+                        )
+                        if source_meta["releaseDate"]:
+                            release_date = source_meta["releaseDate"]
+
+                        existing_case_record["releaseDate"] = release_date
+                        existing_case_record["type"] = container_type
+                        existing_case_record["sourceType"] = source_meta["sourceType"]
+                        existing_case_record["sourceId"] = source_meta["sourceId"]
+                        existing_case_record["sourceName"] = source_meta["sourceName"]
+
+                sticker_contents_map.setdefault(case_id, set()).add(sticker_id)
+
+        collections_refs = meta.get("collections")
+        if isinstance(collections_refs, list):
+            for collection_ref in collections_refs:
+                if not isinstance(collection_ref, dict):
+                    continue
+
+                collection_name = normalize_collection_name(
+                    str(collection_ref.get("name", "")).strip()
+                )
+                if not collection_name:
+                    continue
+
+                case_id = sticker_collection_name_to_id.get(collection_name)
+                if case_id is None:
+                    existing_case = existing_case_by_name.get(collection_name)
+                    if existing_case:
+                        case_id = str(existing_case["id"])
+                        release_date = existing_case.get("releaseDate")
+                    elif collection_name in case_name_to_id:
+                        case_id = case_name_to_id[collection_name]
+                        release_date = new_cases.get(case_id, {}).get("releaseDate")
+                    else:
+                        case_id = str(next_case_id)
+                        next_case_id += 1
+                        release_date = "2000-01-01"
+
+                    source_meta = resolve_sticker_collection_source(collection_name)
+                    if source_meta["releaseDate"]:
+                        release_date = source_meta["releaseDate"]
+
+                    case_record = {
+                        "id": case_id,
+                        "name": collection_name,
+                        "caseImage": f"assets/cases/{case_id}.png",
+                        "releaseDate": release_date,
+                        "type": "STICKER_COLLECTION",
+                        "tournamentName": None,
+                        "tournamentLogo": None,
+                        "sourceType": source_meta["sourceType"],
+                        "sourceId": source_meta["sourceId"],
+                        "sourceName": source_meta["sourceName"],
+                    }
+
+                    new_cases[case_id] = case_record
+                    case_name_to_id[collection_name] = case_id
+                    sticker_collection_name_to_id[collection_name] = case_id
+
+                    image = collection_ref.get("image")
+                    if image:
+                        download_file(str(image), CASES_DIR / f"{case_id}.png")
+
+                sticker_contents_map.setdefault(case_id, set()).add(sticker_id)
+                existing_case_record = new_cases.get(case_id)
+                if existing_case_record:
+                    source_meta = resolve_sticker_collection_source(collection_name)
+                    existing_case_record["type"] = "STICKER_COLLECTION"
+                    existing_case_record["sourceType"] = source_meta["sourceType"]
+                    existing_case_record["sourceId"] = source_meta["sourceId"]
+                    existing_case_record["sourceName"] = source_meta["sourceName"]
+                    if source_meta["releaseDate"]:
+                        existing_case_record["releaseDate"] = source_meta["releaseDate"]
+
+        time.sleep(0.001)
+
+    for crate in supported_crates:
+        crate_name = str(crate.get("name", "")).strip()
+        if not crate_name:
+            continue
+
+        if infer_container_type(crate_name, crate.get("type")) != "PIN_CAPSULE":
+            continue
+
+        case_id = case_name_to_id.get(crate_name)
+        if case_id is None:
+            continue
+
+        pin_collection = infer_pin_collection(crate_name)
+        contains = crate.get("contains")
+        if not isinstance(contains, list):
+            continue
+
+        for collectible in contains:
+            if not isinstance(collectible, dict):
+                continue
+
+            pin_name = str(collectible.get("name", "")).strip()
+            if not pin_name:
+                continue
+
+            rarity = PIN_RARITY_MAP.get(
+                str((collectible.get("rarity") or {}).get("name")),
+                "HIGH_GRADE",
+            )
+            image_url = str(collectible.get("image", "")).strip() or None
+
+            key = (
+                canonical_name(pin_name),
+                canonical_name(pin_collection or ""),
+            )
+            existing_pin = existing_pin_by_key.get(key)
+
+            if existing_pin:
+                pin_id = str(existing_pin["id"])
+                reused_pin_count += 1
+            else:
+                source_pin_id = str(collectible.get("id", ""))
+                candidate = make_stable_numeric_id(source_pin_id, 950_000_000)
+
+                if (
+                    candidate.isdigit()
+                    and int(candidate) not in used_pin_ids
+                    and candidate not in new_pins
+                ):
+                    pin_id = candidate
+                    used_pin_ids.add(int(candidate))
+                else:
+                    while next_pin_id in used_pin_ids:
+                        next_pin_id += 1
+                    pin_id = str(next_pin_id)
+                    used_pin_ids.add(next_pin_id)
+                    next_pin_id += 1
+
+                created_pin_count += 1
+
+            pin_record = {
+                "id": pin_id,
+                "name": pin_name,
+                "pinImage": f"assets/pins/{pin_id}.png",
+                "rarity": rarity,
+                "collection": pin_collection,
+            }
+
+            new_pins[pin_id] = pin_record
+            existing_pin_by_key[key] = pin_record
+
+            if image_url:
+                download_file(image_url, PINS_DIR / f"{pin_id}.png")
+
+            pin_contents_map.setdefault(case_id, set()).add(pin_id)
+
+    music_kit_meta_by_id: dict[str, dict[str, Any]] = {
+        str(item.get("id", "")).strip(): item
+        for item in music_kits_data
+        if isinstance(item, dict) and str(item.get("id", "")).strip()
+    }
+
+    for crate in supported_crates:
+        crate_name = str(crate.get("name", "")).strip()
+        if not crate_name:
+            continue
+
+        if infer_container_type(crate_name, crate.get("type")) != "MUSIC_KIT_BOX":
+            continue
+
+        case_id = case_name_to_id.get(crate_name)
+        if case_id is None:
+            continue
+
+        music_kit_collection = infer_music_kit_collection(crate_name)
+        contains = crate.get("contains")
+        if not isinstance(contains, list):
+            continue
+
+        for collectible in contains:
+            if not isinstance(collectible, dict):
+                continue
+
+            raw_name = str(collectible.get("name", "")).strip()
+            music_kit_name, is_stat_trak = normalize_music_kit_name(raw_name)
+            if not music_kit_name:
+                continue
+
+            source_music_kit_id = str(collectible.get("id", "")).strip()
+            if not source_music_kit_id:
+                continue
+
+            music_kit_meta = music_kit_meta_by_id.get(source_music_kit_id, {})
+            rarity = MUSIC_KIT_RARITY_MAP.get(
+                str((collectible.get("rarity") or {}).get("name"))
+                or str((music_kit_meta.get("rarity") or {}).get("name")),
+                "HIGH_GRADE",
+            )
+            image_url = (
+                str(collectible.get("image", "")).strip()
+                or str(music_kit_meta.get("image", "")).strip()
+                or None
+            )
+
+            key = (
+                canonical_name(music_kit_name),
+                canonical_name(music_kit_collection or ""),
+                is_stat_trak,
+            )
+            existing_music_kit = existing_music_kit_by_key.get(key)
+
+            if existing_music_kit:
+                music_kit_id = str(existing_music_kit["id"])
+                reused_music_kit_count += 1
+            else:
+                candidate = make_hashed_numeric_id(source_music_kit_id, 970_000_000)
+
+                if (
+                    candidate.isdigit()
+                    and int(candidate) not in used_music_kit_ids
+                    and candidate not in new_music_kits
+                ):
+                    music_kit_id = candidate
+                    used_music_kit_ids.add(int(candidate))
+                else:
+                    while next_music_kit_id in used_music_kit_ids:
+                        next_music_kit_id += 1
+                    music_kit_id = str(next_music_kit_id)
+                    used_music_kit_ids.add(next_music_kit_id)
+                    next_music_kit_id += 1
+
+                created_music_kit_count += 1
+
+            music_kit_record = {
+                "id": music_kit_id,
+                "name": music_kit_name,
+                "musicKitImage": f"assets/music_kits/{music_kit_id}.png",
+                "rarity": rarity,
+                "collection": music_kit_collection,
+                "isStatTrak": is_stat_trak,
+            }
+
+            new_music_kits[music_kit_id] = music_kit_record
+            existing_music_kit_by_key[key] = music_kit_record
+
+            if image_url:
+                download_file(image_url, MUSIC_KITS_DIR / f"{music_kit_id}.png")
+
+            music_kit_contents_map.setdefault(case_id, set()).add(music_kit_id)
 
     for legacy_case in LEGACY_CASE_OVERRIDES:
         legacy_name = str(legacy_case.get("name", "")).strip()
@@ -1386,6 +2304,9 @@ def main() -> None:
             "type": str(legacy_case.get("type") or "CASE"),
             "tournamentName": None,
             "tournamentLogo": None,
+            "sourceType": None,
+            "sourceId": None,
+            "sourceName": None,
         }
 
         new_cases[legacy_case_id] = legacy_case_record
@@ -1425,17 +2346,50 @@ def main() -> None:
                 if weapon_type in {"KNIFE", "GLOVES"} or item_kind in {"KNIFE", "GLOVES"}:
                     case_contents_map.setdefault(legacy_case_id, set()).add(skin_id)
 
+    for case_record in new_cases.values():
+        case_name = str(case_record.get("name", "")).strip()
+        forced_type = CONTAINER_TYPE_OVERRIDES.get(case_name)
+        if forced_type:
+            case_record["type"] = forced_type
+
     cases_out = sorted(
         new_cases.values(),
         key=lambda x: (x.get("releaseDate") or "9999-99-99", x.get("name", "")),
     )
     skins_out = sorted(new_skins.values(), key=lambda x: int(x["id"]))
+    stickers_out = sorted(new_stickers.values(), key=lambda x: int(x["id"]))
+    pins_out = sorted(new_pins.values(), key=lambda x: int(x["id"]))
+    music_kits_out = sorted(new_music_kits.values(), key=lambda x: int(x["id"]))
 
     case_contents_out = sorted(
         (
             {"caseId": case_id, "skinIds": sort_numeric_str(list(skin_ids))}
             for case_id, skin_ids in case_contents_map.items()
             if skin_ids
+        ),
+        key=lambda x: int(x["caseId"]),
+    )
+    sticker_contents_out = sorted(
+        (
+            {"caseId": case_id, "stickerIds": sort_numeric_str(list(sticker_ids))}
+            for case_id, sticker_ids in sticker_contents_map.items()
+            if sticker_ids
+        ),
+        key=lambda x: int(x["caseId"]),
+    )
+    pin_contents_out = sorted(
+        (
+            {"caseId": case_id, "pinIds": sort_numeric_str(list(pin_ids))}
+            for case_id, pin_ids in pin_contents_map.items()
+            if pin_ids
+        ),
+        key=lambda x: int(x["caseId"]),
+    )
+    music_kit_contents_out = sorted(
+        (
+            {"caseId": case_id, "musicKitIds": sort_numeric_str(list(music_kit_ids))}
+            for case_id, music_kit_ids in music_kit_contents_map.items()
+            if music_kit_ids
         ),
         key=lambda x: int(x["caseId"]),
     )
@@ -1468,7 +2422,13 @@ def main() -> None:
 
     write_json(DATA_DIR / "cases.json", cases_out)
     write_json(DATA_DIR / "skins.json", skins_out)
+    write_json(DATA_DIR / "stickers.json", stickers_out)
+    write_json(DATA_DIR / "pins.json", pins_out)
+    write_json(DATA_DIR / "music_kits.json", music_kits_out)
     write_json(DATA_DIR / "case_contents.json", case_contents_out)
+    write_json(DATA_DIR / "sticker_contents.json", sticker_contents_out)
+    write_json(DATA_DIR / "pin_contents.json", pin_contents_out)
+    write_json(DATA_DIR / "music_kit_contents.json", music_kit_contents_out)
     write_json(DATA_DIR / "reward_collections.json", reward_collections_out)
     write_json(DATA_DIR / "reward_collection_contents.json", reward_collection_contents_out)
     write_json(DATA_DIR / "operation_collections.json", operation_collections_out)
@@ -1479,11 +2439,23 @@ def main() -> None:
     print(f"Reward collections: {len(reward_collections_out)}")
     print(f"Operation collections: {len(operation_collections_out)}")
     print(f"Skins: {len(skins_out)}")
+    print(f"Stickers: {len(stickers_out)}")
+    print(f"Pins: {len(pins_out)}")
+    print(f"Music kits: {len(music_kits_out)}")
     print(f"Case contents: {len(case_contents_out)}")
+    print(f"Sticker contents: {len(sticker_contents_out)}")
+    print(f"Pin contents: {len(pin_contents_out)}")
+    print(f"Music kit contents: {len(music_kit_contents_out)}")
     print(f"Reward collection contents: {len(reward_collection_contents_out)}")
     print(f"Operation collection contents: {len(operation_collection_contents_out)}")
     print(f"Created skins: {created_skin_count}")
+    print(f"Created stickers: {created_sticker_count}")
+    print(f"Created pins: {created_pin_count}")
+    print(f"Created music kits: {created_music_kit_count}")
     print(f"Reused skins: {reused_skin_count}")
+    print(f"Reused stickers: {reused_sticker_count}")
+    print(f"Reused pins: {reused_pin_count}")
+    print(f"Reused music kits: {reused_music_kit_count}")
     print(f"Unknown items skipped: {skipped_unknown_items}")
     print(f"Containers created from skin.crates fallback: {container_refs_created_from_skin_meta}")
     print(f"Reward collections created: {reward_collections_created}")

@@ -58,6 +58,9 @@ flutter:
   assets:
     - assets/data/
     - assets/skins/
+    - assets/stickers/
+    - assets/pins/
+    - assets/music_kits/
     - assets/cases/
     - assets/reward_collections/
     - assets/operation_collections/

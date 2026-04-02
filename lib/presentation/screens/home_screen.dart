@@ -7,6 +7,7 @@ import 'operation_collection_list_screen.dart';
 import 'reward_collection_list_screen.dart';
 import 'settings_screen.dart';
 import 'skin_glossary_screen.dart';
+import 'sticker_collection_list_screen.dart';
 import 'tradeup_screen.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -32,9 +33,8 @@ class HomeScreen extends StatelessWidget {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (_) => SettingsScreen(
-                    settingsController: settingsController,
-                  ),
+                  builder: (_) =>
+                      SettingsScreen(settingsController: settingsController),
                 ),
               );
             },
@@ -52,7 +52,7 @@ class HomeScreen extends StatelessWidget {
               children: [
                 _menuButton(
                   context,
-                  title: '🎰 Open Cases',
+                  title: '🎁 Open Containers',
                   onTap: () {
                     Navigator.push(
                       context,
@@ -84,14 +84,13 @@ class HomeScreen extends StatelessWidget {
                 const SizedBox(height: 16),
                 _menuButton(
                   context,
-                  title: '🎖️ Operation / Armory Rewards',
+                  title: '⭐ Operation / Armory Rewards',
                   onTap: () {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (_) => RewardCollectionListScreen(
-                          repository: repository,
-                        ),
+                        builder: (_) =>
+                            RewardCollectionListScreen(repository: repository),
                       ),
                     );
                   },
@@ -99,7 +98,7 @@ class HomeScreen extends StatelessWidget {
                 const SizedBox(height: 16),
                 _menuButton(
                   context,
-                  title: '🗃️ Legacy Operation Collections',
+                  title: '🗂️ Legacy Operation Collections',
                   onTap: () {
                     Navigator.push(
                       context,
@@ -114,7 +113,21 @@ class HomeScreen extends StatelessWidget {
                 const SizedBox(height: 16),
                 _menuButton(
                   context,
-                  title: '🔄 Trade-Up',
+                  title: '🏷️ Sticker Collections',
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) =>
+                            StickerCollectionListScreen(repository: repository),
+                      ),
+                    );
+                  },
+                ),
+                const SizedBox(height: 16),
+                _menuButton(
+                  context,
+                  title: '🔁 Trade-Up',
                   onTap: () {
                     Navigator.push(
                       context,
@@ -133,19 +146,16 @@ class HomeScreen extends StatelessWidget {
   }
 
   Widget _menuButton(
-      BuildContext context, {
-        required String title,
-        required VoidCallback onTap,
-      }) {
+    BuildContext context, {
+    required String title,
+    required VoidCallback onTap,
+  }) {
     return SizedBox(
       width: double.infinity,
       height: 64,
       child: ElevatedButton(
         onPressed: onTap,
-        child: Text(
-          title,
-          style: const TextStyle(fontSize: 18),
-        ),
+        child: Text(title, style: const TextStyle(fontSize: 18)),
       ),
     );
   }

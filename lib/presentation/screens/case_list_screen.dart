@@ -8,6 +8,9 @@ import '../helpers/source_color_helper.dart';
 import '../widgets/chip_badge.dart';
 import '../widgets/collection_list_card.dart';
 import 'case_open_screen.dart';
+import 'music_kit_box_open_screen.dart';
+import 'pin_container_open_screen.dart';
+import 'sticker_container_open_screen.dart';
 
 class CaseListScreen extends StatefulWidget {
   final LocalDataRepository repository;
@@ -39,7 +42,7 @@ class _CaseListScreenState extends State<CaseListScreen> {
     final types = <String>{_filterAll};
 
     for (final caseDto in cases) {
-      if (caseDto.isXrayPackage) continue;
+      if (caseDto.isXrayPackage || caseDto.isStickerCollection) continue;
       types.add(caseDto.type);
     }
 
@@ -48,6 +51,9 @@ class _CaseListScreenState extends State<CaseListScreen> {
       'CASE',
       'SOUVENIR_PACKAGE',
       'COLLECTION_PACKAGE',
+      'STICKER_CAPSULE',
+      'PIN_CAPSULE',
+      'MUSIC_KIT_BOX',
       'TERMINAL',
     ];
 
@@ -76,6 +82,12 @@ class _CaseListScreenState extends State<CaseListScreen> {
         return 'Souvenir';
       case 'COLLECTION_PACKAGE':
         return 'Collection';
+      case 'STICKER_CAPSULE':
+        return 'Sticker Capsule';
+      case 'PIN_CAPSULE':
+        return 'Pin Capsule';
+      case 'MUSIC_KIT_BOX':
+        return 'Music Kit Box';
       case 'TERMINAL':
         return 'Terminal';
       default:
@@ -86,7 +98,9 @@ class _CaseListScreenState extends State<CaseListScreen> {
   List<CaseDto> _applyFilters(List<CaseDto> cases) {
     var filtered = List<CaseDto>.from(cases);
 
-    filtered = filtered.where((c) => !c.isXrayPackage).toList();
+    filtered = filtered
+        .where((c) => !c.isXrayPackage && !c.isStickerCollection)
+        .toList();
 
     if (_selectedFilter != _filterAll) {
       filtered = filtered.where((c) => c.type == _selectedFilter).toList();
@@ -132,27 +146,53 @@ class _CaseListScreenState extends State<CaseListScreen> {
 
   Widget _buildCaseCard(BuildContext context, CaseDto caseDto) {
     final typeColor = SourceColorHelper.containerTypeColor(caseDto.type);
+    final chips = <Widget>[
+      ChipBadge(label: caseDto.typeLabel, color: typeColor),
+    ];
+
+    if (caseDto.isStickerCollection && caseDto.sourceTypeLabel != null) {
+      final sourceColor = SourceColorHelper.collectibleSourceColor(
+        caseDto.sourceType,
+        caseDto.sourceId,
+      );
+      chips.add(ChipBadge(label: caseDto.sourceTypeLabel!, color: sourceColor));
+
+      if ((caseDto.sourceName ?? '').isNotEmpty) {
+        chips.add(ChipBadge(label: caseDto.sourceName!, color: sourceColor));
+      }
+    }
 
     return CollectionListCard(
       imagePath: caseDto.caseImage,
       title: caseDto.name,
       releaseDate: caseDto.releaseDate,
-      chips: [
-        ChipBadge(
-          label: caseDto.typeLabel,
-          color: typeColor,
-        ),
-      ],
+      chips: chips,
       metadata: const [],
       onTap: () {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (_) => CaseOpenScreen(
-              caseDto: caseDto,
-              repository: widget.repository,
-              settingsController: widget.settingsController,
-            ),
+            builder: (_) =>
+                caseDto.isStickerCapsule || caseDto.isStickerCollection
+                ? StickerContainerOpenScreen(
+                    caseDto: caseDto,
+                    repository: widget.repository,
+                  )
+                : caseDto.isPinCapsule
+                ? PinContainerOpenScreen(
+                    caseDto: caseDto,
+                    repository: widget.repository,
+                  )
+                : caseDto.isMusicKitBox
+                ? MusicKitBoxOpenScreen(
+                    caseDto: caseDto,
+                    repository: widget.repository,
+                  )
+                : CaseOpenScreen(
+                    caseDto: caseDto,
+                    repository: widget.repository,
+                    settingsController: widget.settingsController,
+                  ),
           ),
         );
       },
@@ -162,9 +202,7 @@ class _CaseListScreenState extends State<CaseListScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Choose Case'),
-      ),
+      appBar: AppBar(title: const Text('Choose Container')),
       body: FutureBuilder<List<CaseDto>>(
         future: _casesFuture,
         builder: (context, snapshot) {
@@ -177,10 +215,12 @@ class _CaseListScreenState extends State<CaseListScreen> {
 
           return LayoutBuilder(
             builder: (context, constraints) {
-              final crossAxisCount =
-              ResponsiveGridHelper.listCrossAxisCount(constraints.maxWidth);
-              final aspectRatio =
-              ResponsiveGridHelper.listChildAspectRatio(constraints.maxWidth);
+              final crossAxisCount = ResponsiveGridHelper.listCrossAxisCount(
+                constraints.maxWidth,
+              );
+              final aspectRatio = ResponsiveGridHelper.listChildAspectRatio(
+                constraints.maxWidth,
+              );
 
               return Column(
                 children: [
@@ -188,28 +228,28 @@ class _CaseListScreenState extends State<CaseListScreen> {
                   Expanded(
                     child: visibleCases.isEmpty
                         ? const Center(
-                      child: Text(
-                        'No containers match the selected filters.',
-                        style: TextStyle(color: Colors.white70),
-                      ),
-                    )
+                            child: Text(
+                              'No containers match the selected filters.',
+                              style: TextStyle(color: Colors.white70),
+                            ),
+                          )
                         : GridView.builder(
-                      padding: const EdgeInsets.all(12),
-                      itemCount: visibleCases.length,
-                      gridDelegate:
-                      SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: crossAxisCount,
-                        crossAxisSpacing: 12,
-                        mainAxisSpacing: 12,
-                        childAspectRatio: aspectRatio,
-                      ),
-                      itemBuilder: (context, index) {
-                        return _buildCaseCard(
-                          context,
-                          visibleCases[index],
-                        );
-                      },
-                    ),
+                            padding: const EdgeInsets.all(12),
+                            itemCount: visibleCases.length,
+                            gridDelegate:
+                                SliverGridDelegateWithFixedCrossAxisCount(
+                                  crossAxisCount: crossAxisCount,
+                                  crossAxisSpacing: 12,
+                                  mainAxisSpacing: 12,
+                                  childAspectRatio: aspectRatio,
+                                ),
+                            itemBuilder: (context, index) {
+                              return _buildCaseCard(
+                                context,
+                                visibleCases[index],
+                              );
+                            },
+                          ),
                   ),
                 ],
               );

@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 
 class SourceColorHelper {
-  static Color rewardSourceColor({
-    required bool isArmory,
-  }) {
+  static Color rewardSourceColor({required bool isArmory}) {
     return isArmory ? Colors.deepPurpleAccent : Colors.amber;
   }
 
@@ -32,6 +30,14 @@ class SourceColorHelper {
         return Colors.amber;
       case 'COLLECTION_PACKAGE':
         return Colors.lightBlueAccent;
+      case 'STICKER_CAPSULE':
+        return Colors.orangeAccent;
+      case 'STICKER_COLLECTION':
+        return Colors.tealAccent;
+      case 'PIN_CAPSULE':
+        return Colors.cyanAccent;
+      case 'MUSIC_KIT_BOX':
+        return Colors.greenAccent;
       case 'TERMINAL':
         return Colors.deepPurpleAccent;
       case 'XRAY_PACKAGE':
@@ -39,6 +45,21 @@ class SourceColorHelper {
       case 'CASE':
       default:
         return Colors.blueAccent;
+    }
+  }
+
+  static Color collectibleSourceColor(String? sourceType, String? sourceId) {
+    switch (sourceType) {
+      case 'OPERATION_REWARD':
+        return rewardSourceColor(isArmory: false);
+      case 'ARMORY_REWARD':
+        return rewardSourceColor(isArmory: true);
+      case 'LEGACY_OPERATION':
+        return operationColor(sourceId ?? '');
+      case 'GENERAL':
+        return Colors.blueGrey;
+      default:
+        return Colors.white24;
     }
   }
 }

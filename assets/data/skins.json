@@ -1120,9 +1120,9 @@
     "variantName": null,
     "phase": null,
     "apiPaintIndex": "124",
-    "collectionSourceType": "OPERATION",
-    "collectionSourceId": "RIPTIDE",
-    "isRewardCollection": true,
+    "collectionSourceType": null,
+    "collectionSourceId": null,
+    "isRewardCollection": false,
     "operationCollectionIds": [
       "BRAVO"
     ],
@@ -1422,9 +1422,9 @@
     "variantName": null,
     "phase": null,
     "apiPaintIndex": "149",
-    "collectionSourceType": "OPERATION",
-    "collectionSourceId": "RIPTIDE",
-    "isRewardCollection": true,
+    "collectionSourceType": null,
+    "collectionSourceId": null,
+    "isRewardCollection": false,
     "operationCollectionIds": [
       "BRAVO"
     ],
@@ -2083,9 +2083,9 @@
     "variantName": null,
     "phase": null,
     "apiPaintIndex": "27",
-    "collectionSourceType": "OPERATION",
-    "collectionSourceId": "RIPTIDE",
-    "isRewardCollection": true,
+    "collectionSourceType": null,
+    "collectionSourceId": null,
+    "isRewardCollection": false,
     "operationCollectionIds": [
       "BRAVO"
     ],
@@ -2339,9 +2339,9 @@
     "variantName": null,
     "phase": null,
     "apiPaintIndex": "246",
-    "collectionSourceType": "OPERATION",
-    "collectionSourceId": "RIPTIDE",
-    "isRewardCollection": true,
+    "collectionSourceType": null,
+    "collectionSourceId": null,
+    "isRewardCollection": false,
     "operationCollectionIds": [
       "BRAVO"
     ],
@@ -3661,9 +3661,9 @@
     "variantName": null,
     "phase": null,
     "apiPaintIndex": "17",
-    "collectionSourceType": "OPERATION",
-    "collectionSourceId": "RIPTIDE",
-    "isRewardCollection": true,
+    "collectionSourceType": null,
+    "collectionSourceId": null,
+    "isRewardCollection": false,
     "operationCollectionIds": [
       "BRAVO"
     ],
@@ -3917,9 +3917,9 @@
     "variantName": null,
     "phase": null,
     "apiPaintIndex": "107",
-    "collectionSourceType": "OPERATION",
-    "collectionSourceId": "RIPTIDE",
-    "isRewardCollection": true,
+    "collectionSourceType": null,
+    "collectionSourceId": null,
+    "isRewardCollection": false,
     "operationCollectionIds": [
       "BRAVO"
     ],
@@ -4324,9 +4324,9 @@
     "variantName": null,
     "phase": null,
     "apiPaintIndex": "30",
-    "collectionSourceType": "OPERATION",
-    "collectionSourceId": "RIPTIDE",
-    "isRewardCollection": true,
+    "collectionSourceType": null,
+    "collectionSourceId": null,
+    "isRewardCollection": false,
     "operationCollectionIds": [
       "BRAVO"
     ],
@@ -6042,9 +6042,9 @@
     "variantName": null,
     "phase": null,
     "apiPaintIndex": "235",
-    "collectionSourceType": "OPERATION",
-    "collectionSourceId": "RIPTIDE",
-    "isRewardCollection": true,
+    "collectionSourceType": null,
+    "collectionSourceId": null,
+    "isRewardCollection": false,
     "operationCollectionIds": [
       "BRAVO"
     ],
@@ -7616,9 +7616,9 @@
     "variantName": null,
     "phase": null,
     "apiPaintIndex": "241",
-    "collectionSourceType": "OPERATION",
-    "collectionSourceId": "RIPTIDE",
-    "isRewardCollection": true,
+    "collectionSourceType": null,
+    "collectionSourceId": null,
+    "isRewardCollection": false,
     "operationCollectionIds": [
       "BRAVO"
     ],
@@ -8611,9 +8611,9 @@
     "variantName": null,
     "phase": null,
     "apiPaintIndex": "243",
-    "collectionSourceType": "OPERATION",
-    "collectionSourceId": "RIPTIDE",
-    "isRewardCollection": true,
+    "collectionSourceType": null,
+    "collectionSourceId": null,
+    "isRewardCollection": false,
     "operationCollectionIds": [
       "BRAVO"
     ],
@@ -8806,9 +8806,9 @@
     "variantName": null,
     "phase": null,
     "apiPaintIndex": "135",
-    "collectionSourceType": "OPERATION",
-    "collectionSourceId": "RIPTIDE",
-    "isRewardCollection": true,
+    "collectionSourceType": null,
+    "collectionSourceId": null,
+    "isRewardCollection": false,
     "operationCollectionIds": [
       "PAYBACK"
     ],
@@ -9622,9 +9622,9 @@
     "variantName": null,
     "phase": null,
     "apiPaintIndex": "148",
-    "collectionSourceType": "OPERATION",
-    "collectionSourceId": "RIPTIDE",
-    "isRewardCollection": true,
+    "collectionSourceType": null,
+    "collectionSourceId": null,
+    "isRewardCollection": false,
     "operationCollectionIds": [
       "BRAVO"
     ],
@@ -10625,9 +10625,9 @@
     "variantName": null,
     "phase": null,
     "apiPaintIndex": "39",
-    "collectionSourceType": "OPERATION",
-    "collectionSourceId": "RIPTIDE",
-    "isRewardCollection": true,
+    "collectionSourceType": null,
+    "collectionSourceId": null,
+    "isRewardCollection": false,
     "operationCollectionIds": [
       "BRAVO"
     ],
@@ -11668,9 +11668,9 @@
     "variantName": null,
     "phase": null,
     "apiPaintIndex": "99",
-    "collectionSourceType": "OPERATION",
-    "collectionSourceId": "RIPTIDE",
-    "isRewardCollection": true,
+    "collectionSourceType": null,
+    "collectionSourceId": null,
+    "isRewardCollection": false,
     "operationCollectionIds": [
       "BRAVO"
     ],
@@ -12669,9 +12669,9 @@
     "variantName": null,
     "phase": null,
     "apiPaintIndex": "141",
-    "collectionSourceType": "OPERATION",
-    "collectionSourceId": "RIPTIDE",
-    "isRewardCollection": true,
+    "collectionSourceType": null,
+    "collectionSourceId": null,
+    "isRewardCollection": false,
     "operationCollectionIds": [
       "BRAVO"
     ],
@@ -13844,9 +13844,9 @@
     "variantName": null,
     "phase": null,
     "apiPaintIndex": "153",
-    "collectionSourceType": "OPERATION",
-    "collectionSourceId": "RIPTIDE",
-    "isRewardCollection": true,
+    "collectionSourceType": null,
+    "collectionSourceId": null,
+    "isRewardCollection": false,
     "operationCollectionIds": [
       "PAYBACK"
     ],
@@ -14077,9 +14077,9 @@
     "variantName": null,
     "phase": null,
     "apiPaintIndex": "72",
-    "collectionSourceType": "OPERATION",
-    "collectionSourceId": "RIPTIDE",
-    "isRewardCollection": true,
+    "collectionSourceType": null,
+    "collectionSourceId": null,
+    "isRewardCollection": false,
     "operationCollectionIds": [
       "BRAVO"
     ],
@@ -16398,9 +16398,9 @@
     "variantName": null,
     "phase": null,
     "apiPaintIndex": "47",
-    "collectionSourceType": "OPERATION",
-    "collectionSourceId": "RIPTIDE",
-    "isRewardCollection": true,
+    "collectionSourceType": null,
+    "collectionSourceId": null,
+    "isRewardCollection": false,
     "operationCollectionIds": [
       "BRAVO"
     ],
@@ -16547,9 +16547,9 @@
     "variantName": null,
     "phase": null,
     "apiPaintIndex": "141",
-    "collectionSourceType": "OPERATION",
-    "collectionSourceId": "RIPTIDE",
-    "isRewardCollection": true,
+    "collectionSourceType": null,
+    "collectionSourceId": null,
+    "isRewardCollection": false,
     "operationCollectionIds": [
       "BRAVO"
     ],
@@ -16805,9 +16805,9 @@
     "variantName": null,
     "phase": null,
     "apiPaintIndex": "78",
-    "collectionSourceType": "OPERATION",
-    "collectionSourceId": "RIPTIDE",
-    "isRewardCollection": true,
+    "collectionSourceType": null,
+    "collectionSourceId": null,
+    "isRewardCollection": false,
     "operationCollectionIds": [
       "BRAVO"
     ],
@@ -18774,9 +18774,9 @@
     "variantName": null,
     "phase": null,
     "apiPaintIndex": "170",
-    "collectionSourceType": "OPERATION",
-    "collectionSourceId": "RIPTIDE",
-    "isRewardCollection": true,
+    "collectionSourceType": null,
+    "collectionSourceId": null,
+    "isRewardCollection": false,
     "operationCollectionIds": [
       "BRAVO"
     ],
@@ -22052,9 +22052,9 @@
     "variantName": null,
     "phase": null,
     "apiPaintIndex": "17",
-    "collectionSourceType": "OPERATION",
-    "collectionSourceId": "RIPTIDE",
-    "isRewardCollection": true,
+    "collectionSourceType": null,
+    "collectionSourceId": null,
+    "isRewardCollection": false,
     "operationCollectionIds": [
       "PAYBACK"
     ],
@@ -22818,9 +22818,9 @@
     "variantName": null,
     "phase": null,
     "apiPaintIndex": "17",
-    "collectionSourceType": "OPERATION",
-    "collectionSourceId": "RIPTIDE",
-    "isRewardCollection": true,
+    "collectionSourceType": null,
+    "collectionSourceId": null,
+    "isRewardCollection": false,
     "operationCollectionIds": [
       "BRAVO"
     ],
@@ -23139,9 +23139,9 @@
     "variantName": null,
     "phase": null,
     "apiPaintIndex": "116",
-    "collectionSourceType": "OPERATION",
-    "collectionSourceId": "RIPTIDE",
-    "isRewardCollection": true,
+    "collectionSourceType": null,
+    "collectionSourceId": null,
+    "isRewardCollection": false,
     "operationCollectionIds": [
       "BRAVO"
     ],
@@ -23777,9 +23777,9 @@
     "variantName": null,
     "phase": null,
     "apiPaintIndex": "248",
-    "collectionSourceType": "OPERATION",
-    "collectionSourceId": "RIPTIDE",
-    "isRewardCollection": true,
+    "collectionSourceType": null,
+    "collectionSourceId": null,
+    "isRewardCollection": false,
     "operationCollectionIds": [
       "BRAVO"
     ],
@@ -23800,9 +23800,9 @@
     "variantName": null,
     "phase": null,
     "apiPaintIndex": "240",
-    "collectionSourceType": "OPERATION",
-    "collectionSourceId": "RIPTIDE",
-    "isRewardCollection": true,
+    "collectionSourceType": null,
+    "collectionSourceId": null,
+    "isRewardCollection": false,
     "operationCollectionIds": [
       "BRAVO"
     ],
@@ -23865,9 +23865,9 @@
     "variantName": null,
     "phase": null,
     "apiPaintIndex": "111",
-    "collectionSourceType": "OPERATION",
-    "collectionSourceId": "RIPTIDE",
-    "isRewardCollection": true,
+    "collectionSourceType": null,
+    "collectionSourceId": null,
+    "isRewardCollection": false,
     "operationCollectionIds": [
       "PAYBACK"
     ],
@@ -25890,9 +25890,9 @@
     "variantName": null,
     "phase": null,
     "apiPaintIndex": "246",
-    "collectionSourceType": "OPERATION",
-    "collectionSourceId": "RIPTIDE",
-    "isRewardCollection": true,
+    "collectionSourceType": null,
+    "collectionSourceId": null,
+    "isRewardCollection": false,
     "operationCollectionIds": [
       "BRAVO"
     ],
@@ -26362,9 +26362,9 @@
     "variantName": null,
     "phase": null,
     "apiPaintIndex": "8",
-    "collectionSourceType": "OPERATION",
-    "collectionSourceId": "RIPTIDE",
-    "isRewardCollection": true,
+    "collectionSourceType": null,
+    "collectionSourceId": null,
+    "isRewardCollection": false,
     "operationCollectionIds": [
       "BRAVO"
     ],
@@ -27902,9 +27902,9 @@
     "variantName": null,
     "phase": null,
     "apiPaintIndex": "34",
-    "collectionSourceType": "OPERATION",
-    "collectionSourceId": "RIPTIDE",
-    "isRewardCollection": true,
+    "collectionSourceType": null,
+    "collectionSourceId": null,
+    "isRewardCollection": false,
     "operationCollectionIds": [
       "BRAVO"
     ],
@@ -28771,9 +28771,9 @@
     "variantName": null,
     "phase": null,
     "apiPaintIndex": "70",
-    "collectionSourceType": "OPERATION",
-    "collectionSourceId": "RIPTIDE",
-    "isRewardCollection": true,
+    "collectionSourceType": null,
+    "collectionSourceId": null,
+    "isRewardCollection": false,
     "operationCollectionIds": [
       "BRAVO"
     ],
@@ -29690,9 +29690,9 @@
     "variantName": null,
     "phase": null,
     "apiPaintIndex": "37",
-    "collectionSourceType": "OPERATION",
-    "collectionSourceId": "RIPTIDE",
-    "isRewardCollection": true,
+    "collectionSourceType": null,
+    "collectionSourceId": null,
+    "isRewardCollection": false,
     "operationCollectionIds": [
       "BRAVO"
     ],
@@ -31619,9 +31619,9 @@
     "variantName": null,
     "phase": null,
     "apiPaintIndex": "157",
-    "collectionSourceType": "OPERATION",
-    "collectionSourceId": "RIPTIDE",
-    "isRewardCollection": true,
+    "collectionSourceType": null,
+    "collectionSourceId": null,
+    "isRewardCollection": false,
     "operationCollectionIds": [
       "BRAVO"
     ],
@@ -33000,9 +33000,9 @@
     "variantName": null,
     "phase": null,
     "apiPaintIndex": "70",
-    "collectionSourceType": "OPERATION",
-    "collectionSourceId": "RIPTIDE",
-    "isRewardCollection": true,
+    "collectionSourceType": null,
+    "collectionSourceId": null,
+    "isRewardCollection": false,
     "operationCollectionIds": [
       "PAYBACK"
     ],
@@ -33214,9 +33214,9 @@
     "variantName": null,
     "phase": null,
     "apiPaintIndex": "2",
-    "collectionSourceType": "OPERATION",
-    "collectionSourceId": "RIPTIDE",
-    "isRewardCollection": true,
+    "collectionSourceType": null,
+    "collectionSourceId": null,
+    "isRewardCollection": false,
     "operationCollectionIds": [
       "BRAVO"
     ],
@@ -34517,9 +34517,9 @@
     "variantName": null,
     "phase": null,
     "apiPaintIndex": "247",
-    "collectionSourceType": "OPERATION",
-    "collectionSourceId": "RIPTIDE",
-    "isRewardCollection": true,
+    "collectionSourceType": null,
+    "collectionSourceId": null,
+    "isRewardCollection": false,
     "operationCollectionIds": [
       "BRAVO"
     ],
@@ -34836,9 +34836,9 @@
     "variantName": null,
     "phase": null,
     "apiPaintIndex": "74",
-    "collectionSourceType": "OPERATION",
-    "collectionSourceId": "RIPTIDE",
-    "isRewardCollection": true,
+    "collectionSourceType": null,
+    "collectionSourceId": null,
+    "isRewardCollection": false,
     "operationCollectionIds": [
       "BRAVO"
     ],
@@ -35583,9 +35583,9 @@
     "variantName": null,
     "phase": null,
     "apiPaintIndex": "34",
-    "collectionSourceType": "OPERATION",
-    "collectionSourceId": "RIPTIDE",
-    "isRewardCollection": true,
+    "collectionSourceType": null,
+    "collectionSourceId": null,
+    "isRewardCollection": false,
     "operationCollectionIds": [
       "BRAVO"
     ],
@@ -35795,9 +35795,9 @@
     "variantName": null,
     "phase": null,
     "apiPaintIndex": "237",
-    "collectionSourceType": "OPERATION",
-    "collectionSourceId": "RIPTIDE",
-    "isRewardCollection": true,
+    "collectionSourceType": null,
+    "collectionSourceId": null,
+    "isRewardCollection": false,
     "operationCollectionIds": [
       "BRAVO"
     ],
@@ -37912,9 +37912,9 @@
     "variantName": null,
     "phase": null,
     "apiPaintIndex": "233",
-    "collectionSourceType": "OPERATION",
-    "collectionSourceId": "RIPTIDE",
-    "isRewardCollection": true,
+    "collectionSourceType": null,
+    "collectionSourceId": null,
+    "isRewardCollection": false,
     "operationCollectionIds": [
       "BRAVO"
     ],
@@ -39633,9 +39633,9 @@
     "variantName": null,
     "phase": null,
     "apiPaintIndex": "172",
-    "collectionSourceType": "OPERATION",
-    "collectionSourceId": "RIPTIDE",
-    "isRewardCollection": true,
+    "collectionSourceType": null,
+    "collectionSourceId": null,
+    "isRewardCollection": false,
     "operationCollectionIds": [
       "PAYBACK"
     ],
@@ -39910,9 +39910,9 @@
     "variantName": null,
     "phase": null,
     "apiPaintIndex": "235",
-    "collectionSourceType": "OPERATION",
-    "collectionSourceId": "RIPTIDE",
-    "isRewardCollection": true,
+    "collectionSourceType": null,
+    "collectionSourceId": null,
+    "isRewardCollection": false,
     "operationCollectionIds": [
       "BRAVO"
     ],
@@ -40172,9 +40172,9 @@
     "variantName": null,
     "phase": null,
     "apiPaintIndex": "46",
-    "collectionSourceType": "OPERATION",
-    "collectionSourceId": "RIPTIDE",
-    "isRewardCollection": true,
+    "collectionSourceType": null,
+    "collectionSourceId": null,
+    "isRewardCollection": false,
     "operationCollectionIds": [
       "BRAVO"
     ],
@@ -40535,9 +40535,9 @@
     "variantName": null,
     "phase": null,
     "apiPaintIndex": "523",
-    "collectionSourceType": "OPERATION",
-    "collectionSourceId": "RIPTIDE",
-    "isRewardCollection": true,
+    "collectionSourceType": null,
+    "collectionSourceId": null,
+    "isRewardCollection": false,
     "operationCollectionIds": [
       "BRAVO"
     ],
@@ -40558,9 +40558,9 @@
     "variantName": null,
     "phase": null,
     "apiPaintIndex": "246",
-    "collectionSourceType": "OPERATION",
-    "collectionSourceId": "RIPTIDE",
-    "isRewardCollection": true,
+    "collectionSourceType": null,
+    "collectionSourceId": null,
+    "isRewardCollection": false,
     "operationCollectionIds": [
       "BRAVO"
     ],
@@ -40900,9 +40900,9 @@
     "variantName": null,
     "phase": null,
     "apiPaintIndex": "3",
-    "collectionSourceType": "OPERATION",
-    "collectionSourceId": "RIPTIDE",
-    "isRewardCollection": true,
+    "collectionSourceType": null,
+    "collectionSourceId": null,
+    "isRewardCollection": false,
     "operationCollectionIds": [
       "BRAVO"
     ],
@@ -41473,9 +41473,9 @@
     "variantName": null,
     "phase": null,
     "apiPaintIndex": "234",
-    "collectionSourceType": "OPERATION",
-    "collectionSourceId": "RIPTIDE",
-    "isRewardCollection": true,
+    "collectionSourceType": null,
+    "collectionSourceId": null,
+    "isRewardCollection": false,
     "operationCollectionIds": [
       "BRAVO"
     ],
@@ -41624,9 +41624,9 @@
     "variantName": null,
     "phase": null,
     "apiPaintIndex": "33",
-    "collectionSourceType": "OPERATION",
-    "collectionSourceId": "RIPTIDE",
-    "isRewardCollection": true,
+    "collectionSourceType": null,
+    "collectionSourceId": null,
+    "isRewardCollection": false,
     "operationCollectionIds": [
       "BRAVO"
     ],
@@ -41710,9 +41710,9 @@
     "variantName": null,
     "phase": null,
     "apiPaintIndex": "47",
-    "collectionSourceType": "OPERATION",
-    "collectionSourceId": "RIPTIDE",
-    "isRewardCollection": true,
+    "collectionSourceType": null,
+    "collectionSourceId": null,
+    "isRewardCollection": false,
     "operationCollectionIds": [
       "BRAVO"
     ],
@@ -43106,9 +43106,9 @@
     "variantName": null,
     "phase": null,
     "apiPaintIndex": "175",
-    "collectionSourceType": "OPERATION",
-    "collectionSourceId": "RIPTIDE",
-    "isRewardCollection": true,
+    "collectionSourceType": null,
+    "collectionSourceId": null,
+    "isRewardCollection": false,
     "operationCollectionIds": [
       "BRAVO"
     ],
@@ -43171,9 +43171,9 @@
     "variantName": null,
     "phase": null,
     "apiPaintIndex": "72",
-    "collectionSourceType": "OPERATION",
-    "collectionSourceId": "RIPTIDE",
-    "isRewardCollection": true,
+    "collectionSourceType": null,
+    "collectionSourceId": null,
+    "isRewardCollection": false,
     "operationCollectionIds": [
       "BRAVO"
     ],
@@ -43920,9 +43920,9 @@
     "variantName": null,
     "phase": null,
     "apiPaintIndex": "159",
-    "collectionSourceType": "OPERATION",
-    "collectionSourceId": "RIPTIDE",
-    "isRewardCollection": true,
+    "collectionSourceType": null,
+    "collectionSourceId": null,
+    "isRewardCollection": false,
     "operationCollectionIds": [
       "BRAVO"
     ],
