@@ -8,10 +8,13 @@ import '../../data/models/patch_dto.dart';
 import '../../data/repositories/local_data_repository.dart';
 import '../../domain/dropped_patch.dart';
 import '../../domain/patch_simulator_service.dart';
+import '../helpers/collectible_open_flow_helper.dart';
 import '../helpers/responsive_grid_helper.dart';
 import '../helpers/source_color_helper.dart';
-import '../widgets/asset_collection_image.dart';
 import '../widgets/chip_badge.dart';
+import '../widgets/collectible_contents_title.dart';
+import '../widgets/collectible_grid_sliver.dart';
+import '../widgets/collectible_open_header.dart';
 import '../widgets/opening_loading_card.dart';
 import '../widgets/patch_drop_card.dart';
 import '../widgets/patch_grid_tile.dart';
@@ -46,21 +49,22 @@ class _PatchCollectionOpenScreenState extends State<PatchCollectionOpenScreen> {
   }
 
   Future<void> _openCollection(List<PatchDto> patches) async {
-    if (_isOpening || patches.isEmpty) return;
-
-    setState(() {
-      _isOpening = true;
-      _dropped = null;
-    });
-
-    await Future.delayed(Duration(milliseconds: 1200 + _random.nextInt(800)));
-    final drop = _simulator.openContainer(patches: patches);
-
-    if (!mounted) return;
-    setState(() {
-      _dropped = drop;
-      _isOpening = false;
-    });
+    await CollectibleOpenFlowHelper.runReveal<DroppedPatch>(
+      setState: setState,
+      isMounted: () => mounted,
+      isOpening: _isOpening,
+      hasItems: patches.isNotEmpty,
+      random: _random,
+      onStart: () {
+        _isOpening = true;
+        _dropped = null;
+      },
+      resolveDrop: () => _simulator.openContainer(patches: patches),
+      onComplete: (drop) {
+        _dropped = drop;
+        _isOpening = false;
+      },
+    );
   }
 
   @override
@@ -96,72 +100,42 @@ class _PatchCollectionOpenScreenState extends State<PatchCollectionOpenScreen> {
               return CustomScrollView(
                 slivers: [
                   SliverToBoxAdapter(
-                    child: Padding(
-                      padding: const EdgeInsets.all(12),
-                      child: Column(
-                        children: [
-                          AssetCollectionImage(
-                            assetPath: widget.collection.caseImage,
-                            height: constraints.maxWidth < 700 ? 90 : 120,
+                    child: CollectibleOpenHeader(
+                      assetPath: widget.collection.caseImage,
+                      imageHeight: constraints.maxWidth < 700 ? 90 : 120,
+                      badges: [
+                        ChipBadge(
+                          label: widget.collection.typeLabel,
+                          color: typeColor,
+                        ),
+                        if (widget.collection.sourceTypeLabel != null)
+                          ChipBadge(
+                            label: widget.collection.sourceTypeLabel!,
+                            color: sourceColor,
                           ),
-                          const SizedBox(height: 10),
-                          Wrap(
-                            spacing: 8,
-                            runSpacing: 8,
-                            alignment: WrapAlignment.center,
-                            children: [
-                              ChipBadge(
-                                label: widget.collection.typeLabel,
-                                color: typeColor,
-                              ),
-                              if (widget.collection.sourceTypeLabel != null)
-                                ChipBadge(
-                                  label: widget.collection.sourceTypeLabel!,
-                                  color: sourceColor,
-                                ),
-                            ],
-                          ),
-                          if ((widget.collection.sourceName ?? '').isNotEmpty) ...[
-                            const SizedBox(height: 8),
-                            Text(
-                              widget.collection.sourceName!,
-                              style: TextStyle(
-                                color: sourceColor,
-                                fontSize: 13,
-                                fontWeight: FontWeight.w600,
-                              ),
-                            ),
-                          ],
-                          if (formattedReleaseDate != null) ...[
-                            const SizedBox(height: 8),
-                            Text(
-                              'Released: $formattedReleaseDate',
-                              style: const TextStyle(
-                                color: Colors.white70,
-                                fontSize: 13,
-                              ),
-                            ),
-                          ],
+                      ],
+                      metadata: [
+                        if ((widget.collection.sourceName ?? '').isNotEmpty) ...[
                           const SizedBox(height: 8),
-                          const Text(
-                            'Patch collections open like reward collections: no roulette, just the final reveal.',
-                            textAlign: TextAlign.center,
-                            style: TextStyle(color: Colors.white70, fontSize: 13),
-                          ),
-                          const SizedBox(height: 12),
-                          SizedBox(
-                            width: double.infinity,
-                            child: ElevatedButton(
-                              onPressed: (_isOpening || patches.isEmpty)
-                                  ? null
-                                  : () => _openCollection(patches),
-                              child: Text(
-                                _isOpening ? 'OPENING...' : 'OPEN PATCH COLLECTION',
-                              ),
+                          Text(
+                            widget.collection.sourceName!,
+                            style: TextStyle(
+                              color: sourceColor,
+                              fontSize: 13,
+                              fontWeight: FontWeight.w600,
                             ),
                           ),
                         ],
-                      ),
+                      ],
+                      releaseDateText: formattedReleaseDate,
+                      description:
+                          'Patch collections open like reward collections: no roulette, just the final reveal.',
+                      buttonLabel: _isOpening
+                          ? 'OPENING...'
+                          : 'OPEN PATCH COLLECTION',
+                      onPressed: (_isOpening || patches.isEmpty)
+                          ? null
+                          : () => _openCollection(patches),
                     ),
                   ),
                   if (_isOpening)
@@ -173,39 +147,20 @@ class _PatchCollectionOpenScreenState extends State<PatchCollectionOpenScreen> {
                   if (_dropped != null)
                     SliverToBoxAdapter(child: PatchDropCard(drop: _dropped!)),
                   const SliverToBoxAdapter(
-                    child: Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-                      child: Align(
-                        alignment: Alignment.centerLeft,
-                        child: Text(
-                          'Collection contents',
-                          style: TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ),
-                    ),
+                    child: CollectibleContentsTitle(title: 'Collection contents'),
                   ),
-                  SliverPadding(
-                    padding: const EdgeInsets.all(12),
-                    sliver: SliverGrid(
-                      delegate: SliverChildBuilderDelegate((_, index) {
-                        final patch = patches[index];
-                        final isDropped = _dropped?.patch.id == patch.id;
-                        return PatchGridTile(
-                          patch: patch,
-                          highlighted: isDropped,
-                          crossAxisCount: gridCount,
-                        );
-                      }, childCount: patches.length),
-                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  CollectibleGridSliver<PatchDto>(
+                    items: patches,
+                    crossAxisCount: gridCount,
+                    childAspectRatio: aspectRatio,
+                    itemBuilder: (patch) {
+                      final isDropped = _dropped?.patch.id == patch.id;
+                      return PatchGridTile(
+                        patch: patch,
+                        highlighted: isDropped,
                         crossAxisCount: gridCount,
-                        crossAxisSpacing: 10,
-                        mainAxisSpacing: 10,
-                        childAspectRatio: aspectRatio,
-                      ),
-                    ),
+                      );
+                    },
                   ),
                 ],
               );

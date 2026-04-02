@@ -3,7 +3,10 @@ import 'package:flutter/material.dart';
 import '../../core/settings/settings_controller.dart';
 import '../../data/models/skin_dto.dart';
 import '../../data/repositories/local_data_repository.dart';
+import '../helpers/app_navigation_helper.dart';
 import '../helpers/skin_ui_helper.dart';
+import '../widgets/detail_tag.dart';
+import '../widgets/glossary_list_item.dart';
 import 'skin_details_screen.dart';
 
 class SkinGlossaryScreen extends StatefulWidget {
@@ -194,7 +197,7 @@ class _SkinGlossaryScreenState extends State<SkinGlossaryScreen> {
                       children: [
                         Expanded(
                           child: DropdownButtonFormField<String>(
-                            value: _rarityFilter,
+                            initialValue: _rarityFilter,
                             decoration: InputDecoration(
                               labelText: 'Rarity',
                               border: OutlineInputBorder(
@@ -219,7 +222,7 @@ class _SkinGlossaryScreenState extends State<SkinGlossaryScreen> {
                         const SizedBox(width: 10),
                         Expanded(
                           child: DropdownButtonFormField<String>(
-                            value: _typeFilter,
+                            initialValue: _typeFilter,
                             decoration: InputDecoration(
                               labelText: 'Type',
                               border: OutlineInputBorder(
@@ -273,121 +276,41 @@ class _SkinGlossaryScreenState extends State<SkinGlossaryScreen> {
                   cacheExtent: 1200,
                   padding: const EdgeInsets.all(12),
                   itemCount: filtered.length,
-                  separatorBuilder: (_, __) => const SizedBox(height: 10),
+                  separatorBuilder: (_, _) => const SizedBox(height: 10),
                   itemBuilder: (context, index) {
                     final skin = filtered[index];
                     final rarityColor = SkinUiHelper.rarityColor(skin);
 
-                    return RepaintBoundary(
-                      child: Card(
-                        clipBehavior: Clip.antiAlias,
-                        child: InkWell(
-                          onTap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (_) => SkinDetailsScreen(
-                                  repository: widget.repository,
-                                  settingsController:
-                                  widget.settingsController,
-                                  skin: skin,
-                                ),
-                              ),
-                            );
-                          },
-                          child: Container(
-                            decoration: BoxDecoration(
-                              border: Border(
-                                left: BorderSide(
-                                  color: rarityColor,
-                                  width: 4,
-                                ),
-                              ),
-                            ),
-                            child: Padding(
-                              padding: const EdgeInsets.all(12),
-                              child: Row(
-                                crossAxisAlignment:
-                                CrossAxisAlignment.center,
-                                children: [
-                                  SizedBox(
-                                    width: 96,
-                                    height: 72,
-                                    child: Image.asset(
-                                      skin.skinImage,
-                                      fit: BoxFit.contain,
-                                      filterQuality: FilterQuality.low,
-                                      isAntiAlias: false,
-                                      gaplessPlayback: true,
-                                      cacheWidth: 256,
-                                      errorBuilder: (_, __, ___) =>
-                                      const Icon(
-                                        Icons.image_not_supported,
-                                        size: 36,
-                                      ),
-                                    ),
-                                  ),
-                                  const SizedBox(width: 12),
-                                  Expanded(
-                                    child: Column(
-                                      crossAxisAlignment:
-                                      CrossAxisAlignment.start,
-                                      children: [
-                                        Text(
-                                          skin.itemDisplayName,
-                                          style: const TextStyle(
-                                            fontSize: 16,
-                                            fontWeight: FontWeight.w700,
-                                          ),
-                                        ),
-                                        const SizedBox(height: 3),
-                                        Text(
-                                          SkinUiHelper.secondaryText(skin),
-                                          style: const TextStyle(
-                                            color: Colors.white70,
-                                            fontSize: 14,
-                                          ),
-                                        ),
-                                        const SizedBox(height: 8),
-                                        Wrap(
-                                          spacing: 8,
-                                          runSpacing: 8,
-                                          children: [
-                                            _pill(
-                                              SkinUiHelper.rarityLabel(
-                                                  skin),
-                                              color: rarityColor,
-                                            ),
-                                            _pill(
-                                              skin.itemKind == 'WEAPON'
-                                                  ? SkinUiHelper
-                                                  .weaponTypeLabel(
-                                                skin.weaponType,
-                                              )
-                                                  : skin.itemKind ==
-                                                  'KNIFE'
-                                                  ? 'Knife'
-                                                  : 'Gloves',
-                                            ),
-                                            if ((skin.collection ?? '')
-                                                .isNotEmpty)
-                                              _pill(skin.collection!),
-                                          ],
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                  const SizedBox(width: 8),
-                                  const Icon(
-                                    Icons.chevron_right,
-                                    color: Colors.white38,
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
+                    return GlossaryListItem(
+                      accentColor: rarityColor,
+                      imagePath: skin.skinImage,
+                      title: skin.itemDisplayName,
+                      subtitle: SkinUiHelper.secondaryText(skin),
+                      tags: [
+                        _pill(
+                          SkinUiHelper.rarityLabel(skin),
+                          color: rarityColor,
                         ),
-                      ),
+                        _pill(
+                          skin.itemKind == 'WEAPON'
+                              ? SkinUiHelper.weaponTypeLabel(skin.weaponType)
+                              : skin.itemKind == 'KNIFE'
+                              ? 'Knife'
+                              : 'Gloves',
+                        ),
+                        if ((skin.collection ?? '').isNotEmpty)
+                          _pill(skin.collection!),
+                      ],
+                      onTap: () {
+                        AppNavigationHelper.pushScreen(
+                          context,
+                          SkinDetailsScreen(
+                            repository: widget.repository,
+                            settingsController: widget.settingsController,
+                            skin: skin,
+                          ),
+                        );
+                      },
                     );
                   },
                 ),
@@ -400,24 +323,7 @@ class _SkinGlossaryScreenState extends State<SkinGlossaryScreen> {
   }
 
   Widget _pill(String text, {Color? color}) {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
-      decoration: BoxDecoration(
-        color: (color ?? Colors.white24).withOpacity(0.14),
-        borderRadius: BorderRadius.circular(999),
-        border: Border.all(
-          color: color ?? Colors.white24,
-        ),
-      ),
-      child: Text(
-        text,
-        style: TextStyle(
-          color: color ?? Colors.white,
-          fontSize: 12,
-          fontWeight: FontWeight.w600,
-        ),
-      ),
-    );
+    return DetailTag(text: text, color: color);
   }
 }
 

@@ -1,22 +1,23 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
-
 import '../../core/utils/date_format_helper.dart';
 import '../../data/models/case_dto.dart';
 import '../../data/models/pin_dto.dart';
 import '../../data/repositories/local_data_repository.dart';
 import '../../domain/dropped_pin.dart';
 import '../../domain/pin_simulator_service.dart';
+import '../helpers/collectible_open_flow_helper.dart';
 import '../helpers/opening_roll_sequence_builder.dart';
 import '../helpers/pin_ui_helper.dart';
 import '../helpers/responsive_grid_helper.dart';
 import '../helpers/source_color_helper.dart';
-import '../widgets/asset_collection_image.dart';
 import '../widgets/chip_badge.dart';
+import '../widgets/collectible_contents_title.dart';
+import '../widgets/collectible_grid_sliver.dart';
+import '../widgets/collectible_open_header.dart';
+import '../widgets/collectible_roller_sliver.dart';
 import '../widgets/opening_roll_item_card.dart';
-import '../widgets/opening_roller.dart';
 import '../widgets/pin_drop_card.dart';
 import '../widgets/pin_grid_tile.dart';
 
@@ -57,61 +58,28 @@ class _PinContainerOpenScreenState extends State<PinContainerOpenScreen> {
     super.dispose();
   }
 
-  Future<void> _waitForRollLayout() async {
-    for (int i = 0; i < 6; i++) {
-      await SchedulerBinding.instance.endOfFrame;
-      if (_rollController.hasClients &&
-          _rollController.position.hasContentDimensions &&
-          _rollController.position.maxScrollExtent > 0) {
-        return;
-      }
-    }
-  }
-
   Future<void> _openContainer(List<PinDto> pins) async {
-    if (_isOpening || pins.isEmpty) return;
-
     final drop = _simulator.openContainer(pins: pins);
     final rollData = _buildRollSequence(pins, drop);
-
-    setState(() {
-      _isOpening = true;
-      _dropped = null;
-      _rollSequence = rollData.items;
-      _winningIndex = rollData.winnerIndex;
-    });
-
-    await _waitForRollLayout();
-    if (!_rollController.hasClients) return;
-
-    _rollController.jumpTo(0);
-
-    await _waitForRollLayout();
-    if (!_rollController.hasClients) return;
-
-    final viewportWidth = _rollController.position.viewportDimension;
-    final itemWidth = OpeningRollLayout.rollItemWidth(viewportWidth);
-
-    final targetOffset = OpeningRollLayout.computeTargetOffset(
-      winningIndex: _winningIndex,
-      viewportWidth: viewportWidth,
-      itemWidth: itemWidth,
-      maxScrollExtent: _rollController.position.maxScrollExtent,
+    await CollectibleOpenFlowHelper.runRoulette<PinDto, DroppedPin>(
+      setState: setState,
+      isMounted: () => mounted,
+      isOpening: _isOpening,
+      hasItems: pins.isNotEmpty,
+      controller: _rollController,
+      rollData: rollData,
+      drop: drop,
+      onStart: (rollData) {
+        _isOpening = true;
+        _dropped = null;
+        _rollSequence = rollData.items;
+        _winningIndex = rollData.winnerIndex;
+      },
+      onComplete: (drop) {
+        _dropped = drop;
+        _isOpening = false;
+      },
     );
-
-    await _rollController.animateTo(
-      targetOffset,
-      duration: const Duration(milliseconds: 6800),
-      curve: Curves.easeOutQuart,
-    );
-
-    await Future.delayed(const Duration(milliseconds: 200));
-    if (!mounted) return;
-
-    setState(() {
-      _dropped = drop;
-      _isOpening = false;
-    });
   }
 
   OpeningRollSequenceData<PinDto> _buildRollSequence(
@@ -167,19 +135,6 @@ class _PinContainerOpenScreenState extends State<PinContainerOpenScreen> {
     );
   }
 
-  Widget _buildRoller() {
-    if (_rollSequence.isEmpty) return const SizedBox.shrink();
-
-    return OpeningRoller<PinDto>(
-      controller: _rollController,
-      items: _rollSequence,
-      winningIndex: _winningIndex,
-      isRolling: _isOpening,
-      itemBuilder: (pin, isWinner, itemWidth) =>
-          _buildRollItem(pin, isWinner: isWinner, itemWidth: itemWidth),
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     final formattedReleaseDate = DateFormatHelper.formatReleaseDate(
@@ -210,96 +165,52 @@ class _PinContainerOpenScreenState extends State<PinContainerOpenScreen> {
               return CustomScrollView(
                 slivers: [
                   SliverToBoxAdapter(
-                    child: Padding(
-                      padding: const EdgeInsets.all(12),
-                      child: Column(
-                        children: [
-                          AssetCollectionImage(
-                            assetPath: widget.caseDto.caseImage,
-                            height: constraints.maxWidth < 700 ? 90 : 120,
-                          ),
-                          const SizedBox(height: 10),
-                          ChipBadge(
-                            label: widget.caseDto.typeLabel,
-                            color: color,
-                          ),
-                          if (formattedReleaseDate != null) ...[
-                            const SizedBox(height: 8),
-                            Text(
-                              'Released: $formattedReleaseDate',
-                              style: const TextStyle(
-                                color: Colors.white70,
-                                fontSize: 13,
-                              ),
-                            ),
-                          ],
-                          const SizedBox(height: 8),
-                          const Text(
-                            'Pin capsules roll collectible pins only.',
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                              color: Colors.white70,
-                              fontSize: 13,
-                            ),
-                          ),
-                          const SizedBox(height: 12),
-                          SizedBox(
-                            width: double.infinity,
-                            child: ElevatedButton(
-                              onPressed: (_isOpening || pins.isEmpty)
-                                  ? null
-                                  : () => _openContainer(pins),
-                              child: Text(
-                                _isOpening ? 'OPENING...' : 'OPEN PIN CAPSULE',
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
+                    child: CollectibleOpenHeader(
+                      assetPath: widget.caseDto.caseImage,
+                      imageHeight: constraints.maxWidth < 700 ? 90 : 120,
+                      badges: [
+                        ChipBadge(
+                          label: widget.caseDto.typeLabel,
+                          color: color,
+                        ),
+                      ],
+                      releaseDateText: formattedReleaseDate,
+                      description: 'Pin capsules roll collectible pins only.',
+                      buttonLabel:
+                          _isOpening ? 'OPENING...' : 'OPEN PIN CAPSULE',
+                      onPressed: (_isOpening || pins.isEmpty)
+                          ? null
+                          : () => _openContainer(pins),
                     ),
                   ),
-                  if (_rollSequence.isNotEmpty)
-                    SliverToBoxAdapter(child: _buildRoller()),
+                  CollectibleRollerSliver<PinDto>(
+                    controller: _rollController,
+                    items: _rollSequence,
+                    winningIndex: _winningIndex,
+                    isRolling: _isOpening,
+                    itemBuilder: (pin, isWinner, itemWidth) => _buildRollItem(
+                      pin,
+                      isWinner: isWinner,
+                      itemWidth: itemWidth,
+                    ),
+                  ),
                   if (_dropped != null)
                     SliverToBoxAdapter(child: PinDropCard(drop: _dropped!)),
                   const SliverToBoxAdapter(
-                    child: Padding(
-                      padding: EdgeInsets.symmetric(
-                        horizontal: 12,
-                        vertical: 8,
-                      ),
-                      child: Align(
-                        alignment: Alignment.centerLeft,
-                        child: Text(
-                          'Pin contents',
-                          style: TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ),
-                    ),
+                    child: CollectibleContentsTitle(title: 'Pin contents'),
                   ),
-                  SliverPadding(
-                    padding: const EdgeInsets.all(12),
-                    sliver: SliverGrid(
-                      delegate: SliverChildBuilderDelegate((_, index) {
-                        final pin = pins[index];
-                        final isDropped = _dropped?.pin.id == pin.id;
-
-                        return PinGridTile(
-                          pin: pin,
-                          highlighted: isDropped,
-                          crossAxisCount: gridCount,
-                        );
-                      }, childCount: pins.length),
-                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  CollectibleGridSliver<PinDto>(
+                    items: pins,
+                    crossAxisCount: gridCount,
+                    childAspectRatio: aspectRatio,
+                    itemBuilder: (pin) {
+                      final isDropped = _dropped?.pin.id == pin.id;
+                      return PinGridTile(
+                        pin: pin,
+                        highlighted: isDropped,
                         crossAxisCount: gridCount,
-                        crossAxisSpacing: 10,
-                        mainAxisSpacing: 10,
-                        childAspectRatio: aspectRatio,
-                      ),
-                    ),
+                      );
+                    },
                   ),
                 ],
               );

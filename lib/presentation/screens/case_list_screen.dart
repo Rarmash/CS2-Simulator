@@ -3,16 +3,13 @@ import 'package:flutter/material.dart';
 import '../../core/settings/settings_controller.dart';
 import '../../data/models/case_dto.dart';
 import '../../data/repositories/local_data_repository.dart';
-import '../helpers/responsive_grid_helper.dart';
+import '../helpers/app_navigation_helper.dart';
 import '../helpers/source_color_helper.dart';
+import '../widgets/async_collection_loader.dart';
 import '../widgets/chip_badge.dart';
+import '../widgets/collection_filter_bar.dart';
 import '../widgets/collection_list_card.dart';
-import 'case_open_screen.dart';
-import 'graffiti_box_open_screen.dart';
-import 'music_kit_box_open_screen.dart';
-import 'patch_container_open_screen.dart';
-import 'pin_container_open_screen.dart';
-import 'sticker_container_open_screen.dart';
+import '../widgets/responsive_collection_grid.dart';
 
 class CaseListScreen extends StatefulWidget {
   final LocalDataRepository repository;
@@ -139,23 +136,15 @@ class _CaseListScreenState extends State<CaseListScreen> {
       _selectedFilter = _filterAll;
     }
 
-    return Padding(
-      padding: const EdgeInsets.fromLTRB(12, 12, 12, 0),
-      child: Wrap(
-        spacing: 8,
-        runSpacing: 8,
-        children: filters.map((type) {
-          return ChoiceChip(
-            label: Text(_filterLabel(type)),
-            selected: _selectedFilter == type,
-            onSelected: (_) {
-              setState(() {
-                _selectedFilter = type;
-              });
-            },
-          );
-        }).toList(),
-      ),
+    return CollectionFilterBar<String>(
+      items: filters,
+      selectedItem: _selectedFilter,
+      labelBuilder: _filterLabel,
+      onSelected: (type) {
+        setState(() {
+          _selectedFilter = type;
+        });
+      },
     );
   }
 
@@ -184,40 +173,12 @@ class _CaseListScreenState extends State<CaseListScreen> {
       chips: chips,
       metadata: const [],
       onTap: () {
-        Navigator.push(
+        AppNavigationHelper.pushScreen(
           context,
-          MaterialPageRoute(
-            builder: (_) =>
-                caseDto.isStickerCapsule || caseDto.isStickerCollection
-                ? StickerContainerOpenScreen(
-                    caseDto: caseDto,
-                    repository: widget.repository,
-                  )
-                : caseDto.isPinCapsule
-                ? PinContainerOpenScreen(
-                    caseDto: caseDto,
-                    repository: widget.repository,
-                  )
-                : caseDto.isMusicKitBox
-                ? MusicKitBoxOpenScreen(
-                    caseDto: caseDto,
-                    repository: widget.repository,
-                  )
-                : caseDto.isGraffitiBox
-                ? GraffitiBoxOpenScreen(
-                    caseDto: caseDto,
-                    repository: widget.repository,
-                  )
-                : caseDto.isPatchPack
-                ? PatchContainerOpenScreen(
-                    caseDto: caseDto,
-                    repository: widget.repository,
-                  )
-                : CaseOpenScreen(
-                    caseDto: caseDto,
-                    repository: widget.repository,
-                    settingsController: widget.settingsController,
-                  ),
+          AppNavigationHelper.buildContainerOpenScreen(
+            caseDto: caseDto,
+            repository: widget.repository,
+            settingsController: widget.settingsController,
           ),
         );
       },
@@ -228,57 +189,16 @@ class _CaseListScreenState extends State<CaseListScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text('Choose Container')),
-      body: FutureBuilder<List<CaseDto>>(
+      body: AsyncCollectionLoader<CaseDto>(
         future: _casesFuture,
-        builder: (context, snapshot) {
-          if (!snapshot.hasData) {
-            return const Center(child: CircularProgressIndicator());
-          }
-
-          final allCases = List<CaseDto>.from(snapshot.data!);
+        builder: (context, allCases) {
           final visibleCases = _applyFilters(allCases);
 
-          return LayoutBuilder(
-            builder: (context, constraints) {
-              final crossAxisCount = ResponsiveGridHelper.listCrossAxisCount(
-                constraints.maxWidth,
-              );
-              final aspectRatio = ResponsiveGridHelper.listChildAspectRatio(
-                constraints.maxWidth,
-              );
-
-              return Column(
-                children: [
-                  _buildFilterBar(allCases),
-                  Expanded(
-                    child: visibleCases.isEmpty
-                        ? const Center(
-                            child: Text(
-                              'No containers match the selected filters.',
-                              style: TextStyle(color: Colors.white70),
-                            ),
-                          )
-                        : GridView.builder(
-                            padding: const EdgeInsets.all(12),
-                            itemCount: visibleCases.length,
-                            gridDelegate:
-                                SliverGridDelegateWithFixedCrossAxisCount(
-                                  crossAxisCount: crossAxisCount,
-                                  crossAxisSpacing: 12,
-                                  mainAxisSpacing: 12,
-                                  childAspectRatio: aspectRatio,
-                                ),
-                            itemBuilder: (context, index) {
-                              return _buildCaseCard(
-                                context,
-                                visibleCases[index],
-                              );
-                            },
-                          ),
-                  ),
-                ],
-              );
-            },
+          return ResponsiveCollectionGrid<CaseDto>(
+            items: visibleCases,
+            emptyMessage: 'No containers match the selected filters.',
+            header: _buildFilterBar(allCases),
+            itemBuilder: _buildCaseCard,
           );
         },
       ),

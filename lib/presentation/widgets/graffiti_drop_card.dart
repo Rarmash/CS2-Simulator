@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../domain/dropped_graffiti.dart';
 import '../helpers/graffiti_ui_helper.dart';
-import 'info_row.dart';
+import 'collectible_drop_card.dart';
 
 class GraffitiDropCard extends StatelessWidget {
   final DroppedGraffiti drop;
@@ -14,94 +14,24 @@ class GraffitiDropCard extends StatelessWidget {
     final rarityColor = GraffitiUiHelper.rarityColor(drop.graffiti);
     final collectionText = GraffitiUiHelper.secondaryText(drop.graffiti);
 
-    return Card(
-      margin: const EdgeInsets.all(12),
-      shape: RoundedRectangleBorder(
-        side: BorderSide(color: rarityColor, width: 2),
-        borderRadius: BorderRadius.circular(14),
-      ),
-      child: Container(
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(14),
-          gradient: LinearGradient(
-            colors: [rarityColor.withOpacity(0.18), Colors.transparent],
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-          ),
+    return CollectibleDropCard(
+      imagePath: drop.graffiti.graffitiImage,
+      title: drop.graffiti.name,
+      subtitle: collectionText != drop.graffiti.name ? collectionText : null,
+      accentColor: rarityColor,
+      entries: [
+        CollectibleInfoEntry(
+          title: 'Rarity',
+          value: GraffitiUiHelper.rarityLabel(drop.graffiti),
+          valueColor: rarityColor,
         ),
-        child: Padding(
-          padding: const EdgeInsets.all(16),
-          child: LayoutBuilder(
-            builder: (context, constraints) {
-              final isNarrow = constraints.maxWidth < 700;
-
-              final image = Image.asset(
-                drop.graffiti.graffitiImage,
-                height: isNarrow ? 120 : 160,
-                errorBuilder: (_, __, ___) => Icon(
-                  Icons.image_not_supported,
-                  size: isNarrow ? 64 : 80,
-                ),
-              );
-
-              final info = Column(
-                crossAxisAlignment:
-                    isNarrow ? CrossAxisAlignment.center : CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    drop.graffiti.name,
-                    textAlign: isNarrow ? TextAlign.center : TextAlign.left,
-                    style: TextStyle(
-                      fontSize: isNarrow ? 17 : 19,
-                      fontWeight: FontWeight.bold,
-                      color: rarityColor,
-                    ),
-                  ),
-                  if (collectionText != drop.graffiti.name) ...[
-                    const SizedBox(height: 6),
-                    Text(
-                      collectionText,
-                      textAlign: isNarrow ? TextAlign.center : TextAlign.left,
-                      style: const TextStyle(
-                        color: Colors.white70,
-                        fontSize: 13,
-                      ),
-                    ),
-                  ],
-                  const SizedBox(height: 10),
-                  InfoRow(
-                    title: 'Rarity',
-                    value: GraffitiUiHelper.rarityLabel(drop.graffiti),
-                    valueColor: rarityColor,
-                  ),
-                  InfoRow(title: 'Type', value: 'Graffiti'),
-                  if (drop.graffiti.collection != null &&
-                      drop.graffiti.collection!.isNotEmpty)
-                    InfoRow(
-                      title: 'Collection',
-                      value: drop.graffiti.collection!,
-                    ),
-                ],
-              );
-
-              if (isNarrow) {
-                return Column(
-                  children: [image, const SizedBox(height: 12), info],
-                );
-              }
-
-              return Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Expanded(flex: 4, child: Center(child: image)),
-                  const SizedBox(width: 16),
-                  Expanded(flex: 5, child: info),
-                ],
-              );
-            },
+        const CollectibleInfoEntry(title: 'Type', value: 'Graffiti'),
+        if ((drop.graffiti.collection ?? '').isNotEmpty)
+          CollectibleInfoEntry(
+            title: 'Collection',
+            value: drop.graffiti.collection!,
           ),
-        ),
-      ),
+      ],
     );
   }
 }

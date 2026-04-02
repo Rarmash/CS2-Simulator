@@ -7,9 +7,13 @@ import '../../data/models/operation_collection_dto.dart';
 import '../../data/models/reward_collection_dto.dart';
 import '../../data/models/skin_dto.dart';
 import '../../data/repositories/local_data_repository.dart';
+import '../helpers/app_navigation_helper.dart';
 import '../helpers/skin_ui_helper.dart';
+import '../widgets/detail_info_row.dart';
+import '../widgets/detail_source_section.dart';
+import '../widgets/detail_source_tile.dart';
+import '../widgets/detail_tag.dart';
 import '../widgets/float_cap_bar.dart';
-import 'case_open_screen.dart';
 import 'operation_collection_open_screen.dart';
 import 'reward_collection_open_screen.dart';
 
@@ -83,7 +87,7 @@ class SkinDetailsScreen extends StatelessWidget {
                             isAntiAlias: false,
                             gaplessPlayback: true,
                             cacheWidth: narrow ? 420 : 640,
-                            errorBuilder: (_, __, ___) => const Icon(
+                            errorBuilder: (_, _, _) => const Icon(
                               Icons.image_not_supported,
                               size: 64,
                             ),
@@ -236,14 +240,12 @@ class SkinDetailsScreen extends StatelessWidget {
                   trailing:
                   DateFormatHelper.formatReleaseDate(item.releaseDate) ?? '-',
                   onTap: () {
-                    Navigator.push(
+                    AppNavigationHelper.pushScreen(
                       context,
-                      MaterialPageRoute(
-                        builder: (_) => CaseOpenScreen(
-                          caseDto: item,
-                          repository: repository,
-                          settingsController: settingsController,
-                        ),
+                      AppNavigationHelper.buildContainerOpenScreen(
+                        caseDto: item,
+                        repository: repository,
+                        settingsController: settingsController,
                       ),
                     );
                   },
@@ -261,13 +263,11 @@ class SkinDetailsScreen extends StatelessWidget {
                   trailing:
                   DateFormatHelper.formatReleaseDate(item.releaseDate) ?? '-',
                   onTap: () {
-                    Navigator.push(
+                    AppNavigationHelper.pushScreen(
                       context,
-                      MaterialPageRoute(
-                        builder: (_) => RewardCollectionOpenScreen(
-                          collection: item,
-                          repository: repository,
-                        ),
+                      RewardCollectionOpenScreen(
+                        collection: item,
+                        repository: repository,
                       ),
                     );
                   },
@@ -285,13 +285,11 @@ class SkinDetailsScreen extends StatelessWidget {
                   trailing:
                   DateFormatHelper.formatReleaseDate(item.releaseDate) ?? '-',
                   onTap: () {
-                    Navigator.push(
+                    AppNavigationHelper.pushScreen(
                       context,
-                      MaterialPageRoute(
-                        builder: (_) => OperationCollectionOpenScreen(
-                          collection: item,
-                          repository: repository,
-                        ),
+                      OperationCollectionOpenScreen(
+                        collection: item,
+                        repository: repository,
                       ),
                     );
                   },
@@ -319,51 +317,11 @@ class SkinDetailsScreen extends StatelessWidget {
   }
 
   Widget _tag(String text, {Color? color}) {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
-      decoration: BoxDecoration(
-        color: (color ?? Colors.white24).withOpacity(0.14),
-        borderRadius: BorderRadius.circular(999),
-        border: Border.all(
-          color: color ?? Colors.white24,
-        ),
-      ),
-      child: Text(
-        text,
-        style: TextStyle(
-          color: color ?? Colors.white,
-          fontSize: 12,
-          fontWeight: FontWeight.w600,
-        ),
-      ),
-    );
+    return DetailTag(text: text, color: color);
   }
 
   Widget _infoRow(String title, String value) {
-    return Padding(
-      padding: const EdgeInsets.only(bottom: 8),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          SizedBox(
-            width: 118,
-            child: Text(
-              title,
-              style: const TextStyle(
-                color: Colors.white60,
-                fontSize: 14,
-              ),
-            ),
-          ),
-          Expanded(
-            child: Text(
-              value,
-              style: const TextStyle(fontSize: 14),
-            ),
-          ),
-        ],
-      ),
-    );
+    return DetailInfoRow(title: title, value: value);
   }
 
   Widget _sourceSection<T>({
@@ -372,32 +330,11 @@ class SkinDetailsScreen extends StatelessWidget {
     required String emptyText,
     required Widget Function(T item) itemBuilder,
   }) {
-    return Card(
-      child: Padding(
-        padding: const EdgeInsets.fromLTRB(16, 14, 16, 14),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              '$title (${items.length})',
-              style: const TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.w700,
-              ),
-            ),
-            const SizedBox(height: 12),
-            if (items.isEmpty)
-              Text(
-                emptyText,
-                style: const TextStyle(
-                  color: Colors.white70,
-                ),
-              )
-            else
-              ...items.map(itemBuilder),
-          ],
-        ),
-      ),
+    return DetailSourceSection<T>(
+      title: title,
+      items: items,
+      emptyText: emptyText,
+      itemBuilder: itemBuilder,
     );
   }
 
@@ -408,96 +345,12 @@ class SkinDetailsScreen extends StatelessWidget {
     required String trailing,
     required VoidCallback onTap,
   }) {
-    return Container(
-      margin: const EdgeInsets.only(bottom: 10),
-      child: Material(
-        color: Colors.transparent,
-        child: InkWell(
-          borderRadius: BorderRadius.circular(12),
-          onTap: onTap,
-          child: Ink(
-            padding: const EdgeInsets.all(12),
-            decoration: BoxDecoration(
-              color: Colors.white.withOpacity(0.04),
-              borderRadius: BorderRadius.circular(12),
-              border: Border.all(color: Colors.white10),
-            ),
-            child: Row(
-              children: [
-                Container(
-                  width: 44,
-                  height: 44,
-                  alignment: Alignment.center,
-                  decoration: BoxDecoration(
-                    color: Colors.white.withOpacity(0.04),
-                    borderRadius: BorderRadius.circular(10),
-                    border: Border.all(color: Colors.white10),
-                  ),
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(8),
-                    child: Image.asset(
-                      imagePath,
-                      width: 34,
-                      height: 34,
-                      fit: BoxFit.contain,
-                      filterQuality: FilterQuality.low,
-                      isAntiAlias: false,
-                      gaplessPlayback: true,
-                      cacheWidth: 96,
-                      errorBuilder: (_, __, ___) => const Icon(
-                        Icons.image_not_supported_outlined,
-                        color: Colors.white54,
-                        size: 20,
-                      ),
-                    ),
-                  ),
-                ),
-                const SizedBox(width: 12),
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        title,
-                        style: const TextStyle(
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
-                      const SizedBox(height: 3),
-                      Text(
-                        subtitle,
-                        style: const TextStyle(
-                          color: Colors.white70,
-                          fontSize: 13,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                const SizedBox(width: 12),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  children: [
-                    Text(
-                      trailing,
-                      style: const TextStyle(
-                        color: Colors.white54,
-                        fontSize: 12,
-                      ),
-                    ),
-                    const SizedBox(height: 4),
-                    const Icon(
-                      Icons.chevron_right,
-                      size: 18,
-                      color: Colors.white38,
-                    ),
-                  ],
-                ),
-              ],
-            ),
-          ),
-        ),
-      ),
+    return DetailSourceTile(
+      imagePath: imagePath,
+      title: title,
+      subtitle: subtitle,
+      trailing: trailing,
+      onTap: onTap,
     );
   }
 

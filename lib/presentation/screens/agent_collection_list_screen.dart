@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 
 import '../../data/models/agent_collection_dto.dart';
 import '../../data/repositories/local_data_repository.dart';
-import '../helpers/responsive_grid_helper.dart';
+import '../helpers/app_navigation_helper.dart';
 import '../helpers/source_color_helper.dart';
+import '../widgets/async_collection_loader.dart';
 import '../widgets/chip_badge.dart';
 import '../widgets/collection_list_card.dart';
+import '../widgets/responsive_collection_grid.dart';
 import 'agent_collection_open_screen.dart';
 
 class AgentCollectionListScreen extends StatefulWidget {
@@ -47,13 +49,11 @@ class _AgentCollectionListScreenState extends State<AgentCollectionListScreen> {
         ),
       ],
       onTap: () {
-        Navigator.push(
+        AppNavigationHelper.pushScreen(
           context,
-          MaterialPageRoute(
-            builder: (_) => AgentCollectionOpenScreen(
-              collection: collection,
-              repository: widget.repository,
-            ),
+          AgentCollectionOpenScreen(
+            collection: collection,
+            repository: widget.repository,
           ),
         );
       },
@@ -64,35 +64,13 @@ class _AgentCollectionListScreenState extends State<AgentCollectionListScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text('Agent Collections')),
-      body: FutureBuilder<List<AgentCollectionDto>>(
+      body: AsyncCollectionLoader<AgentCollectionDto>(
         future: _future,
-        builder: (context, snapshot) {
-          if (!snapshot.hasData) {
-            return const Center(child: CircularProgressIndicator());
-          }
-
-          final items = List<AgentCollectionDto>.from(snapshot.data!);
-          return LayoutBuilder(
-            builder: (context, constraints) {
-              final crossAxisCount = ResponsiveGridHelper.listCrossAxisCount(
-                constraints.maxWidth,
-              );
-              final aspectRatio = ResponsiveGridHelper.listChildAspectRatio(
-                constraints.maxWidth,
-              );
-
-              return GridView.builder(
-                padding: const EdgeInsets.all(12),
-                itemCount: items.length,
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: crossAxisCount,
-                  crossAxisSpacing: 12,
-                  mainAxisSpacing: 12,
-                  childAspectRatio: aspectRatio,
-                ),
-                itemBuilder: (context, index) => _buildCard(context, items[index]),
-              );
-            },
+        builder: (context, items) {
+          return ResponsiveCollectionGrid<AgentCollectionDto>(
+            items: items,
+            emptyMessage: 'No agent collections found.',
+            itemBuilder: _buildCard,
           );
         },
       ),

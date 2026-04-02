@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 
 import '../../data/models/case_dto.dart';
 import '../../data/repositories/local_data_repository.dart';
-import '../helpers/responsive_grid_helper.dart';
+import '../helpers/app_navigation_helper.dart';
 import '../helpers/source_color_helper.dart';
+import '../widgets/async_collection_loader.dart';
 import '../widgets/chip_badge.dart';
 import '../widgets/collection_list_card.dart';
+import '../widgets/responsive_collection_grid.dart';
 import 'patch_collection_open_screen.dart';
 
 class PatchCollectionListScreen extends StatefulWidget {
@@ -57,13 +59,11 @@ class _PatchCollectionListScreenState extends State<PatchCollectionListScreen> {
         ],
       ],
       onTap: () {
-        Navigator.push(
+        AppNavigationHelper.pushScreen(
           context,
-          MaterialPageRoute(
-            builder: (_) => PatchCollectionOpenScreen(
-              collection: collection,
-              repository: widget.repository,
-            ),
+          PatchCollectionOpenScreen(
+            collection: collection,
+            repository: widget.repository,
           ),
         );
       },
@@ -74,43 +74,13 @@ class _PatchCollectionListScreenState extends State<PatchCollectionListScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text('Patch Collections')),
-      body: FutureBuilder<List<CaseDto>>(
+      body: AsyncCollectionLoader<CaseDto>(
         future: _future,
-        builder: (context, snapshot) {
-          if (!snapshot.hasData) {
-            return const Center(child: CircularProgressIndicator());
-          }
-
-          final items = List<CaseDto>.from(snapshot.data!);
-          return LayoutBuilder(
-            builder: (context, constraints) {
-              final crossAxisCount = ResponsiveGridHelper.listCrossAxisCount(
-                constraints.maxWidth,
-              );
-              final aspectRatio = ResponsiveGridHelper.listChildAspectRatio(
-                constraints.maxWidth,
-              );
-
-              return items.isEmpty
-                  ? const Center(
-                      child: Text(
-                        'No patch collections found.',
-                        style: TextStyle(color: Colors.white70),
-                      ),
-                    )
-                  : GridView.builder(
-                      padding: const EdgeInsets.all(12),
-                      itemCount: items.length,
-                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: crossAxisCount,
-                        crossAxisSpacing: 12,
-                        mainAxisSpacing: 12,
-                        childAspectRatio: aspectRatio,
-                      ),
-                      itemBuilder: (context, index) =>
-                          _buildCard(context, items[index]),
-                    );
-            },
+        builder: (context, items) {
+          return ResponsiveCollectionGrid<CaseDto>(
+            items: items,
+            emptyMessage: 'No patch collections found.',
+            itemBuilder: _buildCard,
           );
         },
       ),
