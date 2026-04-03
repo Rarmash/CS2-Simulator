@@ -143,18 +143,11 @@ The project is actively evolving, with current work focused on:
 
 ## Roadmap
 
-### v0.9
-
-- Codebase optimization and cleanup
-- Asset size optimization to reduce how much users need to download
-- Agent, graffiti, and patch support polish
-- General glossary support for more item types
-- Shared glossary for collectibles, either unified or grouped by item type
-
 ### v0.10
 
 - Trade-Up rewrite and UI cleanup
 - Charm support
+- Unified handling of regular and StatTrak™ Music Kits as one grouped item
 - Broader simulator accuracy pass across more container types
 - Better browsing and glossary coverage for non-skin content
 
