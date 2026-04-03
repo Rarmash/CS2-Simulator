@@ -151,10 +151,16 @@ The project is actively evolving, with current work focused on:
 - General glossary support for more item types
 - Shared glossary for collectibles, either unified or grouped by item type
 
+### v0.10
+
+- Trade-Up rewrite and UI cleanup
+- Charm support
+- Broader simulator accuracy pass across more container types
+- Better browsing and glossary coverage for non-skin content
+
 ### Future
 
-- Broader simulator accuracy pass across all supported container types
-- Better browsing and glossary coverage for non-skin content
+- Skin pattern and finish seed support for items where patterns matter
 - Cleaner navigation across containers, collections, and collectibles
 - Music Kit preview playback if a reliable audio source is available
 - Optional China / Perfect World visual mode if a reliable alternate asset source is available

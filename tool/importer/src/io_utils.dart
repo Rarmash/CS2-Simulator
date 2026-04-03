@@ -211,6 +211,9 @@ class IoUtils {
   Future<String?> downloadOptimizedAsset(
     String url,
     String pathWithoutExt,
+    {
+    CompressionMode? compressionModeOverride,
+  }
   ) async {
     if (url.isEmpty) {
       return null;
@@ -273,7 +276,10 @@ class IoUtils {
             final result = await Process.run(cwebpPath, [
               '-lossless',
               '-z',
-              compressionMode == CompressionMode.maxCompress ? '9' : '6',
+              (compressionModeOverride ?? compressionMode) ==
+                      CompressionMode.maxCompress
+                  ? '9'
+                  : '6',
               '-mt',
               '-exact',
               inputFile.path,

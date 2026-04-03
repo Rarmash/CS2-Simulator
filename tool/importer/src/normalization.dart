@@ -527,6 +527,20 @@ String? inferPinCollection(String? crateName) {
   return name.isEmpty ? null : name;
 }
 
+bool shouldCreateGenuinePin({
+  required String pinName,
+  required String? pinCollection,
+}) {
+  final collection = (pinCollection ?? '').trim();
+  if (collection == 'Series 1' ||
+      collection == 'Series 2' ||
+      collection == 'Series 3') {
+    return true;
+  }
+
+  return collection == 'Half-Life: Alyx' && pinName.trim() == 'Alyx Pin';
+}
+
 String? inferMusicKitCollection(String? crateName) {
   var name = (crateName ?? '').trim();
   if (name.isEmpty) {
@@ -604,6 +618,12 @@ Map<String, String?> resolveAgentCollectionSource(String? collectionName) {
   if (normalized.startsWith('Music Kit | ')) {
     normalized = normalized.substring('Music Kit | '.length).trim();
   }
+
+  normalized = switch (normalized) {
+    'TWERL and Ekko & Sidetrack, Under Bright Lights' =>
+      'TWERL, Ekko & Sidetrack, Under Bright Lights',
+    _ => normalized,
+  };
 
   return (normalized, isStatTrak);
 }

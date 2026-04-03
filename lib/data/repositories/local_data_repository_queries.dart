@@ -188,6 +188,78 @@ mixin _LocalDataRepositoryQueries on _LocalDataRepositoryLoaders {
     return result;
   }
 
+  Future<List<CaseDto>> loadCasesForPin(String pinId) async {
+    final cases = await loadCases();
+    final contents = await loadPinContents();
+
+    final caseIds = contents
+        .where((entry) => entry.pinIds.contains(pinId))
+        .map((entry) => entry.caseId)
+        .toSet();
+
+    final result = cases.where((c) => caseIds.contains(c.id)).toList();
+    result.sort(_compareCaseByReleaseDateAsc);
+    return result;
+  }
+
+  Future<List<CaseDto>> loadCasesForMusicKit(String musicKitId) async {
+    final cases = await loadCases();
+    final contents = await loadMusicKitContents();
+
+    final caseIds = contents
+        .where((entry) => entry.musicKitIds.contains(musicKitId))
+        .map((entry) => entry.caseId)
+        .toSet();
+
+    final result = cases.where((c) => caseIds.contains(c.id)).toList();
+    result.sort(_compareCaseByReleaseDateAsc);
+    return result;
+  }
+
+  Future<List<CaseDto>> loadCasesForGraffiti(String graffitiId) async {
+    final cases = await loadCases();
+    final contents = await loadGraffitiContents();
+
+    final caseIds = contents
+        .where((entry) => entry.graffitiIds.contains(graffitiId))
+        .map((entry) => entry.caseId)
+        .toSet();
+
+    final result = cases.where((c) => caseIds.contains(c.id)).toList();
+    result.sort(_compareCaseByReleaseDateAsc);
+    return result;
+  }
+
+  Future<List<CaseDto>> loadCasesForPatch(String patchId) async {
+    final cases = await loadCases();
+    final contents = await loadPatchContents();
+
+    final caseIds = contents
+        .where((entry) => entry.patchIds.contains(patchId))
+        .map((entry) => entry.caseId)
+        .toSet();
+
+    final result = cases.where((c) => caseIds.contains(c.id)).toList();
+    result.sort(_compareCaseByReleaseDateAsc);
+    return result;
+  }
+
+  Future<List<AgentCollectionDto>> loadAgentCollectionsForAgent(
+    String agentId,
+  ) async {
+    final collections = await loadAgentCollections();
+    final contents = await loadAgentCollectionContents();
+
+    final ids = contents
+        .where((entry) => entry.agentIds.contains(agentId))
+        .map((entry) => entry.agentCollectionId)
+        .toSet();
+
+    final result = collections.where((c) => ids.contains(c.id)).toList();
+    result.sort(_compareNamedReleaseDateAsc);
+    return result;
+  }
+
   Future<List<CaseDto>> loadStickerCollections() async {
     final cases = await loadCases();
     final result = cases.where((c) => c.isStickerCollection).toList();

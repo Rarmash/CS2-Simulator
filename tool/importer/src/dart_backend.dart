@@ -327,6 +327,7 @@ class DartImporterBackend implements ImporterBackend {
     final stickerContentsMap = <String, Set<String>>{};
     final pinContentsMap = <String, Set<String>>{};
     final musicKitContentsMap = <String, Set<String>>{};
+    final musicKitCollectionBySourceId = <String, String?>{};
     final agentCollectionContentsMap = <String, Set<String>>{
       for (final collectionId in newAgentCollections.keys) collectionId: <String>{},
     };
@@ -983,6 +984,42 @@ class DartImporterBackend implements ImporterBackend {
         newPins[pinId] = pinRecord;
         existingPinByKey[key] = pinRecord;
         pinContentsMap.putIfAbsent(caseId, () => <String>{}).add(pinId);
+
+        if (!shouldCreateGenuinePin(
+          pinName: pinName,
+          pinCollection: pinCollection,
+        )) {
+          continue;
+        }
+
+        final genuineKey = (
+          canonicalName('Genuine $pinName'),
+          canonicalName(pinCollection ?? ''),
+        );
+        final existingGenuinePin = existingPinByKey[genuineKey];
+        late String genuinePinId;
+        if (existingGenuinePin != null) {
+          genuinePinId = existingGenuinePin['id'].toString();
+          reusedPinCount += 1;
+        } else {
+          while (usedPinIds.contains(nextPinId)) {
+            nextPinId += 1;
+          }
+          genuinePinId = nextPinId.toString();
+          usedPinIds.add(nextPinId);
+          nextPinId += 1;
+          createdPinCount += 1;
+        }
+
+        final genuinePinRecord = <String, dynamic>{
+          'id': genuinePinId,
+          'name': 'Genuine $pinName',
+          'pinImage': pinImagePath,
+          'rarity': 'GENUINE',
+          'collection': pinCollection,
+        };
+        newPins[genuinePinId] = genuinePinRecord;
+        existingPinByKey[genuineKey] = genuinePinRecord;
       }
     }
 
@@ -1088,6 +1125,7 @@ class DartImporterBackend implements ImporterBackend {
           relativeDir: 'assets/music_kits',
           id: musicKitId,
           existingRelativePath: existingMusicKit?['musicKitImage']?.toString(),
+          compressionModeOverride: CompressionMode.maxCompress,
         );
 
         final musicKitRecord = <String, dynamic>{
@@ -1100,10 +1138,86 @@ class DartImporterBackend implements ImporterBackend {
         };
         newMusicKits[musicKitId] = musicKitRecord;
         existingMusicKitByKey[key] = musicKitRecord;
+        musicKitCollectionBySourceId[sourceMusicKitId] = musicKitCollection;
         musicKitContentsMap
             .putIfAbsent(caseId, () => <String>{})
             .add(musicKitId);
       }
+    }
+
+    for (final meta in musicKitsData) {
+      final sourceMusicKitId = (meta['id'] ?? '').toString().trim();
+      if (sourceMusicKitId.isEmpty) {
+        continue;
+      }
+
+      final normalizedMusicKitName = normalizeMusicKitName(
+        (meta['name'] ?? '').toString().trim(),
+      );
+      final musicKitName = normalizedMusicKitName.$1;
+      final isStatTrak = normalizedMusicKitName.$2;
+      if (musicKitName.isEmpty) {
+        continue;
+      }
+
+      final rawCollection = meta['collection'];
+      final explicitCollection = rawCollection is String
+          ? rawCollection.trim()
+          : '';
+      final musicKitCollection =
+          musicKitCollectionBySourceId[sourceMusicKitId] ??
+          (explicitCollection.isEmpty ? null : explicitCollection);
+      final key = (
+        canonicalName(musicKitName),
+        canonicalName(musicKitCollection ?? ''),
+        isStatTrak,
+      );
+
+      if (existingMusicKitByKey.containsKey(key)) {
+        continue;
+      }
+
+      final rarity =
+          musicKitRarityMap[((meta['rarity'] as Map?)?['name'] ?? '').toString()] ??
+          'HIGH_GRADE';
+      final imageUrl = chooseImageUrl(meta);
+
+      late String musicKitId;
+      final candidate = makeHashedNumericId(sourceMusicKitId, 970000000);
+      if (RegExp(r'^\d+$').hasMatch(candidate) &&
+          !usedMusicKitIds.contains(int.parse(candidate)) &&
+          !newMusicKits.containsKey(candidate)) {
+        musicKitId = candidate;
+        usedMusicKitIds.add(int.parse(candidate));
+      } else {
+        while (usedMusicKitIds.contains(nextMusicKitId)) {
+          nextMusicKitId += 1;
+        }
+        musicKitId = nextMusicKitId.toString();
+        usedMusicKitIds.add(nextMusicKitId);
+        nextMusicKitId += 1;
+      }
+      createdMusicKitCount += 1;
+
+      final musicKitImagePath = await _syncAsset(
+        imageUrl: imageUrl,
+        dirPath: musicKitsDir.path,
+        relativeDir: 'assets/music_kits',
+        id: musicKitId,
+        compressionModeOverride: CompressionMode.maxCompress,
+      );
+
+      final musicKitRecord = <String, dynamic>{
+        'id': musicKitId,
+        'name': musicKitName,
+        'musicKitImage': musicKitImagePath,
+        'rarity': rarity,
+        'collection': musicKitCollection,
+        'isStatTrak': isStatTrak,
+      };
+      newMusicKits[musicKitId] = musicKitRecord;
+      existingMusicKitByKey[key] = musicKitRecord;
+      musicKitCollectionBySourceId[sourceMusicKitId] = musicKitCollection;
     }
 
     for (final meta in agentsData) {
@@ -1855,6 +1969,7 @@ class DartImporterBackend implements ImporterBackend {
     required String relativeDir,
     required String id,
     String? existingRelativePath,
+    CompressionMode? compressionModeOverride,
   }) async {
     final existing = (existingRelativePath ?? '').trim();
     if (existing.isNotEmpty && File(existing).existsSync()) {
@@ -1869,7 +1984,11 @@ class DartImporterBackend implements ImporterBackend {
     }
 
     if (imageUrl != null && imageUrl.isNotEmpty) {
-      final ext = await _io.downloadOptimizedAsset(imageUrl, '$dirPath/$id');
+      final ext = await _io.downloadOptimizedAsset(
+        imageUrl,
+        '$dirPath/$id',
+        compressionModeOverride: compressionModeOverride,
+      );
       if (ext != null) {
         return '$relativeDir/$id$ext';
       }

@@ -5,6 +5,8 @@ import '../../data/models/pin_dto.dart';
 class PinUiHelper {
   static Color rarityColor(PinDto pin) {
     switch (pin.rarity) {
+      case 'GENUINE':
+        return const Color(0xFF4D7455);
       case 'HIGH_GRADE':
         return Colors.blue;
       case 'REMARKABLE':
@@ -20,6 +22,8 @@ class PinUiHelper {
 
   static String rarityLabel(PinDto pin) {
     switch (pin.rarity) {
+      case 'GENUINE':
+        return 'Genuine';
       case 'HIGH_GRADE':
         return 'High Grade';
       case 'REMARKABLE':
@@ -35,6 +39,9 @@ class PinUiHelper {
 
   static String secondaryText(PinDto pin) {
     final collection = (pin.collection ?? '').trim();
-    return collection.isNotEmpty ? collection : 'Collectible Pin';
+    if (collection.isNotEmpty) {
+      return collection;
+    }
+    return pin.rarity == 'GENUINE' ? 'Genuine Pin' : 'Collectible Pin';
   }
 }

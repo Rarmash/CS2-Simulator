@@ -5,11 +5,11 @@ import '../../data/repositories/local_data_repository.dart';
 import '../helpers/app_navigation_helper.dart';
 import 'agent_collection_list_screen.dart';
 import 'case_list_screen.dart';
+import 'glossary_hub_screen.dart';
 import 'operation_collection_list_screen.dart';
 import 'patch_collection_list_screen.dart';
 import 'reward_collection_list_screen.dart';
 import 'settings_screen.dart';
-import 'skin_glossary_screen.dart';
 import 'sticker_collection_list_screen.dart';
 import 'tradeup_screen.dart';
 
@@ -36,8 +36,8 @@ class HomeScreen extends StatelessWidget {
       ),
       _HomeMenuItem(
         icon: Icons.menu_book,
-        title: 'Skin Glossary',
-        buildScreen: () => SkinGlossaryScreen(
+        title: 'Item Glossary',
+        buildScreen: () => GlossaryHubScreen(
           repository: repository,
           settingsController: settingsController,
         ),

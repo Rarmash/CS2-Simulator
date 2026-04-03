@@ -32,6 +32,14 @@
     "isStatTrak": false
   },
   {
+    "id": "972592427",
+    "name": "Proxy, Battlepack",
+    "musicKitImage": "assets/music_kits/972592427.webp",
+    "rarity": "HIGH_GRADE",
+    "collection": null,
+    "isStatTrak": false
+  },
+  {
     "id": "973258375",
     "name": "Jonathan Young, Starship Velociraptor",
     "musicKitImage": "assets/music_kits/973258375.webp",
@@ -40,11 +48,35 @@
     "isStatTrak": false
   },
   {
+    "id": "973657692",
+    "name": "Halo, The Master Chief Collection",
+    "musicKitImage": "assets/music_kits/973657692.webp",
+    "rarity": "HIGH_GRADE",
+    "collection": null,
+    "isStatTrak": false
+  },
+  {
     "id": "973796104",
     "name": "PVRIS, Evergreen",
     "musicKitImage": "assets/music_kits/973796104.webp",
     "rarity": "HIGH_GRADE",
     "collection": "Deluge",
+    "isStatTrak": false
+  },
+  {
+    "id": "973977466",
+    "name": "Denzel Curry, ULTIMATE",
+    "musicKitImage": "assets/music_kits/973977466.webp",
+    "rarity": "HIGH_GRADE",
+    "collection": null,
+    "isStatTrak": false
+  },
+  {
+    "id": "974613487",
+    "name": "Michael Bross, Invasion!",
+    "musicKitImage": "assets/music_kits/974613487.webp",
+    "rarity": "HIGH_GRADE",
+    "collection": null,
     "isStatTrak": false
   },
   {
@@ -80,6 +112,38 @@
     "isStatTrak": false
   },
   {
+    "id": "981765877",
+    "name": "Daniel Sadowski, Crimson Assault",
+    "musicKitImage": "assets/music_kits/981765877.webp",
+    "rarity": "HIGH_GRADE",
+    "collection": null,
+    "isStatTrak": false
+  },
+  {
+    "id": "981815769",
+    "name": "Skog, Metal",
+    "musicKitImage": "assets/music_kits/981815769.webp",
+    "rarity": "HIGH_GRADE",
+    "collection": null,
+    "isStatTrak": true
+  },
+  {
+    "id": "983344523",
+    "name": "Darren Korb, Hades Music Kit",
+    "musicKitImage": "assets/music_kits/983344523.webp",
+    "rarity": "HIGH_GRADE",
+    "collection": null,
+    "isStatTrak": false
+  },
+  {
+    "id": "983830847",
+    "name": "The Verkkars, EZ4ENCE",
+    "musicKitImage": "assets/music_kits/983830847.webp",
+    "rarity": "HIGH_GRADE",
+    "collection": null,
+    "isStatTrak": false
+  },
+  {
     "id": "983861625",
     "name": "DRYDEN, Feel The Power",
     "musicKitImage": "assets/music_kits/983861625.webp",
@@ -94,6 +158,14 @@
     "rarity": "HIGH_GRADE",
     "collection": "NIGHTMODE",
     "isStatTrak": true
+  },
+  {
+    "id": "984428081",
+    "name": "Neck Deep, The Lowlife Pack",
+    "musicKitImage": "assets/music_kits/984428081.webp",
+    "rarity": "HIGH_GRADE",
+    "collection": null,
+    "isStatTrak": false
   },
   {
     "id": "984479732",
@@ -112,6 +184,30 @@
     "isStatTrak": false
   },
   {
+    "id": "985610938",
+    "name": "Damjan Mravunac, The Talos Principle",
+    "musicKitImage": "assets/music_kits/985610938.webp",
+    "rarity": "HIGH_GRADE",
+    "collection": null,
+    "isStatTrak": false
+  },
+  {
+    "id": "985798752",
+    "name": "Daniel Sadowski, The 8-Bit Kit",
+    "musicKitImage": "assets/music_kits/985798752.webp",
+    "rarity": "HIGH_GRADE",
+    "collection": null,
+    "isStatTrak": false
+  },
+  {
+    "id": "986081934",
+    "name": "Various Artists, Hotline Miami",
+    "musicKitImage": "assets/music_kits/986081934.webp",
+    "rarity": "HIGH_GRADE",
+    "collection": null,
+    "isStatTrak": true
+  },
+  {
     "id": "986102338",
     "name": "Humanity's Last Breath, Void",
     "musicKitImage": "assets/music_kits/986102338.webp",
@@ -125,6 +221,22 @@
     "musicKitImage": "assets/music_kits/986159988.webp",
     "rarity": "HIGH_GRADE",
     "collection": "Deluge",
+    "isStatTrak": true
+  },
+  {
+    "id": "986295788",
+    "name": "Perfect World, 花脸 Hua Lian (Painted Face)",
+    "musicKitImage": "assets/music_kits/986295788.webp",
+    "rarity": "HIGH_GRADE",
+    "collection": null,
+    "isStatTrak": false
+  },
+  {
+    "id": "986500260",
+    "name": "Daniel Sadowski, Crimson Assault",
+    "musicKitImage": "assets/music_kits/986500260.webp",
+    "rarity": "HIGH_GRADE",
+    "collection": null,
     "isStatTrak": true
   },
   {
@@ -144,12 +256,36 @@
     "isStatTrak": false
   },
   {
+    "id": "989574806",
+    "name": "Various Artists, Hotline Miami",
+    "musicKitImage": "assets/music_kits/989574806.webp",
+    "rarity": "HIGH_GRADE",
+    "collection": null,
+    "isStatTrak": false
+  },
+  {
     "id": "990519625",
     "name": "Tim Huling, Devil's Paintbrush",
     "musicKitImage": "assets/music_kits/990519625.webp",
     "rarity": "HIGH_GRADE",
     "collection": "Masterminds 2",
     "isStatTrak": false
+  },
+  {
+    "id": "991673260",
+    "name": "bbno$, u mad!",
+    "musicKitImage": "assets/music_kits/991673260.webp",
+    "rarity": "HIGH_GRADE",
+    "collection": null,
+    "isStatTrak": true
+  },
+  {
+    "id": "992680274",
+    "name": "Matt Lange, IsoRhythm",
+    "musicKitImage": "assets/music_kits/992680274.webp",
+    "rarity": "HIGH_GRADE",
+    "collection": null,
+    "isStatTrak": true
   },
   {
     "id": "992902795",
@@ -176,12 +312,52 @@
     "isStatTrak": true
   },
   {
+    "id": "994671944",
+    "name": "The Verkkars & n0thing, Flashbang Dance",
+    "musicKitImage": "assets/music_kits/994671944.webp",
+    "rarity": "HIGH_GRADE",
+    "collection": null,
+    "isStatTrak": false
+  },
+  {
+    "id": "994893180",
+    "name": "Amon Tobin, All for Dust",
+    "musicKitImage": "assets/music_kits/994893180.webp",
+    "rarity": "HIGH_GRADE",
+    "collection": null,
+    "isStatTrak": true
+  },
+  {
+    "id": "995696992",
+    "name": "Daniel Sadowski, Total Domination",
+    "musicKitImage": "assets/music_kits/995696992.webp",
+    "rarity": "HIGH_GRADE",
+    "collection": null,
+    "isStatTrak": true
+  },
+  {
     "id": "996251847",
     "name": "Juelz, Shooters",
     "musicKitImage": "assets/music_kits/996251847.webp",
     "rarity": "HIGH_GRADE",
     "collection": "Initiators",
     "isStatTrak": false
+  },
+  {
+    "id": "996799574",
+    "name": "Noisia, Sharpened",
+    "musicKitImage": "assets/music_kits/996799574.webp",
+    "rarity": "HIGH_GRADE",
+    "collection": null,
+    "isStatTrak": false
+  },
+  {
+    "id": "997068518",
+    "name": "Beartooth, Disgusting",
+    "musicKitImage": "assets/music_kits/997068518.webp",
+    "rarity": "HIGH_GRADE",
+    "collection": null,
+    "isStatTrak": true
   },
   {
     "id": "997276857",
@@ -200,6 +376,14 @@
     "isStatTrak": true
   },
   {
+    "id": "997721676",
+    "name": "Kelly Bailey, Hazardous Environments",
+    "musicKitImage": "assets/music_kits/997721676.webp",
+    "rarity": "HIGH_GRADE",
+    "collection": null,
+    "isStatTrak": false
+  },
+  {
     "id": "998333682",
     "name": "KILL SCRIPT, All Night",
     "musicKitImage": "assets/music_kits/998333682.webp",
@@ -213,6 +397,14 @@
     "musicKitImage": "assets/music_kits/998457578.webp",
     "rarity": "HIGH_GRADE",
     "collection": "Masterminds 2",
+    "isStatTrak": false
+  },
+  {
+    "id": "998492121",
+    "name": "Valve, Counter-Strike 2",
+    "musicKitImage": "assets/music_kits/998492121.webp",
+    "rarity": "HIGH_GRADE",
+    "collection": null,
     "isStatTrak": false
   },
   {
@@ -240,6 +432,14 @@
     "isStatTrak": true
   },
   {
+    "id": "1000587013",
+    "name": "Damjan Mravunac, The Talos Principle",
+    "musicKitImage": "assets/music_kits/1000587013.webp",
+    "rarity": "HIGH_GRADE",
+    "collection": null,
+    "isStatTrak": true
+  },
+  {
     "id": "1000709437",
     "name": "Juelz, Floorspace",
     "musicKitImage": "assets/music_kits/1000709437.webp",
@@ -264,11 +464,35 @@
     "isStatTrak": true
   },
   {
+    "id": "1001873278",
+    "name": "Beartooth, Disgusting",
+    "musicKitImage": "assets/music_kits/1001873278.webp",
+    "rarity": "HIGH_GRADE",
+    "collection": null,
+    "isStatTrak": false
+  },
+  {
     "id": "1002198311",
     "name": "3kliksphilip, Heading for the Source",
     "musicKitImage": "assets/music_kits/1002198311.webp",
     "rarity": "HIGH_GRADE",
     "collection": "Initiators",
+    "isStatTrak": true
+  },
+  {
+    "id": "1002316011",
+    "name": "Austin Wintory, Desert Fire",
+    "musicKitImage": "assets/music_kits/1002316011.webp",
+    "rarity": "HIGH_GRADE",
+    "collection": null,
+    "isStatTrak": false
+  },
+  {
+    "id": "1002527582",
+    "name": "Mord Fustang, Diamonds",
+    "musicKitImage": "assets/music_kits/1002527582.webp",
+    "rarity": "HIGH_GRADE",
+    "collection": null,
     "isStatTrak": true
   },
   {
@@ -288,6 +512,14 @@
     "isStatTrak": true
   },
   {
+    "id": "1004485801",
+    "name": "Scarlxrd: King, Scar",
+    "musicKitImage": "assets/music_kits/1004485801.webp",
+    "rarity": "HIGH_GRADE",
+    "collection": null,
+    "isStatTrak": true
+  },
+  {
     "id": "1005312915",
     "name": "Killer Mike, MICHAEL",
     "musicKitImage": "assets/music_kits/1005312915.webp",
@@ -296,11 +528,43 @@
     "isStatTrak": true
   },
   {
+    "id": "1005794782",
+    "name": "bbno$, u mad!",
+    "musicKitImage": "assets/music_kits/1005794782.webp",
+    "rarity": "HIGH_GRADE",
+    "collection": null,
+    "isStatTrak": false
+  },
+  {
+    "id": "1005821347",
+    "name": "Matt Lange, IsoRhythm",
+    "musicKitImage": "assets/music_kits/1005821347.webp",
+    "rarity": "HIGH_GRADE",
+    "collection": null,
+    "isStatTrak": false
+  },
+  {
     "id": "1005980932",
     "name": "Austin Wintory, Mocha Petal",
     "musicKitImage": "assets/music_kits/1005980932.webp",
     "rarity": "HIGH_GRADE",
     "collection": "Tacticians",
+    "isStatTrak": false
+  },
+  {
+    "id": "1006361788",
+    "name": "Sasha, LNOE",
+    "musicKitImage": "assets/music_kits/1006361788.webp",
+    "rarity": "HIGH_GRADE",
+    "collection": null,
+    "isStatTrak": true
+  },
+  {
+    "id": "1006918543",
+    "name": "Skog, Metal",
+    "musicKitImage": "assets/music_kits/1006918543.webp",
+    "rarity": "HIGH_GRADE",
+    "collection": null,
     "isStatTrak": false
   },
   {
@@ -312,6 +576,22 @@
     "isStatTrak": false
   },
   {
+    "id": "1007491651",
+    "name": "Perfect World, 花脸 Hua Lian (Painted Face)",
+    "musicKitImage": "assets/music_kits/1007491651.webp",
+    "rarity": "HIGH_GRADE",
+    "collection": null,
+    "isStatTrak": true
+  },
+  {
+    "id": "1007691386",
+    "name": "Sean Murray, A*D*8",
+    "musicKitImage": "assets/music_kits/1007691386.webp",
+    "rarity": "HIGH_GRADE",
+    "collection": null,
+    "isStatTrak": false
+  },
+  {
     "id": "1008303658",
     "name": "PVRIS, Evergreen",
     "musicKitImage": "assets/music_kits/1008303658.webp",
@@ -320,11 +600,43 @@
     "isStatTrak": true
   },
   {
+    "id": "1008602048",
+    "name": "Robert Allaire, Insurgency",
+    "musicKitImage": "assets/music_kits/1008602048.webp",
+    "rarity": "HIGH_GRADE",
+    "collection": null,
+    "isStatTrak": false
+  },
+  {
+    "id": "1009017397",
+    "name": "Midnight Riders, All I Want for Christmas",
+    "musicKitImage": "assets/music_kits/1009017397.webp",
+    "rarity": "HIGH_GRADE",
+    "collection": null,
+    "isStatTrak": false
+  },
+  {
     "id": "1009155363",
     "name": "Sam Marshall, Clutch",
     "musicKitImage": "assets/music_kits/1009155363.webp",
     "rarity": "HIGH_GRADE",
     "collection": "Masterminds 2",
+    "isStatTrak": true
+  },
+  {
+    "id": "1009632613",
+    "name": "Perfect World, Ay Hey",
+    "musicKitImage": "assets/music_kits/1009632613.webp",
+    "rarity": "HIGH_GRADE",
+    "collection": null,
+    "isStatTrak": false
+  },
+  {
+    "id": "1009748723",
+    "name": "Feed Me, High Noon",
+    "musicKitImage": "assets/music_kits/1009748723.webp",
+    "rarity": "HIGH_GRADE",
+    "collection": null,
     "isStatTrak": true
   },
   {
@@ -349,6 +661,22 @@
     "musicKitImage": "assets/music_kits/1010678901.webp",
     "rarity": "HIGH_GRADE",
     "collection": "Masterminds",
+    "isStatTrak": true
+  },
+  {
+    "id": "1010787345",
+    "name": "Perfect World, Ay Hey",
+    "musicKitImage": "assets/music_kits/1010787345.webp",
+    "rarity": "HIGH_GRADE",
+    "collection": null,
+    "isStatTrak": true
+  },
+  {
+    "id": "1010972054",
+    "name": "Sean Murray, A*D*8",
+    "musicKitImage": "assets/music_kits/1010972054.webp",
+    "rarity": "HIGH_GRADE",
+    "collection": null,
     "isStatTrak": true
   },
   {
@@ -384,6 +712,22 @@
     "isStatTrak": true
   },
   {
+    "id": "1012423437",
+    "name": "Darude, Moments CS:GO",
+    "musicKitImage": "assets/music_kits/1012423437.webp",
+    "rarity": "HIGH_GRADE",
+    "collection": null,
+    "isStatTrak": false
+  },
+  {
+    "id": "1012620674",
+    "name": "Daniel Sadowski, The 8-Bit Kit",
+    "musicKitImage": "assets/music_kits/1012620674.webp",
+    "rarity": "HIGH_GRADE",
+    "collection": null,
+    "isStatTrak": true
+  },
+  {
     "id": "1013122391",
     "name": "Beartooth, Aggressive",
     "musicKitImage": "assets/music_kits/1013122391.webp",
@@ -392,11 +736,27 @@
     "isStatTrak": true
   },
   {
+    "id": "1016279770",
+    "name": "Troels Folmann, Uber Blasto Phone",
+    "musicKitImage": "assets/music_kits/1016279770.webp",
+    "rarity": "HIGH_GRADE",
+    "collection": null,
+    "isStatTrak": false
+  },
+  {
     "id": "1016818422",
     "name": "Sarah Schachner, KOLIBRI",
     "musicKitImage": "assets/music_kits/1016818422.webp",
     "rarity": "HIGH_GRADE",
     "collection": "Tacticians",
+    "isStatTrak": true
+  },
+  {
+    "id": "1017012278",
+    "name": "Ki:Theory, MOLOTOV",
+    "musicKitImage": "assets/music_kits/1017012278.webp",
+    "rarity": "HIGH_GRADE",
+    "collection": null,
     "isStatTrak": true
   },
   {
@@ -422,6 +782,14 @@
     "rarity": "HIGH_GRADE",
     "collection": "Masterminds",
     "isStatTrak": false
+  },
+  {
+    "id": "1018800726",
+    "name": "The Verkkars, EZ4ENCE",
+    "musicKitImage": "assets/music_kits/1018800726.webp",
+    "rarity": "HIGH_GRADE",
+    "collection": null,
+    "isStatTrak": true
   },
   {
     "id": "1019800188",
@@ -456,6 +824,38 @@
     "isStatTrak": true
   },
   {
+    "id": "1021464349",
+    "name": "Noisia, Sharpened",
+    "musicKitImage": "assets/music_kits/1021464349.webp",
+    "rarity": "HIGH_GRADE",
+    "collection": null,
+    "isStatTrak": true
+  },
+  {
+    "id": "1023014483",
+    "name": "Proxy, Battlepack",
+    "musicKitImage": "assets/music_kits/1023014483.webp",
+    "rarity": "HIGH_GRADE",
+    "collection": null,
+    "isStatTrak": true
+  },
+  {
+    "id": "1023991939",
+    "name": "New Beat Fund, Sponge Fingerz",
+    "musicKitImage": "assets/music_kits/1023991939.webp",
+    "rarity": "HIGH_GRADE",
+    "collection": null,
+    "isStatTrak": true
+  },
+  {
+    "id": "1024081196",
+    "name": "Daniel Sadowski, Total Domination",
+    "musicKitImage": "assets/music_kits/1024081196.webp",
+    "rarity": "HIGH_GRADE",
+    "collection": null,
+    "isStatTrak": false
+  },
+  {
     "id": "1024340982",
     "name": "Juelz, Floorspace",
     "musicKitImage": "assets/music_kits/1024340982.webp",
@@ -480,11 +880,27 @@
     "isStatTrak": true
   },
   {
+    "id": "1025264551",
+    "name": "Scarlxrd, CHAIN$AW.LXADXUT.",
+    "musicKitImage": "assets/music_kits/1025264551.webp",
+    "rarity": "HIGH_GRADE",
+    "collection": null,
+    "isStatTrak": false
+  },
+  {
     "id": "1025275940",
     "name": "Tigercub, The Perfume of Decay",
     "musicKitImage": "assets/music_kits/1025275940.webp",
     "rarity": "HIGH_GRADE",
     "collection": "Deluge",
+    "isStatTrak": false
+  },
+  {
+    "id": "1025324012",
+    "name": "Feed Me, High Noon",
+    "musicKitImage": "assets/music_kits/1025324012.webp",
+    "rarity": "HIGH_GRADE",
+    "collection": null,
     "isStatTrak": false
   },
   {
@@ -497,7 +913,7 @@
   },
   {
     "id": "1026639040",
-    "name": "TWERL and Ekko & Sidetrack, Under Bright Lights",
+    "name": "TWERL, Ekko & Sidetrack, Under Bright Lights",
     "musicKitImage": "assets/music_kits/1026639040.webp",
     "rarity": "HIGH_GRADE",
     "collection": "NIGHTMODE",
@@ -512,11 +928,51 @@
     "isStatTrak": true
   },
   {
+    "id": "1027598311",
+    "name": "Skog, II-Headshot",
+    "musicKitImage": "assets/music_kits/1027598311.webp",
+    "rarity": "HIGH_GRADE",
+    "collection": null,
+    "isStatTrak": true
+  },
+  {
+    "id": "1028581175",
+    "name": "Midnight Riders, All I Want for Christmas",
+    "musicKitImage": "assets/music_kits/1028581175.webp",
+    "rarity": "HIGH_GRADE",
+    "collection": null,
+    "isStatTrak": true
+  },
+  {
+    "id": "1029067740",
+    "name": "Lennie Moore, Java Havana Funkaloo",
+    "musicKitImage": "assets/music_kits/1029067740.webp",
+    "rarity": "HIGH_GRADE",
+    "collection": null,
+    "isStatTrak": true
+  },
+  {
+    "id": "1029448649",
+    "name": "The Verkkars & n0thing, Flashbang Dance",
+    "musicKitImage": "assets/music_kits/1029448649.webp",
+    "rarity": "HIGH_GRADE",
+    "collection": null,
+    "isStatTrak": true
+  },
+  {
     "id": "1029802512",
     "name": "Tree Adams and Ben Bromfield, M.U.D.D. FORCE",
     "musicKitImage": "assets/music_kits/1029802512.webp",
     "rarity": "HIGH_GRADE",
     "collection": "Masterminds",
+    "isStatTrak": true
+  },
+  {
+    "id": "1032471984",
+    "name": "Michael Bross, Invasion!",
+    "musicKitImage": "assets/music_kits/1032471984.webp",
+    "rarity": "HIGH_GRADE",
+    "collection": null,
     "isStatTrak": true
   },
   {
@@ -536,6 +992,30 @@
     "isStatTrak": true
   },
   {
+    "id": "1033066698",
+    "name": "Scarlxrd: King, Scar",
+    "musicKitImage": "assets/music_kits/1033066698.webp",
+    "rarity": "HIGH_GRADE",
+    "collection": null,
+    "isStatTrak": false
+  },
+  {
+    "id": "1033436697",
+    "name": "Sasha, LNOE",
+    "musicKitImage": "assets/music_kits/1033436697.webp",
+    "rarity": "HIGH_GRADE",
+    "collection": null,
+    "isStatTrak": false
+  },
+  {
+    "id": "1034191515",
+    "name": "Lennie Moore, Java Havana Funkaloo",
+    "musicKitImage": "assets/music_kits/1034191515.webp",
+    "rarity": "HIGH_GRADE",
+    "collection": null,
+    "isStatTrak": false
+  },
+  {
     "id": "1034373778",
     "name": "Chipzel, ~Yellow Magic~",
     "musicKitImage": "assets/music_kits/1034373778.webp",
@@ -550,6 +1030,22 @@
     "rarity": "HIGH_GRADE",
     "collection": "Tacticians",
     "isStatTrak": false
+  },
+  {
+    "id": "1034676233",
+    "name": "Kelly Bailey, Hazardous Environments",
+    "musicKitImage": "assets/music_kits/1034676233.webp",
+    "rarity": "HIGH_GRADE",
+    "collection": null,
+    "isStatTrak": true
+  },
+  {
+    "id": "1034776466",
+    "name": "Scarlxrd, CHAIN$AW.LXADXUT.",
+    "musicKitImage": "assets/music_kits/1034776466.webp",
+    "rarity": "HIGH_GRADE",
+    "collection": null,
+    "isStatTrak": true
   },
   {
     "id": "1036144690",
@@ -568,11 +1064,43 @@
     "isStatTrak": true
   },
   {
+    "id": "1036612800",
+    "name": "Austin Wintory, Desert Fire",
+    "musicKitImage": "assets/music_kits/1036612800.webp",
+    "rarity": "HIGH_GRADE",
+    "collection": null,
+    "isStatTrak": true
+  },
+  {
     "id": "1036996197",
     "name": "Twin Atlantic, GLA",
     "musicKitImage": "assets/music_kits/1036996197.webp",
     "rarity": "HIGH_GRADE",
     "collection": "Radicals",
+    "isStatTrak": true
+  },
+  {
+    "id": "1037048944",
+    "name": "Half-Life: Alyx, Anti-Citizen",
+    "musicKitImage": "assets/music_kits/1037048944.webp",
+    "rarity": "HIGH_GRADE",
+    "collection": null,
+    "isStatTrak": false
+  },
+  {
+    "id": "1038233452",
+    "name": "Troels Folmann, Uber Blasto Phone",
+    "musicKitImage": "assets/music_kits/1038233452.webp",
+    "rarity": "HIGH_GRADE",
+    "collection": null,
+    "isStatTrak": true
+  },
+  {
+    "id": "1038272247",
+    "name": "Neck Deep, The Lowlife Pack",
+    "musicKitImage": "assets/music_kits/1038272247.webp",
+    "rarity": "HIGH_GRADE",
+    "collection": null,
     "isStatTrak": true
   },
   {
@@ -600,12 +1128,44 @@
     "isStatTrak": true
   },
   {
+    "id": "1040958037",
+    "name": "Mord Fustang, Diamonds",
+    "musicKitImage": "assets/music_kits/1040958037.webp",
+    "rarity": "HIGH_GRADE",
+    "collection": null,
+    "isStatTrak": false
+  },
+  {
+    "id": "1043031531",
+    "name": "Mateo Messina, For No Mankind",
+    "musicKitImage": "assets/music_kits/1043031531.webp",
+    "rarity": "HIGH_GRADE",
+    "collection": null,
+    "isStatTrak": true
+  },
+  {
+    "id": "1044890021",
+    "name": "Dren, Death's Head Demolition",
+    "musicKitImage": "assets/music_kits/1044890021.webp",
+    "rarity": "HIGH_GRADE",
+    "collection": null,
+    "isStatTrak": true
+  },
+  {
     "id": "1044942782",
     "name": "Jesse Harlin, Astro Bellum",
     "musicKitImage": "assets/music_kits/1044942782.webp",
     "rarity": "HIGH_GRADE",
     "collection": "Tacticians",
     "isStatTrak": false
+  },
+  {
+    "id": "1046878779",
+    "name": "AWOLNATION, I Am",
+    "musicKitImage": "assets/music_kits/1046878779.webp",
+    "rarity": "HIGH_GRADE",
+    "collection": null,
+    "isStatTrak": true
   },
   {
     "id": "1047455470",
@@ -624,12 +1184,36 @@
     "isStatTrak": false
   },
   {
+    "id": "1047665408",
+    "name": "Mateo Messina, For No Mankind",
+    "musicKitImage": "assets/music_kits/1047665408.webp",
+    "rarity": "HIGH_GRADE",
+    "collection": null,
+    "isStatTrak": false
+  },
+  {
+    "id": "1047794109",
+    "name": "Ki:Theory, MOLOTOV",
+    "musicKitImage": "assets/music_kits/1047794109.webp",
+    "rarity": "HIGH_GRADE",
+    "collection": null,
+    "isStatTrak": false
+  },
+  {
     "id": "1048343219",
     "name": "ISOxo, inhuman",
     "musicKitImage": "assets/music_kits/1048343219.webp",
     "rarity": "HIGH_GRADE",
     "collection": "NIGHTMODE",
     "isStatTrak": false
+  },
+  {
+    "id": "1049894869",
+    "name": "Ian Hultquist, Lion's Mouth",
+    "musicKitImage": "assets/music_kits/1049894869.webp",
+    "rarity": "HIGH_GRADE",
+    "collection": null,
+    "isStatTrak": true
   },
   {
     "id": "1050160811",
@@ -672,6 +1256,30 @@
     "isStatTrak": false
   },
   {
+    "id": "1052897721",
+    "name": "Darude, Moments CS:GO",
+    "musicKitImage": "assets/music_kits/1052897721.webp",
+    "rarity": "HIGH_GRADE",
+    "collection": null,
+    "isStatTrak": true
+  },
+  {
+    "id": "1053191400",
+    "name": "New Beat Fund, Sponge Fingerz",
+    "musicKitImage": "assets/music_kits/1053191400.webp",
+    "rarity": "HIGH_GRADE",
+    "collection": null,
+    "isStatTrak": false
+  },
+  {
+    "id": "1053895197",
+    "name": "Amon Tobin, All for Dust",
+    "musicKitImage": "assets/music_kits/1053895197.webp",
+    "rarity": "HIGH_GRADE",
+    "collection": null,
+    "isStatTrak": false
+  },
+  {
     "id": "1054885947",
     "name": "Ben Bromfield, Rabbit Hole",
     "musicKitImage": "assets/music_kits/1054885947.webp",
@@ -696,6 +1304,14 @@
     "isStatTrak": true
   },
   {
+    "id": "1057745533",
+    "name": "Dren, Death's Head Demolition",
+    "musicKitImage": "assets/music_kits/1057745533.webp",
+    "rarity": "HIGH_GRADE",
+    "collection": null,
+    "isStatTrak": false
+  },
+  {
     "id": "1059220517",
     "name": "KILL SCRIPT, All Night",
     "musicKitImage": "assets/music_kits/1059220517.webp",
@@ -712,11 +1328,27 @@
     "isStatTrak": false
   },
   {
+    "id": "1059508163",
+    "name": "AWOLNATION, I Am",
+    "musicKitImage": "assets/music_kits/1059508163.webp",
+    "rarity": "HIGH_GRADE",
+    "collection": null,
+    "isStatTrak": false
+  },
+  {
     "id": "1061750258",
     "name": "3kliksphilip, Heading for the Source",
     "musicKitImage": "assets/music_kits/1061750258.webp",
     "rarity": "HIGH_GRADE",
     "collection": "Initiators",
+    "isStatTrak": false
+  },
+  {
+    "id": "1062814563",
+    "name": "Valve, CS:GO",
+    "musicKitImage": "assets/music_kits/1062814563.webp",
+    "rarity": "HIGH_GRADE",
+    "collection": null,
     "isStatTrak": false
   },
   {
@@ -726,6 +1358,38 @@
     "rarity": "HIGH_GRADE",
     "collection": "Deluge",
     "isStatTrak": false
+  },
+  {
+    "id": "1063466361",
+    "name": "Ian Hultquist, Lion's Mouth",
+    "musicKitImage": "assets/music_kits/1063466361.webp",
+    "rarity": "HIGH_GRADE",
+    "collection": null,
+    "isStatTrak": false
+  },
+  {
+    "id": "1063784694",
+    "name": "Skog, II-Headshot",
+    "musicKitImage": "assets/music_kits/1063784694.webp",
+    "rarity": "HIGH_GRADE",
+    "collection": null,
+    "isStatTrak": false
+  },
+  {
+    "id": "1065487654",
+    "name": "Denzel Curry, ULTIMATE",
+    "musicKitImage": "assets/music_kits/1065487654.webp",
+    "rarity": "HIGH_GRADE",
+    "collection": null,
+    "isStatTrak": true
+  },
+  {
+    "id": "1066435192",
+    "name": "Robert Allaire, Insurgency",
+    "musicKitImage": "assets/music_kits/1066435192.webp",
+    "rarity": "HIGH_GRADE",
+    "collection": null,
+    "isStatTrak": true
   },
   {
     "id": "1066759080",
