@@ -39,6 +39,9 @@ class CaseDto {
   bool get isStickerCollection => type == 'STICKER_COLLECTION';
   bool get isPinCapsule => type == 'PIN_CAPSULE';
   bool get isMusicKitBox => type == 'MUSIC_KIT_BOX';
+  bool get isGraffitiBox => type == 'GRAFFITI_BOX';
+  bool get isPatchPack => type == 'PATCH_PACK';
+  bool get isPatchCollection => type == 'PATCH_COLLECTION';
   bool get isXrayPackage => type == 'XRAY_PACKAGE';
   bool get isTerminal => type == 'TERMINAL';
 
@@ -58,6 +61,12 @@ class CaseDto {
         return 'Pin Capsule';
       case 'MUSIC_KIT_BOX':
         return 'Music Kit Box';
+      case 'GRAFFITI_BOX':
+        return 'Graffiti Box';
+      case 'PATCH_PACK':
+        return 'Patch Pack';
+      case 'PATCH_COLLECTION':
+        return 'Patch Collection';
       case 'XRAY_PACKAGE':
         return 'X-Ray Package';
       case 'TERMINAL':

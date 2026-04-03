@@ -6,9 +6,9 @@
 [![Dart](https://img.shields.io/badge/Dart-3.11+-0175C2?logo=dart&logoColor=white)](https://dart.dev/)
 [![Platforms](https://img.shields.io/badge/Platforms-Android%20%7C%20iOS%20%7C%20Windows%20%7C%20Linux%20%7C%20macOS%20%7C%20Web-4EAA25)](https://github.com/Rarmash/CS2-Simulator/releases)
 
-Counter-Strike 2 container opening and Trade-Up simulator built with Flutter and Dart.
+Counter-Strike 2 container opening, collectible opening, glossary, and Trade-Up simulator built with Flutter and Dart.
 
-The project focuses on reproducing CS2-style opening behavior and keeping the local item database generated from external data in a reproducible way.
+The project focuses on reproducing CS2-style opening behavior, supporting more and more CS2 collectible content, and keeping the local item database generated from external data in a reproducible way.
 
 ## Disclaimer
 
@@ -29,6 +29,9 @@ Unless explicitly stated otherwise, the repository license applies to the source
 - Sticker collections
 - Collectible pins capsules
 - Music Kit Boxes, including `StatTrak(TM)` music kits
+- Agent collections
+- Graffiti boxes
+- Patch packs and patch collections
 - Skin glossary with item metadata
 - Trade-Up simulator
 
@@ -37,7 +40,7 @@ Unless explicitly stated otherwise, the repository license applies to the source
 - Flutter
 - Dart
 - Local JSON assets for all generated content
-- Dart-based importer for containers, skins, stickers, pins, music kits, and collection metadata
+- Dart-based importer for containers, skins, stickers, pins, music kits, agents, graffiti, patches, and collection metadata
 
 ## Project Structure
 
@@ -48,6 +51,9 @@ Unless explicitly stated otherwise, the repository license applies to the source
 - [assets/stickers/](assets/stickers) sticker images
 - [assets/pins/](assets/pins) pin images
 - [assets/music_kits/](assets/music_kits) music kit images
+- [assets/agents/](assets/agents) agent images
+- [assets/graffiti/](assets/graffiti) graffiti images
+- [assets/patches/](assets/patches) patch images
 - [tool/import_cs_data.dart](tool/import_cs_data.dart) main importer entrypoint
 - [tool/prune_generated_assets.dart](tool/prune_generated_assets.dart) cleanup tool for orphaned generated assets
 
@@ -109,6 +115,7 @@ dart run tool/prune_generated_assets.dart
 - The importer stores the actual generated extension, including `.webp` where applicable
 - Container dates are resolved locally instead of trusting API sale dates
 - Supported container types fail the import if a hardcoded release date is missing
+- Generated assets can be rebuilt in `fast` or `max-compress` mode depending on whether you are doing normal development or a release rebuild
 
 ## Typical Workflow
 
@@ -130,22 +137,23 @@ The source code in this repository is licensed under `AGPL-3.0`.
 The project is actively evolving, with current work focused on:
 
 - expanding simulator coverage for CS2 collectible content
-- improving importer maintainability
+- continuing UI/codebase refactoring to reduce duplicated screen logic
 - reducing release size through better asset compression
+- preparing a more reusable foundation for future non-skin glossaries
 
 ## Roadmap
 
-### v0.9
+### v0.10
 
-- Codebase optimization and cleanup
-- Asset size optimization to reduce how much users need to download
-- Agent support
-- Graffiti support
+- Trade-Up rewrite and UI cleanup
+- Charm support
+- Unified handling of regular and StatTrak™ Music Kits as one grouped item
+- Broader simulator accuracy pass across more container types
+- Better browsing and glossary coverage for non-skin content
 
 ### Future
 
-- Broader simulator accuracy pass across all supported container types
-- Better browsing and glossary coverage for non-skin content
+- Skin pattern and finish seed support for items where patterns matter
 - Cleaner navigation across containers, collections, and collectibles
 - Music Kit preview playback if a reliable audio source is available
 - Optional China / Perfect World visual mode if a reliable alternate asset source is available

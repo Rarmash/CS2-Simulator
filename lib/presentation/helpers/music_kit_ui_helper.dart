@@ -22,7 +22,7 @@ class MusicKitUiHelper {
   }
 
   static String typeLabel(MusicKitDto musicKit) {
-    return musicKit.isStatTrak ? 'StatTrak Music Kit' : 'Music Kit';
+    return musicKit.isStatTrak ? 'StatTrak™ Music Kit' : 'Music Kit';
   }
 
   static String secondaryText(MusicKitDto musicKit) {

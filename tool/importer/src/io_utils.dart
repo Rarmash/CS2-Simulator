@@ -48,8 +48,12 @@ class IoUtils {
       stickersDir,
       pinsDir,
       musicKitsDir,
+      agentsDir,
+      graffitiDir,
+      patchesDir,
       rewardCollectionsDir,
       operationCollectionsDir,
+      agentCollectionsDir,
       tournamentLogosDir,
     ]) {
       if (!dir.existsSync()) {
@@ -66,6 +70,13 @@ class IoUtils {
       File('${dataDir.path}/pin_contents.json'),
       File('${dataDir.path}/music_kits.json'),
       File('${dataDir.path}/music_kit_contents.json'),
+      File('${dataDir.path}/agents.json'),
+      File('${dataDir.path}/agent_collections.json'),
+      File('${dataDir.path}/agent_collection_contents.json'),
+      File('${dataDir.path}/graffiti.json'),
+      File('${dataDir.path}/graffiti_contents.json'),
+      File('${dataDir.path}/patches.json'),
+      File('${dataDir.path}/patch_contents.json'),
     ]) {
       if (file.existsSync()) {
         await file.delete();
@@ -200,6 +211,9 @@ class IoUtils {
   Future<String?> downloadOptimizedAsset(
     String url,
     String pathWithoutExt,
+    {
+    CompressionMode? compressionModeOverride,
+  }
   ) async {
     if (url.isEmpty) {
       return null;
@@ -262,7 +276,10 @@ class IoUtils {
             final result = await Process.run(cwebpPath, [
               '-lossless',
               '-z',
-              compressionMode == CompressionMode.maxCompress ? '9' : '6',
+              (compressionModeOverride ?? compressionMode) ==
+                      CompressionMode.maxCompress
+                  ? '9'
+                  : '6',
               '-mt',
               '-exact',
               inputFile.path,

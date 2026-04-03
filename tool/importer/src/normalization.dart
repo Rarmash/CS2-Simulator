@@ -291,11 +291,17 @@ bool isSupportedContainer(Map<String, dynamic> crate) {
   if (lowerName.contains('collection package')) {
     return true;
   }
-  if (lowerName.contains('patch') || lowerType.contains('patch')) {
-    return false;
-  }
   if (crateType == 'Pins' || lowerType.contains('pins')) {
     return true;
+  }
+  if (crateType == 'Graffiti' || lowerType.contains('graffiti')) {
+    return true;
+  }
+  if (crateType == 'Patch Capsule' || lowerType.contains('patch capsule')) {
+    return true;
+  }
+  if (lowerName.contains('patch') || lowerType.contains('patch')) {
+    return false;
   }
   if (crateType == 'Music Kit Box' || lowerType.contains('music kit box')) {
     return true;
@@ -340,6 +346,18 @@ String inferContainerType(String? crateName, String? crateType) {
   }
   if (type == 'Pins' || lowerType.contains('pins')) {
     return 'PIN_CAPSULE';
+  }
+  if (type == 'Graffiti' || lowerType.contains('graffiti')) {
+    return 'GRAFFITI_BOX';
+  }
+  if (lowerName.endsWith('patch collection')) {
+    return 'PATCH_COLLECTION';
+  }
+  if (lowerName.endsWith('patch pack')) {
+    return 'PATCH_PACK';
+  }
+  if (type == 'Patch Capsule' || lowerType.contains('patch capsule')) {
+    return 'PATCH_PACK';
   }
   if (type == 'Music Kit Box' || lowerType.contains('music kit box')) {
     return 'MUSIC_KIT_BOX';
@@ -423,6 +441,22 @@ String operationKey(String name, String operationId) =>
   musicKit['isStatTrak'] == true,
 );
 
+(String, String, String) existingAgentKey(Map<String, dynamic> agent) => (
+  canonicalName((agent['name'] ?? '').toString()),
+  canonicalName((agent['collection'] ?? '').toString()),
+  (agent['team'] ?? '').toString().trim().toUpperCase(),
+);
+
+(String, String) existingGraffitiKey(Map<String, dynamic> graffiti) => (
+  canonicalName((graffiti['name'] ?? '').toString()),
+  canonicalName((graffiti['collection'] ?? '').toString()),
+);
+
+(String, String) existingPatchKey(Map<String, dynamic> patch) => (
+  canonicalName((patch['name'] ?? '').toString()),
+  canonicalName((patch['collection'] ?? '').toString()),
+);
+
 (String?, String?) chooseCollectionNameAndImage(Map<String, dynamic> meta) {
   final collections = meta['collections'];
   if (collections is List &&
@@ -493,6 +527,20 @@ String? inferPinCollection(String? crateName) {
   return name.isEmpty ? null : name;
 }
 
+bool shouldCreateGenuinePin({
+  required String pinName,
+  required String? pinCollection,
+}) {
+  final collection = (pinCollection ?? '').trim();
+  if (collection == 'Series 1' ||
+      collection == 'Series 2' ||
+      collection == 'Series 3') {
+    return true;
+  }
+
+  return collection == 'Half-Life: Alyx' && pinName.trim() == 'Alyx Pin';
+}
+
 String? inferMusicKitCollection(String? crateName) {
   var name = (crateName ?? '').trim();
   if (name.isEmpty) {
@@ -505,6 +553,54 @@ String? inferMusicKitCollection(String? crateName) {
   name = name.replaceAll(RegExp(r'\s+Music Kit Box$'), '').trim();
   name = name.replaceAll(RegExp(r'\s+Box$'), '').trim();
   return name.isEmpty ? null : name;
+}
+
+String? inferGraffitiCollection(String? crateName) {
+  var name = (crateName ?? '').trim();
+  if (name.isEmpty) {
+    return null;
+  }
+  name = name.replaceAll(RegExp(r'\s+Graffiti Box$'), '').trim();
+  return name.isEmpty ? null : name;
+}
+
+String? inferPatchCollection(String? crateName) {
+  var name = (crateName ?? '').trim();
+  if (name.isEmpty) {
+    return null;
+  }
+  name = name.replaceAll(RegExp(r'\s+Patch Pack$'), '').trim();
+  name = name.replaceAll(RegExp(r'\s+Patch Collection$'), '').trim();
+  return name.isEmpty ? null : name;
+}
+
+String normalizeGraffitiName(String name) {
+  final normalized = name.trim();
+  final index = normalized.indexOf(' | ');
+  return index == -1 ? normalized : normalized.substring(index + 3).trim();
+}
+
+String normalizePatchName(String name) {
+  return name.replaceFirst(RegExp(r'^Patch\s+\|\s+'), '').trim();
+}
+
+Map<String, String?> resolveAgentCollectionSource(String? collectionName) {
+  final normalized = (collectionName ?? '').trim();
+  final source = agentCollectionSourceOverrides[normalized] ?? const {};
+
+  String? value(String key) {
+    final raw = source[key];
+    if (raw == null || raw.trim().isEmpty) {
+      return null;
+    }
+    return raw.trim();
+  }
+
+  return {
+    'operationId': value('operationId'),
+    'operationName': value('operationName'),
+    'releaseDate': value('releaseDate'),
+  };
 }
 
 (String, bool) normalizeMusicKitName(String? name) {
@@ -523,12 +619,44 @@ String? inferMusicKitCollection(String? crateName) {
     normalized = normalized.substring('Music Kit | '.length).trim();
   }
 
+  normalized = switch (normalized) {
+    'TWERL and Ekko & Sidetrack, Under Bright Lights' =>
+      'TWERL, Ekko & Sidetrack, Under Bright Lights',
+    _ => normalized,
+  };
+
   return (normalized, isStatTrak);
 }
 
 Map<String, String?> resolveStickerCollectionSource(String? collectionName) {
   final normalized = (collectionName ?? '').trim();
   final source = stickerCollectionSourceOverrides[normalized] ?? const {};
+
+  String? value(String key) {
+    final raw = source[key];
+    if (raw == null || raw.trim().isEmpty) {
+      return null;
+    }
+    return raw.trim();
+  }
+
+  final sourceType = value('sourceType');
+  final sourceId = value('sourceId');
+  final sourceName = value('sourceName');
+
+  return {
+    'sourceType': sourceType,
+    'sourceId': sourceId,
+    'sourceName': sourceName,
+    'operationId': sourceId,
+    'operationName': sourceName,
+    'releaseDate': value('releaseDate'),
+  };
+}
+
+Map<String, String?> resolvePatchCollectionSource(String? collectionName) {
+  final normalized = (collectionName ?? '').trim();
+  final source = patchCollectionSourceOverrides[normalized] ?? const {};
 
   String? value(String key) {
     final raw = source[key];

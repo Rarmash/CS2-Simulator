@@ -2,10 +2,13 @@ import 'package:flutter/material.dart';
 
 import '../../data/models/operation_collection_dto.dart';
 import '../../data/repositories/local_data_repository.dart';
-import '../helpers/responsive_grid_helper.dart';
+import '../helpers/app_navigation_helper.dart';
 import '../helpers/source_color_helper.dart';
+import '../widgets/async_collection_loader.dart';
 import '../widgets/chip_badge.dart';
+import '../widgets/collection_filter_bar.dart';
 import '../widgets/collection_list_card.dart';
+import '../widgets/responsive_collection_grid.dart';
 import 'operation_collection_open_screen.dart';
 
 class OperationCollectionListScreen extends StatefulWidget {
@@ -110,23 +113,15 @@ class _OperationCollectionListScreenState
       _selectedFilter = _filterAll;
     }
 
-    return Padding(
-      padding: const EdgeInsets.fromLTRB(12, 12, 12, 0),
-      child: Wrap(
-        spacing: 8,
-        runSpacing: 8,
-        children: filters.map((id) {
-          return ChoiceChip(
-            label: Text(_filterLabel(id, all)),
-            selected: _selectedFilter == id,
-            onSelected: (_) {
-              setState(() {
-                _selectedFilter = id;
-              });
-            },
-          );
-        }).toList(),
-      ),
+    return CollectionFilterBar<String>(
+      items: filters,
+      selectedItem: _selectedFilter,
+      labelBuilder: (id) => _filterLabel(id, all),
+      onSelected: (id) {
+        setState(() {
+          _selectedFilter = id;
+        });
+      },
     );
   }
 
@@ -145,13 +140,11 @@ class _OperationCollectionListScreenState
       ],
       metadata: const [],
       onTap: () {
-        Navigator.push(
+        AppNavigationHelper.pushScreen(
           context,
-          MaterialPageRoute(
-            builder: (_) => OperationCollectionOpenScreen(
-              collection: collection,
-              repository: widget.repository,
-            ),
+          OperationCollectionOpenScreen(
+            collection: collection,
+            repository: widget.repository,
           ),
         );
       },
@@ -164,52 +157,16 @@ class _OperationCollectionListScreenState
       appBar: AppBar(
         title: const Text('Operation Collections'),
       ),
-      body: FutureBuilder<List<OperationCollectionDto>>(
+      body: AsyncCollectionLoader<OperationCollectionDto>(
         future: _future,
-        builder: (context, snapshot) {
-          if (!snapshot.hasData) {
-            return const Center(child: CircularProgressIndicator());
-          }
-
-          final all = List<OperationCollectionDto>.from(snapshot.data!);
+        builder: (context, all) {
           final visible = _applyFilters(all);
 
-          return LayoutBuilder(
-            builder: (context, constraints) {
-              final crossAxisCount =
-              ResponsiveGridHelper.listCrossAxisCount(constraints.maxWidth);
-              final aspectRatio =
-              ResponsiveGridHelper.listChildAspectRatio(constraints.maxWidth);
-
-              return Column(
-                children: [
-                  _buildFilterBar(all),
-                  Expanded(
-                    child: visible.isEmpty
-                        ? const Center(
-                      child: Text(
-                        'No operation collections found.',
-                        style: TextStyle(color: Colors.white70),
-                      ),
-                    )
-                        : GridView.builder(
-                      padding: const EdgeInsets.all(12),
-                      itemCount: visible.length,
-                      gridDelegate:
-                      SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: crossAxisCount,
-                        crossAxisSpacing: 12,
-                        mainAxisSpacing: 12,
-                        childAspectRatio: aspectRatio,
-                      ),
-                      itemBuilder: (context, index) {
-                        return _buildCard(context, visible[index]);
-                      },
-                    ),
-                  ),
-                ],
-              );
-            },
+          return ResponsiveCollectionGrid<OperationCollectionDto>(
+            items: visible,
+            emptyMessage: 'No operation collections found.',
+            header: _buildFilterBar(all),
+            itemBuilder: _buildCard,
           );
         },
       ),

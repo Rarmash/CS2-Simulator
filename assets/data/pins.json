@@ -313,5 +313,243 @@
     "pinImage": "assets/pins/6134.webp",
     "rarity": "EXTRAORDINARY",
     "collection": "Half-Life: Alyx"
+  },
+  {
+    "id": "950000001",
+    "name": "Genuine Guardian Pin",
+    "pinImage": "assets/pins/6110.webp",
+    "rarity": "GENUINE",
+    "collection": "Series 1"
+  },
+  {
+    "id": "950000002",
+    "name": "Genuine Tactics Pin",
+    "pinImage": "assets/pins/6111.webp",
+    "rarity": "GENUINE",
+    "collection": "Series 1"
+  },
+  {
+    "id": "950000003",
+    "name": "Genuine Nuke Pin",
+    "pinImage": "assets/pins/6108.webp",
+    "rarity": "GENUINE",
+    "collection": "Series 1"
+  },
+  {
+    "id": "950000004",
+    "name": "Genuine Train Pin",
+    "pinImage": "assets/pins/6109.webp",
+    "rarity": "GENUINE",
+    "collection": "Series 1"
+  },
+  {
+    "id": "950000005",
+    "name": "Genuine Victory Pin",
+    "pinImage": "assets/pins/6106.webp",
+    "rarity": "GENUINE",
+    "collection": "Series 1"
+  },
+  {
+    "id": "950000006",
+    "name": "Genuine Militia Pin",
+    "pinImage": "assets/pins/6107.webp",
+    "rarity": "GENUINE",
+    "collection": "Series 1"
+  },
+  {
+    "id": "950000007",
+    "name": "Genuine Italy Pin",
+    "pinImage": "assets/pins/6105.webp",
+    "rarity": "GENUINE",
+    "collection": "Series 1"
+  },
+  {
+    "id": "950000008",
+    "name": "Genuine Mirage Pin",
+    "pinImage": "assets/pins/6103.webp",
+    "rarity": "GENUINE",
+    "collection": "Series 1"
+  },
+  {
+    "id": "950000009",
+    "name": "Genuine Inferno Pin",
+    "pinImage": "assets/pins/6104.webp",
+    "rarity": "GENUINE",
+    "collection": "Series 1"
+  },
+  {
+    "id": "950000010",
+    "name": "Genuine Dust II Pin",
+    "pinImage": "assets/pins/6101.webp",
+    "rarity": "GENUINE",
+    "collection": "Series 1"
+  },
+  {
+    "id": "950000011",
+    "name": "Genuine Guardian Elite Pin",
+    "pinImage": "assets/pins/6102.webp",
+    "rarity": "GENUINE",
+    "collection": "Series 1"
+  },
+  {
+    "id": "950000012",
+    "name": "Genuine Guardian 2 Pin",
+    "pinImage": "assets/pins/6112.webp",
+    "rarity": "GENUINE",
+    "collection": "Series 2"
+  },
+  {
+    "id": "950000013",
+    "name": "Genuine Bravo Pin",
+    "pinImage": "assets/pins/6113.webp",
+    "rarity": "GENUINE",
+    "collection": "Series 2"
+  },
+  {
+    "id": "950000014",
+    "name": "Genuine Baggage Pin",
+    "pinImage": "assets/pins/6114.webp",
+    "rarity": "GENUINE",
+    "collection": "Series 2"
+  },
+  {
+    "id": "950000015",
+    "name": "Genuine Phoenix Pin",
+    "pinImage": "assets/pins/6115.webp",
+    "rarity": "GENUINE",
+    "collection": "Series 2"
+  },
+  {
+    "id": "950000016",
+    "name": "Genuine Office Pin",
+    "pinImage": "assets/pins/6116.webp",
+    "rarity": "GENUINE",
+    "collection": "Series 2"
+  },
+  {
+    "id": "950000017",
+    "name": "Genuine Cobblestone Pin",
+    "pinImage": "assets/pins/6117.webp",
+    "rarity": "GENUINE",
+    "collection": "Series 2"
+  },
+  {
+    "id": "950000018",
+    "name": "Genuine Overpass Pin",
+    "pinImage": "assets/pins/6118.webp",
+    "rarity": "GENUINE",
+    "collection": "Series 2"
+  },
+  {
+    "id": "950000019",
+    "name": "Genuine Bloodhound Pin",
+    "pinImage": "assets/pins/6119.webp",
+    "rarity": "GENUINE",
+    "collection": "Series 2"
+  },
+  {
+    "id": "950000020",
+    "name": "Genuine Cache Pin",
+    "pinImage": "assets/pins/6120.webp",
+    "rarity": "GENUINE",
+    "collection": "Series 2"
+  },
+  {
+    "id": "950000021",
+    "name": "Genuine Chroma Pin",
+    "pinImage": "assets/pins/6122.webp",
+    "rarity": "GENUINE",
+    "collection": "Series 2"
+  },
+  {
+    "id": "950000022",
+    "name": "Genuine Valeria Phoenix Pin",
+    "pinImage": "assets/pins/6121.webp",
+    "rarity": "GENUINE",
+    "collection": "Series 2"
+  },
+  {
+    "id": "950000023",
+    "name": "Genuine Guardian 3 Pin",
+    "pinImage": "assets/pins/6123.webp",
+    "rarity": "GENUINE",
+    "collection": "Series 3"
+  },
+  {
+    "id": "950000024",
+    "name": "Genuine Canals Pin",
+    "pinImage": "assets/pins/6124.webp",
+    "rarity": "GENUINE",
+    "collection": "Series 3"
+  },
+  {
+    "id": "950000025",
+    "name": "Genuine Welcome to the Clutch Pin",
+    "pinImage": "assets/pins/6125.webp",
+    "rarity": "GENUINE",
+    "collection": "Series 3"
+  },
+  {
+    "id": "950000026",
+    "name": "Genuine Death Sentence Pin",
+    "pinImage": "assets/pins/6126.webp",
+    "rarity": "GENUINE",
+    "collection": "Series 3"
+  },
+  {
+    "id": "950000027",
+    "name": "Genuine Inferno 2 Pin",
+    "pinImage": "assets/pins/6127.webp",
+    "rarity": "GENUINE",
+    "collection": "Series 3"
+  },
+  {
+    "id": "950000028",
+    "name": "Genuine Wildfire Pin",
+    "pinImage": "assets/pins/6128.webp",
+    "rarity": "GENUINE",
+    "collection": "Series 3"
+  },
+  {
+    "id": "950000029",
+    "name": "Genuine Easy Peasy Pin",
+    "pinImage": "assets/pins/6129.webp",
+    "rarity": "GENUINE",
+    "collection": "Series 3"
+  },
+  {
+    "id": "950000030",
+    "name": "Genuine Aces High Pin",
+    "pinImage": "assets/pins/6130.webp",
+    "rarity": "GENUINE",
+    "collection": "Series 3"
+  },
+  {
+    "id": "950000031",
+    "name": "Genuine Hydra Pin",
+    "pinImage": "assets/pins/6131.webp",
+    "rarity": "GENUINE",
+    "collection": "Series 3"
+  },
+  {
+    "id": "950000032",
+    "name": "Genuine Howl Pin",
+    "pinImage": "assets/pins/6132.webp",
+    "rarity": "GENUINE",
+    "collection": "Series 3"
+  },
+  {
+    "id": "950000033",
+    "name": "Genuine Brigadier General Pin",
+    "pinImage": "assets/pins/6133.webp",
+    "rarity": "GENUINE",
+    "collection": "Series 3"
+  },
+  {
+    "id": "950000034",
+    "name": "Genuine Alyx Pin",
+    "pinImage": "assets/pins/6134.webp",
+    "rarity": "GENUINE",
+    "collection": "Half-Life: Alyx"
   }
 ]

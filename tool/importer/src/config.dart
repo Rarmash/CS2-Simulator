@@ -7,6 +7,9 @@ const skinsUrl = '$baseUrl/skins.json';
 const collectionsUrl = '$baseUrl/collections.json';
 const stickersUrl = '$baseUrl/stickers.json';
 const musicKitsUrl = '$baseUrl/music_kits.json';
+const agentsUrl = '$baseUrl/agents.json';
+const graffitiUrl = '$baseUrl/graffiti.json';
+const patchesUrl = '$baseUrl/patches.json';
 
 const timeoutSeconds = 30;
 
@@ -18,10 +21,14 @@ final skinsDir = Directory('${assetsDir.path}/skins');
 final stickersDir = Directory('${assetsDir.path}/stickers');
 final pinsDir = Directory('${assetsDir.path}/pins');
 final musicKitsDir = Directory('${assetsDir.path}/music_kits');
+final agentsDir = Directory('${assetsDir.path}/agents');
+final graffitiDir = Directory('${assetsDir.path}/graffiti');
+final patchesDir = Directory('${assetsDir.path}/patches');
 final rewardCollectionsDir = Directory('${assetsDir.path}/reward_collections');
 final operationCollectionsDir = Directory(
   '${assetsDir.path}/operation_collections',
 );
+final agentCollectionsDir = Directory('${assetsDir.path}/agent_collections');
 final tournamentLogosDir = Directory('${assetsDir.path}/tournament_logos');
 
 final rewardOverridesPath = File(
@@ -62,6 +69,59 @@ const pinRarityMap = <String, String>{
 const musicKitRarityMap = <String, String>{
   'High Grade': 'HIGH_GRADE',
   'Default': 'DEFAULT',
+};
+
+const agentRarityMap = <String, String>{
+  'Distinguished': 'DISTINGUISHED',
+  'Exceptional': 'EXCEPTIONAL',
+  'Superior': 'SUPERIOR',
+  'Master': 'MASTER',
+};
+
+const graffitiRarityMap = <String, String>{
+  'Base Grade': 'BASE_GRADE',
+  'High Grade': 'HIGH_GRADE',
+  'Remarkable': 'REMARKABLE',
+  'Exotic': 'EXOTIC',
+};
+
+const patchRarityMap = <String, String>{
+  'High Grade': 'HIGH_GRADE',
+  'Remarkable': 'REMARKABLE',
+  'Exotic': 'EXOTIC',
+};
+
+const agentCollectionSourceOverrides = <String, Map<String, String>>{
+  'Shattered Web Agents': {
+    'operationId': 'SHATTERED_WEB',
+    'operationName': 'Operation Shattered Web',
+    'releaseDate': '2019-11-18',
+  },
+  'Broken Fang Agents': {
+    'operationId': 'BROKEN_FANG',
+    'operationName': 'Operation Broken Fang',
+    'releaseDate': '2020-12-03',
+  },
+  'Operation Riptide Agents': {
+    'operationId': 'RIPTIDE',
+    'operationName': 'Operation Riptide',
+    'releaseDate': '2021-09-21',
+  },
+};
+
+const patchCollectionSourceOverrides = <String, Map<String, String>>{
+  'Operation Riptide Patch Collection': {
+    'sourceType': 'OPERATION_REWARD',
+    'sourceId': 'RIPTIDE',
+    'sourceName': 'Operation Riptide',
+    'releaseDate': '2021-09-21',
+  },
+  'Metal Skill Group Patch Collection': {
+    'sourceType': 'GENERAL',
+    'sourceId': 'METAL_SKILL_GROUP',
+    'sourceName': 'Metal Skill Group',
+    'releaseDate': '2020-02-24',
+  },
 };
 
 const stickerCollectionSourceOverrides = <String, Map<String, String>>{
@@ -653,6 +713,16 @@ const containerReleaseDateOverrides = <String, String>{
   'Collectible Pins Capsule Series 3': '2018-03-01',
   'Half-Life: Alyx Collectible Pins Capsule': '2020-03-23',
   'StatTrak™ Radicals Box': '2016-08-16',
+  'Community Graffiti Box 1': '2016-10-06',
+  'CS:GO Graffiti Box': '2016-10-06',
+  'Perfect World Graffiti Box': '2017-09-14',
+  'CS:GO Patch Pack': '2020-02-24',
+  'Metal Skill Group Patch Collection': '2020-02-24',
+  'Half-Life: Alyx Patch Pack': '2020-03-23',
+  'Operation Riptide Patch Collection': '2021-09-21',
+  'Stockholm 2021 Legends Patch Pack': '2021-10-26',
+  'Stockholm 2021 Challengers Patch Pack': '2021-10-26',
+  'Stockholm 2021 Contenders Patch Pack': '2021-10-26',
   'Masterminds Music Kit Box': '2020-04-22',
   'StatTrak™ Masterminds Music Kit Box': '2020-04-22',
   'Tacticians Music Kit Box': '2021-07-20',

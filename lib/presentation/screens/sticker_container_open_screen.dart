@@ -1,22 +1,23 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
-
 import '../../core/utils/date_format_helper.dart';
 import '../../data/models/case_dto.dart';
 import '../../data/models/sticker_dto.dart';
 import '../../data/repositories/local_data_repository.dart';
 import '../../domain/dropped_sticker.dart';
 import '../../domain/sticker_simulator_service.dart';
+import '../helpers/collectible_open_flow_helper.dart';
 import '../helpers/opening_roll_sequence_builder.dart';
-import '../helpers/responsive_grid_helper.dart';
 import '../helpers/source_color_helper.dart';
 import '../helpers/sticker_ui_helper.dart';
-import '../widgets/asset_collection_image.dart';
 import '../widgets/chip_badge.dart';
+import '../widgets/collectible_open_body.dart';
+import '../widgets/collectible_contents_title.dart';
+import '../widgets/collectible_grid_sliver.dart';
+import '../widgets/collectible_open_header.dart';
+import '../widgets/collectible_roller_sliver.dart';
 import '../widgets/opening_roll_item_card.dart';
-import '../widgets/opening_roller.dart';
 import '../widgets/opening_loading_card.dart';
 import '../widgets/sticker_drop_card.dart';
 import '../widgets/sticker_grid_tile.dart';
@@ -60,79 +61,52 @@ class _StickerContainerOpenScreenState
     super.dispose();
   }
 
-  Future<void> _waitForRollLayout() async {
-    for (int i = 0; i < 6; i++) {
-      await SchedulerBinding.instance.endOfFrame;
-      if (_rollController.hasClients &&
-          _rollController.position.hasContentDimensions &&
-          _rollController.position.maxScrollExtent > 0) {
-        return;
-      }
-    }
-  }
-
   Future<void> _openContainer(List<StickerDto> stickers) async {
-    if (_isOpening || stickers.isEmpty) return;
-
     final drop = _simulator.openContainer(stickers: stickers);
 
     if (widget.caseDto.isStickerCapsule) {
       final rollData = _buildRollSequence(stickers, drop);
-
-      setState(() {
-        _isOpening = true;
-        _dropped = null;
-        _rollSequence = rollData.items;
-        _winningIndex = rollData.winnerIndex;
-      });
-
-      await _waitForRollLayout();
-      if (!_rollController.hasClients) return;
-
-      _rollController.jumpTo(0);
-
-      await _waitForRollLayout();
-      if (!_rollController.hasClients) return;
-
-      final viewportWidth = _rollController.position.viewportDimension;
-      final itemWidth = _rollItemWidth(viewportWidth);
-
-      final targetOffset = _computeTargetOffset(
-        winningIndex: _winningIndex,
-        viewportWidth: viewportWidth,
-        itemWidth: itemWidth,
+      await CollectibleOpenFlowHelper.runRoulette<StickerDto, DroppedSticker>(
+        setState: setState,
+        isMounted: () => mounted,
+        isOpening: _isOpening,
+        hasItems: stickers.isNotEmpty,
+        controller: _rollController,
+        rollData: rollData,
+        drop: drop,
+        onStart: (rollData) {
+          _isOpening = true;
+          _dropped = null;
+          _rollSequence = rollData.items;
+          _winningIndex = rollData.winnerIndex;
+        },
+        onComplete: (drop) {
+          _dropped = drop;
+          _isOpening = false;
+        },
       );
-
-      await _rollController.animateTo(
-        targetOffset,
-        duration: const Duration(milliseconds: 6800),
-        curve: Curves.easeOutQuart,
-      );
-
-      await Future.delayed(const Duration(milliseconds: 200));
-      if (!mounted) return;
-
-      setState(() {
-        _dropped = drop;
-        _isOpening = false;
-      });
       return;
     }
 
-    setState(() {
-      _isOpening = true;
-      _dropped = null;
-      _rollSequence = const [];
-    });
-
-    await Future.delayed(Duration(milliseconds: 1100 + _random.nextInt(700)));
-
-    if (!mounted) return;
-
-    setState(() {
-      _dropped = drop;
-      _isOpening = false;
-    });
+    await CollectibleOpenFlowHelper.runReveal<DroppedSticker>(
+      setState: setState,
+      isMounted: () => mounted,
+      isOpening: _isOpening,
+      hasItems: stickers.isNotEmpty,
+      random: _random,
+      baseDelayMs: 1100,
+      randomDelayMs: 700,
+      onStart: () {
+        _isOpening = true;
+        _dropped = null;
+        _rollSequence = const [];
+      },
+      resolveDrop: () => drop,
+      onComplete: (drop) {
+        _dropped = drop;
+        _isOpening = false;
+      },
+    );
   }
 
   String _openButtonLabel() {
@@ -150,23 +124,6 @@ class _StickerContainerOpenScreenState
       return 'Opening sticker collection...';
     }
     return 'Opening sticker capsule...';
-  }
-
-  double _rollItemWidth(double viewportWidth) {
-    return OpeningRollLayout.rollItemWidth(viewportWidth);
-  }
-
-  double _computeTargetOffset({
-    required int winningIndex,
-    required double viewportWidth,
-    required double itemWidth,
-  }) {
-    return OpeningRollLayout.computeTargetOffset(
-      winningIndex: winningIndex,
-      viewportWidth: viewportWidth,
-      itemWidth: itemWidth,
-      maxScrollExtent: _rollController.position.maxScrollExtent,
-    );
   }
 
   OpeningRollSequenceData<StickerDto> _buildRollSequence(
@@ -233,19 +190,6 @@ class _StickerContainerOpenScreenState
     );
   }
 
-  Widget _buildRoller() {
-    if (_rollSequence.isEmpty) return const SizedBox.shrink();
-
-    return OpeningRoller<StickerDto>(
-      controller: _rollController,
-      items: _rollSequence,
-      winningIndex: _winningIndex,
-      isRolling: _isOpening,
-      itemBuilder: (sticker, isWinner, itemWidth) =>
-          _buildRollItem(sticker, isWinner: isWinner, itemWidth: itemWidth),
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     final formattedReleaseDate = DateFormatHelper.formatReleaseDate(
@@ -260,146 +204,68 @@ class _StickerContainerOpenScreenState
 
     return Scaffold(
       appBar: AppBar(title: Text(widget.caseDto.name)),
-      body: FutureBuilder<List<StickerDto>>(
+      body: CollectibleOpenBody<StickerDto>(
         future: _stickersFuture,
-        builder: (context, snapshot) {
-          if (!snapshot.hasData) {
-            return const Center(child: CircularProgressIndicator());
-          }
-
-          final stickers = snapshot.data!;
-
-          return LayoutBuilder(
-            builder: (context, constraints) {
-              final gridCount = ResponsiveGridHelper.skinGridCrossAxisCount(
-                constraints.maxWidth,
-              );
-              final aspectRatio = ResponsiveGridHelper.skinGridChildAspectRatio(
-                constraints.maxWidth,
-              );
-
-              return CustomScrollView(
-                slivers: [
-                  SliverToBoxAdapter(
-                    child: Padding(
-                      padding: const EdgeInsets.all(12),
-                      child: Column(
-                        children: [
-                          AssetCollectionImage(
-                            assetPath: widget.caseDto.caseImage,
-                            height: constraints.maxWidth < 700 ? 90 : 120,
-                          ),
-                          const SizedBox(height: 10),
-                          ChipBadge(
-                            label: widget.caseDto.typeLabel,
-                            color: color,
-                          ),
-                          if (widget.caseDto.isStickerCollection &&
-                              sourceTypeLabel != null) ...[
-                            const SizedBox(height: 8),
-                            Wrap(
-                              spacing: 8,
-                              runSpacing: 8,
-                              alignment: WrapAlignment.center,
-                              children: [
-                                ChipBadge(
-                                  label: sourceTypeLabel,
-                                  color: sourceColor,
-                                ),
-                                if ((widget.caseDto.sourceName ?? '')
-                                    .isNotEmpty)
-                                  ChipBadge(
-                                    label: widget.caseDto.sourceName!,
-                                    color: sourceColor,
-                                  ),
-                              ],
-                            ),
-                          ],
-                          if (formattedReleaseDate != null) ...[
-                            const SizedBox(height: 8),
-                            Text(
-                              'Released: $formattedReleaseDate',
-                              style: const TextStyle(
-                                color: Colors.white70,
-                                fontSize: 13,
-                              ),
-                            ),
-                          ],
-                          const SizedBox(height: 8),
-                          const Text(
-                            'Sticker containers roll only sticker rarities. No float, StatTrak, souvenir, knives, or gloves.',
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                              color: Colors.white70,
-                              fontSize: 13,
-                            ),
-                          ),
-                          const SizedBox(height: 12),
-                          SizedBox(
-                            width: double.infinity,
-                            child: ElevatedButton(
-                              onPressed: (_isOpening || stickers.isEmpty)
-                                  ? null
-                                  : () => _openContainer(stickers),
-                              child: Text(_openButtonLabel()),
-                            ),
-                          ),
-                        ],
-                      ),
+        sliverBuilder: (context, constraints, stickers, gridCount, aspectRatio) {
+          return [
+            SliverToBoxAdapter(
+              child: CollectibleOpenHeader(
+                assetPath: widget.caseDto.caseImage,
+                imageHeight: constraints.maxWidth < 700 ? 90 : 120,
+                badges: [
+                  ChipBadge(label: widget.caseDto.typeLabel, color: color),
+                  if (widget.caseDto.isStickerCollection &&
+                      sourceTypeLabel != null)
+                    ChipBadge(label: sourceTypeLabel, color: sourceColor),
+                  if (widget.caseDto.isStickerCollection &&
+                      (widget.caseDto.sourceName ?? '').isNotEmpty)
+                    ChipBadge(
+                      label: widget.caseDto.sourceName!,
+                      color: sourceColor,
                     ),
-                  ),
-                  if (widget.caseDto.isStickerCapsule &&
-                      _rollSequence.isNotEmpty)
-                    SliverToBoxAdapter(child: _buildRoller()),
-                  if (_isOpening && !widget.caseDto.isStickerCapsule)
-                    SliverToBoxAdapter(
-                      child: OpeningLoadingCard(title: _loadingTitle()),
-                    ),
-                  if (_dropped != null)
-                    SliverToBoxAdapter(child: StickerDropCard(drop: _dropped!)),
-                  const SliverToBoxAdapter(
-                    child: Padding(
-                      padding: EdgeInsets.symmetric(
-                        horizontal: 12,
-                        vertical: 8,
-                      ),
-                      child: Align(
-                        alignment: Alignment.centerLeft,
-                        child: Text(
-                          'Sticker contents',
-                          style: TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                  SliverPadding(
-                    padding: const EdgeInsets.all(12),
-                    sliver: SliverGrid(
-                      delegate: SliverChildBuilderDelegate((_, index) {
-                        final sticker = stickers[index];
-                        final isDropped = _dropped?.sticker.id == sticker.id;
-
-                        return StickerGridTile(
-                          sticker: sticker,
-                          highlighted: isDropped,
-                          crossAxisCount: gridCount,
-                        );
-                      }, childCount: stickers.length),
-                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: gridCount,
-                        crossAxisSpacing: 10,
-                        mainAxisSpacing: 10,
-                        childAspectRatio: aspectRatio,
-                      ),
-                    ),
-                  ),
                 ],
-              );
-            },
-          );
+                releaseDateText: formattedReleaseDate,
+                description:
+                    'Sticker containers roll only sticker rarities. No float, StatTrak, souvenir, knives, or gloves.',
+                buttonLabel: _openButtonLabel(),
+                onPressed: (_isOpening || stickers.isEmpty)
+                    ? null
+                    : () => _openContainer(stickers),
+              ),
+            ),
+            if (widget.caseDto.isStickerCapsule)
+              CollectibleRollerSliver<StickerDto>(
+                controller: _rollController,
+                items: _rollSequence,
+                winningIndex: _winningIndex,
+                isRolling: _isOpening,
+                itemBuilder: (sticker, isWinner, itemWidth) => _buildRollItem(
+                  sticker,
+                  isWinner: isWinner,
+                  itemWidth: itemWidth,
+                ),
+              ),
+            if (_isOpening && !widget.caseDto.isStickerCapsule)
+              SliverToBoxAdapter(child: OpeningLoadingCard(title: _loadingTitle())),
+            if (_dropped != null)
+              SliverToBoxAdapter(child: StickerDropCard(drop: _dropped!)),
+            const SliverToBoxAdapter(
+              child: CollectibleContentsTitle(title: 'Sticker contents'),
+            ),
+            CollectibleGridSliver<StickerDto>(
+              items: stickers,
+              crossAxisCount: gridCount,
+              childAspectRatio: aspectRatio,
+              itemBuilder: (sticker) {
+                final isDropped = _dropped?.sticker.id == sticker.id;
+                return StickerGridTile(
+                  sticker: sticker,
+                  highlighted: isDropped,
+                  crossAxisCount: gridCount,
+                );
+              },
+            ),
+          ];
         },
       ),
     );

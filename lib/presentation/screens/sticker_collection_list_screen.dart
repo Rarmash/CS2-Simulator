@@ -2,11 +2,13 @@ import 'package:flutter/material.dart';
 
 import '../../data/models/case_dto.dart';
 import '../../data/repositories/local_data_repository.dart';
-import '../helpers/responsive_grid_helper.dart';
+import '../helpers/app_navigation_helper.dart';
 import '../helpers/source_color_helper.dart';
+import '../widgets/async_collection_loader.dart';
 import '../widgets/chip_badge.dart';
+import '../widgets/collection_filter_bar.dart';
 import '../widgets/collection_list_card.dart';
-import 'sticker_container_open_screen.dart';
+import '../widgets/responsive_collection_grid.dart';
 
 class StickerCollectionListScreen extends StatefulWidget {
   final LocalDataRepository repository;
@@ -77,23 +79,15 @@ class _StickerCollectionListScreenState
   Widget _buildFilterBar() {
     const filters = [_filterAll, _filterOperations, _filterArmory];
 
-    return Padding(
-      padding: const EdgeInsets.fromLTRB(12, 12, 12, 0),
-      child: Wrap(
-        spacing: 8,
-        runSpacing: 8,
-        children: filters.map((type) {
-          return ChoiceChip(
-            label: Text(_filterLabel(type)),
-            selected: _selectedFilter == type,
-            onSelected: (_) {
-              setState(() {
-                _selectedFilter = type;
-              });
-            },
-          );
-        }).toList(),
-      ),
+    return CollectionFilterBar<String>(
+      items: filters,
+      selectedItem: _selectedFilter,
+      labelBuilder: _filterLabel,
+      onSelected: (type) {
+        setState(() {
+          _selectedFilter = type;
+        });
+      },
     );
   }
 
@@ -125,13 +119,11 @@ class _StickerCollectionListScreenState
         ],
       ],
       onTap: () {
-        Navigator.push(
+        AppNavigationHelper.pushScreen(
           context,
-          MaterialPageRoute(
-            builder: (_) => StickerContainerOpenScreen(
-              caseDto: collection,
-              repository: widget.repository,
-            ),
+          AppNavigationHelper.buildContainerOpenScreen(
+            caseDto: collection,
+            repository: widget.repository,
           ),
         );
       },
@@ -142,54 +134,16 @@ class _StickerCollectionListScreenState
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text('Sticker Collections')),
-      body: FutureBuilder<List<CaseDto>>(
+      body: AsyncCollectionLoader<CaseDto>(
         future: _future,
-        builder: (context, snapshot) {
-          if (!snapshot.hasData) {
-            return const Center(child: CircularProgressIndicator());
-          }
-
-          final all = List<CaseDto>.from(snapshot.data!);
+        builder: (context, all) {
           final visible = _applyFilters(all);
 
-          return LayoutBuilder(
-            builder: (context, constraints) {
-              final crossAxisCount = ResponsiveGridHelper.listCrossAxisCount(
-                constraints.maxWidth,
-              );
-              final aspectRatio = ResponsiveGridHelper.listChildAspectRatio(
-                constraints.maxWidth,
-              );
-
-              return Column(
-                children: [
-                  _buildFilterBar(),
-                  Expanded(
-                    child: visible.isEmpty
-                        ? const Center(
-                            child: Text(
-                              'No sticker collections found.',
-                              style: TextStyle(color: Colors.white70),
-                            ),
-                          )
-                        : GridView.builder(
-                            padding: const EdgeInsets.all(12),
-                            itemCount: visible.length,
-                            gridDelegate:
-                                SliverGridDelegateWithFixedCrossAxisCount(
-                                  crossAxisCount: crossAxisCount,
-                                  crossAxisSpacing: 12,
-                                  mainAxisSpacing: 12,
-                                  childAspectRatio: aspectRatio,
-                                ),
-                            itemBuilder: (context, index) {
-                              return _buildCard(context, visible[index]);
-                            },
-                          ),
-                  ),
-                ],
-              );
-            },
+          return ResponsiveCollectionGrid<CaseDto>(
+            items: visible,
+            emptyMessage: 'No sticker collections found.',
+            header: _buildFilterBar(),
+            itemBuilder: _buildCard,
           );
         },
       ),

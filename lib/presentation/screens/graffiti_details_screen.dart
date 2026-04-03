@@ -1,0 +1,104 @@
+import 'package:flutter/material.dart';
+
+import '../../core/utils/date_format_helper.dart';
+import '../../data/models/case_dto.dart';
+import '../../data/models/graffiti_dto.dart';
+import '../../data/repositories/local_data_repository.dart';
+import '../helpers/app_navigation_helper.dart';
+import '../helpers/graffiti_ui_helper.dart';
+import '../widgets/collectible_details_card.dart';
+import '../widgets/detail_info_row.dart';
+import '../widgets/detail_source_section.dart';
+import '../widgets/detail_source_tile.dart';
+import '../widgets/detail_tag.dart';
+
+class GraffitiDetailsScreen extends StatelessWidget {
+  final LocalDataRepository repository;
+  final GraffitiDto graffiti;
+
+  const GraffitiDetailsScreen({
+    super.key,
+    required this.repository,
+    required this.graffiti,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final rarityColor = GraffitiUiHelper.rarityColor(graffiti);
+
+    return Scaffold(
+      appBar: AppBar(title: Text(graffiti.name)),
+      body: FutureBuilder<List<CaseDto>>(
+        future: repository.loadCasesForGraffiti(graffiti.id),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState != ConnectionState.done) {
+            return const Center(child: CircularProgressIndicator());
+          }
+
+          if (snapshot.hasError) {
+            return Center(
+              child: Padding(
+                padding: const EdgeInsets.all(24),
+                child: Text(
+                  'Failed to load graffiti details.\n${snapshot.error}',
+                  textAlign: TextAlign.center,
+                ),
+              ),
+            );
+          }
+
+          final cases = snapshot.data ?? const <CaseDto>[];
+
+          return ListView(
+            padding: const EdgeInsets.all(12),
+            children: [
+              CollectibleDetailsCard(
+                imagePath: graffiti.graffitiImage,
+                title: graffiti.name,
+                subtitle: GraffitiUiHelper.secondaryText(graffiti),
+                tags: [
+                  DetailTag(
+                    text: GraffitiUiHelper.rarityLabel(graffiti),
+                    color: rarityColor,
+                  ),
+                  if ((graffiti.collection ?? '').isNotEmpty)
+                    DetailTag(text: graffiti.collection!),
+                ],
+                infoRows: [
+                  DetailInfoRow(
+                    title: 'Rarity',
+                    value: GraffitiUiHelper.rarityLabel(graffiti),
+                  ),
+                  if ((graffiti.collection ?? '').isNotEmpty)
+                    DetailInfoRow(title: 'Collection', value: graffiti.collection!),
+                ],
+              ),
+              const SizedBox(height: 12),
+              DetailSourceSection<CaseDto>(
+                title: 'Boxes',
+                items: cases,
+                emptyText: 'No graffiti box sources found.',
+                itemBuilder: (item) => DetailSourceTile(
+                  imagePath: item.caseImage,
+                  title: item.name,
+                  subtitle: item.typeLabel,
+                  trailing:
+                      DateFormatHelper.formatReleaseDate(item.releaseDate) ?? '-',
+                  onTap: () {
+                    AppNavigationHelper.pushScreen(
+                      context,
+                      AppNavigationHelper.buildContainerOpenScreen(
+                        caseDto: item,
+                        repository: repository,
+                      ),
+                    );
+                  },
+                ),
+              ),
+            ],
+          );
+        },
+      ),
+    );
+  }
+}

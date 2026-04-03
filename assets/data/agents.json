@@ -1,0 +1,506 @@
+[
+  {
+    "id": "4613",
+    "name": "Bloody Darryl The Strapped | The Professionals",
+    "agentImage": "assets/agents/4613.webp",
+    "rarity": "SUPERIOR",
+    "collection": "Operation Riptide Agents",
+    "team": "TERRORIST"
+  },
+  {
+    "id": "4619",
+    "name": "'Blueberries' Buckshot | NSWC SEAL",
+    "agentImage": "assets/agents/4619.webp",
+    "rarity": "EXCEPTIONAL",
+    "collection": "Broken Fang Agents",
+    "team": "COUNTER-TERRORIST"
+  },
+  {
+    "id": "4680",
+    "name": "'Two Times' McCoy | TACP Cavalry",
+    "agentImage": "assets/agents/4680.webp",
+    "rarity": "SUPERIOR",
+    "collection": "Broken Fang Agents",
+    "team": "COUNTER-TERRORIST"
+  },
+  {
+    "id": "4711",
+    "name": "Cmdr. Mae 'Dead Cold' Jamison | SWAT",
+    "agentImage": "assets/agents/4711.webp",
+    "rarity": "MASTER",
+    "collection": "Broken Fang Agents",
+    "team": "COUNTER-TERRORIST"
+  },
+  {
+    "id": "4712",
+    "name": "1st Lieutenant Farlow | SWAT",
+    "agentImage": "assets/agents/4712.webp",
+    "rarity": "SUPERIOR",
+    "collection": "Broken Fang Agents",
+    "team": "COUNTER-TERRORIST"
+  },
+  {
+    "id": "4713",
+    "name": "John 'Van Healen' Kask | SWAT",
+    "agentImage": "assets/agents/4713.webp",
+    "rarity": "EXCEPTIONAL",
+    "collection": "Broken Fang Agents",
+    "team": "COUNTER-TERRORIST"
+  },
+  {
+    "id": "4714",
+    "name": "Bio-Haz Specialist | SWAT",
+    "agentImage": "assets/agents/4714.webp",
+    "rarity": "DISTINGUISHED",
+    "collection": "Broken Fang Agents",
+    "team": "COUNTER-TERRORIST"
+  },
+  {
+    "id": "4715",
+    "name": "Sergeant Bombson | SWAT",
+    "agentImage": "assets/agents/4715.webp",
+    "rarity": "EXCEPTIONAL",
+    "collection": "Broken Fang Agents",
+    "team": "COUNTER-TERRORIST"
+  },
+  {
+    "id": "4716",
+    "name": "Chem-Haz Specialist | SWAT",
+    "agentImage": "assets/agents/4716.webp",
+    "rarity": "DISTINGUISHED",
+    "collection": "Broken Fang Agents",
+    "team": "COUNTER-TERRORIST"
+  },
+  {
+    "id": "4718",
+    "name": "Rezan the Redshirt | Sabre",
+    "agentImage": "assets/agents/4718.webp",
+    "rarity": "SUPERIOR",
+    "collection": "Broken Fang Agents",
+    "team": "TERRORIST"
+  },
+  {
+    "id": "4726",
+    "name": "Sir Bloody Miami Darryl | The Professionals",
+    "agentImage": "assets/agents/4726.webp",
+    "rarity": "MASTER",
+    "collection": "Broken Fang Agents",
+    "team": "TERRORIST"
+  },
+  {
+    "id": "4727",
+    "name": "Safecracker Voltzmann | The Professionals",
+    "agentImage": "assets/agents/4727.webp",
+    "rarity": "SUPERIOR",
+    "collection": "Broken Fang Agents",
+    "team": "TERRORIST"
+  },
+  {
+    "id": "4728",
+    "name": "Little Kev | The Professionals",
+    "agentImage": "assets/agents/4728.webp",
+    "rarity": "EXCEPTIONAL",
+    "collection": "Broken Fang Agents",
+    "team": "TERRORIST"
+  },
+  {
+    "id": "4730",
+    "name": "Getaway Sally | The Professionals",
+    "agentImage": "assets/agents/4730.webp",
+    "rarity": "EXCEPTIONAL",
+    "collection": "Broken Fang Agents",
+    "team": "TERRORIST"
+  },
+  {
+    "id": "4732",
+    "name": "Number K | The Professionals",
+    "agentImage": "assets/agents/4732.webp",
+    "rarity": "SUPERIOR",
+    "collection": "Broken Fang Agents",
+    "team": "TERRORIST"
+  },
+  {
+    "id": "4733",
+    "name": "Sir Bloody Silent Darryl | The Professionals",
+    "agentImage": "assets/agents/4733.webp",
+    "rarity": "MASTER",
+    "collection": "Broken Fang Agents",
+    "team": "TERRORIST"
+  },
+  {
+    "id": "4734",
+    "name": "Sir Bloody Skullhead Darryl | The Professionals",
+    "agentImage": "assets/agents/4734.webp",
+    "rarity": "MASTER",
+    "collection": "Broken Fang Agents",
+    "team": "TERRORIST"
+  },
+  {
+    "id": "4735",
+    "name": "Sir Bloody Darryl Royale | The Professionals",
+    "agentImage": "assets/agents/4735.webp",
+    "rarity": "MASTER",
+    "collection": "Broken Fang Agents",
+    "team": "TERRORIST"
+  },
+  {
+    "id": "4736",
+    "name": "Sir Bloody Loudmouth Darryl | The Professionals",
+    "agentImage": "assets/agents/4736.webp",
+    "rarity": "MASTER",
+    "collection": "Broken Fang Agents",
+    "team": "TERRORIST"
+  },
+  {
+    "id": "4749",
+    "name": "Sous-Lieutenant Medic | Gendarmerie Nationale",
+    "agentImage": "assets/agents/4749.webp",
+    "rarity": "EXCEPTIONAL",
+    "collection": "Operation Riptide Agents",
+    "team": "COUNTER-TERRORIST"
+  },
+  {
+    "id": "4750",
+    "name": "Chem-Haz Capitaine | Gendarmerie Nationale",
+    "agentImage": "assets/agents/4750.webp",
+    "rarity": "SUPERIOR",
+    "collection": "Operation Riptide Agents",
+    "team": "COUNTER-TERRORIST"
+  },
+  {
+    "id": "4751",
+    "name": "Chef d'Escadron Rouchard | Gendarmerie Nationale",
+    "agentImage": "assets/agents/4751.webp",
+    "rarity": "MASTER",
+    "collection": "Operation Riptide Agents",
+    "team": "COUNTER-TERRORIST"
+  },
+  {
+    "id": "4752",
+    "name": "Aspirant | Gendarmerie Nationale",
+    "agentImage": "assets/agents/4752.webp",
+    "rarity": "DISTINGUISHED",
+    "collection": "Operation Riptide Agents",
+    "team": "COUNTER-TERRORIST"
+  },
+  {
+    "id": "4753",
+    "name": "Officer Jacques Beltram | Gendarmerie Nationale",
+    "agentImage": "assets/agents/4753.webp",
+    "rarity": "EXCEPTIONAL",
+    "collection": "Operation Riptide Agents",
+    "team": "COUNTER-TERRORIST"
+  },
+  {
+    "id": "4756",
+    "name": "Lieutenant 'Tree Hugger' Farlow | SWAT",
+    "agentImage": "assets/agents/4756.webp",
+    "rarity": "EXCEPTIONAL",
+    "collection": "Operation Riptide Agents",
+    "team": "COUNTER-TERRORIST"
+  },
+  {
+    "id": "4757",
+    "name": "Cmdr. Davida 'Goggles' Fernandez | SEAL Frogman",
+    "agentImage": "assets/agents/4757.webp",
+    "rarity": "MASTER",
+    "collection": "Operation Riptide Agents",
+    "team": "COUNTER-TERRORIST"
+  },
+  {
+    "id": "4771",
+    "name": "Cmdr. Frank 'Wet Sox' Baroud | SEAL Frogman",
+    "agentImage": "assets/agents/4771.webp",
+    "rarity": "MASTER",
+    "collection": "Operation Riptide Agents",
+    "team": "COUNTER-TERRORIST"
+  },
+  {
+    "id": "4772",
+    "name": "Lieutenant Rex Krikey | SEAL Frogman",
+    "agentImage": "assets/agents/4772.webp",
+    "rarity": "SUPERIOR",
+    "collection": "Operation Riptide Agents",
+    "team": "COUNTER-TERRORIST"
+  },
+  {
+    "id": "4773",
+    "name": "Elite Trapper Solman | Guerrilla Warfare",
+    "agentImage": "assets/agents/4773.webp",
+    "rarity": "SUPERIOR",
+    "collection": "Operation Riptide Agents",
+    "team": "TERRORIST"
+  },
+  {
+    "id": "4774",
+    "name": "Crasswater The Forgotten | Guerrilla Warfare",
+    "agentImage": "assets/agents/4774.webp",
+    "rarity": "MASTER",
+    "collection": "Operation Riptide Agents",
+    "team": "TERRORIST"
+  },
+  {
+    "id": "4775",
+    "name": "Arno The Overgrown | Guerrilla Warfare",
+    "agentImage": "assets/agents/4775.webp",
+    "rarity": "SUPERIOR",
+    "collection": "Operation Riptide Agents",
+    "team": "TERRORIST"
+  },
+  {
+    "id": "4776",
+    "name": "Col. Mangos Dabisi | Guerrilla Warfare",
+    "agentImage": "assets/agents/4776.webp",
+    "rarity": "EXCEPTIONAL",
+    "collection": "Operation Riptide Agents",
+    "team": "TERRORIST"
+  },
+  {
+    "id": "4777",
+    "name": "Vypa Sista of the Revolution | Guerrilla Warfare",
+    "agentImage": "assets/agents/4777.webp",
+    "rarity": "MASTER",
+    "collection": "Operation Riptide Agents",
+    "team": "TERRORIST"
+  },
+  {
+    "id": "4778",
+    "name": "Trapper Aggressor | Guerrilla Warfare",
+    "agentImage": "assets/agents/4778.webp",
+    "rarity": "DISTINGUISHED",
+    "collection": "Operation Riptide Agents",
+    "team": "TERRORIST"
+  },
+  {
+    "id": "4780",
+    "name": "'Medium Rare' Crasswater | Guerrilla Warfare",
+    "agentImage": "assets/agents/4780.webp",
+    "rarity": "MASTER",
+    "collection": "Operation Riptide Agents",
+    "team": "TERRORIST"
+  },
+  {
+    "id": "4781",
+    "name": "Trapper | Guerrilla Warfare",
+    "agentImage": "assets/agents/4781.webp",
+    "rarity": "EXCEPTIONAL",
+    "collection": "Operation Riptide Agents",
+    "team": "TERRORIST"
+  },
+  {
+    "id": "5105",
+    "name": "Ground Rebel  | Elite Crew",
+    "agentImage": "assets/agents/5105.webp",
+    "rarity": "DISTINGUISHED",
+    "collection": "Shattered Web Agents",
+    "team": "TERRORIST"
+  },
+  {
+    "id": "5106",
+    "name": "Osiris | Elite Crew",
+    "agentImage": "assets/agents/5106.webp",
+    "rarity": "EXCEPTIONAL",
+    "collection": "Shattered Web Agents",
+    "team": "TERRORIST"
+  },
+  {
+    "id": "5107",
+    "name": "Prof. Shahmat | Elite Crew",
+    "agentImage": "assets/agents/5107.webp",
+    "rarity": "SUPERIOR",
+    "collection": "Shattered Web Agents",
+    "team": "TERRORIST"
+  },
+  {
+    "id": "5108",
+    "name": "The Elite Mr. Muhlik | Elite Crew",
+    "agentImage": "assets/agents/5108.webp",
+    "rarity": "MASTER",
+    "collection": "Shattered Web Agents",
+    "team": "TERRORIST"
+  },
+  {
+    "id": "5109",
+    "name": "Jungle Rebel | Elite Crew",
+    "agentImage": "assets/agents/5109.webp",
+    "rarity": "DISTINGUISHED",
+    "collection": "Operation Riptide Agents",
+    "team": "TERRORIST"
+  },
+  {
+    "id": "5205",
+    "name": "Soldier | Phoenix",
+    "agentImage": "assets/agents/5205.webp",
+    "rarity": "DISTINGUISHED",
+    "collection": "Shattered Web Agents",
+    "team": "TERRORIST"
+  },
+  {
+    "id": "5206",
+    "name": "Enforcer | Phoenix",
+    "agentImage": "assets/agents/5206.webp",
+    "rarity": "DISTINGUISHED",
+    "collection": "Shattered Web Agents",
+    "team": "TERRORIST"
+  },
+  {
+    "id": "5207",
+    "name": "Slingshot | Phoenix",
+    "agentImage": "assets/agents/5207.webp",
+    "rarity": "EXCEPTIONAL",
+    "collection": "Shattered Web Agents",
+    "team": "TERRORIST"
+  },
+  {
+    "id": "5208",
+    "name": "Street Soldier | Phoenix",
+    "agentImage": "assets/agents/5208.webp",
+    "rarity": "DISTINGUISHED",
+    "collection": "Broken Fang Agents",
+    "team": "TERRORIST"
+  },
+  {
+    "id": "5305",
+    "name": "Operator | FBI SWAT",
+    "agentImage": "assets/agents/5305.webp",
+    "rarity": "DISTINGUISHED",
+    "collection": "Shattered Web Agents",
+    "team": "COUNTER-TERRORIST"
+  },
+  {
+    "id": "5306",
+    "name": "Markus Delrow | FBI HRT",
+    "agentImage": "assets/agents/5306.webp",
+    "rarity": "EXCEPTIONAL",
+    "collection": "Shattered Web Agents",
+    "team": "COUNTER-TERRORIST"
+  },
+  {
+    "id": "5307",
+    "name": "Michael Syfers  | FBI Sniper",
+    "agentImage": "assets/agents/5307.webp",
+    "rarity": "SUPERIOR",
+    "collection": "Shattered Web Agents",
+    "team": "COUNTER-TERRORIST"
+  },
+  {
+    "id": "5308",
+    "name": "Special Agent Ava | FBI",
+    "agentImage": "assets/agents/5308.webp",
+    "rarity": "MASTER",
+    "collection": "Shattered Web Agents",
+    "team": "COUNTER-TERRORIST"
+  },
+  {
+    "id": "5400",
+    "name": "3rd Commando Company | KSK",
+    "agentImage": "assets/agents/5400.webp",
+    "rarity": "DISTINGUISHED",
+    "collection": "Shattered Web Agents",
+    "team": "COUNTER-TERRORIST"
+  },
+  {
+    "id": "5401",
+    "name": "Seal Team 6 Soldier | NSWC SEAL",
+    "agentImage": "assets/agents/5401.webp",
+    "rarity": "DISTINGUISHED",
+    "collection": "Shattered Web Agents",
+    "team": "COUNTER-TERRORIST"
+  },
+  {
+    "id": "5402",
+    "name": "Buckshot | NSWC SEAL",
+    "agentImage": "assets/agents/5402.webp",
+    "rarity": "EXCEPTIONAL",
+    "collection": "Shattered Web Agents",
+    "team": "COUNTER-TERRORIST"
+  },
+  {
+    "id": "5403",
+    "name": "'Two Times' McCoy | USAF TACP",
+    "agentImage": "assets/agents/5403.webp",
+    "rarity": "SUPERIOR",
+    "collection": "Shattered Web Agents",
+    "team": "COUNTER-TERRORIST"
+  },
+  {
+    "id": "5404",
+    "name": "Lt. Commander Ricksaw | NSWC SEAL",
+    "agentImage": "assets/agents/5404.webp",
+    "rarity": "MASTER",
+    "collection": "Shattered Web Agents",
+    "team": "COUNTER-TERRORIST"
+  },
+  {
+    "id": "5405",
+    "name": "Primeiro Tenente | Brazilian 1st Battalion",
+    "agentImage": "assets/agents/5405.webp",
+    "rarity": "DISTINGUISHED",
+    "collection": "Operation Riptide Agents",
+    "team": "COUNTER-TERRORIST"
+  },
+  {
+    "id": "5500",
+    "name": "Dragomir | Sabre",
+    "agentImage": "assets/agents/5500.webp",
+    "rarity": "EXCEPTIONAL",
+    "collection": "Shattered Web Agents",
+    "team": "TERRORIST"
+  },
+  {
+    "id": "5501",
+    "name": "Maximus | Sabre",
+    "agentImage": "assets/agents/5501.webp",
+    "rarity": "EXCEPTIONAL",
+    "collection": "Shattered Web Agents",
+    "team": "TERRORIST"
+  },
+  {
+    "id": "5502",
+    "name": "Rezan The Ready | Sabre",
+    "agentImage": "assets/agents/5502.webp",
+    "rarity": "SUPERIOR",
+    "collection": "Shattered Web Agents",
+    "team": "TERRORIST"
+  },
+  {
+    "id": "5503",
+    "name": "Blackwolf | Sabre",
+    "agentImage": "assets/agents/5503.webp",
+    "rarity": "SUPERIOR",
+    "collection": "Shattered Web Agents",
+    "team": "TERRORIST"
+  },
+  {
+    "id": "5504",
+    "name": "'The Doctor' Romanov | Sabre",
+    "agentImage": "assets/agents/5504.webp",
+    "rarity": "MASTER",
+    "collection": "Shattered Web Agents",
+    "team": "TERRORIST"
+  },
+  {
+    "id": "5505",
+    "name": "Dragomir | Sabre Footsoldier",
+    "agentImage": "assets/agents/5505.webp",
+    "rarity": "DISTINGUISHED",
+    "collection": "Broken Fang Agents",
+    "team": "TERRORIST"
+  },
+  {
+    "id": "5601",
+    "name": "B Squadron Officer | SAS",
+    "agentImage": "assets/agents/5601.webp",
+    "rarity": "DISTINGUISHED",
+    "collection": "Shattered Web Agents",
+    "team": "COUNTER-TERRORIST"
+  },
+  {
+    "id": "5602",
+    "name": "D Squadron Officer | NZSAS",
+    "agentImage": "assets/agents/5602.webp",
+    "rarity": "DISTINGUISHED",
+    "collection": "Operation Riptide Agents",
+    "team": "COUNTER-TERRORIST"
+  }
+]

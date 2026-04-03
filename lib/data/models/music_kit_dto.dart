@@ -26,6 +26,18 @@ class MusicKitDto {
     );
   }
 
+  String? get artist {
+    final index = name.indexOf(', ');
+    if (index <= 0) return null;
+    return name.substring(0, index).trim();
+  }
+
+  String get trackName {
+    final index = name.indexOf(', ');
+    if (index <= 0 || index + 2 >= name.length) return name;
+    return name.substring(index + 2).trim();
+  }
+
   String get displayName {
     return isStatTrak ? 'StatTrak™ $name' : name;
   }

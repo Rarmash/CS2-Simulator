@@ -2,10 +2,13 @@ import 'package:flutter/material.dart';
 
 import '../../data/models/reward_collection_dto.dart';
 import '../../data/repositories/local_data_repository.dart';
-import '../helpers/responsive_grid_helper.dart';
+import '../helpers/app_navigation_helper.dart';
 import '../helpers/source_color_helper.dart';
+import '../widgets/async_collection_loader.dart';
 import '../widgets/chip_badge.dart';
+import '../widgets/collection_filter_bar.dart';
 import '../widgets/collection_list_card.dart';
+import '../widgets/responsive_collection_grid.dart';
 import 'reward_collection_open_screen.dart';
 
 class RewardCollectionListScreen extends StatefulWidget {
@@ -73,23 +76,15 @@ class _RewardCollectionListScreenState
   Widget _buildFilterBar() {
     const filters = [_filterAll, _filterOperation, _filterArmory];
 
-    return Padding(
-      padding: const EdgeInsets.fromLTRB(12, 12, 12, 0),
-      child: Wrap(
-        spacing: 8,
-        runSpacing: 8,
-        children: filters.map((type) {
-          return ChoiceChip(
-            label: Text(_filterLabel(type)),
-            selected: _selectedFilter == type,
-            onSelected: (_) {
-              setState(() {
-                _selectedFilter = type;
-              });
-            },
-          );
-        }).toList(),
-      ),
+    return CollectionFilterBar<String>(
+      items: filters,
+      selectedItem: _selectedFilter,
+      labelBuilder: _filterLabel,
+      onSelected: (type) {
+        setState(() {
+          _selectedFilter = type;
+        });
+      },
     );
   }
 
@@ -124,13 +119,11 @@ class _RewardCollectionListScreenState
         ),
       ],
       onTap: () {
-        Navigator.push(
+        AppNavigationHelper.pushScreen(
           context,
-          MaterialPageRoute(
-            builder: (_) => RewardCollectionOpenScreen(
-              collection: collection,
-              repository: widget.repository,
-            ),
+          RewardCollectionOpenScreen(
+            collection: collection,
+            repository: widget.repository,
           ),
         );
       },
@@ -143,52 +136,16 @@ class _RewardCollectionListScreenState
       appBar: AppBar(
         title: const Text('Operation / Armory Rewards'),
       ),
-      body: FutureBuilder<List<RewardCollectionDto>>(
+      body: AsyncCollectionLoader<RewardCollectionDto>(
         future: _future,
-        builder: (context, snapshot) {
-          if (!snapshot.hasData) {
-            return const Center(child: CircularProgressIndicator());
-          }
-
-          final all = List<RewardCollectionDto>.from(snapshot.data!);
+        builder: (context, all) {
           final visible = _applyFilters(all);
 
-          return LayoutBuilder(
-            builder: (context, constraints) {
-              final crossAxisCount =
-              ResponsiveGridHelper.listCrossAxisCount(constraints.maxWidth);
-              final aspectRatio =
-              ResponsiveGridHelper.listChildAspectRatio(constraints.maxWidth);
-
-              return Column(
-                children: [
-                  _buildFilterBar(),
-                  Expanded(
-                    child: visible.isEmpty
-                        ? const Center(
-                      child: Text(
-                        'No reward collections found.',
-                        style: TextStyle(color: Colors.white70),
-                      ),
-                    )
-                        : GridView.builder(
-                      padding: const EdgeInsets.all(12),
-                      itemCount: visible.length,
-                      gridDelegate:
-                      SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: crossAxisCount,
-                        crossAxisSpacing: 12,
-                        mainAxisSpacing: 12,
-                        childAspectRatio: aspectRatio,
-                      ),
-                      itemBuilder: (context, index) {
-                        return _buildCard(context, visible[index]);
-                      },
-                    ),
-                  ),
-                ],
-              );
-            },
+          return ResponsiveCollectionGrid<RewardCollectionDto>(
+            items: visible,
+            emptyMessage: 'No reward collections found.',
+            header: _buildFilterBar(),
+            itemBuilder: _buildCard,
           );
         },
       ),
