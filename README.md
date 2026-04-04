@@ -28,11 +28,11 @@ Unless explicitly stated otherwise, the repository license applies to the source
 - Sticker capsules
 - Sticker collections
 - Collectible pins capsules
-- Music Kit Boxes, including `StatTrak(TM)` music kits
+- Music Kit Boxes, including `StatTrak™` music kits
 - Agent collections
 - Graffiti boxes
 - Patch packs and patch collections
-- Skin glossary with item metadata
+- Item glossary hub with dedicated screens for skins and collectibles
 - Trade-Up simulator
 
 ## Tech Stack

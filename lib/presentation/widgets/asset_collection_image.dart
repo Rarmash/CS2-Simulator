@@ -35,7 +35,8 @@ class AssetCollectionImage extends StatelessWidget {
       assetPath,
       height: height,
       fit: fit,
-      errorBuilder: (_, __, ___) => const Icon(Icons.image_not_supported),
+      errorBuilder: (_, error, stackTrace) =>
+          const Icon(Icons.image_not_supported),
     );
   }
 }

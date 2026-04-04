@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../core/app/app_info.dart';
 import '../../core/settings/settings_controller.dart';
 import '../../data/repositories/local_data_repository.dart';
 import '../helpers/app_navigation_helper.dart';
@@ -113,6 +114,13 @@ class HomeScreen extends StatelessWidget {
                   ),
                   if (i != menuItems.length - 1) const SizedBox(height: 16),
                 ],
+                const SizedBox(height: 20),
+                Text(
+                  appVersion,
+                  style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                        color: Theme.of(context).hintColor,
+                      ),
+                ),
               ],
             ),
           ),

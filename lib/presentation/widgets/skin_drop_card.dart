@@ -28,7 +28,7 @@ class SkinDropCard extends StatelessWidget {
           borderRadius: BorderRadius.circular(14),
           gradient: LinearGradient(
             colors: [
-              rarityColor.withOpacity(0.18),
+              rarityColor.withValues(alpha: 0.18),
               Colors.transparent,
             ],
             begin: Alignment.topCenter,
@@ -44,7 +44,7 @@ class SkinDropCard extends StatelessWidget {
               final image = Image.asset(
                 drop.skin.skinImage,
                 height: isNarrow ? 120 : 160,
-                errorBuilder: (_, __, ___) => Icon(
+                errorBuilder: (_, error, stackTrace) => Icon(
                   Icons.image_not_supported,
                   size: isNarrow ? 64 : 80,
                 ),
