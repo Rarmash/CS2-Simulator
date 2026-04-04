@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../core/utils/date_format_helper.dart';
-import '../../data/models/case_dto.dart';
+import '../../data/models/container_dto.dart';
 import '../../data/models/charm_dto.dart';
 import '../../data/repositories/local_data_repository.dart';
 import '../helpers/app_navigation_helper.dart';
@@ -28,8 +28,8 @@ class CharmDetailsScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(title: Text(charm.name)),
-      body: FutureBuilder<List<CaseDto>>(
-        future: repository.loadCasesForCharm(charm.id),
+      body: FutureBuilder<List<ContainerDto>>(
+        future: repository.loadContainersForCharm(charm.id),
         builder: (context, snapshot) {
           if (snapshot.connectionState != ConnectionState.done) {
             return const Center(child: CircularProgressIndicator());
@@ -47,7 +47,7 @@ class CharmDetailsScreen extends StatelessWidget {
             );
           }
 
-          final cases = snapshot.data ?? const <CaseDto>[];
+          final cases = snapshot.data ?? const <ContainerDto>[];
 
           return ListView(
             padding: const EdgeInsets.all(12),
@@ -77,12 +77,12 @@ class CharmDetailsScreen extends StatelessWidget {
                 ],
               ),
               const SizedBox(height: 12),
-              DetailSourceSection<CaseDto>(
+              DetailSourceSection<ContainerDto>(
                 title: 'Collections',
                 items: cases,
                 emptyText: 'No charm collection sources found.',
                 itemBuilder: (item) => DetailSourceTile(
-                  imagePath: item.caseImage,
+                  imagePath: item.containerImage,
                   title: item.name,
                   subtitle: item.typeLabel,
                   trailing:
@@ -92,7 +92,7 @@ class CharmDetailsScreen extends StatelessWidget {
                     AppNavigationHelper.pushScreen(
                       context,
                       AppNavigationHelper.buildContainerOpenScreen(
-                        caseDto: item,
+                        containerDto: item,
                         repository: repository,
                       ),
                     );

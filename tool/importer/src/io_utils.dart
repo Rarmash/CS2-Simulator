@@ -43,7 +43,7 @@ class IoUtils {
     for (final dir in [
       assetsDir,
       dataDir,
-      casesDir,
+      containersDir,
       skinsDir,
       stickersDir,
       pinsDir,
@@ -52,9 +52,6 @@ class IoUtils {
       graffitiDir,
       patchesDir,
       charmsDir,
-      rewardCollectionsDir,
-      operationCollectionsDir,
-      agentCollectionsDir,
       tournamentLogosDir,
     ]) {
       if (!dir.existsSync()) {
@@ -72,7 +69,6 @@ class IoUtils {
       File('${dataDir.path}/music_kits.json'),
       File('${dataDir.path}/music_kit_contents.json'),
       File('${dataDir.path}/agents.json'),
-      File('${dataDir.path}/agent_collections.json'),
       File('${dataDir.path}/agent_collection_contents.json'),
       File('${dataDir.path}/graffiti.json'),
       File('${dataDir.path}/graffiti_contents.json'),

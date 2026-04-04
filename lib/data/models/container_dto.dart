@@ -1,34 +1,40 @@
-class CaseDto {
+class ContainerDto {
   final String id;
   final String name;
-  final String caseImage;
+  final String containerImage;
   final String? releaseDate;
   final String type;
   final String? sourceType;
   final String? sourceId;
   final String? sourceName;
+  final String? currency;
+  final int? cost;
 
-  CaseDto({
+  ContainerDto({
     required this.id,
     required this.name,
-    required this.caseImage,
+    required this.containerImage,
     required this.releaseDate,
     required this.type,
     required this.sourceType,
     required this.sourceId,
     required this.sourceName,
+    required this.currency,
+    required this.cost,
   });
 
-  factory CaseDto.fromJson(Map<String, dynamic> json) {
-    return CaseDto(
+  factory ContainerDto.fromJson(Map<String, dynamic> json) {
+    return ContainerDto(
       id: json['id'] as String,
       name: json['name'] as String,
-      caseImage: json['caseImage'] as String,
+      containerImage: json['containerImage'] as String,
       releaseDate: json['releaseDate'] as String?,
       type: (json['type'] as String?) ?? 'CASE',
       sourceType: json['sourceType'] as String?,
       sourceId: json['sourceId'] as String?,
       sourceName: json['sourceName'] as String?,
+      currency: json['currency'] as String?,
+      cost: (json['cost'] as num?)?.toInt(),
     );
   }
 
@@ -43,6 +49,9 @@ class CaseDto {
   bool get isPatchPack => type == 'PATCH_PACK';
   bool get isPatchCollection => type == 'PATCH_COLLECTION';
   bool get isCharmCollection => type == 'CHARM_COLLECTION';
+  bool get isAgentCollection => type == 'AGENT_COLLECTION';
+  bool get isRewardCollection => type == 'REWARD_COLLECTION';
+  bool get isOperationCollection => type == 'OPERATION_COLLECTION';
   bool get isXrayPackage => type == 'XRAY_PACKAGE';
   bool get isTerminal => type == 'TERMINAL';
 
@@ -70,6 +79,12 @@ class CaseDto {
         return 'Patch Collection';
       case 'CHARM_COLLECTION':
         return 'Charm Collection';
+      case 'AGENT_COLLECTION':
+        return 'Agent Collection';
+      case 'REWARD_COLLECTION':
+        return 'Reward Collection';
+      case 'OPERATION_COLLECTION':
+        return 'Operation Collection';
       case 'XRAY_PACKAGE':
         return 'X-Ray Package';
       case 'TERMINAL':
@@ -93,4 +108,51 @@ class CaseDto {
         return null;
     }
   }
+
+  bool get isArmoryRewardCollection =>
+      isRewardCollection && sourceType == 'ARMORY_REWARD';
+
+  bool get isOperationRewardCollection =>
+      isRewardCollection && sourceType == 'OPERATION_REWARD';
+
+  String get sourceLabel {
+    final source = (sourceName ?? '').trim();
+    if (source.isNotEmpty) {
+      return source;
+    }
+
+    final id = (sourceId ?? '').trim();
+    if (id.isEmpty) {
+      return 'Unknown Source';
+    }
+
+    return id
+        .split('_')
+        .map((part) {
+          if (part.isEmpty) return part;
+          final lower = part.toLowerCase();
+          return lower[0].toUpperCase() + lower.substring(1);
+        })
+        .join(' ');
+  }
+
+  String get currencyLabel {
+    switch (currency) {
+      case 'STARS':
+        return 'Stars';
+      case 'CREDITS':
+        return 'Credits';
+      default:
+        return currency ?? '';
+    }
+  }
+
+  String get actionLabel {
+    if (cost == null || currency == null) {
+      return 'Open Collection';
+    }
+    return 'Spend $cost $currencyLabel';
+  }
+
+  String get operationLabel => sourceLabel;
 }

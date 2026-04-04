@@ -37,9 +37,11 @@ class _PinGlossaryScreenState extends State<PinGlossaryScreen> {
         return false;
       }
       if (query.isEmpty) return true;
-      final haystack = <String>[pin.name, pin.collection ?? '', pin.rarity]
-          .join(' ')
-          .toLowerCase();
+      final haystack = <String>[
+        pin.name,
+        pin.collection ?? '',
+        pin.rarity,
+      ].join(' ').toLowerCase();
       return haystack.contains(query);
     }).toList();
 

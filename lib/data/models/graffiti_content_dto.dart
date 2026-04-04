@@ -1,15 +1,15 @@
 class GraffitiContentDto {
-  final String caseId;
+  final String containerId;
   final List<String> graffitiIds;
 
   const GraffitiContentDto({
-    required this.caseId,
+    required this.containerId,
     required this.graffitiIds,
   });
 
   factory GraffitiContentDto.fromJson(Map<String, dynamic> json) {
     return GraffitiContentDto(
-      caseId: json['caseId'] as String,
+      containerId: json['containerId'] as String,
       graffitiIds: List<String>.from(json['graffitiIds'] as List<dynamic>),
     );
   }

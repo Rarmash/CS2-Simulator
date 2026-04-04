@@ -6,7 +6,7 @@ int _compareByReleaseDateAsc(String? a, String? b) {
   return left.compareTo(right);
 }
 
-int _compareCaseByReleaseDateAsc(CaseDto a, CaseDto b) {
+int _compareContainerByReleaseDateAsc(ContainerDto a, ContainerDto b) {
   final byDate = _compareByReleaseDateAsc(a.releaseDate, b.releaseDate);
   if (byDate != 0) return byDate;
   return a.name.compareTo(b.name);
@@ -21,20 +21,7 @@ int _compareNamedReleaseDateAsc(dynamic a, dynamic b) {
   return (a.name as String).compareTo(b.name as String);
 }
 
-int _compareOperationCollectionAsc(
-  OperationCollectionDto a,
-  OperationCollectionDto b,
-) {
-  final byOperation = a.operationName.compareTo(b.operationName);
-  if (byOperation != 0) return byOperation;
-
-  final byDate = _compareByReleaseDateAsc(a.releaseDate, b.releaseDate);
-  if (byDate != 0) return byDate;
-
-  return a.name.compareTo(b.name);
-}
-
-int _compareCollectibleCollectionAsc(CaseDto a, CaseDto b) {
+int _compareCollectibleCollectionAsc(ContainerDto a, ContainerDto b) {
   final sourceA = a.sourceType ?? '';
   final sourceB = b.sourceType ?? '';
   final bySource = sourceA.compareTo(sourceB);

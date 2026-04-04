@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../data/models/reward_collection_dto.dart';
+import '../../data/models/container_dto.dart';
 import '../../data/repositories/local_data_repository.dart';
 import '../helpers/app_navigation_helper.dart';
 import '../helpers/source_color_helper.dart';
@@ -14,10 +14,7 @@ import 'reward_collection_open_screen.dart';
 class RewardCollectionListScreen extends StatefulWidget {
   final LocalDataRepository repository;
 
-  const RewardCollectionListScreen({
-    super.key,
-    required this.repository,
-  });
+  const RewardCollectionListScreen({super.key, required this.repository});
 
   @override
   State<RewardCollectionListScreen> createState() =>
@@ -26,7 +23,7 @@ class RewardCollectionListScreen extends StatefulWidget {
 
 class _RewardCollectionListScreenState
     extends State<RewardCollectionListScreen> {
-  late Future<List<RewardCollectionDto>> _future;
+  late Future<List<ContainerDto>> _future;
 
   static const String _filterAll = 'ALL';
   static const String _filterOperation = 'OPERATION';
@@ -53,13 +50,13 @@ class _RewardCollectionListScreenState
     }
   }
 
-  List<RewardCollectionDto> _applyFilters(List<RewardCollectionDto> all) {
-    var items = List<RewardCollectionDto>.from(all);
+  List<ContainerDto> _applyFilters(List<ContainerDto> all) {
+    var items = List<ContainerDto>.from(all);
 
     if (_selectedFilter == _filterOperation) {
-      items = items.where((e) => e.isOperation).toList();
+      items = items.where((e) => e.isOperationRewardCollection).toList();
     } else if (_selectedFilter == _filterArmory) {
-      items = items.where((e) => e.isArmory).toList();
+      items = items.where((e) => e.isArmoryRewardCollection).toList();
     }
 
     items.sort((a, b) {
@@ -88,18 +85,18 @@ class _RewardCollectionListScreenState
     );
   }
 
-  Widget _buildCard(BuildContext context, RewardCollectionDto collection) {
+  Widget _buildCard(BuildContext context, ContainerDto collection) {
     final color = SourceColorHelper.rewardSourceColor(
-      isArmory: collection.isArmory,
+      isArmory: collection.isArmoryRewardCollection,
     );
 
     return CollectionListCard(
-      imagePath: collection.image,
+      imagePath: collection.containerImage,
       title: collection.name,
       releaseDate: collection.releaseDate,
       chips: [
         ChipBadge(
-          label: collection.isArmory ? 'Armory' : 'Operation',
+          label: collection.isArmoryRewardCollection ? 'Armory' : 'Operation',
           color: color,
         ),
         ChipBadge(
@@ -133,15 +130,13 @@ class _RewardCollectionListScreenState
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Operation / Armory Rewards'),
-      ),
-      body: AsyncCollectionLoader<RewardCollectionDto>(
+      appBar: AppBar(title: const Text('Operation / Armory Rewards')),
+      body: AsyncCollectionLoader<ContainerDto>(
         future: _future,
         builder: (context, all) {
           final visible = _applyFilters(all);
 
-          return ResponsiveCollectionGrid<RewardCollectionDto>(
+          return ResponsiveCollectionGrid<ContainerDto>(
             items: visible,
             emptyMessage: 'No reward collections found.',
             header: _buildFilterBar(),

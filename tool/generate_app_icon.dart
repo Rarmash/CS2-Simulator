@@ -6,34 +6,21 @@ import 'package:image/image.dart' as img;
 void main() async {
   final root = Directory.current;
 
-  final casesFile = File('${root.path}/assets/data/cases.json');
-  final rewardCollectionsFile =
-  File('${root.path}/assets/data/reward_collections.json');
-  final operationCollectionsFile =
-  File('${root.path}/assets/data/operation_collections.json');
+  final containersFile = File('${root.path}/assets/data/containers.json');
 
-  if (!casesFile.existsSync()) {
-    stderr.writeln('cases.json not found: ${casesFile.path}');
+  if (!containersFile.existsSync()) {
+    stderr.writeln('containers.json not found: ${containersFile.path}');
     exit(1);
   }
 
-  final cases = _readJsonList(await casesFile.readAsString(), 'cases.json');
-  final rewardCollections = rewardCollectionsFile.existsSync()
-      ? _readJsonList(
-    await rewardCollectionsFile.readAsString(),
-    'reward_collections.json',
-  )
-      : <Map<String, dynamic>>[];
-  final operationCollections = operationCollectionsFile.existsSync()
-      ? _readJsonList(
-    await operationCollectionsFile.readAsString(),
-    'operation_collections.json',
-  )
-      : <Map<String, dynamic>>[];
+  final containers = _readJsonList(
+    await containersFile.readAsString(),
+    'containers.json',
+  );
 
   final candidates = <_IconCandidate>[];
 
-  for (final item in cases) {
+  for (final item in containers) {
     final name = (item['name'] as String?)?.trim() ?? '';
     if (name.isEmpty) continue;
 
@@ -45,11 +32,11 @@ void main() async {
         final tournamentLogo = (item['tournamentLogo'] as String?)?.trim();
         imageRel = (tournamentLogo != null && tournamentLogo.isNotEmpty)
             ? tournamentLogo
-            : (item['caseImage'] as String?)?.trim();
+            : (item['containerImage'] as String?)?.trim();
         break;
 
       default:
-        imageRel = (item['caseImage'] as String?)?.trim();
+        imageRel = (item['containerImage'] as String?)?.trim();
         break;
     }
 
@@ -60,38 +47,6 @@ void main() async {
         name: name,
         kind: 'CONTAINER',
         sourceType: type,
-        releaseDate: (item['releaseDate'] as String?)?.trim(),
-        imageRelPath: imageRel,
-      ),
-    );
-  }
-
-  for (final item in rewardCollections) {
-    final name = (item['name'] as String?)?.trim() ?? '';
-    final imageRel = (item['image'] as String?)?.trim() ?? '';
-    if (name.isEmpty || imageRel.isEmpty) continue;
-
-    candidates.add(
-      _IconCandidate(
-        name: name,
-        kind: 'REWARD_COLLECTION',
-        sourceType: (item['sourceType'] as String?)?.trim() ?? 'REWARD_COLLECTION',
-        releaseDate: (item['releaseDate'] as String?)?.trim(),
-        imageRelPath: imageRel,
-      ),
-    );
-  }
-
-  for (final item in operationCollections) {
-    final name = (item['name'] as String?)?.trim() ?? '';
-    final imageRel = (item['image'] as String?)?.trim() ?? '';
-    if (name.isEmpty || imageRel.isEmpty) continue;
-
-    candidates.add(
-      _IconCandidate(
-        name: name,
-        kind: 'OPERATION_COLLECTION',
-        sourceType: (item['operationId'] as String?)?.trim() ?? 'OPERATION_COLLECTION',
         releaseDate: (item['releaseDate'] as String?)?.trim(),
         imageRelPath: imageRel,
       ),
@@ -139,10 +94,7 @@ void main() async {
     height: canvasSize,
     numChannels: 4,
   );
-  img.fill(
-    standardCanvas,
-    color: img.ColorRgba8(0, 0, 0, 0),
-  );
+  img.fill(standardCanvas, color: img.ColorRgba8(0, 0, 0, 0));
 
   final standardFitted = _resizeToFit(
     croppedSource,
@@ -157,18 +109,16 @@ void main() async {
     dstY: ((canvasSize - standardFitted.height) / 2).round(),
   );
 
-  await File('${outDir.path}/latest_case.png')
-      .writeAsBytes(img.encodePng(standardCanvas));
+  await File(
+    '${outDir.path}/latest_container.png',
+  ).writeAsBytes(img.encodePng(standardCanvas));
 
   final foregroundCanvas = img.Image(
     width: canvasSize,
     height: canvasSize,
     numChannels: 4,
   );
-  img.fill(
-    foregroundCanvas,
-    color: img.ColorRgba8(0, 0, 0, 0),
-  );
+  img.fill(foregroundCanvas, color: img.ColorRgba8(0, 0, 0, 0));
 
   final foregroundFitted = _resizeToFit(
     croppedSource,
@@ -183,8 +133,9 @@ void main() async {
     dstY: ((canvasSize - foregroundFitted.height) / 2).round(),
   );
 
-  await File('${outDir.path}/latest_case_foreground.png')
-      .writeAsBytes(img.encodePng(foregroundCanvas));
+  await File(
+    '${outDir.path}/latest_container_foreground.png',
+  ).writeAsBytes(img.encodePng(foregroundCanvas));
 
   final monoSource = img.copyResize(
     croppedSource,
@@ -199,10 +150,7 @@ void main() async {
     height: canvasSize,
     numChannels: 4,
   );
-  img.fill(
-    monoCanvas,
-    color: img.ColorRgba8(0, 0, 0, 0),
-  );
+  img.fill(monoCanvas, color: img.ColorRgba8(0, 0, 0, 0));
   img.compositeImage(
     monoCanvas,
     monoConverted,
@@ -210,18 +158,16 @@ void main() async {
     dstY: ((canvasSize - monoConverted.height) / 2).round(),
   );
 
-  await File('${outDir.path}/latest_case_monochrome.png')
-      .writeAsBytes(img.encodePng(monoCanvas));
+  await File(
+    '${outDir.path}/latest_container_monochrome.png',
+  ).writeAsBytes(img.encodePng(monoCanvas));
 
   final iosDarkCanvas = img.Image(
     width: canvasSize,
     height: canvasSize,
     numChannels: 4,
   );
-  img.fill(
-    iosDarkCanvas,
-    color: img.ColorRgba8(0, 0, 0, 0),
-  );
+  img.fill(iosDarkCanvas, color: img.ColorRgba8(0, 0, 0, 0));
 
   final iosDarkFitted = _resizeToFit(
     croppedSource,
@@ -236,18 +182,16 @@ void main() async {
     dstY: ((canvasSize - iosDarkFitted.height) / 2).round(),
   );
 
-  await File('${outDir.path}/latest_case_ios_dark.png')
-      .writeAsBytes(img.encodePng(iosDarkCanvas));
+  await File(
+    '${outDir.path}/latest_container_ios_dark.png',
+  ).writeAsBytes(img.encodePng(iosDarkCanvas));
 
   final tintedCanvas = img.Image(
     width: canvasSize,
     height: canvasSize,
     numChannels: 4,
   );
-  img.fill(
-    tintedCanvas,
-    color: img.ColorRgba8(0, 0, 0, 0),
-  );
+  img.fill(tintedCanvas, color: img.ColorRgba8(0, 0, 0, 0));
 
   final tintedSource = img.copyResize(
     croppedSource,
@@ -264,31 +208,30 @@ void main() async {
     dstY: ((canvasSize - tintedGray.height) / 2).round(),
   );
 
-  await File('${outDir.path}/latest_case_ios_tinted.png')
-      .writeAsBytes(img.encodePng(tintedCanvas));
+  await File(
+    '${outDir.path}/latest_container_ios_tinted.png',
+  ).writeAsBytes(img.encodePng(tintedCanvas));
 
   final transparentBg = img.Image(
     width: canvasSize,
     height: canvasSize,
     numChannels: 4,
   );
-  img.fill(
-    transparentBg,
-    color: img.ColorRgba8(0, 0, 0, 0),
-  );
+  img.fill(transparentBg, color: img.ColorRgba8(0, 0, 0, 0));
 
-  await File('${outDir.path}/transparent_bg.png')
-      .writeAsBytes(img.encodePng(transparentBg));
+  await File(
+    '${outDir.path}/transparent_bg.png',
+  ).writeAsBytes(img.encodePng(transparentBg));
 
   stdout.writeln('Latest item: ${latest.name}');
   stdout.writeln('Kind: ${latest.kind}');
   stdout.writeln('Source type: ${latest.sourceType}');
   stdout.writeln('Selected image: ${latest.imageRelPath}');
-  stdout.writeln('Generated: assets/app_icon/latest_case.png');
-  stdout.writeln('Generated: assets/app_icon/latest_case_foreground.png');
-  stdout.writeln('Generated: assets/app_icon/latest_case_monochrome.png');
-  stdout.writeln('Generated: assets/app_icon/latest_case_ios_dark.png');
-  stdout.writeln('Generated: assets/app_icon/latest_case_ios_tinted.png');
+  stdout.writeln('Generated: assets/app_icon/latest_container.png');
+  stdout.writeln('Generated: assets/app_icon/latest_container_foreground.png');
+  stdout.writeln('Generated: assets/app_icon/latest_container_monochrome.png');
+  stdout.writeln('Generated: assets/app_icon/latest_container_ios_dark.png');
+  stdout.writeln('Generated: assets/app_icon/latest_container_ios_tinted.png');
   stdout.writeln('Generated: assets/app_icon/transparent_bg.png');
 }
 
@@ -322,10 +265,10 @@ List<Map<String, dynamic>> _readJsonList(String raw, String debugName) {
 }
 
 img.Image _resizeToFit(
-    img.Image source, {
-      required int maxWidth,
-      required int maxHeight,
-    }) {
+  img.Image source, {
+  required int maxWidth,
+  required int maxHeight,
+}) {
   final widthRatio = maxWidth / source.width;
   final heightRatio = maxHeight / source.height;
   final ratio = widthRatio < heightRatio ? widthRatio : heightRatio;
@@ -459,14 +402,14 @@ img.Image _trimSolidBackground(img.Image source) {
 }
 
 bool _isCloseColor(
-    int r1,
-    int g1,
-    int b1,
-    int r2,
-    int g2,
-    int b2,
-    int tolerance,
-    ) {
+  int r1,
+  int g1,
+  int b1,
+  int r2,
+  int g2,
+  int b2,
+  int tolerance,
+) {
   return (r1 - r2).abs() <= tolerance &&
       (g1 - g2).abs() <= tolerance &&
       (b1 - b2).abs() <= tolerance;

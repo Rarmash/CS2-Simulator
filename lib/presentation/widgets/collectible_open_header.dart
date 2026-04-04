@@ -57,7 +57,10 @@ class CollectibleOpenHeader extends StatelessWidget {
           const SizedBox(height: 12),
           SizedBox(
             width: double.infinity,
-            child: ElevatedButton(onPressed: onPressed, child: Text(buttonLabel)),
+            child: ElevatedButton(
+              onPressed: onPressed,
+              child: Text(buttonLabel),
+            ),
           ),
         ],
       ),

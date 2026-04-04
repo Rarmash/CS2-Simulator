@@ -35,9 +35,11 @@ class _PatchGlossaryScreenState extends State<PatchGlossaryScreen> {
         return false;
       }
       if (query.isEmpty) return true;
-      final haystack = <String>[patch.name, patch.collection ?? '', patch.rarity]
-          .join(' ')
-          .toLowerCase();
+      final haystack = <String>[
+        patch.name,
+        patch.collection ?? '',
+        patch.rarity,
+      ].join(' ').toLowerCase();
       return haystack.contains(query);
     }).toList();
 

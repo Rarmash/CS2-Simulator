@@ -18,9 +18,10 @@ class DartImporterBackend implements ImporterBackend {
     final rewardSourceOverrides = _loadRewardOverrides();
     final operationCollectionOverrides = _loadOperationOverrides();
 
-    final allExistingCases = _io.loadJsonList(
-      File('${dataDir.path}/cases.json'),
-    );
+    final allExistingCases = _io
+        .loadJsonList(File('${dataDir.path}/containers.json'))
+        .map(_normalizeExistingContainerMeta)
+        .toList();
     final existingSkins = _io.loadJsonList(File('${dataDir.path}/skins.json'));
     final existingStickers = _io.loadJsonList(
       File('${dataDir.path}/stickers.json'),
@@ -50,15 +51,61 @@ class DartImporterBackend implements ImporterBackend {
         'MUSIC_KIT_BOX',
       }.contains(type);
     }).toList();
-    final existingRewardCollections = _io.loadJsonList(
-      File('${dataDir.path}/reward_collections.json'),
-    );
-    final existingOperationCollections = _io.loadJsonList(
-      File('${dataDir.path}/operation_collections.json'),
-    );
-    final existingAgentCollections = _io.loadJsonList(
-      File('${dataDir.path}/agent_collections.json'),
-    );
+    final existingRewardCollections = allExistingCases
+        .where(
+          (item) =>
+              (item['type'] ?? '').toString().trim().toUpperCase() ==
+              'REWARD_COLLECTION',
+        )
+        .map(
+          (item) => <String, dynamic>{
+            'id': item['id'],
+            'name': item['name'],
+            'image': item['containerImage'],
+            'sourceType': (item['sourceType'] ?? '') == 'ARMORY_REWARD'
+                ? 'ARMORY'
+                : 'OPERATION',
+            'sourceId': item['sourceId'],
+            'currency': item['currency'],
+            'cost': item['cost'],
+            'releaseDate': item['releaseDate'],
+          },
+        )
+        .toList();
+    final existingOperationCollections = allExistingCases
+        .where(
+          (item) =>
+              (item['type'] ?? '').toString().trim().toUpperCase() ==
+              'OPERATION_COLLECTION',
+        )
+        .map(
+          (item) => <String, dynamic>{
+            'id': item['id'],
+            'name': item['name'],
+            'image': item['containerImage'],
+            'operationId': item['sourceId'],
+            'operationName': item['sourceName'],
+            'releaseDate': item['releaseDate'],
+          },
+        )
+        .toList();
+    final existingAgentCollections = allExistingCases
+        .where(
+          (item) =>
+              (item['type'] ?? '').toString().trim().toUpperCase() ==
+              'AGENT_COLLECTION',
+        )
+        .map(
+          (item) => <String, dynamic>{
+            'id': item['id'],
+            'name': item['name'],
+            'image': item['containerImage'],
+            'operationId': item['sourceId'],
+            'operationName': item['sourceName'],
+            'releaseDate': item['releaseDate'],
+          },
+        )
+        .toList();
 
     final existingSkinByKey =
         <(String, String, String, String), Map<String, dynamic>>{
@@ -256,7 +303,7 @@ class DartImporterBackend implements ImporterBackend {
       }
 
       final existingCase = existingCaseByName[crateName];
-      final caseId = existingCase != null
+      final containerId = existingCase != null
           ? existingCase['id'].toString()
           : (nextCaseId++).toString();
       var releaseDate = existingCase?['releaseDate'];
@@ -300,21 +347,21 @@ class DartImporterBackend implements ImporterBackend {
         }
       }
 
-      final caseImagePath = await _syncAsset(
+      final containerImagePath = await _syncAsset(
         imageUrl: crate['image']?.toString(),
-        dirPath: casesDir.path,
-        relativeDir: 'assets/cases',
-        id: caseId,
-        existingRelativePath: existingCase?['caseImage']?.toString(),
+        dirPath: containersDir.path,
+        relativeDir: 'assets/containers',
+        id: containerId,
+        existingRelativePath: existingCase?['containerImage']?.toString(),
       );
       final patchCollectionSource = containerType == 'PATCH_COLLECTION'
           ? resolvePatchCollectionSource(crateName)
           : const <String, String?>{};
 
       final caseRecord = <String, dynamic>{
-        'id': caseId,
+        'id': containerId,
         'name': crateName,
-        'caseImage': caseImagePath,
+        'containerImage': containerImagePath,
         'releaseDate': releaseDate,
         'type': containerType,
         'tournamentName': tournamentName,
@@ -324,8 +371,8 @@ class DartImporterBackend implements ImporterBackend {
         'sourceName': patchCollectionSource['sourceName'],
       };
 
-      newCases[caseId] = caseRecord;
-      caseNameToId[crateName] = caseId;
+      newCases[containerId] = caseRecord;
+      caseNameToId[crateName] = containerId;
     }
 
     final charmCollections =
@@ -348,7 +395,7 @@ class DartImporterBackend implements ImporterBackend {
       }
 
       final existingCase = existingCaseByName[collectionName];
-      final caseId = existingCase != null
+      final containerId = existingCase != null
           ? existingCase['id'].toString()
           : (nextCaseId++).toString();
       final sourceMeta = resolveCharmCollectionSource(collectionName);
@@ -359,19 +406,19 @@ class DartImporterBackend implements ImporterBackend {
         );
       }
 
-      final caseImagePath = await _syncAsset(
+      final containerImagePath = await _syncAsset(
         imageUrl: collection['image']?.toString(),
-        dirPath: casesDir.path,
-        relativeDir: 'assets/cases',
-        id: caseId,
-        existingRelativePath: existingCase?['caseImage']?.toString(),
+        dirPath: containersDir.path,
+        relativeDir: 'assets/containers',
+        id: containerId,
+        existingRelativePath: existingCase?['containerImage']?.toString(),
         compressionModeOverride: CompressionMode.maxCompress,
       );
 
-      newCases[caseId] = {
-        'id': caseId,
+      newCases[containerId] = {
+        'id': containerId,
         'name': collectionName,
-        'caseImage': caseImagePath,
+        'containerImage': containerImagePath,
         'releaseDate': releaseDate,
         'type': 'CHARM_COLLECTION',
         'tournamentName': null,
@@ -380,7 +427,7 @@ class DartImporterBackend implements ImporterBackend {
         'sourceId': sourceMeta['sourceId'],
         'sourceName': sourceMeta['sourceName'],
       };
-      caseNameToId[collectionName] = caseId;
+      caseNameToId[collectionName] = containerId;
     }
 
     final newSkins = <String, Map<String, dynamic>>{};
@@ -393,8 +440,8 @@ class DartImporterBackend implements ImporterBackend {
     final newCharms = <String, Map<String, dynamic>>{};
     final skinIdByFullName = <String, String>{};
 
-    final caseContentsMap = <String, Set<String>>{
-      for (final caseId in newCases.keys) caseId: <String>{},
+    final containerContentsMap = <String, Set<String>>{
+      for (final containerId in newCases.keys) containerId: <String>{},
     };
     final stickerContentsMap = <String, Set<String>>{};
     final pinContentsMap = <String, Set<String>>{};
@@ -596,8 +643,8 @@ class DartImporterBackend implements ImporterBackend {
 
         final rewardImagePath = await _syncAsset(
           imageUrl: collectionImageByName[collectionName],
-          dirPath: rewardCollectionsDir.path,
-          relativeDir: 'assets/reward_collections',
+          dirPath: containersDir.path,
+          relativeDir: 'assets/containers',
           id: rewardId,
           existingRelativePath:
               (newRewardCollections[rewardId] ?? existingReward)?['image']
@@ -619,6 +666,25 @@ class DartImporterBackend implements ImporterBackend {
           rewardCollectionsCreated += 1;
         }
         newRewardCollections[rewardId] = rewardRecord;
+        newCases[rewardId] = {
+          'id': rewardId,
+          'name': collectionName,
+          'containerImage': rewardImagePath,
+          'releaseDate': rewardMeta['releaseDate'],
+          'type': 'REWARD_COLLECTION',
+          'tournamentName': null,
+          'tournamentLogo': null,
+          'sourceType': rewardMeta['sourceType'] == 'ARMORY'
+              ? 'ARMORY_REWARD'
+              : 'OPERATION_REWARD',
+          'sourceId': rewardMeta['sourceId'],
+          'sourceName': rewardRecord['sourceType'] == 'ARMORY'
+              ? 'The Armory'
+              : resolveOperationNameFromId(rewardMeta['sourceId']?.toString()),
+          'currency': rewardMeta['currency'] ?? 'STARS',
+          'cost': rewardMeta['cost'] ?? 4,
+        };
+        caseNameToId[collectionName] = rewardId;
         rewardContentsMap.putIfAbsent(rewardId, () => <String>{}).add(skinId);
       }
 
@@ -640,8 +706,8 @@ class DartImporterBackend implements ImporterBackend {
 
         final operationImagePath = await _syncAsset(
           imageUrl: collectionImageByName[collectionName ?? ''],
-          dirPath: operationCollectionsDir.path,
-          relativeDir: 'assets/operation_collections',
+          dirPath: containersDir.path,
+          relativeDir: 'assets/containers',
           id: opId,
           existingRelativePath:
               (newOperationCollections[opId] ?? existingOperation)?['image']
@@ -661,6 +727,21 @@ class DartImporterBackend implements ImporterBackend {
           operationCollectionsCreated += 1;
         }
         newOperationCollections[opId] = operationRecord;
+        newCases[opId] = {
+          'id': opId,
+          'name': collectionName,
+          'containerImage': operationImagePath,
+          'releaseDate': operationMeta['releaseDate'],
+          'type': 'OPERATION_COLLECTION',
+          'tournamentName': null,
+          'tournamentLogo': null,
+          'sourceType': 'LEGACY_OPERATION',
+          'sourceId': operationMeta['operationId'],
+          'sourceName': operationMeta['operationName'],
+          'currency': null,
+          'cost': null,
+        };
+        caseNameToId[collectionName ?? ''] = opId;
         operationContentsMap.putIfAbsent(opId, () => <String>{}).add(skinId);
       }
 
@@ -676,8 +757,8 @@ class DartImporterBackend implements ImporterBackend {
             continue;
           }
 
-          var caseId = caseNameToId[crateName];
-          if (caseId == null) {
+          var containerId = caseNameToId[crateName];
+          if (containerId == null) {
             final existingCaseMeta = existingCaseByName[crateName];
             final releaseDate = resolveContainerReleaseDate(
               crateName: crateName,
@@ -685,20 +766,21 @@ class DartImporterBackend implements ImporterBackend {
               crateMeta: Map<String, dynamic>.from(crateRef),
               existingReleaseDate: existingCaseMeta?['releaseDate'],
             );
-            caseId = existingCaseMeta != null
+            containerId = existingCaseMeta != null
                 ? existingCaseMeta['id'].toString()
                 : (nextCaseId++).toString();
-            final caseImagePath = await _syncAsset(
+            final containerImagePath = await _syncAsset(
               imageUrl: crateRef['image']?.toString(),
-              dirPath: casesDir.path,
-              relativeDir: 'assets/cases',
-              id: caseId,
-              existingRelativePath: existingCaseMeta?['caseImage']?.toString(),
+              dirPath: containersDir.path,
+              relativeDir: 'assets/containers',
+              id: containerId,
+              existingRelativePath: existingCaseMeta?['containerImage']
+                  ?.toString(),
             );
-            newCases[caseId] = {
-              'id': caseId,
+            newCases[containerId] = {
+              'id': containerId,
               'name': crateName,
-              'caseImage': caseImagePath,
+              'containerImage': containerImagePath,
               'releaseDate': releaseDate,
               'type': 'STICKER_CAPSULE',
               'tournamentName': null,
@@ -707,12 +789,14 @@ class DartImporterBackend implements ImporterBackend {
               'sourceId': null,
               'sourceName': null,
             };
-            caseNameToId[crateName] = caseId;
-            caseContentsMap.putIfAbsent(caseId, () => <String>{});
+            caseNameToId[crateName] = containerId;
+            containerContentsMap.putIfAbsent(containerId, () => <String>{});
             containerRefsCreatedFromSkinMeta += 1;
           }
 
-          caseContentsMap.putIfAbsent(caseId, () => <String>{}).add(skinId);
+          containerContentsMap
+              .putIfAbsent(containerId, () => <String>{})
+              .add(skinId);
         }
       }
     }
@@ -810,10 +894,10 @@ class DartImporterBackend implements ImporterBackend {
             continue;
           }
 
-          var caseId = caseNameToId[crateName];
+          var containerId = caseNameToId[crateName];
           final containerType = inferStickerContainerType(crateName);
 
-          if (caseId == null) {
+          if (containerId == null) {
             final existingCaseMeta = existingCaseByName[crateName];
             var releaseDate = resolveContainerReleaseDate(
               crateName: crateName,
@@ -833,20 +917,21 @@ class DartImporterBackend implements ImporterBackend {
               releaseDate = sourceMeta['releaseDate']!;
             }
 
-            caseId = existingCaseMeta != null
+            containerId = existingCaseMeta != null
                 ? existingCaseMeta['id'].toString()
                 : (nextCaseId++).toString();
-            final caseImagePath = await _syncAsset(
+            final containerImagePath = await _syncAsset(
               imageUrl: crateRef['image']?.toString(),
-              dirPath: casesDir.path,
-              relativeDir: 'assets/cases',
-              id: caseId,
-              existingRelativePath: existingCaseMeta?['caseImage']?.toString(),
+              dirPath: containersDir.path,
+              relativeDir: 'assets/containers',
+              id: containerId,
+              existingRelativePath: existingCaseMeta?['containerImage']
+                  ?.toString(),
             );
-            newCases[caseId] = {
-              'id': caseId,
+            newCases[containerId] = {
+              'id': containerId,
               'name': crateName,
-              'caseImage': caseImagePath,
+              'containerImage': containerImagePath,
               'releaseDate': releaseDate,
               'type': containerType,
               'tournamentName': null,
@@ -855,10 +940,10 @@ class DartImporterBackend implements ImporterBackend {
               'sourceId': sourceMeta['sourceId'],
               'sourceName': sourceMeta['sourceName'],
             };
-            caseNameToId[crateName] = caseId;
+            caseNameToId[crateName] = containerId;
             containerRefsCreatedFromSkinMeta += 1;
           } else {
-            final existingCaseRecord = newCases[caseId];
+            final existingCaseRecord = newCases[containerId];
             if (existingCaseRecord != null) {
               var releaseDate = resolveContainerReleaseDate(
                 crateName: crateName,
@@ -887,7 +972,7 @@ class DartImporterBackend implements ImporterBackend {
           }
 
           stickerContentsMap
-              .putIfAbsent(caseId, () => <String>{})
+              .putIfAbsent(containerId, () => <String>{})
               .add(stickerId);
         }
       }
@@ -908,18 +993,19 @@ class DartImporterBackend implements ImporterBackend {
             continue;
           }
 
-          var caseId = stickerCollectionNameToId[stickerCollectionName];
-          if (caseId == null) {
+          var containerId = stickerCollectionNameToId[stickerCollectionName];
+          if (containerId == null) {
             final existingCaseMeta = existingCaseByName[stickerCollectionName];
             String releaseDate;
             if (existingCaseMeta != null) {
-              caseId = existingCaseMeta['id'].toString();
+              containerId = existingCaseMeta['id'].toString();
               releaseDate = (existingCaseMeta['releaseDate'] ?? '').toString();
             } else if (caseNameToId.containsKey(stickerCollectionName)) {
-              caseId = caseNameToId[stickerCollectionName]!;
-              releaseDate = (newCases[caseId]?['releaseDate'] ?? '').toString();
+              containerId = caseNameToId[stickerCollectionName]!;
+              releaseDate = (newCases[containerId]?['releaseDate'] ?? '')
+                  .toString();
             } else {
-              caseId = (nextCaseId++).toString();
+              containerId = (nextCaseId++).toString();
               releaseDate = '2000-01-01';
             }
 
@@ -930,17 +1016,17 @@ class DartImporterBackend implements ImporterBackend {
               releaseDate = sourceMeta['releaseDate']!;
             }
 
-            newCases[caseId] = {
-              'id': caseId,
+            newCases[containerId] = {
+              'id': containerId,
               'name': stickerCollectionName,
-              'caseImage': await _syncAsset(
+              'containerImage': await _syncAsset(
                 imageUrl: collectionRef['image']?.toString(),
-                dirPath: casesDir.path,
-                relativeDir: 'assets/cases',
-                id: caseId,
+                dirPath: containersDir.path,
+                relativeDir: 'assets/containers',
+                id: containerId,
                 existingRelativePath:
-                    existingCaseMeta?['caseImage']?.toString() ??
-                    newCases[caseId]?['caseImage']?.toString(),
+                    existingCaseMeta?['containerImage']?.toString() ??
+                    newCases[containerId]?['containerImage']?.toString(),
               ),
               'releaseDate': releaseDate,
               'type': 'STICKER_COLLECTION',
@@ -950,14 +1036,14 @@ class DartImporterBackend implements ImporterBackend {
               'sourceId': sourceMeta['sourceId'],
               'sourceName': sourceMeta['sourceName'],
             };
-            caseNameToId[stickerCollectionName] = caseId;
-            stickerCollectionNameToId[stickerCollectionName] = caseId;
+            caseNameToId[stickerCollectionName] = containerId;
+            stickerCollectionNameToId[stickerCollectionName] = containerId;
           }
 
           stickerContentsMap
-              .putIfAbsent(caseId, () => <String>{})
+              .putIfAbsent(containerId, () => <String>{})
               .add(stickerId);
-          final existingCaseRecord = newCases[caseId];
+          final existingCaseRecord = newCases[containerId];
           if (existingCaseRecord != null) {
             final sourceMeta = resolveStickerCollectionSource(
               stickerCollectionName,
@@ -984,8 +1070,8 @@ class DartImporterBackend implements ImporterBackend {
         continue;
       }
 
-      final caseId = caseNameToId[crateName];
-      if (caseId == null) {
+      final containerId = caseNameToId[crateName];
+      if (containerId == null) {
         continue;
       }
 
@@ -1059,7 +1145,7 @@ class DartImporterBackend implements ImporterBackend {
         };
         newPins[pinId] = pinRecord;
         existingPinByKey[key] = pinRecord;
-        pinContentsMap.putIfAbsent(caseId, () => <String>{}).add(pinId);
+        pinContentsMap.putIfAbsent(containerId, () => <String>{}).add(pinId);
 
         if (!shouldCreateGenuinePin(
           pinName: pinName,
@@ -1120,8 +1206,8 @@ class DartImporterBackend implements ImporterBackend {
         continue;
       }
 
-      final caseId = caseNameToId[crateName];
-      if (caseId == null) {
+      final containerId = caseNameToId[crateName];
+      if (containerId == null) {
         continue;
       }
 
@@ -1216,7 +1302,7 @@ class DartImporterBackend implements ImporterBackend {
         existingMusicKitByKey[key] = musicKitRecord;
         musicKitCollectionBySourceId[sourceMusicKitId] = musicKitCollection;
         musicKitContentsMap
-            .putIfAbsent(caseId, () => <String>{})
+            .putIfAbsent(containerId, () => <String>{})
             .add(musicKitId);
       }
     }
@@ -1401,8 +1487,8 @@ class DartImporterBackend implements ImporterBackend {
 
       final agentCollectionImagePath = await _syncAsset(
         imageUrl: collectionRef['image']?.toString(),
-        dirPath: agentCollectionsDir.path,
-        relativeDir: 'assets/agent_collections',
+        dirPath: containersDir.path,
+        relativeDir: 'assets/containers',
         id: agentCollectionId,
         existingRelativePath:
             (newAgentCollections[agentCollectionId] ??
@@ -1418,6 +1504,21 @@ class DartImporterBackend implements ImporterBackend {
         'operationName': opName,
         'releaseDate': releaseDate,
       };
+      newCases[agentCollectionId] = {
+        'id': agentCollectionId,
+        'name': collectionName,
+        'containerImage': agentCollectionImagePath,
+        'releaseDate': releaseDate,
+        'type': 'AGENT_COLLECTION',
+        'tournamentName': null,
+        'tournamentLogo': null,
+        'sourceType': 'LEGACY_OPERATION',
+        'sourceId': opId,
+        'sourceName': opName,
+        'currency': null,
+        'cost': null,
+      };
+      caseNameToId[collectionName] = agentCollectionId;
       agentCollectionContentsMap
           .putIfAbsent(agentCollectionId, () => <String>{})
           .add(agentId);
@@ -1561,12 +1662,12 @@ class DartImporterBackend implements ImporterBackend {
           }
           final crateRef = crateRefRaw.map((k, v) => MapEntry(k.toString(), v));
           final crateName = (crateRef['name'] ?? '').toString().trim();
-          final caseId = caseNameToId[crateName];
-          if (caseId == null) {
+          final containerId = caseNameToId[crateName];
+          if (containerId == null) {
             continue;
           }
           graffitiContentsMap
-              .putIfAbsent(caseId, () => <String>{})
+              .putIfAbsent(containerId, () => <String>{})
               .add(graffitiId);
         }
       }
@@ -1586,8 +1687,8 @@ class DartImporterBackend implements ImporterBackend {
         continue;
       }
 
-      final caseId = caseNameToId[crateName];
-      if (caseId == null) {
+      final containerId = caseNameToId[crateName];
+      if (containerId == null) {
         continue;
       }
 
@@ -1668,11 +1769,13 @@ class DartImporterBackend implements ImporterBackend {
         };
         newPatches[patchId] = patchRecord;
         existingPatchByKey[key] = patchRecord;
-        patchContentsMap.putIfAbsent(caseId, () => <String>{}).add(patchId);
+        patchContentsMap
+            .putIfAbsent(containerId, () => <String>{})
+            .add(patchId);
       }
 
       if (patchContainerType == 'PATCH_COLLECTION') {
-        final existingCaseRecord = newCases[caseId];
+        final existingCaseRecord = newCases[containerId];
         if (existingCaseRecord != null) {
           final sourceMeta = resolvePatchCollectionSource(crateName);
           existingCaseRecord['sourceType'] = sourceMeta['sourceType'];
@@ -1687,8 +1790,8 @@ class DartImporterBackend implements ImporterBackend {
 
     for (final collection in charmCollections) {
       final collectionName = (collection['name'] ?? '').toString().trim();
-      final caseId = caseNameToId[collectionName];
-      if (caseId == null) {
+      final containerId = caseNameToId[collectionName];
+      if (containerId == null) {
         continue;
       }
 
@@ -1757,7 +1860,7 @@ class DartImporterBackend implements ImporterBackend {
         }
 
         charmContentsMap
-            .putIfAbsent(caseId, () => <String>{})
+            .putIfAbsent(containerId, () => <String>{})
             .add(charmRecord['id'].toString());
       }
     }
@@ -1779,10 +1882,10 @@ class DartImporterBackend implements ImporterBackend {
       newCases[legacyCaseId] = {
         'id': legacyCaseId,
         'name': legacyName,
-        'caseImage':
-            existingCase?['caseImage']?.toString() ??
-            (baseCase?['caseImage']?.toString()) ??
-            'assets/cases/$legacyCaseId.png',
+        'containerImage':
+            existingCase?['containerImage']?.toString() ??
+            (baseCase?['containerImage']?.toString()) ??
+            'assets/containers/$legacyCaseId.png',
         'releaseDate': (legacyCase['releaseDate'] ?? '2000-01-01').toString(),
         'type': (legacyCase['type'] ?? 'CASE').toString(),
         'tournamentName': null,
@@ -1792,19 +1895,19 @@ class DartImporterBackend implements ImporterBackend {
         'sourceName': null,
       };
       caseNameToId[legacyName] = legacyCaseId;
-      caseContentsMap.putIfAbsent(legacyCaseId, () => <String>{});
+      containerContentsMap.putIfAbsent(legacyCaseId, () => <String>{});
 
       if (legacyCase['copyImageFromBase'] == true && baseCase != null) {
         final baseImageName = basename(
-          (baseCase['caseImage'] ?? '').toString(),
+          (baseCase['containerImage'] ?? '').toString(),
         );
-        final baseImageFile = File('${casesDir.path}/$baseImageName');
+        final baseImageFile = File('${containersDir.path}/$baseImageName');
         final baseExt = suffixFromPath(baseImageName);
-        final legacyImageFile = File('${casesDir.path}/$legacyCaseId$baseExt');
+        final legacyImageFile = File('${containersDir.path}/$legacyCaseId$baseExt');
         if (baseImageFile.existsSync() && !legacyImageFile.existsSync()) {
           await legacyImageFile.writeAsBytes(await baseImageFile.readAsBytes());
-          newCases[legacyCaseId]!['caseImage'] =
-              'assets/cases/$legacyCaseId$baseExt';
+          newCases[legacyCaseId]!['containerImage'] =
+              'assets/containers/$legacyCaseId$baseExt';
         }
       }
 
@@ -1821,7 +1924,7 @@ class DartImporterBackend implements ImporterBackend {
             );
             continue;
           }
-          caseContentsMap
+          containerContentsMap
               .putIfAbsent(legacyCaseId, () => <String>{})
               .add(skinId);
         }
@@ -1829,7 +1932,8 @@ class DartImporterBackend implements ImporterBackend {
 
       if (legacyCase['copySpecialItemsFromBase'] == true &&
           baseCaseId != null) {
-        for (final skinId in caseContentsMap[baseCaseId] ?? const <String>{}) {
+        for (final skinId
+            in containerContentsMap[baseCaseId] ?? const <String>{}) {
           final skin = newSkins[skinId];
           if (skin == null) {
             continue;
@@ -1840,7 +1944,7 @@ class DartImporterBackend implements ImporterBackend {
               weaponType == 'GLOVES' ||
               itemKind == 'KNIFE' ||
               itemKind == 'GLOVES') {
-            caseContentsMap
+            containerContentsMap
                 .putIfAbsent(legacyCaseId, () => <String>{})
                 .add(skinId);
           }
@@ -1917,16 +2021,24 @@ class DartImporterBackend implements ImporterBackend {
         ).compareTo(int.parse(b['id'].toString())),
       );
 
-    final caseContentsOut = buildContents(caseContentsMap, 'caseId', 'skinIds');
+    final containerContentsOut = buildContents(
+      containerContentsMap,
+      'containerId',
+      'skinIds',
+    );
     final stickerContentsOut = buildContents(
       stickerContentsMap,
-      'caseId',
+      'containerId',
       'stickerIds',
     );
-    final pinContentsOut = buildContents(pinContentsMap, 'caseId', 'pinIds');
+    final pinContentsOut = buildContents(
+      pinContentsMap,
+      'containerId',
+      'pinIds',
+    );
     final musicKitContentsOut = buildContents(
       musicKitContentsMap,
-      'caseId',
+      'containerId',
       'musicKitIds',
     );
     final agentCollectionsOut = newAgentCollections.values.toList()
@@ -1948,17 +2060,17 @@ class DartImporterBackend implements ImporterBackend {
     );
     final graffitiContentsOut = buildContents(
       graffitiContentsMap,
-      'caseId',
+      'containerId',
       'graffitiIds',
     );
     final patchContentsOut = buildContents(
       patchContentsMap,
-      'caseId',
+      'containerId',
       'patchIds',
     );
     final charmContentsOut = buildContents(
       charmContentsMap,
-      'caseId',
+      'containerId',
       'charmIds',
     );
     final rewardCollectionsOut = newRewardCollections.values.toList()
@@ -2008,7 +2120,7 @@ class DartImporterBackend implements ImporterBackend {
       'skinIds',
     );
 
-    await _io.writeJson(File('${dataDir.path}/cases.json'), casesOut);
+    await _io.writeJson(File('${dataDir.path}/containers.json'), casesOut);
     await _io.writeJson(File('${dataDir.path}/skins.json'), skinsOut);
     await _io.writeJson(File('${dataDir.path}/stickers.json'), stickersOut);
     await _io.writeJson(File('${dataDir.path}/pins.json'), pinsOut);
@@ -2018,8 +2130,8 @@ class DartImporterBackend implements ImporterBackend {
     await _io.writeJson(File('${dataDir.path}/patches.json'), patchesOut);
     await _io.writeJson(File('${dataDir.path}/charms.json'), charmsOut);
     await _io.writeJson(
-      File('${dataDir.path}/case_contents.json'),
-      caseContentsOut,
+      File('${dataDir.path}/container_contents.json'),
+      containerContentsOut,
     );
     await _io.writeJson(
       File('${dataDir.path}/sticker_contents.json'),
@@ -2032,10 +2144,6 @@ class DartImporterBackend implements ImporterBackend {
     await _io.writeJson(
       File('${dataDir.path}/music_kit_contents.json'),
       musicKitContentsOut,
-    );
-    await _io.writeJson(
-      File('${dataDir.path}/agent_collections.json'),
-      agentCollectionsOut,
     );
     await _io.writeJson(
       File('${dataDir.path}/agent_collection_contents.json'),
@@ -2054,16 +2162,8 @@ class DartImporterBackend implements ImporterBackend {
       charmContentsOut,
     );
     await _io.writeJson(
-      File('${dataDir.path}/reward_collections.json'),
-      rewardCollectionsOut,
-    );
-    await _io.writeJson(
       File('${dataDir.path}/reward_collection_contents.json'),
       rewardCollectionContentsOut,
-    );
-    await _io.writeJson(
-      File('${dataDir.path}/operation_collections.json'),
-      operationCollectionsOut,
     );
     await _io.writeJson(
       File('${dataDir.path}/operation_collection_contents.json'),
@@ -2083,7 +2183,7 @@ class DartImporterBackend implements ImporterBackend {
     _io.printInfo('Graffiti: ${graffitiOut.length}');
     _io.printInfo('Patches: ${patchesOut.length}');
     _io.printInfo('Charms: ${charmsOut.length}');
-    _io.printInfo('Case contents: ${caseContentsOut.length}');
+    _io.printInfo('Container contents: ${containerContentsOut.length}');
     _io.printInfo('Sticker contents: ${stickerContentsOut.length}');
     _io.printInfo('Pin contents: ${pinContentsOut.length}');
     _io.printInfo('Music kit contents: ${musicKitContentsOut.length}');
@@ -2124,6 +2224,25 @@ class DartImporterBackend implements ImporterBackend {
       'Operation collections created: $operationCollectionsCreated',
     );
     _io.printInfo('Tournament logos downloaded: $tournamentLogosCreated');
+  }
+
+  Map<String, dynamic> _normalizeExistingContainerMeta(
+    Map<String, dynamic> item,
+  ) {
+    final normalized = Map<String, dynamic>.from(item);
+    final imagePath = (normalized['containerImage'] ?? normalized['caseImage'])
+        ?.toString()
+        .trim();
+
+    if (imagePath != null && imagePath.isNotEmpty) {
+      normalized['containerImage'] = imagePath.replaceAll(
+        'assets/cases/',
+        'assets/containers/',
+      );
+    }
+
+    normalized.remove('caseImage');
+    return normalized;
   }
 
   Map<String, Map<String, dynamic>> _loadRewardOverrides() {

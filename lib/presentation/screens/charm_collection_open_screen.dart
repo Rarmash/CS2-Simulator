@@ -3,7 +3,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 
 import '../../core/utils/date_format_helper.dart';
-import '../../data/models/case_dto.dart';
+import '../../data/models/container_dto.dart';
 import '../../data/models/charm_dto.dart';
 import '../../data/repositories/local_data_repository.dart';
 import '../../domain/charm_collection_simulator_service.dart';
@@ -20,7 +20,7 @@ import '../widgets/collectible_open_header.dart';
 import '../widgets/opening_loading_card.dart';
 
 class CharmCollectionOpenScreen extends StatefulWidget {
-  final CaseDto collection;
+  final ContainerDto collection;
   final LocalDataRepository repository;
 
   const CharmCollectionOpenScreen({
@@ -46,7 +46,9 @@ class _CharmCollectionOpenScreenState extends State<CharmCollectionOpenScreen> {
   @override
   void initState() {
     super.initState();
-    _charmsFuture = widget.repository.loadCharmsForCase(widget.collection.id);
+    _charmsFuture = widget.repository.loadCharmsForContainer(
+      widget.collection.id,
+    );
   }
 
   Future<void> _openCollection(List<CharmDto> charms) async {
@@ -89,7 +91,7 @@ class _CharmCollectionOpenScreenState extends State<CharmCollectionOpenScreen> {
           return [
             SliverToBoxAdapter(
               child: CollectibleOpenHeader(
-                assetPath: widget.collection.caseImage,
+                assetPath: widget.collection.containerImage,
                 imageHeight: constraints.maxWidth < 700 ? 90 : 120,
                 badges: [
                   ChipBadge(

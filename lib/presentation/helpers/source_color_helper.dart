@@ -46,6 +46,12 @@ class SourceColorHelper {
         return Colors.pinkAccent;
       case 'CHARM_COLLECTION':
         return Colors.deepOrangeAccent;
+      case 'AGENT_COLLECTION':
+        return Colors.blueGrey;
+      case 'REWARD_COLLECTION':
+        return Colors.amberAccent;
+      case 'OPERATION_COLLECTION':
+        return Colors.amberAccent;
       case 'TERMINAL':
         return Colors.deepPurpleAccent;
       case 'XRAY_PACKAGE':

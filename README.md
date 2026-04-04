@@ -41,13 +41,13 @@ Unless explicitly stated otherwise, the repository license applies to the source
 - Flutter
 - Dart
 - Local JSON assets for all generated content
-- Dart-based importer for containers, skins, stickers, pins, music kits, agents, graffiti, patches, charms, and collection metadata
+- Dart-based importer for containers, skins, stickers, pins, music kits, agents, graffiti, patches, charms, and unified source metadata
 
 ## Project Structure
 
 - [lib/](lib) application code
 - [assets/data/](assets/data) generated JSON data
-- [assets/cases/](assets/cases) container images
+- [assets/containers/](assets/containers) images for containers and collection-type sources
 - [assets/skins/](assets/skins) skin images
 - [assets/stickers/](assets/stickers) sticker images
 - [assets/pins/](assets/pins) pin images
@@ -105,6 +105,9 @@ dart run tool/import_cs_data.dart --compression=max-compress
 - `fast` is the default mode and is intended for normal development work
 - `max-compress` is intended for rare clean release rebuilds
 
+The main generated source registry is `assets/data/containers.json`.
+It includes regular containers as well as collection-type sources such as reward collections, legacy operation collections, agent collections, sticker collections, patch collections, and charm collections.
+
 After a large migration or a clean import, you can remove orphaned generated assets:
 
 ```bash
@@ -115,6 +118,7 @@ dart run tool/prune_generated_assets.dart
 
 - Existing generated assets are not overwritten during normal imports
 - The importer stores the actual generated extension, including `.webp` where applicable
+- Collection-type source images are stored alongside regular container images in `assets/containers/`
 - Container dates are resolved locally instead of trusting API sale dates
 - Supported container types fail the import if a hardcoded release date is missing
 - Generated assets can be rebuilt in `fast` or `max-compress` mode depending on whether you are doing normal development or a release rebuild
@@ -148,7 +152,7 @@ The project is actively evolving, with current work focused on:
 ### v0.10
 
 - Trade-Up rewrite and UI cleanup
-- Unified handling of regular and StatTrak™ Music Kits as one grouped item
+- Unified handling of regular and `StatTrak™` Music Kits as one grouped item
 - Broader simulator accuracy pass across more container types
 - Better browsing and glossary coverage for non-skin content
 

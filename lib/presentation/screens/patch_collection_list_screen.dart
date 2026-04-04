@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../data/models/case_dto.dart';
+import '../../data/models/container_dto.dart';
 import '../../data/repositories/local_data_repository.dart';
 import '../helpers/app_navigation_helper.dart';
 import '../helpers/source_color_helper.dart';
@@ -21,7 +21,7 @@ class PatchCollectionListScreen extends StatefulWidget {
 }
 
 class _PatchCollectionListScreenState extends State<PatchCollectionListScreen> {
-  late Future<List<CaseDto>> _future;
+  late Future<List<ContainerDto>> _future;
 
   @override
   void initState() {
@@ -29,7 +29,7 @@ class _PatchCollectionListScreenState extends State<PatchCollectionListScreen> {
     _future = widget.repository.loadPatchCollections();
   }
 
-  Widget _buildCard(BuildContext context, CaseDto collection) {
+  Widget _buildCard(BuildContext context, ContainerDto collection) {
     final typeColor = SourceColorHelper.containerTypeColor(collection.type);
     final sourceColor = SourceColorHelper.collectibleSourceColor(
       collection.sourceType,
@@ -37,7 +37,7 @@ class _PatchCollectionListScreenState extends State<PatchCollectionListScreen> {
     );
 
     return CollectionListCard(
-      imagePath: collection.caseImage,
+      imagePath: collection.containerImage,
       title: collection.name,
       releaseDate: collection.releaseDate,
       chips: [
@@ -74,10 +74,10 @@ class _PatchCollectionListScreenState extends State<PatchCollectionListScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text('Patch Collections')),
-      body: AsyncCollectionLoader<CaseDto>(
+      body: AsyncCollectionLoader<ContainerDto>(
         future: _future,
         builder: (context, items) {
-          return ResponsiveCollectionGrid<CaseDto>(
+          return ResponsiveCollectionGrid<ContainerDto>(
             items: items,
             emptyMessage: 'No patch collections found.',
             itemBuilder: _buildCard,

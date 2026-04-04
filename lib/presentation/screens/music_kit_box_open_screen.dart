@@ -2,7 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import '../../core/utils/date_format_helper.dart';
-import '../../data/models/case_dto.dart';
+import '../../data/models/container_dto.dart';
 import '../../data/models/music_kit_dto.dart';
 import '../../data/repositories/local_data_repository.dart';
 import '../../domain/dropped_music_kit.dart';
@@ -22,12 +22,12 @@ import '../widgets/music_kit_grid_tile.dart';
 import '../widgets/opening_roll_item_card.dart';
 
 class MusicKitBoxOpenScreen extends StatefulWidget {
-  final CaseDto caseDto;
+  final ContainerDto containerDto;
   final LocalDataRepository repository;
 
   const MusicKitBoxOpenScreen({
     super.key,
-    required this.caseDto,
+    required this.containerDto,
     required this.repository,
   });
 
@@ -49,8 +49,8 @@ class _MusicKitBoxOpenScreenState extends State<MusicKitBoxOpenScreen> {
   @override
   void initState() {
     super.initState();
-    _musicKitsFuture = widget.repository.loadMusicKitsForCase(
-      widget.caseDto.id,
+    _musicKitsFuture = widget.repository.loadMusicKitsForContainer(
+      widget.containerDto.id,
     );
   }
 
@@ -116,22 +116,24 @@ class _MusicKitBoxOpenScreenState extends State<MusicKitBoxOpenScreen> {
   @override
   Widget build(BuildContext context) {
     final formattedReleaseDate = DateFormatHelper.formatReleaseDate(
-      widget.caseDto.releaseDate,
+      widget.containerDto.releaseDate,
     );
-    final color = SourceColorHelper.containerTypeColor(widget.caseDto.type);
+    final color = SourceColorHelper.containerTypeColor(
+      widget.containerDto.type,
+    );
 
     return Scaffold(
-      appBar: AppBar(title: Text(widget.caseDto.name)),
+      appBar: AppBar(title: Text(widget.containerDto.name)),
       body: CollectibleOpenBody<MusicKitDto>(
         future: _musicKitsFuture,
         sliverBuilder: (context, constraints, musicKits, gridCount, aspectRatio) {
           return [
             SliverToBoxAdapter(
               child: CollectibleOpenHeader(
-                assetPath: widget.caseDto.caseImage,
+                assetPath: widget.containerDto.containerImage,
                 imageHeight: constraints.maxWidth < 700 ? 90 : 120,
                 badges: [
-                  ChipBadge(label: widget.caseDto.typeLabel, color: color),
+                  ChipBadge(label: widget.containerDto.typeLabel, color: color),
                 ],
                 releaseDateText: formattedReleaseDate,
                 description:

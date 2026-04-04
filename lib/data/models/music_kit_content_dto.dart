@@ -1,12 +1,15 @@
 class MusicKitContentDto {
-  final String caseId;
+  final String containerId;
   final List<String> musicKitIds;
 
-  const MusicKitContentDto({required this.caseId, required this.musicKitIds});
+  const MusicKitContentDto({
+    required this.containerId,
+    required this.musicKitIds,
+  });
 
   factory MusicKitContentDto.fromJson(Map<String, dynamic> json) {
     return MusicKitContentDto(
-      caseId: json['caseId'] as String,
+      containerId: json['containerId'] as String,
       musicKitIds: List<String>.from(json['musicKitIds'] as List<dynamic>),
     );
   }

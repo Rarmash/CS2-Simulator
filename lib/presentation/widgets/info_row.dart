@@ -27,10 +27,7 @@ class InfoRow extends StatelessWidget {
             ),
           ),
           Expanded(
-            child: Text(
-              value,
-              style: TextStyle(color: valueColor),
-            ),
+            child: Text(value, style: TextStyle(color: valueColor)),
           ),
         ],
       ),

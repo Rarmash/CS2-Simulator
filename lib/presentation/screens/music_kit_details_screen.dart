@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../core/utils/date_format_helper.dart';
-import '../../data/models/case_dto.dart';
+import '../../data/models/container_dto.dart';
 import '../../data/models/music_kit_dto.dart';
 import '../../data/repositories/local_data_repository.dart';
 import '../helpers/app_navigation_helper.dart';
@@ -47,8 +47,9 @@ class MusicKitDetailsScreen extends StatelessWidget {
             );
           }
 
-          final data = snapshot.data ??
-              const _MusicKitDetailsData(variants: [], cases: []);
+          final data =
+              snapshot.data ??
+              const _MusicKitDetailsData(variants: [], containers: []);
           if (data.variants.isEmpty) {
             return const Center(
               child: Padding(
@@ -107,7 +108,7 @@ class MusicKitDetailsScreen extends StatelessWidget {
                     ),
                   ),
                   DetailInfoRow(
-                    title: 'StatTrak™ variant',
+                    title: 'StatTrakРІвЂћСћ variant',
                     value: _statTrakAvailabilityLabel(
                       hasRegular: hasRegular,
                       hasStatTrak: hasStatTrak,
@@ -118,21 +119,22 @@ class MusicKitDetailsScreen extends StatelessWidget {
                 ],
               ),
               const SizedBox(height: 12),
-              DetailSourceSection<CaseDto>(
+              DetailSourceSection<ContainerDto>(
                 title: 'Boxes',
-                items: data.cases,
+                items: data.containers,
                 emptyText: 'No music kit box sources found.',
                 itemBuilder: (item) => DetailSourceTile(
-                  imagePath: item.caseImage,
+                  imagePath: item.containerImage,
                   title: item.name,
                   subtitle: item.typeLabel,
                   trailing:
-                      DateFormatHelper.formatReleaseDate(item.releaseDate) ?? '-',
+                      DateFormatHelper.formatReleaseDate(item.releaseDate) ??
+                      '-',
                   onTap: () {
                     AppNavigationHelper.pushScreen(
                       context,
                       AppNavigationHelper.buildContainerOpenScreen(
-                        caseDto: item,
+                        containerDto: item,
                         repository: repository,
                       ),
                     );
@@ -153,22 +155,23 @@ class MusicKitDetailsScreen extends StatelessWidget {
           (musicKit.collection ?? '') == (collection ?? '');
     }).toList();
 
-    final seenCaseIds = <String>{};
-    final cases = <CaseDto>[];
+    final seenContainerIds = <String>{};
+    final containers = <ContainerDto>[];
     for (final variant in variants) {
-      final sources = await repository.loadCasesForMusicKit(variant.id);
+      final sources = await repository.loadContainersForMusicKit(variant.id);
       for (final item in sources) {
-        if (seenCaseIds.add(item.id)) {
-          cases.add(item);
+        if (seenContainerIds.add(item.id)) {
+          containers.add(item);
         }
       }
     }
-    cases.sort(
-      (a, b) =>
-          (a.releaseDate ?? '9999-99-99').compareTo(b.releaseDate ?? '9999-99-99'),
+    containers.sort(
+      (a, b) => (a.releaseDate ?? '9999-99-99').compareTo(
+        b.releaseDate ?? '9999-99-99',
+      ),
     );
 
-    return _MusicKitDetailsData(variants: variants, cases: cases);
+    return _MusicKitDetailsData(variants: variants, containers: containers);
   }
 
   String _titleFromName(String fullName) {
@@ -197,15 +200,12 @@ class MusicKitDetailsScreen extends StatelessWidget {
     return parts.join(' | ');
   }
 
-  String _typeLabel({
-    required bool hasRegular,
-    required bool hasStatTrak,
-  }) {
+  String _typeLabel({required bool hasRegular, required bool hasStatTrak}) {
     if (hasRegular && hasStatTrak) {
-      return 'Music Kit / StatTrak™';
+      return 'Music Kit / StatTrakРІвЂћСћ';
     }
     if (hasStatTrak) {
-      return 'StatTrak™ Music Kit';
+      return 'StatTrakРІвЂћСћ Music Kit';
     }
     return 'Music Kit';
   }
@@ -226,20 +226,21 @@ class MusicKitDetailsScreen extends StatelessWidget {
 
 class _MusicKitDetailsData {
   final List<MusicKitDto> variants;
-  final List<CaseDto> cases;
+  final List<ContainerDto> containers;
 
   const _MusicKitDetailsData({
     required this.variants,
-    required this.cases,
+    required this.containers,
   });
 
   MusicKitDto get primary {
-    final sorted = [...variants]..sort((a, b) {
-      if (a.isStatTrak == b.isStatTrak) {
-        return a.id.compareTo(b.id);
-      }
-      return a.isStatTrak ? 1 : -1;
-    });
+    final sorted = [...variants]
+      ..sort((a, b) {
+        if (a.isStatTrak == b.isStatTrak) {
+          return a.id.compareTo(b.id);
+        }
+        return a.isStatTrak ? 1 : -1;
+      });
     return sorted.first;
   }
 }

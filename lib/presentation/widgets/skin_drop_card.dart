@@ -7,10 +7,7 @@ import 'info_row.dart';
 class SkinDropCard extends StatelessWidget {
   final DroppedSkin drop;
 
-  const SkinDropCard({
-    super.key,
-    required this.drop,
-  });
+  const SkinDropCard({super.key, required this.drop});
 
   @override
   Widget build(BuildContext context) {
@@ -27,10 +24,7 @@ class SkinDropCard extends StatelessWidget {
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(14),
           gradient: LinearGradient(
-            colors: [
-              rarityColor.withValues(alpha: 0.18),
-              Colors.transparent,
-            ],
+            colors: [rarityColor.withValues(alpha: 0.18), Colors.transparent],
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
           ),
@@ -44,15 +38,14 @@ class SkinDropCard extends StatelessWidget {
               final image = Image.asset(
                 drop.skin.skinImage,
                 height: isNarrow ? 120 : 160,
-                errorBuilder: (_, error, stackTrace) => Icon(
-                  Icons.image_not_supported,
-                  size: isNarrow ? 64 : 80,
-                ),
+                errorBuilder: (_, error, stackTrace) =>
+                    Icon(Icons.image_not_supported, size: isNarrow ? 64 : 80),
               );
 
               final info = Column(
-                crossAxisAlignment:
-                isNarrow ? CrossAxisAlignment.center : CrossAxisAlignment.start,
+                crossAxisAlignment: isNarrow
+                    ? CrossAxisAlignment.center
+                    : CrossAxisAlignment.start,
                 children: [
                   Text(
                     SkinUiHelper.fullDropDisplayName(
@@ -92,41 +85,25 @@ class SkinDropCard extends StatelessWidget {
                     title: 'Float',
                     value: drop.skinFloat?.toStringAsFixed(6) ?? '-',
                   ),
-                  InfoRow(
-                    title: 'Exterior',
-                    value: drop.exterior ?? '-',
-                  ),
+                  InfoRow(title: 'Exterior', value: drop.exterior ?? '-'),
                   if (drop.skin.collection != null &&
                       drop.skin.collection!.isNotEmpty)
-                    InfoRow(
-                      title: 'Collection',
-                      value: drop.skin.collection!,
-                    ),
+                    InfoRow(title: 'Collection', value: drop.skin.collection!),
                 ],
               );
 
               if (isNarrow) {
                 return Column(
-                  children: [
-                    image,
-                    const SizedBox(height: 12),
-                    info,
-                  ],
+                  children: [image, const SizedBox(height: 12), info],
                 );
               }
 
               return Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Expanded(
-                    flex: 4,
-                    child: Center(child: image),
-                  ),
+                  Expanded(flex: 4, child: Center(child: image)),
                   const SizedBox(width: 16),
-                  Expanded(
-                    flex: 5,
-                    child: info,
-                  ),
+                  Expanded(flex: 5, child: info),
                 ],
               );
             },

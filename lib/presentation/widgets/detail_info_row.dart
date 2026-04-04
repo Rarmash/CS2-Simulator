@@ -23,18 +23,10 @@ class DetailInfoRow extends StatelessWidget {
             width: titleWidth,
             child: Text(
               title,
-              style: const TextStyle(
-                color: Colors.white60,
-                fontSize: 14,
-              ),
+              style: const TextStyle(color: Colors.white60, fontSize: 14),
             ),
           ),
-          Expanded(
-            child: Text(
-              value,
-              style: const TextStyle(fontSize: 14),
-            ),
-          ),
+          Expanded(child: Text(value, style: const TextStyle(fontSize: 14))),
         ],
       ),
     );

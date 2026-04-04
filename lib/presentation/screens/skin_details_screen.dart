@@ -2,9 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../core/settings/settings_controller.dart';
 import '../../core/utils/date_format_helper.dart';
-import '../../data/models/case_dto.dart';
-import '../../data/models/operation_collection_dto.dart';
-import '../../data/models/reward_collection_dto.dart';
+import '../../data/models/container_dto.dart';
 import '../../data/models/skin_dto.dart';
 import '../../data/repositories/local_data_repository.dart';
 import '../helpers/app_navigation_helper.dart';
@@ -34,16 +32,12 @@ class SkinDetailsScreen extends StatelessWidget {
     final rarityColor = SkinUiHelper.rarityColor(skin);
 
     return Scaffold(
-      appBar: AppBar(
-        title: Text(skin.itemDisplayName),
-      ),
+      appBar: AppBar(title: Text(skin.itemDisplayName)),
       body: FutureBuilder<_SkinSourcesData>(
         future: _loadData(),
         builder: (context, snapshot) {
           if (snapshot.connectionState != ConnectionState.done) {
-            return const Center(
-              child: CircularProgressIndicator(),
-            );
+            return const Center(child: CircularProgressIndicator());
           }
 
           if (snapshot.hasError) {
@@ -58,9 +52,10 @@ class SkinDetailsScreen extends StatelessWidget {
             );
           }
 
-          final data = snapshot.data ??
+          final data =
+              snapshot.data ??
               const _SkinSourcesData(
-                cases: [],
+                containers: [],
                 rewardCollections: [],
                 operationCollections: [],
               );
@@ -87,10 +82,8 @@ class SkinDetailsScreen extends StatelessWidget {
                             isAntiAlias: false,
                             gaplessPlayback: true,
                             cacheWidth: narrow ? 420 : 640,
-                            errorBuilder: (_, _, _) => const Icon(
-                              Icons.image_not_supported,
-                              size: 64,
-                            ),
+                            errorBuilder: (_, _, _) =>
+                                const Icon(Icons.image_not_supported, size: 64),
                           ),
                         );
 
@@ -101,8 +94,9 @@ class SkinDetailsScreen extends StatelessWidget {
                           children: [
                             Text(
                               skin.itemDisplayName,
-                              textAlign:
-                              narrow ? TextAlign.center : TextAlign.left,
+                              textAlign: narrow
+                                  ? TextAlign.center
+                                  : TextAlign.left,
                               style: const TextStyle(
                                 fontSize: 22,
                                 fontWeight: FontWeight.bold,
@@ -111,8 +105,9 @@ class SkinDetailsScreen extends StatelessWidget {
                             const SizedBox(height: 6),
                             Text(
                               SkinUiHelper.secondaryText(skin),
-                              textAlign:
-                              narrow ? TextAlign.center : TextAlign.left,
+                              textAlign: narrow
+                                  ? TextAlign.center
+                                  : TextAlign.left,
                               style: const TextStyle(
                                 color: Colors.white70,
                                 fontSize: 16,
@@ -130,8 +125,8 @@ class SkinDetailsScreen extends StatelessWidget {
                                 _tag(
                                   skin.itemKind == 'WEAPON'
                                       ? SkinUiHelper.weaponTypeLabel(
-                                    skin.weaponType,
-                                  )
+                                          skin.weaponType,
+                                        )
                                       : skin.itemKind == 'KNIFE'
                                       ? 'Knife'
                                       : 'Gloves',
@@ -151,45 +146,26 @@ class SkinDetailsScreen extends StatelessWidget {
                                 skin.finishCatalogName!,
                               ),
                             if ((skin.variantName ?? '').isNotEmpty)
-                              _infoRow(
-                                'Variant',
-                                skin.variantName!,
-                              ),
+                              _infoRow('Variant', skin.variantName!),
                             if ((skin.phase ?? '').isNotEmpty)
-                              _infoRow(
-                                'Phase',
-                                skin.phase!,
-                              ),
+                              _infoRow('Phase', skin.phase!),
                             if ((skin.apiPaintIndex ?? '').isNotEmpty)
-                              _infoRow(
-                                'Paint index',
-                                skin.apiPaintIndex!,
-                              ),
+                              _infoRow('Paint index', skin.apiPaintIndex!),
                           ],
                         );
 
                         if (narrow) {
                           return Column(
-                            children: [
-                              image,
-                              const SizedBox(height: 16),
-                              info,
-                            ],
+                            children: [image, const SizedBox(height: 16), info],
                           );
                         }
 
                         return Row(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Expanded(
-                              flex: 4,
-                              child: image,
-                            ),
+                            Expanded(flex: 4, child: image),
                             const SizedBox(width: 16),
-                            Expanded(
-                              flex: 5,
-                              child: info,
-                            ),
+                            Expanded(flex: 5, child: info),
                           ],
                         );
                       },
@@ -219,31 +195,29 @@ class SkinDetailsScreen extends StatelessWidget {
                       const SizedBox(height: 10),
                       const Text(
                         'Red segment shows the valid float range for this skin.',
-                        style: TextStyle(
-                          color: Colors.white70,
-                          fontSize: 13,
-                        ),
+                        style: TextStyle(color: Colors.white70, fontSize: 13),
                       ),
                     ],
                   ),
                 ),
               ),
               const SizedBox(height: 12),
-              _sourceSection<CaseDto>(
+              _sourceSection<ContainerDto>(
                 title: 'Cases / Containers',
-                items: data.cases,
+                items: data.containers,
                 emptyText: 'This skin is not present in case/container data.',
                 itemBuilder: (item) => _sourceTile(
-                  imagePath: item.caseImage,
+                  imagePath: item.containerImage,
                   title: item.name,
                   subtitle: item.typeLabel,
                   trailing:
-                  DateFormatHelper.formatReleaseDate(item.releaseDate) ?? '-',
+                      DateFormatHelper.formatReleaseDate(item.releaseDate) ??
+                      '-',
                   onTap: () {
                     AppNavigationHelper.pushScreen(
                       context,
                       AppNavigationHelper.buildContainerOpenScreen(
-                        caseDto: item,
+                        containerDto: item,
                         repository: repository,
                         settingsController: settingsController,
                       ),
@@ -252,16 +226,17 @@ class SkinDetailsScreen extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 12),
-              _sourceSection<RewardCollectionDto>(
+              _sourceSection<ContainerDto>(
                 title: 'Reward Collections / Armory',
                 items: data.rewardCollections,
                 emptyText: 'No reward collection sources found.',
                 itemBuilder: (item) => _sourceTile(
-                  imagePath: item.image,
+                  imagePath: item.containerImage,
                   title: item.name,
                   subtitle: _rewardCollectionSubtitle(item),
                   trailing:
-                  DateFormatHelper.formatReleaseDate(item.releaseDate) ?? '-',
+                      DateFormatHelper.formatReleaseDate(item.releaseDate) ??
+                      '-',
                   onTap: () {
                     AppNavigationHelper.pushScreen(
                       context,
@@ -274,16 +249,17 @@ class SkinDetailsScreen extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 12),
-              _sourceSection<OperationCollectionDto>(
+              _sourceSection<ContainerDto>(
                 title: 'Legacy Operation Collections',
                 items: data.operationCollections,
                 emptyText: 'No legacy operation collection sources found.',
                 itemBuilder: (item) => _sourceTile(
-                  imagePath: item.image,
+                  imagePath: item.containerImage,
                   title: item.name,
                   subtitle: item.operationLabel,
                   trailing:
-                  DateFormatHelper.formatReleaseDate(item.releaseDate) ?? '-',
+                      DateFormatHelper.formatReleaseDate(item.releaseDate) ??
+                      '-',
                   onTap: () {
                     AppNavigationHelper.pushScreen(
                       context,
@@ -304,15 +280,15 @@ class SkinDetailsScreen extends StatelessWidget {
 
   Future<_SkinSourcesData> _loadData() async {
     final results = await Future.wait<dynamic>([
-      repository.loadCasesForSkin(skin.id),
+      repository.loadContainersForSkin(skin.id),
       repository.loadRewardCollectionsForSkin(skin.id),
       repository.loadOperationCollectionsForSkin(skin.id),
     ]);
 
     return _SkinSourcesData(
-      cases: results[0] as List<CaseDto>,
-      rewardCollections: results[1] as List<RewardCollectionDto>,
-      operationCollections: results[2] as List<OperationCollectionDto>,
+      containers: results[0] as List<ContainerDto>,
+      rewardCollections: results[1] as List<ContainerDto>,
+      operationCollections: results[2] as List<ContainerDto>,
     );
   }
 
@@ -354,23 +330,20 @@ class SkinDetailsScreen extends StatelessWidget {
     );
   }
 
-  String _rewardCollectionSubtitle(RewardCollectionDto item) {
-    final parts = <String>[
-      item.sourceLabel,
-      item.actionLabel,
-    ];
+  String _rewardCollectionSubtitle(ContainerDto item) {
+    final parts = <String>[item.sourceLabel, item.actionLabel];
 
-    return parts.join(' • ');
+    return parts.join(' РІР‚Сћ ');
   }
 }
 
 class _SkinSourcesData {
-  final List<CaseDto> cases;
-  final List<RewardCollectionDto> rewardCollections;
-  final List<OperationCollectionDto> operationCollections;
+  final List<ContainerDto> containers;
+  final List<ContainerDto> rewardCollections;
+  final List<ContainerDto> operationCollections;
 
   const _SkinSourcesData({
-    required this.cases,
+    required this.containers,
     required this.rewardCollections,
     required this.operationCollections,
   });

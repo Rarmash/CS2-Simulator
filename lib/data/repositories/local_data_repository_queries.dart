@@ -1,10 +1,10 @@
 part of 'local_data_repository.dart';
 
 mixin _LocalDataRepositoryQueries on _LocalDataRepositoryLoaders {
-  Future<List<SkinDto>> loadSkinsForCase(String caseId) async {
+  Future<List<SkinDto>> loadSkinsForContainer(String containerId) async {
     final skins = await loadSkins();
-    final contents = await loadCaseContents();
-    final content = contents.firstWhere((c) => c.caseId == caseId);
+    final contents = await loadContainerContents();
+    final content = contents.firstWhere((c) => c.containerId == containerId);
     final ids = content.skinIds.toSet();
 
     final result = skins.where((s) => ids.contains(s.id)).toList();
@@ -16,10 +16,10 @@ mixin _LocalDataRepositoryQueries on _LocalDataRepositoryLoaders {
     return result;
   }
 
-  Future<List<StickerDto>> loadStickersForCase(String caseId) async {
+  Future<List<StickerDto>> loadStickersForContainer(String containerId) async {
     final stickers = await loadStickers();
     final contents = await loadStickerContents();
-    final content = contents.firstWhere((c) => c.caseId == caseId);
+    final content = contents.firstWhere((c) => c.containerId == containerId);
     final ids = content.stickerIds.toSet();
 
     final result = stickers.where((s) => ids.contains(s.id)).toList();
@@ -33,10 +33,10 @@ mixin _LocalDataRepositoryQueries on _LocalDataRepositoryLoaders {
     return result;
   }
 
-  Future<List<PinDto>> loadPinsForCase(String caseId) async {
+  Future<List<PinDto>> loadPinsForContainer(String containerId) async {
     final pins = await loadPins();
     final contents = await loadPinContents();
-    final content = contents.firstWhere((c) => c.caseId == caseId);
+    final content = contents.firstWhere((c) => c.containerId == containerId);
     final ids = content.pinIds.toSet();
 
     final result = pins.where((p) => ids.contains(p.id)).toList();
@@ -48,10 +48,12 @@ mixin _LocalDataRepositoryQueries on _LocalDataRepositoryLoaders {
     return result;
   }
 
-  Future<List<MusicKitDto>> loadMusicKitsForCase(String caseId) async {
+  Future<List<MusicKitDto>> loadMusicKitsForContainer(
+    String containerId,
+  ) async {
     final musicKits = await loadMusicKits();
     final contents = await loadMusicKitContents();
-    final content = contents.firstWhere((c) => c.caseId == caseId);
+    final content = contents.firstWhere((c) => c.containerId == containerId);
     final ids = content.musicKitIds.toSet();
 
     final result = musicKits.where((m) => ids.contains(m.id)).toList();
@@ -69,10 +71,10 @@ mixin _LocalDataRepositoryQueries on _LocalDataRepositoryLoaders {
     return result;
   }
 
-  Future<List<GraffitiDto>> loadGraffitiForCase(String caseId) async {
+  Future<List<GraffitiDto>> loadGraffitiForContainer(String containerId) async {
     final graffiti = await loadGraffiti();
     final contents = await loadGraffitiContents();
-    final content = contents.firstWhere((c) => c.caseId == caseId);
+    final content = contents.firstWhere((c) => c.containerId == containerId);
     final ids = content.graffitiIds.toSet();
 
     final result = graffiti.where((g) => ids.contains(g.id)).toList();
@@ -86,10 +88,10 @@ mixin _LocalDataRepositoryQueries on _LocalDataRepositoryLoaders {
     return result;
   }
 
-  Future<List<PatchDto>> loadPatchesForCase(String caseId) async {
+  Future<List<PatchDto>> loadPatchesForContainer(String containerId) async {
     final patches = await loadPatches();
     final contents = await loadPatchContents();
-    final content = contents.firstWhere((c) => c.caseId == caseId);
+    final content = contents.firstWhere((c) => c.containerId == containerId);
     final ids = content.patchIds.toSet();
 
     final result = patches.where((p) => ids.contains(p.id)).toList();
@@ -103,10 +105,10 @@ mixin _LocalDataRepositoryQueries on _LocalDataRepositoryLoaders {
     return result;
   }
 
-  Future<List<CharmDto>> loadCharmsForCase(String caseId) async {
+  Future<List<CharmDto>> loadCharmsForContainer(String containerId) async {
     final charms = await loadCharms();
     final contents = await loadCharmContents();
-    final content = contents.firstWhere((c) => c.caseId == caseId);
+    final content = contents.firstWhere((c) => c.containerId == containerId);
     final ids = content.charmIds.toSet();
 
     final result = charms.where((c) => ids.contains(c.id)).toList();
@@ -183,105 +185,123 @@ mixin _LocalDataRepositoryQueries on _LocalDataRepositoryLoaders {
     return result;
   }
 
-  Future<List<CaseDto>> loadCasesForSkin(String skinId) async {
-    final cases = await loadCases();
-    final contents = await loadCaseContents();
+  Future<List<ContainerDto>> loadContainersForSkin(String skinId) async {
+    final containers = await loadContainers();
+    final contents = await loadContainerContents();
 
-    final caseIds = contents
+    final containerIds = contents
         .where((entry) => entry.skinIds.contains(skinId))
-        .map((entry) => entry.caseId)
+        .map((entry) => entry.containerId)
         .toSet();
 
-    final result = cases.where((c) => caseIds.contains(c.id)).toList();
-    result.sort(_compareCaseByReleaseDateAsc);
+    final result = containers
+        .where((c) => containerIds.contains(c.id))
+        .toList();
+    result.sort(_compareContainerByReleaseDateAsc);
     return result;
   }
 
-  Future<List<CaseDto>> loadCasesForSticker(String stickerId) async {
-    final cases = await loadCases();
+  Future<List<ContainerDto>> loadContainersForSticker(String stickerId) async {
+    final containers = await loadContainers();
     final contents = await loadStickerContents();
 
-    final caseIds = contents
+    final containerIds = contents
         .where((entry) => entry.stickerIds.contains(stickerId))
-        .map((entry) => entry.caseId)
+        .map((entry) => entry.containerId)
         .toSet();
 
-    final result = cases.where((c) => caseIds.contains(c.id)).toList();
-    result.sort(_compareCaseByReleaseDateAsc);
+    final result = containers
+        .where((c) => containerIds.contains(c.id))
+        .toList();
+    result.sort(_compareContainerByReleaseDateAsc);
     return result;
   }
 
-  Future<List<CaseDto>> loadCasesForPin(String pinId) async {
-    final cases = await loadCases();
+  Future<List<ContainerDto>> loadContainersForPin(String pinId) async {
+    final containers = await loadContainers();
     final contents = await loadPinContents();
 
-    final caseIds = contents
+    final containerIds = contents
         .where((entry) => entry.pinIds.contains(pinId))
-        .map((entry) => entry.caseId)
+        .map((entry) => entry.containerId)
         .toSet();
 
-    final result = cases.where((c) => caseIds.contains(c.id)).toList();
-    result.sort(_compareCaseByReleaseDateAsc);
+    final result = containers
+        .where((c) => containerIds.contains(c.id))
+        .toList();
+    result.sort(_compareContainerByReleaseDateAsc);
     return result;
   }
 
-  Future<List<CaseDto>> loadCasesForMusicKit(String musicKitId) async {
-    final cases = await loadCases();
+  Future<List<ContainerDto>> loadContainersForMusicKit(
+    String musicKitId,
+  ) async {
+    final containers = await loadContainers();
     final contents = await loadMusicKitContents();
 
-    final caseIds = contents
+    final containerIds = contents
         .where((entry) => entry.musicKitIds.contains(musicKitId))
-        .map((entry) => entry.caseId)
+        .map((entry) => entry.containerId)
         .toSet();
 
-    final result = cases.where((c) => caseIds.contains(c.id)).toList();
-    result.sort(_compareCaseByReleaseDateAsc);
+    final result = containers
+        .where((c) => containerIds.contains(c.id))
+        .toList();
+    result.sort(_compareContainerByReleaseDateAsc);
     return result;
   }
 
-  Future<List<CaseDto>> loadCasesForGraffiti(String graffitiId) async {
-    final cases = await loadCases();
+  Future<List<ContainerDto>> loadContainersForGraffiti(
+    String graffitiId,
+  ) async {
+    final containers = await loadContainers();
     final contents = await loadGraffitiContents();
 
-    final caseIds = contents
+    final containerIds = contents
         .where((entry) => entry.graffitiIds.contains(graffitiId))
-        .map((entry) => entry.caseId)
+        .map((entry) => entry.containerId)
         .toSet();
 
-    final result = cases.where((c) => caseIds.contains(c.id)).toList();
-    result.sort(_compareCaseByReleaseDateAsc);
+    final result = containers
+        .where((c) => containerIds.contains(c.id))
+        .toList();
+    result.sort(_compareContainerByReleaseDateAsc);
     return result;
   }
 
-  Future<List<CaseDto>> loadCasesForPatch(String patchId) async {
-    final cases = await loadCases();
+  Future<List<ContainerDto>> loadContainersForPatch(String patchId) async {
+    final containers = await loadContainers();
     final contents = await loadPatchContents();
 
-    final caseIds = contents
+    final containerIds = contents
         .where((entry) => entry.patchIds.contains(patchId))
-        .map((entry) => entry.caseId)
+        .map((entry) => entry.containerId)
         .toSet();
 
-    final result = cases.where((c) => caseIds.contains(c.id)).toList();
-    result.sort(_compareCaseByReleaseDateAsc);
+    final result = containers
+        .where((c) => containerIds.contains(c.id))
+        .toList();
+    result.sort(_compareContainerByReleaseDateAsc);
     return result;
   }
 
-  Future<List<CaseDto>> loadCasesForCharm(String charmId) async {
-    final cases = await loadCases();
+  Future<List<ContainerDto>> loadContainersForCharm(String charmId) async {
+    final containers = await loadContainers();
     final contents = await loadCharmContents();
 
-    final caseIds = contents
+    final containerIds = contents
         .where((entry) => entry.charmIds.contains(charmId))
-        .map((entry) => entry.caseId)
+        .map((entry) => entry.containerId)
         .toSet();
 
-    final result = cases.where((c) => caseIds.contains(c.id)).toList();
-    result.sort(_compareCaseByReleaseDateAsc);
+    final result = containers
+        .where((c) => containerIds.contains(c.id))
+        .toList();
+    result.sort(_compareContainerByReleaseDateAsc);
     return result;
   }
 
-  Future<List<AgentCollectionDto>> loadAgentCollectionsForAgent(
+  Future<List<ContainerDto>> loadAgentCollectionsForAgent(
     String agentId,
   ) async {
     final collections = await loadAgentCollections();
@@ -293,34 +313,32 @@ mixin _LocalDataRepositoryQueries on _LocalDataRepositoryLoaders {
         .toSet();
 
     final result = collections.where((c) => ids.contains(c.id)).toList();
-    result.sort(_compareNamedReleaseDateAsc);
-    return result;
-  }
-
-  Future<List<CaseDto>> loadStickerCollections() async {
-    final cases = await loadCases();
-    final result = cases.where((c) => c.isStickerCollection).toList();
     result.sort(_compareCollectibleCollectionAsc);
     return result;
   }
 
-  Future<List<CaseDto>> loadPatchCollections() async {
-    final cases = await loadCases();
-    final result = cases.where((c) => c.isPatchCollection).toList();
+  Future<List<ContainerDto>> loadStickerCollections() async {
+    final containers = await loadContainers();
+    final result = containers.where((c) => c.isStickerCollection).toList();
     result.sort(_compareCollectibleCollectionAsc);
     return result;
   }
 
-  Future<List<CaseDto>> loadCharmCollections() async {
-    final cases = await loadCases();
-    final result = cases.where((c) => c.isCharmCollection).toList();
+  Future<List<ContainerDto>> loadPatchCollections() async {
+    final containers = await loadContainers();
+    final result = containers.where((c) => c.isPatchCollection).toList();
     result.sort(_compareCollectibleCollectionAsc);
     return result;
   }
 
-  Future<List<RewardCollectionDto>> loadRewardCollectionsForSkin(
-    String skinId,
-  ) async {
+  Future<List<ContainerDto>> loadCharmCollections() async {
+    final containers = await loadContainers();
+    final result = containers.where((c) => c.isCharmCollection).toList();
+    result.sort(_compareCollectibleCollectionAsc);
+    return result;
+  }
+
+  Future<List<ContainerDto>> loadRewardCollectionsForSkin(String skinId) async {
     final collections = await loadRewardCollections();
     final contents = await loadRewardCollectionContents();
 
@@ -334,7 +352,7 @@ mixin _LocalDataRepositoryQueries on _LocalDataRepositoryLoaders {
     return result;
   }
 
-  Future<List<OperationCollectionDto>> loadOperationCollectionsForSkin(
+  Future<List<ContainerDto>> loadOperationCollectionsForSkin(
     String skinId,
   ) async {
     final collections = await loadOperationCollections();
@@ -346,7 +364,7 @@ mixin _LocalDataRepositoryQueries on _LocalDataRepositoryLoaders {
         .toSet();
 
     final result = collections.where((c) => ids.contains(c.id)).toList();
-    result.sort(_compareOperationCollectionAsc);
+    result.sort(_compareCollectibleCollectionAsc);
     return result;
   }
 }

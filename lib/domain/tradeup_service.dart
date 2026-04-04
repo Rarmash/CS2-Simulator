@@ -18,10 +18,7 @@ class TradeUpChance {
   final SkinDto skin;
   final double probability; // 0..1
 
-  const TradeUpChance({
-    required this.skin,
-    required this.probability,
-  });
+  const TradeUpChance({required this.skin, required this.probability});
 }
 
 class TradeUpService {
@@ -117,11 +114,11 @@ class TradeUpService {
       final Map<String, double> skinProbabilityById = {};
 
       for (final entry in caseWeights.entries) {
-        final caseId = entry.key;
+        final containerId = entry.key;
         final caseProbability = entry.value;
 
         final possibleSpecialSkins = _getSpecialSkinsForRegularCase(
-          caseId: caseId,
+          containerId: containerId,
           allSkins: allSkins,
           regularCaseIdToSkinIds: regularCaseIdToSkinIds,
         );
@@ -138,10 +135,9 @@ class TradeUpService {
       }
 
       final chances = skinProbabilityById.entries
-          .map((e) => TradeUpChance(
-        skin: skinById[e.key]!,
-        probability: e.value,
-      ))
+          .map(
+            (e) => TradeUpChance(skin: skinById[e.key]!, probability: e.value),
+          )
           .toList();
 
       chances.sort((a, b) => b.probability.compareTo(a.probability));
@@ -174,10 +170,7 @@ class TradeUpService {
     }
 
     final chances = skinProbabilityById.entries
-        .map((e) => TradeUpChance(
-      skin: skinById[e.key]!,
-      probability: e.value,
-    ))
+        .map((e) => TradeUpChance(skin: skinById[e.key]!, probability: e.value))
         .toList();
 
     chances.sort((a, b) => b.probability.compareTo(a.probability));
@@ -196,7 +189,7 @@ class TradeUpService {
     );
 
     final possibleSkins = _getSpecialSkinsForRegularCase(
-      caseId: selectedCaseId,
+      containerId: selectedCaseId,
       allSkins: allSkins,
       regularCaseIdToSkinIds: regularCaseIdToSkinIds,
     );
@@ -216,11 +209,11 @@ class TradeUpService {
   }
 
   List<SkinDto> _getSpecialSkinsForRegularCase({
-    required String caseId,
+    required String containerId,
     required List<SkinDto> allSkins,
     required Map<String, List<String>> regularCaseIdToSkinIds,
   }) {
-    final ids = regularCaseIdToSkinIds[caseId] ?? const [];
+    final ids = regularCaseIdToSkinIds[containerId] ?? const [];
     final idSet = ids.toSet();
 
     return allSkins.where((s) {
@@ -229,9 +222,10 @@ class TradeUpService {
   }
 
   double _calculateOutputFloat(List<SkinDto> input, SkinDto resultSkin) {
-    final avgFloat = input
-        .map((s) => (s.floatTop + s.floatBottom) / 2)
-        .reduce((a, b) => a + b) /
+    final avgFloat =
+        input
+            .map((s) => (s.floatTop + s.floatBottom) / 2)
+            .reduce((a, b) => a + b) /
         input.length;
 
     return resultSkin.floatTop +
@@ -265,9 +259,7 @@ class TradeUpService {
     return _normalizedCollection(a) == _normalizedCollection(b);
   }
 
-  Map<String, double> _buildCollectionWeights({
-    required List<SkinDto> input,
-  }) {
+  Map<String, double> _buildCollectionWeights({required List<SkinDto> input}) {
     final counts = <String, int>{};
 
     for (final skin in input) {
@@ -281,14 +273,10 @@ class TradeUpService {
       throw Exception('Could not determine collections for selected skins');
     }
 
-    return {
-      for (final entry in counts.entries) entry.key: entry.value / total,
-    };
+    return {for (final entry in counts.entries) entry.key: entry.value / total};
   }
 
-  String _weightedCollectionChoice({
-    required List<SkinDto> input,
-  }) {
+  String _weightedCollectionChoice({required List<SkinDto> input}) {
     final weights = _buildCollectionWeights(input: input);
 
     final roll = _random.nextDouble();
@@ -311,23 +299,25 @@ class TradeUpService {
     final counts = <String, double>{};
 
     for (final skin in input) {
-      final caseIds = (skinIdToRegularCaseIds[skin.id] ?? const []).toSet().toList();
-      if (caseIds.isEmpty) continue;
+      final containerIds = (skinIdToRegularCaseIds[skin.id] ?? const [])
+          .toSet()
+          .toList();
+      if (containerIds.isEmpty) continue;
 
-      final contribution = 1.0 / caseIds.length;
-      for (final caseId in caseIds) {
-        counts[caseId] = (counts[caseId] ?? 0) + contribution;
+      final contribution = 1.0 / containerIds.length;
+      for (final containerId in containerIds) {
+        counts[containerId] = (counts[containerId] ?? 0) + contribution;
       }
     }
 
     final total = counts.values.fold<double>(0, (a, b) => a + b);
     if (total == 0) {
-      throw Exception('Could not determine related regular cases for selected skins');
+      throw Exception(
+        'Could not determine related regular cases for selected skins',
+      );
     }
 
-    return {
-      for (final entry in counts.entries) entry.key: entry.value / total,
-    };
+    return {for (final entry in counts.entries) entry.key: entry.value / total};
   }
 
   String _weightedRegularCaseChoice({

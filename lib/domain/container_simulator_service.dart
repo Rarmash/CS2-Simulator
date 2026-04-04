@@ -1,28 +1,28 @@
 import 'dart:math';
 
-import '../data/models/case_dto.dart';
+import '../data/models/container_dto.dart';
 import '../data/models/skin_dto.dart';
 import 'case_odds.dart';
 import 'dropped_skin.dart';
 import 'package_odds.dart';
 import 'terminal_offer.dart';
 
-class CaseSimulatorService {
+class ContainerSimulatorService {
   final Random _random = Random();
 
   DroppedSkin openCase({
     required List<SkinDto> skins,
-    required CaseDto caseDto,
+    required ContainerDto containerDto,
   }) {
     if (skins.isEmpty) {
       throw Exception('No skins found for container');
     }
 
-    if (caseDto.isTerminal) {
+    if (containerDto.isTerminal) {
       throw Exception('Use buildTerminalOffers() for terminal containers');
     }
 
-    if (caseDto.isXrayPackage) {
+    if (containerDto.isXrayPackage) {
       final guaranteedSkin = skins.first;
       final floatValue = _generateFloat(
         guaranteedSkin.floatTop,
@@ -39,19 +39,21 @@ class CaseSimulatorService {
     }
 
     final SkinDto selectedSkin;
-    if (caseDto.isSouvenirPackage || caseDto.isCollectionPackage) {
+    if (containerDto.isSouvenirPackage || containerDto.isCollectionPackage) {
       selectedSkin = _selectPackageSkin(skins);
     } else {
       selectedSkin = _selectCaseSkin(skins);
     }
 
-    final isSouvenir = caseDto.isSouvenirPackage;
-    final isStatTrak = caseDto.isRegularCase &&
+    final isSouvenir = containerDto.isSouvenirPackage;
+    final isStatTrak =
+        containerDto.isRegularCase &&
         !selectedSkin.isGloves &&
         !selectedSkin.isKnife &&
         _generateStatTrak();
 
-    final isVanillaKnife = selectedSkin.isKnife && selectedSkin.name == 'Vanilla';
+    final isVanillaKnife =
+        selectedSkin.isKnife && selectedSkin.name == 'Vanilla';
 
     double? value;
     String? exterior;
@@ -191,7 +193,8 @@ class CaseSimulatorService {
         }).toList();
       case CaseOdds.specialItem:
         return skins.where((s) {
-          final specialLike = s.rarity == 'COVERT' || s.rarity == 'EXTRAORDINARY';
+          final specialLike =
+              s.rarity == 'COVERT' || s.rarity == 'EXTRAORDINARY';
           return specialLike && s.isSpecialItem;
         }).toList();
     }
@@ -230,10 +233,14 @@ class CaseSimulatorService {
       case PackageOdds.classified:
         return skins.where((s) => s.rarity == 'CLASSIFIED').toList();
       case PackageOdds.covert:
-        return skins.where((s) =>
-        s.rarity == 'COVERT' ||
-            s.rarity == 'CONTRABAND' ||
-            s.isSpecialItem).toList();
+        return skins
+            .where(
+              (s) =>
+                  s.rarity == 'COVERT' ||
+                  s.rarity == 'CONTRABAND' ||
+                  s.isSpecialItem,
+            )
+            .toList();
     }
   }
 

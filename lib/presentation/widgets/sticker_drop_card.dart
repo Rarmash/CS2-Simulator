@@ -24,7 +24,10 @@ class StickerDropCard extends StatelessWidget {
           value: StickerUiHelper.rarityLabel(drop.sticker),
           valueColor: rarityColor,
         ),
-        CollectibleInfoEntry(title: 'Type', value: drop.sticker.stickerTypeLabel),
+        CollectibleInfoEntry(
+          title: 'Type',
+          value: drop.sticker.stickerTypeLabel,
+        ),
         CollectibleInfoEntry(
           title: 'Effect',
           value: StickerUiHelper.effectLabel(drop.sticker.effect),

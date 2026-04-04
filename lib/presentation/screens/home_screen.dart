@@ -5,7 +5,7 @@ import '../../core/settings/settings_controller.dart';
 import '../../data/repositories/local_data_repository.dart';
 import '../helpers/app_navigation_helper.dart';
 import 'agent_collection_list_screen.dart';
-import 'case_list_screen.dart';
+import 'container_list_screen.dart';
 import 'charm_collection_list_screen.dart';
 import 'glossary_hub_screen.dart';
 import 'operation_collection_list_screen.dart';
@@ -31,7 +31,7 @@ class HomeScreen extends StatelessWidget {
       _HomeMenuItem(
         icon: Icons.inventory_2,
         title: 'Open Containers',
-        buildScreen: () => CaseListScreen(
+        buildScreen: () => ContainerListScreen(
           repository: repository,
           settingsController: settingsController,
         ),

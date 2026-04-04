@@ -1,6 +1,6 @@
 import 'dart:math';
 
-import '../data/models/operation_collection_dto.dart';
+import '../data/models/container_dto.dart';
 import '../data/models/skin_dto.dart';
 import 'dropped_skin.dart';
 import 'package_odds.dart';
@@ -10,7 +10,7 @@ class OperationCollectionSimulatorService {
 
   DroppedSkin openCollection({
     required List<SkinDto> skins,
-    required OperationCollectionDto collection,
+    required ContainerDto collection,
   }) {
     if (skins.isEmpty) {
       throw Exception('No skins found for operation collection');

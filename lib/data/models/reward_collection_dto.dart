@@ -47,10 +47,10 @@ class RewardCollectionDto {
         return sourceId
             .split('_')
             .map((part) {
-          if (part.isEmpty) return part;
-          final lower = part.toLowerCase();
-          return lower[0].toUpperCase() + lower.substring(1);
-        })
+              if (part.isEmpty) return part;
+              final lower = part.toLowerCase();
+              return lower[0].toUpperCase() + lower.substring(1);
+            })
             .join(' ');
     }
   }

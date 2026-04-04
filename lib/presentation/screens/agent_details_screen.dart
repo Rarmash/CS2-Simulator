@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 import '../../core/utils/date_format_helper.dart';
-import '../../data/models/agent_collection_dto.dart';
 import '../../data/models/agent_dto.dart';
+import '../../data/models/container_dto.dart';
 import '../../data/repositories/local_data_repository.dart';
 import '../helpers/agent_ui_helper.dart';
 import '../helpers/app_navigation_helper.dart';
@@ -29,7 +29,7 @@ class AgentDetailsScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(title: Text(agent.name)),
-      body: FutureBuilder<List<AgentCollectionDto>>(
+      body: FutureBuilder<List<ContainerDto>>(
         future: repository.loadAgentCollectionsForAgent(agent.id),
         builder: (context, snapshot) {
           if (snapshot.connectionState != ConnectionState.done) {
@@ -48,7 +48,7 @@ class AgentDetailsScreen extends StatelessWidget {
             );
           }
 
-          final collections = snapshot.data ?? const <AgentCollectionDto>[];
+          final collections = snapshot.data ?? const <ContainerDto>[];
 
           return ListView(
             padding: const EdgeInsets.all(12),
@@ -63,7 +63,9 @@ class AgentDetailsScreen extends StatelessWidget {
                     color: rarityColor,
                   ),
                   DetailTag(
-                    text: agent.team == 'COUNTER-TERRORIST' ? 'CT Side' : 'T Side',
+                    text: agent.team == 'COUNTER-TERRORIST'
+                        ? 'CT Side'
+                        : 'T Side',
                   ),
                   if ((agent.collection ?? '').isNotEmpty)
                     DetailTag(text: agent.collection!),
@@ -80,20 +82,24 @@ class AgentDetailsScreen extends StatelessWidget {
                         : 'Terrorist',
                   ),
                   if ((agent.collection ?? '').isNotEmpty)
-                    DetailInfoRow(title: 'Collection', value: agent.collection!),
+                    DetailInfoRow(
+                      title: 'Collection',
+                      value: agent.collection!,
+                    ),
                 ],
               ),
               const SizedBox(height: 12),
-              DetailSourceSection<AgentCollectionDto>(
+              DetailSourceSection<ContainerDto>(
                 title: 'Agent Collections',
                 items: collections,
                 emptyText: 'No agent collection sources found.',
                 itemBuilder: (item) => DetailSourceTile(
-                  imagePath: item.image,
+                  imagePath: item.containerImage,
                   title: item.name,
-                  subtitle: item.operationName,
+                  subtitle: item.sourceLabel,
                   trailing:
-                      DateFormatHelper.formatReleaseDate(item.releaseDate) ?? '-',
+                      DateFormatHelper.formatReleaseDate(item.releaseDate) ??
+                      '-',
                   onTap: () {
                     AppNavigationHelper.pushScreen(
                       context,

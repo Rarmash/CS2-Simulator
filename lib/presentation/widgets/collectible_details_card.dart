@@ -57,18 +57,11 @@ class CollectibleDetailsCard extends StatelessWidget {
                 Text(
                   subtitle,
                   textAlign: narrow ? TextAlign.center : TextAlign.left,
-                  style: const TextStyle(
-                    color: Colors.white70,
-                    fontSize: 16,
-                  ),
+                  style: const TextStyle(color: Colors.white70, fontSize: 16),
                 ),
                 if (tags.isNotEmpty) ...[
                   const SizedBox(height: 12),
-                  Wrap(
-                    spacing: 8,
-                    runSpacing: 8,
-                    children: tags,
-                  ),
+                  Wrap(spacing: 8, runSpacing: 8, children: tags),
                 ],
                 if (infoRows.isNotEmpty) ...[
                   const SizedBox(height: 14),
@@ -79,11 +72,7 @@ class CollectibleDetailsCard extends StatelessWidget {
 
             if (narrow) {
               return Column(
-                children: [
-                  image,
-                  const SizedBox(height: 16),
-                  info,
-                ],
+                children: [image, const SizedBox(height: 16), info],
               );
             }
 

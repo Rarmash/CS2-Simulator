@@ -2,7 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import '../../core/utils/date_format_helper.dart';
-import '../../data/models/case_dto.dart';
+import '../../data/models/container_dto.dart';
 import '../../data/models/pin_dto.dart';
 import '../../data/repositories/local_data_repository.dart';
 import '../../domain/dropped_pin.dart';
@@ -22,12 +22,12 @@ import '../widgets/pin_drop_card.dart';
 import '../widgets/pin_grid_tile.dart';
 
 class PinContainerOpenScreen extends StatefulWidget {
-  final CaseDto caseDto;
+  final ContainerDto containerDto;
   final LocalDataRepository repository;
 
   const PinContainerOpenScreen({
     super.key,
-    required this.caseDto,
+    required this.containerDto,
     required this.repository,
   });
 
@@ -49,7 +49,9 @@ class _PinContainerOpenScreenState extends State<PinContainerOpenScreen> {
   @override
   void initState() {
     super.initState();
-    _pinsFuture = widget.repository.loadPinsForCase(widget.caseDto.id);
+    _pinsFuture = widget.repository.loadPinsForContainer(
+      widget.containerDto.id,
+    );
   }
 
   @override
@@ -138,22 +140,24 @@ class _PinContainerOpenScreenState extends State<PinContainerOpenScreen> {
   @override
   Widget build(BuildContext context) {
     final formattedReleaseDate = DateFormatHelper.formatReleaseDate(
-      widget.caseDto.releaseDate,
+      widget.containerDto.releaseDate,
     );
-    final color = SourceColorHelper.containerTypeColor(widget.caseDto.type);
+    final color = SourceColorHelper.containerTypeColor(
+      widget.containerDto.type,
+    );
 
     return Scaffold(
-      appBar: AppBar(title: Text(widget.caseDto.name)),
+      appBar: AppBar(title: Text(widget.containerDto.name)),
       body: CollectibleOpenBody<PinDto>(
         future: _pinsFuture,
         sliverBuilder: (context, constraints, pins, gridCount, aspectRatio) {
           return [
             SliverToBoxAdapter(
               child: CollectibleOpenHeader(
-                assetPath: widget.caseDto.caseImage,
+                assetPath: widget.containerDto.containerImage,
                 imageHeight: constraints.maxWidth < 700 ? 90 : 120,
                 badges: [
-                  ChipBadge(label: widget.caseDto.typeLabel, color: color),
+                  ChipBadge(label: widget.containerDto.typeLabel, color: color),
                 ],
                 releaseDateText: formattedReleaseDate,
                 description: 'Pin capsules roll collectible pins only.',
@@ -168,11 +172,8 @@ class _PinContainerOpenScreenState extends State<PinContainerOpenScreen> {
               items: _rollSequence,
               winningIndex: _winningIndex,
               isRolling: _isOpening,
-              itemBuilder: (pin, isWinner, itemWidth) => _buildRollItem(
-                pin,
-                isWinner: isWinner,
-                itemWidth: itemWidth,
-              ),
+              itemBuilder: (pin, isWinner, itemWidth) =>
+                  _buildRollItem(pin, isWinner: isWinner, itemWidth: itemWidth),
             ),
             if (_dropped != null)
               SliverToBoxAdapter(child: PinDropCard(drop: _dropped!)),

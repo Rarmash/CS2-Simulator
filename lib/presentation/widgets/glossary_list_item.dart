@@ -27,12 +27,7 @@ class GlossaryListItem extends StatelessWidget {
           onTap: onTap,
           child: Container(
             decoration: BoxDecoration(
-              border: Border(
-                left: BorderSide(
-                  color: accentColor,
-                  width: 4,
-                ),
-              ),
+              border: Border(left: BorderSide(color: accentColor, width: 4)),
             ),
             child: Padding(
               padding: const EdgeInsets.all(12),
@@ -49,10 +44,8 @@ class GlossaryListItem extends StatelessWidget {
                       isAntiAlias: false,
                       gaplessPlayback: true,
                       cacheWidth: 256,
-                      errorBuilder: (_, _, _) => const Icon(
-                        Icons.image_not_supported,
-                        size: 36,
-                      ),
+                      errorBuilder: (_, _, _) =>
+                          const Icon(Icons.image_not_supported, size: 36),
                     ),
                   ),
                   const SizedBox(width: 12),
@@ -77,20 +70,13 @@ class GlossaryListItem extends StatelessWidget {
                         ),
                         if (tags.isNotEmpty) ...[
                           const SizedBox(height: 8),
-                          Wrap(
-                            spacing: 8,
-                            runSpacing: 8,
-                            children: tags,
-                          ),
+                          Wrap(spacing: 8, runSpacing: 8, children: tags),
                         ],
                       ],
                     ),
                   ),
                   const SizedBox(width: 8),
-                  const Icon(
-                    Icons.chevron_right,
-                    color: Colors.white38,
-                  ),
+                  const Icon(Icons.chevron_right, color: Colors.white38),
                 ],
               ),
             ),

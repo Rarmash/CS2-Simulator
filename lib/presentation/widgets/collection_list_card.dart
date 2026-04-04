@@ -23,8 +23,9 @@ class CollectionListCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final formattedReleaseDate =
-    DateFormatHelper.formatReleaseDate(releaseDate);
+    final formattedReleaseDate = DateFormatHelper.formatReleaseDate(
+      releaseDate,
+    );
 
     return InkWell(
       borderRadius: BorderRadius.circular(16),
@@ -50,11 +51,7 @@ class CollectionListCard extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   if (chips.isNotEmpty)
-                    Wrap(
-                      spacing: 8,
-                      runSpacing: 8,
-                      children: chips,
-                    ),
+                    Wrap(spacing: 8, runSpacing: 8, children: chips),
                   if (chips.isNotEmpty) const SizedBox(height: 8),
                   Text(
                     title,

@@ -9,10 +9,7 @@ import '../helpers/skin_ui_helper.dart';
 class TradeUpScreen extends StatefulWidget {
   final LocalDataRepository repository;
 
-  const TradeUpScreen({
-    super.key,
-    required this.repository,
-  });
+  const TradeUpScreen({super.key, required this.repository});
 
   @override
   State<TradeUpScreen> createState() => _TradeUpScreenState();
@@ -38,12 +35,10 @@ class _TradeUpScreenState extends State<TradeUpScreen> {
 
   Future<_TradeUpData> _loadData() async {
     final skins = await widget.repository.loadSkins();
-    final cases = await widget.repository.loadCases();
-    final caseToSkinIds = await widget.repository.loadCaseToSkinIds();
+    final cases = await widget.repository.loadContainers();
+    final caseToSkinIds = await widget.repository.loadContainerToSkinIds();
 
-    final caseNameById = {
-      for (final c in cases) c.id: c.name,
-    };
+    final caseNameById = {for (final c in cases) c.id: c.name};
 
     final regularCases = {
       for (final c in cases.where((c) => c.isRegularCase)) c.id: c,
@@ -54,21 +49,21 @@ class _TradeUpScreenState extends State<TradeUpScreen> {
     final regularCaseIdToSkinIds = <String, List<String>>{};
 
     for (final entry in caseToSkinIds.entries) {
-      final caseId = entry.key;
-      final caseName = caseNameById[caseId];
+      final containerId = entry.key;
+      final caseName = caseNameById[containerId];
       if (caseName == null) continue;
 
-      final isRegularCase = regularCases.containsKey(caseId);
+      final isRegularCase = regularCases.containsKey(containerId);
 
       if (isRegularCase) {
-        regularCaseIdToSkinIds[caseId] = List<String>.from(entry.value);
+        regularCaseIdToSkinIds[containerId] = List<String>.from(entry.value);
       }
 
       for (final skinId in entry.value) {
         skinIdToCaseNames.putIfAbsent(skinId, () => []).add(caseName);
 
         if (isRegularCase) {
-          skinIdToRegularCaseIds.putIfAbsent(skinId, () => []).add(caseId);
+          skinIdToRegularCaseIds.putIfAbsent(skinId, () => []).add(containerId);
         }
       }
     }
@@ -137,7 +132,9 @@ class _TradeUpScreenState extends State<TradeUpScreen> {
 
     if (_selected.isNotEmpty && _selected.first.rarity != skin.rarity) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('All selected skins must have the same rarity')),
+        const SnackBar(
+          content: Text('All selected skins must have the same rarity'),
+        ),
       );
       return;
     }
@@ -232,7 +229,7 @@ class _TradeUpScreenState extends State<TradeUpScreen> {
                 skin.skinImage,
                 fit: BoxFit.contain,
                 errorBuilder: (_, error, stackTrace) =>
-                const Icon(Icons.image_not_supported),
+                    const Icon(Icons.image_not_supported),
               ),
             ),
             Positioned(
@@ -276,7 +273,7 @@ class _TradeUpScreenState extends State<TradeUpScreen> {
                         s.skinImage,
                         fit: BoxFit.contain,
                         errorBuilder: (_, error, stackTrace) =>
-                        const Icon(Icons.image_not_supported),
+                            const Icon(Icons.image_not_supported),
                       ),
                     ),
                   ),
@@ -298,7 +295,10 @@ class _TradeUpScreenState extends State<TradeUpScreen> {
                           maxLines: 2,
                           overflow: TextOverflow.ellipsis,
                           textAlign: TextAlign.center,
-                          style: const TextStyle(fontSize: 10, color: Colors.white70),
+                          style: const TextStyle(
+                            fontSize: 10,
+                            color: Colors.white70,
+                          ),
                         ),
                         if (caseNames.isNotEmpty) ...[
                           const SizedBox(height: 3),
@@ -307,17 +307,24 @@ class _TradeUpScreenState extends State<TradeUpScreen> {
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
                             textAlign: TextAlign.center,
-                            style: const TextStyle(fontSize: 9, color: Colors.white54),
+                            style: const TextStyle(
+                              fontSize: 9,
+                              color: Colors.white54,
+                            ),
                           ),
                         ],
-                        if (s.collection != null && s.collection!.isNotEmpty) ...[
+                        if (s.collection != null &&
+                            s.collection!.isNotEmpty) ...[
                           const SizedBox(height: 2),
                           Text(
                             s.collection!,
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
                             textAlign: TextAlign.center,
-                            style: const TextStyle(fontSize: 9, color: Colors.white38),
+                            style: const TextStyle(
+                              fontSize: 9,
+                              color: Colors.white38,
+                            ),
                           ),
                         ],
                       ],
@@ -330,13 +337,18 @@ class _TradeUpScreenState extends State<TradeUpScreen> {
                   right: 4,
                   top: 4,
                   child: Container(
-                    padding:
-                    const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 6,
+                      vertical: 2,
+                    ),
                     decoration: BoxDecoration(
                       color: Colors.black,
                       borderRadius: BorderRadius.circular(6),
                     ),
-                    child: Text('x$count', style: const TextStyle(fontSize: 10)),
+                    child: Text(
+                      'x$count',
+                      style: const TextStyle(fontSize: 10),
+                    ),
                   ),
                 ),
             ],
@@ -366,19 +378,18 @@ class _TradeUpScreenState extends State<TradeUpScreen> {
               s.skinImage,
               height: 120,
               errorBuilder: (_, error, stackTrace) =>
-              const Icon(Icons.image_not_supported, size: 80),
+                  const Icon(Icons.image_not_supported, size: 80),
             ),
             const SizedBox(height: 8),
             Text(
-              '${s.isSpecialItem ? '★ ' : ''}${s.itemDisplayName} | ${s.name}',
-              style: TextStyle(
-                color: color,
-                fontWeight: FontWeight.bold,
-              ),
+              '${s.isSpecialItem ? 'РІВвЂ¦ ' : ''}${s.itemDisplayName} | ${s.name}',
+              style: TextStyle(color: color, fontWeight: FontWeight.bold),
               textAlign: TextAlign.center,
             ),
             const SizedBox(height: 6),
-            Text('Rarity: ${s.isSpecialItem ? 'Special Item' : _rarityLabel(s.rarity)}'),
+            Text(
+              'Rarity: ${s.isSpecialItem ? 'Special Item' : _rarityLabel(s.rarity)}',
+            ),
             Text('Weapon type: ${SkinUiHelper.weaponTypeLabel(s.weaponType)}'),
             Text('Float: ${_result!.floatValue.toStringAsFixed(5)}'),
             Text(_result!.exterior),
@@ -403,7 +414,7 @@ class _TradeUpScreenState extends State<TradeUpScreen> {
                 skin.skinImage,
                 fit: BoxFit.contain,
                 errorBuilder: (_, error, stackTrace) =>
-                const Icon(Icons.image_not_supported),
+                    const Icon(Icons.image_not_supported),
               ),
             ),
           ),
@@ -447,9 +458,7 @@ class _TradeUpScreenState extends State<TradeUpScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Trade-Up Simulator'),
-      ),
+      appBar: AppBar(title: const Text('Trade-Up Simulator')),
       body: FutureBuilder<_TradeUpData>(
         future: _dataFuture,
         builder: (_, snap) {
@@ -497,7 +506,8 @@ class _TradeUpScreenState extends State<TradeUpScreen> {
                         children: [
                           TextField(
                             decoration: const InputDecoration(
-                              hintText: 'Search by skin, case, or collection...',
+                              hintText:
+                                  'Search by skin, case, or collection...',
                               prefixIcon: Icon(Icons.search),
                             ),
                             onChanged: (v) => setState(() => _search = v),
@@ -536,12 +546,16 @@ class _TradeUpScreenState extends State<TradeUpScreen> {
                               fontWeight: FontWeight.bold,
                             ),
                           ),
-                          if (_selected.isNotEmpty && _selected.first.rarity == 'COVERT')
+                          if (_selected.isNotEmpty &&
+                              _selected.first.rarity == 'COVERT')
                             const Padding(
                               padding: EdgeInsets.only(top: 4),
                               child: Text(
                                 'Covert trade-up uses exactly 5 skins',
-                                style: TextStyle(color: Colors.white70, fontSize: 12),
+                                style: TextStyle(
+                                  color: Colors.white70,
+                                  fontSize: 12,
+                                ),
                               ),
                             ),
                           if (!_canAddMore())
@@ -549,7 +563,10 @@ class _TradeUpScreenState extends State<TradeUpScreen> {
                               padding: EdgeInsets.only(top: 4),
                               child: Text(
                                 'Selection is full',
-                                style: TextStyle(color: Colors.amber, fontSize: 12),
+                                style: TextStyle(
+                                  color: Colors.amber,
+                                  fontSize: 12,
+                                ),
                               ),
                             ),
                         ],
@@ -564,11 +581,11 @@ class _TradeUpScreenState extends State<TradeUpScreen> {
                         physics: const NeverScrollableScrollPhysics(),
                         itemCount: 10,
                         gridDelegate:
-                        const SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: 5,
-                          crossAxisSpacing: 6,
-                          mainAxisSpacing: 6,
-                        ),
+                            const SliverGridDelegateWithFixedCrossAxisCount(
+                              crossAxisCount: 5,
+                              crossAxisSpacing: 6,
+                              mainAxisSpacing: 6,
+                            ),
                         itemBuilder: (_, i) => _slot(i, data),
                       ),
                     ),
@@ -580,11 +597,13 @@ class _TradeUpScreenState extends State<TradeUpScreen> {
                         children: [
                           Expanded(
                             child: ElevatedButton(
-                              onPressed: _tradeReady() ? () => _trade(data) : null,
+                              onPressed: _tradeReady()
+                                  ? () => _trade(data)
+                                  : null,
                               child: Text(
                                 _selected.isNotEmpty &&
-                                    _selected.first.rarity == 'COVERT'
-                                    ? 'TRADE → SPECIAL ITEM'
+                                        _selected.first.rarity == 'COVERT'
+                                    ? 'TRADE РІвЂ вЂ™ SPECIAL ITEM'
                                     : 'TRADE',
                               ),
                             ),
@@ -617,14 +636,14 @@ class _TradeUpScreenState extends State<TradeUpScreen> {
                       padding: const EdgeInsets.symmetric(horizontal: 12),
                       sliver: SliverGrid(
                         delegate: SliverChildBuilderDelegate(
-                              (_, i) => _chanceCard(_chances[i]),
+                          (_, i) => _chanceCard(_chances[i]),
                           childCount: _chances.length,
                         ),
                         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                           crossAxisCount:
-                          ResponsiveGridHelper.tradeGridCrossAxisCount(
-                            c.maxWidth,
-                          ),
+                              ResponsiveGridHelper.tradeGridCrossAxisCount(
+                                c.maxWidth,
+                              ),
                           crossAxisSpacing: 8,
                           mainAxisSpacing: 8,
                           childAspectRatio: 0.72,
@@ -647,14 +666,14 @@ class _TradeUpScreenState extends State<TradeUpScreen> {
                     padding: const EdgeInsets.all(12),
                     sliver: SliverGrid(
                       delegate: SliverChildBuilderDelegate(
-                            (_, i) => _skinTile(filtered[i], data),
+                        (_, i) => _skinTile(filtered[i], data),
                         childCount: filtered.length,
                       ),
                       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                         crossAxisCount:
-                        ResponsiveGridHelper.tradeGridCrossAxisCount(
-                          c.maxWidth,
-                        ),
+                            ResponsiveGridHelper.tradeGridCrossAxisCount(
+                              c.maxWidth,
+                            ),
                         crossAxisSpacing: 8,
                         mainAxisSpacing: 8,
                         childAspectRatio: 0.75,

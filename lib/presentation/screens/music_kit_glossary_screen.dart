@@ -76,8 +76,9 @@ class _MusicKitGlossaryScreenState extends State<MusicKitGlossaryScreen> {
     filtered.sort((a, b) {
       final rarityCompare = _rarityOrder(a).compareTo(_rarityOrder(b));
       if (rarityCompare != 0) return rarityCompare;
-      final statTrakCompare =
-          a.hasStatTrak == b.hasStatTrak ? 0 : (a.hasStatTrak ? 1 : -1);
+      final statTrakCompare = a.hasStatTrak == b.hasStatTrak
+          ? 0
+          : (a.hasStatTrak ? 1 : -1);
       if (statTrakCompare != 0) return statTrakCompare;
       return a.trackName.compareTo(b.trackName);
     });
@@ -172,12 +173,13 @@ class _MusicKitGlossaryEntry {
   });
 
   factory _MusicKitGlossaryEntry.fromVariants(List<MusicKitDto> variants) {
-    final sorted = [...variants]..sort((a, b) {
-      if (a.isStatTrak == b.isStatTrak) {
-        return a.id.compareTo(b.id);
-      }
-      return a.isStatTrak ? 1 : -1;
-    });
+    final sorted = [...variants]
+      ..sort((a, b) {
+        if (a.isStatTrak == b.isStatTrak) {
+          return a.id.compareTo(b.id);
+        }
+        return a.isStatTrak ? 1 : -1;
+      });
     final primary = sorted.first;
     return _MusicKitGlossaryEntry(
       name: primary.name,

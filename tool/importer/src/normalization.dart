@@ -683,6 +683,29 @@ Map<String, String?> resolvePatchCollectionSource(String? collectionName) {
   };
 }
 
+String? resolveOperationNameFromId(String? operationId) {
+  switch ((operationId ?? '').trim()) {
+    case 'PAYBACK':
+      return 'Operation Payback';
+    case 'BRAVO':
+      return 'Operation Bravo';
+    case 'PHOENIX':
+      return 'Operation Phoenix';
+    case 'BREAKOUT':
+      return 'Operation Breakout';
+    case 'BLOODHOUND':
+      return 'Operation Bloodhound';
+    case 'SHATTERED_WEB':
+      return 'Operation Shattered Web';
+    case 'BROKEN_FANG':
+      return 'Operation Broken Fang';
+    case 'RIPTIDE':
+      return 'Operation Riptide';
+    default:
+      return null;
+  }
+}
+
 Map<String, String?> resolveCharmCollectionSource(String? collectionName) {
   final normalized = (collectionName ?? '').trim();
   final source = charmCollectionSourceOverrides[normalized] ?? const {};

@@ -95,8 +95,9 @@ class _SkinGlossaryScreenState extends State<SkinGlossaryScreen> {
     }).toList();
 
     filtered.sort((a, b) {
-      final specialCompare =
-      (a.isSpecialItem ? 1 : 0).compareTo(b.isSpecialItem ? 1 : 0);
+      final specialCompare = (a.isSpecialItem ? 1 : 0).compareTo(
+        b.isSpecialItem ? 1 : 0,
+      );
       if (specialCompare != 0) return specialCompare;
 
       final rarityCompare = _rarityOrder(a).compareTo(_rarityOrder(b));
@@ -139,16 +140,12 @@ class _SkinGlossaryScreenState extends State<SkinGlossaryScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Skin Glossary'),
-      ),
+      appBar: AppBar(title: const Text('Skin Glossary')),
       body: FutureBuilder<List<SkinDto>>(
         future: _future,
         builder: (context, snapshot) {
           if (snapshot.connectionState != ConnectionState.done) {
-            return const Center(
-              child: CircularProgressIndicator(),
-            );
+            return const Center(child: CircularProgressIndicator());
           }
 
           if (snapshot.hasError) {
@@ -176,17 +173,17 @@ class _SkinGlossaryScreenState extends State<SkinGlossaryScreen> {
                       controller: _searchController,
                       decoration: InputDecoration(
                         hintText:
-                        'Search by skin, weapon, collection, finish...',
+                            'Search by skin, weapon, collection, finish...',
                         prefixIcon: const Icon(Icons.search),
                         suffixIcon: _query.isEmpty
                             ? null
                             : IconButton(
-                          tooltip: 'Clear',
-                          onPressed: () {
-                            _searchController.clear();
-                          },
-                          icon: const Icon(Icons.clear),
-                        ),
+                                tooltip: 'Clear',
+                                onPressed: () {
+                                  _searchController.clear();
+                                },
+                                icon: const Icon(Icons.clear),
+                              ),
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(14),
                         ),
@@ -207,10 +204,10 @@ class _SkinGlossaryScreenState extends State<SkinGlossaryScreen> {
                             items: _rarityItems
                                 .map(
                                   (e) => DropdownMenuItem<String>(
-                                value: e.value,
-                                child: Text(e.label),
-                              ),
-                            )
+                                    value: e.value,
+                                    child: Text(e.label),
+                                  ),
+                                )
                                 .toList(),
                             onChanged: (value) {
                               setState(() {
@@ -232,10 +229,10 @@ class _SkinGlossaryScreenState extends State<SkinGlossaryScreen> {
                             items: _typeItems
                                 .map(
                                   (e) => DropdownMenuItem<String>(
-                                value: e.value,
-                                child: Text(e.label),
-                              ),
-                            )
+                                    value: e.value,
+                                    child: Text(e.label),
+                                  ),
+                                )
                                 .toList(),
                             onChanged: (value) {
                               setState(() {
@@ -264,56 +261,58 @@ class _SkinGlossaryScreenState extends State<SkinGlossaryScreen> {
               Expanded(
                 child: filtered.isEmpty
                     ? const Center(
-                  child: Padding(
-                    padding: EdgeInsets.all(24),
-                    child: Text(
-                      'Nothing found.',
-                      style: TextStyle(fontSize: 16),
-                    ),
-                  ),
-                )
-                    : ListView.separated(
-                  cacheExtent: 1200,
-                  padding: const EdgeInsets.all(12),
-                  itemCount: filtered.length,
-                  separatorBuilder: (_, _) => const SizedBox(height: 10),
-                  itemBuilder: (context, index) {
-                    final skin = filtered[index];
-                    final rarityColor = SkinUiHelper.rarityColor(skin);
-
-                    return GlossaryListItem(
-                      accentColor: rarityColor,
-                      imagePath: skin.skinImage,
-                      title: skin.itemDisplayName,
-                      subtitle: SkinUiHelper.secondaryText(skin),
-                      tags: [
-                        _pill(
-                          SkinUiHelper.rarityLabel(skin),
-                          color: rarityColor,
-                        ),
-                        _pill(
-                          skin.itemKind == 'WEAPON'
-                              ? SkinUiHelper.weaponTypeLabel(skin.weaponType)
-                              : skin.itemKind == 'KNIFE'
-                              ? 'Knife'
-                              : 'Gloves',
-                        ),
-                        if ((skin.collection ?? '').isNotEmpty)
-                          _pill(skin.collection!),
-                      ],
-                      onTap: () {
-                        AppNavigationHelper.pushScreen(
-                          context,
-                          SkinDetailsScreen(
-                            repository: widget.repository,
-                            settingsController: widget.settingsController,
-                            skin: skin,
+                        child: Padding(
+                          padding: EdgeInsets.all(24),
+                          child: Text(
+                            'Nothing found.',
+                            style: TextStyle(fontSize: 16),
                           ),
-                        );
-                      },
-                    );
-                  },
-                ),
+                        ),
+                      )
+                    : ListView.separated(
+                        cacheExtent: 1200,
+                        padding: const EdgeInsets.all(12),
+                        itemCount: filtered.length,
+                        separatorBuilder: (_, _) => const SizedBox(height: 10),
+                        itemBuilder: (context, index) {
+                          final skin = filtered[index];
+                          final rarityColor = SkinUiHelper.rarityColor(skin);
+
+                          return GlossaryListItem(
+                            accentColor: rarityColor,
+                            imagePath: skin.skinImage,
+                            title: skin.itemDisplayName,
+                            subtitle: SkinUiHelper.secondaryText(skin),
+                            tags: [
+                              _pill(
+                                SkinUiHelper.rarityLabel(skin),
+                                color: rarityColor,
+                              ),
+                              _pill(
+                                skin.itemKind == 'WEAPON'
+                                    ? SkinUiHelper.weaponTypeLabel(
+                                        skin.weaponType,
+                                      )
+                                    : skin.itemKind == 'KNIFE'
+                                    ? 'Knife'
+                                    : 'Gloves',
+                              ),
+                              if ((skin.collection ?? '').isNotEmpty)
+                                _pill(skin.collection!),
+                            ],
+                            onTap: () {
+                              AppNavigationHelper.pushScreen(
+                                context,
+                                SkinDetailsScreen(
+                                  repository: widget.repository,
+                                  settingsController: widget.settingsController,
+                                  skin: skin,
+                                ),
+                              );
+                            },
+                          );
+                        },
+                      ),
               ),
             ],
           );

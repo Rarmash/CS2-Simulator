@@ -4,11 +4,7 @@ class ChipBadge extends StatelessWidget {
   final String label;
   final Color color;
 
-  const ChipBadge({
-    super.key,
-    required this.label,
-    required this.color,
-  });
+  const ChipBadge({super.key, required this.label, required this.color});
 
   @override
   Widget build(BuildContext context) {

@@ -33,10 +33,7 @@ class OpeningLoadingCard extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 6),
-              Text(
-                subtitle,
-                style: const TextStyle(color: Colors.white70),
-              ),
+              Text(subtitle, style: const TextStyle(color: Colors.white70)),
             ],
           ),
         ),

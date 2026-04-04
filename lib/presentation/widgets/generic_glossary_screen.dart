@@ -74,8 +74,8 @@ class _GenericGlossaryScreenState<T> extends State<GenericGlossaryScreen<T>> {
 
           final items = snapshot.data ?? <T>[];
           final filtered = widget.filterAndSort(items, _query);
-          final headerControls = widget.headerControlsBuilder?.call(context) ??
-              const <Widget>[];
+          final headerControls =
+              widget.headerControlsBuilder?.call(context) ?? const <Widget>[];
 
           return Column(
             children: [

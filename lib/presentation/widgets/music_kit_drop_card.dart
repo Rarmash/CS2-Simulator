@@ -29,7 +29,10 @@ class MusicKitDropCard extends StatelessWidget {
           value: MusicKitUiHelper.typeLabel(drop.musicKit),
         ),
         if ((drop.musicKit.collection ?? '').isNotEmpty)
-          CollectibleInfoEntry(title: 'Series', value: drop.musicKit.collection!),
+          CollectibleInfoEntry(
+            title: 'Series',
+            value: drop.musicKit.collection!,
+          ),
       ],
     );
   }

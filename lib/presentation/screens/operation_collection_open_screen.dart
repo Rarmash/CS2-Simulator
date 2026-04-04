@@ -3,7 +3,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 
 import '../../core/utils/date_format_helper.dart';
-import '../../data/models/operation_collection_dto.dart';
+import '../../data/models/container_dto.dart';
 import '../../data/models/skin_dto.dart';
 import '../../data/repositories/local_data_repository.dart';
 import '../../domain/dropped_skin.dart';
@@ -20,7 +20,7 @@ import '../widgets/skin_grid_tile.dart';
 import '../widgets/source_badge.dart';
 
 class OperationCollectionOpenScreen extends StatefulWidget {
-  final OperationCollectionDto collection;
+  final ContainerDto collection;
   final LocalDataRepository repository;
 
   const OperationCollectionOpenScreen({
@@ -53,7 +53,7 @@ class _OperationCollectionOpenScreenState
   }
 
   Color get _operationColor =>
-      SourceColorHelper.operationColor(widget.collection.operationId);
+      SourceColorHelper.operationColor(widget.collection.sourceId ?? '');
 
   Future<void> _openCollection(List<SkinDto> skins) async {
     await CollectibleOpenFlowHelper.runReveal<DroppedSkin>(
@@ -98,11 +98,11 @@ class _OperationCollectionOpenScreenState
           return [
             SliverToBoxAdapter(
               child: CollectibleOpenHeader(
-                assetPath: widget.collection.image,
+                assetPath: widget.collection.containerImage,
                 imageHeight: constraints.maxWidth < 700 ? 90 : 120,
                 badges: [
                   SourceBadge(
-                    label: widget.collection.operationName,
+                    label: widget.collection.sourceLabel,
                     color: _operationColor,
                   ),
                 ],

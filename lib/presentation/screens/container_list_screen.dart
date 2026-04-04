@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../core/settings/settings_controller.dart';
-import '../../data/models/case_dto.dart';
+import '../../data/models/container_dto.dart';
 import '../../data/repositories/local_data_repository.dart';
 import '../helpers/app_navigation_helper.dart';
 import '../helpers/source_color_helper.dart';
@@ -11,22 +11,22 @@ import '../widgets/collection_filter_bar.dart';
 import '../widgets/collection_list_card.dart';
 import '../widgets/responsive_collection_grid.dart';
 
-class CaseListScreen extends StatefulWidget {
+class ContainerListScreen extends StatefulWidget {
   final LocalDataRepository repository;
   final SettingsController settingsController;
 
-  const CaseListScreen({
+  const ContainerListScreen({
     super.key,
     required this.repository,
     required this.settingsController,
   });
 
   @override
-  State<CaseListScreen> createState() => _CaseListScreenState();
+  State<ContainerListScreen> createState() => _ContainerListScreenState();
 }
 
-class _CaseListScreenState extends State<CaseListScreen> {
-  late Future<List<CaseDto>> _casesFuture;
+class _ContainerListScreenState extends State<ContainerListScreen> {
+  late Future<List<ContainerDto>> _containersFuture;
 
   static const String _filterAll = 'ALL';
   String _selectedFilter = _filterAll;
@@ -34,20 +34,23 @@ class _CaseListScreenState extends State<CaseListScreen> {
   @override
   void initState() {
     super.initState();
-    _casesFuture = widget.repository.loadCases();
+    _containersFuture = widget.repository.loadContainers();
   }
 
-  List<String> _availableFilters(List<CaseDto> cases) {
+  List<String> _availableFilters(List<ContainerDto> containers) {
     final types = <String>{_filterAll};
 
-    for (final caseDto in cases) {
-      if (caseDto.isXrayPackage ||
-          caseDto.isStickerCollection ||
-          caseDto.isPatchCollection ||
-          caseDto.isCharmCollection) {
+    for (final containerDto in containers) {
+      if (containerDto.isXrayPackage ||
+          containerDto.isStickerCollection ||
+          containerDto.isPatchCollection ||
+          containerDto.isCharmCollection ||
+          containerDto.isAgentCollection ||
+          containerDto.isRewardCollection ||
+          containerDto.isOperationCollection) {
         continue;
       }
-      types.add(caseDto.type);
+      types.add(containerDto.type);
     }
 
     final ordered = <String>[_filterAll];
@@ -105,8 +108,8 @@ class _CaseListScreenState extends State<CaseListScreen> {
     }
   }
 
-  List<CaseDto> _applyFilters(List<CaseDto> cases) {
-    var filtered = List<CaseDto>.from(cases);
+  List<ContainerDto> _applyFilters(List<ContainerDto> containers) {
+    var filtered = List<ContainerDto>.from(containers);
 
     filtered = filtered
         .where(
@@ -114,7 +117,10 @@ class _CaseListScreenState extends State<CaseListScreen> {
               !c.isXrayPackage &&
               !c.isStickerCollection &&
               !c.isPatchCollection &&
-              !c.isCharmCollection,
+              !c.isCharmCollection &&
+              !c.isAgentCollection &&
+              !c.isRewardCollection &&
+              !c.isOperationCollection,
         )
         .toList();
 
@@ -133,8 +139,8 @@ class _CaseListScreenState extends State<CaseListScreen> {
     return filtered;
   }
 
-  Widget _buildFilterBar(List<CaseDto> allCases) {
-    final filters = _availableFilters(allCases);
+  Widget _buildFilterBar(List<ContainerDto> allContainers) {
+    final filters = _availableFilters(allContainers);
 
     if (_selectedFilter != _filterAll && !filters.contains(_selectedFilter)) {
       _selectedFilter = _filterAll;
@@ -152,35 +158,40 @@ class _CaseListScreenState extends State<CaseListScreen> {
     );
   }
 
-  Widget _buildCaseCard(BuildContext context, CaseDto caseDto) {
-    final typeColor = SourceColorHelper.containerTypeColor(caseDto.type);
+  Widget _buildCaseCard(BuildContext context, ContainerDto containerDto) {
+    final typeColor = SourceColorHelper.containerTypeColor(containerDto.type);
     final chips = <Widget>[
-      ChipBadge(label: caseDto.typeLabel, color: typeColor),
+      ChipBadge(label: containerDto.typeLabel, color: typeColor),
     ];
 
-    if (caseDto.isStickerCollection && caseDto.sourceTypeLabel != null) {
+    if (containerDto.isStickerCollection &&
+        containerDto.sourceTypeLabel != null) {
       final sourceColor = SourceColorHelper.collectibleSourceColor(
-        caseDto.sourceType,
-        caseDto.sourceId,
+        containerDto.sourceType,
+        containerDto.sourceId,
       );
-      chips.add(ChipBadge(label: caseDto.sourceTypeLabel!, color: sourceColor));
+      chips.add(
+        ChipBadge(label: containerDto.sourceTypeLabel!, color: sourceColor),
+      );
 
-      if ((caseDto.sourceName ?? '').isNotEmpty) {
-        chips.add(ChipBadge(label: caseDto.sourceName!, color: sourceColor));
+      if ((containerDto.sourceName ?? '').isNotEmpty) {
+        chips.add(
+          ChipBadge(label: containerDto.sourceName!, color: sourceColor),
+        );
       }
     }
 
     return CollectionListCard(
-      imagePath: caseDto.caseImage,
-      title: caseDto.name,
-      releaseDate: caseDto.releaseDate,
+      imagePath: containerDto.containerImage,
+      title: containerDto.name,
+      releaseDate: containerDto.releaseDate,
       chips: chips,
       metadata: const [],
       onTap: () {
         AppNavigationHelper.pushScreen(
           context,
           AppNavigationHelper.buildContainerOpenScreen(
-            caseDto: caseDto,
+            containerDto: containerDto,
             repository: widget.repository,
             settingsController: widget.settingsController,
           ),
@@ -193,15 +204,15 @@ class _CaseListScreenState extends State<CaseListScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text('Choose Container')),
-      body: AsyncCollectionLoader<CaseDto>(
-        future: _casesFuture,
-        builder: (context, allCases) {
-          final visibleCases = _applyFilters(allCases);
+      body: AsyncCollectionLoader<ContainerDto>(
+        future: _containersFuture,
+        builder: (context, allContainers) {
+          final visibleContainers = _applyFilters(allContainers);
 
-          return ResponsiveCollectionGrid<CaseDto>(
-            items: visibleCases,
+          return ResponsiveCollectionGrid<ContainerDto>(
+            items: visibleContainers,
             emptyMessage: 'No containers match the selected filters.',
-            header: _buildFilterBar(allCases),
+            header: _buildFilterBar(allContainers),
             itemBuilder: _buildCaseCard,
           );
         },

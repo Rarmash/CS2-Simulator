@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../core/utils/date_format_helper.dart';
-import '../../data/models/case_dto.dart';
+import '../../data/models/container_dto.dart';
 import '../../data/models/sticker_dto.dart';
 import '../../data/repositories/local_data_repository.dart';
 import '../helpers/app_navigation_helper.dart';
@@ -28,8 +28,8 @@ class StickerDetailsScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(title: Text(sticker.name)),
-      body: FutureBuilder<List<CaseDto>>(
-        future: repository.loadCasesForSticker(sticker.id),
+      body: FutureBuilder<List<ContainerDto>>(
+        future: repository.loadContainersForSticker(sticker.id),
         builder: (context, snapshot) {
           if (snapshot.connectionState != ConnectionState.done) {
             return const Center(child: CircularProgressIndicator());
@@ -47,7 +47,7 @@ class StickerDetailsScreen extends StatelessWidget {
             );
           }
 
-          final cases = snapshot.data ?? const <CaseDto>[];
+          final cases = snapshot.data ?? const <ContainerDto>[];
 
           return ListView(
             padding: const EdgeInsets.all(12),
@@ -63,7 +63,9 @@ class StickerDetailsScreen extends StatelessWidget {
                   ),
                   DetailTag(text: sticker.stickerTypeLabel),
                   if (sticker.effect != 'OTHER')
-                    DetailTag(text: StickerUiHelper.effectLabel(sticker.effect)),
+                    DetailTag(
+                      text: StickerUiHelper.effectLabel(sticker.effect),
+                    ),
                   if ((sticker.collection ?? '').isNotEmpty)
                     DetailTag(text: sticker.collection!),
                   if ((sticker.tournament ?? '').isNotEmpty)
@@ -80,13 +82,19 @@ class StickerDetailsScreen extends StatelessWidget {
                     value: StickerUiHelper.effectLabel(sticker.effect),
                   ),
                   if ((sticker.collection ?? '').isNotEmpty)
-                    DetailInfoRow(title: 'Collection', value: sticker.collection!),
+                    DetailInfoRow(
+                      title: 'Collection',
+                      value: sticker.collection!,
+                    ),
                   if ((sticker.tournament ?? '').isNotEmpty)
-                    DetailInfoRow(title: 'Tournament', value: sticker.tournament!),
+                    DetailInfoRow(
+                      title: 'Tournament',
+                      value: sticker.tournament!,
+                    ),
                 ],
               ),
               const SizedBox(height: 12),
-              DetailSourceSection<CaseDto>(
+              DetailSourceSection<ContainerDto>(
                 title: 'Containers',
                 items: cases,
                 emptyText: 'No sticker container sources found.',
@@ -96,16 +104,17 @@ class StickerDetailsScreen extends StatelessWidget {
                     subtitleParts.add(item.sourceTypeLabel!);
                   }
                   return DetailSourceTile(
-                    imagePath: item.caseImage,
+                    imagePath: item.containerImage,
                     title: item.name,
-                    subtitle: subtitleParts.join(' • '),
+                    subtitle: subtitleParts.join(' вЂў '),
                     trailing:
-                        DateFormatHelper.formatReleaseDate(item.releaseDate) ?? '-',
+                        DateFormatHelper.formatReleaseDate(item.releaseDate) ??
+                        '-',
                     onTap: () {
                       AppNavigationHelper.pushScreen(
                         context,
                         AppNavigationHelper.buildContainerOpenScreen(
-                          caseDto: item,
+                          containerDto: item,
                           repository: repository,
                         ),
                       );

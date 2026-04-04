@@ -98,7 +98,10 @@ class _GraffitiGlossaryScreenState extends State<GraffitiGlossaryScreen> {
           title: graffiti.name,
           subtitle: GraffitiUiHelper.secondaryText(graffiti),
           tags: [
-            DetailTag(text: GraffitiUiHelper.rarityLabel(graffiti), color: color),
+            DetailTag(
+              text: GraffitiUiHelper.rarityLabel(graffiti),
+              color: color,
+            ),
             if ((graffiti.collection ?? '').isNotEmpty)
               DetailTag(text: graffiti.collection!),
           ],

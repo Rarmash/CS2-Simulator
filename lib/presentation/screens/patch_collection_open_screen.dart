@@ -3,7 +3,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 
 import '../../core/utils/date_format_helper.dart';
-import '../../data/models/case_dto.dart';
+import '../../data/models/container_dto.dart';
 import '../../data/models/patch_dto.dart';
 import '../../data/repositories/local_data_repository.dart';
 import '../../domain/dropped_patch.dart';
@@ -20,7 +20,7 @@ import '../widgets/patch_drop_card.dart';
 import '../widgets/patch_grid_tile.dart';
 
 class PatchCollectionOpenScreen extends StatefulWidget {
-  final CaseDto collection;
+  final ContainerDto collection;
   final LocalDataRepository repository;
 
   const PatchCollectionOpenScreen({
@@ -45,7 +45,9 @@ class _PatchCollectionOpenScreenState extends State<PatchCollectionOpenScreen> {
   @override
   void initState() {
     super.initState();
-    _patchesFuture = widget.repository.loadPatchesForCase(widget.collection.id);
+    _patchesFuture = widget.repository.loadPatchesForContainer(
+      widget.collection.id,
+    );
   }
 
   Future<void> _openCollection(List<PatchDto> patches) async {
@@ -72,7 +74,9 @@ class _PatchCollectionOpenScreenState extends State<PatchCollectionOpenScreen> {
     final formattedReleaseDate = DateFormatHelper.formatReleaseDate(
       widget.collection.releaseDate,
     );
-    final typeColor = SourceColorHelper.containerTypeColor(widget.collection.type);
+    final typeColor = SourceColorHelper.containerTypeColor(
+      widget.collection.type,
+    );
     final sourceColor = SourceColorHelper.collectibleSourceColor(
       widget.collection.sourceType,
       widget.collection.sourceId,
@@ -86,10 +90,13 @@ class _PatchCollectionOpenScreenState extends State<PatchCollectionOpenScreen> {
           return [
             SliverToBoxAdapter(
               child: CollectibleOpenHeader(
-                assetPath: widget.collection.caseImage,
+                assetPath: widget.collection.containerImage,
                 imageHeight: constraints.maxWidth < 700 ? 90 : 120,
                 badges: [
-                  ChipBadge(label: widget.collection.typeLabel, color: typeColor),
+                  ChipBadge(
+                    label: widget.collection.typeLabel,
+                    color: typeColor,
+                  ),
                   if (widget.collection.sourceTypeLabel != null)
                     ChipBadge(
                       label: widget.collection.sourceTypeLabel!,
@@ -112,8 +119,9 @@ class _PatchCollectionOpenScreenState extends State<PatchCollectionOpenScreen> {
                 releaseDateText: formattedReleaseDate,
                 description:
                     'Patch collections open like reward collections: no roulette, just the final reveal.',
-                buttonLabel:
-                    _isOpening ? 'OPENING...' : 'OPEN PATCH COLLECTION',
+                buttonLabel: _isOpening
+                    ? 'OPENING...'
+                    : 'OPEN PATCH COLLECTION',
                 onPressed: (_isOpening || patches.isEmpty)
                     ? null
                     : () => _openCollection(patches),

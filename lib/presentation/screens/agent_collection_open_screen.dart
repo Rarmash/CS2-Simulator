@@ -3,8 +3,8 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 
 import '../../core/utils/date_format_helper.dart';
-import '../../data/models/agent_collection_dto.dart';
 import '../../data/models/agent_dto.dart';
+import '../../data/models/container_dto.dart';
 import '../../data/repositories/local_data_repository.dart';
 import '../../domain/agent_collection_simulator_service.dart';
 import '../../domain/dropped_agent.dart';
@@ -20,7 +20,7 @@ import '../widgets/opening_loading_card.dart';
 import '../widgets/source_badge.dart';
 
 class AgentCollectionOpenScreen extends StatefulWidget {
-  final AgentCollectionDto collection;
+  final ContainerDto collection;
   final LocalDataRepository repository;
 
   const AgentCollectionOpenScreen({
@@ -78,7 +78,9 @@ class _AgentCollectionOpenScreenState extends State<AgentCollectionOpenScreen> {
     final formattedReleaseDate = DateFormatHelper.formatReleaseDate(
       widget.collection.releaseDate,
     );
-    final color = SourceColorHelper.operationColor(widget.collection.operationId);
+    final color = SourceColorHelper.operationColor(
+      widget.collection.sourceId ?? '',
+    );
 
     return Scaffold(
       appBar: AppBar(title: Text(widget.collection.name)),
@@ -88,18 +90,20 @@ class _AgentCollectionOpenScreenState extends State<AgentCollectionOpenScreen> {
           return [
             SliverToBoxAdapter(
               child: CollectibleOpenHeader(
-                assetPath: widget.collection.image,
+                assetPath: widget.collection.containerImage,
                 imageHeight: constraints.maxWidth < 700 ? 90 : 120,
                 badges: [
                   SourceBadge(
-                    label: widget.collection.operationName,
+                    label: widget.collection.sourceLabel,
                     color: color,
                   ),
                 ],
                 releaseDateText: formattedReleaseDate,
                 description:
                     'Agent collections open like operation rewards: no roulette, just the final reveal.',
-                buttonLabel: _isOpening ? 'OPENING...' : 'OPEN AGENT COLLECTION',
+                buttonLabel: _isOpening
+                    ? 'OPENING...'
+                    : 'OPEN AGENT COLLECTION',
                 onPressed: (_isOpening || agents.isEmpty)
                     ? null
                     : () => _openCollection(agents),

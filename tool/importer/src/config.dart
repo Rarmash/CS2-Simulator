@@ -17,7 +17,7 @@ const timeoutSeconds = 30;
 final outRoot = Directory.current;
 final assetsDir = Directory('${outRoot.path}/assets');
 final dataDir = Directory('${assetsDir.path}/data');
-final casesDir = Directory('${assetsDir.path}/cases');
+final containersDir = Directory('${assetsDir.path}/containers');
 final skinsDir = Directory('${assetsDir.path}/skins');
 final stickersDir = Directory('${assetsDir.path}/stickers');
 final pinsDir = Directory('${assetsDir.path}/pins');
@@ -26,11 +26,6 @@ final agentsDir = Directory('${assetsDir.path}/agents');
 final graffitiDir = Directory('${assetsDir.path}/graffiti');
 final patchesDir = Directory('${assetsDir.path}/patches');
 final charmsDir = Directory('${assetsDir.path}/charms');
-final rewardCollectionsDir = Directory('${assetsDir.path}/reward_collections');
-final operationCollectionsDir = Directory(
-  '${assetsDir.path}/operation_collections',
-);
-final agentCollectionsDir = Directory('${assetsDir.path}/agent_collections');
 final tournamentLogosDir = Directory('${assetsDir.path}/tournament_logos');
 
 final rewardOverridesPath = File(

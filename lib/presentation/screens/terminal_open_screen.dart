@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
 import '../../core/utils/date_format_helper.dart';
-import '../../data/models/case_dto.dart';
+import '../../data/models/container_dto.dart';
 import '../../data/models/skin_dto.dart';
 import '../../data/repositories/local_data_repository.dart';
-import '../../domain/case_simulator_service.dart';
+import '../../domain/container_simulator_service.dart';
 import '../../domain/dropped_skin.dart';
 import '../../domain/terminal_offer.dart';
 import '../helpers/source_color_helper.dart';
@@ -19,12 +19,12 @@ import '../widgets/skin_grid_tile.dart';
 import '../widgets/terminal_offer_card.dart';
 
 class TerminalOpenScreen extends StatefulWidget {
-  final CaseDto caseDto;
+  final ContainerDto containerDto;
   final LocalDataRepository repository;
 
   const TerminalOpenScreen({
     super.key,
-    required this.caseDto,
+    required this.containerDto,
     required this.repository,
   });
 
@@ -34,7 +34,7 @@ class TerminalOpenScreen extends StatefulWidget {
 
 class _TerminalOpenScreenState extends State<TerminalOpenScreen> {
   late Future<List<SkinDto>> _skinsFuture;
-  final CaseSimulatorService _simulator = CaseSimulatorService();
+  final ContainerSimulatorService _simulator = ContainerSimulatorService();
 
   List<TerminalOffer> _terminalOffers = const [];
   int _terminalOfferIndex = 0;
@@ -65,7 +65,9 @@ class _TerminalOpenScreenState extends State<TerminalOpenScreen> {
   @override
   void initState() {
     super.initState();
-    _skinsFuture = widget.repository.loadSkinsForCase(widget.caseDto.id);
+    _skinsFuture = widget.repository.loadSkinsForContainer(
+      widget.containerDto.id,
+    );
   }
 
   Future<void> _startTerminal(List<SkinDto> skins) async {
@@ -144,22 +146,27 @@ class _TerminalOpenScreenState extends State<TerminalOpenScreen> {
   @override
   Widget build(BuildContext context) {
     final formattedReleaseDate = DateFormatHelper.formatReleaseDate(
-      widget.caseDto.releaseDate,
+      widget.containerDto.releaseDate,
     );
-    final typeColor = SourceColorHelper.containerTypeColor(widget.caseDto.type);
+    final typeColor = SourceColorHelper.containerTypeColor(
+      widget.containerDto.type,
+    );
 
     return Scaffold(
-      appBar: AppBar(title: Text(widget.caseDto.name)),
+      appBar: AppBar(title: Text(widget.containerDto.name)),
       body: CollectibleOpenBody<SkinDto>(
         future: _skinsFuture,
         sliverBuilder: (context, constraints, skins, gridCount, aspectRatio) {
           return [
             SliverToBoxAdapter(
               child: CollectibleOpenHeader(
-                assetPath: widget.caseDto.caseImage,
+                assetPath: widget.containerDto.containerImage,
                 imageHeight: constraints.maxWidth < 700 ? 90 : 120,
                 badges: [
-                  ChipBadge(label: widget.caseDto.typeLabel, color: typeColor),
+                  ChipBadge(
+                    label: widget.containerDto.typeLabel,
+                    color: typeColor,
+                  ),
                 ],
                 releaseDateText: formattedReleaseDate,
                 description:

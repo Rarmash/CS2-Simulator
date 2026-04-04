@@ -112,7 +112,10 @@ class _StickerGlossaryScreenState extends State<StickerGlossaryScreen> {
           onTap: () {
             AppNavigationHelper.pushScreen(
               context,
-              StickerDetailsScreen(repository: widget.repository, sticker: sticker),
+              StickerDetailsScreen(
+                repository: widget.repository,
+                sticker: sticker,
+              ),
             );
           },
         );
