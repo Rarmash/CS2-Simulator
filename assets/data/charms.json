@@ -1,0 +1,548 @@
+[
+  {
+    "id": "1",
+    "name": "Lil' Ava",
+    "charmImage": "assets/charms/1.webp",
+    "rarity": "HIGH_GRADE",
+    "collection": "Missing Link Charm Collection"
+  },
+  {
+    "id": "2",
+    "name": "That's Bananas",
+    "charmImage": "assets/charms/2.webp",
+    "rarity": "REMARKABLE",
+    "collection": "Missing Link Charm Collection"
+  },
+  {
+    "id": "3",
+    "name": "Lil' Whiskers",
+    "charmImage": "assets/charms/3.webp",
+    "rarity": "REMARKABLE",
+    "collection": "Missing Link Charm Collection"
+  },
+  {
+    "id": "4",
+    "name": "Lil' Sandy",
+    "charmImage": "assets/charms/4.webp",
+    "rarity": "REMARKABLE",
+    "collection": "Missing Link Charm Collection"
+  },
+  {
+    "id": "5",
+    "name": "Chicken Lil'",
+    "charmImage": "assets/charms/5.webp",
+    "rarity": "REMARKABLE",
+    "collection": "Missing Link Charm Collection"
+  },
+  {
+    "id": "6",
+    "name": "Lil' Crass",
+    "charmImage": "assets/charms/6.webp",
+    "rarity": "HIGH_GRADE",
+    "collection": "Missing Link Charm Collection"
+  },
+  {
+    "id": "7",
+    "name": "Hot Howl",
+    "charmImage": "assets/charms/7.webp",
+    "rarity": "EXTRAORDINARY",
+    "collection": "Missing Link Charm Collection"
+  },
+  {
+    "id": "8",
+    "name": "Big Kev",
+    "charmImage": "assets/charms/8.webp",
+    "rarity": "HIGH_GRADE",
+    "collection": "Missing Link Charm Collection"
+  },
+  {
+    "id": "9",
+    "name": "Lil' Monster",
+    "charmImage": "assets/charms/9.webp",
+    "rarity": "EXOTIC",
+    "collection": "Missing Link Charm Collection"
+  },
+  {
+    "id": "10",
+    "name": "Hot Sauce",
+    "charmImage": "assets/charms/10.webp",
+    "rarity": "HIGH_GRADE",
+    "collection": "Missing Link Charm Collection"
+  },
+  {
+    "id": "11",
+    "name": "Diamond Dog",
+    "charmImage": "assets/charms/11.webp",
+    "rarity": "EXOTIC",
+    "collection": "Missing Link Charm Collection"
+  },
+  {
+    "id": "12",
+    "name": "Pinch O' Salt",
+    "charmImage": "assets/charms/12.webp",
+    "rarity": "HIGH_GRADE",
+    "collection": "Missing Link Charm Collection"
+  },
+  {
+    "id": "13",
+    "name": "Diner Dog",
+    "charmImage": "assets/charms/13.webp",
+    "rarity": "EXOTIC",
+    "collection": "Missing Link Charm Collection"
+  },
+  {
+    "id": "14",
+    "name": "Lil' Teacup",
+    "charmImage": "assets/charms/14.webp",
+    "rarity": "REMARKABLE",
+    "collection": "Missing Link Charm Collection"
+  },
+  {
+    "id": "15",
+    "name": "Lil' SAS",
+    "charmImage": "assets/charms/15.webp",
+    "rarity": "HIGH_GRADE",
+    "collection": "Missing Link Charm Collection"
+  },
+  {
+    "id": "16",
+    "name": "Hot Wurst",
+    "charmImage": "assets/charms/16.webp",
+    "rarity": "EXTRAORDINARY",
+    "collection": "Missing Link Charm Collection"
+  },
+  {
+    "id": "17",
+    "name": "Baby's AK",
+    "charmImage": "assets/charms/17.webp",
+    "rarity": "HIGH_GRADE",
+    "collection": "Small Arms Charm Collection"
+  },
+  {
+    "id": "18",
+    "name": "Die-cast AK",
+    "charmImage": "assets/charms/18.webp",
+    "rarity": "REMARKABLE",
+    "collection": "Small Arms Charm Collection"
+  },
+  {
+    "id": "19",
+    "name": "Pocket AWP",
+    "charmImage": "assets/charms/19.webp",
+    "rarity": "HIGH_GRADE",
+    "collection": "Small Arms Charm Collection"
+  },
+  {
+    "id": "20",
+    "name": "Titeenium AWP",
+    "charmImage": "assets/charms/20.webp",
+    "rarity": "EXOTIC",
+    "collection": "Small Arms Charm Collection"
+  },
+  {
+    "id": "21",
+    "name": "Baby Karat CT",
+    "charmImage": "assets/charms/21.webp",
+    "rarity": "EXTRAORDINARY",
+    "collection": "Small Arms Charm Collection"
+  },
+  {
+    "id": "22",
+    "name": "Whittle Knife",
+    "charmImage": "assets/charms/22.webp",
+    "rarity": "HIGH_GRADE",
+    "collection": "Small Arms Charm Collection"
+  },
+  {
+    "id": "23",
+    "name": "POP Art",
+    "charmImage": "assets/charms/23.webp",
+    "rarity": "REMARKABLE",
+    "collection": "Small Arms Charm Collection"
+  },
+  {
+    "id": "24",
+    "name": "Lil' Squirt",
+    "charmImage": "assets/charms/24.webp",
+    "rarity": "EXOTIC",
+    "collection": "Small Arms Charm Collection"
+  },
+  {
+    "id": "25",
+    "name": "Disco MAC",
+    "charmImage": "assets/charms/25.webp",
+    "rarity": "REMARKABLE",
+    "collection": "Small Arms Charm Collection"
+  },
+  {
+    "id": "26",
+    "name": "Backsplash",
+    "charmImage": "assets/charms/26.webp",
+    "rarity": "HIGH_GRADE",
+    "collection": "Small Arms Charm Collection"
+  },
+  {
+    "id": "27",
+    "name": "Lil' Cap Gun",
+    "charmImage": "assets/charms/27.webp",
+    "rarity": "HIGH_GRADE",
+    "collection": "Small Arms Charm Collection"
+  },
+  {
+    "id": "28",
+    "name": "Hot Hands",
+    "charmImage": "assets/charms/28.webp",
+    "rarity": "REMARKABLE",
+    "collection": "Small Arms Charm Collection"
+  },
+  {
+    "id": "29",
+    "name": "Semi-Precious",
+    "charmImage": "assets/charms/29.webp",
+    "rarity": "EXOTIC",
+    "collection": "Small Arms Charm Collection"
+  },
+  {
+    "id": "30",
+    "name": "Baby Karat T",
+    "charmImage": "assets/charms/30.webp",
+    "rarity": "EXTRAORDINARY",
+    "collection": "Small Arms Charm Collection"
+  },
+  {
+    "id": "31",
+    "name": "Glamour Shot",
+    "charmImage": "assets/charms/31.webp",
+    "rarity": "REMARKABLE",
+    "collection": "Small Arms Charm Collection"
+  },
+  {
+    "id": "32",
+    "name": "Stitch-Loaded",
+    "charmImage": "assets/charms/32.webp",
+    "rarity": "HIGH_GRADE",
+    "collection": "Small Arms Charm Collection"
+  },
+  {
+    "id": "33",
+    "name": "Lil' Squatch",
+    "charmImage": "assets/charms/33.webp",
+    "rarity": "REMARKABLE",
+    "collection": "Missing Link Charm Collection"
+  },
+  {
+    "id": "38",
+    "name": "Lil' Curse",
+    "charmImage": "assets/charms/38.webp",
+    "rarity": "HIGH_GRADE",
+    "collection": "Missing Link Community Charm Collection"
+  },
+  {
+    "id": "39",
+    "name": "Lil' Serpent",
+    "charmImage": "assets/charms/39.webp",
+    "rarity": "EXTRAORDINARY",
+    "collection": "Missing Link Community Charm Collection"
+  },
+  {
+    "id": "40",
+    "name": "Lil' Baller",
+    "charmImage": "assets/charms/40.webp",
+    "rarity": "HIGH_GRADE",
+    "collection": "Missing Link Community Charm Collection"
+  },
+  {
+    "id": "41",
+    "name": "Dead Weight",
+    "charmImage": "assets/charms/41.webp",
+    "rarity": "HIGH_GRADE",
+    "collection": "Missing Link Community Charm Collection"
+  },
+  {
+    "id": "42",
+    "name": "Lil' Prick",
+    "charmImage": "assets/charms/42.webp",
+    "rarity": "EXOTIC",
+    "collection": "Missing Link Community Charm Collection"
+  },
+  {
+    "id": "43",
+    "name": "Lil' Buns",
+    "charmImage": "assets/charms/43.webp",
+    "rarity": "REMARKABLE",
+    "collection": "Missing Link Community Charm Collection"
+  },
+  {
+    "id": "44",
+    "name": "Lil' Smokey",
+    "charmImage": "assets/charms/44.webp",
+    "rarity": "HIGH_GRADE",
+    "collection": "Missing Link Community Charm Collection"
+  },
+  {
+    "id": "45",
+    "name": "Lil' Eldritch",
+    "charmImage": "assets/charms/45.webp",
+    "rarity": "EXTRAORDINARY",
+    "collection": "Missing Link Community Charm Collection"
+  },
+  {
+    "id": "46",
+    "name": "Lil' Happy",
+    "charmImage": "assets/charms/46.webp",
+    "rarity": "EXOTIC",
+    "collection": "Missing Link Community Charm Collection"
+  },
+  {
+    "id": "47",
+    "name": "Magmatude",
+    "charmImage": "assets/charms/47.webp",
+    "rarity": "REMARKABLE",
+    "collection": "Missing Link Community Charm Collection"
+  },
+  {
+    "id": "48",
+    "name": "Lil' Cackle",
+    "charmImage": "assets/charms/48.webp",
+    "rarity": "HIGH_GRADE",
+    "collection": "Missing Link Community Charm Collection"
+  },
+  {
+    "id": "49",
+    "name": "Quick Silver",
+    "charmImage": "assets/charms/49.webp",
+    "rarity": "EXTRAORDINARY",
+    "collection": "Missing Link Community Charm Collection"
+  },
+  {
+    "id": "50",
+    "name": "Lil' No. 2",
+    "charmImage": "assets/charms/50.webp",
+    "rarity": "HIGH_GRADE",
+    "collection": "Missing Link Community Charm Collection"
+  },
+  {
+    "id": "51",
+    "name": "Piñatita",
+    "charmImage": "assets/charms/51.webp",
+    "rarity": "EXOTIC",
+    "collection": "Missing Link Community Charm Collection"
+  },
+  {
+    "id": "52",
+    "name": "Pocket Pop",
+    "charmImage": "assets/charms/52.webp",
+    "rarity": "REMARKABLE",
+    "collection": "Missing Link Community Charm Collection"
+  },
+  {
+    "id": "53",
+    "name": "Lil' Hero",
+    "charmImage": "assets/charms/53.webp",
+    "rarity": "EXOTIC",
+    "collection": "Missing Link Community Charm Collection"
+  },
+  {
+    "id": "54",
+    "name": "Lil' Tusk",
+    "charmImage": "assets/charms/54.webp",
+    "rarity": "HIGH_GRADE",
+    "collection": "Missing Link Community Charm Collection"
+  },
+  {
+    "id": "55",
+    "name": "Lil' Goop",
+    "charmImage": "assets/charms/55.webp",
+    "rarity": "REMARKABLE",
+    "collection": "Missing Link Community Charm Collection"
+  },
+  {
+    "id": "56",
+    "name": "Hang Loose",
+    "charmImage": "assets/charms/56.webp",
+    "rarity": "REMARKABLE",
+    "collection": "Missing Link Community Charm Collection"
+  },
+  {
+    "id": "57",
+    "name": "Lil' Vino",
+    "charmImage": "assets/charms/57.webp",
+    "rarity": "HIGH_GRADE",
+    "collection": "Missing Link Community Charm Collection"
+  },
+  {
+    "id": "58",
+    "name": "Lil' Moments",
+    "charmImage": "assets/charms/58.webp",
+    "rarity": "REMARKABLE",
+    "collection": "Missing Link Community Charm Collection"
+  },
+  {
+    "id": "59",
+    "name": "Lil' Boo",
+    "charmImage": "assets/charms/59.webp",
+    "rarity": "EXTRAORDINARY",
+    "collection": "Missing Link Community Charm Collection"
+  },
+  {
+    "id": "60",
+    "name": "Lil' Chirp",
+    "charmImage": "assets/charms/60.webp",
+    "rarity": "EXOTIC",
+    "collection": "Missing Link Community Charm Collection"
+  },
+  {
+    "id": "61",
+    "name": "Big Brain",
+    "charmImage": "assets/charms/61.webp",
+    "rarity": "REMARKABLE",
+    "collection": "Dr Boom Charm Collection"
+  },
+  {
+    "id": "62",
+    "name": "Biomech",
+    "charmImage": "assets/charms/62.webp",
+    "rarity": "HIGH_GRADE",
+    "collection": "Dr Boom Charm Collection"
+  },
+  {
+    "id": "63",
+    "name": "Splatter Cat",
+    "charmImage": "assets/charms/63.webp",
+    "rarity": "HIGH_GRADE",
+    "collection": "Dr Boom Charm Collection"
+  },
+  {
+    "id": "64",
+    "name": "Gritty",
+    "charmImage": "assets/charms/64.webp",
+    "rarity": "HIGH_GRADE",
+    "collection": "Dr Boom Charm Collection"
+  },
+  {
+    "id": "65",
+    "name": "Fluffy",
+    "charmImage": "assets/charms/65.webp",
+    "rarity": "HIGH_GRADE",
+    "collection": "Dr Boom Charm Collection"
+  },
+  {
+    "id": "66",
+    "name": "Whittle Guy",
+    "charmImage": "assets/charms/66.webp",
+    "rarity": "HIGH_GRADE",
+    "collection": "Dr Boom Charm Collection"
+  },
+  {
+    "id": "67",
+    "name": "Lil' Zen",
+    "charmImage": "assets/charms/67.webp",
+    "rarity": "HIGH_GRADE",
+    "collection": "Dr Boom Charm Collection"
+  },
+  {
+    "id": "68",
+    "name": "Lil' Facelift",
+    "charmImage": "assets/charms/68.webp",
+    "rarity": "REMARKABLE",
+    "collection": "Dr Boom Charm Collection"
+  },
+  {
+    "id": "69",
+    "name": "Lil' Chomper",
+    "charmImage": "assets/charms/69.webp",
+    "rarity": "REMARKABLE",
+    "collection": "Dr Boom Charm Collection"
+  },
+  {
+    "id": "70",
+    "name": "Lil' Bloody",
+    "charmImage": "assets/charms/70.webp",
+    "rarity": "REMARKABLE",
+    "collection": "Dr Boom Charm Collection"
+  },
+  {
+    "id": "71",
+    "name": "Lil' Dumplin'",
+    "charmImage": "assets/charms/71.webp",
+    "rarity": "REMARKABLE",
+    "collection": "Dr Boom Charm Collection"
+  },
+  {
+    "id": "72",
+    "name": "Bomb Tag",
+    "charmImage": "assets/charms/72.webp",
+    "rarity": "REMARKABLE",
+    "collection": "Dr Boom Charm Collection"
+  },
+  {
+    "id": "73",
+    "name": "Glitter Bomb",
+    "charmImage": "assets/charms/73.webp",
+    "rarity": "EXTRAORDINARY",
+    "collection": "Dr Boom Charm Collection"
+  },
+  {
+    "id": "74",
+    "name": "Lil' Eco",
+    "charmImage": "assets/charms/74.webp",
+    "rarity": "EXOTIC",
+    "collection": "Dr Boom Charm Collection"
+  },
+  {
+    "id": "75",
+    "name": "Hungry Eyes",
+    "charmImage": "assets/charms/75.webp",
+    "rarity": "EXOTIC",
+    "collection": "Dr Boom Charm Collection"
+  },
+  {
+    "id": "76",
+    "name": "Eye of Ball",
+    "charmImage": "assets/charms/76.webp",
+    "rarity": "EXOTIC",
+    "collection": "Dr Boom Charm Collection"
+  },
+  {
+    "id": "77",
+    "name": "Lil' Yeti",
+    "charmImage": "assets/charms/77.webp",
+    "rarity": "EXOTIC",
+    "collection": "Dr Boom Charm Collection"
+  },
+  {
+    "id": "78",
+    "name": "8 Ball IGL",
+    "charmImage": "assets/charms/78.webp",
+    "rarity": "EXTRAORDINARY",
+    "collection": "Dr Boom Charm Collection"
+  },
+  {
+    "id": "79",
+    "name": "Flash Bomb",
+    "charmImage": "assets/charms/79.webp",
+    "rarity": "EXOTIC",
+    "collection": "Dr Boom Charm Collection"
+  },
+  {
+    "id": "80",
+    "name": "Lil' Ferno",
+    "charmImage": "assets/charms/80.webp",
+    "rarity": "EXTRAORDINARY",
+    "collection": "Dr Boom Charm Collection"
+  },
+  {
+    "id": "81",
+    "name": "Butane Buddy",
+    "charmImage": "assets/charms/81.webp",
+    "rarity": "EXTRAORDINARY",
+    "collection": "Dr Boom Charm Collection"
+  },
+  {
+    "id": "82",
+    "name": "Dr. Brian",
+    "charmImage": "assets/charms/82.webp",
+    "rarity": "REMARKABLE",
+    "collection": "Dr Boom Charm Collection"
+  }
+]

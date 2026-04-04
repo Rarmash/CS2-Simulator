@@ -2,7 +2,10 @@ part of 'local_data_repository.dart';
 
 mixin _LocalDataRepositoryLoaders {
   Future<List<CaseDto>> loadCases() async {
-    final cases = await _loadDtoList('assets/data/cases.json', CaseDto.fromJson);
+    final cases = await _loadDtoList(
+      'assets/data/cases.json',
+      CaseDto.fromJson,
+    );
     cases.sort(_compareCaseByReleaseDateAsc);
     return cases;
   }
@@ -35,8 +38,15 @@ mixin _LocalDataRepositoryLoaders {
     return _loadDtoList('assets/data/patches.json', PatchDto.fromJson);
   }
 
+  Future<List<CharmDto>> loadCharms() async {
+    return _loadDtoList('assets/data/charms.json', CharmDto.fromJson);
+  }
+
   Future<List<CaseContentDto>> loadCaseContents() async {
-    return _loadDtoList('assets/data/case_contents.json', CaseContentDto.fromJson);
+    return _loadDtoList(
+      'assets/data/case_contents.json',
+      CaseContentDto.fromJson,
+    );
   }
 
   Future<List<StickerContentDto>> loadStickerContents() async {
@@ -47,7 +57,10 @@ mixin _LocalDataRepositoryLoaders {
   }
 
   Future<List<PinContentDto>> loadPinContents() async {
-    return _loadDtoList('assets/data/pin_contents.json', PinContentDto.fromJson);
+    return _loadDtoList(
+      'assets/data/pin_contents.json',
+      PinContentDto.fromJson,
+    );
   }
 
   Future<List<MusicKitContentDto>> loadMusicKitContents() async {
@@ -87,6 +100,13 @@ mixin _LocalDataRepositoryLoaders {
     );
   }
 
+  Future<List<CharmContentDto>> loadCharmContents() async {
+    return _loadDtoList(
+      'assets/data/charm_contents.json',
+      CharmContentDto.fromJson,
+    );
+  }
+
   Future<List<RewardCollectionDto>> loadRewardCollections() async {
     final items = await _loadDtoList(
       'assets/data/reward_collections.json',
@@ -96,7 +116,8 @@ mixin _LocalDataRepositoryLoaders {
     return items;
   }
 
-  Future<List<RewardCollectionContentDto>> loadRewardCollectionContents() async {
+  Future<List<RewardCollectionContentDto>>
+  loadRewardCollectionContents() async {
     return _loadDtoList(
       'assets/data/reward_collection_contents.json',
       RewardCollectionContentDto.fromJson,

@@ -32,6 +32,7 @@ Unless explicitly stated otherwise, the repository license applies to the source
 - Agent collections
 - Graffiti boxes
 - Patch packs and patch collections
+- Charm collections
 - Item glossary hub with dedicated screens for skins and collectibles
 - Trade-Up simulator
 
@@ -40,7 +41,7 @@ Unless explicitly stated otherwise, the repository license applies to the source
 - Flutter
 - Dart
 - Local JSON assets for all generated content
-- Dart-based importer for containers, skins, stickers, pins, music kits, agents, graffiti, patches, and collection metadata
+- Dart-based importer for containers, skins, stickers, pins, music kits, agents, graffiti, patches, charms, and collection metadata
 
 ## Project Structure
 
@@ -54,6 +55,7 @@ Unless explicitly stated otherwise, the repository license applies to the source
 - [assets/agents/](assets/agents) agent images
 - [assets/graffiti/](assets/graffiti) graffiti images
 - [assets/patches/](assets/patches) patch images
+- [assets/charms/](assets/charms) charm images
 - [tool/import_cs_data.dart](tool/import_cs_data.dart) main importer entrypoint
 - [tool/prune_generated_assets.dart](tool/prune_generated_assets.dart) cleanup tool for orphaned generated assets
 
@@ -146,10 +148,15 @@ The project is actively evolving, with current work focused on:
 ### v0.10
 
 - Trade-Up rewrite and UI cleanup
-- Charm support
 - Unified handling of regular and StatTrak™ Music Kits as one grouped item
 - Broader simulator accuracy pass across more container types
 - Better browsing and glossary coverage for non-skin content
+
+### v0.11
+
+- Major tournament section covering CS:GO and CS2 eras
+- Tournament pages with dates, organizers, winners, and placements
+- Better linking between Majors and their souvenir packages, sticker capsules, and autograph capsules
 
 ### Future
 

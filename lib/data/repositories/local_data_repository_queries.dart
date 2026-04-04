@@ -24,9 +24,9 @@ mixin _LocalDataRepositoryQueries on _LocalDataRepositoryLoaders {
 
     final result = stickers.where((s) => ids.contains(s.id)).toList();
     result.sort((a, b) {
-      final rarityCompare = _stickerRarityOrder(a).compareTo(
-        _stickerRarityOrder(b),
-      );
+      final rarityCompare = _stickerRarityOrder(
+        a,
+      ).compareTo(_stickerRarityOrder(b));
       if (rarityCompare != 0) return rarityCompare;
       return int.parse(a.id).compareTo(int.parse(b.id));
     });
@@ -56,9 +56,9 @@ mixin _LocalDataRepositoryQueries on _LocalDataRepositoryLoaders {
 
     final result = musicKits.where((m) => ids.contains(m.id)).toList();
     result.sort((a, b) {
-      final rarityCompare = _musicKitRarityOrder(a).compareTo(
-        _musicKitRarityOrder(b),
-      );
+      final rarityCompare = _musicKitRarityOrder(
+        a,
+      ).compareTo(_musicKitRarityOrder(b));
       if (rarityCompare != 0) return rarityCompare;
       final statTrakCompare = a.isStatTrak == b.isStatTrak
           ? 0
@@ -77,9 +77,9 @@ mixin _LocalDataRepositoryQueries on _LocalDataRepositoryLoaders {
 
     final result = graffiti.where((g) => ids.contains(g.id)).toList();
     result.sort((a, b) {
-      final rarityCompare = _graffitiRarityOrder(a).compareTo(
-        _graffitiRarityOrder(b),
-      );
+      final rarityCompare = _graffitiRarityOrder(
+        a,
+      ).compareTo(_graffitiRarityOrder(b));
       if (rarityCompare != 0) return rarityCompare;
       return int.parse(a.id).compareTo(int.parse(b.id));
     });
@@ -94,14 +94,35 @@ mixin _LocalDataRepositoryQueries on _LocalDataRepositoryLoaders {
 
     final result = patches.where((p) => ids.contains(p.id)).toList();
     result.sort((a, b) {
-      final rarityCompare = _patchRarityOrder(a).compareTo(_patchRarityOrder(b));
+      final rarityCompare = _patchRarityOrder(
+        a,
+      ).compareTo(_patchRarityOrder(b));
       if (rarityCompare != 0) return rarityCompare;
       return int.parse(a.id).compareTo(int.parse(b.id));
     });
     return result;
   }
 
-  Future<List<AgentDto>> loadAgentsForCollection(String agentCollectionId) async {
+  Future<List<CharmDto>> loadCharmsForCase(String caseId) async {
+    final charms = await loadCharms();
+    final contents = await loadCharmContents();
+    final content = contents.firstWhere((c) => c.caseId == caseId);
+    final ids = content.charmIds.toSet();
+
+    final result = charms.where((c) => ids.contains(c.id)).toList();
+    result.sort((a, b) {
+      final rarityCompare = _charmRarityOrder(
+        a,
+      ).compareTo(_charmRarityOrder(b));
+      if (rarityCompare != 0) return rarityCompare;
+      return int.parse(a.id).compareTo(int.parse(b.id));
+    });
+    return result;
+  }
+
+  Future<List<AgentDto>> loadAgentsForCollection(
+    String agentCollectionId,
+  ) async {
     final agents = await loadAgents();
     final contents = await loadAgentCollectionContents();
     final content = contents.firstWhere(
@@ -111,7 +132,9 @@ mixin _LocalDataRepositoryQueries on _LocalDataRepositoryLoaders {
 
     final result = agents.where((a) => ids.contains(a.id)).toList();
     result.sort((a, b) {
-      final rarityCompare = _agentRarityOrder(a).compareTo(_agentRarityOrder(b));
+      final rarityCompare = _agentRarityOrder(
+        a,
+      ).compareTo(_agentRarityOrder(b));
       if (rarityCompare != 0) return rarityCompare;
       return int.parse(a.id).compareTo(int.parse(b.id));
     });
@@ -244,6 +267,20 @@ mixin _LocalDataRepositoryQueries on _LocalDataRepositoryLoaders {
     return result;
   }
 
+  Future<List<CaseDto>> loadCasesForCharm(String charmId) async {
+    final cases = await loadCases();
+    final contents = await loadCharmContents();
+
+    final caseIds = contents
+        .where((entry) => entry.charmIds.contains(charmId))
+        .map((entry) => entry.caseId)
+        .toSet();
+
+    final result = cases.where((c) => caseIds.contains(c.id)).toList();
+    result.sort(_compareCaseByReleaseDateAsc);
+    return result;
+  }
+
   Future<List<AgentCollectionDto>> loadAgentCollectionsForAgent(
     String agentId,
   ) async {
@@ -270,6 +307,13 @@ mixin _LocalDataRepositoryQueries on _LocalDataRepositoryLoaders {
   Future<List<CaseDto>> loadPatchCollections() async {
     final cases = await loadCases();
     final result = cases.where((c) => c.isPatchCollection).toList();
+    result.sort(_compareCollectibleCollectionAsc);
+    return result;
+  }
+
+  Future<List<CaseDto>> loadCharmCollections() async {
+    final cases = await loadCases();
+    final result = cases.where((c) => c.isCharmCollection).toList();
     result.sort(_compareCollectibleCollectionAsc);
     return result;
   }

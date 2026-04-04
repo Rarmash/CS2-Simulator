@@ -2,7 +2,7 @@ name: cs2_simulator
 description: "Counter-Strike 2 case opening and Trade-Up contract creation simulator written in Flutter + Dart."
 publish_to: 'none'
 
-version: 0.9.2
+version: 0.10.0
 
 environment:
   sdk: ^3.11.3
@@ -66,6 +66,7 @@ flutter:
     - assets/agents/
     - assets/graffiti/
     - assets/patches/
+    - assets/charms/
     - assets/cases/
     - assets/agent_collections/
     - assets/reward_collections/

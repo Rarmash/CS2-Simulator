@@ -4,6 +4,7 @@ import '../../core/settings/settings_controller.dart';
 import '../../data/models/case_dto.dart';
 import '../../data/repositories/local_data_repository.dart';
 import '../screens/case_open_screen.dart';
+import '../screens/charm_collection_open_screen.dart';
 import '../screens/graffiti_box_open_screen.dart';
 import '../screens/music_kit_box_open_screen.dart';
 import '../screens/patch_container_open_screen.dart';
@@ -33,34 +34,25 @@ class AppNavigationHelper {
       );
     }
     if (caseDto.isPinCapsule) {
-      return PinContainerOpenScreen(
-        caseDto: caseDto,
-        repository: repository,
-      );
+      return PinContainerOpenScreen(caseDto: caseDto, repository: repository);
     }
     if (caseDto.isMusicKitBox) {
-      return MusicKitBoxOpenScreen(
-        caseDto: caseDto,
-        repository: repository,
-      );
+      return MusicKitBoxOpenScreen(caseDto: caseDto, repository: repository);
     }
     if (caseDto.isGraffitiBox) {
-      return GraffitiBoxOpenScreen(
-        caseDto: caseDto,
-        repository: repository,
-      );
+      return GraffitiBoxOpenScreen(caseDto: caseDto, repository: repository);
     }
     if (caseDto.isPatchPack) {
-      return PatchContainerOpenScreen(
-        caseDto: caseDto,
+      return PatchContainerOpenScreen(caseDto: caseDto, repository: repository);
+    }
+    if (caseDto.isCharmCollection) {
+      return CharmCollectionOpenScreen(
+        collection: caseDto,
         repository: repository,
       );
     }
     if (caseDto.isTerminal) {
-      return TerminalOpenScreen(
-        caseDto: caseDto,
-        repository: repository,
-      );
+      return TerminalOpenScreen(caseDto: caseDto, repository: repository);
     }
 
     assert(

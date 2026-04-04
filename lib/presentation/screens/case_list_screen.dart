@@ -43,7 +43,8 @@ class _CaseListScreenState extends State<CaseListScreen> {
     for (final caseDto in cases) {
       if (caseDto.isXrayPackage ||
           caseDto.isStickerCollection ||
-          caseDto.isPatchCollection) {
+          caseDto.isPatchCollection ||
+          caseDto.isCharmCollection) {
         continue;
       }
       types.add(caseDto.type);
@@ -110,7 +111,10 @@ class _CaseListScreenState extends State<CaseListScreen> {
     filtered = filtered
         .where(
           (c) =>
-              !c.isXrayPackage && !c.isStickerCollection && !c.isPatchCollection,
+              !c.isXrayPackage &&
+              !c.isStickerCollection &&
+              !c.isPatchCollection &&
+              !c.isCharmCollection,
         )
         .toList();
 

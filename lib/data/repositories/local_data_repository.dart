@@ -7,6 +7,8 @@ import '../models/agent_collection_dto.dart';
 import '../models/agent_dto.dart';
 import '../models/case_content_dto.dart';
 import '../models/case_dto.dart';
+import '../models/charm_content_dto.dart';
+import '../models/charm_dto.dart';
 import '../models/graffiti_content_dto.dart';
 import '../models/graffiti_dto.dart';
 import '../models/music_kit_content_dto.dart';
@@ -27,4 +29,5 @@ part 'local_data_repository_loaders.dart';
 part 'local_data_repository_queries.dart';
 part 'local_data_repository_sorting.dart';
 
-class LocalDataRepository with _LocalDataRepositoryLoaders, _LocalDataRepositoryQueries {}
+class LocalDataRepository
+    with _LocalDataRepositoryLoaders, _LocalDataRepositoryQueries {}

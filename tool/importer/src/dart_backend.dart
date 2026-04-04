@@ -29,12 +29,17 @@ class DartImporterBackend implements ImporterBackend {
     final existingMusicKits = _io.loadJsonList(
       File('${dataDir.path}/music_kits.json'),
     );
-    final existingAgents = _io.loadJsonList(File('${dataDir.path}/agents.json'));
+    final existingAgents = _io.loadJsonList(
+      File('${dataDir.path}/agents.json'),
+    );
     final existingGraffiti = _io.loadJsonList(
       File('${dataDir.path}/graffiti.json'),
     );
     final existingPatches = _io.loadJsonList(
       File('${dataDir.path}/patches.json'),
+    );
+    final existingCharms = _io.loadJsonList(
+      File('${dataDir.path}/charms.json'),
     );
     final existingCases = allExistingCases.where((item) {
       final type = (item['type'] ?? '').toString().trim().toUpperCase();
@@ -86,6 +91,10 @@ class DartImporterBackend implements ImporterBackend {
       for (final p in existingPatches)
         existingPatchKey(p): Map<String, dynamic>.from(p),
     };
+    final existingCharmByKey = <(String, String), Map<String, dynamic>>{
+      for (final c in existingCharms)
+        existingCharmKey(c): Map<String, dynamic>.from(c),
+    };
     final existingCaseByName = <String, Map<String, dynamic>>{
       for (final c in allExistingCases)
         existingCaseKey(c): Map<String, dynamic>.from(c),
@@ -108,7 +117,9 @@ class DartImporterBackend implements ImporterBackend {
         operationKey(
           (c['name'] ?? '').toString(),
           (c['operationId'] ?? '').toString(),
-        ): Map<String, dynamic>.from(c),
+        ): Map<String, dynamic>.from(
+          c,
+        ),
     };
 
     final usedSkinIds = _extractUsedIds(existingSkins);
@@ -118,6 +129,7 @@ class DartImporterBackend implements ImporterBackend {
     final usedAgentIds = _extractUsedIds(existingAgents);
     final usedGraffitiIds = _extractUsedIds(existingGraffiti);
     final usedPatchIds = _extractUsedIds(existingPatches);
+    final usedCharmIds = _extractUsedIds(existingCharms);
     final usedCaseIds = _extractUsedIds(allExistingCases);
     final usedRewardIds = _extractUsedIds(existingRewardCollections);
     final usedOperationIds = _extractUsedIds(existingOperationCollections);
@@ -130,6 +142,7 @@ class DartImporterBackend implements ImporterBackend {
     var nextAgentId = _nextId(usedAgentIds, 980000000);
     var nextGraffitiId = _nextId(usedGraffitiIds, 990000000);
     var nextPatchId = _nextId(usedPatchIds, 995000000);
+    var nextCharmId = _nextId(usedCharmIds, 996000000);
     var nextCaseId = _nextId(usedCaseIds, 0);
     var nextRewardId = _nextId(usedRewardIds, 10000);
     var nextOperationId = _nextId(usedOperationIds, 20000);
@@ -151,6 +164,8 @@ class DartImporterBackend implements ImporterBackend {
     final graffitiData = _asJsonList(await _io.fetchJson(graffitiUrl));
     _io.printInfo('Fetching patches.json ...');
     final patchesData = _asJsonList(await _io.fetchJson(patchesUrl));
+    _io.printInfo('Fetching keychains.json ...');
+    final keychainsData = _asJsonList(await _io.fetchJson(keychainsUrl));
 
     final collectionImageByName = buildCollectionImageMap(skinsData);
     buildCollectionMetaMap(collectionsData);
@@ -195,7 +210,8 @@ class DartImporterBackend implements ImporterBackend {
         operationKey(
           (c['name'] ?? '').toString(),
           (c['operationId'] ?? '').toString(),
-        ): (c['id'] ?? '').toString(),
+        ): (c['id'] ?? '')
+            .toString(),
     };
 
     final supportedCrates = crates.where(isSupportedContainer).toList()
@@ -312,6 +328,61 @@ class DartImporterBackend implements ImporterBackend {
       caseNameToId[crateName] = caseId;
     }
 
+    final charmCollections =
+        collectionsData.where((collection) {
+          final name = (collection['name'] ?? '').toString().trim();
+          final contains = collection['contains'];
+          return name.endsWith('Charm Collection') &&
+              contains is List &&
+              contains.isNotEmpty;
+        }).toList()..sort(
+          (a, b) => ((a['name'] ?? '').toString()).compareTo(
+            (b['name'] ?? '').toString(),
+          ),
+        );
+
+    for (final collection in charmCollections) {
+      final collectionName = (collection['name'] ?? '').toString().trim();
+      if (collectionName.isEmpty) {
+        continue;
+      }
+
+      final existingCase = existingCaseByName[collectionName];
+      final caseId = existingCase != null
+          ? existingCase['id'].toString()
+          : (nextCaseId++).toString();
+      final sourceMeta = resolveCharmCollectionSource(collectionName);
+      final releaseDate = sourceMeta['releaseDate'];
+      if (releaseDate == null) {
+        throw StateError(
+          'Missing hardcoded release date for charm collection: $collectionName',
+        );
+      }
+
+      final caseImagePath = await _syncAsset(
+        imageUrl: collection['image']?.toString(),
+        dirPath: casesDir.path,
+        relativeDir: 'assets/cases',
+        id: caseId,
+        existingRelativePath: existingCase?['caseImage']?.toString(),
+        compressionModeOverride: CompressionMode.maxCompress,
+      );
+
+      newCases[caseId] = {
+        'id': caseId,
+        'name': collectionName,
+        'caseImage': caseImagePath,
+        'releaseDate': releaseDate,
+        'type': 'CHARM_COLLECTION',
+        'tournamentName': null,
+        'tournamentLogo': null,
+        'sourceType': sourceMeta['sourceType'],
+        'sourceId': sourceMeta['sourceId'],
+        'sourceName': sourceMeta['sourceName'],
+      };
+      caseNameToId[collectionName] = caseId;
+    }
+
     final newSkins = <String, Map<String, dynamic>>{};
     final newStickers = <String, Map<String, dynamic>>{};
     final newPins = <String, Map<String, dynamic>>{};
@@ -319,6 +390,7 @@ class DartImporterBackend implements ImporterBackend {
     final newAgents = <String, Map<String, dynamic>>{};
     final newGraffiti = <String, Map<String, dynamic>>{};
     final newPatches = <String, Map<String, dynamic>>{};
+    final newCharms = <String, Map<String, dynamic>>{};
     final skinIdByFullName = <String, String>{};
 
     final caseContentsMap = <String, Set<String>>{
@@ -329,10 +401,12 @@ class DartImporterBackend implements ImporterBackend {
     final musicKitContentsMap = <String, Set<String>>{};
     final musicKitCollectionBySourceId = <String, String?>{};
     final agentCollectionContentsMap = <String, Set<String>>{
-      for (final collectionId in newAgentCollections.keys) collectionId: <String>{},
+      for (final collectionId in newAgentCollections.keys)
+        collectionId: <String>{},
     };
     final graffitiContentsMap = <String, Set<String>>{};
     final patchContentsMap = <String, Set<String>>{};
+    final charmContentsMap = <String, Set<String>>{};
     final rewardContentsMap = <String, Set<String>>{
       for (final collectionId in newRewardCollections.keys)
         collectionId: <String>{},
@@ -349,6 +423,7 @@ class DartImporterBackend implements ImporterBackend {
     var createdAgentCount = 0;
     var createdGraffitiCount = 0;
     var createdPatchCount = 0;
+    var createdCharmCount = 0;
     var reusedSkinCount = 0;
     var reusedStickerCount = 0;
     var reusedPinCount = 0;
@@ -356,6 +431,7 @@ class DartImporterBackend implements ImporterBackend {
     var reusedAgentCount = 0;
     var reusedGraffitiCount = 0;
     var reusedPatchCount = 0;
+    var reusedCharmCount = 0;
     var skippedUnknownItems = 0;
     var containerRefsCreatedFromSkinMeta = 0;
     var rewardCollectionsCreated = 0;
@@ -1178,7 +1254,8 @@ class DartImporterBackend implements ImporterBackend {
       }
 
       final rarity =
-          musicKitRarityMap[((meta['rarity'] as Map?)?['name'] ?? '').toString()] ??
+          musicKitRarityMap[((meta['rarity'] as Map?)?['name'] ?? '')
+              .toString()] ??
           'HIGH_GRADE';
       final imageUrl = chooseImageUrl(meta);
 
@@ -1244,7 +1321,8 @@ class DartImporterBackend implements ImporterBackend {
       }
 
       final rarity =
-          agentRarityMap[((meta['rarity'] as Map?)?['name'] ?? '').toString()] ??
+          agentRarityMap[((meta['rarity'] as Map?)?['name'] ?? '')
+              .toString()] ??
           'DISTINGUISHED';
       final team = ((meta['team'] as Map?)?['name'] ?? '')
           .toString()
@@ -1310,7 +1388,8 @@ class DartImporterBackend implements ImporterBackend {
 
       final collectionKey = operationKey(collectionName, opId);
       var agentCollectionId = agentCollectionKeyToId[collectionKey];
-      final existingAgentCollection = existingAgentCollectionByKey[collectionKey];
+      final existingAgentCollection =
+          existingAgentCollectionByKey[collectionKey];
       if (agentCollectionId == null) {
         if (existingAgentCollection != null) {
           agentCollectionId = existingAgentCollection['id'].toString();
@@ -1326,7 +1405,8 @@ class DartImporterBackend implements ImporterBackend {
         relativeDir: 'assets/agent_collections',
         id: agentCollectionId,
         existingRelativePath:
-            (newAgentCollections[agentCollectionId] ?? existingAgentCollection)?['image']
+            (newAgentCollections[agentCollectionId] ??
+                    existingAgentCollection)?['image']
                 ?.toString(),
       );
 
@@ -1343,6 +1423,70 @@ class DartImporterBackend implements ImporterBackend {
           .add(agentId);
     }
 
+    for (final meta in keychainsData) {
+      final charmName = normalizeCharmName(
+        (meta['name'] ?? '').toString().trim(),
+      );
+      if (charmName.isEmpty) {
+        continue;
+      }
+
+      final collectionInfo = chooseCollectionNameAndImage(meta);
+      final charmCollection = collectionInfo.$1;
+      final rarity =
+          charmRarityMap[((meta['rarity'] as Map?)?['name'] ?? '')
+              .toString()] ??
+          'HIGH_GRADE';
+      final imageUrl = chooseImageUrl(meta);
+
+      final key = (
+        canonicalName(charmName),
+        canonicalName(charmCollection ?? ''),
+      );
+      final existingCharm = existingCharmByKey[key];
+      late String charmId;
+      if (existingCharm != null) {
+        charmId = existingCharm['id'].toString();
+        reusedCharmCount += 1;
+      } else {
+        final sourceCharmId = (meta['id'] ?? '').toString().trim();
+        final candidate = makeStableNumericId(sourceCharmId, 996000000);
+        if (RegExp(r'^\d+$').hasMatch(candidate) &&
+            !usedCharmIds.contains(int.parse(candidate)) &&
+            !newCharms.containsKey(candidate)) {
+          charmId = candidate;
+          usedCharmIds.add(int.parse(candidate));
+        } else {
+          while (usedCharmIds.contains(nextCharmId)) {
+            nextCharmId += 1;
+          }
+          charmId = nextCharmId.toString();
+          usedCharmIds.add(nextCharmId);
+          nextCharmId += 1;
+        }
+        createdCharmCount += 1;
+      }
+
+      final charmImagePath = await _syncAsset(
+        imageUrl: imageUrl,
+        dirPath: charmsDir.path,
+        relativeDir: 'assets/charms',
+        id: charmId,
+        existingRelativePath: existingCharm?['charmImage']?.toString(),
+        compressionModeOverride: CompressionMode.maxCompress,
+      );
+
+      final charmRecord = <String, dynamic>{
+        'id': charmId,
+        'name': charmName,
+        'charmImage': charmImagePath,
+        'rarity': rarity,
+        'collection': charmCollection,
+      };
+      newCharms[charmId] = charmRecord;
+      existingCharmByKey[key] = charmRecord;
+    }
+
     for (final meta in graffitiData) {
       final graffitiName = normalizeGraffitiName(
         (meta['name'] ?? '').toString().trim(),
@@ -1352,7 +1496,8 @@ class DartImporterBackend implements ImporterBackend {
       }
 
       final rarity =
-          graffitiRarityMap[((meta['rarity'] as Map?)?['name'] ?? '').toString()] ??
+          graffitiRarityMap[((meta['rarity'] as Map?)?['name'] ?? '')
+              .toString()] ??
           'BASE_GRADE';
       final imageUrl = chooseImageUrl(meta);
       final cratesRefs = meta['crates'];
@@ -1420,7 +1565,9 @@ class DartImporterBackend implements ImporterBackend {
           if (caseId == null) {
             continue;
           }
-          graffitiContentsMap.putIfAbsent(caseId, () => <String>{}).add(graffitiId);
+          graffitiContentsMap
+              .putIfAbsent(caseId, () => <String>{})
+              .add(graffitiId);
         }
       }
     }
@@ -1465,10 +1612,12 @@ class DartImporterBackend implements ImporterBackend {
         }
 
         final rarity =
-            patchRarityMap[((collectible['rarity'] as Map?)?['name'] ?? '').toString()] ??
+            patchRarityMap[((collectible['rarity'] as Map?)?['name'] ?? '')
+                .toString()] ??
             'HIGH_GRADE';
         final sourcePatchId = (collectible['id'] ?? '').toString();
-        final patchMeta = patchMetaById[sourcePatchId] ?? const <String, dynamic>{};
+        final patchMeta =
+            patchMetaById[sourcePatchId] ?? const <String, dynamic>{};
         final collectibleImage = (collectible['image'] ?? '').toString().trim();
         final metaImage = (patchMeta['image'] ?? '').toString().trim();
         final imageUrl = collectibleImage.isNotEmpty
@@ -1533,6 +1682,83 @@ class DartImporterBackend implements ImporterBackend {
             existingCaseRecord['releaseDate'] = sourceMeta['releaseDate'];
           }
         }
+      }
+    }
+
+    for (final collection in charmCollections) {
+      final collectionName = (collection['name'] ?? '').toString().trim();
+      final caseId = caseNameToId[collectionName];
+      if (caseId == null) {
+        continue;
+      }
+
+      final contains = collection['contains'];
+      if (contains is! List) {
+        continue;
+      }
+
+      for (final collectibleRaw in contains) {
+        if (collectibleRaw is! Map) {
+          continue;
+        }
+        final collectible = collectibleRaw.map(
+          (k, v) => MapEntry(k.toString(), v),
+        );
+        final charmName = normalizeCharmName(
+          (collectible['name'] ?? '').toString().trim(),
+        );
+        if (charmName.isEmpty) {
+          continue;
+        }
+
+        final key = (canonicalName(charmName), canonicalName(collectionName));
+
+        var charmRecord = existingCharmByKey[key];
+        if (charmRecord == null) {
+          final rarity =
+              charmRarityMap[((collectible['rarity'] as Map?)?['name'] ?? '')
+                  .toString()] ??
+              'HIGH_GRADE';
+          final sourceCharmId = (collectible['id'] ?? '').toString().trim();
+          late String charmId;
+          final candidate = makeStableNumericId(sourceCharmId, 996000000);
+          if (RegExp(r'^\d+$').hasMatch(candidate) &&
+              !usedCharmIds.contains(int.parse(candidate)) &&
+              !newCharms.containsKey(candidate)) {
+            charmId = candidate;
+            usedCharmIds.add(int.parse(candidate));
+          } else {
+            while (usedCharmIds.contains(nextCharmId)) {
+              nextCharmId += 1;
+            }
+            charmId = nextCharmId.toString();
+            usedCharmIds.add(nextCharmId);
+            nextCharmId += 1;
+          }
+          createdCharmCount += 1;
+
+          final charmImagePath = await _syncAsset(
+            imageUrl: collectible['image']?.toString(),
+            dirPath: charmsDir.path,
+            relativeDir: 'assets/charms',
+            id: charmId,
+            compressionModeOverride: CompressionMode.maxCompress,
+          );
+
+          charmRecord = <String, dynamic>{
+            'id': charmId,
+            'name': charmName,
+            'charmImage': charmImagePath,
+            'rarity': rarity,
+            'collection': collectionName,
+          };
+          newCharms[charmId] = charmRecord;
+          existingCharmByKey[key] = charmRecord;
+        }
+
+        charmContentsMap
+            .putIfAbsent(caseId, () => <String>{})
+            .add(charmRecord['id'].toString());
       }
     }
 
@@ -1684,6 +1910,12 @@ class DartImporterBackend implements ImporterBackend {
           a['id'].toString(),
         ).compareTo(int.parse(b['id'].toString())),
       );
+    final charmsOut = newCharms.values.toList()
+      ..sort(
+        (a, b) => int.parse(
+          a['id'].toString(),
+        ).compareTo(int.parse(b['id'].toString())),
+      );
 
     final caseContentsOut = buildContents(caseContentsMap, 'caseId', 'skinIds');
     final stickerContentsOut = buildContents(
@@ -1723,6 +1955,11 @@ class DartImporterBackend implements ImporterBackend {
       patchContentsMap,
       'caseId',
       'patchIds',
+    );
+    final charmContentsOut = buildContents(
+      charmContentsMap,
+      'caseId',
+      'charmIds',
     );
     final rewardCollectionsOut = newRewardCollections.values.toList()
       ..sort((a, b) {
@@ -1779,6 +2016,7 @@ class DartImporterBackend implements ImporterBackend {
     await _io.writeJson(File('${dataDir.path}/agents.json'), agentsOut);
     await _io.writeJson(File('${dataDir.path}/graffiti.json'), graffitiOut);
     await _io.writeJson(File('${dataDir.path}/patches.json'), patchesOut);
+    await _io.writeJson(File('${dataDir.path}/charms.json'), charmsOut);
     await _io.writeJson(
       File('${dataDir.path}/case_contents.json'),
       caseContentsOut,
@@ -1812,6 +2050,10 @@ class DartImporterBackend implements ImporterBackend {
       patchContentsOut,
     );
     await _io.writeJson(
+      File('${dataDir.path}/charm_contents.json'),
+      charmContentsOut,
+    );
+    await _io.writeJson(
       File('${dataDir.path}/reward_collections.json'),
       rewardCollectionsOut,
     );
@@ -1840,13 +2082,17 @@ class DartImporterBackend implements ImporterBackend {
     _io.printInfo('Agents: ${agentsOut.length}');
     _io.printInfo('Graffiti: ${graffitiOut.length}');
     _io.printInfo('Patches: ${patchesOut.length}');
+    _io.printInfo('Charms: ${charmsOut.length}');
     _io.printInfo('Case contents: ${caseContentsOut.length}');
     _io.printInfo('Sticker contents: ${stickerContentsOut.length}');
     _io.printInfo('Pin contents: ${pinContentsOut.length}');
     _io.printInfo('Music kit contents: ${musicKitContentsOut.length}');
-    _io.printInfo('Agent collection contents: ${agentCollectionContentsOut.length}');
+    _io.printInfo(
+      'Agent collection contents: ${agentCollectionContentsOut.length}',
+    );
     _io.printInfo('Graffiti contents: ${graffitiContentsOut.length}');
     _io.printInfo('Patch contents: ${patchContentsOut.length}');
+    _io.printInfo('Charm contents: ${charmContentsOut.length}');
     _io.printInfo(
       'Reward collection contents: ${rewardCollectionContentsOut.length}',
     );
@@ -1860,6 +2106,7 @@ class DartImporterBackend implements ImporterBackend {
     _io.printInfo('Created agents: $createdAgentCount');
     _io.printInfo('Created graffiti: $createdGraffitiCount');
     _io.printInfo('Created patches: $createdPatchCount');
+    _io.printInfo('Created charms: $createdCharmCount');
     _io.printInfo('Reused skins: $reusedSkinCount');
     _io.printInfo('Reused stickers: $reusedStickerCount');
     _io.printInfo('Reused pins: $reusedPinCount');
@@ -1867,6 +2114,7 @@ class DartImporterBackend implements ImporterBackend {
     _io.printInfo('Reused agents: $reusedAgentCount');
     _io.printInfo('Reused graffiti: $reusedGraffitiCount');
     _io.printInfo('Reused patches: $reusedPatchCount');
+    _io.printInfo('Reused charms: $reusedCharmCount');
     _io.printInfo('Unknown items skipped: $skippedUnknownItems');
     _io.printInfo(
       'Containers created from skin.crates fallback: $containerRefsCreatedFromSkinMeta',

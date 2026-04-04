@@ -4,6 +4,7 @@ import '../../core/settings/settings_controller.dart';
 import '../../data/repositories/local_data_repository.dart';
 import '../helpers/app_navigation_helper.dart';
 import 'agent_glossary_screen.dart';
+import 'charm_glossary_screen.dart';
 import 'graffiti_glossary_screen.dart';
 import 'music_kit_glossary_screen.dart';
 import 'patch_glossary_screen.dart';
@@ -62,6 +63,11 @@ class GlossaryHubScreen extends StatelessWidget {
         title: 'Patches',
         buildScreen: () => PatchGlossaryScreen(repository: repository),
       ),
+      _GlossaryHubItem(
+        icon: Icons.key,
+        title: 'Charms',
+        buildScreen: () => CharmGlossaryScreen(repository: repository),
+      ),
     ];
 
     return Scaffold(
@@ -93,7 +99,10 @@ class GlossaryHubScreen extends StatelessWidget {
                         children: [
                           Icon(item.icon),
                           const SizedBox(width: 10),
-                          Text(item.title, style: const TextStyle(fontSize: 18)),
+                          Text(
+                            item.title,
+                            style: const TextStyle(fontSize: 18),
+                          ),
                         ],
                       ),
                     ),

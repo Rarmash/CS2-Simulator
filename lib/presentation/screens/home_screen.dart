@@ -6,6 +6,7 @@ import '../../data/repositories/local_data_repository.dart';
 import '../helpers/app_navigation_helper.dart';
 import 'agent_collection_list_screen.dart';
 import 'case_list_screen.dart';
+import 'charm_collection_list_screen.dart';
 import 'glossary_hub_screen.dart';
 import 'operation_collection_list_screen.dart';
 import 'patch_collection_list_screen.dart';
@@ -51,7 +52,8 @@ class HomeScreen extends StatelessWidget {
       _HomeMenuItem(
         icon: Icons.collections_bookmark,
         title: 'Legacy Operation Collections',
-        buildScreen: () => OperationCollectionListScreen(repository: repository),
+        buildScreen: () =>
+            OperationCollectionListScreen(repository: repository),
       ),
       _HomeMenuItem(
         icon: Icons.badge,
@@ -67,6 +69,11 @@ class HomeScreen extends StatelessWidget {
         icon: Icons.style,
         title: 'Patch Collections',
         buildScreen: () => PatchCollectionListScreen(repository: repository),
+      ),
+      _HomeMenuItem(
+        icon: Icons.key,
+        title: 'Charm Collections',
+        buildScreen: () => CharmCollectionListScreen(repository: repository),
       ),
       _HomeMenuItem(
         icon: Icons.swap_horiz,
@@ -118,8 +125,8 @@ class HomeScreen extends StatelessWidget {
                 Text(
                   appVersion,
                   style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                        color: Theme.of(context).hintColor,
-                      ),
+                    color: Theme.of(context).hintColor,
+                  ),
                 ),
               ],
             ),

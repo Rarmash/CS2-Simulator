@@ -4908,6 +4908,30 @@
     "sourceName": null
   },
   {
+    "id": "2242",
+    "name": "Missing Link Charm Collection",
+    "caseImage": "assets/cases/2242.webp",
+    "releaseDate": "2024-10-02",
+    "type": "CHARM_COLLECTION",
+    "tournamentName": null,
+    "tournamentLogo": null,
+    "sourceType": "ARMORY_REWARD",
+    "sourceId": "ARMORY",
+    "sourceName": "The Armory"
+  },
+  {
+    "id": "2244",
+    "name": "Small Arms Charm Collection",
+    "caseImage": "assets/cases/2244.webp",
+    "releaseDate": "2024-10-02",
+    "type": "CHARM_COLLECTION",
+    "tournamentName": null,
+    "tournamentLogo": null,
+    "sourceType": "ARMORY_REWARD",
+    "sourceId": "ARMORY",
+    "sourceName": "The Armory"
+  },
+  {
     "id": "351",
     "name": "Shanghai 2024 Ancient Souvenir Package",
     "caseImage": "assets/cases/351.webp",
@@ -5345,6 +5369,30 @@
     "caseImage": "assets/cases/2229.webp",
     "releaseDate": "2025-10-02",
     "type": "STICKER_COLLECTION",
+    "tournamentName": null,
+    "tournamentLogo": null,
+    "sourceType": "ARMORY_REWARD",
+    "sourceId": "ARMORY",
+    "sourceName": "The Armory"
+  },
+  {
+    "id": "2241",
+    "name": "Dr Boom Charm Collection",
+    "caseImage": "assets/cases/2241.webp",
+    "releaseDate": "2025-10-02",
+    "type": "CHARM_COLLECTION",
+    "tournamentName": null,
+    "tournamentLogo": null,
+    "sourceType": "ARMORY_REWARD",
+    "sourceId": "ARMORY",
+    "sourceName": "The Armory"
+  },
+  {
+    "id": "2243",
+    "name": "Missing Link Community Charm Collection",
+    "caseImage": "assets/cases/2243.webp",
+    "releaseDate": "2025-10-02",
+    "type": "CHARM_COLLECTION",
     "tournamentName": null,
     "tournamentLogo": null,
     "sourceType": "ARMORY_REWARD",

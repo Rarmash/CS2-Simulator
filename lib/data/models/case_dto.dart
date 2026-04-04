@@ -42,6 +42,7 @@ class CaseDto {
   bool get isGraffitiBox => type == 'GRAFFITI_BOX';
   bool get isPatchPack => type == 'PATCH_PACK';
   bool get isPatchCollection => type == 'PATCH_COLLECTION';
+  bool get isCharmCollection => type == 'CHARM_COLLECTION';
   bool get isXrayPackage => type == 'XRAY_PACKAGE';
   bool get isTerminal => type == 'TERMINAL';
 
@@ -67,6 +68,8 @@ class CaseDto {
         return 'Patch Pack';
       case 'PATCH_COLLECTION':
         return 'Patch Collection';
+      case 'CHARM_COLLECTION':
+        return 'Charm Collection';
       case 'XRAY_PACKAGE':
         return 'X-Ray Package';
       case 'TERMINAL':

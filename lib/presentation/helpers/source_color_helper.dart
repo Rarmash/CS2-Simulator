@@ -44,6 +44,8 @@ class SourceColorHelper {
         return Colors.pinkAccent;
       case 'PATCH_COLLECTION':
         return Colors.pinkAccent;
+      case 'CHARM_COLLECTION':
+        return Colors.deepOrangeAccent;
       case 'TERMINAL':
         return Colors.deepPurpleAccent;
       case 'XRAY_PACKAGE':

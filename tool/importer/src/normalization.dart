@@ -457,6 +457,11 @@ String operationKey(String name, String operationId) =>
   canonicalName((patch['collection'] ?? '').toString()),
 );
 
+(String, String) existingCharmKey(Map<String, dynamic> charm) => (
+  canonicalName((charm['name'] ?? '').toString()),
+  canonicalName((charm['collection'] ?? '').toString()),
+);
+
 (String?, String?) chooseCollectionNameAndImage(Map<String, dynamic> meta) {
   final collections = meta['collections'];
   if (collections is List &&
@@ -584,6 +589,10 @@ String normalizePatchName(String name) {
   return name.replaceFirst(RegExp(r'^Patch\s+\|\s+'), '').trim();
 }
 
+String normalizeCharmName(String name) {
+  return name.replaceFirst(RegExp(r'^Charm\s+\|\s+'), '').trim();
+}
+
 Map<String, String?> resolveAgentCollectionSource(String? collectionName) {
   final normalized = (collectionName ?? '').trim();
   final source = agentCollectionSourceOverrides[normalized] ?? const {};
@@ -657,6 +666,26 @@ Map<String, String?> resolveStickerCollectionSource(String? collectionName) {
 Map<String, String?> resolvePatchCollectionSource(String? collectionName) {
   final normalized = (collectionName ?? '').trim();
   final source = patchCollectionSourceOverrides[normalized] ?? const {};
+
+  String? value(String key) {
+    final raw = source[key];
+    if (raw == null || raw.trim().isEmpty) {
+      return null;
+    }
+    return raw.trim();
+  }
+
+  return {
+    'sourceType': value('sourceType'),
+    'sourceId': value('sourceId'),
+    'sourceName': value('sourceName'),
+    'releaseDate': value('releaseDate'),
+  };
+}
+
+Map<String, String?> resolveCharmCollectionSource(String? collectionName) {
+  final normalized = (collectionName ?? '').trim();
+  final source = charmCollectionSourceOverrides[normalized] ?? const {};
 
   String? value(String key) {
     final raw = source[key];

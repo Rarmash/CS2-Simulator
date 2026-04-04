@@ -154,3 +154,18 @@ int _patchRarityOrder(PatchDto patch) {
       return 99;
   }
 }
+
+int _charmRarityOrder(CharmDto charm) {
+  switch (charm.rarity) {
+    case 'HIGH_GRADE':
+      return 0;
+    case 'REMARKABLE':
+      return 1;
+    case 'EXOTIC':
+      return 2;
+    case 'EXTRAORDINARY':
+      return 3;
+    default:
+      return 99;
+  }
+}

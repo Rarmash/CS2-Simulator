@@ -51,6 +51,7 @@ class IoUtils {
       agentsDir,
       graffitiDir,
       patchesDir,
+      charmsDir,
       rewardCollectionsDir,
       operationCollectionsDir,
       agentCollectionsDir,
@@ -77,6 +78,8 @@ class IoUtils {
       File('${dataDir.path}/graffiti_contents.json'),
       File('${dataDir.path}/patches.json'),
       File('${dataDir.path}/patch_contents.json'),
+      File('${dataDir.path}/charms.json'),
+      File('${dataDir.path}/charm_contents.json'),
     ]) {
       if (file.existsSync()) {
         await file.delete();
@@ -210,11 +213,9 @@ class IoUtils {
 
   Future<String?> downloadOptimizedAsset(
     String url,
-    String pathWithoutExt,
-    {
+    String pathWithoutExt, {
     CompressionMode? compressionModeOverride,
-  }
-  ) async {
+  }) async {
     if (url.isEmpty) {
       return null;
     }

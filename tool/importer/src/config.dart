@@ -10,6 +10,7 @@ const musicKitsUrl = '$baseUrl/music_kits.json';
 const agentsUrl = '$baseUrl/agents.json';
 const graffitiUrl = '$baseUrl/graffiti.json';
 const patchesUrl = '$baseUrl/patches.json';
+const keychainsUrl = '$baseUrl/keychains.json';
 
 const timeoutSeconds = 30;
 
@@ -24,6 +25,7 @@ final musicKitsDir = Directory('${assetsDir.path}/music_kits');
 final agentsDir = Directory('${assetsDir.path}/agents');
 final graffitiDir = Directory('${assetsDir.path}/graffiti');
 final patchesDir = Directory('${assetsDir.path}/patches');
+final charmsDir = Directory('${assetsDir.path}/charms');
 final rewardCollectionsDir = Directory('${assetsDir.path}/reward_collections');
 final operationCollectionsDir = Directory(
   '${assetsDir.path}/operation_collections',
@@ -91,6 +93,13 @@ const patchRarityMap = <String, String>{
   'Exotic': 'EXOTIC',
 };
 
+const charmRarityMap = <String, String>{
+  'High Grade': 'HIGH_GRADE',
+  'Remarkable': 'REMARKABLE',
+  'Extraordinary': 'EXTRAORDINARY',
+  'Exotic': 'EXOTIC',
+};
+
 const agentCollectionSourceOverrides = <String, Map<String, String>>{
   'Shattered Web Agents': {
     'operationId': 'SHATTERED_WEB',
@@ -121,6 +130,33 @@ const patchCollectionSourceOverrides = <String, Map<String, String>>{
     'sourceId': 'METAL_SKILL_GROUP',
     'sourceName': 'Metal Skill Group',
     'releaseDate': '2020-02-24',
+  },
+};
+
+const charmCollectionSourceOverrides = <String, Map<String, String>>{
+  'Missing Link Charm Collection': {
+    'sourceType': 'ARMORY_REWARD',
+    'sourceId': 'ARMORY',
+    'sourceName': 'The Armory',
+    'releaseDate': '2024-10-02',
+  },
+  'Small Arms Charm Collection': {
+    'sourceType': 'ARMORY_REWARD',
+    'sourceId': 'ARMORY',
+    'sourceName': 'The Armory',
+    'releaseDate': '2024-10-02',
+  },
+  'Missing Link Community Charm Collection': {
+    'sourceType': 'ARMORY_REWARD',
+    'sourceId': 'ARMORY',
+    'sourceName': 'The Armory',
+    'releaseDate': '2025-10-02',
+  },
+  'Dr Boom Charm Collection': {
+    'sourceType': 'ARMORY_REWARD',
+    'sourceId': 'ARMORY',
+    'sourceName': 'The Armory',
+    'releaseDate': '2025-10-02',
   },
 };
 
