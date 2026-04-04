@@ -5,15 +5,8 @@
     "musicKitImage": "assets/music_kits/970676397.webp",
     "rarity": "HIGH_GRADE",
     "collection": "Masterminds 2",
-    "isStatTrak": false
-  },
-  {
-    "id": "971231302",
-    "name": "Matt Levine, Drifter",
-    "musicKitImage": "assets/music_kits/971231302.webp",
-    "rarity": "HIGH_GRADE",
-    "collection": "Masterminds",
-    "isStatTrak": true
+    "hasRegular": true,
+    "hasStatTrak": true
   },
   {
     "id": "971420563",
@@ -21,7 +14,8 @@
     "musicKitImage": "assets/music_kits/971420563.webp",
     "rarity": "HIGH_GRADE",
     "collection": "Tacticians",
-    "isStatTrak": true
+    "hasRegular": true,
+    "hasStatTrak": true
   },
   {
     "id": "971454122",
@@ -29,7 +23,8 @@
     "musicKitImage": "assets/music_kits/971454122.webp",
     "rarity": "HIGH_GRADE",
     "collection": "NIGHTMODE",
-    "isStatTrak": false
+    "hasRegular": true,
+    "hasStatTrak": true
   },
   {
     "id": "972592427",
@@ -37,7 +32,8 @@
     "musicKitImage": "assets/music_kits/972592427.webp",
     "rarity": "HIGH_GRADE",
     "collection": null,
-    "isStatTrak": false
+    "hasRegular": true,
+    "hasStatTrak": true
   },
   {
     "id": "973258375",
@@ -45,7 +41,8 @@
     "musicKitImage": "assets/music_kits/973258375.webp",
     "rarity": "HIGH_GRADE",
     "collection": "Deluge",
-    "isStatTrak": false
+    "hasRegular": true,
+    "hasStatTrak": true
   },
   {
     "id": "973657692",
@@ -53,7 +50,8 @@
     "musicKitImage": "assets/music_kits/973657692.webp",
     "rarity": "HIGH_GRADE",
     "collection": null,
-    "isStatTrak": false
+    "hasRegular": true,
+    "hasStatTrak": false
   },
   {
     "id": "973796104",
@@ -61,7 +59,8 @@
     "musicKitImage": "assets/music_kits/973796104.webp",
     "rarity": "HIGH_GRADE",
     "collection": "Deluge",
-    "isStatTrak": false
+    "hasRegular": true,
+    "hasStatTrak": true
   },
   {
     "id": "973977466",
@@ -69,7 +68,8 @@
     "musicKitImage": "assets/music_kits/973977466.webp",
     "rarity": "HIGH_GRADE",
     "collection": null,
-    "isStatTrak": false
+    "hasRegular": true,
+    "hasStatTrak": true
   },
   {
     "id": "974613487",
@@ -77,15 +77,8 @@
     "musicKitImage": "assets/music_kits/974613487.webp",
     "rarity": "HIGH_GRADE",
     "collection": null,
-    "isStatTrak": false
-  },
-  {
-    "id": "975826813",
-    "name": "James and the Cold Gun, Chewing Glass",
-    "musicKitImage": "assets/music_kits/975826813.webp",
-    "rarity": "HIGH_GRADE",
-    "collection": "Deluge",
-    "isStatTrak": true
+    "hasRegular": true,
+    "hasStatTrak": true
   },
   {
     "id": "976329060",
@@ -93,7 +86,8 @@
     "musicKitImage": "assets/music_kits/976329060.webp",
     "rarity": "HIGH_GRADE",
     "collection": "Initiators",
-    "isStatTrak": false
+    "hasRegular": true,
+    "hasStatTrak": true
   },
   {
     "id": "976850143",
@@ -101,7 +95,8 @@
     "musicKitImage": "assets/music_kits/976850143.webp",
     "rarity": "HIGH_GRADE",
     "collection": "Masterminds 2",
-    "isStatTrak": false
+    "hasRegular": true,
+    "hasStatTrak": true
   },
   {
     "id": "977121784",
@@ -109,7 +104,8 @@
     "musicKitImage": "assets/music_kits/977121784.webp",
     "rarity": "HIGH_GRADE",
     "collection": "Masterminds",
-    "isStatTrak": false
+    "hasRegular": true,
+    "hasStatTrak": true
   },
   {
     "id": "981765877",
@@ -117,15 +113,8 @@
     "musicKitImage": "assets/music_kits/981765877.webp",
     "rarity": "HIGH_GRADE",
     "collection": null,
-    "isStatTrak": false
-  },
-  {
-    "id": "981815769",
-    "name": "Skog, Metal",
-    "musicKitImage": "assets/music_kits/981815769.webp",
-    "rarity": "HIGH_GRADE",
-    "collection": null,
-    "isStatTrak": true
+    "hasRegular": true,
+    "hasStatTrak": true
   },
   {
     "id": "983344523",
@@ -133,7 +122,8 @@
     "musicKitImage": "assets/music_kits/983344523.webp",
     "rarity": "HIGH_GRADE",
     "collection": null,
-    "isStatTrak": false
+    "hasRegular": true,
+    "hasStatTrak": false
   },
   {
     "id": "983830847",
@@ -141,23 +131,8 @@
     "musicKitImage": "assets/music_kits/983830847.webp",
     "rarity": "HIGH_GRADE",
     "collection": null,
-    "isStatTrak": false
-  },
-  {
-    "id": "983861625",
-    "name": "DRYDEN, Feel The Power",
-    "musicKitImage": "assets/music_kits/983861625.webp",
-    "rarity": "HIGH_GRADE",
-    "collection": "NIGHTMODE",
-    "isStatTrak": true
-  },
-  {
-    "id": "984052782",
-    "name": "Rad Cat, Reason",
-    "musicKitImage": "assets/music_kits/984052782.webp",
-    "rarity": "HIGH_GRADE",
-    "collection": "NIGHTMODE",
-    "isStatTrak": true
+    "hasRegular": true,
+    "hasStatTrak": true
   },
   {
     "id": "984428081",
@@ -165,7 +140,8 @@
     "musicKitImage": "assets/music_kits/984428081.webp",
     "rarity": "HIGH_GRADE",
     "collection": null,
-    "isStatTrak": false
+    "hasRegular": true,
+    "hasStatTrak": true
   },
   {
     "id": "984479732",
@@ -173,7 +149,8 @@
     "musicKitImage": "assets/music_kits/984479732.webp",
     "rarity": "HIGH_GRADE",
     "collection": "Deluge",
-    "isStatTrak": false
+    "hasRegular": true,
+    "hasStatTrak": true
   },
   {
     "id": "985214830",
@@ -181,7 +158,8 @@
     "musicKitImage": "assets/music_kits/985214830.webp",
     "rarity": "HIGH_GRADE",
     "collection": "Masterminds",
-    "isStatTrak": false
+    "hasRegular": true,
+    "hasStatTrak": true
   },
   {
     "id": "985610938",
@@ -189,7 +167,8 @@
     "musicKitImage": "assets/music_kits/985610938.webp",
     "rarity": "HIGH_GRADE",
     "collection": null,
-    "isStatTrak": false
+    "hasRegular": true,
+    "hasStatTrak": true
   },
   {
     "id": "985798752",
@@ -197,31 +176,8 @@
     "musicKitImage": "assets/music_kits/985798752.webp",
     "rarity": "HIGH_GRADE",
     "collection": null,
-    "isStatTrak": false
-  },
-  {
-    "id": "986081934",
-    "name": "Various Artists, Hotline Miami",
-    "musicKitImage": "assets/music_kits/986081934.webp",
-    "rarity": "HIGH_GRADE",
-    "collection": null,
-    "isStatTrak": true
-  },
-  {
-    "id": "986102338",
-    "name": "Humanity's Last Breath, Void",
-    "musicKitImage": "assets/music_kits/986102338.webp",
-    "rarity": "HIGH_GRADE",
-    "collection": "Initiators",
-    "isStatTrak": true
-  },
-  {
-    "id": "986159988",
-    "name": "Adam Beyer, Red Room",
-    "musicKitImage": "assets/music_kits/986159988.webp",
-    "rarity": "HIGH_GRADE",
-    "collection": "Deluge",
-    "isStatTrak": true
+    "hasRegular": true,
+    "hasStatTrak": true
   },
   {
     "id": "986295788",
@@ -229,23 +185,8 @@
     "musicKitImage": "assets/music_kits/986295788.webp",
     "rarity": "HIGH_GRADE",
     "collection": null,
-    "isStatTrak": false
-  },
-  {
-    "id": "986500260",
-    "name": "Daniel Sadowski, Crimson Assault",
-    "musicKitImage": "assets/music_kits/986500260.webp",
-    "rarity": "HIGH_GRADE",
-    "collection": null,
-    "isStatTrak": true
-  },
-  {
-    "id": "987263905",
-    "name": "Tigercub, The Perfume of Decay",
-    "musicKitImage": "assets/music_kits/987263905.webp",
-    "rarity": "HIGH_GRADE",
-    "collection": "Deluge",
-    "isStatTrak": true
+    "hasRegular": true,
+    "hasStatTrak": true
   },
   {
     "id": "988045417",
@@ -253,7 +194,8 @@
     "musicKitImage": "assets/music_kits/988045417.webp",
     "rarity": "HIGH_GRADE",
     "collection": "Masterminds",
-    "isStatTrak": false
+    "hasRegular": true,
+    "hasStatTrak": true
   },
   {
     "id": "989574806",
@@ -261,7 +203,8 @@
     "musicKitImage": "assets/music_kits/989574806.webp",
     "rarity": "HIGH_GRADE",
     "collection": null,
-    "isStatTrak": false
+    "hasRegular": true,
+    "hasStatTrak": true
   },
   {
     "id": "990519625",
@@ -269,23 +212,8 @@
     "musicKitImage": "assets/music_kits/990519625.webp",
     "rarity": "HIGH_GRADE",
     "collection": "Masterminds 2",
-    "isStatTrak": false
-  },
-  {
-    "id": "991673260",
-    "name": "bbno$, u mad!",
-    "musicKitImage": "assets/music_kits/991673260.webp",
-    "rarity": "HIGH_GRADE",
-    "collection": null,
-    "isStatTrak": true
-  },
-  {
-    "id": "992680274",
-    "name": "Matt Lange, IsoRhythm",
-    "musicKitImage": "assets/music_kits/992680274.webp",
-    "rarity": "HIGH_GRADE",
-    "collection": null,
-    "isStatTrak": true
+    "hasRegular": true,
+    "hasStatTrak": true
   },
   {
     "id": "992902795",
@@ -293,7 +221,8 @@
     "musicKitImage": "assets/music_kits/992902795.webp",
     "rarity": "HIGH_GRADE",
     "collection": "Radicals",
-    "isStatTrak": true
+    "hasRegular": false,
+    "hasStatTrak": true
   },
   {
     "id": "993368645",
@@ -301,15 +230,8 @@
     "musicKitImage": "assets/music_kits/993368645.webp",
     "rarity": "HIGH_GRADE",
     "collection": "Masterminds",
-    "isStatTrak": false
-  },
-  {
-    "id": "994554107",
-    "name": "Juelz, Shooters",
-    "musicKitImage": "assets/music_kits/994554107.webp",
-    "rarity": "HIGH_GRADE",
-    "collection": "Initiators",
-    "isStatTrak": true
+    "hasRegular": true,
+    "hasStatTrak": true
   },
   {
     "id": "994671944",
@@ -317,23 +239,8 @@
     "musicKitImage": "assets/music_kits/994671944.webp",
     "rarity": "HIGH_GRADE",
     "collection": null,
-    "isStatTrak": false
-  },
-  {
-    "id": "994893180",
-    "name": "Amon Tobin, All for Dust",
-    "musicKitImage": "assets/music_kits/994893180.webp",
-    "rarity": "HIGH_GRADE",
-    "collection": null,
-    "isStatTrak": true
-  },
-  {
-    "id": "995696992",
-    "name": "Daniel Sadowski, Total Domination",
-    "musicKitImage": "assets/music_kits/995696992.webp",
-    "rarity": "HIGH_GRADE",
-    "collection": null,
-    "isStatTrak": true
+    "hasRegular": true,
+    "hasStatTrak": true
   },
   {
     "id": "996251847",
@@ -341,7 +248,8 @@
     "musicKitImage": "assets/music_kits/996251847.webp",
     "rarity": "HIGH_GRADE",
     "collection": "Initiators",
-    "isStatTrak": false
+    "hasRegular": true,
+    "hasStatTrak": true
   },
   {
     "id": "996799574",
@@ -349,31 +257,8 @@
     "musicKitImage": "assets/music_kits/996799574.webp",
     "rarity": "HIGH_GRADE",
     "collection": null,
-    "isStatTrak": false
-  },
-  {
-    "id": "997068518",
-    "name": "Beartooth, Disgusting",
-    "musicKitImage": "assets/music_kits/997068518.webp",
-    "rarity": "HIGH_GRADE",
-    "collection": null,
-    "isStatTrak": true
-  },
-  {
-    "id": "997276857",
-    "name": "Sarah Schachner, KOLIBRI",
-    "musicKitImage": "assets/music_kits/997276857.webp",
-    "rarity": "HIGH_GRADE",
-    "collection": "Tacticians",
-    "isStatTrak": false
-  },
-  {
-    "id": "997687959",
-    "name": "ISOxo, inhuman",
-    "musicKitImage": "assets/music_kits/997687959.webp",
-    "rarity": "HIGH_GRADE",
-    "collection": "NIGHTMODE",
-    "isStatTrak": true
+    "hasRegular": true,
+    "hasStatTrak": true
   },
   {
     "id": "997721676",
@@ -381,15 +266,8 @@
     "musicKitImage": "assets/music_kits/997721676.webp",
     "rarity": "HIGH_GRADE",
     "collection": null,
-    "isStatTrak": false
-  },
-  {
-    "id": "998333682",
-    "name": "KILL SCRIPT, All Night",
-    "musicKitImage": "assets/music_kits/998333682.webp",
-    "rarity": "HIGH_GRADE",
-    "collection": "NIGHTMODE",
-    "isStatTrak": true
+    "hasRegular": true,
+    "hasStatTrak": true
   },
   {
     "id": "998457578",
@@ -397,7 +275,8 @@
     "musicKitImage": "assets/music_kits/998457578.webp",
     "rarity": "HIGH_GRADE",
     "collection": "Masterminds 2",
-    "isStatTrak": false
+    "hasRegular": true,
+    "hasStatTrak": true
   },
   {
     "id": "998492121",
@@ -405,7 +284,8 @@
     "musicKitImage": "assets/music_kits/998492121.webp",
     "rarity": "HIGH_GRADE",
     "collection": null,
-    "isStatTrak": false
+    "hasRegular": true,
+    "hasStatTrak": false
   },
   {
     "id": "999027984",
@@ -413,7 +293,8 @@
     "musicKitImage": "assets/music_kits/999027984.webp",
     "rarity": "HIGH_GRADE",
     "collection": "NIGHTMODE",
-    "isStatTrak": false
+    "hasRegular": true,
+    "hasStatTrak": true
   },
   {
     "id": "999193725",
@@ -421,23 +302,8 @@
     "musicKitImage": "assets/music_kits/999193725.webp",
     "rarity": "HIGH_GRADE",
     "collection": "Initiators",
-    "isStatTrak": false
-  },
-  {
-    "id": "1000538183",
-    "name": "HEALTH, RAT WARS",
-    "musicKitImage": "assets/music_kits/1000538183.webp",
-    "rarity": "HIGH_GRADE",
-    "collection": "Deluge",
-    "isStatTrak": true
-  },
-  {
-    "id": "1000587013",
-    "name": "Damjan Mravunac, The Talos Principle",
-    "musicKitImage": "assets/music_kits/1000587013.webp",
-    "rarity": "HIGH_GRADE",
-    "collection": null,
-    "isStatTrak": true
+    "hasRegular": true,
+    "hasStatTrak": true
   },
   {
     "id": "1000709437",
@@ -445,7 +311,8 @@
     "musicKitImage": "assets/music_kits/1000709437.webp",
     "rarity": "HIGH_GRADE",
     "collection": "Deluge",
-    "isStatTrak": false
+    "hasRegular": true,
+    "hasStatTrak": true
   },
   {
     "id": "1001522256",
@@ -453,15 +320,8 @@
     "musicKitImage": "assets/music_kits/1001522256.webp",
     "rarity": "HIGH_GRADE",
     "collection": "Masterminds 2",
-    "isStatTrak": false
-  },
-  {
-    "id": "1001606814",
-    "name": "Knock2, dashstar*",
-    "musicKitImage": "assets/music_kits/1001606814.webp",
-    "rarity": "HIGH_GRADE",
-    "collection": "Initiators",
-    "isStatTrak": true
+    "hasRegular": true,
+    "hasStatTrak": true
   },
   {
     "id": "1001873278",
@@ -469,15 +329,8 @@
     "musicKitImage": "assets/music_kits/1001873278.webp",
     "rarity": "HIGH_GRADE",
     "collection": null,
-    "isStatTrak": false
-  },
-  {
-    "id": "1002198311",
-    "name": "3kliksphilip, Heading for the Source",
-    "musicKitImage": "assets/music_kits/1002198311.webp",
-    "rarity": "HIGH_GRADE",
-    "collection": "Initiators",
-    "isStatTrak": true
+    "hasRegular": true,
+    "hasStatTrak": true
   },
   {
     "id": "1002316011",
@@ -485,47 +338,8 @@
     "musicKitImage": "assets/music_kits/1002316011.webp",
     "rarity": "HIGH_GRADE",
     "collection": null,
-    "isStatTrak": false
-  },
-  {
-    "id": "1002527582",
-    "name": "Mord Fustang, Diamonds",
-    "musicKitImage": "assets/music_kits/1002527582.webp",
-    "rarity": "HIGH_GRADE",
-    "collection": null,
-    "isStatTrak": true
-  },
-  {
-    "id": "1003252223",
-    "name": "Tree Adams, Seventh Moon",
-    "musicKitImage": "assets/music_kits/1003252223.webp",
-    "rarity": "HIGH_GRADE",
-    "collection": "Masterminds 2",
-    "isStatTrak": true
-  },
-  {
-    "id": "1004387147",
-    "name": "Knock2, Make U SWEAT!",
-    "musicKitImage": "assets/music_kits/1004387147.webp",
-    "rarity": "HIGH_GRADE",
-    "collection": "NIGHTMODE",
-    "isStatTrak": true
-  },
-  {
-    "id": "1004485801",
-    "name": "Scarlxrd: King, Scar",
-    "musicKitImage": "assets/music_kits/1004485801.webp",
-    "rarity": "HIGH_GRADE",
-    "collection": null,
-    "isStatTrak": true
-  },
-  {
-    "id": "1005312915",
-    "name": "Killer Mike, MICHAEL",
-    "musicKitImage": "assets/music_kits/1005312915.webp",
-    "rarity": "HIGH_GRADE",
-    "collection": "Deluge",
-    "isStatTrak": true
+    "hasRegular": true,
+    "hasStatTrak": true
   },
   {
     "id": "1005794782",
@@ -533,7 +347,8 @@
     "musicKitImage": "assets/music_kits/1005794782.webp",
     "rarity": "HIGH_GRADE",
     "collection": null,
-    "isStatTrak": false
+    "hasRegular": true,
+    "hasStatTrak": true
   },
   {
     "id": "1005821347",
@@ -541,23 +356,8 @@
     "musicKitImage": "assets/music_kits/1005821347.webp",
     "rarity": "HIGH_GRADE",
     "collection": null,
-    "isStatTrak": false
-  },
-  {
-    "id": "1005980932",
-    "name": "Austin Wintory, Mocha Petal",
-    "musicKitImage": "assets/music_kits/1005980932.webp",
-    "rarity": "HIGH_GRADE",
-    "collection": "Tacticians",
-    "isStatTrak": false
-  },
-  {
-    "id": "1006361788",
-    "name": "Sasha, LNOE",
-    "musicKitImage": "assets/music_kits/1006361788.webp",
-    "rarity": "HIGH_GRADE",
-    "collection": null,
-    "isStatTrak": true
+    "hasRegular": true,
+    "hasStatTrak": true
   },
   {
     "id": "1006918543",
@@ -565,7 +365,8 @@
     "musicKitImage": "assets/music_kits/1006918543.webp",
     "rarity": "HIGH_GRADE",
     "collection": null,
-    "isStatTrak": false
+    "hasRegular": true,
+    "hasStatTrak": true
   },
   {
     "id": "1007353574",
@@ -573,15 +374,8 @@
     "musicKitImage": "assets/music_kits/1007353574.webp",
     "rarity": "HIGH_GRADE",
     "collection": "Masterminds",
-    "isStatTrak": false
-  },
-  {
-    "id": "1007491651",
-    "name": "Perfect World, 花脸 Hua Lian (Painted Face)",
-    "musicKitImage": "assets/music_kits/1007491651.webp",
-    "rarity": "HIGH_GRADE",
-    "collection": null,
-    "isStatTrak": true
+    "hasRegular": true,
+    "hasStatTrak": true
   },
   {
     "id": "1007691386",
@@ -589,15 +383,8 @@
     "musicKitImage": "assets/music_kits/1007691386.webp",
     "rarity": "HIGH_GRADE",
     "collection": null,
-    "isStatTrak": false
-  },
-  {
-    "id": "1008303658",
-    "name": "PVRIS, Evergreen",
-    "musicKitImage": "assets/music_kits/1008303658.webp",
-    "rarity": "HIGH_GRADE",
-    "collection": "Deluge",
-    "isStatTrak": true
+    "hasRegular": true,
+    "hasStatTrak": true
   },
   {
     "id": "1008602048",
@@ -605,7 +392,8 @@
     "musicKitImage": "assets/music_kits/1008602048.webp",
     "rarity": "HIGH_GRADE",
     "collection": null,
-    "isStatTrak": false
+    "hasRegular": true,
+    "hasStatTrak": true
   },
   {
     "id": "1009017397",
@@ -613,15 +401,8 @@
     "musicKitImage": "assets/music_kits/1009017397.webp",
     "rarity": "HIGH_GRADE",
     "collection": null,
-    "isStatTrak": false
-  },
-  {
-    "id": "1009155363",
-    "name": "Sam Marshall, Clutch",
-    "musicKitImage": "assets/music_kits/1009155363.webp",
-    "rarity": "HIGH_GRADE",
-    "collection": "Masterminds 2",
-    "isStatTrak": true
+    "hasRegular": true,
+    "hasStatTrak": true
   },
   {
     "id": "1009632613",
@@ -629,15 +410,8 @@
     "musicKitImage": "assets/music_kits/1009632613.webp",
     "rarity": "HIGH_GRADE",
     "collection": null,
-    "isStatTrak": false
-  },
-  {
-    "id": "1009748723",
-    "name": "Feed Me, High Noon",
-    "musicKitImage": "assets/music_kits/1009748723.webp",
-    "rarity": "HIGH_GRADE",
-    "collection": null,
-    "isStatTrak": true
+    "hasRegular": true,
+    "hasStatTrak": true
   },
   {
     "id": "1009981235",
@@ -645,7 +419,8 @@
     "musicKitImage": "assets/music_kits/1009981235.webp",
     "rarity": "HIGH_GRADE",
     "collection": "Radicals",
-    "isStatTrak": true
+    "hasRegular": false,
+    "hasStatTrak": true
   },
   {
     "id": "1010421769",
@@ -653,31 +428,8 @@
     "musicKitImage": "assets/music_kits/1010421769.webp",
     "rarity": "HIGH_GRADE",
     "collection": "NIGHTMODE",
-    "isStatTrak": false
-  },
-  {
-    "id": "1010678901",
-    "name": "Tim Huling, Neo Noir",
-    "musicKitImage": "assets/music_kits/1010678901.webp",
-    "rarity": "HIGH_GRADE",
-    "collection": "Masterminds",
-    "isStatTrak": true
-  },
-  {
-    "id": "1010787345",
-    "name": "Perfect World, Ay Hey",
-    "musicKitImage": "assets/music_kits/1010787345.webp",
-    "rarity": "HIGH_GRADE",
-    "collection": null,
-    "isStatTrak": true
-  },
-  {
-    "id": "1010972054",
-    "name": "Sean Murray, A*D*8",
-    "musicKitImage": "assets/music_kits/1010972054.webp",
-    "rarity": "HIGH_GRADE",
-    "collection": null,
-    "isStatTrak": true
+    "hasRegular": true,
+    "hasStatTrak": true
   },
   {
     "id": "1011148448",
@@ -685,31 +437,8 @@
     "musicKitImage": "assets/music_kits/1011148448.webp",
     "rarity": "HIGH_GRADE",
     "collection": "Tacticians",
-    "isStatTrak": true
-  },
-  {
-    "id": "1011442758",
-    "name": "Matt Levine, Agency",
-    "musicKitImage": "assets/music_kits/1011442758.webp",
-    "rarity": "HIGH_GRADE",
-    "collection": "Masterminds 2",
-    "isStatTrak": true
-  },
-  {
-    "id": "1011503984",
-    "name": "Meechy Darko, Gothic Luxury",
-    "musicKitImage": "assets/music_kits/1011503984.webp",
-    "rarity": "HIGH_GRADE",
-    "collection": "Initiators",
-    "isStatTrak": true
-  },
-  {
-    "id": "1012417359",
-    "name": "Selective Response, No Love Only Pleasure",
-    "musicKitImage": "assets/music_kits/1012417359.webp",
-    "rarity": "HIGH_GRADE",
-    "collection": "Deluge",
-    "isStatTrak": true
+    "hasRegular": true,
+    "hasStatTrak": true
   },
   {
     "id": "1012423437",
@@ -717,15 +446,8 @@
     "musicKitImage": "assets/music_kits/1012423437.webp",
     "rarity": "HIGH_GRADE",
     "collection": null,
-    "isStatTrak": false
-  },
-  {
-    "id": "1012620674",
-    "name": "Daniel Sadowski, The 8-Bit Kit",
-    "musicKitImage": "assets/music_kits/1012620674.webp",
-    "rarity": "HIGH_GRADE",
-    "collection": null,
-    "isStatTrak": true
+    "hasRegular": true,
+    "hasStatTrak": true
   },
   {
     "id": "1013122391",
@@ -733,7 +455,8 @@
     "musicKitImage": "assets/music_kits/1013122391.webp",
     "rarity": "HIGH_GRADE",
     "collection": "Radicals",
-    "isStatTrak": true
+    "hasRegular": false,
+    "hasStatTrak": true
   },
   {
     "id": "1016279770",
@@ -741,7 +464,8 @@
     "musicKitImage": "assets/music_kits/1016279770.webp",
     "rarity": "HIGH_GRADE",
     "collection": null,
-    "isStatTrak": false
+    "hasRegular": true,
+    "hasStatTrak": true
   },
   {
     "id": "1016818422",
@@ -749,23 +473,8 @@
     "musicKitImage": "assets/music_kits/1016818422.webp",
     "rarity": "HIGH_GRADE",
     "collection": "Tacticians",
-    "isStatTrak": true
-  },
-  {
-    "id": "1017012278",
-    "name": "Ki:Theory, MOLOTOV",
-    "musicKitImage": "assets/music_kits/1017012278.webp",
-    "rarity": "HIGH_GRADE",
-    "collection": null,
-    "isStatTrak": true
-  },
-  {
-    "id": "1017749013",
-    "name": "Sullivan King, Lock Me Up",
-    "musicKitImage": "assets/music_kits/1017749013.webp",
-    "rarity": "HIGH_GRADE",
-    "collection": "Initiators",
-    "isStatTrak": true
+    "hasRegular": true,
+    "hasStatTrak": true
   },
   {
     "id": "1017750097",
@@ -773,7 +482,8 @@
     "musicKitImage": "assets/music_kits/1017750097.webp",
     "rarity": "HIGH_GRADE",
     "collection": "Initiators",
-    "isStatTrak": false
+    "hasRegular": true,
+    "hasStatTrak": true
   },
   {
     "id": "1018567891",
@@ -781,15 +491,8 @@
     "musicKitImage": "assets/music_kits/1018567891.webp",
     "rarity": "HIGH_GRADE",
     "collection": "Masterminds",
-    "isStatTrak": false
-  },
-  {
-    "id": "1018800726",
-    "name": "The Verkkars, EZ4ENCE",
-    "musicKitImage": "assets/music_kits/1018800726.webp",
-    "rarity": "HIGH_GRADE",
-    "collection": null,
-    "isStatTrak": true
+    "hasRegular": true,
+    "hasStatTrak": true
   },
   {
     "id": "1019800188",
@@ -797,7 +500,8 @@
     "musicKitImage": "assets/music_kits/1019800188.webp",
     "rarity": "HIGH_GRADE",
     "collection": "Masterminds 2",
-    "isStatTrak": false
+    "hasRegular": true,
+    "hasStatTrak": true
   },
   {
     "id": "1020124659",
@@ -805,47 +509,8 @@
     "musicKitImage": "assets/music_kits/1020124659.webp",
     "rarity": "HIGH_GRADE",
     "collection": "Deluge",
-    "isStatTrak": false
-  },
-  {
-    "id": "1020735512",
-    "name": "Jonathan Young, Starship Velociraptor",
-    "musicKitImage": "assets/music_kits/1020735512.webp",
-    "rarity": "HIGH_GRADE",
-    "collection": "Deluge",
-    "isStatTrak": true
-  },
-  {
-    "id": "1020755149",
-    "name": "Daniel Sadowski, Dead Shot",
-    "musicKitImage": "assets/music_kits/1020755149.webp",
-    "rarity": "HIGH_GRADE",
-    "collection": "Masterminds 2",
-    "isStatTrak": true
-  },
-  {
-    "id": "1021464349",
-    "name": "Noisia, Sharpened",
-    "musicKitImage": "assets/music_kits/1021464349.webp",
-    "rarity": "HIGH_GRADE",
-    "collection": null,
-    "isStatTrak": true
-  },
-  {
-    "id": "1023014483",
-    "name": "Proxy, Battlepack",
-    "musicKitImage": "assets/music_kits/1023014483.webp",
-    "rarity": "HIGH_GRADE",
-    "collection": null,
-    "isStatTrak": true
-  },
-  {
-    "id": "1023991939",
-    "name": "New Beat Fund, Sponge Fingerz",
-    "musicKitImage": "assets/music_kits/1023991939.webp",
-    "rarity": "HIGH_GRADE",
-    "collection": null,
-    "isStatTrak": true
+    "hasRegular": true,
+    "hasStatTrak": true
   },
   {
     "id": "1024081196",
@@ -853,31 +518,8 @@
     "musicKitImage": "assets/music_kits/1024081196.webp",
     "rarity": "HIGH_GRADE",
     "collection": null,
-    "isStatTrak": false
-  },
-  {
-    "id": "1024340982",
-    "name": "Juelz, Floorspace",
-    "musicKitImage": "assets/music_kits/1024340982.webp",
-    "rarity": "HIGH_GRADE",
-    "collection": "Deluge",
-    "isStatTrak": true
-  },
-  {
-    "id": "1024737315",
-    "name": "Sam Marshall, Bodacious",
-    "musicKitImage": "assets/music_kits/1024737315.webp",
-    "rarity": "HIGH_GRADE",
-    "collection": "Masterminds",
-    "isStatTrak": true
-  },
-  {
-    "id": "1024770198",
-    "name": "Ben Bromfield, Rabbit Hole",
-    "musicKitImage": "assets/music_kits/1024770198.webp",
-    "rarity": "HIGH_GRADE",
-    "collection": "Masterminds 2",
-    "isStatTrak": true
+    "hasRegular": true,
+    "hasStatTrak": true
   },
   {
     "id": "1025264551",
@@ -885,7 +527,8 @@
     "musicKitImage": "assets/music_kits/1025264551.webp",
     "rarity": "HIGH_GRADE",
     "collection": null,
-    "isStatTrak": false
+    "hasRegular": true,
+    "hasStatTrak": true
   },
   {
     "id": "1025275940",
@@ -893,7 +536,8 @@
     "musicKitImage": "assets/music_kits/1025275940.webp",
     "rarity": "HIGH_GRADE",
     "collection": "Deluge",
-    "isStatTrak": false
+    "hasRegular": true,
+    "hasStatTrak": true
   },
   {
     "id": "1025324012",
@@ -901,23 +545,8 @@
     "musicKitImage": "assets/music_kits/1025324012.webp",
     "rarity": "HIGH_GRADE",
     "collection": null,
-    "isStatTrak": false
-  },
-  {
-    "id": "1026524570",
-    "name": "Tim Huling, Devil's Paintbrush",
-    "musicKitImage": "assets/music_kits/1026524570.webp",
-    "rarity": "HIGH_GRADE",
-    "collection": "Masterminds 2",
-    "isStatTrak": true
-  },
-  {
-    "id": "1026639040",
-    "name": "TWERL, Ekko & Sidetrack, Under Bright Lights",
-    "musicKitImage": "assets/music_kits/1026639040.webp",
-    "rarity": "HIGH_GRADE",
-    "collection": "NIGHTMODE",
-    "isStatTrak": true
+    "hasRegular": true,
+    "hasStatTrak": true
   },
   {
     "id": "1027126827",
@@ -925,55 +554,8 @@
     "musicKitImage": "assets/music_kits/1027126827.webp",
     "rarity": "HIGH_GRADE",
     "collection": "Tacticians",
-    "isStatTrak": true
-  },
-  {
-    "id": "1027598311",
-    "name": "Skog, II-Headshot",
-    "musicKitImage": "assets/music_kits/1027598311.webp",
-    "rarity": "HIGH_GRADE",
-    "collection": null,
-    "isStatTrak": true
-  },
-  {
-    "id": "1028581175",
-    "name": "Midnight Riders, All I Want for Christmas",
-    "musicKitImage": "assets/music_kits/1028581175.webp",
-    "rarity": "HIGH_GRADE",
-    "collection": null,
-    "isStatTrak": true
-  },
-  {
-    "id": "1029067740",
-    "name": "Lennie Moore, Java Havana Funkaloo",
-    "musicKitImage": "assets/music_kits/1029067740.webp",
-    "rarity": "HIGH_GRADE",
-    "collection": null,
-    "isStatTrak": true
-  },
-  {
-    "id": "1029448649",
-    "name": "The Verkkars & n0thing, Flashbang Dance",
-    "musicKitImage": "assets/music_kits/1029448649.webp",
-    "rarity": "HIGH_GRADE",
-    "collection": null,
-    "isStatTrak": true
-  },
-  {
-    "id": "1029802512",
-    "name": "Tree Adams and Ben Bromfield, M.U.D.D. FORCE",
-    "musicKitImage": "assets/music_kits/1029802512.webp",
-    "rarity": "HIGH_GRADE",
-    "collection": "Masterminds",
-    "isStatTrak": true
-  },
-  {
-    "id": "1032471984",
-    "name": "Michael Bross, Invasion!",
-    "musicKitImage": "assets/music_kits/1032471984.webp",
-    "rarity": "HIGH_GRADE",
-    "collection": null,
-    "isStatTrak": true
+    "hasRegular": true,
+    "hasStatTrak": true
   },
   {
     "id": "1032490082",
@@ -981,15 +563,8 @@
     "musicKitImage": "assets/music_kits/1032490082.webp",
     "rarity": "HIGH_GRADE",
     "collection": "Deluge",
-    "isStatTrak": false
-  },
-  {
-    "id": "1032701438",
-    "name": "Daniel Sadowski, Eye of the Dragon",
-    "musicKitImage": "assets/music_kits/1032701438.webp",
-    "rarity": "HIGH_GRADE",
-    "collection": "Masterminds",
-    "isStatTrak": true
+    "hasRegular": true,
+    "hasStatTrak": true
   },
   {
     "id": "1033066698",
@@ -997,7 +572,8 @@
     "musicKitImage": "assets/music_kits/1033066698.webp",
     "rarity": "HIGH_GRADE",
     "collection": null,
-    "isStatTrak": false
+    "hasRegular": true,
+    "hasStatTrak": true
   },
   {
     "id": "1033436697",
@@ -1005,7 +581,8 @@
     "musicKitImage": "assets/music_kits/1033436697.webp",
     "rarity": "HIGH_GRADE",
     "collection": null,
-    "isStatTrak": false
+    "hasRegular": true,
+    "hasStatTrak": true
   },
   {
     "id": "1034191515",
@@ -1013,39 +590,8 @@
     "musicKitImage": "assets/music_kits/1034191515.webp",
     "rarity": "HIGH_GRADE",
     "collection": null,
-    "isStatTrak": false
-  },
-  {
-    "id": "1034373778",
-    "name": "Chipzel, ~Yellow Magic~",
-    "musicKitImage": "assets/music_kits/1034373778.webp",
-    "rarity": "HIGH_GRADE",
-    "collection": "Tacticians",
-    "isStatTrak": false
-  },
-  {
-    "id": "1034543151",
-    "name": "Laura Shigihara: Work Hard, Play Hard",
-    "musicKitImage": "assets/music_kits/1034543151.webp",
-    "rarity": "HIGH_GRADE",
-    "collection": "Tacticians",
-    "isStatTrak": false
-  },
-  {
-    "id": "1034676233",
-    "name": "Kelly Bailey, Hazardous Environments",
-    "musicKitImage": "assets/music_kits/1034676233.webp",
-    "rarity": "HIGH_GRADE",
-    "collection": null,
-    "isStatTrak": true
-  },
-  {
-    "id": "1034776466",
-    "name": "Scarlxrd, CHAIN$AW.LXADXUT.",
-    "musicKitImage": "assets/music_kits/1034776466.webp",
-    "rarity": "HIGH_GRADE",
-    "collection": null,
-    "isStatTrak": true
+    "hasRegular": true,
+    "hasStatTrak": true
   },
   {
     "id": "1036144690",
@@ -1053,7 +599,8 @@
     "musicKitImage": "assets/music_kits/1036144690.webp",
     "rarity": "HIGH_GRADE",
     "collection": "Radicals",
-    "isStatTrak": true
+    "hasRegular": false,
+    "hasStatTrak": true
   },
   {
     "id": "1036314880",
@@ -1061,15 +608,8 @@
     "musicKitImage": "assets/music_kits/1036314880.webp",
     "rarity": "HIGH_GRADE",
     "collection": "Radicals",
-    "isStatTrak": true
-  },
-  {
-    "id": "1036612800",
-    "name": "Austin Wintory, Desert Fire",
-    "musicKitImage": "assets/music_kits/1036612800.webp",
-    "rarity": "HIGH_GRADE",
-    "collection": null,
-    "isStatTrak": true
+    "hasRegular": false,
+    "hasStatTrak": true
   },
   {
     "id": "1036996197",
@@ -1077,7 +617,8 @@
     "musicKitImage": "assets/music_kits/1036996197.webp",
     "rarity": "HIGH_GRADE",
     "collection": "Radicals",
-    "isStatTrak": true
+    "hasRegular": false,
+    "hasStatTrak": true
   },
   {
     "id": "1037048944",
@@ -1085,23 +626,8 @@
     "musicKitImage": "assets/music_kits/1037048944.webp",
     "rarity": "HIGH_GRADE",
     "collection": null,
-    "isStatTrak": false
-  },
-  {
-    "id": "1038233452",
-    "name": "Troels Folmann, Uber Blasto Phone",
-    "musicKitImage": "assets/music_kits/1038233452.webp",
-    "rarity": "HIGH_GRADE",
-    "collection": null,
-    "isStatTrak": true
-  },
-  {
-    "id": "1038272247",
-    "name": "Neck Deep, The Lowlife Pack",
-    "musicKitImage": "assets/music_kits/1038272247.webp",
-    "rarity": "HIGH_GRADE",
-    "collection": null,
-    "isStatTrak": true
+    "hasRegular": true,
+    "hasStatTrak": false
   },
   {
     "id": "1038380485",
@@ -1109,23 +635,8 @@
     "musicKitImage": "assets/music_kits/1038380485.webp",
     "rarity": "HIGH_GRADE",
     "collection": "Tacticians",
-    "isStatTrak": true
-  },
-  {
-    "id": "1040151842",
-    "name": "Ghost, Skeletá",
-    "musicKitImage": "assets/music_kits/1040151842.webp",
-    "rarity": "HIGH_GRADE",
-    "collection": "Deluge",
-    "isStatTrak": true
-  },
-  {
-    "id": "1040470171",
-    "name": "Dren, Gunman Taco Truck",
-    "musicKitImage": "assets/music_kits/1040470171.webp",
-    "rarity": "HIGH_GRADE",
-    "collection": "Masterminds",
-    "isStatTrak": true
+    "hasRegular": true,
+    "hasStatTrak": true
   },
   {
     "id": "1040958037",
@@ -1133,39 +644,8 @@
     "musicKitImage": "assets/music_kits/1040958037.webp",
     "rarity": "HIGH_GRADE",
     "collection": null,
-    "isStatTrak": false
-  },
-  {
-    "id": "1043031531",
-    "name": "Mateo Messina, For No Mankind",
-    "musicKitImage": "assets/music_kits/1043031531.webp",
-    "rarity": "HIGH_GRADE",
-    "collection": null,
-    "isStatTrak": true
-  },
-  {
-    "id": "1044890021",
-    "name": "Dren, Death's Head Demolition",
-    "musicKitImage": "assets/music_kits/1044890021.webp",
-    "rarity": "HIGH_GRADE",
-    "collection": null,
-    "isStatTrak": true
-  },
-  {
-    "id": "1044942782",
-    "name": "Jesse Harlin, Astro Bellum",
-    "musicKitImage": "assets/music_kits/1044942782.webp",
-    "rarity": "HIGH_GRADE",
-    "collection": "Tacticians",
-    "isStatTrak": false
-  },
-  {
-    "id": "1046878779",
-    "name": "AWOLNATION, I Am",
-    "musicKitImage": "assets/music_kits/1046878779.webp",
-    "rarity": "HIGH_GRADE",
-    "collection": null,
-    "isStatTrak": true
+    "hasRegular": true,
+    "hasStatTrak": true
   },
   {
     "id": "1047455470",
@@ -1173,7 +653,8 @@
     "musicKitImage": "assets/music_kits/1047455470.webp",
     "rarity": "HIGH_GRADE",
     "collection": "Radicals",
-    "isStatTrak": true
+    "hasRegular": false,
+    "hasStatTrak": true
   },
   {
     "id": "1047586438",
@@ -1181,7 +662,8 @@
     "musicKitImage": "assets/music_kits/1047586438.webp",
     "rarity": "HIGH_GRADE",
     "collection": "NIGHTMODE",
-    "isStatTrak": false
+    "hasRegular": true,
+    "hasStatTrak": true
   },
   {
     "id": "1047665408",
@@ -1189,7 +671,8 @@
     "musicKitImage": "assets/music_kits/1047665408.webp",
     "rarity": "HIGH_GRADE",
     "collection": null,
-    "isStatTrak": false
+    "hasRegular": true,
+    "hasStatTrak": true
   },
   {
     "id": "1047794109",
@@ -1197,7 +680,8 @@
     "musicKitImage": "assets/music_kits/1047794109.webp",
     "rarity": "HIGH_GRADE",
     "collection": null,
-    "isStatTrak": false
+    "hasRegular": true,
+    "hasStatTrak": true
   },
   {
     "id": "1048343219",
@@ -1205,15 +689,8 @@
     "musicKitImage": "assets/music_kits/1048343219.webp",
     "rarity": "HIGH_GRADE",
     "collection": "NIGHTMODE",
-    "isStatTrak": false
-  },
-  {
-    "id": "1049894869",
-    "name": "Ian Hultquist, Lion's Mouth",
-    "musicKitImage": "assets/music_kits/1049894869.webp",
-    "rarity": "HIGH_GRADE",
-    "collection": null,
-    "isStatTrak": true
+    "hasRegular": true,
+    "hasStatTrak": true
   },
   {
     "id": "1050160811",
@@ -1221,7 +698,8 @@
     "musicKitImage": "assets/music_kits/1050160811.webp",
     "rarity": "HIGH_GRADE",
     "collection": "Deluge",
-    "isStatTrak": false
+    "hasRegular": true,
+    "hasStatTrak": true
   },
   {
     "id": "1050389227",
@@ -1229,15 +707,8 @@
     "musicKitImage": "assets/music_kits/1050389227.webp",
     "rarity": "HIGH_GRADE",
     "collection": "Initiators",
-    "isStatTrak": false
-  },
-  {
-    "id": "1051886114",
-    "name": "Austin Wintory, Bachram",
-    "musicKitImage": "assets/music_kits/1051886114.webp",
-    "rarity": "HIGH_GRADE",
-    "collection": "Masterminds",
-    "isStatTrak": true
+    "hasRegular": true,
+    "hasStatTrak": true
   },
   {
     "id": "1052161809",
@@ -1245,7 +716,8 @@
     "musicKitImage": "assets/music_kits/1052161809.webp",
     "rarity": "HIGH_GRADE",
     "collection": "Deluge",
-    "isStatTrak": false
+    "hasRegular": true,
+    "hasStatTrak": true
   },
   {
     "id": "1052316358",
@@ -1253,15 +725,8 @@
     "musicKitImage": "assets/music_kits/1052316358.webp",
     "rarity": "HIGH_GRADE",
     "collection": "Masterminds 2",
-    "isStatTrak": false
-  },
-  {
-    "id": "1052897721",
-    "name": "Darude, Moments CS:GO",
-    "musicKitImage": "assets/music_kits/1052897721.webp",
-    "rarity": "HIGH_GRADE",
-    "collection": null,
-    "isStatTrak": true
+    "hasRegular": true,
+    "hasStatTrak": true
   },
   {
     "id": "1053191400",
@@ -1269,7 +734,8 @@
     "musicKitImage": "assets/music_kits/1053191400.webp",
     "rarity": "HIGH_GRADE",
     "collection": null,
-    "isStatTrak": false
+    "hasRegular": true,
+    "hasStatTrak": true
   },
   {
     "id": "1053895197",
@@ -1277,7 +743,8 @@
     "musicKitImage": "assets/music_kits/1053895197.webp",
     "rarity": "HIGH_GRADE",
     "collection": null,
-    "isStatTrak": false
+    "hasRegular": true,
+    "hasStatTrak": true
   },
   {
     "id": "1054885947",
@@ -1285,7 +752,8 @@
     "musicKitImage": "assets/music_kits/1054885947.webp",
     "rarity": "HIGH_GRADE",
     "collection": "Masterminds 2",
-    "isStatTrak": false
+    "hasRegular": true,
+    "hasStatTrak": true
   },
   {
     "id": "1055101006",
@@ -1293,15 +761,8 @@
     "musicKitImage": "assets/music_kits/1055101006.webp",
     "rarity": "HIGH_GRADE",
     "collection": "Tacticians",
-    "isStatTrak": true
-  },
-  {
-    "id": "1057256691",
-    "name": "Austin Wintory, The Devil Went Clubbing In Georgia",
-    "musicKitImage": "assets/music_kits/1057256691.webp",
-    "rarity": "HIGH_GRADE",
-    "collection": "Masterminds 2",
-    "isStatTrak": true
+    "hasRegular": true,
+    "hasStatTrak": true
   },
   {
     "id": "1057745533",
@@ -1309,7 +770,8 @@
     "musicKitImage": "assets/music_kits/1057745533.webp",
     "rarity": "HIGH_GRADE",
     "collection": null,
-    "isStatTrak": false
+    "hasRegular": true,
+    "hasStatTrak": true
   },
   {
     "id": "1059220517",
@@ -1317,7 +779,8 @@
     "musicKitImage": "assets/music_kits/1059220517.webp",
     "rarity": "HIGH_GRADE",
     "collection": "NIGHTMODE",
-    "isStatTrak": false
+    "hasRegular": true,
+    "hasStatTrak": true
   },
   {
     "id": "1059406591",
@@ -1325,7 +788,8 @@
     "musicKitImage": "assets/music_kits/1059406591.webp",
     "rarity": "HIGH_GRADE",
     "collection": "Masterminds",
-    "isStatTrak": false
+    "hasRegular": true,
+    "hasStatTrak": true
   },
   {
     "id": "1059508163",
@@ -1333,7 +797,8 @@
     "musicKitImage": "assets/music_kits/1059508163.webp",
     "rarity": "HIGH_GRADE",
     "collection": null,
-    "isStatTrak": false
+    "hasRegular": true,
+    "hasStatTrak": true
   },
   {
     "id": "1061750258",
@@ -1341,7 +806,8 @@
     "musicKitImage": "assets/music_kits/1061750258.webp",
     "rarity": "HIGH_GRADE",
     "collection": "Initiators",
-    "isStatTrak": false
+    "hasRegular": true,
+    "hasStatTrak": true
   },
   {
     "id": "1062814563",
@@ -1349,7 +815,8 @@
     "musicKitImage": "assets/music_kits/1062814563.webp",
     "rarity": "HIGH_GRADE",
     "collection": null,
-    "isStatTrak": false
+    "hasRegular": true,
+    "hasStatTrak": false
   },
   {
     "id": "1063058078",
@@ -1357,7 +824,8 @@
     "musicKitImage": "assets/music_kits/1063058078.webp",
     "rarity": "HIGH_GRADE",
     "collection": "Deluge",
-    "isStatTrak": false
+    "hasRegular": true,
+    "hasStatTrak": true
   },
   {
     "id": "1063466361",
@@ -1365,7 +833,8 @@
     "musicKitImage": "assets/music_kits/1063466361.webp",
     "rarity": "HIGH_GRADE",
     "collection": null,
-    "isStatTrak": false
+    "hasRegular": true,
+    "hasStatTrak": true
   },
   {
     "id": "1063784694",
@@ -1373,38 +842,7 @@
     "musicKitImage": "assets/music_kits/1063784694.webp",
     "rarity": "HIGH_GRADE",
     "collection": null,
-    "isStatTrak": false
-  },
-  {
-    "id": "1065487654",
-    "name": "Denzel Curry, ULTIMATE",
-    "musicKitImage": "assets/music_kits/1065487654.webp",
-    "rarity": "HIGH_GRADE",
-    "collection": null,
-    "isStatTrak": true
-  },
-  {
-    "id": "1066435192",
-    "name": "Robert Allaire, Insurgency",
-    "musicKitImage": "assets/music_kits/1066435192.webp",
-    "rarity": "HIGH_GRADE",
-    "collection": null,
-    "isStatTrak": true
-  },
-  {
-    "id": "1066759080",
-    "name": "Dren McDonald, Coffee! Kofe! Kahveh!",
-    "musicKitImage": "assets/music_kits/1066759080.webp",
-    "rarity": "HIGH_GRADE",
-    "collection": "Masterminds 2",
-    "isStatTrak": true
-  },
-  {
-    "id": "1069896488",
-    "name": "Freaky DNA, Vici",
-    "musicKitImage": "assets/music_kits/1069896488.webp",
-    "rarity": "HIGH_GRADE",
-    "collection": "Tacticians",
-    "isStatTrak": false
+    "hasRegular": true,
+    "hasStatTrak": true
   }
 ]

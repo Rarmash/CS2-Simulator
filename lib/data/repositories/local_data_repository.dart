@@ -12,6 +12,7 @@ import '../models/graffiti_content_dto.dart';
 import '../models/graffiti_dto.dart';
 import '../models/music_kit_content_dto.dart';
 import '../models/music_kit_dto.dart';
+import '../models/music_kit_group_dto.dart';
 import '../models/operation_collection_content_dto.dart';
 import '../models/patch_content_dto.dart';
 import '../models/patch_dto.dart';

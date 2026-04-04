@@ -99,6 +99,19 @@ int _musicKitRarityOrder(MusicKitDto musicKit) {
   }
 }
 
+int _musicKitVariantOrder(MusicKitDto musicKit) {
+  if (musicKit.hasRegular && !musicKit.hasStatTrak) {
+    return 0;
+  }
+  if (musicKit.hasRegular && musicKit.hasStatTrak) {
+    return 1;
+  }
+  if (musicKit.hasStatTrak) {
+    return 2;
+  }
+  return 999;
+}
+
 int _agentRarityOrder(AgentDto agent) {
   switch (agent.rarity) {
     case 'DISTINGUISHED':

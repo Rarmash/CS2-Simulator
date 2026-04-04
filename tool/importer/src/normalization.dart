@@ -435,10 +435,9 @@ String operationKey(String name, String operationId) =>
   canonicalName((pin['collection'] ?? '').toString()),
 );
 
-(String, String, bool) existingMusicKitKey(Map<String, dynamic> musicKit) => (
+(String, String) existingMusicKitKey(Map<String, dynamic> musicKit) => (
   canonicalName((musicKit['name'] ?? '').toString()),
   canonicalName((musicKit['collection'] ?? '').toString()),
-  musicKit['isStatTrak'] == true,
 );
 
 (String, String, String) existingAgentKey(Map<String, dynamic> agent) => (
@@ -912,6 +911,40 @@ List<Map<String, dynamic>> buildContents(
       a[idKey].toString(),
     ).compareTo(int.parse(b[idKey].toString())),
   );
+  return out;
+}
+
+List<Map<String, dynamic>> buildMusicKitContents(
+  Map<String, Map<String, Map<String, bool>>> source,
+) {
+  final out = source.entries
+      .where((entry) => entry.value.isNotEmpty)
+      .map((entry) {
+        final items = entry.value.entries
+            .map(
+              (item) => <String, dynamic>{
+                'musicKitId': item.key,
+                'hasRegular': item.value['hasRegular'] ?? false,
+                'hasStatTrak': item.value['hasStatTrak'] ?? false,
+              },
+            )
+            .toList()
+          ..sort(
+            (a, b) => int.parse(
+              a['musicKitId'].toString(),
+            ).compareTo(int.parse(b['musicKitId'].toString())),
+          );
+
+        return <String, dynamic>{'containerId': entry.key, 'items': items};
+      })
+      .toList();
+
+  out.sort(
+    (a, b) => int.parse(
+      a['containerId'].toString(),
+    ).compareTo(int.parse(b['containerId'].toString())),
+  );
+
   return out;
 }
 

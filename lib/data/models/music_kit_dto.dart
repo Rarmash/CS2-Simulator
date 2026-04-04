@@ -4,7 +4,8 @@ class MusicKitDto {
   final String musicKitImage;
   final String rarity;
   final String? collection;
-  final bool isStatTrak;
+  final bool hasRegular;
+  final bool hasStatTrak;
 
   const MusicKitDto({
     required this.id,
@@ -12,17 +13,40 @@ class MusicKitDto {
     required this.musicKitImage,
     required this.rarity,
     required this.collection,
-    required this.isStatTrak,
+    required this.hasRegular,
+    required this.hasStatTrak,
   });
 
   factory MusicKitDto.fromJson(Map<String, dynamic> json) {
+    final legacyIsStatTrak = json['isStatTrak'] as bool? ?? false;
     return MusicKitDto(
       id: json['id'] as String,
       name: json['name'] as String,
       musicKitImage: json['musicKitImage'] as String,
       rarity: json['rarity'] as String,
       collection: json['collection'] as String?,
-      isStatTrak: json['isStatTrak'] as bool? ?? false,
+      hasRegular: json['hasRegular'] as bool? ?? !legacyIsStatTrak,
+      hasStatTrak: json['hasStatTrak'] as bool? ?? legacyIsStatTrak,
+    );
+  }
+
+  MusicKitDto copyWith({
+    String? id,
+    String? name,
+    String? musicKitImage,
+    String? rarity,
+    String? collection,
+    bool? hasRegular,
+    bool? hasStatTrak,
+  }) {
+    return MusicKitDto(
+      id: id ?? this.id,
+      name: name ?? this.name,
+      musicKitImage: musicKitImage ?? this.musicKitImage,
+      rarity: rarity ?? this.rarity,
+      collection: collection ?? this.collection,
+      hasRegular: hasRegular ?? this.hasRegular,
+      hasStatTrak: hasStatTrak ?? this.hasStatTrak,
     );
   }
 
@@ -39,6 +63,9 @@ class MusicKitDto {
   }
 
   String get displayName {
-    return isStatTrak ? 'StatTrak™ $name' : name;
+    if (hasStatTrak && !hasRegular) {
+      return 'StatTrak™ $name';
+    }
+    return name;
   }
 }

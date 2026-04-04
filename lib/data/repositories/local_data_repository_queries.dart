@@ -54,21 +54,79 @@ mixin _LocalDataRepositoryQueries on _LocalDataRepositoryLoaders {
     final musicKits = await loadMusicKits();
     final contents = await loadMusicKitContents();
     final content = contents.firstWhere((c) => c.containerId == containerId);
-    final ids = content.musicKitIds.toSet();
+    final entriesById = {
+      for (final entry in content.items) entry.musicKitId: entry,
+    };
 
-    final result = musicKits.where((m) => ids.contains(m.id)).toList();
+    final result = musicKits
+        .where((m) => entriesById.containsKey(m.id))
+        .map((musicKit) {
+          final entry = entriesById[musicKit.id]!;
+          return musicKit.copyWith(
+            hasRegular: entry.hasRegular,
+            hasStatTrak: entry.hasStatTrak,
+          );
+        })
+        .toList();
     result.sort((a, b) {
       final rarityCompare = _musicKitRarityOrder(
         a,
       ).compareTo(_musicKitRarityOrder(b));
       if (rarityCompare != 0) return rarityCompare;
-      final statTrakCompare = a.isStatTrak == b.isStatTrak
-          ? 0
-          : (a.isStatTrak ? 1 : -1);
-      if (statTrakCompare != 0) return statTrakCompare;
+      final variantCompare = _musicKitVariantOrder(a).compareTo(
+        _musicKitVariantOrder(b),
+      );
+      if (variantCompare != 0) return variantCompare;
       return int.parse(a.id).compareTo(int.parse(b.id));
     });
     return result;
+  }
+
+  Future<List<MusicKitGroupDto>> loadGroupedMusicKits() async {
+    final musicKits = await loadMusicKits();
+    final grouped = <String, List<MusicKitDto>>{};
+
+    for (final musicKit in musicKits) {
+      final key =
+          '${musicKit.name.trim().toLowerCase()}|${(musicKit.collection ?? '').trim().toLowerCase()}';
+      grouped.putIfAbsent(key, () => <MusicKitDto>[]).add(musicKit);
+    }
+
+    final result = grouped.values
+        .map(MusicKitGroupDto.fromVariants)
+        .toList();
+
+    result.sort((a, b) {
+      final rarityCompare = _musicKitRarityOrder(
+        a.primary,
+      ).compareTo(_musicKitRarityOrder(b.primary));
+      if (rarityCompare != 0) return rarityCompare;
+      final statTrakCompare = a.hasStatTrak == b.hasStatTrak
+          ? 0
+          : (a.hasStatTrak ? 1 : -1);
+      if (statTrakCompare != 0) return statTrakCompare;
+      return a.trackName.compareTo(b.trackName);
+    });
+
+    return result;
+  }
+
+  Future<MusicKitGroupDto?> loadMusicKitGroup(
+    String musicKitName,
+    String? collection,
+  ) async {
+    final groups = await loadGroupedMusicKits();
+    final normalizedCollection = (collection ?? '').trim().toLowerCase();
+
+    for (final group in groups) {
+      if (group.name == musicKitName &&
+          (group.collection ?? '').trim().toLowerCase() ==
+              normalizedCollection) {
+        return group;
+      }
+    }
+
+    return null;
   }
 
   Future<List<GraffitiDto>> loadGraffitiForContainer(String containerId) async {
@@ -240,7 +298,7 @@ mixin _LocalDataRepositoryQueries on _LocalDataRepositoryLoaders {
     final contents = await loadMusicKitContents();
 
     final containerIds = contents
-        .where((entry) => entry.musicKitIds.contains(musicKitId))
+        .where((entry) => entry.items.any((item) => item.musicKitId == musicKitId))
         .map((entry) => entry.containerId)
         .toSet();
 
@@ -249,6 +307,29 @@ mixin _LocalDataRepositoryQueries on _LocalDataRepositoryLoaders {
         .toList();
     result.sort(_compareContainerByReleaseDateAsc);
     return result;
+  }
+
+  Future<List<ContainerDto>> loadContainersForMusicKitGroup(
+    String musicKitName,
+    String? collection,
+  ) async {
+    final group = await loadMusicKitGroup(musicKitName, collection);
+    if (group == null) return const [];
+
+    final seenContainerIds = <String>{};
+    final containers = <ContainerDto>[];
+
+    for (final variant in group.variants) {
+      final sources = await loadContainersForMusicKit(variant.id);
+      for (final container in sources) {
+        if (seenContainerIds.add(container.id)) {
+          containers.add(container);
+        }
+      }
+    }
+
+    containers.sort(_compareContainerByReleaseDateAsc);
+    return containers;
   }
 
   Future<List<ContainerDto>> loadContainersForGraffiti(

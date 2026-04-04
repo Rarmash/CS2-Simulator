@@ -122,7 +122,7 @@ class DartImporterBackend implements ImporterBackend {
         existingPinKey(p): Map<String, dynamic>.from(p),
     };
     final existingMusicKitByKey =
-        <(String, String, bool), Map<String, dynamic>>{
+        <(String, String), Map<String, dynamic>>{
           for (final m in existingMusicKits)
             existingMusicKitKey(m): Map<String, dynamic>.from(m),
         };
@@ -445,7 +445,8 @@ class DartImporterBackend implements ImporterBackend {
     };
     final stickerContentsMap = <String, Set<String>>{};
     final pinContentsMap = <String, Set<String>>{};
-    final musicKitContentsMap = <String, Set<String>>{};
+    final musicKitContentsMap = <String, Map<String, Map<String, bool>>>{};
+    final musicKitVariantPresence = <(String, String), Map<String, bool>>{};
     final musicKitCollectionBySourceId = <String, String?>{};
     final agentCollectionContentsMap = <String, Set<String>>{
       for (final collectionId in newAgentCollections.keys)
@@ -1255,8 +1256,15 @@ class DartImporterBackend implements ImporterBackend {
         final key = (
           canonicalName(musicKitName),
           canonicalName(musicKitCollection ?? ''),
-          isStatTrak,
         );
+        final variantPresence = musicKitVariantPresence.putIfAbsent(
+          key,
+          () => <String, bool>{'hasRegular': false, 'hasStatTrak': false},
+        );
+        variantPresence['hasRegular'] =
+            (variantPresence['hasRegular'] ?? false) || !isStatTrak;
+        variantPresence['hasStatTrak'] =
+            (variantPresence['hasStatTrak'] ?? false) || isStatTrak;
         final existingMusicKit = existingMusicKitByKey[key];
         late String musicKitId;
         if (existingMusicKit != null) {
@@ -1296,14 +1304,24 @@ class DartImporterBackend implements ImporterBackend {
           'musicKitImage': musicKitImagePath,
           'rarity': rarity,
           'collection': musicKitCollection,
-          'isStatTrak': isStatTrak,
+          'hasRegular': variantPresence['hasRegular'] ?? false,
+          'hasStatTrak': variantPresence['hasStatTrak'] ?? false,
         };
         newMusicKits[musicKitId] = musicKitRecord;
         existingMusicKitByKey[key] = musicKitRecord;
         musicKitCollectionBySourceId[sourceMusicKitId] = musicKitCollection;
-        musicKitContentsMap
-            .putIfAbsent(containerId, () => <String>{})
-            .add(musicKitId);
+        final containerMusicKits = musicKitContentsMap.putIfAbsent(
+          containerId,
+          () => <String, Map<String, bool>>{},
+        );
+        final existingEntry =
+            containerMusicKits[musicKitId] ??
+            <String, bool>{'hasRegular': false, 'hasStatTrak': false};
+        existingEntry['hasRegular'] =
+            (existingEntry['hasRegular'] ?? false) || !isStatTrak;
+        existingEntry['hasStatTrak'] =
+            (existingEntry['hasStatTrak'] ?? false) || isStatTrak;
+        containerMusicKits[musicKitId] = existingEntry;
       }
     }
 
@@ -1332,10 +1350,27 @@ class DartImporterBackend implements ImporterBackend {
       final key = (
         canonicalName(musicKitName),
         canonicalName(musicKitCollection ?? ''),
-        isStatTrak,
       );
+      final variantPresence = musicKitVariantPresence.putIfAbsent(
+        key,
+        () => <String, bool>{'hasRegular': false, 'hasStatTrak': false},
+      );
+      variantPresence['hasRegular'] =
+          (variantPresence['hasRegular'] ?? false) || !isStatTrak;
+      variantPresence['hasStatTrak'] =
+          (variantPresence['hasStatTrak'] ?? false) || isStatTrak;
 
       if (existingMusicKitByKey.containsKey(key)) {
+        final existingRecord = existingMusicKitByKey[key];
+        if (existingRecord != null) {
+          final existingId = existingRecord['id']?.toString();
+          if (existingId != null && newMusicKits.containsKey(existingId)) {
+            newMusicKits[existingId]!['hasRegular'] =
+                variantPresence['hasRegular'] ?? false;
+            newMusicKits[existingId]!['hasStatTrak'] =
+                variantPresence['hasStatTrak'] ?? false;
+          }
+        }
         continue;
       }
 
@@ -1376,7 +1411,8 @@ class DartImporterBackend implements ImporterBackend {
         'musicKitImage': musicKitImagePath,
         'rarity': rarity,
         'collection': musicKitCollection,
-        'isStatTrak': isStatTrak,
+        'hasRegular': variantPresence['hasRegular'] ?? false,
+        'hasStatTrak': variantPresence['hasStatTrak'] ?? false,
       };
       newMusicKits[musicKitId] = musicKitRecord;
       existingMusicKitByKey[key] = musicKitRecord;
@@ -2036,11 +2072,7 @@ class DartImporterBackend implements ImporterBackend {
       'containerId',
       'pinIds',
     );
-    final musicKitContentsOut = buildContents(
-      musicKitContentsMap,
-      'containerId',
-      'musicKitIds',
-    );
+    final musicKitContentsOut = buildMusicKitContents(musicKitContentsMap);
     final agentCollectionsOut = newAgentCollections.values.toList()
       ..sort((a, b) {
         final dateCompare = (a['releaseDate'] ?? '9999-99-99')

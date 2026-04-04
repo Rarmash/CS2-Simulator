@@ -152,7 +152,6 @@ The project is actively evolving, with current work focused on:
 ### v0.10
 
 - Trade-Up rewrite and UI cleanup
-- Unified handling of regular and `StatTrak™` Music Kits as one grouped item
 - Broader simulator accuracy pass across more container types
 - Better browsing and glossary coverage for non-skin content
 
