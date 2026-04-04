@@ -231,7 +231,7 @@ class _TradeUpScreenState extends State<TradeUpScreen> {
               child: Image.asset(
                 skin.skinImage,
                 fit: BoxFit.contain,
-                errorBuilder: (_, __, ___) =>
+                errorBuilder: (_, error, stackTrace) =>
                 const Icon(Icons.image_not_supported),
               ),
             ),
@@ -275,7 +275,7 @@ class _TradeUpScreenState extends State<TradeUpScreen> {
                       child: Image.asset(
                         s.skinImage,
                         fit: BoxFit.contain,
-                        errorBuilder: (_, __, ___) =>
+                        errorBuilder: (_, error, stackTrace) =>
                         const Icon(Icons.image_not_supported),
                       ),
                     ),
@@ -365,7 +365,7 @@ class _TradeUpScreenState extends State<TradeUpScreen> {
             Image.asset(
               s.skinImage,
               height: 120,
-              errorBuilder: (_, __, ___) =>
+              errorBuilder: (_, error, stackTrace) =>
               const Icon(Icons.image_not_supported, size: 80),
             ),
             const SizedBox(height: 8),
@@ -402,7 +402,7 @@ class _TradeUpScreenState extends State<TradeUpScreen> {
               child: Image.asset(
                 skin.skinImage,
                 fit: BoxFit.contain,
-                errorBuilder: (_, __, ___) =>
+                errorBuilder: (_, error, stackTrace) =>
                 const Icon(Icons.image_not_supported),
               ),
             ),

@@ -38,12 +38,12 @@ class _XrayRevealCardState extends State<XrayRevealCard>
       vsync: this,
       duration: _scanDuration,
     )..addStatusListener((status) {
-      if (status == AnimationStatus.completed && mounted) {
-        setState(() {
-          _scanCompleted = true;
-        });
-      }
-    });
+        if (status == AnimationStatus.completed && mounted) {
+          setState(() {
+            _scanCompleted = true;
+          });
+        }
+      });
 
     _controller.forward();
   }
@@ -72,8 +72,8 @@ class _XrayRevealCardState extends State<XrayRevealCard>
             widget.drop.skin.skinImage,
             fit: BoxFit.contain,
             height: _skinRenderHeight,
-            errorBuilder: (_, __, ___) =>
-            const Icon(Icons.image_not_supported, size: 72),
+            errorBuilder: (_, error, stackTrace) =>
+                const Icon(Icons.image_not_supported, size: 72),
           ),
         ),
       ),
@@ -93,7 +93,7 @@ class _XrayRevealCardState extends State<XrayRevealCard>
         final scanY = _scanViewportHeight * progress;
         final unrevealedTop = scanY.clamp(0.0, _scanViewportHeight);
         final unrevealedHeight =
-        (_scanViewportHeight - unrevealedTop).clamp(0.0, _scanViewportHeight);
+            (_scanViewportHeight - unrevealedTop).clamp(0.0, _scanViewportHeight);
         final lineTop = (scanY - 1).clamp(0.0, _scanViewportHeight - 2);
 
         return Container(
@@ -102,12 +102,12 @@ class _XrayRevealCardState extends State<XrayRevealCard>
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(14),
             border: Border.all(
-              color: xrayGlow.withOpacity(0.55),
+              color: xrayGlow.withValues(alpha: 0.55),
               width: 1,
             ),
             boxShadow: [
               BoxShadow(
-                color: xrayGlow.withOpacity(0.16),
+                color: xrayGlow.withValues(alpha: 0.16),
                 blurRadius: 18,
                 spreadRadius: 1,
               ),
@@ -128,7 +128,6 @@ class _XrayRevealCardState extends State<XrayRevealCard>
               const Positioned.fill(
                 child: _XrayGridOverlay(),
               ),
-
               Positioned.fill(
                 child: DecoratedBox(
                   decoration: BoxDecoration(
@@ -137,19 +136,17 @@ class _XrayRevealCardState extends State<XrayRevealCard>
                       radius: 1.05,
                       colors: [
                         Colors.transparent,
-                        xrayGlow.withOpacity(0.03),
-                        Colors.black.withOpacity(0.18),
+                        xrayGlow.withValues(alpha: 0.03),
+                        Colors.black.withValues(alpha: 0.18),
                       ],
                       stops: const [0.0, 0.72, 1.0],
                     ),
                   ),
                 ),
               ),
-
               Positioned.fill(
                 child: _buildFixedSkinImage(),
               ),
-
               if (unrevealedHeight > 0)
                 Positioned(
                   left: 0,
@@ -160,8 +157,6 @@ class _XrayRevealCardState extends State<XrayRevealCard>
                     color: maskColor,
                   ),
                 ),
-
-              // Дополнительная маска-градиент около линии скана.
               Positioned(
                 left: 0,
                 right: 0,
@@ -175,16 +170,15 @@ class _XrayRevealCardState extends State<XrayRevealCard>
                         end: Alignment.bottomCenter,
                         colors: [
                           Colors.transparent,
-                          xrayGlow.withOpacity(0.04),
-                          xrayGlow.withOpacity(0.11),
-                          xrayGlow.withOpacity(0.03),
+                          xrayGlow.withValues(alpha: 0.04),
+                          xrayGlow.withValues(alpha: 0.11),
+                          xrayGlow.withValues(alpha: 0.03),
                         ],
                       ),
                     ),
                   ),
                 ),
               ),
-
               Positioned(
                 left: 12,
                 right: 12,
@@ -196,7 +190,7 @@ class _XrayRevealCardState extends State<XrayRevealCard>
                       color: xrayGlow,
                       boxShadow: [
                         BoxShadow(
-                          color: xrayGlow.withOpacity(0.95),
+                          color: xrayGlow.withValues(alpha: 0.95),
                           blurRadius: 14,
                         ),
                       ],
@@ -204,7 +198,6 @@ class _XrayRevealCardState extends State<XrayRevealCard>
                   ),
                 ),
               ),
-
               Positioned(
                 left: 28,
                 right: 28,
@@ -212,11 +205,10 @@ class _XrayRevealCardState extends State<XrayRevealCard>
                 child: IgnorePointer(
                   child: Container(
                     height: 1,
-                    color: xrayGlow.withOpacity(0.35),
+                    color: xrayGlow.withValues(alpha: 0.35),
                   ),
                 ),
               ),
-
               Positioned(
                 top: 10,
                 left: 10,
@@ -226,10 +218,10 @@ class _XrayRevealCardState extends State<XrayRevealCard>
                     vertical: 6,
                   ),
                   decoration: BoxDecoration(
-                    color: Colors.black.withOpacity(0.34),
+                    color: Colors.black.withValues(alpha: 0.34),
                     borderRadius: BorderRadius.circular(999),
                     border: Border.all(
-                      color: xrayGlow.withOpacity(0.35),
+                      color: xrayGlow.withValues(alpha: 0.35),
                     ),
                   ),
                   child: Text(
@@ -245,7 +237,6 @@ class _XrayRevealCardState extends State<XrayRevealCard>
                   ),
                 ),
               ),
-
               Positioned(
                 top: 10,
                 right: 10,
@@ -256,12 +247,11 @@ class _XrayRevealCardState extends State<XrayRevealCard>
                     style: TextStyle(
                       fontSize: 11,
                       letterSpacing: 0.9,
-                      color: xrayGlow.withOpacity(0.9),
+                      color: xrayGlow.withValues(alpha: 0.9),
                     ),
                   ),
                 ),
               ),
-
               Positioned(
                 left: 10,
                 bottom: 10,
@@ -270,8 +260,9 @@ class _XrayRevealCardState extends State<XrayRevealCard>
                   height: 22,
                   decoration: BoxDecoration(
                     border: Border(
-                      left: BorderSide(color: xrayGlow.withOpacity(0.65)),
-                      bottom: BorderSide(color: xrayGlow.withOpacity(0.65)),
+                      left: BorderSide(color: xrayGlow.withValues(alpha: 0.65)),
+                      bottom:
+                          BorderSide(color: xrayGlow.withValues(alpha: 0.65)),
                     ),
                   ),
                 ),
@@ -284,8 +275,9 @@ class _XrayRevealCardState extends State<XrayRevealCard>
                   height: 22,
                   decoration: BoxDecoration(
                     border: Border(
-                      right: BorderSide(color: xrayGlow.withOpacity(0.65)),
-                      bottom: BorderSide(color: xrayGlow.withOpacity(0.65)),
+                      right: BorderSide(color: xrayGlow.withValues(alpha: 0.65)),
+                      bottom:
+                          BorderSide(color: xrayGlow.withValues(alpha: 0.65)),
                     ),
                   ),
                 ),
@@ -333,79 +325,79 @@ class _XrayRevealCardState extends State<XrayRevealCard>
               duration: _detailsFadeDuration,
               child: !_scanCompleted
                   ? const Padding(
-                key: ValueKey('scan_wait'),
-                padding: EdgeInsets.only(top: 16),
-                child: Text(
-                  'Running X-Ray scan...',
-                  style: TextStyle(
-                    color: Colors.white70,
-                    fontSize: 14,
-                  ),
-                ),
-              )
+                      key: ValueKey('scan_wait'),
+                      padding: EdgeInsets.only(top: 16),
+                      child: Text(
+                        'Running X-Ray scan...',
+                        style: TextStyle(
+                          color: Colors.white70,
+                          fontSize: 14,
+                        ),
+                      ),
+                    )
                   : Column(
-                key: const ValueKey('scan_done'),
-                children: [
-                  const SizedBox(height: 16),
-                  Text(
-                    _fullName(),
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                      color: rarityColor,
+                      key: const ValueKey('scan_done'),
+                      children: [
+                        const SizedBox(height: 16),
+                        Text(
+                          _fullName(),
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                            color: rarityColor,
+                          ),
+                        ),
+                        const SizedBox(height: 10),
+                        InfoRow(
+                          title: 'Rarity',
+                          value: SkinUiHelper.rarityLabel(skin),
+                          valueColor: rarityColor,
+                        ),
+                        InfoRow(
+                          title: 'Weapon type',
+                          value: SkinUiHelper.weaponTypeLabel(skin.weaponType),
+                        ),
+                        InfoRow(
+                          title: 'Float',
+                          value: widget.drop.skinFloat?.toStringAsFixed(6) ?? '-',
+                        ),
+                        InfoRow(
+                          title: 'Exterior',
+                          value: widget.drop.exterior ?? '-',
+                        ),
+                        InfoRow(
+                          title: 'StatTrak',
+                          value: widget.drop.isStatTrak ? 'Yes' : 'No',
+                        ),
+                        const SizedBox(height: 16),
+                        Row(
+                          children: [
+                            Expanded(
+                              child: OutlinedButton(
+                                onPressed: widget.onDestroy,
+                                style: OutlinedButton.styleFrom(
+                                  padding:
+                                      const EdgeInsets.symmetric(vertical: 14),
+                                ),
+                                child: const Text('DESTROY'),
+                              ),
+                            ),
+                            const SizedBox(width: 12),
+                            Expanded(
+                              child: ElevatedButton(
+                                onPressed: widget.onClaim,
+                                style: ElevatedButton.styleFrom(
+                                  padding:
+                                      const EdgeInsets.symmetric(vertical: 14),
+                                ),
+                                child: const Text('CLAIM ITEM'),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
                     ),
-                  ),
-                  const SizedBox(height: 10),
-                  InfoRow(
-                    title: 'Rarity',
-                    value: SkinUiHelper.rarityLabel(skin),
-                    valueColor: rarityColor,
-                  ),
-                  InfoRow(
-                    title: 'Weapon type',
-                    value: SkinUiHelper.weaponTypeLabel(skin.weaponType),
-                  ),
-                  InfoRow(
-                    title: 'Float',
-                    value: widget.drop.skinFloat?.toStringAsFixed(6) ?? '-',
-                  ),
-                  InfoRow(
-                    title: 'Exterior',
-                    value: widget.drop.exterior ?? '-',
-                  ),
-                  InfoRow(
-                    title: 'StatTrak',
-                    value: widget.drop.isStatTrak ? 'Yes' : 'No',
-                  ),
-                  const SizedBox(height: 16),
-                  Row(
-                    children: [
-                      Expanded(
-                        child: OutlinedButton(
-                          onPressed: widget.onDestroy,
-                          style: OutlinedButton.styleFrom(
-                            padding:
-                            const EdgeInsets.symmetric(vertical: 14),
-                          ),
-                          child: const Text('DESTROY'),
-                        ),
-                      ),
-                      const SizedBox(width: 12),
-                      Expanded(
-                        child: ElevatedButton(
-                          onPressed: widget.onClaim,
-                          style: ElevatedButton.styleFrom(
-                            padding:
-                            const EdgeInsets.symmetric(vertical: 14),
-                          ),
-                          child: const Text('CLAIM ITEM'),
-                        ),
-                      ),
-                    ],
-                  ),
-                ],
-              ),
             ),
           ],
         ),
@@ -429,11 +421,11 @@ class _XrayGridPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     final minor = Paint()
-      ..color = const Color(0xFF78FFF0).withOpacity(0.05)
+      ..color = const Color(0xFF78FFF0).withValues(alpha: 0.05)
       ..strokeWidth = 1;
 
     final major = Paint()
-      ..color = const Color(0xFF78FFF0).withOpacity(0.08)
+      ..color = const Color(0xFF78FFF0).withValues(alpha: 0.08)
       ..strokeWidth = 1;
 
     const minorStep = 24.0;

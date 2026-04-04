@@ -31,7 +31,7 @@ class SkinGridTile extends StatelessWidget {
         boxShadow: highlighted
             ? [
           BoxShadow(
-            color: rarityColor.withOpacity(0.45),
+            color: rarityColor.withValues(alpha: 0.45),
             blurRadius: 16,
             spreadRadius: 2,
           ),
@@ -40,7 +40,7 @@ class SkinGridTile extends StatelessWidget {
       ),
       child: Card(
         margin: EdgeInsets.zero,
-        color: highlighted ? rarityColor.withOpacity(0.12) : null,
+        color: highlighted ? rarityColor.withValues(alpha: 0.12) : null,
         child: Column(
           children: [
             Expanded(
@@ -49,7 +49,7 @@ class SkinGridTile extends StatelessWidget {
                 child: Image.asset(
                   skin.skinImage,
                   fit: BoxFit.contain,
-                  errorBuilder: (_, __, ___) =>
+                  errorBuilder: (_, error, stackTrace) =>
                   const Icon(Icons.image_not_supported),
                 ),
               ),
