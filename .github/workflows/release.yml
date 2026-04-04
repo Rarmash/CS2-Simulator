@@ -182,11 +182,11 @@ jobs:
           Push-Location "build\windows\x64\runner\Release"
           try {
             if (Get-Command 7z -ErrorAction SilentlyContinue) {
-              7z a -tzip -mx=9 "..\..\..\..\dist\${env:APP_NAME}-${env:TAG}-windows-x64.zip" "*"
+              7z a -tzip -mx=9 "..\..\..\..\..\dist\${env:APP_NAME}-${env:TAG}-windows-x64.zip" "*"
             } else {
               Compress-Archive `
                 -Path "*" `
-                -DestinationPath "..\..\..\..\dist\${env:APP_NAME}-${env:TAG}-windows-x64.zip" `
+                -DestinationPath "..\..\..\..\..\dist\${env:APP_NAME}-${env:TAG}-windows-x64.zip" `
                 -CompressionLevel Optimal `
                 -Force
             }
