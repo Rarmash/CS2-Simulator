@@ -9,7 +9,8 @@ class GenericGlossaryScreen<T> extends StatefulWidget {
   final String Function(int count) countLabelBuilder;
   final String emptyMessage;
   final String errorPrefix;
-  final List<Widget> Function(BuildContext context)? headerControlsBuilder;
+  final List<Widget> Function(BuildContext context, List<T> items)?
+  headerControlsBuilder;
 
   const GenericGlossaryScreen({
     super.key,
@@ -75,7 +76,8 @@ class _GenericGlossaryScreenState<T> extends State<GenericGlossaryScreen<T>> {
           final items = snapshot.data ?? <T>[];
           final filtered = widget.filterAndSort(items, _query);
           final headerControls =
-              widget.headerControlsBuilder?.call(context) ?? const <Widget>[];
+              widget.headerControlsBuilder?.call(context, items) ??
+              const <Widget>[];
 
           return Column(
             children: [

@@ -21,6 +21,7 @@ class CharmGlossaryScreen extends StatefulWidget {
 
 class _CharmGlossaryScreenState extends State<CharmGlossaryScreen> {
   String _rarityFilter = 'ALL';
+  String _collectionFilter = 'ALL';
 
   static const List<GlossaryFilterOption> _rarityOptions = [
     GlossaryFilterOption('ALL', 'All rarities'),
@@ -30,9 +31,27 @@ class _CharmGlossaryScreenState extends State<CharmGlossaryScreen> {
     GlossaryFilterOption('EXOTIC', 'Exotic'),
   ];
 
+  List<GlossaryFilterOption> _collectionOptions(List<CharmDto> items) {
+    final values = items
+        .map((item) => (item.collection ?? '').trim())
+        .where((value) => value.isNotEmpty)
+        .toSet()
+        .toList()
+      ..sort();
+
+    return [
+      const GlossaryFilterOption('ALL', 'All collections'),
+      ...values.map((value) => GlossaryFilterOption(value, value)),
+    ];
+  }
+
   List<CharmDto> _filterAndSort(List<CharmDto> items, String query) {
     final filtered = items.where((charm) {
       if (_rarityFilter != 'ALL' && charm.rarity != _rarityFilter) {
+        return false;
+      }
+      if (_collectionFilter != 'ALL' &&
+          (charm.collection ?? '') != _collectionFilter) {
         return false;
       }
       if (query.isEmpty) return true;
@@ -78,16 +97,35 @@ class _CharmGlossaryScreenState extends State<CharmGlossaryScreen> {
       countLabelBuilder: (count) => '$count charms',
       emptyMessage: 'No charms found.',
       errorPrefix: 'Failed to load charms.',
-      headerControlsBuilder: (_) => [
-        GlossaryFilterDropdown(
-          label: 'Rarity',
-          value: _rarityFilter,
-          options: _rarityOptions,
-          onChanged: (value) {
-            setState(() {
-              _rarityFilter = value ?? 'ALL';
-            });
-          },
+      headerControlsBuilder: (_, items) => [
+        Row(
+          children: [
+            Expanded(
+              child: GlossaryFilterDropdown(
+                label: 'Rarity',
+                value: _rarityFilter,
+                options: _rarityOptions,
+                onChanged: (value) {
+                  setState(() {
+                    _rarityFilter = value ?? 'ALL';
+                  });
+                },
+              ),
+            ),
+            const SizedBox(width: 10),
+            Expanded(
+              child: GlossaryFilterDropdown(
+                label: 'Collection',
+                value: _collectionFilter,
+                options: _collectionOptions(items),
+                onChanged: (value) {
+                  setState(() {
+                    _collectionFilter = value ?? 'ALL';
+                  });
+                },
+              ),
+            ),
+          ],
         ),
       ],
       itemBuilder: (context, charm) {

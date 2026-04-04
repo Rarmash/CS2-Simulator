@@ -21,6 +21,7 @@ class MusicKitGlossaryScreen extends StatefulWidget {
 
 class _MusicKitGlossaryScreenState extends State<MusicKitGlossaryScreen> {
   String _variantFilter = 'ALL';
+  String _seriesFilter = 'ALL';
 
   static const List<GlossaryFilterOption> _variantOptions = [
     GlossaryFilterOption('ALL', 'All variants'),
@@ -28,6 +29,20 @@ class _MusicKitGlossaryScreenState extends State<MusicKitGlossaryScreen> {
     GlossaryFilterOption('STATTRAK_ONLY', 'StatTrak only'),
     GlossaryFilterOption('BOTH', 'Both variants'),
   ];
+
+  List<GlossaryFilterOption> _seriesOptions(List<MusicKitGroupDto> items) {
+    final values = items
+        .map((item) => (item.collection ?? '').trim())
+        .where((value) => value.isNotEmpty)
+        .toSet()
+        .toList()
+      ..sort();
+
+    return [
+      const GlossaryFilterOption('ALL', 'All series'),
+      ...values.map((value) => GlossaryFilterOption(value, value)),
+    ];
+  }
 
   Future<List<MusicKitGroupDto>> _loadEntries() {
     return widget.repository.loadGroupedMusicKits();
@@ -48,6 +63,9 @@ class _MusicKitGlossaryScreenState extends State<MusicKitGlossaryScreen> {
       }
       if (_variantFilter == 'BOTH' &&
           !(entry.hasRegular && entry.hasStatTrak)) {
+        return false;
+      }
+      if (_seriesFilter != 'ALL' && (entry.collection ?? '') != _seriesFilter) {
         return false;
       }
 
@@ -96,16 +114,35 @@ class _MusicKitGlossaryScreenState extends State<MusicKitGlossaryScreen> {
       countLabelBuilder: (count) => '$count music kits',
       emptyMessage: 'No music kits found.',
       errorPrefix: 'Failed to load music kits.',
-      headerControlsBuilder: (_) => [
-        GlossaryFilterDropdown(
-          label: 'Variant',
-          value: _variantFilter,
-          options: _variantOptions,
-          onChanged: (value) {
-            setState(() {
-              _variantFilter = value ?? 'ALL';
-            });
-          },
+      headerControlsBuilder: (_, items) => [
+        Row(
+          children: [
+            Expanded(
+              child: GlossaryFilterDropdown(
+                label: 'Variant',
+                value: _variantFilter,
+                options: _variantOptions,
+                onChanged: (value) {
+                  setState(() {
+                    _variantFilter = value ?? 'ALL';
+                  });
+                },
+              ),
+            ),
+            const SizedBox(width: 10),
+            Expanded(
+              child: GlossaryFilterDropdown(
+                label: 'Series',
+                value: _seriesFilter,
+                options: _seriesOptions(items),
+                onChanged: (value) {
+                  setState(() {
+                    _seriesFilter = value ?? 'ALL';
+                  });
+                },
+              ),
+            ),
+          ],
         ),
       ],
       itemBuilder: (context, musicKit) {

@@ -21,6 +21,7 @@ class StickerGlossaryScreen extends StatefulWidget {
 
 class _StickerGlossaryScreenState extends State<StickerGlossaryScreen> {
   String _rarityFilter = 'ALL';
+  String _sourceFilter = 'ALL';
 
   static const List<GlossaryFilterOption> _rarityOptions = [
     GlossaryFilterOption('ALL', 'All rarities'),
@@ -31,9 +32,26 @@ class _StickerGlossaryScreenState extends State<StickerGlossaryScreen> {
     GlossaryFilterOption('CONTRABAND', 'Contraband'),
   ];
 
+  List<GlossaryFilterOption> _sourceOptions(List<StickerDto> items) {
+    final values = items
+        .map((item) => item.sourceLabel.trim())
+        .where((value) => value.isNotEmpty)
+        .toSet()
+        .toList()
+      ..sort();
+
+    return [
+      const GlossaryFilterOption('ALL', 'All sources'),
+      ...values.map((value) => GlossaryFilterOption(value, value)),
+    ];
+  }
+
   List<StickerDto> _filterAndSort(List<StickerDto> items, String query) {
     final filtered = items.where((sticker) {
       if (_rarityFilter != 'ALL' && sticker.rarity != _rarityFilter) {
+        return false;
+      }
+      if (_sourceFilter != 'ALL' && sticker.sourceLabel != _sourceFilter) {
         return false;
       }
       if (query.isEmpty) return true;
@@ -84,16 +102,35 @@ class _StickerGlossaryScreenState extends State<StickerGlossaryScreen> {
       countLabelBuilder: (count) => '$count stickers',
       emptyMessage: 'No stickers found.',
       errorPrefix: 'Failed to load stickers.',
-      headerControlsBuilder: (_) => [
-        GlossaryFilterDropdown(
-          label: 'Rarity',
-          value: _rarityFilter,
-          options: _rarityOptions,
-          onChanged: (value) {
-            setState(() {
-              _rarityFilter = value ?? 'ALL';
-            });
-          },
+      headerControlsBuilder: (_, items) => [
+        Row(
+          children: [
+            Expanded(
+              child: GlossaryFilterDropdown(
+                label: 'Rarity',
+                value: _rarityFilter,
+                options: _rarityOptions,
+                onChanged: (value) {
+                  setState(() {
+                    _rarityFilter = value ?? 'ALL';
+                  });
+                },
+              ),
+            ),
+            const SizedBox(width: 10),
+            Expanded(
+              child: GlossaryFilterDropdown(
+                label: 'Source',
+                value: _sourceFilter,
+                options: _sourceOptions(items),
+                onChanged: (value) {
+                  setState(() {
+                    _sourceFilter = value ?? 'ALL';
+                  });
+                },
+              ),
+            ),
+          ],
         ),
       ],
       itemBuilder: (context, sticker) {

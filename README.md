@@ -153,7 +153,6 @@ The project is actively evolving, with current work focused on:
 
 - Trade-Up rewrite and UI cleanup
 - Broader simulator accuracy pass across more container types
-- Better browsing and glossary coverage for non-skin content
 
 ### v0.11
 
