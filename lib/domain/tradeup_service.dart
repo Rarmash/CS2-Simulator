@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import '../data/models/skin_dto.dart';
+import 'skin_float_helper.dart';
 
 class TradeUpResult {
   final SkinDto skin;
@@ -343,10 +344,6 @@ class TradeUpService {
   }
 
   String _getExterior(double value) {
-    if (value <= 0.07) return 'Factory New';
-    if (value <= 0.15) return 'Minimal Wear';
-    if (value <= 0.37) return 'Field-Tested';
-    if (value <= 0.44) return 'Well-Worn';
-    return 'Battle-Scarred';
+    return SkinFloatHelper.exteriorFromFloat(value);
   }
 }

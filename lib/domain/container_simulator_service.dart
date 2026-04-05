@@ -5,6 +5,7 @@ import '../data/models/skin_dto.dart';
 import 'case_odds.dart';
 import 'dropped_skin.dart';
 import 'package_odds.dart';
+import 'skin_float_helper.dart';
 import 'terminal_offer.dart';
 
 class ContainerSimulatorService {
@@ -24,17 +25,18 @@ class ContainerSimulatorService {
 
     if (containerDto.isXrayPackage) {
       final guaranteedSkin = skins.first;
-      final floatValue = _generateFloat(
-        guaranteedSkin.floatTop,
-        guaranteedSkin.floatBottom,
+      final wear = SkinFloatHelper.generateWear(
+        random: _random,
+        minFloat: guaranteedSkin.floatTop,
+        maxFloat: guaranteedSkin.floatBottom,
       );
 
       return DroppedSkin(
         skin: guaranteedSkin,
         isStatTrak: false,
         isSouvenir: false,
-        skinFloat: floatValue,
-        exterior: _getExterior(floatValue),
+        skinFloat: wear.floatValue,
+        exterior: wear.exterior,
       );
     }
 
@@ -59,8 +61,13 @@ class ContainerSimulatorService {
     String? exterior;
 
     if (!isVanillaKnife) {
-      value = _generateFloat(selectedSkin.floatTop, selectedSkin.floatBottom);
-      exterior = _getExterior(value);
+      final wear = SkinFloatHelper.generateWear(
+        random: _random,
+        minFloat: selectedSkin.floatTop,
+        maxFloat: selectedSkin.floatBottom,
+      );
+      value = wear.floatValue;
+      exterior = wear.exterior;
     }
 
     return DroppedSkin(
@@ -92,8 +99,13 @@ class ContainerSimulatorService {
       String? exterior;
 
       if (!isVanillaKnife) {
-        value = _generateFloat(skin.floatTop, skin.floatBottom);
-        exterior = _getExterior(value);
+        final wear = SkinFloatHelper.generateWear(
+          random: _random,
+          minFloat: skin.floatTop,
+          maxFloat: skin.floatBottom,
+        );
+        value = wear.floatValue;
+        exterior = wear.exterior;
       }
 
       return TerminalOffer(
@@ -246,15 +258,4 @@ class ContainerSimulatorService {
 
   bool _generateStatTrak() => _random.nextInt(10) == 0;
 
-  double _generateFloat(double min, double max) {
-    return min + _random.nextDouble() * (max - min);
-  }
-
-  String _getExterior(double value) {
-    if (value >= 0.00 && value <= 0.07) return 'Factory New';
-    if (value > 0.07 && value <= 0.15) return 'Minimal Wear';
-    if (value > 0.15 && value <= 0.37) return 'Field-Tested';
-    if (value > 0.37 && value <= 0.44) return 'Well-Worn';
-    return 'Battle-Scarred';
-  }
 }

@@ -4,6 +4,7 @@ import '../data/models/container_dto.dart';
 import '../data/models/skin_dto.dart';
 import 'dropped_skin.dart';
 import 'package_odds.dart';
+import 'skin_float_helper.dart';
 
 class RewardCollectionSimulatorService {
   final Random _random = Random();
@@ -17,17 +18,18 @@ class RewardCollectionSimulatorService {
     }
 
     final selectedSkin = _selectRewardSkin(skins);
-    final floatValue = _generateFloat(
-      selectedSkin.floatTop,
-      selectedSkin.floatBottom,
+    final wear = SkinFloatHelper.generateWear(
+      random: _random,
+      minFloat: selectedSkin.floatTop,
+      maxFloat: selectedSkin.floatBottom,
     );
 
     return DroppedSkin(
       skin: selectedSkin,
       isStatTrak: false,
       isSouvenir: false,
-      skinFloat: floatValue,
-      exterior: _getExterior(floatValue),
+      skinFloat: wear.floatValue,
+      exterior: wear.exterior,
     );
   }
 
@@ -81,15 +83,4 @@ class RewardCollectionSimulatorService {
     }
   }
 
-  double _generateFloat(double min, double max) {
-    return min + _random.nextDouble() * (max - min);
-  }
-
-  String _getExterior(double value) {
-    if (value <= 0.07) return 'Factory New';
-    if (value <= 0.15) return 'Minimal Wear';
-    if (value <= 0.37) return 'Field-Tested';
-    if (value <= 0.44) return 'Well-Worn';
-    return 'Battle-Scarred';
-  }
 }
