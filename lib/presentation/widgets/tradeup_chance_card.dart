@@ -67,17 +67,11 @@ class TradeUpChanceCard extends StatelessWidget {
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                   textAlign: TextAlign.center,
-                  style: const TextStyle(
-                    fontSize: 9,
-                    color: Colors.white70,
-                  ),
+                  style: const TextStyle(fontSize: 9, color: Colors.white70),
                 ),
                 Text(
                   'FV ${chance.floatValue.toStringAsFixed(5)}',
-                  style: const TextStyle(
-                    fontSize: 9,
-                    color: Colors.white54,
-                  ),
+                  style: const TextStyle(fontSize: 9, color: Colors.white54),
                 ),
               ],
             ),

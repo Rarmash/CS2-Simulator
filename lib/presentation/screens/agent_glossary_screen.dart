@@ -39,12 +39,13 @@ class _AgentGlossaryScreenState extends State<AgentGlossaryScreen> {
   ];
 
   List<GlossaryFilterOption> _collectionOptions(List<AgentDto> items) {
-    final values = items
-        .map((item) => (item.collection ?? '').trim())
-        .where((value) => value.isNotEmpty)
-        .toSet()
-        .toList()
-      ..sort();
+    final values =
+        items
+            .map((item) => (item.collection ?? '').trim())
+            .where((value) => value.isNotEmpty)
+            .toSet()
+            .toList()
+          ..sort();
 
     return [
       const GlossaryFilterOption('ALL', 'All collections'),

@@ -57,28 +57,19 @@ class TradeUpSelectedSlot extends StatelessWidget {
                   const SizedBox(height: 2),
                   Text(
                     'FV ${item!.floatValue.toStringAsFixed(5)}',
-                    style: const TextStyle(
-                      fontSize: 9,
-                      color: Colors.white70,
-                    ),
+                    style: const TextStyle(fontSize: 9, color: Colors.white70),
                   ),
                   Text(
                     _qualityLabel(item!.quality),
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
-                    style: const TextStyle(
-                      fontSize: 8,
-                      color: Colors.white60,
-                    ),
+                    style: const TextStyle(fontSize: 8, color: Colors.white60),
                   ),
                   Text(
                     SkinFloatHelper.exteriorFromFloat(item!.floatValue),
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
-                    style: const TextStyle(
-                      fontSize: 8,
-                      color: Colors.white54,
-                    ),
+                    style: const TextStyle(fontSize: 8, color: Colors.white54),
                   ),
                 ],
               ),

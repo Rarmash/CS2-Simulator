@@ -917,10 +917,11 @@ List<Map<String, dynamic>> buildContents(
 List<Map<String, dynamic>> buildMusicKitContents(
   Map<String, Map<String, Map<String, bool>>> source,
 ) {
-  final out = source.entries
-      .where((entry) => entry.value.isNotEmpty)
-      .map((entry) {
-        final items = entry.value.entries
+  final out = source.entries.where((entry) => entry.value.isNotEmpty).map((
+    entry,
+  ) {
+    final items =
+        entry.value.entries
             .map(
               (item) => <String, dynamic>{
                 'musicKitId': item.key,
@@ -935,9 +936,8 @@ List<Map<String, dynamic>> buildMusicKitContents(
             ).compareTo(int.parse(b['musicKitId'].toString())),
           );
 
-        return <String, dynamic>{'containerId': entry.key, 'items': items};
-      })
-      .toList();
+    return <String, dynamic>{'containerId': entry.key, 'items': items};
+  }).toList();
 
   out.sort(
     (a, b) => int.parse(

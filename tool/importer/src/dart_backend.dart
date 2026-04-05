@@ -121,11 +121,10 @@ class DartImporterBackend implements ImporterBackend {
       for (final p in existingPins)
         existingPinKey(p): Map<String, dynamic>.from(p),
     };
-    final existingMusicKitByKey =
-        <(String, String), Map<String, dynamic>>{
-          for (final m in existingMusicKits)
-            existingMusicKitKey(m): Map<String, dynamic>.from(m),
-        };
+    final existingMusicKitByKey = <(String, String), Map<String, dynamic>>{
+      for (final m in existingMusicKits)
+        existingMusicKitKey(m): Map<String, dynamic>.from(m),
+    };
     final existingAgentByKey = <(String, String, String), Map<String, dynamic>>{
       for (final a in existingAgents)
         existingAgentKey(a): Map<String, dynamic>.from(a),
@@ -1939,7 +1938,9 @@ class DartImporterBackend implements ImporterBackend {
         );
         final baseImageFile = File('${containersDir.path}/$baseImageName');
         final baseExt = suffixFromPath(baseImageName);
-        final legacyImageFile = File('${containersDir.path}/$legacyCaseId$baseExt');
+        final legacyImageFile = File(
+          '${containersDir.path}/$legacyCaseId$baseExt',
+        );
         if (baseImageFile.existsSync() && !legacyImageFile.existsSync()) {
           await legacyImageFile.writeAsBytes(await baseImageFile.readAsBytes());
           newCases[legacyCaseId]!['containerImage'] =

@@ -31,12 +31,13 @@ class _PatchGlossaryScreenState extends State<PatchGlossaryScreen> {
   ];
 
   List<GlossaryFilterOption> _collectionOptions(List<PatchDto> items) {
-    final values = items
-        .map((item) => (item.collection ?? '').trim())
-        .where((value) => value.isNotEmpty)
-        .toSet()
-        .toList()
-      ..sort();
+    final values =
+        items
+            .map((item) => (item.collection ?? '').trim())
+            .where((value) => value.isNotEmpty)
+            .toSet()
+            .toList()
+          ..sort();
 
     return [
       const GlossaryFilterOption('ALL', 'All collections'),

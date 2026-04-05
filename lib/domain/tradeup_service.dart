@@ -183,22 +183,18 @@ class TradeUpService {
         }
       }
 
-      final chances = skinProbabilityById.entries
-          .map(
-            (e) {
-              final skin = skinById[e.key]!;
-              final floatValue = _calculateOutputFloat(input, skin);
-              return TradeUpChance(
-                skin: skin,
-                probability: e.value,
-                floatValue: floatValue,
-                exterior: _getExterior(floatValue),
-                isStatTrak: _isStatTrakContract(input),
-                isSouvenir: false,
-              );
-            },
-          )
-          .toList();
+      final chances = skinProbabilityById.entries.map((e) {
+        final skin = skinById[e.key]!;
+        final floatValue = _calculateOutputFloat(input, skin);
+        return TradeUpChance(
+          skin: skin,
+          probability: e.value,
+          floatValue: floatValue,
+          exterior: _getExterior(floatValue),
+          isStatTrak: _isStatTrakContract(input),
+          isSouvenir: false,
+        );
+      }).toList();
 
       chances.sort((a, b) => b.probability.compareTo(a.probability));
       return chances;
@@ -229,20 +225,18 @@ class TradeUpService {
       }
     }
 
-    final chances = skinProbabilityById.entries
-        .map((e) {
-          final skin = skinById[e.key]!;
-          final floatValue = _calculateOutputFloat(input, skin);
-          return TradeUpChance(
-            skin: skin,
-            probability: e.value,
-            floatValue: floatValue,
-            exterior: _getExterior(floatValue),
-            isStatTrak: _isStatTrakContract(input),
-            isSouvenir: false,
-          );
-        })
-        .toList();
+    final chances = skinProbabilityById.entries.map((e) {
+      final skin = skinById[e.key]!;
+      final floatValue = _calculateOutputFloat(input, skin);
+      return TradeUpChance(
+        skin: skin,
+        probability: e.value,
+        floatValue: floatValue,
+        exterior: _getExterior(floatValue),
+        isStatTrak: _isStatTrakContract(input),
+        isSouvenir: false,
+      );
+    }).toList();
 
     chances.sort((a, b) => b.probability.compareTo(a.probability));
     return chances;

@@ -177,8 +177,5 @@ class _MusicKitDetailsData {
   final MusicKitGroupDto? group;
   final List<ContainerDto> containers;
 
-  const _MusicKitDetailsData({
-    required this.group,
-    required this.containers,
-  });
+  const _MusicKitDetailsData({required this.group, required this.containers});
 }

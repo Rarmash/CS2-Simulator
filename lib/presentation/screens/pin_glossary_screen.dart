@@ -33,12 +33,13 @@ class _PinGlossaryScreenState extends State<PinGlossaryScreen> {
   ];
 
   List<GlossaryFilterOption> _collectionOptions(List<PinDto> items) {
-    final values = items
-        .map((item) => (item.collection ?? '').trim())
-        .where((value) => value.isNotEmpty)
-        .toSet()
-        .toList()
-      ..sort();
+    final values =
+        items
+            .map((item) => (item.collection ?? '').trim())
+            .where((value) => value.isNotEmpty)
+            .toSet()
+            .toList()
+          ..sort();
 
     return [
       const GlossaryFilterOption('ALL', 'All collections'),

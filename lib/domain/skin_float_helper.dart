@@ -52,8 +52,9 @@ class SkinFloatHelper {
           final available = intersectionMax - intersectionMin;
           if (available <= 0) return null;
           final tierSpan = tier.max - tier.min;
-          final effectiveWeight =
-              tierSpan <= 0 ? 0.0 : tier.weight * (available / tierSpan);
+          final effectiveWeight = tierSpan <= 0
+              ? 0.0
+              : tier.weight * (available / tierSpan);
           return (
             effectiveWeight: effectiveWeight,
             tier: tier,
@@ -61,7 +62,9 @@ class SkinFloatHelper {
             max: intersectionMax,
           );
         })
-        .whereType<({double effectiveWeight, double max, double min, _WearTier tier})>()
+        .whereType<
+          ({double effectiveWeight, double max, double min, _WearTier tier})
+        >()
         .where((entry) => entry.effectiveWeight > 0)
         .toList();
 

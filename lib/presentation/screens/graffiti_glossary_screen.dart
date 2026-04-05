@@ -32,12 +32,13 @@ class _GraffitiGlossaryScreenState extends State<GraffitiGlossaryScreen> {
   ];
 
   List<GlossaryFilterOption> _collectionOptions(List<GraffitiDto> items) {
-    final values = items
-        .map((item) => (item.collection ?? '').trim())
-        .where((value) => value.isNotEmpty)
-        .toSet()
-        .toList()
-      ..sort();
+    final values =
+        items
+            .map((item) => (item.collection ?? '').trim())
+            .where((value) => value.isNotEmpty)
+            .toSet()
+            .toList()
+          ..sort();
 
     return [
       const GlossaryFilterOption('ALL', 'All collections'),

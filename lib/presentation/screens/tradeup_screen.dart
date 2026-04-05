@@ -349,7 +349,8 @@ class _TradeUpScreenState extends State<TradeUpScreen> {
                               hintText: 'Search by skin or collection...',
                               prefixIcon: Icon(Icons.search),
                             ),
-                            onChanged: (value) => setState(() => _search = value),
+                            onChanged: (value) =>
+                                setState(() => _search = value),
                           ),
                           const SizedBox(height: 8),
                           Wrap(
@@ -397,7 +398,8 @@ class _TradeUpScreenState extends State<TradeUpScreen> {
                               ),
                             ),
                           if (_controller.selected.isNotEmpty &&
-                              _controller.selected.first.skin.rarity == 'COVERT')
+                              _controller.selected.first.skin.rarity ==
+                                  'COVERT')
                             const Padding(
                               padding: EdgeInsets.only(top: 4),
                               child: Text(
@@ -485,7 +487,11 @@ class _TradeUpScreenState extends State<TradeUpScreen> {
                                       : null,
                                   child: Text(
                                     _controller.selected.isNotEmpty &&
-                                            _controller.selected.first.skin.rarity ==
+                                            _controller
+                                                    .selected
+                                                    .first
+                                                    .skin
+                                                    .rarity ==
                                                 'COVERT'
                                         ? 'TRADE SPECIAL ITEM'
                                         : 'TRADE',

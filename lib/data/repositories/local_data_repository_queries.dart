@@ -58,24 +58,23 @@ mixin _LocalDataRepositoryQueries on _LocalDataRepositoryLoaders {
       for (final entry in content.items) entry.musicKitId: entry,
     };
 
-    final result = musicKits
-        .where((m) => entriesById.containsKey(m.id))
-        .map((musicKit) {
-          final entry = entriesById[musicKit.id]!;
-          return musicKit.copyWith(
-            hasRegular: entry.hasRegular,
-            hasStatTrak: entry.hasStatTrak,
-          );
-        })
-        .toList();
+    final result = musicKits.where((m) => entriesById.containsKey(m.id)).map((
+      musicKit,
+    ) {
+      final entry = entriesById[musicKit.id]!;
+      return musicKit.copyWith(
+        hasRegular: entry.hasRegular,
+        hasStatTrak: entry.hasStatTrak,
+      );
+    }).toList();
     result.sort((a, b) {
       final rarityCompare = _musicKitRarityOrder(
         a,
       ).compareTo(_musicKitRarityOrder(b));
       if (rarityCompare != 0) return rarityCompare;
-      final variantCompare = _musicKitVariantOrder(a).compareTo(
-        _musicKitVariantOrder(b),
-      );
+      final variantCompare = _musicKitVariantOrder(
+        a,
+      ).compareTo(_musicKitVariantOrder(b));
       if (variantCompare != 0) return variantCompare;
       return int.parse(a.id).compareTo(int.parse(b.id));
     });
@@ -92,9 +91,7 @@ mixin _LocalDataRepositoryQueries on _LocalDataRepositoryLoaders {
       grouped.putIfAbsent(key, () => <MusicKitDto>[]).add(musicKit);
     }
 
-    final result = grouped.values
-        .map(MusicKitGroupDto.fromVariants)
-        .toList();
+    final result = grouped.values.map(MusicKitGroupDto.fromVariants).toList();
 
     result.sort((a, b) {
       final rarityCompare = _musicKitRarityOrder(
@@ -298,7 +295,9 @@ mixin _LocalDataRepositoryQueries on _LocalDataRepositoryLoaders {
     final contents = await loadMusicKitContents();
 
     final containerIds = contents
-        .where((entry) => entry.items.any((item) => item.musicKitId == musicKitId))
+        .where(
+          (entry) => entry.items.any((item) => item.musicKitId == musicKitId),
+        )
         .map((entry) => entry.containerId)
         .toSet();
 

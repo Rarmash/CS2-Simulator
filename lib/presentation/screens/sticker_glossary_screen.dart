@@ -33,12 +33,13 @@ class _StickerGlossaryScreenState extends State<StickerGlossaryScreen> {
   ];
 
   List<GlossaryFilterOption> _sourceOptions(List<StickerDto> items) {
-    final values = items
-        .map((item) => item.sourceLabel.trim())
-        .where((value) => value.isNotEmpty)
-        .toSet()
-        .toList()
-      ..sort();
+    final values =
+        items
+            .map((item) => item.sourceLabel.trim())
+            .where((value) => value.isNotEmpty)
+            .toSet()
+            .toList()
+          ..sort();
 
     return [
       const GlossaryFilterOption('ALL', 'All sources'),

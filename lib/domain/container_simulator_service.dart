@@ -257,5 +257,4 @@ class ContainerSimulatorService {
   }
 
   bool _generateStatTrak() => _random.nextInt(10) == 0;
-
 }
