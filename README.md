@@ -155,9 +155,18 @@ The project is actively evolving, with current work focused on:
 - Tournament pages with dates, organizers, winners, and placements
 - Better linking between Majors and their souvenir packages, sticker capsules, and autograph capsules
 
+### v0.12
+
+- Skin pattern and finish seed support, including knife phases, gem variants, fade-style finishes, and other pattern-driven outcomes
+
+### v0.13
+
+- Inventory or item ownership tracking in some form
+- Opening and Trade-Up history with per-container and per-item stats
+- Better collection browsing around owned items, seen drops, and completion progress
+
 ### Future
 
-- Skin pattern and finish seed support for items where patterns matter
 - Cleaner navigation across containers, collections, and collectibles
 - Music Kit preview playback if a reliable audio source is available
 - Optional China / Perfect World visual mode if a reliable alternate asset source is available
