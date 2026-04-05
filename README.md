@@ -168,5 +168,6 @@ The project is actively evolving, with current work focused on:
 ### Future
 
 - Cleaner navigation across containers, collections, and collectibles
+- Better automated test coverage beyond basic smoke checks
 - Music Kit preview playback if a reliable audio source is available
 - Optional China / Perfect World visual mode if a reliable alternate asset source is available
