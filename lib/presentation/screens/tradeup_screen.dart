@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../data/models/skin_dto.dart';
 import '../../data/repositories/local_data_repository.dart';
+import '../../domain/skin_float_helper.dart';
 import '../../domain/tradeup_service.dart';
 import '../helpers/responsive_grid_helper.dart';
 import '../helpers/skin_ui_helper.dart';
@@ -20,9 +21,10 @@ class _TradeUpScreenState extends State<TradeUpScreen> {
 
   final TradeUpService _service = TradeUpService();
 
-  final List<SkinDto> _selected = [];
+  final List<TradeUpInputItem> _selected = [];
   TradeUpResult? _result;
   List<TradeUpChance> _chances = [];
+  String? _tradeIssue;
 
   String _search = '';
   String? _rarity = 'MIL_SPEC';
@@ -38,21 +40,15 @@ class _TradeUpScreenState extends State<TradeUpScreen> {
     final cases = await widget.repository.loadContainers();
     final caseToSkinIds = await widget.repository.loadContainerToSkinIds();
 
-    final caseNameById = {for (final c in cases) c.id: c.name};
-
     final regularCases = {
       for (final c in cases.where((c) => c.isRegularCase)) c.id: c,
     };
 
-    final skinIdToCaseNames = <String, List<String>>{};
     final skinIdToRegularCaseIds = <String, List<String>>{};
     final regularCaseIdToSkinIds = <String, List<String>>{};
 
     for (final entry in caseToSkinIds.entries) {
       final containerId = entry.key;
-      final caseName = caseNameById[containerId];
-      if (caseName == null) continue;
-
       final isRegularCase = regularCases.containsKey(containerId);
 
       if (isRegularCase) {
@@ -60,8 +56,6 @@ class _TradeUpScreenState extends State<TradeUpScreen> {
       }
 
       for (final skinId in entry.value) {
-        skinIdToCaseNames.putIfAbsent(skinId, () => []).add(caseName);
-
         if (isRegularCase) {
           skinIdToRegularCaseIds.putIfAbsent(skinId, () => []).add(containerId);
         }
@@ -70,7 +64,6 @@ class _TradeUpScreenState extends State<TradeUpScreen> {
 
     return _TradeUpData(
       skins: skins,
-      skinIdToCaseNames: skinIdToCaseNames,
       skinIdToRegularCaseIds: skinIdToRegularCaseIds,
       regularCaseIdToSkinIds: regularCaseIdToSkinIds,
     );
@@ -97,7 +90,7 @@ class _TradeUpScreenState extends State<TradeUpScreen> {
 
   int _maxSelectable() {
     if (_selected.isEmpty) return 10;
-    return _selected.first.rarity == 'COVERT' ? 5 : 10;
+    return _selected.first.skin.rarity == 'COVERT' ? 5 : 10;
   }
 
   bool _canAddMore() {
@@ -106,7 +99,7 @@ class _TradeUpScreenState extends State<TradeUpScreen> {
 
   bool _tradeReady() {
     if (_selected.isEmpty) return false;
-    final rarity = _selected.first.rarity;
+    final rarity = _selected.first.skin.rarity;
 
     if (rarity == 'COVERT') {
       return _selected.length == 5;
@@ -114,14 +107,29 @@ class _TradeUpScreenState extends State<TradeUpScreen> {
     return _selected.length == 10;
   }
 
+  bool _canExecuteTrade() {
+    return _tradeReady() && _tradeIssue == null;
+  }
+
   void _recalculateChances(_TradeUpData data) {
+    _tradeIssue = null;
+
     if (_tradeReady()) {
-      _chances = _service.getTradeUpChances(
-        input: _selected,
-        allSkins: data.skins,
-        skinIdToRegularCaseIds: data.skinIdToRegularCaseIds,
-        regularCaseIdToSkinIds: data.regularCaseIdToSkinIds,
-      );
+      try {
+        _chances = _service.getTradeUpChances(
+          input: _selected,
+          allSkins: data.skins,
+          skinIdToRegularCaseIds: data.skinIdToRegularCaseIds,
+          regularCaseIdToSkinIds: data.regularCaseIdToSkinIds,
+        );
+
+        if (_chances.isEmpty) {
+          _tradeIssue = 'This selection cannot produce a valid trade-up result';
+        }
+      } catch (e) {
+        _chances = [];
+        _tradeIssue = e.toString().replaceFirst('Exception: ', '');
+      }
     } else {
       _chances = [];
     }
@@ -130,7 +138,7 @@ class _TradeUpScreenState extends State<TradeUpScreen> {
   void _add(SkinDto skin, _TradeUpData data) {
     if (!_canAddMore()) return;
 
-    if (_selected.isNotEmpty && _selected.first.rarity != skin.rarity) {
+    if (_selected.isNotEmpty && _selected.first.skin.rarity != skin.rarity) {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
           content: Text('All selected skins must have the same rarity'),
@@ -140,7 +148,100 @@ class _TradeUpScreenState extends State<TradeUpScreen> {
     }
 
     setState(() {
-      _selected.add(skin);
+      _selected.add(
+        TradeUpInputItem(
+          skin: skin,
+          floatValue: (skin.floatTop + skin.floatBottom) / 2,
+        ),
+      );
+      _result = null;
+      _recalculateChances(data);
+    });
+  }
+
+  Future<void> _editFloatAt(int index, _TradeUpData data) async {
+    final item = _selected[index];
+    final controller = TextEditingController(
+      text: item.floatValue.toStringAsFixed(5),
+    );
+
+    final result = await showDialog<double>(
+      context: context,
+      builder: (context) {
+        String? errorText;
+
+        return StatefulBuilder(
+          builder: (context, setDialogState) {
+            return AlertDialog(
+              title: const Text('Set Float'),
+              content: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(item.skin.itemDisplayName),
+                  Text(
+                    item.skin.name,
+                    style: const TextStyle(color: Colors.white70),
+                  ),
+                  const SizedBox(height: 8),
+                  Text(
+                    'Allowed range: ${item.skin.floatTop.toStringAsFixed(2)} - ${item.skin.floatBottom.toStringAsFixed(2)}',
+                    style: const TextStyle(fontSize: 12, color: Colors.white70),
+                  ),
+                  const SizedBox(height: 12),
+                  TextField(
+                    controller: controller,
+                    keyboardType: const TextInputType.numberWithOptions(
+                      decimal: true,
+                    ),
+                    decoration: InputDecoration(
+                      labelText: 'Float value',
+                      errorText: errorText,
+                    ),
+                  ),
+                ],
+              ),
+              actions: [
+                TextButton(
+                  onPressed: () => Navigator.of(context).pop(),
+                  child: const Text('Cancel'),
+                ),
+                FilledButton(
+                  onPressed: () {
+                    final parsed = double.tryParse(
+                      controller.text.trim().replaceAll(',', '.'),
+                    );
+
+                    if (parsed == null) {
+                      setDialogState(() {
+                        errorText = 'Enter a valid float value';
+                      });
+                      return;
+                    }
+
+                    if (parsed < item.skin.floatTop ||
+                        parsed > item.skin.floatBottom) {
+                      setDialogState(() {
+                        errorText = 'Float must stay within the allowed range';
+                      });
+                      return;
+                    }
+
+                    Navigator.of(context).pop(parsed);
+                  },
+                  child: const Text('Apply'),
+                ),
+              ],
+            );
+          },
+        );
+      },
+    );
+
+    if (result == null) return;
+
+    setState(() {
+      _selected[index] = TradeUpInputItem(skin: item.skin, floatValue: result);
       _result = null;
       _recalculateChances(data);
     });
@@ -163,6 +264,7 @@ class _TradeUpScreenState extends State<TradeUpScreen> {
       _selected.clear();
       _result = null;
       _chances = [];
+      _tradeIssue = null;
     });
   }
 
@@ -185,24 +287,21 @@ class _TradeUpScreenState extends State<TradeUpScreen> {
     }
   }
 
-  bool _matchesSearch(SkinDto s, _TradeUpData data) {
+  bool _matchesSearch(SkinDto s) {
     final q = _search.trim().toLowerCase();
     if (q.isEmpty) return true;
 
-    final caseNames = data.skinIdToCaseNames[s.id] ?? const [];
-    final caseNamesJoined = caseNames.join(' ').toLowerCase();
     final collection = (s.collection ?? '').toLowerCase();
 
     return s.name.toLowerCase().contains(q) ||
         s.itemDisplayName.toLowerCase().contains(q) ||
-        caseNamesJoined.contains(q) ||
         collection.contains(q);
   }
 
   Widget _slot(int i, _TradeUpData data) {
-    final skin = i < _selected.length ? _selected[i] : null;
+    final item = i < _selected.length ? _selected[i] : null;
 
-    if (skin == null) {
+    if (item == null) {
       return Container(
         decoration: BoxDecoration(
           border: Border.all(color: Colors.white24),
@@ -212,46 +311,80 @@ class _TradeUpScreenState extends State<TradeUpScreen> {
       );
     }
 
+    final skin = item.skin;
     final color = SkinUiHelper.rarityColor(skin);
 
-    return GestureDetector(
-      onTap: () => _removeAt(i, data),
-      child: Container(
-        decoration: BoxDecoration(
-          border: Border.all(color: color, width: 2),
-          borderRadius: BorderRadius.circular(10),
-        ),
-        child: Stack(
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(4),
-              child: Image.asset(
-                skin.skinImage,
-                fit: BoxFit.contain,
-                errorBuilder: (_, error, stackTrace) =>
-                    const Icon(Icons.image_not_supported),
+    return Container(
+      decoration: BoxDecoration(
+        border: Border.all(color: color, width: 2),
+        borderRadius: BorderRadius.circular(10),
+      ),
+      child: Stack(
+        children: [
+          Material(
+            color: Colors.transparent,
+            child: InkWell(
+              borderRadius: BorderRadius.circular(8),
+              onTap: () => _editFloatAt(i, data),
+              child: Padding(
+                padding: const EdgeInsets.all(4),
+                child: Column(
+                  children: [
+                    Expanded(
+                      child: Image.asset(
+                        skin.skinImage,
+                        fit: BoxFit.contain,
+                        errorBuilder: (_, error, stackTrace) =>
+                            const Icon(Icons.image_not_supported),
+                      ),
+                    ),
+                    const SizedBox(height: 2),
+                    Text(
+                      'FV ${item.floatValue.toStringAsFixed(5)}',
+                      style: const TextStyle(
+                        fontSize: 9,
+                        color: Colors.white70,
+                      ),
+                    ),
+                    Text(
+                      SkinFloatHelper.exteriorFromFloat(item.floatValue),
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: const TextStyle(
+                        fontSize: 8,
+                        color: Colors.white54,
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
-            Positioned(
-              right: 2,
-              top: 2,
-              child: Container(
-                padding: const EdgeInsets.all(2),
-                color: Colors.black,
-                child: const Icon(Icons.close, size: 12),
+          ),
+          Positioned(
+            right: 0,
+            top: 0,
+            child: Material(
+              color: Colors.black87,
+              borderRadius: BorderRadius.circular(8),
+              child: InkWell(
+                borderRadius: BorderRadius.circular(8),
+                onTap: () => _removeAt(i, data),
+                child: const Padding(
+                  padding: EdgeInsets.all(4),
+                  child: Icon(Icons.close, size: 12),
+                ),
               ),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
 
   Widget _skinTile(SkinDto s, _TradeUpData data) {
     final color = SkinUiHelper.rarityColor(s);
-    final count = _selected.where((e) => e.id == s.id).length;
+    final count = _selected.where((e) => e.skin.id == s.id).length;
     final blocked = !_canAddMore();
-    final caseNames = data.skinIdToCaseNames[s.id] ?? const [];
 
     return Opacity(
       opacity: blocked ? 0.55 : 1,
@@ -300,22 +433,9 @@ class _TradeUpScreenState extends State<TradeUpScreen> {
                             color: Colors.white70,
                           ),
                         ),
-                        if (caseNames.isNotEmpty) ...[
-                          const SizedBox(height: 3),
-                          Text(
-                            caseNames.first,
-                            maxLines: 1,
-                            overflow: TextOverflow.ellipsis,
-                            textAlign: TextAlign.center,
-                            style: const TextStyle(
-                              fontSize: 9,
-                              color: Colors.white54,
-                            ),
-                          ),
-                        ],
                         if (s.collection != null &&
                             s.collection!.isNotEmpty) ...[
-                          const SizedBox(height: 2),
+                          const SizedBox(height: 3),
                           Text(
                             s.collection!,
                             maxLines: 1,
@@ -447,6 +567,24 @@ class _TradeUpScreenState extends State<TradeUpScreen> {
                     color: color,
                   ),
                 ),
+                const SizedBox(height: 2),
+                Text(
+                  chance.exterior,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  textAlign: TextAlign.center,
+                  style: const TextStyle(
+                    fontSize: 9,
+                    color: Colors.white70,
+                  ),
+                ),
+                Text(
+                  'FV ${chance.floatValue.toStringAsFixed(5)}',
+                  style: const TextStyle(
+                    fontSize: 9,
+                    color: Colors.white54,
+                  ),
+                ),
               ],
             ),
           ),
@@ -489,7 +627,7 @@ class _TradeUpScreenState extends State<TradeUpScreen> {
               return false;
             }
 
-            return _matchesSearch(s, data);
+            return _matchesSearch(s);
           }).toList();
 
           filtered.sort((a, b) => int.parse(a.id).compareTo(int.parse(b.id)));
@@ -507,7 +645,7 @@ class _TradeUpScreenState extends State<TradeUpScreen> {
                           TextField(
                             decoration: const InputDecoration(
                               hintText:
-                                  'Search by skin, case, or collection...',
+                                  'Search by skin or collection...',
                               prefixIcon: Icon(Icons.search),
                             ),
                             onChanged: (v) => setState(() => _search = v),
@@ -538,7 +676,7 @@ class _TradeUpScreenState extends State<TradeUpScreen> {
                           ),
                           const SizedBox(height: 12),
                           Text(
-                            _selected.isEmpty
+                              _selected.isEmpty
                                 ? 'Select skins'
                                 : 'Selected: ${_selected.length}/${_maxSelectable()}',
                             style: const TextStyle(
@@ -546,8 +684,19 @@ class _TradeUpScreenState extends State<TradeUpScreen> {
                               fontWeight: FontWeight.bold,
                             ),
                           ),
+                          if (_selected.isNotEmpty)
+                            const Padding(
+                              padding: EdgeInsets.only(top: 4),
+                              child: Text(
+                                'Tap a selected skin to edit its float',
+                                style: TextStyle(
+                                  color: Colors.white70,
+                                  fontSize: 12,
+                                ),
+                              ),
+                            ),
                           if (_selected.isNotEmpty &&
-                              _selected.first.rarity == 'COVERT')
+                              _selected.first.skin.rarity == 'COVERT')
                             const Padding(
                               padding: EdgeInsets.only(top: 4),
                               child: Text(
@@ -565,6 +714,17 @@ class _TradeUpScreenState extends State<TradeUpScreen> {
                                 'Selection is full',
                                 style: TextStyle(
                                   color: Colors.amber,
+                                  fontSize: 12,
+                                ),
+                              ),
+                            ),
+                          if (_tradeIssue != null)
+                            Padding(
+                              padding: const EdgeInsets.only(top: 4),
+                              child: Text(
+                                _tradeIssue!,
+                                style: const TextStyle(
+                                  color: Colors.orangeAccent,
                                   fontSize: 12,
                                 ),
                               ),
@@ -597,12 +757,12 @@ class _TradeUpScreenState extends State<TradeUpScreen> {
                         children: [
                           Expanded(
                             child: ElevatedButton(
-                              onPressed: _tradeReady()
+                              onPressed: _canExecuteTrade()
                                   ? () => _trade(data)
                                   : null,
                               child: Text(
                                 _selected.isNotEmpty &&
-                                        _selected.first.rarity == 'COVERT'
+                                        _selected.first.skin.rarity == 'COVERT'
                                     ? 'TRADE РІвЂ вЂ™ SPECIAL ITEM'
                                     : 'TRADE',
                               ),
@@ -623,7 +783,7 @@ class _TradeUpScreenState extends State<TradeUpScreen> {
                       child: Padding(
                         padding: EdgeInsets.fromLTRB(12, 12, 12, 8),
                         child: Text(
-                          'Possible results',
+                          'Possible results with projected float',
                           style: TextStyle(
                             fontSize: 18,
                             fontWeight: FontWeight.bold,
@@ -692,13 +852,11 @@ class _TradeUpScreenState extends State<TradeUpScreen> {
 
 class _TradeUpData {
   final List<SkinDto> skins;
-  final Map<String, List<String>> skinIdToCaseNames;
   final Map<String, List<String>> skinIdToRegularCaseIds;
   final Map<String, List<String>> regularCaseIdToSkinIds;
 
   const _TradeUpData({
     required this.skins,
-    required this.skinIdToCaseNames,
     required this.skinIdToRegularCaseIds,
     required this.regularCaseIdToSkinIds,
   });

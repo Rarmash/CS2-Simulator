@@ -151,8 +151,7 @@ The project is actively evolving, with current work focused on:
 
 ### v0.10
 
-- Trade-Up rewrite and UI cleanup
-- Broader simulator accuracy pass across more container types
+- Trade-Up rewrite with UI cleanup, accurate outcome weighting, and float projection
 
 ### v0.11
 
