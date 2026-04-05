@@ -2,10 +2,14 @@ import 'package:flutter/material.dart';
 
 import '../../data/models/skin_dto.dart';
 import '../../data/repositories/local_data_repository.dart';
-import '../../domain/skin_float_helper.dart';
+import '../../domain/dropped_skin.dart';
 import '../../domain/tradeup_service.dart';
 import '../helpers/responsive_grid_helper.dart';
-import '../helpers/skin_ui_helper.dart';
+import '../helpers/tradeup_controller.dart';
+import '../widgets/tradeup_chance_card.dart';
+import '../widgets/skin_drop_card.dart';
+import '../widgets/tradeup_selected_slot.dart';
+import '../widgets/tradeup_skin_tile.dart';
 
 class TradeUpScreen extends StatefulWidget {
   final LocalDataRepository repository;
@@ -17,14 +21,11 @@ class TradeUpScreen extends StatefulWidget {
 }
 
 class _TradeUpScreenState extends State<TradeUpScreen> {
+  static const double _tradeupPanelMaxWidth = 620;
+
   late Future<_TradeUpData> _dataFuture;
 
-  final TradeUpService _service = TradeUpService();
-
-  final List<TradeUpInputItem> _selected = [];
-  TradeUpResult? _result;
-  List<TradeUpChance> _chances = [];
-  String? _tradeIssue;
+  late final TradeUpController _controller;
 
   String _search = '';
   String? _rarity = 'MIL_SPEC';
@@ -32,24 +33,25 @@ class _TradeUpScreenState extends State<TradeUpScreen> {
   @override
   void initState() {
     super.initState();
+    _controller = TradeUpController(service: TradeUpService());
     _dataFuture = _loadData();
   }
 
   Future<_TradeUpData> _loadData() async {
     final skins = await widget.repository.loadSkins();
-    final cases = await widget.repository.loadContainers();
-    final caseToSkinIds = await widget.repository.loadContainerToSkinIds();
+    final containers = await widget.repository.loadContainers();
+    final containerToSkinIds = await widget.repository.loadContainerToSkinIds();
 
-    final regularCases = {
-      for (final c in cases.where((c) => c.isRegularCase)) c.id: c,
+    final regularContainers = {
+      for (final c in containers.where((c) => c.isRegularCase)) c.id: c,
     };
 
     final skinIdToRegularCaseIds = <String, List<String>>{};
     final regularCaseIdToSkinIds = <String, List<String>>{};
 
-    for (final entry in caseToSkinIds.entries) {
+    for (final entry in containerToSkinIds.entries) {
       final containerId = entry.key;
-      final isRegularCase = regularCases.containsKey(containerId);
+      final isRegularCase = regularContainers.containsKey(containerId);
 
       if (isRegularCase) {
         regularCaseIdToSkinIds[containerId] = List<String>.from(entry.value);
@@ -89,81 +91,39 @@ class _TradeUpScreenState extends State<TradeUpScreen> {
   }
 
   int _maxSelectable() {
-    if (_selected.isEmpty) return 10;
-    return _selected.first.skin.rarity == 'COVERT' ? 5 : 10;
+    return _controller.maxSelectable();
   }
 
   bool _canAddMore() {
-    return _selected.length < _maxSelectable();
-  }
-
-  bool _tradeReady() {
-    if (_selected.isEmpty) return false;
-    final rarity = _selected.first.skin.rarity;
-
-    if (rarity == 'COVERT') {
-      return _selected.length == 5;
-    }
-    return _selected.length == 10;
+    return _controller.canAddMore;
   }
 
   bool _canExecuteTrade() {
-    return _tradeReady() && _tradeIssue == null;
-  }
-
-  void _recalculateChances(_TradeUpData data) {
-    _tradeIssue = null;
-
-    if (_tradeReady()) {
-      try {
-        _chances = _service.getTradeUpChances(
-          input: _selected,
-          allSkins: data.skins,
-          skinIdToRegularCaseIds: data.skinIdToRegularCaseIds,
-          regularCaseIdToSkinIds: data.regularCaseIdToSkinIds,
-        );
-
-        if (_chances.isEmpty) {
-          _tradeIssue = 'This selection cannot produce a valid trade-up result';
-        }
-      } catch (e) {
-        _chances = [];
-        _tradeIssue = e.toString().replaceFirst('Exception: ', '');
-      }
-    } else {
-      _chances = [];
-    }
+    return _controller.canExecuteTrade;
   }
 
   void _add(SkinDto skin, _TradeUpData data) {
-    if (!_canAddMore()) return;
-
-    if (_selected.isNotEmpty && _selected.first.skin.rarity != skin.rarity) {
+    try {
+      _controller.add(
+        skin,
+        allSkins: data.skins,
+        skinIdToRegularCaseIds: data.skinIdToRegularCaseIds,
+        regularCaseIdToSkinIds: data.regularCaseIdToSkinIds,
+      );
+      setState(() {});
+    } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('All selected skins must have the same rarity'),
-        ),
+        SnackBar(content: Text(e.toString().replaceFirst('Exception: ', ''))),
       );
-      return;
     }
-
-    setState(() {
-      _selected.add(
-        TradeUpInputItem(
-          skin: skin,
-          floatValue: (skin.floatTop + skin.floatBottom) / 2,
-        ),
-      );
-      _result = null;
-      _recalculateChances(data);
-    });
   }
 
   Future<void> _editFloatAt(int index, _TradeUpData data) async {
-    final item = _selected[index];
+    final item = _controller.selected[index];
     final controller = TextEditingController(
       text: item.floatValue.toStringAsFixed(5),
     );
+    var selectedQuality = item.quality;
 
     final result = await showDialog<double>(
       context: context,
@@ -198,6 +158,27 @@ class _TradeUpScreenState extends State<TradeUpScreen> {
                       labelText: 'Float value',
                       errorText: errorText,
                     ),
+                  ),
+                  const SizedBox(height: 12),
+                  const Text(
+                    'Quality mode',
+                    style: TextStyle(fontSize: 12, color: Colors.white70),
+                  ),
+                  const SizedBox(height: 8),
+                  Wrap(
+                    spacing: 8,
+                    children: [
+                      for (final quality in _editableQualities)
+                        ChoiceChip(
+                          label: Text(_qualityLabel(quality)),
+                          selected: selectedQuality == quality,
+                          onSelected: (_) {
+                            setDialogState(() {
+                              selectedQuality = quality;
+                            });
+                          },
+                        ),
+                    ],
                   ),
                 ],
               ),
@@ -241,19 +222,26 @@ class _TradeUpScreenState extends State<TradeUpScreen> {
     if (result == null) return;
 
     setState(() {
-      _selected[index] = TradeUpInputItem(skin: item.skin, floatValue: result);
-      _result = null;
-      _recalculateChances(data);
+      _controller.updateItem(
+        index,
+        floatValue: result,
+        quality: selectedQuality,
+        allSkins: data.skins,
+        skinIdToRegularCaseIds: data.skinIdToRegularCaseIds,
+        regularCaseIdToSkinIds: data.regularCaseIdToSkinIds,
+      );
     });
   }
 
   void _removeAt(int index, _TradeUpData data) {
     setState(() {
-      _selected.removeAt(index);
-      _result = null;
-      _recalculateChances(data);
-
-      if (_selected.isEmpty) {
+      _controller.removeAt(
+        index,
+        allSkins: data.skins,
+        skinIdToRegularCaseIds: data.skinIdToRegularCaseIds,
+        regularCaseIdToSkinIds: data.regularCaseIdToSkinIds,
+      );
+      if (_controller.selected.isEmpty) {
         _rarity = 'MIL_SPEC';
       }
     });
@@ -261,24 +249,19 @@ class _TradeUpScreenState extends State<TradeUpScreen> {
 
   void _clear() {
     setState(() {
-      _selected.clear();
-      _result = null;
-      _chances = [];
-      _tradeIssue = null;
+      _controller.clear();
     });
   }
 
   Future<void> _trade(_TradeUpData data) async {
     try {
-      final result = _service.tradeUp(
-        input: _selected,
+      _controller.executeTrade(
         allSkins: data.skins,
         skinIdToRegularCaseIds: data.skinIdToRegularCaseIds,
         regularCaseIdToSkinIds: data.regularCaseIdToSkinIds,
       );
-
       setState(() {
-        _result = result;
+        // Controller already updated its state.
       });
     } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(
@@ -287,311 +270,32 @@ class _TradeUpScreenState extends State<TradeUpScreen> {
     }
   }
 
-  bool _matchesSearch(SkinDto s) {
+  bool _matchesSearch(SkinDto skin) {
     final q = _search.trim().toLowerCase();
     if (q.isEmpty) return true;
 
-    final collection = (s.collection ?? '').toLowerCase();
+    final collection = (skin.collection ?? '').toLowerCase();
 
-    return s.name.toLowerCase().contains(q) ||
-        s.itemDisplayName.toLowerCase().contains(q) ||
+    return skin.name.toLowerCase().contains(q) ||
+        skin.itemDisplayName.toLowerCase().contains(q) ||
         collection.contains(q);
   }
 
-  Widget _slot(int i, _TradeUpData data) {
-    final item = i < _selected.length ? _selected[i] : null;
-
-    if (item == null) {
-      return Container(
-        decoration: BoxDecoration(
-          border: Border.all(color: Colors.white24),
-          borderRadius: BorderRadius.circular(10),
-        ),
-        child: const Center(child: Icon(Icons.add)),
-      );
+  String _qualityLabel(TradeUpInputQuality quality) {
+    switch (quality) {
+      case TradeUpInputQuality.regular:
+        return 'Regular';
+      case TradeUpInputQuality.statTrak:
+        return 'StatTrak™';
+      case TradeUpInputQuality.souvenir:
+        return 'Souvenir';
     }
-
-    final skin = item.skin;
-    final color = SkinUiHelper.rarityColor(skin);
-
-    return Container(
-      decoration: BoxDecoration(
-        border: Border.all(color: color, width: 2),
-        borderRadius: BorderRadius.circular(10),
-      ),
-      child: Stack(
-        children: [
-          Material(
-            color: Colors.transparent,
-            child: InkWell(
-              borderRadius: BorderRadius.circular(8),
-              onTap: () => _editFloatAt(i, data),
-              child: Padding(
-                padding: const EdgeInsets.all(4),
-                child: Column(
-                  children: [
-                    Expanded(
-                      child: Image.asset(
-                        skin.skinImage,
-                        fit: BoxFit.contain,
-                        errorBuilder: (_, error, stackTrace) =>
-                            const Icon(Icons.image_not_supported),
-                      ),
-                    ),
-                    const SizedBox(height: 2),
-                    Text(
-                      'FV ${item.floatValue.toStringAsFixed(5)}',
-                      style: const TextStyle(
-                        fontSize: 9,
-                        color: Colors.white70,
-                      ),
-                    ),
-                    Text(
-                      SkinFloatHelper.exteriorFromFloat(item.floatValue),
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                      style: const TextStyle(
-                        fontSize: 8,
-                        color: Colors.white54,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          ),
-          Positioned(
-            right: 0,
-            top: 0,
-            child: Material(
-              color: Colors.black87,
-              borderRadius: BorderRadius.circular(8),
-              child: InkWell(
-                borderRadius: BorderRadius.circular(8),
-                onTap: () => _removeAt(i, data),
-                child: const Padding(
-                  padding: EdgeInsets.all(4),
-                  child: Icon(Icons.close, size: 12),
-                ),
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
   }
 
-  Widget _skinTile(SkinDto s, _TradeUpData data) {
-    final color = SkinUiHelper.rarityColor(s);
-    final count = _selected.where((e) => e.skin.id == s.id).length;
-    final blocked = !_canAddMore();
-
-    return Opacity(
-      opacity: blocked ? 0.55 : 1,
-      child: GestureDetector(
-        onTap: blocked ? null : () => _add(s, data),
-        child: Container(
-          decoration: BoxDecoration(
-            border: Border.all(color: Colors.white10),
-            borderRadius: BorderRadius.circular(10),
-          ),
-          child: Stack(
-            children: [
-              Column(
-                children: [
-                  Expanded(
-                    child: Padding(
-                      padding: const EdgeInsets.all(4),
-                      child: Image.asset(
-                        s.skinImage,
-                        fit: BoxFit.contain,
-                        errorBuilder: (_, error, stackTrace) =>
-                            const Icon(Icons.image_not_supported),
-                      ),
-                    ),
-                  ),
-                  Container(height: 3, color: color),
-                  Padding(
-                    padding: const EdgeInsets.all(5),
-                    child: Column(
-                      children: [
-                        Text(
-                          s.itemDisplayName,
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
-                          textAlign: TextAlign.center,
-                          style: const TextStyle(fontSize: 10),
-                        ),
-                        const SizedBox(height: 3),
-                        Text(
-                          s.name,
-                          maxLines: 2,
-                          overflow: TextOverflow.ellipsis,
-                          textAlign: TextAlign.center,
-                          style: const TextStyle(
-                            fontSize: 10,
-                            color: Colors.white70,
-                          ),
-                        ),
-                        if (s.collection != null &&
-                            s.collection!.isNotEmpty) ...[
-                          const SizedBox(height: 3),
-                          Text(
-                            s.collection!,
-                            maxLines: 1,
-                            overflow: TextOverflow.ellipsis,
-                            textAlign: TextAlign.center,
-                            style: const TextStyle(
-                              fontSize: 9,
-                              color: Colors.white38,
-                            ),
-                          ),
-                        ],
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-              if (count > 0)
-                Positioned(
-                  right: 4,
-                  top: 4,
-                  child: Container(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 6,
-                      vertical: 2,
-                    ),
-                    decoration: BoxDecoration(
-                      color: Colors.black,
-                      borderRadius: BorderRadius.circular(6),
-                    ),
-                    child: Text(
-                      'x$count',
-                      style: const TextStyle(fontSize: 10),
-                    ),
-                  ),
-                ),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-
-  Widget _resultCard() {
-    if (_result == null) return const SizedBox();
-
-    final s = _result!.skin;
-    final color = SkinUiHelper.rarityColor(s);
-
-    return Card(
-      margin: const EdgeInsets.all(12),
-      shape: RoundedRectangleBorder(
-        side: BorderSide(color: color, width: 2),
-        borderRadius: BorderRadius.circular(12),
-      ),
-      child: Padding(
-        padding: const EdgeInsets.all(12),
-        child: Column(
-          children: [
-            Image.asset(
-              s.skinImage,
-              height: 120,
-              errorBuilder: (_, error, stackTrace) =>
-                  const Icon(Icons.image_not_supported, size: 80),
-            ),
-            const SizedBox(height: 8),
-            Text(
-              '${s.isSpecialItem ? 'РІВвЂ¦ ' : ''}${s.itemDisplayName} | ${s.name}',
-              style: TextStyle(color: color, fontWeight: FontWeight.bold),
-              textAlign: TextAlign.center,
-            ),
-            const SizedBox(height: 6),
-            Text(
-              'Rarity: ${s.isSpecialItem ? 'Special Item' : _rarityLabel(s.rarity)}',
-            ),
-            Text('Weapon type: ${SkinUiHelper.weaponTypeLabel(s.weaponType)}'),
-            Text('Float: ${_result!.floatValue.toStringAsFixed(5)}'),
-            Text(_result!.exterior),
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget _chanceCard(TradeUpChance chance) {
-    final skin = chance.skin;
-    final color = SkinUiHelper.rarityColor(skin);
-
-    return Card(
-      margin: EdgeInsets.zero,
-      child: Column(
-        children: [
-          Expanded(
-            child: Padding(
-              padding: const EdgeInsets.all(4),
-              child: Image.asset(
-                skin.skinImage,
-                fit: BoxFit.contain,
-                errorBuilder: (_, error, stackTrace) =>
-                    const Icon(Icons.image_not_supported),
-              ),
-            ),
-          ),
-          Container(height: 3, color: color),
-          Padding(
-            padding: const EdgeInsets.all(6),
-            child: Column(
-              children: [
-                Text(
-                  skin.itemDisplayName,
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                  textAlign: TextAlign.center,
-                  style: const TextStyle(fontSize: 10),
-                ),
-                const SizedBox(height: 3),
-                Text(
-                  skin.name,
-                  maxLines: 2,
-                  overflow: TextOverflow.ellipsis,
-                  textAlign: TextAlign.center,
-                  style: const TextStyle(fontSize: 10, color: Colors.white70),
-                ),
-                const SizedBox(height: 4),
-                Text(
-                  '${(chance.probability * 100).toStringAsFixed(2)}%',
-                  style: TextStyle(
-                    fontSize: 11,
-                    fontWeight: FontWeight.bold,
-                    color: color,
-                  ),
-                ),
-                const SizedBox(height: 2),
-                Text(
-                  chance.exterior,
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                  textAlign: TextAlign.center,
-                  style: const TextStyle(
-                    fontSize: 9,
-                    color: Colors.white70,
-                  ),
-                ),
-                Text(
-                  'FV ${chance.floatValue.toStringAsFixed(5)}',
-                  style: const TextStyle(
-                    fontSize: 9,
-                    color: Colors.white54,
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ],
-      ),
-    );
-  }
+  List<TradeUpInputQuality> get _editableQualities => const [
+    TradeUpInputQuality.regular,
+    TradeUpInputQuality.statTrak,
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -605,10 +309,8 @@ class _TradeUpScreenState extends State<TradeUpScreen> {
           }
 
           final data = snap.data!;
-          final all = data.skins;
-
-          final filtered = all.where((s) {
-            if (s.isSpecialItem) return false;
+          final filtered = data.skins.where((skin) {
+            if (skin.isSpecialItem) return false;
 
             const allowedRarities = {
               'CONSUMER',
@@ -619,21 +321,21 @@ class _TradeUpScreenState extends State<TradeUpScreen> {
               'COVERT',
             };
 
-            if (!allowedRarities.contains(s.rarity)) {
+            if (!allowedRarities.contains(skin.rarity)) {
               return false;
             }
 
-            if (_rarity != null && s.rarity != _rarity) {
+            if (_rarity != null && skin.rarity != _rarity) {
               return false;
             }
 
-            return _matchesSearch(s);
+            return _matchesSearch(skin);
           }).toList();
 
           filtered.sort((a, b) => int.parse(a.id).compareTo(int.parse(b.id)));
 
           return LayoutBuilder(
-            builder: (context, c) {
+            builder: (context, constraints) {
               return CustomScrollView(
                 slivers: [
                   SliverToBoxAdapter(
@@ -644,17 +346,16 @@ class _TradeUpScreenState extends State<TradeUpScreen> {
                         children: [
                           TextField(
                             decoration: const InputDecoration(
-                              hintText:
-                                  'Search by skin or collection...',
+                              hintText: 'Search by skin or collection...',
                               prefixIcon: Icon(Icons.search),
                             ),
-                            onChanged: (v) => setState(() => _search = v),
+                            onChanged: (value) => setState(() => _search = value),
                           ),
                           const SizedBox(height: 8),
                           Wrap(
                             spacing: 8,
                             children: [
-                              for (final r in [
+                              for (final rarity in [
                                 'CONSUMER',
                                 'INDUSTRIAL',
                                 'MIL_SPEC',
@@ -663,11 +364,11 @@ class _TradeUpScreenState extends State<TradeUpScreen> {
                                 'COVERT',
                               ])
                                 ChoiceChip(
-                                  label: Text(_rarityLabel(r)),
-                                  selected: _rarity == r,
+                                  label: Text(_rarityLabel(rarity)),
+                                  selected: _rarity == rarity,
                                   onSelected: (_) {
                                     setState(() {
-                                      _rarity = r;
+                                      _rarity = rarity;
                                       _clear();
                                     });
                                   },
@@ -676,15 +377,15 @@ class _TradeUpScreenState extends State<TradeUpScreen> {
                           ),
                           const SizedBox(height: 12),
                           Text(
-                              _selected.isEmpty
+                            _controller.selected.isEmpty
                                 ? 'Select skins'
-                                : 'Selected: ${_selected.length}/${_maxSelectable()}',
+                                : 'Selected: ${_controller.selected.length}/${_maxSelectable()}',
                             style: const TextStyle(
                               fontSize: 16,
                               fontWeight: FontWeight.bold,
                             ),
                           ),
-                          if (_selected.isNotEmpty)
+                          if (_controller.selected.isNotEmpty)
                             const Padding(
                               padding: EdgeInsets.only(top: 4),
                               child: Text(
@@ -695,8 +396,8 @@ class _TradeUpScreenState extends State<TradeUpScreen> {
                                 ),
                               ),
                             ),
-                          if (_selected.isNotEmpty &&
-                              _selected.first.skin.rarity == 'COVERT')
+                          if (_controller.selected.isNotEmpty &&
+                              _controller.selected.first.skin.rarity == 'COVERT')
                             const Padding(
                               padding: EdgeInsets.only(top: 4),
                               child: Text(
@@ -718,11 +419,11 @@ class _TradeUpScreenState extends State<TradeUpScreen> {
                                 ),
                               ),
                             ),
-                          if (_tradeIssue != null)
+                          if (_controller.tradeIssue != null)
                             Padding(
                               padding: const EdgeInsets.only(top: 4),
                               child: Text(
-                                _tradeIssue!,
+                                _controller.tradeIssue!,
                                 style: const TextStyle(
                                   color: Colors.orangeAccent,
                                   fontSize: 12,
@@ -734,51 +435,97 @@ class _TradeUpScreenState extends State<TradeUpScreen> {
                     ),
                   ),
                   SliverToBoxAdapter(
-                    child: Padding(
-                      padding: const EdgeInsets.all(12),
-                      child: GridView.builder(
-                        shrinkWrap: true,
-                        physics: const NeverScrollableScrollPhysics(),
-                        itemCount: 10,
-                        gridDelegate:
-                            const SliverGridDelegateWithFixedCrossAxisCount(
-                              crossAxisCount: 5,
-                              crossAxisSpacing: 6,
-                              mainAxisSpacing: 6,
+                    child: Center(
+                      child: ConstrainedBox(
+                        constraints: const BoxConstraints(
+                          maxWidth: _tradeupPanelMaxWidth,
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.all(12),
+                          child: GridView.builder(
+                            shrinkWrap: true,
+                            physics: const NeverScrollableScrollPhysics(),
+                            itemCount: 10,
+                            gridDelegate:
+                                const SliverGridDelegateWithFixedCrossAxisCount(
+                                  crossAxisCount: 5,
+                                  crossAxisSpacing: 6,
+                                  mainAxisSpacing: 6,
+                                ),
+                            itemBuilder: (_, index) => TradeUpSelectedSlot(
+                              item: index < _controller.selected.length
+                                  ? _controller.selected[index]
+                                  : null,
+                              onTap: index < _controller.selected.length
+                                  ? () => _editFloatAt(index, data)
+                                  : null,
+                              onRemove: index < _controller.selected.length
+                                  ? () => _removeAt(index, data)
+                                  : null,
                             ),
-                        itemBuilder: (_, i) => _slot(i, data),
+                          ),
+                        ),
                       ),
                     ),
                   ),
                   SliverToBoxAdapter(
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 12),
-                      child: Row(
-                        children: [
-                          Expanded(
-                            child: ElevatedButton(
-                              onPressed: _canExecuteTrade()
-                                  ? () => _trade(data)
-                                  : null,
-                              child: Text(
-                                _selected.isNotEmpty &&
-                                        _selected.first.skin.rarity == 'COVERT'
-                                    ? 'TRADE РІвЂ вЂ™ SPECIAL ITEM'
-                                    : 'TRADE',
+                    child: Center(
+                      child: ConstrainedBox(
+                        constraints: const BoxConstraints(
+                          maxWidth: _tradeupPanelMaxWidth,
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 12),
+                          child: Row(
+                            children: [
+                              Expanded(
+                                child: ElevatedButton(
+                                  onPressed: _canExecuteTrade()
+                                      ? () => _trade(data)
+                                      : null,
+                                  child: Text(
+                                    _controller.selected.isNotEmpty &&
+                                            _controller.selected.first.skin.rarity ==
+                                                'COVERT'
+                                        ? 'TRADE SPECIAL ITEM'
+                                        : 'TRADE',
+                                  ),
+                                ),
                               ),
-                            ),
+                              const SizedBox(width: 8),
+                              OutlinedButton(
+                                onPressed: _controller.selected.isNotEmpty
+                                    ? _clear
+                                    : null,
+                                child: const Text('CLEAR'),
+                              ),
+                            ],
                           ),
-                          const SizedBox(width: 8),
-                          OutlinedButton(
-                            onPressed: _selected.isNotEmpty ? _clear : null,
-                            child: const Text('CLEAR'),
-                          ),
-                        ],
+                        ),
                       ),
                     ),
                   ),
-                  SliverToBoxAdapter(child: _resultCard()),
-                  if (_chances.isNotEmpty)
+                  SliverToBoxAdapter(
+                    child: Center(
+                      child: ConstrainedBox(
+                        constraints: const BoxConstraints(
+                          maxWidth: _tradeupPanelMaxWidth,
+                        ),
+                        child: _controller.result == null
+                            ? const SizedBox()
+                            : SkinDropCard(
+                                drop: DroppedSkin(
+                                  skin: _controller.result!.skin,
+                                  isStatTrak: _controller.result!.isStatTrak,
+                                  isSouvenir: _controller.result!.isSouvenir,
+                                  skinFloat: _controller.result!.floatValue,
+                                  exterior: _controller.result!.exterior,
+                                ),
+                              ),
+                      ),
+                    ),
+                  ),
+                  if (_controller.chances.isNotEmpty)
                     const SliverToBoxAdapter(
                       child: Padding(
                         padding: EdgeInsets.fromLTRB(12, 12, 12, 8),
@@ -791,18 +538,20 @@ class _TradeUpScreenState extends State<TradeUpScreen> {
                         ),
                       ),
                     ),
-                  if (_chances.isNotEmpty)
+                  if (_controller.chances.isNotEmpty)
                     SliverPadding(
                       padding: const EdgeInsets.symmetric(horizontal: 12),
                       sliver: SliverGrid(
                         delegate: SliverChildBuilderDelegate(
-                          (_, i) => _chanceCard(_chances[i]),
-                          childCount: _chances.length,
+                          (_, index) => TradeUpChanceCard(
+                            chance: _controller.chances[index],
+                          ),
+                          childCount: _controller.chances.length,
                         ),
                         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                           crossAxisCount:
                               ResponsiveGridHelper.tradeGridCrossAxisCount(
-                                c.maxWidth,
+                                constraints.maxWidth,
                               ),
                           crossAxisSpacing: 8,
                           mainAxisSpacing: 8,
@@ -826,13 +575,20 @@ class _TradeUpScreenState extends State<TradeUpScreen> {
                     padding: const EdgeInsets.all(12),
                     sliver: SliverGrid(
                       delegate: SliverChildBuilderDelegate(
-                        (_, i) => _skinTile(filtered[i], data),
+                        (_, index) => TradeUpSkinTile(
+                          skin: filtered[index],
+                          selectedCount: _controller.selected
+                              .where((e) => e.skin.id == filtered[index].id)
+                              .length,
+                          blocked: !_canAddMore(),
+                          onTap: () => _add(filtered[index], data),
+                        ),
                         childCount: filtered.length,
                       ),
                       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                         crossAxisCount:
                             ResponsiveGridHelper.tradeGridCrossAxisCount(
-                              c.maxWidth,
+                              constraints.maxWidth,
                             ),
                         crossAxisSpacing: 8,
                         mainAxisSpacing: 8,

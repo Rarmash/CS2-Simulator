@@ -3,22 +3,48 @@ import 'dart:math';
 import '../data/models/skin_dto.dart';
 import 'skin_float_helper.dart';
 
+enum TradeUpInputQuality { regular, statTrak, souvenir }
+
 class TradeUpInputItem {
   final SkinDto skin;
   final double floatValue;
+  final TradeUpInputQuality quality;
 
-  const TradeUpInputItem({required this.skin, required this.floatValue});
+  const TradeUpInputItem({
+    required this.skin,
+    required this.floatValue,
+    this.quality = TradeUpInputQuality.regular,
+  });
+
+  bool get isStatTrak => quality == TradeUpInputQuality.statTrak;
+  bool get isSouvenir => quality == TradeUpInputQuality.souvenir;
+
+  TradeUpInputItem copyWith({
+    SkinDto? skin,
+    double? floatValue,
+    TradeUpInputQuality? quality,
+  }) {
+    return TradeUpInputItem(
+      skin: skin ?? this.skin,
+      floatValue: floatValue ?? this.floatValue,
+      quality: quality ?? this.quality,
+    );
+  }
 }
 
 class TradeUpResult {
   final SkinDto skin;
   final double floatValue;
   final String exterior;
+  final bool isStatTrak;
+  final bool isSouvenir;
 
   const TradeUpResult({
     required this.skin,
     required this.floatValue,
     required this.exterior,
+    required this.isStatTrak,
+    required this.isSouvenir,
   });
 }
 
@@ -27,12 +53,16 @@ class TradeUpChance {
   final double probability; // 0..1
   final double floatValue;
   final String exterior;
+  final bool isStatTrak;
+  final bool isSouvenir;
 
   const TradeUpChance({
     required this.skin,
     required this.probability,
     required this.floatValue,
     required this.exterior,
+    required this.isStatTrak,
+    required this.isSouvenir,
   });
 }
 
@@ -57,6 +87,14 @@ class TradeUpService {
 
     if (input.any((s) => s.skin.isSpecialItem)) {
       throw Exception('Knives and gloves are not allowed as input');
+    }
+
+    final issue = validationIssue(
+      input: input,
+      skinIdToRegularCaseIds: skinIdToRegularCaseIds,
+    );
+    if (issue != null) {
+      throw Exception(issue);
     }
 
     final isSpecialTrade = rarity == 'COVERT';
@@ -104,6 +142,12 @@ class TradeUpService {
     if (input.any((s) => s.skin.rarity != rarity)) return const [];
     if (input.any((s) => s.skin.isSpecialItem)) return const [];
 
+    final issue = validationIssue(
+      input: input,
+      skinIdToRegularCaseIds: skinIdToRegularCaseIds,
+    );
+    if (issue != null) return const [];
+
     final isSpecialTrade = rarity == 'COVERT';
     if (isSpecialTrade && input.length != 5) return const [];
     if (!isSpecialTrade && input.length != 10) return const [];
@@ -149,6 +193,8 @@ class TradeUpService {
                 probability: e.value,
                 floatValue: floatValue,
                 exterior: _getExterior(floatValue),
+                isStatTrak: _isStatTrakContract(input),
+                isSouvenir: false,
               );
             },
           )
@@ -192,6 +238,8 @@ class TradeUpService {
             probability: e.value,
             floatValue: floatValue,
             exterior: _getExterior(floatValue),
+            isStatTrak: _isStatTrakContract(input),
+            isSouvenir: false,
           );
         })
         .toList();
@@ -218,6 +266,33 @@ class TradeUpService {
     }
 
     return _rollFromChances(chances);
+  }
+
+  String? validationIssue({
+    required List<TradeUpInputItem> input,
+    required Map<String, List<String>> skinIdToRegularCaseIds,
+  }) {
+    if (input.isEmpty) return null;
+
+    if (input.any((item) => item.isSouvenir)) {
+      return 'Souvenir items cannot be used in trade-up contracts';
+    }
+
+    final firstQuality = input.first.quality;
+    if (input.any((item) => item.quality != firstQuality)) {
+      return 'All selected skins must use the same quality mode';
+    }
+
+    if (input.first.skin.rarity == 'COVERT' &&
+        _buildRegularCaseWeightsOrNull(
+              input: input,
+              skinIdToRegularCaseIds: skinIdToRegularCaseIds,
+            ) ==
+            null) {
+      return 'These covert skins are not linked to a valid special-item pool';
+    }
+
+    return null;
   }
 
   List<SkinDto> _getSpecialSkinsForRegularCase({
@@ -307,6 +382,22 @@ class TradeUpService {
     required List<TradeUpInputItem> input,
     required Map<String, List<String>> skinIdToRegularCaseIds,
   }) {
+    final result = _buildRegularCaseWeightsOrNull(
+      input: input,
+      skinIdToRegularCaseIds: skinIdToRegularCaseIds,
+    );
+    if (result == null) {
+      throw Exception(
+        'Could not determine related regular cases for selected skins',
+      );
+    }
+    return result;
+  }
+
+  Map<String, double>? _buildRegularCaseWeightsOrNull({
+    required List<TradeUpInputItem> input,
+    required Map<String, List<String>> skinIdToRegularCaseIds,
+  }) {
     final counts = <String, double>{};
 
     for (final item in input) {
@@ -323,9 +414,7 @@ class TradeUpService {
 
     final total = counts.values.fold<double>(0, (a, b) => a + b);
     if (total == 0) {
-      throw Exception(
-        'Could not determine related regular cases for selected skins',
-      );
+      return null;
     }
 
     return {for (final entry in counts.entries) entry.key: entry.value / total};
@@ -342,6 +431,8 @@ class TradeUpService {
           skin: chance.skin,
           floatValue: chance.floatValue,
           exterior: chance.exterior,
+          isStatTrak: chance.isStatTrak,
+          isSouvenir: chance.isSouvenir,
         );
       }
     }
@@ -351,7 +442,14 @@ class TradeUpService {
       skin: fallback.skin,
       floatValue: fallback.floatValue,
       exterior: fallback.exterior,
+      isStatTrak: fallback.isStatTrak,
+      isSouvenir: fallback.isSouvenir,
     );
+  }
+
+  bool _isStatTrakContract(List<TradeUpInputItem> input) {
+    return input.isNotEmpty &&
+        input.every((item) => item.quality == TradeUpInputQuality.statTrak);
   }
 
   String _getExterior(double value) {

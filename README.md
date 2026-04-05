@@ -149,10 +149,6 @@ The project is actively evolving, with current work focused on:
 
 ## Roadmap
 
-### v0.10
-
-- Trade-Up rewrite with UI cleanup, accurate outcome weighting, and float projection
-
 ### v0.11
 
 - Major tournament section covering CS:GO and CS2 eras
