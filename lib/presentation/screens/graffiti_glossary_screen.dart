@@ -21,6 +21,7 @@ class GraffitiGlossaryScreen extends StatefulWidget {
 
 class _GraffitiGlossaryScreenState extends State<GraffitiGlossaryScreen> {
   String _rarityFilter = 'ALL';
+  String _collectionFilter = 'ALL';
 
   static const List<GlossaryFilterOption> _rarityOptions = [
     GlossaryFilterOption('ALL', 'All rarities'),
@@ -30,9 +31,28 @@ class _GraffitiGlossaryScreenState extends State<GraffitiGlossaryScreen> {
     GlossaryFilterOption('EXOTIC', 'Exotic'),
   ];
 
+  List<GlossaryFilterOption> _collectionOptions(List<GraffitiDto> items) {
+    final values =
+        items
+            .map((item) => (item.collection ?? '').trim())
+            .where((value) => value.isNotEmpty)
+            .toSet()
+            .toList()
+          ..sort();
+
+    return [
+      const GlossaryFilterOption('ALL', 'All collections'),
+      ...values.map((value) => GlossaryFilterOption(value, value)),
+    ];
+  }
+
   List<GraffitiDto> _filterAndSort(List<GraffitiDto> items, String query) {
     final filtered = items.where((graffiti) {
       if (_rarityFilter != 'ALL' && graffiti.rarity != _rarityFilter) {
+        return false;
+      }
+      if (_collectionFilter != 'ALL' &&
+          (graffiti.collection ?? '') != _collectionFilter) {
         return false;
       }
       if (query.isEmpty) return true;
@@ -78,16 +98,35 @@ class _GraffitiGlossaryScreenState extends State<GraffitiGlossaryScreen> {
       countLabelBuilder: (count) => '$count graffiti',
       emptyMessage: 'No graffiti found.',
       errorPrefix: 'Failed to load graffiti.',
-      headerControlsBuilder: (_) => [
-        GlossaryFilterDropdown(
-          label: 'Rarity',
-          value: _rarityFilter,
-          options: _rarityOptions,
-          onChanged: (value) {
-            setState(() {
-              _rarityFilter = value ?? 'ALL';
-            });
-          },
+      headerControlsBuilder: (_, items) => [
+        Row(
+          children: [
+            Expanded(
+              child: GlossaryFilterDropdown(
+                label: 'Rarity',
+                value: _rarityFilter,
+                options: _rarityOptions,
+                onChanged: (value) {
+                  setState(() {
+                    _rarityFilter = value ?? 'ALL';
+                  });
+                },
+              ),
+            ),
+            const SizedBox(width: 10),
+            Expanded(
+              child: GlossaryFilterDropdown(
+                label: 'Collection',
+                value: _collectionFilter,
+                options: _collectionOptions(items),
+                onChanged: (value) {
+                  setState(() {
+                    _collectionFilter = value ?? 'ALL';
+                  });
+                },
+              ),
+            ),
+          ],
         ),
       ],
       itemBuilder: (context, graffiti) {
@@ -98,7 +137,10 @@ class _GraffitiGlossaryScreenState extends State<GraffitiGlossaryScreen> {
           title: graffiti.name,
           subtitle: GraffitiUiHelper.secondaryText(graffiti),
           tags: [
-            DetailTag(text: GraffitiUiHelper.rarityLabel(graffiti), color: color),
+            DetailTag(
+              text: GraffitiUiHelper.rarityLabel(graffiti),
+              color: color,
+            ),
             if ((graffiti.collection ?? '').isNotEmpty)
               DetailTag(text: graffiti.collection!),
           ],

@@ -43,7 +43,7 @@ class IoUtils {
     for (final dir in [
       assetsDir,
       dataDir,
-      casesDir,
+      containersDir,
       skinsDir,
       stickersDir,
       pinsDir,
@@ -51,9 +51,7 @@ class IoUtils {
       agentsDir,
       graffitiDir,
       patchesDir,
-      rewardCollectionsDir,
-      operationCollectionsDir,
-      agentCollectionsDir,
+      charmsDir,
       tournamentLogosDir,
     ]) {
       if (!dir.existsSync()) {
@@ -71,12 +69,13 @@ class IoUtils {
       File('${dataDir.path}/music_kits.json'),
       File('${dataDir.path}/music_kit_contents.json'),
       File('${dataDir.path}/agents.json'),
-      File('${dataDir.path}/agent_collections.json'),
       File('${dataDir.path}/agent_collection_contents.json'),
       File('${dataDir.path}/graffiti.json'),
       File('${dataDir.path}/graffiti_contents.json'),
       File('${dataDir.path}/patches.json'),
       File('${dataDir.path}/patch_contents.json'),
+      File('${dataDir.path}/charms.json'),
+      File('${dataDir.path}/charm_contents.json'),
     ]) {
       if (file.existsSync()) {
         await file.delete();
@@ -210,11 +209,9 @@ class IoUtils {
 
   Future<String?> downloadOptimizedAsset(
     String url,
-    String pathWithoutExt,
-    {
+    String pathWithoutExt, {
     CompressionMode? compressionModeOverride,
-  }
-  ) async {
+  }) async {
     if (url.isEmpty) {
       return null;
     }

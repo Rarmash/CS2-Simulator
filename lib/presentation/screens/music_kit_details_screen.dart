@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 
 import '../../core/utils/date_format_helper.dart';
-import '../../data/models/case_dto.dart';
+import '../../data/models/container_dto.dart';
 import '../../data/models/music_kit_dto.dart';
+import '../../data/models/music_kit_group_dto.dart';
 import '../../data/repositories/local_data_repository.dart';
 import '../helpers/app_navigation_helper.dart';
 import '../helpers/music_kit_ui_helper.dart';
@@ -47,9 +48,10 @@ class MusicKitDetailsScreen extends StatelessWidget {
             );
           }
 
-          final data = snapshot.data ??
-              const _MusicKitDetailsData(variants: [], cases: []);
-          if (data.variants.isEmpty) {
+          final data =
+              snapshot.data ??
+              const _MusicKitDetailsData(group: null, containers: []);
+          if (data.group == null) {
             return const Center(
               child: Padding(
                 padding: EdgeInsets.all(24),
@@ -61,10 +63,9 @@ class MusicKitDetailsScreen extends StatelessWidget {
             );
           }
 
-          final primary = data.primary;
+          final group = data.group!;
+          final primary = group.primary;
           final rarityColor = MusicKitUiHelper.rarityColor(primary);
-          final hasRegular = data.variants.any((item) => !item.isStatTrak);
-          final hasStatTrak = data.variants.any((item) => item.isStatTrak);
 
           return ListView(
             padding: const EdgeInsets.all(12),
@@ -72,22 +73,13 @@ class MusicKitDetailsScreen extends StatelessWidget {
               CollectibleDetailsCard(
                 imagePath: primary.musicKitImage,
                 title: primary.trackName,
-                subtitle: _subtitle(
-                  primary,
-                  hasRegular: hasRegular,
-                  hasStatTrak: hasStatTrak,
-                ),
+                subtitle: MusicKitUiHelper.groupedSecondaryText(group),
                 tags: [
                   DetailTag(
                     text: MusicKitUiHelper.rarityLabel(primary),
                     color: rarityColor,
                   ),
-                  DetailTag(
-                    text: _typeLabel(
-                      hasRegular: hasRegular,
-                      hasStatTrak: hasStatTrak,
-                    ),
-                  ),
+                  DetailTag(text: MusicKitUiHelper.groupedTypeLabel(group)),
                   if ((primary.collection ?? '').isNotEmpty)
                     DetailTag(text: primary.collection!),
                 ],
@@ -101,16 +93,13 @@ class MusicKitDetailsScreen extends StatelessWidget {
                   ),
                   DetailInfoRow(
                     title: 'Type',
-                    value: _typeLabel(
-                      hasRegular: hasRegular,
-                      hasStatTrak: hasStatTrak,
-                    ),
+                    value: MusicKitUiHelper.groupedTypeLabel(group),
                   ),
                   DetailInfoRow(
                     title: 'StatTrak™ variant',
                     value: _statTrakAvailabilityLabel(
-                      hasRegular: hasRegular,
-                      hasStatTrak: hasStatTrak,
+                      hasRegular: group.hasRegular,
+                      hasStatTrak: group.hasStatTrak,
                     ),
                   ),
                   if ((primary.collection ?? '').isNotEmpty)
@@ -118,21 +107,22 @@ class MusicKitDetailsScreen extends StatelessWidget {
                 ],
               ),
               const SizedBox(height: 12),
-              DetailSourceSection<CaseDto>(
+              DetailSourceSection<ContainerDto>(
                 title: 'Boxes',
-                items: data.cases,
+                items: data.containers,
                 emptyText: 'No music kit box sources found.',
                 itemBuilder: (item) => DetailSourceTile(
-                  imagePath: item.caseImage,
+                  imagePath: item.containerImage,
                   title: item.name,
                   subtitle: item.typeLabel,
                   trailing:
-                      DateFormatHelper.formatReleaseDate(item.releaseDate) ?? '-',
+                      DateFormatHelper.formatReleaseDate(item.releaseDate) ??
+                      '-',
                   onTap: () {
                     AppNavigationHelper.pushScreen(
                       context,
                       AppNavigationHelper.buildContainerOpenScreen(
-                        caseDto: item,
+                        containerDto: item,
                         repository: repository,
                       ),
                     );
@@ -147,28 +137,13 @@ class MusicKitDetailsScreen extends StatelessWidget {
   }
 
   Future<_MusicKitDetailsData> _loadData() async {
-    final allMusicKits = await repository.loadMusicKits();
-    final variants = allMusicKits.where((musicKit) {
-      return musicKit.name == musicKitName &&
-          (musicKit.collection ?? '') == (collection ?? '');
-    }).toList();
-
-    final seenCaseIds = <String>{};
-    final cases = <CaseDto>[];
-    for (final variant in variants) {
-      final sources = await repository.loadCasesForMusicKit(variant.id);
-      for (final item in sources) {
-        if (seenCaseIds.add(item.id)) {
-          cases.add(item);
-        }
-      }
-    }
-    cases.sort(
-      (a, b) =>
-          (a.releaseDate ?? '9999-99-99').compareTo(b.releaseDate ?? '9999-99-99'),
+    final group = await repository.loadMusicKitGroup(musicKitName, collection);
+    final containers = await repository.loadContainersForMusicKitGroup(
+      musicKitName,
+      collection,
     );
 
-    return _MusicKitDetailsData(variants: variants, cases: cases);
+    return _MusicKitDetailsData(group: group, containers: containers);
   }
 
   String _titleFromName(String fullName) {
@@ -178,36 +153,10 @@ class MusicKitDetailsScreen extends StatelessWidget {
       musicKitImage: '',
       rarity: '',
       collection: null,
-      isStatTrak: false,
+      hasRegular: true,
+      hasStatTrak: false,
     );
     return dto.trackName;
-  }
-
-  String _subtitle(
-    MusicKitDto musicKit, {
-    required bool hasRegular,
-    required bool hasStatTrak,
-  }) {
-    final parts = <String>[
-      if ((musicKit.artist ?? '').isNotEmpty) musicKit.artist!,
-      _typeLabel(hasRegular: hasRegular, hasStatTrak: hasStatTrak),
-      if (hasRegular && hasStatTrak) 'Both variants',
-      if ((musicKit.collection ?? '').isNotEmpty) musicKit.collection!,
-    ];
-    return parts.join(' | ');
-  }
-
-  String _typeLabel({
-    required bool hasRegular,
-    required bool hasStatTrak,
-  }) {
-    if (hasRegular && hasStatTrak) {
-      return 'Music Kit / StatTrak™';
-    }
-    if (hasStatTrak) {
-      return 'StatTrak™ Music Kit';
-    }
-    return 'Music Kit';
   }
 
   String _statTrakAvailabilityLabel({
@@ -225,21 +174,8 @@ class MusicKitDetailsScreen extends StatelessWidget {
 }
 
 class _MusicKitDetailsData {
-  final List<MusicKitDto> variants;
-  final List<CaseDto> cases;
+  final MusicKitGroupDto? group;
+  final List<ContainerDto> containers;
 
-  const _MusicKitDetailsData({
-    required this.variants,
-    required this.cases,
-  });
-
-  MusicKitDto get primary {
-    final sorted = [...variants]..sort((a, b) {
-      if (a.isStatTrak == b.isStatTrak) {
-        return a.id.compareTo(b.id);
-      }
-      return a.isStatTrak ? 1 : -1;
-    });
-    return sorted.first;
-  }
+  const _MusicKitDetailsData({required this.group, required this.containers});
 }

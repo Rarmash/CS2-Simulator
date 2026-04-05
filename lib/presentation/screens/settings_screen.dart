@@ -7,10 +7,7 @@ import '../../core/settings/settings_controller.dart';
 class SettingsScreen extends StatelessWidget {
   final SettingsController settingsController;
 
-  const SettingsScreen({
-    super.key,
-    required this.settingsController,
-  });
+  const SettingsScreen({super.key, required this.settingsController});
 
   @override
   Widget build(BuildContext context) {
@@ -18,9 +15,7 @@ class SettingsScreen extends StatelessWidget {
       animation: settingsController,
       builder: (context, _) {
         return Scaffold(
-          appBar: AppBar(
-            title: const Text('Settings'),
-          ),
+          appBar: AppBar(title: const Text('Settings')),
           body: ListView(
             children: [
               SwitchListTile(
@@ -76,7 +71,7 @@ class SettingsScreen extends StatelessWidget {
                         height: 52,
                         color: theme.colorScheme.primaryContainer,
                         child: Image.asset(
-                          'assets/app_icon/latest_case.png',
+                          'assets/app_icon/latest_container.png',
                           fit: BoxFit.cover,
                         ),
                       ),
@@ -184,11 +179,7 @@ class _AboutInfoTile extends StatelessWidget {
                   borderRadius: BorderRadius.circular(10),
                 ),
                 alignment: Alignment.center,
-                child: Icon(
-                  icon,
-                  size: 20,
-                  color: theme.colorScheme.primary,
-                ),
+                child: Icon(icon, size: 20, color: theme.colorScheme.primary),
               ),
               const SizedBox(width: 12),
               Expanded(
@@ -202,10 +193,7 @@ class _AboutInfoTile extends StatelessWidget {
                       ),
                     ),
                     const SizedBox(height: 4),
-                    Text(
-                      value,
-                      style: theme.textTheme.bodyLarge,
-                    ),
+                    Text(value, style: theme.textTheme.bodyLarge),
                     if (helperText != null) ...[
                       const SizedBox(height: 4),
                       Text(

@@ -4,11 +4,7 @@ class DetailTag extends StatelessWidget {
   final String text;
   final Color? color;
 
-  const DetailTag({
-    super.key,
-    required this.text,
-    this.color,
-  });
+  const DetailTag({super.key, required this.text, this.color});
 
   @override
   Widget build(BuildContext context) {

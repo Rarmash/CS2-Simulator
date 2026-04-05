@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../data/models/case_dto.dart';
+import '../../data/models/container_dto.dart';
 import '../../data/repositories/local_data_repository.dart';
 import '../helpers/app_navigation_helper.dart';
 import '../helpers/source_color_helper.dart';
@@ -22,7 +22,7 @@ class StickerCollectionListScreen extends StatefulWidget {
 
 class _StickerCollectionListScreenState
     extends State<StickerCollectionListScreen> {
-  late Future<List<CaseDto>> _future;
+  late Future<List<ContainerDto>> _future;
 
   static const String _filterAll = 'ALL';
   static const String _filterArmory = 'ARMORY_REWARD';
@@ -49,15 +49,15 @@ class _StickerCollectionListScreenState
     }
   }
 
-  String _sourceGroupLabel(CaseDto collection) {
+  String _sourceGroupLabel(ContainerDto collection) {
     if (collection.sourceType == _filterArmory) {
       return 'Armory';
     }
     return 'Operations';
   }
 
-  List<CaseDto> _applyFilters(List<CaseDto> all) {
-    var items = List<CaseDto>.from(all);
+  List<ContainerDto> _applyFilters(List<ContainerDto> all) {
+    var items = List<ContainerDto>.from(all);
 
     if (_selectedFilter == _filterArmory) {
       items = items.where((e) => e.sourceType == _filterArmory).toList();
@@ -91,14 +91,14 @@ class _StickerCollectionListScreenState
     );
   }
 
-  Widget _buildCard(BuildContext context, CaseDto collection) {
+  Widget _buildCard(BuildContext context, ContainerDto collection) {
     final typeColor = SourceColorHelper.containerTypeColor(collection.type);
     final isArmory = collection.sourceType == _filterArmory;
     final sourceColor = SourceColorHelper.rewardSourceColor(isArmory: isArmory);
     final sourceLabel = _sourceGroupLabel(collection);
 
     return CollectionListCard(
-      imagePath: collection.caseImage,
+      imagePath: collection.containerImage,
       title: collection.name,
       releaseDate: collection.releaseDate,
       chips: [
@@ -122,7 +122,7 @@ class _StickerCollectionListScreenState
         AppNavigationHelper.pushScreen(
           context,
           AppNavigationHelper.buildContainerOpenScreen(
-            caseDto: collection,
+            containerDto: collection,
             repository: widget.repository,
           ),
         );
@@ -134,12 +134,12 @@ class _StickerCollectionListScreenState
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text('Sticker Collections')),
-      body: AsyncCollectionLoader<CaseDto>(
+      body: AsyncCollectionLoader<ContainerDto>(
         future: _future,
         builder: (context, all) {
           final visible = _applyFilters(all);
 
-          return ResponsiveCollectionGrid<CaseDto>(
+          return ResponsiveCollectionGrid<ContainerDto>(
             items: visible,
             emptyMessage: 'No sticker collections found.',
             header: _buildFilterBar(),

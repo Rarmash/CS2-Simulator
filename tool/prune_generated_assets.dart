@@ -25,25 +25,21 @@ Future<void> main() async {
     }
   }
 
-  collectFromJsonArray('assets/data/cases.json', [
-    'caseImage',
+  collectFromJsonArray('assets/data/containers.json', [
+    'containerImage',
     'tournamentLogo',
   ]);
   collectFromJsonArray('assets/data/skins.json', ['skinImage']);
   collectFromJsonArray('assets/data/stickers.json', ['stickerImage']);
   collectFromJsonArray('assets/data/pins.json', ['pinImage']);
   collectFromJsonArray('assets/data/music_kits.json', ['musicKitImage']);
-  collectFromJsonArray('assets/data/reward_collections.json', ['image']);
-  collectFromJsonArray('assets/data/operation_collections.json', ['image']);
 
   final dirs = <String>[
-    'assets/cases',
+    'assets/containers',
     'assets/skins',
     'assets/stickers',
     'assets/pins',
     'assets/music_kits',
-    'assets/reward_collections',
-    'assets/operation_collections',
     'assets/tournament_logos',
   ];
 

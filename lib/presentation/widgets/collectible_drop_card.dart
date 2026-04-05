@@ -56,15 +56,14 @@ class CollectibleDropCard extends StatelessWidget {
               final image = Image.asset(
                 imagePath,
                 height: isNarrow ? 120 : 160,
-                errorBuilder: (_, _, _) => Icon(
-                  Icons.image_not_supported,
-                  size: isNarrow ? 64 : 80,
-                ),
+                errorBuilder: (_, _, _) =>
+                    Icon(Icons.image_not_supported, size: isNarrow ? 64 : 80),
               );
 
               final info = Column(
-                crossAxisAlignment:
-                    isNarrow ? CrossAxisAlignment.center : CrossAxisAlignment.start,
+                crossAxisAlignment: isNarrow
+                    ? CrossAxisAlignment.center
+                    : CrossAxisAlignment.start,
                 children: [
                   Text(
                     title,

@@ -1,9 +1,12 @@
 part of 'local_data_repository.dart';
 
 mixin _LocalDataRepositoryLoaders {
-  Future<List<CaseDto>> loadCases() async {
-    final cases = await _loadDtoList('assets/data/cases.json', CaseDto.fromJson);
-    cases.sort(_compareCaseByReleaseDateAsc);
+  Future<List<ContainerDto>> loadContainers() async {
+    final cases = await _loadDtoList(
+      'assets/data/containers.json',
+      ContainerDto.fromJson,
+    );
+    cases.sort(_compareContainerByReleaseDateAsc);
     return cases;
   }
 
@@ -35,8 +38,15 @@ mixin _LocalDataRepositoryLoaders {
     return _loadDtoList('assets/data/patches.json', PatchDto.fromJson);
   }
 
-  Future<List<CaseContentDto>> loadCaseContents() async {
-    return _loadDtoList('assets/data/case_contents.json', CaseContentDto.fromJson);
+  Future<List<CharmDto>> loadCharms() async {
+    return _loadDtoList('assets/data/charms.json', CharmDto.fromJson);
+  }
+
+  Future<List<ContainerContentDto>> loadContainerContents() async {
+    return _loadDtoList(
+      'assets/data/container_contents.json',
+      ContainerContentDto.fromJson,
+    );
   }
 
   Future<List<StickerContentDto>> loadStickerContents() async {
@@ -47,7 +57,10 @@ mixin _LocalDataRepositoryLoaders {
   }
 
   Future<List<PinContentDto>> loadPinContents() async {
-    return _loadDtoList('assets/data/pin_contents.json', PinContentDto.fromJson);
+    return _loadDtoList(
+      'assets/data/pin_contents.json',
+      PinContentDto.fromJson,
+    );
   }
 
   Future<List<MusicKitContentDto>> loadMusicKitContents() async {
@@ -57,13 +70,11 @@ mixin _LocalDataRepositoryLoaders {
     );
   }
 
-  Future<List<AgentCollectionDto>> loadAgentCollections() async {
-    final items = await _loadDtoList(
-      'assets/data/agent_collections.json',
-      AgentCollectionDto.fromJson,
-    );
-    items.sort(_compareNamedReleaseDateAsc);
-    return items;
+  Future<List<ContainerDto>> loadAgentCollections() async {
+    final items = await loadContainers();
+    final result = items.where((item) => item.isAgentCollection).toList();
+    result.sort(_compareCollectibleCollectionAsc);
+    return result;
   }
 
   Future<List<AgentCollectionContentDto>> loadAgentCollectionContents() async {
@@ -87,29 +98,33 @@ mixin _LocalDataRepositoryLoaders {
     );
   }
 
-  Future<List<RewardCollectionDto>> loadRewardCollections() async {
-    final items = await _loadDtoList(
-      'assets/data/reward_collections.json',
-      RewardCollectionDto.fromJson,
+  Future<List<CharmContentDto>> loadCharmContents() async {
+    return _loadDtoList(
+      'assets/data/charm_contents.json',
+      CharmContentDto.fromJson,
     );
-    items.sort(_compareNamedReleaseDateAsc);
-    return items;
   }
 
-  Future<List<RewardCollectionContentDto>> loadRewardCollectionContents() async {
+  Future<List<ContainerDto>> loadRewardCollections() async {
+    final items = await loadContainers();
+    final result = items.where((item) => item.isRewardCollection).toList();
+    result.sort(_compareCollectibleCollectionAsc);
+    return result;
+  }
+
+  Future<List<RewardCollectionContentDto>>
+  loadRewardCollectionContents() async {
     return _loadDtoList(
       'assets/data/reward_collection_contents.json',
       RewardCollectionContentDto.fromJson,
     );
   }
 
-  Future<List<OperationCollectionDto>> loadOperationCollections() async {
-    final items = await _loadDtoList(
-      'assets/data/operation_collections.json',
-      OperationCollectionDto.fromJson,
-    );
-    items.sort(_compareOperationCollectionAsc);
-    return items;
+  Future<List<ContainerDto>> loadOperationCollections() async {
+    final items = await loadContainers();
+    final result = items.where((item) => item.isOperationCollection).toList();
+    result.sort(_compareCollectibleCollectionAsc);
+    return result;
   }
 
   Future<List<OperationCollectionContentDto>>
@@ -120,11 +135,11 @@ mixin _LocalDataRepositoryLoaders {
     );
   }
 
-  Future<Map<String, List<String>>> loadCaseToSkinIds() async {
-    final caseContents = await loadCaseContents();
+  Future<Map<String, List<String>>> loadContainerToSkinIds() async {
+    final caseContents = await loadContainerContents();
     return {
       for (final entry in caseContents)
-        entry.caseId: List<String>.from(entry.skinIds),
+        entry.containerId: List<String>.from(entry.skinIds),
     };
   }
 

@@ -3,7 +3,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 
 import '../../core/utils/date_format_helper.dart';
-import '../../data/models/reward_collection_dto.dart';
+import '../../data/models/container_dto.dart';
 import '../../data/models/skin_dto.dart';
 import '../../data/repositories/local_data_repository.dart';
 import '../../domain/dropped_skin.dart';
@@ -20,7 +20,7 @@ import '../widgets/skin_grid_tile.dart';
 import '../widgets/source_badge.dart';
 
 class RewardCollectionOpenScreen extends StatefulWidget {
-  final RewardCollectionDto collection;
+  final ContainerDto collection;
   final LocalDataRepository repository;
 
   const RewardCollectionOpenScreen({
@@ -53,7 +53,7 @@ class _RewardCollectionOpenScreenState
   }
 
   Color get _sourceColor => SourceColorHelper.rewardSourceColor(
-    isArmory: widget.collection.isArmory,
+    isArmory: widget.collection.isArmoryRewardCollection,
   );
 
   Future<void> _openReward(List<SkinDto> skins) async {
@@ -99,11 +99,11 @@ class _RewardCollectionOpenScreenState
           return [
             SliverToBoxAdapter(
               child: CollectibleOpenHeader(
-                assetPath: widget.collection.image,
+                assetPath: widget.collection.containerImage,
                 imageHeight: constraints.maxWidth < 700 ? 90 : 120,
                 badges: [
                   SourceBadge(
-                    label: widget.collection.isArmory
+                    label: widget.collection.isArmoryRewardCollection
                         ? 'Armory Reward'
                         : 'Operation Reward',
                     color: _sourceColor,
@@ -137,7 +137,7 @@ class _RewardCollectionOpenScreenState
             if (_isOpening)
               SliverToBoxAdapter(
                 child: OpeningLoadingCard(
-                  title: widget.collection.isArmory
+                  title: widget.collection.isArmoryRewardCollection
                       ? 'Opening armory reward...'
                       : 'Opening operation reward...',
                 ),

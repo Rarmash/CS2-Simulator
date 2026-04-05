@@ -6,7 +6,7 @@ int _compareByReleaseDateAsc(String? a, String? b) {
   return left.compareTo(right);
 }
 
-int _compareCaseByReleaseDateAsc(CaseDto a, CaseDto b) {
+int _compareContainerByReleaseDateAsc(ContainerDto a, ContainerDto b) {
   final byDate = _compareByReleaseDateAsc(a.releaseDate, b.releaseDate);
   if (byDate != 0) return byDate;
   return a.name.compareTo(b.name);
@@ -21,20 +21,7 @@ int _compareNamedReleaseDateAsc(dynamic a, dynamic b) {
   return (a.name as String).compareTo(b.name as String);
 }
 
-int _compareOperationCollectionAsc(
-  OperationCollectionDto a,
-  OperationCollectionDto b,
-) {
-  final byOperation = a.operationName.compareTo(b.operationName);
-  if (byOperation != 0) return byOperation;
-
-  final byDate = _compareByReleaseDateAsc(a.releaseDate, b.releaseDate);
-  if (byDate != 0) return byDate;
-
-  return a.name.compareTo(b.name);
-}
-
-int _compareCollectibleCollectionAsc(CaseDto a, CaseDto b) {
+int _compareCollectibleCollectionAsc(ContainerDto a, ContainerDto b) {
   final sourceA = a.sourceType ?? '';
   final sourceB = b.sourceType ?? '';
   final bySource = sourceA.compareTo(sourceB);
@@ -112,6 +99,19 @@ int _musicKitRarityOrder(MusicKitDto musicKit) {
   }
 }
 
+int _musicKitVariantOrder(MusicKitDto musicKit) {
+  if (musicKit.hasRegular && !musicKit.hasStatTrak) {
+    return 0;
+  }
+  if (musicKit.hasRegular && musicKit.hasStatTrak) {
+    return 1;
+  }
+  if (musicKit.hasStatTrak) {
+    return 2;
+  }
+  return 999;
+}
+
 int _agentRarityOrder(AgentDto agent) {
   switch (agent.rarity) {
     case 'DISTINGUISHED':
@@ -150,6 +150,21 @@ int _patchRarityOrder(PatchDto patch) {
       return 1;
     case 'EXOTIC':
       return 2;
+    default:
+      return 99;
+  }
+}
+
+int _charmRarityOrder(CharmDto charm) {
+  switch (charm.rarity) {
+    case 'HIGH_GRADE':
+      return 0;
+    case 'REMARKABLE':
+      return 1;
+    case 'EXOTIC':
+      return 2;
+    case 'EXTRAORDINARY':
+      return 3;
     default:
       return 99;
   }

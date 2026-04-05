@@ -2,7 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import '../../core/utils/date_format_helper.dart';
-import '../../data/models/case_dto.dart';
+import '../../data/models/container_dto.dart';
 import '../../data/models/patch_dto.dart';
 import '../../data/repositories/local_data_repository.dart';
 import '../../domain/dropped_patch.dart';
@@ -22,17 +22,18 @@ import '../widgets/patch_drop_card.dart';
 import '../widgets/patch_grid_tile.dart';
 
 class PatchContainerOpenScreen extends StatefulWidget {
-  final CaseDto caseDto;
+  final ContainerDto containerDto;
   final LocalDataRepository repository;
 
   const PatchContainerOpenScreen({
     super.key,
-    required this.caseDto,
+    required this.containerDto,
     required this.repository,
   });
 
   @override
-  State<PatchContainerOpenScreen> createState() => _PatchContainerOpenScreenState();
+  State<PatchContainerOpenScreen> createState() =>
+      _PatchContainerOpenScreenState();
 }
 
 class _PatchContainerOpenScreenState extends State<PatchContainerOpenScreen> {
@@ -49,7 +50,9 @@ class _PatchContainerOpenScreenState extends State<PatchContainerOpenScreen> {
   @override
   void initState() {
     super.initState();
-    _patchesFuture = widget.repository.loadPatchesForCase(widget.caseDto.id);
+    _patchesFuture = widget.repository.loadPatchesForContainer(
+      widget.containerDto.id,
+    );
   }
 
   @override
@@ -87,7 +90,9 @@ class _PatchContainerOpenScreenState extends State<PatchContainerOpenScreen> {
     DroppedPatch drop,
   ) {
     final high = allPatches.where((p) => p.rarity == 'HIGH_GRADE').toList();
-    final remarkable = allPatches.where((p) => p.rarity == 'REMARKABLE').toList();
+    final remarkable = allPatches
+        .where((p) => p.rarity == 'REMARKABLE')
+        .toList();
     final exotic = allPatches.where((p) => p.rarity == 'EXOTIC').toList();
 
     return OpeningRollSequenceBuilder.build<PatchDto>(
@@ -97,7 +102,8 @@ class _PatchContainerOpenScreenState extends State<PatchContainerOpenScreen> {
         if (high.isNotEmpty) WeightedRollBucket(items: high, weight: 0.7992327),
         if (remarkable.isNotEmpty)
           WeightedRollBucket(items: remarkable, weight: 0.1598465),
-        if (exotic.isNotEmpty) WeightedRollBucket(items: exotic, weight: 0.0409208),
+        if (exotic.isNotEmpty)
+          WeightedRollBucket(items: exotic, weight: 0.0409208),
       ],
       nearWinnerBuckets: [
         if (high.isNotEmpty) WeightedRollBucket(items: high, weight: 0.60),
@@ -127,22 +133,24 @@ class _PatchContainerOpenScreenState extends State<PatchContainerOpenScreen> {
   @override
   Widget build(BuildContext context) {
     final formattedReleaseDate = DateFormatHelper.formatReleaseDate(
-      widget.caseDto.releaseDate,
+      widget.containerDto.releaseDate,
     );
-    final color = SourceColorHelper.containerTypeColor(widget.caseDto.type);
+    final color = SourceColorHelper.containerTypeColor(
+      widget.containerDto.type,
+    );
 
     return Scaffold(
-      appBar: AppBar(title: Text(widget.caseDto.name)),
+      appBar: AppBar(title: Text(widget.containerDto.name)),
       body: CollectibleOpenBody<PatchDto>(
         future: _patchesFuture,
         sliverBuilder: (context, constraints, patches, gridCount, aspectRatio) {
           return [
             SliverToBoxAdapter(
               child: CollectibleOpenHeader(
-                assetPath: widget.caseDto.caseImage,
+                assetPath: widget.containerDto.containerImage,
                 imageHeight: constraints.maxWidth < 700 ? 90 : 120,
                 badges: [
-                  ChipBadge(label: widget.caseDto.typeLabel, color: color),
+                  ChipBadge(label: widget.containerDto.typeLabel, color: color),
                 ],
                 releaseDateText: formattedReleaseDate,
                 description:

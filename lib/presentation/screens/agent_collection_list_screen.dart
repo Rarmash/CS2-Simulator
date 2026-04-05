@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../data/models/agent_collection_dto.dart';
+import '../../data/models/container_dto.dart';
 import '../../data/repositories/local_data_repository.dart';
 import '../helpers/app_navigation_helper.dart';
 import '../helpers/source_color_helper.dart';
@@ -21,7 +21,7 @@ class AgentCollectionListScreen extends StatefulWidget {
 }
 
 class _AgentCollectionListScreenState extends State<AgentCollectionListScreen> {
-  late Future<List<AgentCollectionDto>> _future;
+  late Future<List<ContainerDto>> _future;
 
   @override
   void initState() {
@@ -29,18 +29,18 @@ class _AgentCollectionListScreenState extends State<AgentCollectionListScreen> {
     _future = widget.repository.loadAgentCollections();
   }
 
-  Widget _buildCard(BuildContext context, AgentCollectionDto collection) {
-    final color = SourceColorHelper.operationColor(collection.operationId);
+  Widget _buildCard(BuildContext context, ContainerDto collection) {
+    final color = SourceColorHelper.operationColor(collection.sourceId ?? '');
 
     return CollectionListCard(
-      imagePath: collection.image,
+      imagePath: collection.containerImage,
       title: collection.name,
       releaseDate: collection.releaseDate,
       chips: [ChipBadge(label: 'Agent Collection', color: color)],
       metadata: [
         const SizedBox(height: 8),
         Text(
-          collection.operationName,
+          collection.sourceLabel,
           style: TextStyle(
             color: color,
             fontSize: 13,
@@ -64,10 +64,10 @@ class _AgentCollectionListScreenState extends State<AgentCollectionListScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text('Agent Collections')),
-      body: AsyncCollectionLoader<AgentCollectionDto>(
+      body: AsyncCollectionLoader<ContainerDto>(
         future: _future,
         builder: (context, items) {
-          return ResponsiveCollectionGrid<AgentCollectionDto>(
+          return ResponsiveCollectionGrid<ContainerDto>(
             items: items,
             emptyMessage: 'No agent collections found.',
             itemBuilder: _buildCard,

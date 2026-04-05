@@ -138,9 +138,7 @@ class FloatCapBar extends StatelessWidget {
 class _FloatTopLabel extends StatelessWidget {
   final double value;
 
-  const _FloatTopLabel({
-    required this.value,
-  });
+  const _FloatTopLabel({required this.value});
 
   @override
   Widget build(BuildContext context) {
@@ -165,10 +163,7 @@ class _PointerTriangle extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CustomPaint(
-      size: const Size(10, 8),
-      painter: _TrianglePainter(),
-    );
+    return CustomPaint(size: const Size(10, 8), painter: _TrianglePainter());
   }
 }
 

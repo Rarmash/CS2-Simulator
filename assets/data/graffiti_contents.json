@@ -1,6 +1,6 @@
 [
   {
-    "caseId": "2231",
+    "containerId": "2231",
     "graffitiIds": [
       "1671",
       "1672",
@@ -23,7 +23,7 @@
     ]
   },
   {
-    "caseId": "2232",
+    "containerId": "2232",
     "graffitiIds": [
       "1653",
       "1654",
@@ -46,7 +46,7 @@
     ]
   },
   {
-    "caseId": "2233",
+    "containerId": "2233",
     "graffitiIds": [
       "2418",
       "2419",

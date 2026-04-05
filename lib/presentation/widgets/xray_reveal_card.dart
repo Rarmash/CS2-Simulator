@@ -34,10 +34,8 @@ class _XrayRevealCardState extends State<XrayRevealCard>
   @override
   void initState() {
     super.initState();
-    _controller = AnimationController(
-      vsync: this,
-      duration: _scanDuration,
-    )..addStatusListener((status) {
+    _controller = AnimationController(vsync: this, duration: _scanDuration)
+      ..addStatusListener((status) {
         if (status == AnimationStatus.completed && mounted) {
           setState(() {
             _scanCompleted = true;
@@ -92,8 +90,10 @@ class _XrayRevealCardState extends State<XrayRevealCard>
         final progress = _controller.value.clamp(0.0, 1.0);
         final scanY = _scanViewportHeight * progress;
         final unrevealedTop = scanY.clamp(0.0, _scanViewportHeight);
-        final unrevealedHeight =
-            (_scanViewportHeight - unrevealedTop).clamp(0.0, _scanViewportHeight);
+        final unrevealedHeight = (_scanViewportHeight - unrevealedTop).clamp(
+          0.0,
+          _scanViewportHeight,
+        );
         final lineTop = (scanY - 1).clamp(0.0, _scanViewportHeight - 2);
 
         return Container(
@@ -115,19 +115,14 @@ class _XrayRevealCardState extends State<XrayRevealCard>
             gradient: const LinearGradient(
               begin: Alignment.topCenter,
               end: Alignment.bottomCenter,
-              colors: [
-                xrayBg2,
-                xrayBg,
-              ],
+              colors: [xrayBg2, xrayBg],
             ),
           ),
           clipBehavior: Clip.antiAlias,
           child: Stack(
             fit: StackFit.expand,
             children: [
-              const Positioned.fill(
-                child: _XrayGridOverlay(),
-              ),
+              const Positioned.fill(child: _XrayGridOverlay()),
               Positioned.fill(
                 child: DecoratedBox(
                   decoration: BoxDecoration(
@@ -144,18 +139,14 @@ class _XrayRevealCardState extends State<XrayRevealCard>
                   ),
                 ),
               ),
-              Positioned.fill(
-                child: _buildFixedSkinImage(),
-              ),
+              Positioned.fill(child: _buildFixedSkinImage()),
               if (unrevealedHeight > 0)
                 Positioned(
                   left: 0,
                   right: 0,
                   top: unrevealedTop,
                   height: unrevealedHeight,
-                  child: Container(
-                    color: maskColor,
-                  ),
+                  child: Container(color: maskColor),
                 ),
               Positioned(
                 left: 0,
@@ -220,9 +211,7 @@ class _XrayRevealCardState extends State<XrayRevealCard>
                   decoration: BoxDecoration(
                     color: Colors.black.withValues(alpha: 0.34),
                     borderRadius: BorderRadius.circular(999),
-                    border: Border.all(
-                      color: xrayGlow.withValues(alpha: 0.35),
-                    ),
+                    border: Border.all(color: xrayGlow.withValues(alpha: 0.35)),
                   ),
                   child: Text(
                     _scanCompleted
@@ -261,8 +250,9 @@ class _XrayRevealCardState extends State<XrayRevealCard>
                   decoration: BoxDecoration(
                     border: Border(
                       left: BorderSide(color: xrayGlow.withValues(alpha: 0.65)),
-                      bottom:
-                          BorderSide(color: xrayGlow.withValues(alpha: 0.65)),
+                      bottom: BorderSide(
+                        color: xrayGlow.withValues(alpha: 0.65),
+                      ),
                     ),
                   ),
                 ),
@@ -275,9 +265,12 @@ class _XrayRevealCardState extends State<XrayRevealCard>
                   height: 22,
                   decoration: BoxDecoration(
                     border: Border(
-                      right: BorderSide(color: xrayGlow.withValues(alpha: 0.65)),
-                      bottom:
-                          BorderSide(color: xrayGlow.withValues(alpha: 0.65)),
+                      right: BorderSide(
+                        color: xrayGlow.withValues(alpha: 0.65),
+                      ),
+                      bottom: BorderSide(
+                        color: xrayGlow.withValues(alpha: 0.65),
+                      ),
                     ),
                   ),
                 ),
@@ -301,10 +294,7 @@ class _XrayRevealCardState extends State<XrayRevealCard>
       margin: const EdgeInsets.all(12),
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(16),
-        side: const BorderSide(
-          color: xrayGlow,
-          width: 1.15,
-        ),
+        side: const BorderSide(color: xrayGlow, width: 1.15),
       ),
       color: xrayPanel,
       child: Padding(
@@ -329,10 +319,7 @@ class _XrayRevealCardState extends State<XrayRevealCard>
                       padding: EdgeInsets.only(top: 16),
                       child: Text(
                         'Running X-Ray scan...',
-                        style: TextStyle(
-                          color: Colors.white70,
-                          fontSize: 14,
-                        ),
+                        style: TextStyle(color: Colors.white70, fontSize: 14),
                       ),
                     )
                   : Column(
@@ -360,7 +347,8 @@ class _XrayRevealCardState extends State<XrayRevealCard>
                         ),
                         InfoRow(
                           title: 'Float',
-                          value: widget.drop.skinFloat?.toStringAsFixed(6) ?? '-',
+                          value:
+                              widget.drop.skinFloat?.toStringAsFixed(6) ?? '-',
                         ),
                         InfoRow(
                           title: 'Exterior',
@@ -377,8 +365,9 @@ class _XrayRevealCardState extends State<XrayRevealCard>
                               child: OutlinedButton(
                                 onPressed: widget.onDestroy,
                                 style: OutlinedButton.styleFrom(
-                                  padding:
-                                      const EdgeInsets.symmetric(vertical: 14),
+                                  padding: const EdgeInsets.symmetric(
+                                    vertical: 14,
+                                  ),
                                 ),
                                 child: const Text('DESTROY'),
                               ),
@@ -388,8 +377,9 @@ class _XrayRevealCardState extends State<XrayRevealCard>
                               child: ElevatedButton(
                                 onPressed: widget.onClaim,
                                 style: ElevatedButton.styleFrom(
-                                  padding:
-                                      const EdgeInsets.symmetric(vertical: 14),
+                                  padding: const EdgeInsets.symmetric(
+                                    vertical: 14,
+                                  ),
                                 ),
                                 child: const Text('CLAIM ITEM'),
                               ),
@@ -411,9 +401,7 @@ class _XrayGridOverlay extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CustomPaint(
-      painter: _XrayGridPainter(),
-    );
+    return CustomPaint(painter: _XrayGridPainter());
   }
 }
 

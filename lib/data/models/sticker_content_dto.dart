@@ -1,12 +1,15 @@
 class StickerContentDto {
-  final String caseId;
+  final String containerId;
   final List<String> stickerIds;
 
-  const StickerContentDto({required this.caseId, required this.stickerIds});
+  const StickerContentDto({
+    required this.containerId,
+    required this.stickerIds,
+  });
 
   factory StickerContentDto.fromJson(Map<String, dynamic> json) {
     return StickerContentDto(
-      caseId: json['caseId'] as String,
+      containerId: json['containerId'] as String,
       stickerIds: (json['stickerIds'] as List<dynamic>)
           .map((e) => e as String)
           .toList(),

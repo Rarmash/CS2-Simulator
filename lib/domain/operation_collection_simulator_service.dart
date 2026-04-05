@@ -1,33 +1,35 @@
 import 'dart:math';
 
-import '../data/models/operation_collection_dto.dart';
+import '../data/models/container_dto.dart';
 import '../data/models/skin_dto.dart';
 import 'dropped_skin.dart';
 import 'package_odds.dart';
+import 'skin_float_helper.dart';
 
 class OperationCollectionSimulatorService {
   final Random _random = Random();
 
   DroppedSkin openCollection({
     required List<SkinDto> skins,
-    required OperationCollectionDto collection,
+    required ContainerDto collection,
   }) {
     if (skins.isEmpty) {
       throw Exception('No skins found for operation collection');
     }
 
     final selectedSkin = _selectSkin(skins);
-    final floatValue = _generateFloat(
-      selectedSkin.floatTop,
-      selectedSkin.floatBottom,
+    final wear = SkinFloatHelper.generateWear(
+      random: _random,
+      minFloat: selectedSkin.floatTop,
+      maxFloat: selectedSkin.floatBottom,
     );
 
     return DroppedSkin(
       skin: selectedSkin,
       isStatTrak: false,
       isSouvenir: false,
-      skinFloat: floatValue,
-      exterior: _getExterior(floatValue),
+      skinFloat: wear.floatValue,
+      exterior: wear.exterior,
     );
   }
 
@@ -79,17 +81,5 @@ class OperationCollectionSimulatorService {
           return s.rarity == 'COVERT' || s.rarity == 'CONTRABAND';
         }).toList();
     }
-  }
-
-  double _generateFloat(double min, double max) {
-    return min + _random.nextDouble() * (max - min);
-  }
-
-  String _getExterior(double value) {
-    if (value <= 0.07) return 'Factory New';
-    if (value <= 0.15) return 'Minimal Wear';
-    if (value <= 0.37) return 'Field-Tested';
-    if (value <= 0.44) return 'Well-Worn';
-    return 'Battle-Scarred';
   }
 }

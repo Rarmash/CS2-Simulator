@@ -4,11 +4,7 @@ class SourceBadge extends StatelessWidget {
   final String label;
   final Color color;
 
-  const SourceBadge({
-    super.key,
-    required this.label,
-    required this.color,
-  });
+  const SourceBadge({super.key, required this.label, required this.color});
 
   @override
   Widget build(BuildContext context) {

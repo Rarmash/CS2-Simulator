@@ -14,7 +14,7 @@ class PinUiHelper {
       case 'EXOTIC':
         return Colors.pink;
       case 'EXTRAORDINARY':
-        return Colors.amber;
+        return const Color(0xFFEB4B4B);
       default:
         return Colors.white24;
     }

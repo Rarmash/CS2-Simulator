@@ -63,9 +63,9 @@ class SkinDto {
       collectionSourceId: json['collectionSourceId'] as String?,
       isRewardCollection: (json['isRewardCollection'] as bool?) ?? false,
       operationCollectionIds:
-      (json['operationCollectionIds'] as List<dynamic>?)
-          ?.map((e) => e as String)
-          .toList() ??
+          (json['operationCollectionIds'] as List<dynamic>?)
+              ?.map((e) => e as String)
+              .toList() ??
           const [],
       isOperationCollection: (json['isOperationCollection'] as bool?) ?? false,
     );

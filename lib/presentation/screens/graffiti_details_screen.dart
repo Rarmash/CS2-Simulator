@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../core/utils/date_format_helper.dart';
-import '../../data/models/case_dto.dart';
+import '../../data/models/container_dto.dart';
 import '../../data/models/graffiti_dto.dart';
 import '../../data/repositories/local_data_repository.dart';
 import '../helpers/app_navigation_helper.dart';
@@ -28,8 +28,8 @@ class GraffitiDetailsScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(title: Text(graffiti.name)),
-      body: FutureBuilder<List<CaseDto>>(
-        future: repository.loadCasesForGraffiti(graffiti.id),
+      body: FutureBuilder<List<ContainerDto>>(
+        future: repository.loadContainersForGraffiti(graffiti.id),
         builder: (context, snapshot) {
           if (snapshot.connectionState != ConnectionState.done) {
             return const Center(child: CircularProgressIndicator());
@@ -47,7 +47,7 @@ class GraffitiDetailsScreen extends StatelessWidget {
             );
           }
 
-          final cases = snapshot.data ?? const <CaseDto>[];
+          final cases = snapshot.data ?? const <ContainerDto>[];
 
           return ListView(
             padding: const EdgeInsets.all(12),
@@ -70,25 +70,29 @@ class GraffitiDetailsScreen extends StatelessWidget {
                     value: GraffitiUiHelper.rarityLabel(graffiti),
                   ),
                   if ((graffiti.collection ?? '').isNotEmpty)
-                    DetailInfoRow(title: 'Collection', value: graffiti.collection!),
+                    DetailInfoRow(
+                      title: 'Collection',
+                      value: graffiti.collection!,
+                    ),
                 ],
               ),
               const SizedBox(height: 12),
-              DetailSourceSection<CaseDto>(
+              DetailSourceSection<ContainerDto>(
                 title: 'Boxes',
                 items: cases,
                 emptyText: 'No graffiti box sources found.',
                 itemBuilder: (item) => DetailSourceTile(
-                  imagePath: item.caseImage,
+                  imagePath: item.containerImage,
                   title: item.name,
                   subtitle: item.typeLabel,
                   trailing:
-                      DateFormatHelper.formatReleaseDate(item.releaseDate) ?? '-',
+                      DateFormatHelper.formatReleaseDate(item.releaseDate) ??
+                      '-',
                   onTap: () {
                     AppNavigationHelper.pushScreen(
                       context,
                       AppNavigationHelper.buildContainerOpenScreen(
-                        caseDto: item,
+                        containerDto: item,
                         repository: repository,
                       ),
                     );

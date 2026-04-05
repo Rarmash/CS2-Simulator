@@ -2,7 +2,7 @@ name: cs2_simulator
 description: "Counter-Strike 2 case opening and Trade-Up contract creation simulator written in Flutter + Dart."
 publish_to: 'none'
 
-version: 0.9.2
+version: 0.10.0
 
 environment:
   sdk: ^3.11.3
@@ -23,34 +23,34 @@ dev_dependencies:
   webp: ^1.0.1
 
 flutter_launcher_icons:
-  image_path: assets/app_icon/latest_case.png
+  image_path: assets/app_icon/latest_container.png
 
   android: true
   adaptive_icon_background: assets/app_icon/transparent_bg.png
-  adaptive_icon_foreground: assets/app_icon/latest_case_foreground.png
-  adaptive_icon_monochrome: assets/app_icon/latest_case_monochrome.png
+  adaptive_icon_foreground: assets/app_icon/latest_container_foreground.png
+  adaptive_icon_monochrome: assets/app_icon/latest_container_monochrome.png
   adaptive_icon_foreground_inset: 18
 
   ios: true
   remove_alpha_ios: false
-  image_path_ios_dark_transparent: assets/app_icon/latest_case_ios_dark.png
-  image_path_ios_tinted_grayscale: assets/app_icon/latest_case_ios_tinted.png
+  image_path_ios_dark_transparent: assets/app_icon/latest_container_ios_dark.png
+  image_path_ios_tinted_grayscale: assets/app_icon/latest_container_ios_tinted.png
   desaturate_tinted_to_grayscale_ios: false
 
   macos:
     generate: true
-    image_path: assets/app_icon/latest_case.png
+    image_path: assets/app_icon/latest_container.png
 
   windows:
     generate: true
-    image_path: assets/app_icon/latest_case.png
+    image_path: assets/app_icon/latest_container.png
     icon_size: 256
 
   linux: true
 
   web:
     generate: true
-    image_path: assets/app_icon/latest_case.png
+    image_path: assets/app_icon/latest_container.png
     background_color: "#00000000"
     theme_color: "#00000000"
 
@@ -66,8 +66,6 @@ flutter:
     - assets/agents/
     - assets/graffiti/
     - assets/patches/
-    - assets/cases/
-    - assets/agent_collections/
-    - assets/reward_collections/
-    - assets/operation_collections/
+    - assets/charms/
+    - assets/containers/
     - assets/tournament_logos/

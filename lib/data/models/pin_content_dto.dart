@@ -1,12 +1,12 @@
 class PinContentDto {
-  final String caseId;
+  final String containerId;
   final List<String> pinIds;
 
-  const PinContentDto({required this.caseId, required this.pinIds});
+  const PinContentDto({required this.containerId, required this.pinIds});
 
   factory PinContentDto.fromJson(Map<String, dynamic> json) {
     return PinContentDto(
-      caseId: json['caseId'] as String,
+      containerId: json['containerId'] as String,
       pinIds: List<String>.from(json['pinIds'] as List<dynamic>),
     );
   }

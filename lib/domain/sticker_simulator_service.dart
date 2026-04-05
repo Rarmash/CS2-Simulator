@@ -27,11 +27,11 @@ class StickerSimulatorService {
       }
     }
 
-    addBucket('HIGH_GRADE', 0.7992327);
-    addBucket('REMARKABLE', 0.1598465);
-    addBucket('EXOTIC', 0.0319693);
-    addBucket('EXTRAORDINARY', 0.0063939);
-    addBucket('CONTRABAND', 0.0025576);
+    addBucket('HIGH_GRADE', 0.80);
+    addBucket('REMARKABLE', 0.16);
+    addBucket('EXOTIC', 0.032);
+    addBucket('EXTRAORDINARY', 0.00641);
+    addBucket('CONTRABAND', 0.00159);
 
     if (availableBuckets.isEmpty) {
       return stickers[_random.nextInt(stickers.length)];

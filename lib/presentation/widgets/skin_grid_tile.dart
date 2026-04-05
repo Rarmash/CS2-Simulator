@@ -30,12 +30,12 @@ class SkinGridTile extends StatelessWidget {
         ),
         boxShadow: highlighted
             ? [
-          BoxShadow(
-            color: rarityColor.withValues(alpha: 0.45),
-            blurRadius: 16,
-            spreadRadius: 2,
-          ),
-        ]
+                BoxShadow(
+                  color: rarityColor.withValues(alpha: 0.45),
+                  blurRadius: 16,
+                  spreadRadius: 2,
+                ),
+              ]
             : null,
       ),
       child: Card(
@@ -50,14 +50,11 @@ class SkinGridTile extends StatelessWidget {
                   skin.skinImage,
                   fit: BoxFit.contain,
                   errorBuilder: (_, error, stackTrace) =>
-                  const Icon(Icons.image_not_supported),
+                      const Icon(Icons.image_not_supported),
                 ),
               ),
             ),
-            Container(
-              height: 5,
-              color: rarityColor,
-            ),
+            Container(height: 5, color: rarityColor),
             Padding(
               padding: EdgeInsets.all(compact ? 6 : 8),
               child: Column(

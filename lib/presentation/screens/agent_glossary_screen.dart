@@ -22,6 +22,7 @@ class AgentGlossaryScreen extends StatefulWidget {
 class _AgentGlossaryScreenState extends State<AgentGlossaryScreen> {
   String _rarityFilter = 'ALL';
   String _sideFilter = 'ALL';
+  String _collectionFilter = 'ALL';
 
   static const List<GlossaryFilterOption> _rarityOptions = [
     GlossaryFilterOption('ALL', 'All rarities'),
@@ -37,12 +38,31 @@ class _AgentGlossaryScreenState extends State<AgentGlossaryScreen> {
     GlossaryFilterOption('TERRORIST', 'T Side'),
   ];
 
+  List<GlossaryFilterOption> _collectionOptions(List<AgentDto> items) {
+    final values =
+        items
+            .map((item) => (item.collection ?? '').trim())
+            .where((value) => value.isNotEmpty)
+            .toSet()
+            .toList()
+          ..sort();
+
+    return [
+      const GlossaryFilterOption('ALL', 'All collections'),
+      ...values.map((value) => GlossaryFilterOption(value, value)),
+    ];
+  }
+
   List<AgentDto> _filterAndSort(List<AgentDto> items, String query) {
     final filtered = items.where((agent) {
       if (_rarityFilter != 'ALL' && agent.rarity != _rarityFilter) {
         return false;
       }
       if (_sideFilter != 'ALL' && agent.team != _sideFilter) {
+        return false;
+      }
+      if (_collectionFilter != 'ALL' &&
+          (agent.collection ?? '') != _collectionFilter) {
         return false;
       }
       if (query.isEmpty) return true;
@@ -89,7 +109,7 @@ class _AgentGlossaryScreenState extends State<AgentGlossaryScreen> {
       countLabelBuilder: (count) => '$count agents',
       emptyMessage: 'No agents found.',
       errorPrefix: 'Failed to load agents.',
-      headerControlsBuilder: (_) => [
+      headerControlsBuilder: (_, items) => [
         Row(
           children: [
             Expanded(
@@ -118,6 +138,17 @@ class _AgentGlossaryScreenState extends State<AgentGlossaryScreen> {
               ),
             ),
           ],
+        ),
+        const SizedBox(height: 10),
+        GlossaryFilterDropdown(
+          label: 'Collection',
+          value: _collectionFilter,
+          options: _collectionOptions(items),
+          onChanged: (value) {
+            setState(() {
+              _collectionFilter = value ?? 'ALL';
+            });
+          },
         ),
       ],
       itemBuilder: (context, agent) {

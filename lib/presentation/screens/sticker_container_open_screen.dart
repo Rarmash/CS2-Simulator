@@ -2,7 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import '../../core/utils/date_format_helper.dart';
-import '../../data/models/case_dto.dart';
+import '../../data/models/container_dto.dart';
 import '../../data/models/sticker_dto.dart';
 import '../../data/repositories/local_data_repository.dart';
 import '../../domain/dropped_sticker.dart';
@@ -23,12 +23,12 @@ import '../widgets/sticker_drop_card.dart';
 import '../widgets/sticker_grid_tile.dart';
 
 class StickerContainerOpenScreen extends StatefulWidget {
-  final CaseDto caseDto;
+  final ContainerDto containerDto;
   final LocalDataRepository repository;
 
   const StickerContainerOpenScreen({
     super.key,
-    required this.caseDto,
+    required this.containerDto,
     required this.repository,
   });
 
@@ -52,7 +52,9 @@ class _StickerContainerOpenScreenState
   @override
   void initState() {
     super.initState();
-    _stickersFuture = widget.repository.loadStickersForCase(widget.caseDto.id);
+    _stickersFuture = widget.repository.loadStickersForContainer(
+      widget.containerDto.id,
+    );
   }
 
   @override
@@ -64,7 +66,7 @@ class _StickerContainerOpenScreenState
   Future<void> _openContainer(List<StickerDto> stickers) async {
     final drop = _simulator.openContainer(stickers: stickers);
 
-    if (widget.caseDto.isStickerCapsule) {
+    if (widget.containerDto.isStickerCapsule) {
       final rollData = _buildRollSequence(stickers, drop);
       await CollectibleOpenFlowHelper.runRoulette<StickerDto, DroppedSticker>(
         setState: setState,
@@ -113,14 +115,14 @@ class _StickerContainerOpenScreenState
     if (_isOpening) {
       return 'OPENING...';
     }
-    if (widget.caseDto.isStickerCollection) {
+    if (widget.containerDto.isStickerCollection) {
       return 'OPEN STICKER COLLECTION';
     }
     return 'OPEN STICKER CAPSULE';
   }
 
   String _loadingTitle() {
-    if (widget.caseDto.isStickerCollection) {
+    if (widget.containerDto.isStickerCollection) {
       return 'Opening sticker collection...';
     }
     return 'Opening sticker capsule...';
@@ -193,34 +195,36 @@ class _StickerContainerOpenScreenState
   @override
   Widget build(BuildContext context) {
     final formattedReleaseDate = DateFormatHelper.formatReleaseDate(
-      widget.caseDto.releaseDate,
+      widget.containerDto.releaseDate,
     );
-    final color = SourceColorHelper.containerTypeColor(widget.caseDto.type);
-    final sourceTypeLabel = widget.caseDto.sourceTypeLabel;
+    final color = SourceColorHelper.containerTypeColor(
+      widget.containerDto.type,
+    );
+    final sourceTypeLabel = widget.containerDto.sourceTypeLabel;
     final sourceColor = SourceColorHelper.collectibleSourceColor(
-      widget.caseDto.sourceType,
-      widget.caseDto.sourceId,
+      widget.containerDto.sourceType,
+      widget.containerDto.sourceId,
     );
 
     return Scaffold(
-      appBar: AppBar(title: Text(widget.caseDto.name)),
+      appBar: AppBar(title: Text(widget.containerDto.name)),
       body: CollectibleOpenBody<StickerDto>(
         future: _stickersFuture,
         sliverBuilder: (context, constraints, stickers, gridCount, aspectRatio) {
           return [
             SliverToBoxAdapter(
               child: CollectibleOpenHeader(
-                assetPath: widget.caseDto.caseImage,
+                assetPath: widget.containerDto.containerImage,
                 imageHeight: constraints.maxWidth < 700 ? 90 : 120,
                 badges: [
-                  ChipBadge(label: widget.caseDto.typeLabel, color: color),
-                  if (widget.caseDto.isStickerCollection &&
+                  ChipBadge(label: widget.containerDto.typeLabel, color: color),
+                  if (widget.containerDto.isStickerCollection &&
                       sourceTypeLabel != null)
                     ChipBadge(label: sourceTypeLabel, color: sourceColor),
-                  if (widget.caseDto.isStickerCollection &&
-                      (widget.caseDto.sourceName ?? '').isNotEmpty)
+                  if (widget.containerDto.isStickerCollection &&
+                      (widget.containerDto.sourceName ?? '').isNotEmpty)
                     ChipBadge(
-                      label: widget.caseDto.sourceName!,
+                      label: widget.containerDto.sourceName!,
                       color: sourceColor,
                     ),
                 ],
@@ -233,7 +237,7 @@ class _StickerContainerOpenScreenState
                     : () => _openContainer(stickers),
               ),
             ),
-            if (widget.caseDto.isStickerCapsule)
+            if (widget.containerDto.isStickerCapsule)
               CollectibleRollerSliver<StickerDto>(
                 controller: _rollController,
                 items: _rollSequence,
@@ -245,8 +249,10 @@ class _StickerContainerOpenScreenState
                   itemWidth: itemWidth,
                 ),
               ),
-            if (_isOpening && !widget.caseDto.isStickerCapsule)
-              SliverToBoxAdapter(child: OpeningLoadingCard(title: _loadingTitle())),
+            if (_isOpening && !widget.containerDto.isStickerCapsule)
+              SliverToBoxAdapter(
+                child: OpeningLoadingCard(title: _loadingTitle()),
+              ),
             if (_dropped != null)
               SliverToBoxAdapter(child: StickerDropCard(drop: _dropped!)),
             const SliverToBoxAdapter(

@@ -24,17 +24,11 @@ class DetailSourceSection<T> extends StatelessWidget {
           children: [
             Text(
               '$title (${items.length})',
-              style: const TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.w700,
-              ),
+              style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w700),
             ),
             const SizedBox(height: 12),
             if (items.isEmpty)
-              Text(
-                emptyText,
-                style: const TextStyle(color: Colors.white70),
-              )
+              Text(emptyText, style: const TextStyle(color: Colors.white70))
             else
               ...items.map(itemBuilder),
           ],

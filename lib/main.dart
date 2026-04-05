@@ -38,9 +38,7 @@ class _Cs2SimulatorAppState extends State<Cs2SimulatorApp> {
             debugShowCheckedModeBanner: false,
             theme: ThemeData.dark(),
             home: const Scaffold(
-              body: Center(
-                child: CircularProgressIndicator(),
-              ),
+              body: Center(child: CircularProgressIndicator()),
             ),
           );
         }

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../data/models/operation_collection_dto.dart';
+import '../../data/models/container_dto.dart';
 import '../../data/repositories/local_data_repository.dart';
 import '../helpers/app_navigation_helper.dart';
 import '../helpers/source_color_helper.dart';
@@ -14,10 +14,7 @@ import 'operation_collection_open_screen.dart';
 class OperationCollectionListScreen extends StatefulWidget {
   final LocalDataRepository repository;
 
-  const OperationCollectionListScreen({
-    super.key,
-    required this.repository,
-  });
+  const OperationCollectionListScreen({super.key, required this.repository});
 
   @override
   State<OperationCollectionListScreen> createState() =>
@@ -26,7 +23,7 @@ class OperationCollectionListScreen extends StatefulWidget {
 
 class _OperationCollectionListScreenState
     extends State<OperationCollectionListScreen> {
-  late Future<List<OperationCollectionDto>> _future;
+  late Future<List<ContainerDto>> _future;
 
   static const String _filterAll = 'ALL';
   String _selectedFilter = _filterAll;
@@ -37,11 +34,11 @@ class _OperationCollectionListScreenState
     _future = widget.repository.loadOperationCollections();
   }
 
-  List<String> _availableFilters(List<OperationCollectionDto> all) {
+  List<String> _availableFilters(List<ContainerDto> all) {
     final ids = <String>{_filterAll};
 
     for (final item in all) {
-      ids.add(item.operationId);
+      ids.add(item.sourceId ?? '');
     }
 
     final ordered = <String>[_filterAll];
@@ -69,26 +66,26 @@ class _OperationCollectionListScreenState
     return ordered;
   }
 
-  String _filterLabel(String id, List<OperationCollectionDto> all) {
+  String _filterLabel(String id, List<ContainerDto> all) {
     if (id == _filterAll) return 'All';
 
-    final match = all.cast<OperationCollectionDto?>().firstWhere(
-          (e) => e?.operationId == id,
+    final match = all.cast<ContainerDto?>().firstWhere(
+      (e) => e?.sourceId == id,
       orElse: () => null,
     );
 
     if (match != null) {
-      return match.operationName.replaceFirst('Operation ', '');
+      return match.sourceLabel.replaceFirst('Operation ', '');
     }
 
     return id;
   }
 
-  List<OperationCollectionDto> _applyFilters(List<OperationCollectionDto> all) {
-    var items = List<OperationCollectionDto>.from(all);
+  List<ContainerDto> _applyFilters(List<ContainerDto> all) {
+    var items = List<ContainerDto>.from(all);
 
     if (_selectedFilter != _filterAll) {
-      items = items.where((e) => e.operationId == _selectedFilter).toList();
+      items = items.where((e) => e.sourceId == _selectedFilter).toList();
     }
 
     items.sort((a, b) {
@@ -97,7 +94,7 @@ class _OperationCollectionListScreenState
       final byDate = ad.compareTo(bd);
       if (byDate != 0) return byDate;
 
-      final byOperation = a.operationName.compareTo(b.operationName);
+      final byOperation = a.sourceLabel.compareTo(b.sourceLabel);
       if (byOperation != 0) return byOperation;
 
       return a.name.compareTo(b.name);
@@ -106,7 +103,7 @@ class _OperationCollectionListScreenState
     return items;
   }
 
-  Widget _buildFilterBar(List<OperationCollectionDto> all) {
+  Widget _buildFilterBar(List<ContainerDto> all) {
     final filters = _availableFilters(all);
 
     if (_selectedFilter != _filterAll && !filters.contains(_selectedFilter)) {
@@ -125,19 +122,14 @@ class _OperationCollectionListScreenState
     );
   }
 
-  Widget _buildCard(BuildContext context, OperationCollectionDto collection) {
-    final color = SourceColorHelper.operationColor(collection.operationId);
+  Widget _buildCard(BuildContext context, ContainerDto collection) {
+    final color = SourceColorHelper.operationColor(collection.sourceId ?? '');
 
     return CollectionListCard(
-      imagePath: collection.image,
+      imagePath: collection.containerImage,
       title: collection.name,
       releaseDate: collection.releaseDate,
-      chips: [
-        ChipBadge(
-          label: collection.operationName,
-          color: color,
-        ),
-      ],
+      chips: [ChipBadge(label: collection.sourceLabel, color: color)],
       metadata: const [],
       onTap: () {
         AppNavigationHelper.pushScreen(
@@ -154,15 +146,13 @@ class _OperationCollectionListScreenState
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Operation Collections'),
-      ),
-      body: AsyncCollectionLoader<OperationCollectionDto>(
+      appBar: AppBar(title: const Text('Operation Collections')),
+      body: AsyncCollectionLoader<ContainerDto>(
         future: _future,
         builder: (context, all) {
           final visible = _applyFilters(all);
 
-          return ResponsiveCollectionGrid<OperationCollectionDto>(
+          return ResponsiveCollectionGrid<ContainerDto>(
             items: visible,
             emptyMessage: 'No operation collections found.',
             header: _buildFilterBar(all),

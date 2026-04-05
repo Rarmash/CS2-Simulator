@@ -5,7 +5,8 @@ import '../../core/settings/settings_controller.dart';
 import '../../data/repositories/local_data_repository.dart';
 import '../helpers/app_navigation_helper.dart';
 import 'agent_collection_list_screen.dart';
-import 'case_list_screen.dart';
+import 'container_list_screen.dart';
+import 'charm_collection_list_screen.dart';
 import 'glossary_hub_screen.dart';
 import 'operation_collection_list_screen.dart';
 import 'patch_collection_list_screen.dart';
@@ -30,7 +31,7 @@ class HomeScreen extends StatelessWidget {
       _HomeMenuItem(
         icon: Icons.inventory_2,
         title: 'Open Containers',
-        buildScreen: () => CaseListScreen(
+        buildScreen: () => ContainerListScreen(
           repository: repository,
           settingsController: settingsController,
         ),
@@ -51,7 +52,8 @@ class HomeScreen extends StatelessWidget {
       _HomeMenuItem(
         icon: Icons.collections_bookmark,
         title: 'Legacy Operation Collections',
-        buildScreen: () => OperationCollectionListScreen(repository: repository),
+        buildScreen: () =>
+            OperationCollectionListScreen(repository: repository),
       ),
       _HomeMenuItem(
         icon: Icons.badge,
@@ -67,6 +69,11 @@ class HomeScreen extends StatelessWidget {
         icon: Icons.style,
         title: 'Patch Collections',
         buildScreen: () => PatchCollectionListScreen(repository: repository),
+      ),
+      _HomeMenuItem(
+        icon: Icons.key,
+        title: 'Charm Collections',
+        buildScreen: () => CharmCollectionListScreen(repository: repository),
       ),
       _HomeMenuItem(
         icon: Icons.swap_horiz,
@@ -92,39 +99,46 @@ class HomeScreen extends StatelessWidget {
           ),
         ],
       ),
-      body: Center(
-        child: ConstrainedBox(
-          constraints: const BoxConstraints(maxWidth: 420),
-          child: Padding(
+      body: LayoutBuilder(
+        builder: (context, constraints) {
+          return SingleChildScrollView(
             padding: const EdgeInsets.all(16),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                for (int i = 0; i < menuItems.length; i++) ...[
-                  _menuButton(
-                    context,
-                    icon: menuItems[i].icon,
-                    title: menuItems[i].title,
-                    onTap: () {
-                      AppNavigationHelper.pushScreen(
+            child: Center(
+              child: ConstrainedBox(
+                constraints: BoxConstraints(
+                  maxWidth: 420,
+                  minHeight: constraints.maxHeight - 32,
+                ),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    for (int i = 0; i < menuItems.length; i++) ...[
+                      _menuButton(
                         context,
-                        menuItems[i].buildScreen(),
-                      );
-                    },
-                  ),
-                  if (i != menuItems.length - 1) const SizedBox(height: 16),
-                ],
-                const SizedBox(height: 20),
-                Text(
-                  appVersion,
-                  style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                        icon: menuItems[i].icon,
+                        title: menuItems[i].title,
+                        onTap: () {
+                          AppNavigationHelper.pushScreen(
+                            context,
+                            menuItems[i].buildScreen(),
+                          );
+                        },
+                      ),
+                      if (i != menuItems.length - 1) const SizedBox(height: 16),
+                    ],
+                    const SizedBox(height: 20),
+                    Text(
+                      appVersion,
+                      style: Theme.of(context).textTheme.bodySmall?.copyWith(
                         color: Theme.of(context).hintColor,
                       ),
+                    ),
+                  ],
                 ),
-              ],
+              ),
             ),
-          ),
-        ),
+          );
+        },
       ),
     );
   }
@@ -145,7 +159,14 @@ class HomeScreen extends StatelessWidget {
           children: [
             Icon(icon),
             const SizedBox(width: 10),
-            Text(title, style: const TextStyle(fontSize: 18)),
+            Flexible(
+              child: Text(
+                title,
+                textAlign: TextAlign.center,
+                overflow: TextOverflow.ellipsis,
+                style: const TextStyle(fontSize: 18),
+              ),
+            ),
           ],
         ),
       ),

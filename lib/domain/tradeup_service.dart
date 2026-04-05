@@ -1,26 +1,68 @@
 import 'dart:math';
 
 import '../data/models/skin_dto.dart';
+import 'skin_float_helper.dart';
+
+enum TradeUpInputQuality { regular, statTrak, souvenir }
+
+class TradeUpInputItem {
+  final SkinDto skin;
+  final double floatValue;
+  final TradeUpInputQuality quality;
+
+  const TradeUpInputItem({
+    required this.skin,
+    required this.floatValue,
+    this.quality = TradeUpInputQuality.regular,
+  });
+
+  bool get isStatTrak => quality == TradeUpInputQuality.statTrak;
+  bool get isSouvenir => quality == TradeUpInputQuality.souvenir;
+
+  TradeUpInputItem copyWith({
+    SkinDto? skin,
+    double? floatValue,
+    TradeUpInputQuality? quality,
+  }) {
+    return TradeUpInputItem(
+      skin: skin ?? this.skin,
+      floatValue: floatValue ?? this.floatValue,
+      quality: quality ?? this.quality,
+    );
+  }
+}
 
 class TradeUpResult {
   final SkinDto skin;
   final double floatValue;
   final String exterior;
+  final bool isStatTrak;
+  final bool isSouvenir;
 
   const TradeUpResult({
     required this.skin,
     required this.floatValue,
     required this.exterior,
+    required this.isStatTrak,
+    required this.isSouvenir,
   });
 }
 
 class TradeUpChance {
   final SkinDto skin;
   final double probability; // 0..1
+  final double floatValue;
+  final String exterior;
+  final bool isStatTrak;
+  final bool isSouvenir;
 
   const TradeUpChance({
     required this.skin,
     required this.probability,
+    required this.floatValue,
+    required this.exterior,
+    required this.isStatTrak,
+    required this.isSouvenir,
   });
 }
 
@@ -28,7 +70,7 @@ class TradeUpService {
   final Random _random = Random();
 
   TradeUpResult tradeUp({
-    required List<SkinDto> input,
+    required List<TradeUpInputItem> input,
     required List<SkinDto> allSkins,
     required Map<String, List<String>> skinIdToRegularCaseIds,
     required Map<String, List<String>> regularCaseIdToSkinIds,
@@ -37,14 +79,22 @@ class TradeUpService {
       throw Exception('No skins selected');
     }
 
-    final rarity = input.first.rarity;
+    final rarity = input.first.skin.rarity;
 
-    if (input.any((s) => s.rarity != rarity)) {
+    if (input.any((s) => s.skin.rarity != rarity)) {
       throw Exception('All skins must have same rarity');
     }
 
-    if (input.any((s) => s.isSpecialItem)) {
+    if (input.any((s) => s.skin.isSpecialItem)) {
       throw Exception('Knives and gloves are not allowed as input');
+    }
+
+    final issue = validationIssue(
+      input: input,
+      skinIdToRegularCaseIds: skinIdToRegularCaseIds,
+    );
+    if (issue != null) {
+      throw Exception(issue);
     }
 
     final isSpecialTrade = rarity == 'COVERT';
@@ -65,42 +115,38 @@ class TradeUpService {
       throw Exception('Trade-up requires exactly 10 skins');
     }
 
-    final nextRarity = _nextRarity(rarity);
+    final chances = getTradeUpChances(
+      input: input,
+      allSkins: allSkins,
+      skinIdToRegularCaseIds: skinIdToRegularCaseIds,
+      regularCaseIdToSkinIds: regularCaseIdToSkinIds,
+    );
 
-    final selectedCollection = _weightedCollectionChoice(input: input);
-
-    final possibleSkins = allSkins.where((s) {
-      return _sameCollection(s.collection, selectedCollection) &&
-          s.rarity == nextRarity &&
-          !s.isSpecialItem;
-    }).toList();
-
-    if (possibleSkins.isEmpty) {
-      throw Exception('No skins found for next rarity in selected collection');
+    if (chances.isEmpty) {
+      throw Exception('No valid trade-up outcomes found');
     }
 
-    final resultSkin = possibleSkins[_random.nextInt(possibleSkins.length)];
-    final floatValue = _calculateOutputFloat(input, resultSkin);
-
-    return TradeUpResult(
-      skin: resultSkin,
-      floatValue: floatValue,
-      exterior: _getExterior(floatValue),
-    );
+    return _rollFromChances(chances);
   }
 
   List<TradeUpChance> getTradeUpChances({
-    required List<SkinDto> input,
+    required List<TradeUpInputItem> input,
     required List<SkinDto> allSkins,
     required Map<String, List<String>> skinIdToRegularCaseIds,
     required Map<String, List<String>> regularCaseIdToSkinIds,
   }) {
     if (input.isEmpty) return const [];
 
-    final rarity = input.first.rarity;
+    final rarity = input.first.skin.rarity;
 
-    if (input.any((s) => s.rarity != rarity)) return const [];
-    if (input.any((s) => s.isSpecialItem)) return const [];
+    if (input.any((s) => s.skin.rarity != rarity)) return const [];
+    if (input.any((s) => s.skin.isSpecialItem)) return const [];
+
+    final issue = validationIssue(
+      input: input,
+      skinIdToRegularCaseIds: skinIdToRegularCaseIds,
+    );
+    if (issue != null) return const [];
 
     final isSpecialTrade = rarity == 'COVERT';
     if (isSpecialTrade && input.length != 5) return const [];
@@ -117,11 +163,11 @@ class TradeUpService {
       final Map<String, double> skinProbabilityById = {};
 
       for (final entry in caseWeights.entries) {
-        final caseId = entry.key;
+        final containerId = entry.key;
         final caseProbability = entry.value;
 
         final possibleSpecialSkins = _getSpecialSkinsForRegularCase(
-          caseId: caseId,
+          containerId: containerId,
           allSkins: allSkins,
           regularCaseIdToSkinIds: regularCaseIdToSkinIds,
         );
@@ -137,12 +183,18 @@ class TradeUpService {
         }
       }
 
-      final chances = skinProbabilityById.entries
-          .map((e) => TradeUpChance(
-        skin: skinById[e.key]!,
-        probability: e.value,
-      ))
-          .toList();
+      final chances = skinProbabilityById.entries.map((e) {
+        final skin = skinById[e.key]!;
+        final floatValue = _calculateOutputFloat(input, skin);
+        return TradeUpChance(
+          skin: skin,
+          probability: e.value,
+          floatValue: floatValue,
+          exterior: _getExterior(floatValue),
+          isStatTrak: _isStatTrakContract(input),
+          isSouvenir: false,
+        );
+      }).toList();
 
       chances.sort((a, b) => b.probability.compareTo(a.probability));
       return chances;
@@ -173,54 +225,76 @@ class TradeUpService {
       }
     }
 
-    final chances = skinProbabilityById.entries
-        .map((e) => TradeUpChance(
-      skin: skinById[e.key]!,
-      probability: e.value,
-    ))
-        .toList();
+    final chances = skinProbabilityById.entries.map((e) {
+      final skin = skinById[e.key]!;
+      final floatValue = _calculateOutputFloat(input, skin);
+      return TradeUpChance(
+        skin: skin,
+        probability: e.value,
+        floatValue: floatValue,
+        exterior: _getExterior(floatValue),
+        isStatTrak: _isStatTrakContract(input),
+        isSouvenir: false,
+      );
+    }).toList();
 
     chances.sort((a, b) => b.probability.compareTo(a.probability));
     return chances;
   }
 
   TradeUpResult _covertToSpecial({
-    required List<SkinDto> input,
+    required List<TradeUpInputItem> input,
     required List<SkinDto> allSkins,
     required Map<String, List<String>> skinIdToRegularCaseIds,
     required Map<String, List<String>> regularCaseIdToSkinIds,
   }) {
-    final selectedCaseId = _weightedRegularCaseChoice(
+    final chances = getTradeUpChances(
       input: input,
-      skinIdToRegularCaseIds: skinIdToRegularCaseIds,
-    );
-
-    final possibleSkins = _getSpecialSkinsForRegularCase(
-      caseId: selectedCaseId,
       allSkins: allSkins,
+      skinIdToRegularCaseIds: skinIdToRegularCaseIds,
       regularCaseIdToSkinIds: regularCaseIdToSkinIds,
     );
 
-    if (possibleSkins.isEmpty) {
+    if (chances.isEmpty) {
       throw Exception('No knives/gloves found in related regular cases');
     }
 
-    final resultSkin = possibleSkins[_random.nextInt(possibleSkins.length)];
-    final floatValue = _calculateOutputFloat(input, resultSkin);
+    return _rollFromChances(chances);
+  }
 
-    return TradeUpResult(
-      skin: resultSkin,
-      floatValue: floatValue,
-      exterior: _getExterior(floatValue),
-    );
+  String? validationIssue({
+    required List<TradeUpInputItem> input,
+    required Map<String, List<String>> skinIdToRegularCaseIds,
+  }) {
+    if (input.isEmpty) return null;
+
+    if (input.any((item) => item.isSouvenir)) {
+      return 'Souvenir items cannot be used in trade-up contracts';
+    }
+
+    final firstQuality = input.first.quality;
+    if (input.any((item) => item.quality != firstQuality)) {
+      return 'All selected skins must use the same quality mode';
+    }
+
+    if (input.first.skin.rarity == 'COVERT' &&
+        _buildRegularCaseWeightsOrNull(
+              input: input,
+              skinIdToRegularCaseIds: skinIdToRegularCaseIds,
+            ) ==
+            null) {
+      return 'These covert skins are not linked to a valid special-item pool';
+    }
+
+    return null;
   }
 
   List<SkinDto> _getSpecialSkinsForRegularCase({
-    required String caseId,
+    required String containerId,
     required List<SkinDto> allSkins,
     required Map<String, List<String>> regularCaseIdToSkinIds,
   }) {
-    final ids = regularCaseIdToSkinIds[caseId] ?? const [];
+    final ids = regularCaseIdToSkinIds[containerId] ?? const [];
     final idSet = ids.toSet();
 
     return allSkins.where((s) {
@@ -228,14 +302,28 @@ class TradeUpService {
     }).toList();
   }
 
-  double _calculateOutputFloat(List<SkinDto> input, SkinDto resultSkin) {
-    final avgFloat = input
-        .map((s) => (s.floatTop + s.floatBottom) / 2)
-        .reduce((a, b) => a + b) /
-        input.length;
+  double _calculateOutputFloat(
+    List<TradeUpInputItem> input,
+    SkinDto resultSkin,
+  ) {
+    final avgNormalizedFloat =
+        input.map(_normalizedInputFloat).reduce((a, b) => a + b) / input.length;
 
     return resultSkin.floatTop +
-        avgFloat * (resultSkin.floatBottom - resultSkin.floatTop);
+        avgNormalizedFloat * (resultSkin.floatBottom - resultSkin.floatTop);
+  }
+
+  double _normalizedInputFloat(TradeUpInputItem input) {
+    final min = input.skin.floatTop;
+    final max = input.skin.floatBottom;
+    final range = max - min;
+
+    if (range <= 0) {
+      return 0;
+    }
+
+    final normalized = (input.floatValue - min) / range;
+    return normalized.clamp(0.0, 1.0);
   }
 
   String _nextRarity(String rarity) {
@@ -266,12 +354,12 @@ class TradeUpService {
   }
 
   Map<String, double> _buildCollectionWeights({
-    required List<SkinDto> input,
+    required List<TradeUpInputItem> input,
   }) {
     final counts = <String, int>{};
 
-    for (final skin in input) {
-      final collection = _normalizedCollection(skin.collection);
+    for (final item in input) {
+      final collection = _normalizedCollection(item.skin.collection);
       if (collection == null) continue;
       counts[collection] = (counts[collection] ?? 0) + 1;
     }
@@ -281,82 +369,84 @@ class TradeUpService {
       throw Exception('Could not determine collections for selected skins');
     }
 
-    return {
-      for (final entry in counts.entries) entry.key: entry.value / total,
-    };
-  }
-
-  String _weightedCollectionChoice({
-    required List<SkinDto> input,
-  }) {
-    final weights = _buildCollectionWeights(input: input);
-
-    final roll = _random.nextDouble();
-    double cumulative = 0.0;
-
-    for (final entry in weights.entries) {
-      cumulative += entry.value;
-      if (roll <= cumulative) {
-        return entry.key;
-      }
-    }
-
-    return weights.keys.first;
+    return {for (final entry in counts.entries) entry.key: entry.value / total};
   }
 
   Map<String, double> _buildRegularCaseWeights({
-    required List<SkinDto> input,
+    required List<TradeUpInputItem> input,
+    required Map<String, List<String>> skinIdToRegularCaseIds,
+  }) {
+    final result = _buildRegularCaseWeightsOrNull(
+      input: input,
+      skinIdToRegularCaseIds: skinIdToRegularCaseIds,
+    );
+    if (result == null) {
+      throw Exception(
+        'Could not determine related regular cases for selected skins',
+      );
+    }
+    return result;
+  }
+
+  Map<String, double>? _buildRegularCaseWeightsOrNull({
+    required List<TradeUpInputItem> input,
     required Map<String, List<String>> skinIdToRegularCaseIds,
   }) {
     final counts = <String, double>{};
 
-    for (final skin in input) {
-      final caseIds = (skinIdToRegularCaseIds[skin.id] ?? const []).toSet().toList();
-      if (caseIds.isEmpty) continue;
+    for (final item in input) {
+      final containerIds = (skinIdToRegularCaseIds[item.skin.id] ?? const [])
+          .toSet()
+          .toList();
+      if (containerIds.isEmpty) continue;
 
-      final contribution = 1.0 / caseIds.length;
-      for (final caseId in caseIds) {
-        counts[caseId] = (counts[caseId] ?? 0) + contribution;
+      final contribution = 1.0 / containerIds.length;
+      for (final containerId in containerIds) {
+        counts[containerId] = (counts[containerId] ?? 0) + contribution;
       }
     }
 
     final total = counts.values.fold<double>(0, (a, b) => a + b);
     if (total == 0) {
-      throw Exception('Could not determine related regular cases for selected skins');
+      return null;
     }
 
-    return {
-      for (final entry in counts.entries) entry.key: entry.value / total,
-    };
+    return {for (final entry in counts.entries) entry.key: entry.value / total};
   }
 
-  String _weightedRegularCaseChoice({
-    required List<SkinDto> input,
-    required Map<String, List<String>> skinIdToRegularCaseIds,
-  }) {
-    final weights = _buildRegularCaseWeights(
-      input: input,
-      skinIdToRegularCaseIds: skinIdToRegularCaseIds,
-    );
-
+  TradeUpResult _rollFromChances(List<TradeUpChance> chances) {
     final roll = _random.nextDouble();
     double cumulative = 0.0;
 
-    for (final entry in weights.entries) {
-      cumulative += entry.value;
+    for (final chance in chances) {
+      cumulative += chance.probability;
       if (roll <= cumulative) {
-        return entry.key;
+        return TradeUpResult(
+          skin: chance.skin,
+          floatValue: chance.floatValue,
+          exterior: chance.exterior,
+          isStatTrak: chance.isStatTrak,
+          isSouvenir: chance.isSouvenir,
+        );
       }
     }
 
-    return weights.keys.first;
+    final fallback = chances.first;
+    return TradeUpResult(
+      skin: fallback.skin,
+      floatValue: fallback.floatValue,
+      exterior: fallback.exterior,
+      isStatTrak: fallback.isStatTrak,
+      isSouvenir: fallback.isSouvenir,
+    );
+  }
+
+  bool _isStatTrakContract(List<TradeUpInputItem> input) {
+    return input.isNotEmpty &&
+        input.every((item) => item.quality == TradeUpInputQuality.statTrak);
   }
 
   String _getExterior(double value) {
-    if (value <= 0.07) return 'Factory New';
-    if (value <= 0.15) return 'Minimal Wear';
-    if (value <= 0.37) return 'Field-Tested';
-    if (value <= 0.44) return 'Well-Worn';
-    return 'Battle-Scarred';
+    return SkinFloatHelper.exteriorFromFloat(value);
   }
 }

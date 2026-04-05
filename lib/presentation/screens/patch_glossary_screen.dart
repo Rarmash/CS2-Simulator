@@ -21,6 +21,7 @@ class PatchGlossaryScreen extends StatefulWidget {
 
 class _PatchGlossaryScreenState extends State<PatchGlossaryScreen> {
   String _rarityFilter = 'ALL';
+  String _collectionFilter = 'ALL';
 
   static const List<GlossaryFilterOption> _rarityOptions = [
     GlossaryFilterOption('ALL', 'All rarities'),
@@ -29,15 +30,36 @@ class _PatchGlossaryScreenState extends State<PatchGlossaryScreen> {
     GlossaryFilterOption('EXOTIC', 'Exotic'),
   ];
 
+  List<GlossaryFilterOption> _collectionOptions(List<PatchDto> items) {
+    final values =
+        items
+            .map((item) => (item.collection ?? '').trim())
+            .where((value) => value.isNotEmpty)
+            .toSet()
+            .toList()
+          ..sort();
+
+    return [
+      const GlossaryFilterOption('ALL', 'All collections'),
+      ...values.map((value) => GlossaryFilterOption(value, value)),
+    ];
+  }
+
   List<PatchDto> _filterAndSort(List<PatchDto> items, String query) {
     final filtered = items.where((patch) {
       if (_rarityFilter != 'ALL' && patch.rarity != _rarityFilter) {
         return false;
       }
+      if (_collectionFilter != 'ALL' &&
+          (patch.collection ?? '') != _collectionFilter) {
+        return false;
+      }
       if (query.isEmpty) return true;
-      final haystack = <String>[patch.name, patch.collection ?? '', patch.rarity]
-          .join(' ')
-          .toLowerCase();
+      final haystack = <String>[
+        patch.name,
+        patch.collection ?? '',
+        patch.rarity,
+      ].join(' ').toLowerCase();
       return haystack.contains(query);
     }).toList();
 
@@ -73,16 +95,35 @@ class _PatchGlossaryScreenState extends State<PatchGlossaryScreen> {
       countLabelBuilder: (count) => '$count patches',
       emptyMessage: 'No patches found.',
       errorPrefix: 'Failed to load patches.',
-      headerControlsBuilder: (_) => [
-        GlossaryFilterDropdown(
-          label: 'Rarity',
-          value: _rarityFilter,
-          options: _rarityOptions,
-          onChanged: (value) {
-            setState(() {
-              _rarityFilter = value ?? 'ALL';
-            });
-          },
+      headerControlsBuilder: (_, items) => [
+        Row(
+          children: [
+            Expanded(
+              child: GlossaryFilterDropdown(
+                label: 'Rarity',
+                value: _rarityFilter,
+                options: _rarityOptions,
+                onChanged: (value) {
+                  setState(() {
+                    _rarityFilter = value ?? 'ALL';
+                  });
+                },
+              ),
+            ),
+            const SizedBox(width: 10),
+            Expanded(
+              child: GlossaryFilterDropdown(
+                label: 'Collection',
+                value: _collectionFilter,
+                options: _collectionOptions(items),
+                onChanged: (value) {
+                  setState(() {
+                    _collectionFilter = value ?? 'ALL';
+                  });
+                },
+              ),
+            ),
+          ],
         ),
       ],
       itemBuilder: (context, patch) {

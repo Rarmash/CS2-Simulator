@@ -24,9 +24,7 @@ class AssetCollectionImage extends StatelessWidget {
         fit: fit,
         placeholderBuilder: (_) => SizedBox(
           height: height,
-          child: const Center(
-            child: CircularProgressIndicator(strokeWidth: 2),
-          ),
+          child: const Center(child: CircularProgressIndicator(strokeWidth: 2)),
         ),
       );
     }

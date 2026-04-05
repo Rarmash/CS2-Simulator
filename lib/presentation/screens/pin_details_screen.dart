@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../core/utils/date_format_helper.dart';
-import '../../data/models/case_dto.dart';
+import '../../data/models/container_dto.dart';
 import '../../data/models/pin_dto.dart';
 import '../../data/repositories/local_data_repository.dart';
 import '../helpers/app_navigation_helper.dart';
@@ -28,8 +28,8 @@ class PinDetailsScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(title: Text(pin.name)),
-      body: FutureBuilder<List<CaseDto>>(
-        future: repository.loadCasesForPin(pin.id),
+      body: FutureBuilder<List<ContainerDto>>(
+        future: repository.loadContainersForPin(pin.id),
         builder: (context, snapshot) {
           if (snapshot.connectionState != ConnectionState.done) {
             return const Center(child: CircularProgressIndicator());
@@ -47,7 +47,7 @@ class PinDetailsScreen extends StatelessWidget {
             );
           }
 
-          final cases = snapshot.data ?? const <CaseDto>[];
+          final cases = snapshot.data ?? const <ContainerDto>[];
 
           return ListView(
             padding: const EdgeInsets.all(12),
@@ -57,31 +57,39 @@ class PinDetailsScreen extends StatelessWidget {
                 title: pin.name,
                 subtitle: PinUiHelper.secondaryText(pin),
                 tags: [
-                  DetailTag(text: PinUiHelper.rarityLabel(pin), color: rarityColor),
-                  if ((pin.collection ?? '').isNotEmpty) DetailTag(text: pin.collection!),
+                  DetailTag(
+                    text: PinUiHelper.rarityLabel(pin),
+                    color: rarityColor,
+                  ),
+                  if ((pin.collection ?? '').isNotEmpty)
+                    DetailTag(text: pin.collection!),
                 ],
                 infoRows: [
-                  DetailInfoRow(title: 'Rarity', value: PinUiHelper.rarityLabel(pin)),
+                  DetailInfoRow(
+                    title: 'Rarity',
+                    value: PinUiHelper.rarityLabel(pin),
+                  ),
                   if ((pin.collection ?? '').isNotEmpty)
                     DetailInfoRow(title: 'Collection', value: pin.collection!),
                 ],
               ),
               const SizedBox(height: 12),
-              DetailSourceSection<CaseDto>(
+              DetailSourceSection<ContainerDto>(
                 title: 'Containers',
                 items: cases,
                 emptyText: 'No pin capsule sources found.',
                 itemBuilder: (item) => DetailSourceTile(
-                  imagePath: item.caseImage,
+                  imagePath: item.containerImage,
                   title: item.name,
                   subtitle: item.typeLabel,
                   trailing:
-                      DateFormatHelper.formatReleaseDate(item.releaseDate) ?? '-',
+                      DateFormatHelper.formatReleaseDate(item.releaseDate) ??
+                      '-',
                   onTap: () {
                     AppNavigationHelper.pushScreen(
                       context,
                       AppNavigationHelper.buildContainerOpenScreen(
-                        caseDto: item,
+                        containerDto: item,
                         repository: repository,
                       ),
                     );

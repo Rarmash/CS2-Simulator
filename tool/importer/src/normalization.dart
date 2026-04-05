@@ -435,10 +435,9 @@ String operationKey(String name, String operationId) =>
   canonicalName((pin['collection'] ?? '').toString()),
 );
 
-(String, String, bool) existingMusicKitKey(Map<String, dynamic> musicKit) => (
+(String, String) existingMusicKitKey(Map<String, dynamic> musicKit) => (
   canonicalName((musicKit['name'] ?? '').toString()),
   canonicalName((musicKit['collection'] ?? '').toString()),
-  musicKit['isStatTrak'] == true,
 );
 
 (String, String, String) existingAgentKey(Map<String, dynamic> agent) => (
@@ -455,6 +454,11 @@ String operationKey(String name, String operationId) =>
 (String, String) existingPatchKey(Map<String, dynamic> patch) => (
   canonicalName((patch['name'] ?? '').toString()),
   canonicalName((patch['collection'] ?? '').toString()),
+);
+
+(String, String) existingCharmKey(Map<String, dynamic> charm) => (
+  canonicalName((charm['name'] ?? '').toString()),
+  canonicalName((charm['collection'] ?? '').toString()),
 );
 
 (String?, String?) chooseCollectionNameAndImage(Map<String, dynamic> meta) {
@@ -584,6 +588,10 @@ String normalizePatchName(String name) {
   return name.replaceFirst(RegExp(r'^Patch\s+\|\s+'), '').trim();
 }
 
+String normalizeCharmName(String name) {
+  return name.replaceFirst(RegExp(r'^Charm\s+\|\s+'), '').trim();
+}
+
 Map<String, String?> resolveAgentCollectionSource(String? collectionName) {
   final normalized = (collectionName ?? '').trim();
   final source = agentCollectionSourceOverrides[normalized] ?? const {};
@@ -657,6 +665,49 @@ Map<String, String?> resolveStickerCollectionSource(String? collectionName) {
 Map<String, String?> resolvePatchCollectionSource(String? collectionName) {
   final normalized = (collectionName ?? '').trim();
   final source = patchCollectionSourceOverrides[normalized] ?? const {};
+
+  String? value(String key) {
+    final raw = source[key];
+    if (raw == null || raw.trim().isEmpty) {
+      return null;
+    }
+    return raw.trim();
+  }
+
+  return {
+    'sourceType': value('sourceType'),
+    'sourceId': value('sourceId'),
+    'sourceName': value('sourceName'),
+    'releaseDate': value('releaseDate'),
+  };
+}
+
+String? resolveOperationNameFromId(String? operationId) {
+  switch ((operationId ?? '').trim()) {
+    case 'PAYBACK':
+      return 'Operation Payback';
+    case 'BRAVO':
+      return 'Operation Bravo';
+    case 'PHOENIX':
+      return 'Operation Phoenix';
+    case 'BREAKOUT':
+      return 'Operation Breakout';
+    case 'BLOODHOUND':
+      return 'Operation Bloodhound';
+    case 'SHATTERED_WEB':
+      return 'Operation Shattered Web';
+    case 'BROKEN_FANG':
+      return 'Operation Broken Fang';
+    case 'RIPTIDE':
+      return 'Operation Riptide';
+    default:
+      return null;
+  }
+}
+
+Map<String, String?> resolveCharmCollectionSource(String? collectionName) {
+  final normalized = (collectionName ?? '').trim();
+  final source = charmCollectionSourceOverrides[normalized] ?? const {};
 
   String? value(String key) {
     final raw = source[key];
@@ -860,6 +911,40 @@ List<Map<String, dynamic>> buildContents(
       a[idKey].toString(),
     ).compareTo(int.parse(b[idKey].toString())),
   );
+  return out;
+}
+
+List<Map<String, dynamic>> buildMusicKitContents(
+  Map<String, Map<String, Map<String, bool>>> source,
+) {
+  final out = source.entries.where((entry) => entry.value.isNotEmpty).map((
+    entry,
+  ) {
+    final items =
+        entry.value.entries
+            .map(
+              (item) => <String, dynamic>{
+                'musicKitId': item.key,
+                'hasRegular': item.value['hasRegular'] ?? false,
+                'hasStatTrak': item.value['hasStatTrak'] ?? false,
+              },
+            )
+            .toList()
+          ..sort(
+            (a, b) => int.parse(
+              a['musicKitId'].toString(),
+            ).compareTo(int.parse(b['musicKitId'].toString())),
+          );
+
+    return <String, dynamic>{'containerId': entry.key, 'items': items};
+  }).toList();
+
+  out.sort(
+    (a, b) => int.parse(
+      a['containerId'].toString(),
+    ).compareTo(int.parse(b['containerId'].toString())),
+  );
+
   return out;
 }
 

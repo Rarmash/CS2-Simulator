@@ -1,7 +1,7 @@
 import 'dart:math';
 
-import '../data/models/agent_collection_dto.dart';
 import '../data/models/agent_dto.dart';
+import '../data/models/container_dto.dart';
 import 'dropped_agent.dart';
 
 class AgentCollectionSimulatorService {
@@ -9,7 +9,7 @@ class AgentCollectionSimulatorService {
 
   DroppedAgent openCollection({
     required List<AgentDto> agents,
-    required AgentCollectionDto collection,
+    required ContainerDto collection,
   }) {
     if (agents.isEmpty) {
       throw Exception('No agents found for agent collection');
