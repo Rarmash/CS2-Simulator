@@ -106,6 +106,7 @@ mixin _LocalDataRepositoryQueries on _LocalDataRepositoryLoaders {
   Future<List<TournamentTeamResultDto>> loadTeamTournamentResults(
     String teamName,
   ) async {
+    final canonicalTeamName = TeamNameHelper.canonicalize(teamName);
     final tournaments = await loadTournaments();
     final metadata = await loadTournamentMetadata();
     final tournamentByName = {
@@ -121,12 +122,12 @@ mixin _LocalDataRepositoryQueries on _LocalDataRepositoryLoaders {
       }
 
       for (final placement in entry.placements) {
-        if (placement.team != teamName) {
+        if (TeamNameHelper.canonicalize(placement.team) != canonicalTeamName) {
           continue;
         }
         results.add(
           TournamentTeamResultDto(
-            teamName: teamName,
+            teamName: canonicalTeamName,
             teamLogo: placement.teamLogo,
             tournamentName: tournament.name,
             tournamentImagePath: tournament.imagePath,
@@ -177,10 +178,9 @@ mixin _LocalDataRepositoryQueries on _LocalDataRepositoryLoaders {
 
       return TournamentTeamSummaryDto(
         teamName: entry.key,
-        teamLogo: items.map((item) => item.teamLogo).firstWhere(
-          (logo) => (logo ?? '').isNotEmpty,
-          orElse: () => null,
-        ),
+        teamLogo: items
+            .map((item) => item.teamLogo)
+            .firstWhere((logo) => (logo ?? '').isNotEmpty, orElse: () => null),
         tournamentCount: items.length,
         titleCount: titleCount,
         bestPlace: bestPlace,
@@ -288,9 +288,10 @@ mixin _LocalDataRepositoryQueries on _LocalDataRepositoryLoaders {
       }
 
       for (final placement in entry.placements) {
+        final canonicalTeamName = TeamNameHelper.canonicalize(placement.team);
         results.add(
           TournamentTeamResultDto(
-            teamName: placement.team,
+            teamName: canonicalTeamName,
             teamLogo: placement.teamLogo,
             tournamentName: tournament.name,
             tournamentImagePath: tournament.imagePath,

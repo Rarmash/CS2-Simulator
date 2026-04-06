@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../core/utils/team_name_helper.dart';
 import '../../core/utils/date_format_helper.dart';
 import '../../data/models/tournament_dto.dart';
 import '../../data/repositories/local_data_repository.dart';
@@ -35,8 +36,10 @@ class _TeamDetailsScreenState extends State<TeamDetailsScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final canonicalTeamName = TeamNameHelper.canonicalize(widget.teamName);
+
     return Scaffold(
-      appBar: AppBar(title: Text(widget.teamName)),
+      appBar: AppBar(title: Text(canonicalTeamName)),
       body: AsyncCollectionLoader<TournamentTeamResultDto>(
         future: _future,
         builder: (context, items) {
@@ -72,7 +75,7 @@ class _TeamDetailsScreenState extends State<TeamDetailsScreen> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                widget.teamName,
+                                canonicalTeamName,
                                 style: const TextStyle(
                                   fontSize: 24,
                                   fontWeight: FontWeight.bold,
