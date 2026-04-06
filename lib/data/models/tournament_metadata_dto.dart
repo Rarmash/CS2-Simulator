@@ -1,13 +1,19 @@
 class TournamentPlacementDto {
   final String place;
   final String team;
+  final String? teamLogo;
 
-  const TournamentPlacementDto({required this.place, required this.team});
+  const TournamentPlacementDto({
+    required this.place,
+    required this.team,
+    required this.teamLogo,
+  });
 
   factory TournamentPlacementDto.fromJson(Map<String, dynamic> json) {
     return TournamentPlacementDto(
       place: json['place'] as String,
       team: json['team'] as String,
+      teamLogo: json['teamLogo'] as String?,
     );
   }
 }
@@ -36,6 +42,8 @@ class TournamentPlayoffMatchDto {
   final String round;
   final String team1;
   final String team2;
+  final String? team1Logo;
+  final String? team2Logo;
   final String? score1;
   final String? score2;
   final String? date;
@@ -44,6 +52,8 @@ class TournamentPlayoffMatchDto {
     required this.round,
     required this.team1,
     required this.team2,
+    required this.team1Logo,
+    required this.team2Logo,
     required this.score1,
     required this.score2,
     required this.date,
@@ -54,6 +64,8 @@ class TournamentPlayoffMatchDto {
       round: json['round'] as String,
       team1: json['team1'] as String,
       team2: json['team2'] as String,
+      team1Logo: json['team1Logo'] as String?,
+      team2Logo: json['team2Logo'] as String?,
       score1: json['score1'] as String?,
       score2: json['score2'] as String?,
       date: json['date'] as String?,

@@ -7,131 +7,163 @@
     "placements": [
       {
         "place": "1st",
-        "team": "Team Vitality"
+        "team": "Team Vitality",
+        "teamLogo": "assets/tournament_logos/team_vitality_41px_team_vitality_2023_lightmode_png.png"
       },
       {
         "place": "2nd",
-        "team": "The MongolZ"
+        "team": "The MongolZ",
+        "teamLogo": "assets/tournament_logos/the_mongolz_39px_the_mongolz_2024_03_allmode_png.png"
       },
       {
         "place": "3rd-4th",
-        "team": "MOUZ"
+        "team": "MOUZ",
+        "teamLogo": "assets/tournament_logos/mouz_47px_mouz_2021_allmode_png.png"
       },
       {
         "place": "3rd-4th",
-        "team": "paiN Gaming"
+        "team": "paiN Gaming",
+        "teamLogo": "assets/tournament_logos/pain_gaming_75px_pain_gaming_2023_lightmode_png.png"
       },
       {
         "place": "5th-8th",
-        "team": "Team Spirit"
+        "team": "Team Spirit",
+        "teamLogo": "assets/tournament_logos/team_spirit_43px_team_spirit_2022_lightmode_png.png"
       },
       {
         "place": "5th-8th",
-        "team": "Natus Vincere"
+        "team": "Natus Vincere",
+        "teamLogo": "assets/tournament_logos/natus_vincere_57px_natus_vincere_2021_lightmode_png.png"
       },
       {
         "place": "5th-8th",
-        "team": "FaZe Clan"
+        "team": "FaZe Clan",
+        "teamLogo": "assets/tournament_logos/faze_clan_76px_faze_clan_2025_allmode_png.png"
       },
       {
         "place": "5th-8th",
-        "team": "FURIA"
+        "team": "FURIA",
+        "teamLogo": "assets/tournament_logos/furia_51px_furia_esports_allmode_png.png"
       },
       {
         "place": "9th-11th",
-        "team": "Virtus.pro"
+        "team": "Virtus.pro",
+        "teamLogo": "assets/tournament_logos/virtus_pro_51px_virtus_pro_2019_allmode_png.png"
       },
       {
         "place": "9th-11th",
-        "team": "Legacy"
+        "team": "Legacy",
+        "teamLogo": "assets/tournament_logos/legacy_49px_legacy_allmode_png.png"
       },
       {
         "place": "9th-11th",
-        "team": "G2 Esports"
+        "team": "G2 Esports",
+        "teamLogo": "assets/tournament_logos/g2_esports_43px_g2_esports_2020_lightmode_png.png"
       },
       {
         "place": "12th-14th",
-        "team": "Aurora Gaming"
+        "team": "Aurora Gaming",
+        "teamLogo": "assets/tournament_logos/aurora_gaming_50px_aurora_gaming_2025_allmode_png.png"
       },
       {
         "place": "12th-14th",
-        "team": "3DMAX"
+        "team": "3DMAX",
+        "teamLogo": "assets/tournament_logos/3dmax_36px_3dmax_2024_allmode_png.png"
       },
       {
         "place": "12th-14th",
-        "team": "Lynn Vision Gaming"
+        "team": "Lynn Vision Gaming",
+        "teamLogo": "assets/tournament_logos/lynn_vision_gaming_74px_lynn_vision_gaming_2024_allmode_png.png"
       },
       {
         "place": "15th-16th",
-        "team": "Nemiga Gaming"
+        "team": "Nemiga Gaming",
+        "teamLogo": "assets/tournament_logos/nemiga_gaming_50px_nemiga_gaming_2020_temporary_png.png"
       },
       {
         "place": "15th-16th",
-        "team": "Team Liquid"
+        "team": "Team Liquid",
+        "teamLogo": "assets/tournament_logos/team_liquid_44px_team_liquid_2024_lightmode_png.png"
       },
       {
         "place": "17th-19th",
-        "team": "B8"
+        "team": "B8",
+        "teamLogo": "assets/tournament_logos/b8_41px_b8_lightmode_png.png"
       },
       {
         "place": "17th-19th",
-        "team": "MIBR"
+        "team": "MIBR",
+        "teamLogo": "assets/tournament_logos/mibr_100px_mibr_2018_lightmode_png.png"
       },
       {
         "place": "17th-19th",
-        "team": "HEROIC"
+        "team": "HEROIC",
+        "teamLogo": "assets/tournament_logos/heroic_57px_heroic_2024_allmode_png.png"
       },
       {
         "place": "20th-22nd",
-        "team": "TYLOO"
+        "team": "TYLOO",
+        "teamLogo": "assets/tournament_logos/tyloo_56px_tyloo_2016_allmode_png.png"
       },
       {
         "place": "20th-22nd",
-        "team": "M80"
+        "team": "M80",
+        "teamLogo": "assets/tournament_logos/m80_52px_m80_esports_2024_lightmode_png.png"
       },
       {
         "place": "20th-22nd",
-        "team": "Team Falcons"
+        "team": "Team Falcons",
+        "teamLogo": "assets/tournament_logos/team_falcons_41px_team_falcons_2022_allmode_png.png"
       },
       {
         "place": "23rd-24th",
-        "team": "BetBoom Team"
+        "team": "BetBoom Team",
+        "teamLogo": "assets/tournament_logos/betboom_team_56px_betboom_team_2024_allmode_png.png"
       },
       {
         "place": "23rd-24th",
-        "team": "OG"
+        "team": "OG",
+        "teamLogo": "assets/tournament_logos/og_34px_og_rb_allmode_png.png"
       },
       {
         "place": "25th-27th",
-        "team": "FlyQuest"
+        "team": "FlyQuest",
+        "teamLogo": "assets/tournament_logos/flyquest_51px_flyquest_2021_allmode_png.png"
       },
       {
         "place": "25th-27th",
-        "team": "NRG"
+        "team": "NRG",
+        "teamLogo": "assets/tournament_logos/nrg_100px_nrg_2024_lightmode_png.png"
       },
       {
         "place": "25th-27th",
-        "team": "Wildcard"
+        "team": "Wildcard",
+        "teamLogo": "assets/tournament_logos/wildcard_42px_wildcard_2024_lightmode_png.png"
       },
       {
         "place": "28th-30th",
-        "team": "Imperial Esports"
+        "team": "Imperial Esports",
+        "teamLogo": "assets/tournament_logos/imperial_esports_44px_imperial_esports_2022_allmode_png.png"
       },
       {
         "place": "28th-30th",
-        "team": "Chinggis Warriors"
+        "team": "Chinggis Warriors",
+        "teamLogo": "assets/tournament_logos/chinggis_warriors_50px_cw_allmode_png.png"
       },
       {
         "place": "28th-30th",
-        "team": "Complexity"
+        "team": "Complexity",
+        "teamLogo": "assets/tournament_logos/complexity_100px_complexity_2025_allmode_png.png"
       },
       {
         "place": "31st-32nd",
-        "team": "Metizport"
+        "team": "Metizport",
+        "teamLogo": "assets/tournament_logos/metizport_50px_metizport_2023_allmode_png.png"
       },
       {
         "place": "31st-32nd",
-        "team": "Fluxo"
+        "team": "Fluxo",
+        "teamLogo": "assets/tournament_logos/fluxo_50px_fluxo_lightmode_png.png"
       }
     ],
     "stageDates": [
@@ -161,6 +193,8 @@
         "round": "Quarterfinals",
         "team1": "Team Spirit",
         "team2": "MOUZ",
+        "team1Logo": "assets/tournament_logos/team_spirit_43px_team_spirit_2022_lightmode_png.png",
+        "team2Logo": "assets/tournament_logos/mouz_47px_mouz_2021_allmode_png.png",
         "score1": "1",
         "score2": "2",
         "date": "June 19, 2025 - 14:05 CDT"
@@ -169,6 +203,8 @@
         "round": "Quarterfinals",
         "team1": "Team Vitality",
         "team2": "Natus Vincere",
+        "team1Logo": "assets/tournament_logos/team_vitality_41px_team_vitality_2023_lightmode_png.png",
+        "team2Logo": "assets/tournament_logos/natus_vincere_57px_natus_vincere_2021_lightmode_png.png",
         "score1": "2",
         "score2": "0",
         "date": "June 20, 2025 - 13:10 CDT"
@@ -177,6 +213,8 @@
         "round": "Semifinals",
         "team1": "MOUZ",
         "team2": "Team Vitality",
+        "team1Logo": "assets/tournament_logos/mouz_47px_mouz_2021_allmode_png.png",
+        "team2Logo": "assets/tournament_logos/team_vitality_41px_team_vitality_2023_lightmode_png.png",
         "score1": "1",
         "score2": "2",
         "date": "June 21, 2025 - 13:00 CDT"
@@ -185,6 +223,8 @@
         "round": "Quarterfinals",
         "team1": "FaZe Clan",
         "team2": "The MongolZ",
+        "team1Logo": "assets/tournament_logos/faze_clan_76px_faze_clan_2025_allmode_png.png",
+        "team2Logo": "assets/tournament_logos/the_mongolz_39px_the_mongolz_2024_03_allmode_png.png",
         "score1": "0",
         "score2": "2",
         "date": "June 20, 2025 - 16:15 CDT"
@@ -193,6 +233,8 @@
         "round": "Quarterfinals",
         "team1": "PaiN Gaming",
         "team2": "FURIA",
+        "team1Logo": "assets/tournament_logos/pain_gaming_75px_pain_gaming_2023_lightmode_png.png",
+        "team2Logo": "assets/tournament_logos/furia_51px_furia_esports_allmode_png.png",
         "score1": "2",
         "score2": "1",
         "date": "June 19, 2025 - 19:20 CDT"
@@ -201,6 +243,8 @@
         "round": "Semifinals",
         "team1": "The MongolZ",
         "team2": "PaiN Gaming",
+        "team1Logo": "assets/tournament_logos/the_mongolz_39px_the_mongolz_2024_03_allmode_png.png",
+        "team2Logo": "assets/tournament_logos/pain_gaming_75px_pain_gaming_2023_lightmode_png.png",
         "score1": "2",
         "score2": "0",
         "date": "June 21, 2025 - 16:50 CDT"
@@ -209,6 +253,8 @@
         "round": "Grand Final",
         "team1": "Team Vitality",
         "team2": "The MongolZ",
+        "team1Logo": "assets/tournament_logos/team_vitality_41px_team_vitality_2023_lightmode_png.png",
+        "team2Logo": "assets/tournament_logos/the_mongolz_39px_the_mongolz_2024_03_allmode_png.png",
         "score1": "2",
         "score2": "1",
         "date": "June 22, 2025 - 14:30 CDT"
@@ -223,99 +269,123 @@
     "placements": [
       {
         "place": "1st",
-        "team": "Team Vitality"
+        "team": "Team Vitality",
+        "teamLogo": "assets/tournament_logos/team_vitality_41px_team_vitality_2023_lightmode_png.png"
       },
       {
         "place": "2nd",
-        "team": "GamerLegion"
+        "team": "GamerLegion",
+        "teamLogo": "assets/tournament_logos/gamerlegion_91px_gamerlegion_cs_2023_allmode_png.png"
       },
       {
         "place": "3rd-4th",
-        "team": "Heroic"
+        "team": "Heroic",
+        "teamLogo": "assets/tournament_logos/heroic_57px_heroic_2023_allmode_png.png"
       },
       {
         "place": "3rd-4th",
-        "team": "Apeks"
+        "team": "Apeks",
+        "teamLogo": "assets/tournament_logos/apeks_100px_apeks_2021_darkmode_png.png"
       },
       {
         "place": "5th-8th",
-        "team": "FaZe Clan"
+        "team": "FaZe Clan",
+        "teamLogo": "assets/tournament_logos/faze_clan_75px_faze_clan_november_2021_lightmode_png.png"
       },
       {
         "place": "5th-8th",
-        "team": "Monte"
+        "team": "Monte",
+        "teamLogo": "assets/tournament_logos/monte_35px_monte_2022_allmode_png.png"
       },
       {
         "place": "5th-8th",
-        "team": "Team Liquid"
+        "team": "Team Liquid",
+        "teamLogo": "assets/tournament_logos/team_liquid_44px_team_liquid_2023_lightmode_png.png"
       },
       {
         "place": "5th-8th",
-        "team": "Into The Breach"
+        "team": "Into The Breach",
+        "teamLogo": "assets/tournament_logos/into_the_breach_47px_into_the_breach_pink_2022_allmode_png.png"
       },
       {
         "place": "9th-11th",
-        "team": "Natus Vincere"
+        "team": "Natus Vincere",
+        "teamLogo": "assets/tournament_logos/natus_vincere_57px_natus_vincere_2021_lightmode_png.png"
       },
       {
         "place": "9th-11th",
-        "team": "Fnatic"
+        "team": "Fnatic",
+        "teamLogo": "assets/tournament_logos/fnatic_77px_fnatic_2020_allmode_png.png"
       },
       {
         "place": "9th-11th",
-        "team": "Ninjas in Pyjamas"
+        "team": "Ninjas in Pyjamas",
+        "teamLogo": "assets/tournament_logos/ninjas_in_pyjamas_50px_ninjas_in_pyjamas_2021_lightmode_png.png"
       },
       {
         "place": "12th-14th",
-        "team": "ENCE"
+        "team": "ENCE",
+        "teamLogo": "assets/tournament_logos/ence_50px_ence_2020_allmode_png.png"
       },
       {
         "place": "12th-14th",
-        "team": "Bad News Eagles"
+        "team": "Bad News Eagles",
+        "teamLogo": "assets/tournament_logos/bad_news_eagles_34px_bad_news_eagles_allmode_png.png"
       },
       {
         "place": "12th-14th",
-        "team": "G2 Esports"
+        "team": "G2 Esports",
+        "teamLogo": "assets/tournament_logos/g2_esports_43px_g2_esports_2020_lightmode_png.png"
       },
       {
         "place": "15th-16th",
-        "team": "9INE"
+        "team": "9INE",
+        "teamLogo": "assets/tournament_logos/9ine_50px_9ine_2022_lightmode_png.png"
       },
       {
         "place": "15th-16th",
-        "team": "FURIA Esports"
+        "team": "FURIA Esports",
+        "teamLogo": "assets/tournament_logos/furia_esports_51px_furia_esports_allmode_png.png"
       },
       {
         "place": "17th-19th",
-        "team": "FORZE Esports"
+        "team": "FORZE Esports",
+        "teamLogo": "assets/tournament_logos/forze_esports_46px_forze_esports_2023_february_lightmode_png.png"
       },
       {
         "place": "17th-19th",
-        "team": "Grayhound Gaming"
+        "team": "Grayhound Gaming",
+        "teamLogo": "assets/tournament_logos/grayhound_gaming_43px_grayhound_gaming_allmode_png.png"
       },
       {
         "place": "17th-19th",
-        "team": "paiN Gaming"
+        "team": "paiN Gaming",
+        "teamLogo": "assets/tournament_logos/pain_gaming_75px_pain_gaming_2017_lightmode_png.png"
       },
       {
         "place": "20th-22nd",
-        "team": "Complexity Gaming"
+        "team": "Complexity Gaming",
+        "teamLogo": "assets/tournament_logos/complexity_gaming_53px_complexity_gaming_2019_lightmode_png.png"
       },
       {
         "place": "20th-22nd",
-        "team": "The MongolZ"
+        "team": "The MongolZ",
+        "teamLogo": "assets/tournament_logos/the_mongolz_41px_the_mongolz_lightmode_png.png"
       },
       {
         "place": "20th-22nd",
-        "team": "OG"
+        "team": "OG",
+        "teamLogo": "assets/tournament_logos/og_34px_og_rb_allmode_png.png"
       },
       {
         "place": "23rd-24th",
-        "team": "MOUZ"
+        "team": "MOUZ",
+        "teamLogo": "assets/tournament_logos/mouz_47px_mouz_2021_allmode_png.png"
       },
       {
         "place": "23rd-24th",
-        "team": "Fluxo"
+        "team": "Fluxo",
+        "teamLogo": "assets/tournament_logos/fluxo_50px_fluxo_lightmode_png.png"
       }
     ],
     "stageDates": [
@@ -340,6 +410,8 @@
         "round": "Quarterfinals",
         "team1": "HEROIC",
         "team2": "FaZe Clan",
+        "team1Logo": "assets/tournament_logos/heroic_57px_heroic_2023_allmode_png.png",
+        "team2Logo": "assets/tournament_logos/faze_clan_75px_faze_clan_november_2021_lightmode_png.png",
         "score1": "2",
         "score2": "1",
         "date": "May 18, 2023 - 15:00 CEST"
@@ -348,6 +420,8 @@
         "round": "Quarterfinals",
         "team1": "GamerLegion",
         "team2": "Monte",
+        "team1Logo": "assets/tournament_logos/gamerlegion_91px_gamerlegion_cs_2023_allmode_png.png",
+        "team2Logo": "assets/tournament_logos/monte_35px_monte_2022_allmode_png.png",
         "score1": "2",
         "score2": "0",
         "date": "May 19, 2023 - 15:00 CEST"
@@ -356,6 +430,8 @@
         "round": "Semifinals",
         "team1": "HEROIC",
         "team2": "GamerLegion",
+        "team1Logo": "assets/tournament_logos/heroic_57px_heroic_2023_allmode_png.png",
+        "team2Logo": "assets/tournament_logos/gamerlegion_91px_gamerlegion_cs_2023_allmode_png.png",
         "score1": "1",
         "score2": "2",
         "date": "May 20, 2023 - 15:00 CEST"
@@ -364,6 +440,8 @@
         "round": "Quarterfinals",
         "team1": "Team Liquid",
         "team2": "Apeks",
+        "team1Logo": "assets/tournament_logos/team_liquid_44px_team_liquid_2023_lightmode_png.png",
+        "team2Logo": "assets/tournament_logos/apeks_100px_apeks_2021_darkmode_png.png",
         "score1": "0",
         "score2": "2",
         "date": "May 19, 2023 - 17:55 CEST"
@@ -372,6 +450,8 @@
         "round": "Quarterfinals",
         "team1": "Into The Breach",
         "team2": "Team Vitality",
+        "team1Logo": "assets/tournament_logos/into_the_breach_47px_into_the_breach_pink_2022_allmode_png.png",
+        "team2Logo": "assets/tournament_logos/team_vitality_41px_team_vitality_2023_lightmode_png.png",
         "score1": "0",
         "score2": "2",
         "date": "May 18, 2023 - 19:15 CEST"
@@ -380,6 +460,8 @@
         "round": "Semifinals",
         "team1": "Apeks",
         "team2": "Team Vitality",
+        "team1Logo": "assets/tournament_logos/apeks_100px_apeks_2021_darkmode_png.png",
+        "team2Logo": "assets/tournament_logos/team_vitality_41px_team_vitality_2023_lightmode_png.png",
         "score1": "0",
         "score2": "2",
         "date": "May 20, 2023 - 19:35 CEST"
@@ -388,6 +470,8 @@
         "round": "Grand Final",
         "team1": "GamerLegion",
         "team2": "Team Vitality",
+        "team1Logo": "assets/tournament_logos/gamerlegion_91px_gamerlegion_cs_2023_allmode_png.png",
+        "team2Logo": "assets/tournament_logos/team_vitality_41px_team_vitality_2023_lightmode_png.png",
         "score1": "0",
         "score2": "2",
         "date": "May 21, 2023 - 17:00 CEST"
@@ -402,67 +486,83 @@
     "placements": [
       {
         "place": "1st",
-        "team": "Team EnVyUs"
+        "team": "Team EnVyUs",
+        "teamLogo": "assets/tournament_logos/team_envyus_50px_team_envyus_lightmode_png.png"
       },
       {
         "place": "2nd",
-        "team": "Natus Vincere"
+        "team": "Natus Vincere",
+        "teamLogo": "assets/tournament_logos/natus_vincere_56px_natus_vincere_allmode_png.png"
       },
       {
         "place": "3rd-4th",
-        "team": "G2 Esports"
+        "team": "G2 Esports",
+        "teamLogo": "assets/tournament_logos/g2_esports_43px_g2_esports_allmode_png.png"
       },
       {
         "place": "3rd-4th",
-        "team": "Ninjas in Pyjamas"
+        "team": "Ninjas in Pyjamas",
+        "teamLogo": "assets/tournament_logos/ninjas_in_pyjamas_50px_ninjas_in_pyjamas_2012_allmode_png.png"
       },
       {
         "place": "5th-8th",
-        "team": "Fnatic"
+        "team": "Fnatic",
+        "teamLogo": "assets/tournament_logos/fnatic_61px_fnatic_allmode_png.png"
       },
       {
         "place": "5th-8th",
-        "team": "Virtus.pro"
+        "team": "Virtus.pro",
+        "teamLogo": "assets/tournament_logos/virtus_pro_48px_virtus_pro_allmode_png.png"
       },
       {
         "place": "5th-8th",
-        "team": "Team SoloMid"
+        "team": "Team SoloMid",
+        "teamLogo": "assets/tournament_logos/team_solomid_50px_team_solomid_lightmode_png.png"
       },
       {
         "place": "5th-8th",
-        "team": "Luminosity Gaming"
+        "team": "Luminosity Gaming",
+        "teamLogo": "assets/tournament_logos/luminosity_gaming_51px_luminosity_gaming_allmode_png.png"
       },
       {
         "place": "9th-12th",
-        "team": "Cloud9"
+        "team": "Cloud9",
+        "teamLogo": "assets/tournament_logos/cloud9_70px_cloud9_allmode_png.png"
       },
       {
         "place": "9th-12th",
-        "team": "mousesports"
+        "team": "mousesports",
+        "teamLogo": "assets/tournament_logos/mousesports_92px_mousesports_new_png.png"
       },
       {
         "place": "9th-12th",
-        "team": "Titan"
+        "team": "Titan",
+        "teamLogo": "assets/tournament_logos/titan_46px_titan_lightmode_png.png"
       },
       {
         "place": "9th-12th",
-        "team": "Counter Logic Gaming"
+        "team": "Counter Logic Gaming",
+        "teamLogo": "assets/tournament_logos/counter_logic_gaming_70px_counter_logic_gaming_allmode_png.png"
       },
       {
         "place": "13th-16th",
-        "team": "Vexed Gaming"
+        "team": "Vexed Gaming",
+        "teamLogo": "assets/tournament_logos/vexed_gaming_41px_vexed_gaming_allmode_png.png"
       },
       {
         "place": "13th-16th",
-        "team": "FlipSid3 Tactics"
+        "team": "FlipSid3 Tactics",
+        "teamLogo": "assets/tournament_logos/flipsid3_tactics_47px_flipsid3_tactics_lightmode_png.png"
       },
       {
         "place": "13th-16th",
-        "team": "Team Liquid"
+        "team": "Team Liquid",
+        "teamLogo": "assets/tournament_logos/team_liquid_50px_team_liquid_allmode_png.png"
       },
       {
         "place": "13th-16th",
-        "team": "Team Dignitas"
+        "team": "Team Dignitas",
+        "teamLogo": "assets/tournament_logos/team_dignitas_44px_team_dignitas_allmode_png.png"
       }
     ],
     "stageDates": [],
@@ -471,6 +571,8 @@
         "round": "Quarterfinals",
         "team1": "Team Envy",
         "team2": "Fnatic",
+        "team1Logo": "assets/tournament_logos/team_envy_50px_team_envyus_lightmode_png.png",
+        "team2Logo": "assets/tournament_logos/fnatic_61px_fnatic_allmode_png.png",
         "score1": "2",
         "score2": "1",
         "date": "October 31, 2015 - 11:15 EET"
@@ -479,6 +581,8 @@
         "round": "Quarterfinals",
         "team1": "Virtus.pro",
         "team2": "G2 Esports",
+        "team1Logo": "assets/tournament_logos/virtus_pro_48px_virtus_pro_allmode_png.png",
+        "team2Logo": "assets/tournament_logos/g2_esports_43px_g2_esports_allmode_png.png",
         "score1": "0",
         "score2": "2",
         "date": "October 31, 2015 - 14:55 EET"
@@ -487,6 +591,8 @@
         "round": "Semifinals",
         "team1": "Team Envy",
         "team2": "G2 Esports",
+        "team1Logo": "assets/tournament_logos/team_envy_50px_team_envyus_lightmode_png.png",
+        "team2Logo": "assets/tournament_logos/g2_esports_43px_g2_esports_allmode_png.png",
         "score1": "2",
         "score2": "1",
         "date": "November 1, 2015 - 12:05 EET"
@@ -495,6 +601,8 @@
         "round": "Quarterfinals",
         "team1": "TSM",
         "team2": "Ninjas in Pyjamas",
+        "team1Logo": "assets/tournament_logos/tsm_50px_team_solomid_lightmode_png.png",
+        "team2Logo": "assets/tournament_logos/ninjas_in_pyjamas_50px_ninjas_in_pyjamas_2012_allmode_png.png",
         "score1": "0",
         "score2": "2",
         "date": "October 31, 2015 - 17:45 EET"
@@ -503,6 +611,8 @@
         "round": "Quarterfinals",
         "team1": "Luminosity Gaming",
         "team2": "Natus Vincere",
+        "team1Logo": "assets/tournament_logos/luminosity_gaming_51px_luminosity_gaming_allmode_png.png",
+        "team2Logo": "assets/tournament_logos/natus_vincere_56px_natus_vincere_allmode_png.png",
         "score1": "0",
         "score2": "2",
         "date": "October 31, 2015 - 20:25 EET"
@@ -511,6 +621,8 @@
         "round": "Semifinals",
         "team1": "Ninjas in Pyjamas",
         "team2": "Natus Vincere",
+        "team1Logo": "assets/tournament_logos/ninjas_in_pyjamas_50px_ninjas_in_pyjamas_2012_allmode_png.png",
+        "team2Logo": "assets/tournament_logos/natus_vincere_56px_natus_vincere_allmode_png.png",
         "score1": "0",
         "score2": "2",
         "date": "November 1, 2015 - 16:30 EET"
@@ -519,6 +631,8 @@
         "round": "Grand Final",
         "team1": "Team Envy",
         "team2": "Natus Vincere",
+        "team1Logo": "assets/tournament_logos/team_envy_50px_team_envyus_lightmode_png.png",
+        "team2Logo": "assets/tournament_logos/natus_vincere_56px_natus_vincere_allmode_png.png",
         "score1": "2",
         "score2": "0",
         "date": "November 1, 2015 - 19:20 EET"
@@ -533,67 +647,83 @@
     "placements": [
       {
         "place": "1st",
-        "team": "Fnatic"
+        "team": "Fnatic",
+        "teamLogo": "assets/tournament_logos/fnatic_61px_fnatic_allmode_png.png"
       },
       {
         "place": "2nd",
-        "team": "Ninjas in Pyjamas"
+        "team": "Ninjas in Pyjamas",
+        "teamLogo": "assets/tournament_logos/ninjas_in_pyjamas_50px_ninjas_in_pyjamas_2012_allmode_png.png"
       },
       {
         "place": "3rd-4th",
-        "team": "VeryGames"
+        "team": "VeryGames",
+        "teamLogo": "assets/tournament_logos/verygames_88px_verygames_allmode_png.png"
       },
       {
         "place": "3rd-4th",
-        "team": "compLexity Gaming"
+        "team": "compLexity Gaming",
+        "teamLogo": "assets/tournament_logos/complexity_gaming_100px_complexity_logo_png.png"
       },
       {
         "place": "5th-8th",
-        "team": "LGB eSports"
+        "team": "LGB eSports",
+        "teamLogo": "assets/tournament_logos/lgb_esports_43px_lgb_esports_allmode_png.png"
       },
       {
         "place": "5th-8th",
-        "team": "Copenhagen Wolves"
+        "team": "Copenhagen Wolves",
+        "teamLogo": "assets/tournament_logos/copenhagen_wolves_50px_copenhagen_wolves_2012_allmode_png.png"
       },
       {
         "place": "5th-8th",
-        "team": "Recursive eSports"
+        "team": "Recursive eSports",
+        "teamLogo": "assets/tournament_logos/recursive_esports_50px_recursive_esports_2014_allmode_png.png"
       },
       {
         "place": "5th-8th",
-        "team": "Astana Dragons"
+        "team": "Astana Dragons",
+        "teamLogo": "assets/tournament_logos/astana_dragons_50px_astana_dragons_allmode_png.png"
       },
       {
         "place": "9th-12th",
-        "team": "Clan-Mystik"
+        "team": "Clan-Mystik",
+        "teamLogo": "assets/tournament_logos/clan_mystik_36px_clan_mystik_lightmode_png.png"
       },
       {
         "place": "9th-12th",
-        "team": "Universal Soldiers"
+        "team": "Universal Soldiers",
+        "teamLogo": "assets/tournament_logos/universal_soldiers_50px_universal_soldiers_allmode_png.png"
       },
       {
         "place": "9th-12th",
-        "team": "n!faculty"
+        "team": "n!faculty",
+        "teamLogo": "assets/tournament_logos/n_faculty_55px_n_faculty_allmode_png.png"
       },
       {
         "place": "9th-12th",
-        "team": "Reason Gaming"
+        "team": "Reason Gaming",
+        "teamLogo": "assets/tournament_logos/reason_gaming_49px_reason_gaming_allmode_png.png"
       },
       {
         "place": "13th-16th",
-        "team": "Natus Vincere"
+        "team": "Natus Vincere",
+        "teamLogo": "assets/tournament_logos/natus_vincere_56px_natus_vincere_allmode_png.png"
       },
       {
         "place": "13th-16th",
-        "team": "Team iBUYPOWER"
+        "team": "Team iBUYPOWER",
+        "teamLogo": "assets/tournament_logos/team_ibuypower_86px_ibuypower_lightmode_png.png"
       },
       {
         "place": "13th-16th",
-        "team": "Xapso"
+        "team": "Xapso",
+        "teamLogo": "assets/tournament_logos/xapso_50px_xapso_allmode_png.png"
       },
       {
         "place": "13th-16th",
-        "team": "SK Gaming"
+        "team": "SK Gaming",
+        "teamLogo": "assets/tournament_logos/sk_gaming_50px_sk_gaming_2003_lightmode_png.png"
       }
     ],
     "stageDates": [],
@@ -602,6 +732,8 @@
         "round": "Quarterfinals",
         "team1": "LGB eSports",
         "team2": "Ninjas in Pyjamas",
+        "team1Logo": "assets/tournament_logos/lgb_esports_43px_lgb_esports_allmode_png.png",
+        "team2Logo": "assets/tournament_logos/ninjas_in_pyjamas_50px_ninjas_in_pyjamas_2012_allmode_png.png",
         "score1": "1",
         "score2": "2",
         "date": "November 28, 2013 - 22:45 CET"
@@ -610,6 +742,8 @@
         "round": "Quarterfinals",
         "team1": "Copenhagen Wolves",
         "team2": "VeryGames",
+        "team1Logo": "assets/tournament_logos/copenhagen_wolves_50px_copenhagen_wolves_2012_allmode_png.png",
+        "team2Logo": "assets/tournament_logos/verygames_88px_verygames_allmode_png.png",
         "score1": "1",
         "score2": "2",
         "date": "November 29, 2013 - 20:00 CET"
@@ -618,6 +752,8 @@
         "round": "Semifinals",
         "team1": "Ninjas in Pyjamas",
         "team2": "VeryGames",
+        "team1Logo": "assets/tournament_logos/ninjas_in_pyjamas_50px_ninjas_in_pyjamas_2012_allmode_png.png",
+        "team2Logo": "assets/tournament_logos/verygames_88px_verygames_allmode_png.png",
         "score1": "2",
         "score2": "1",
         "date": "November 30, 2013 - 14:30 CET"
@@ -626,6 +762,8 @@
         "round": "Quarterfinals",
         "team1": "Fnatic",
         "team2": "Recursive eSports",
+        "team1Logo": "assets/tournament_logos/fnatic_61px_fnatic_allmode_png.png",
+        "team2Logo": "assets/tournament_logos/recursive_esports_50px_recursive_esports_2014_allmode_png.png",
         "score1": "2",
         "score2": "1",
         "date": "November 28, 2013 - 22:30 CET"
@@ -634,6 +772,8 @@
         "round": "Quarterfinals",
         "team1": "Complexity",
         "team2": "Astana Dragons",
+        "team1Logo": "assets/tournament_logos/complexity_100px_complexity_logo_png.png",
+        "team2Logo": "assets/tournament_logos/astana_dragons_50px_astana_dragons_allmode_png.png",
         "score1": "2",
         "score2": "1",
         "date": "November 29, 2013 - 20:00 CET"
@@ -642,6 +782,8 @@
         "round": "Semifinals",
         "team1": "Fnatic",
         "team2": "Complexity",
+        "team1Logo": "assets/tournament_logos/fnatic_61px_fnatic_allmode_png.png",
+        "team2Logo": "assets/tournament_logos/complexity_100px_complexity_logo_png.png",
         "score1": "2",
         "score2": "0",
         "date": "November 30, 2013 - 18:00 CET"
@@ -650,6 +792,8 @@
         "round": "Grand Final",
         "team1": "Ninjas in Pyjamas",
         "team2": "Fnatic",
+        "team1Logo": "assets/tournament_logos/ninjas_in_pyjamas_50px_ninjas_in_pyjamas_2012_allmode_png.png",
+        "team2Logo": "assets/tournament_logos/fnatic_61px_fnatic_allmode_png.png",
         "score1": "1",
         "score2": "2",
         "date": "November 30, 2013 - 22:30 CET"
@@ -664,67 +808,83 @@
     "placements": [
       {
         "place": "1st",
-        "team": "Team LDLC.com"
+        "team": "Team LDLC.com",
+        "teamLogo": "assets/tournament_logos/team_ldlc_com_100px_team_ldlc_2012_lightmode_png.png"
       },
       {
         "place": "2nd",
-        "team": "Ninjas in Pyjamas"
+        "team": "Ninjas in Pyjamas",
+        "teamLogo": "assets/tournament_logos/ninjas_in_pyjamas_50px_ninjas_in_pyjamas_2012_allmode_png.png"
       },
       {
         "place": "3rd-4th",
-        "team": "Virtus.pro"
+        "team": "Virtus.pro",
+        "teamLogo": "assets/tournament_logos/virtus_pro_48px_virtus_pro_allmode_png.png"
       },
       {
         "place": "3rd-4th",
-        "team": "Natus Vincere"
+        "team": "Natus Vincere",
+        "teamLogo": "assets/tournament_logos/natus_vincere_56px_natus_vincere_allmode_png.png"
       },
       {
         "place": "5th-8th",
-        "team": "HellRaisers"
+        "team": "HellRaisers",
+        "teamLogo": "assets/tournament_logos/hellraisers_57px_hellraisers_2014_allmode_png.png"
       },
       {
         "place": "5th-8th",
-        "team": "PENTA Sports"
+        "team": "PENTA Sports",
+        "teamLogo": "assets/tournament_logos/penta_sports_37px_penta_sports_lightmode_png.png"
       },
       {
         "place": "5th-8th",
-        "team": "Fnatic"
+        "team": "Fnatic",
+        "teamLogo": "assets/tournament_logos/fnatic_61px_fnatic_allmode_png.png"
       },
       {
         "place": "5th-8th",
-        "team": "Team Dignitas"
+        "team": "Team Dignitas",
+        "teamLogo": "assets/tournament_logos/team_dignitas_44px_team_dignitas_allmode_png.png"
       },
       {
         "place": "9th-12th",
-        "team": "Cloud9"
+        "team": "Cloud9",
+        "teamLogo": "assets/tournament_logos/cloud9_70px_cloud9_allmode_png.png"
       },
       {
         "place": "9th-12th",
-        "team": "Team iBUYPOWER"
+        "team": "Team iBUYPOWER",
+        "teamLogo": "assets/tournament_logos/team_ibuypower_86px_ibuypower_lightmode_png.png"
       },
       {
         "place": "9th-12th",
-        "team": "ESC Gaming"
+        "team": "ESC Gaming",
+        "teamLogo": "assets/tournament_logos/esc_gaming_39px_esc_gaming_allmode_png.png"
       },
       {
         "place": "9th-12th",
-        "team": "FlipSid3 Tactics"
+        "team": "FlipSid3 Tactics",
+        "teamLogo": "assets/tournament_logos/flipsid3_tactics_47px_flipsid3_tactics_lightmode_png.png"
       },
       {
         "place": "13th-16th",
-        "team": "Bravado Gaming"
+        "team": "Bravado Gaming",
+        "teamLogo": "assets/tournament_logos/bravado_gaming_49px_bravado_gaming_allmode_png.png"
       },
       {
         "place": "13th-16th",
-        "team": "Copenhagen Wolves"
+        "team": "Copenhagen Wolves",
+        "teamLogo": "assets/tournament_logos/copenhagen_wolves_50px_copenhagen_wolves_2012_allmode_png.png"
       },
       {
         "place": "13th-16th",
-        "team": "Planetkey Dynamics"
+        "team": "Planetkey Dynamics",
+        "teamLogo": "assets/tournament_logos/planetkey_dynamics_68px_planetkey_dynamics_allmode_png.png"
       },
       {
         "place": "13th-16th",
-        "team": "myXMG"
+        "team": "myXMG",
+        "teamLogo": "assets/tournament_logos/myxmg_65px_myxmg_allmode_png.png"
       }
     ],
     "stageDates": [],
@@ -733,6 +893,8 @@
         "round": "Quarterfinals",
         "team1": "HellRaisers",
         "team2": "Ninjas in Pyjamas",
+        "team1Logo": "assets/tournament_logos/hellraisers_57px_hellraisers_2014_allmode_png.png",
+        "team2Logo": "assets/tournament_logos/ninjas_in_pyjamas_50px_ninjas_in_pyjamas_2012_allmode_png.png",
         "score1": "0",
         "score2": "2",
         "date": "November 28, 2014 - 11:05 CET"
@@ -741,6 +903,8 @@
         "round": "Quarterfinals",
         "team1": "Virtus.pro",
         "team2": "PENTA Sports",
+        "team1Logo": "assets/tournament_logos/virtus_pro_48px_virtus_pro_allmode_png.png",
+        "team2Logo": "assets/tournament_logos/penta_sports_37px_penta_sports_lightmode_png.png",
         "score1": "2",
         "score2": "0",
         "date": "November 28, 2014 - 14:30 CET"
@@ -749,6 +913,8 @@
         "round": "Semifinals",
         "team1": "Ninjas in Pyjamas",
         "team2": "Virtus.pro",
+        "team1Logo": "assets/tournament_logos/ninjas_in_pyjamas_50px_ninjas_in_pyjamas_2012_allmode_png.png",
+        "team2Logo": "assets/tournament_logos/virtus_pro_48px_virtus_pro_allmode_png.png",
         "score1": "2",
         "score2": "1",
         "date": "November 29, 2014 - 13:00 CET"
@@ -757,6 +923,8 @@
         "round": "Quarterfinals",
         "team1": "Team LDLC",
         "team2": "Fnatic",
+        "team1Logo": "assets/tournament_logos/team_ldlc_100px_team_ldlc_2012_lightmode_png.png",
+        "team2Logo": "assets/tournament_logos/fnatic_61px_fnatic_allmode_png.png",
         "score1": "2",
         "score2": "1",
         "date": "November 28, 2014 - 17:30 CET"
@@ -765,6 +933,8 @@
         "round": "Quarterfinals",
         "team1": "Dignitas",
         "team2": "Natus Vincere",
+        "team1Logo": "assets/tournament_logos/dignitas_44px_team_dignitas_allmode_png.png",
+        "team2Logo": "assets/tournament_logos/natus_vincere_56px_natus_vincere_allmode_png.png",
         "score1": "0",
         "score2": "2",
         "date": "November 28, 2014 - 21:30 CET"
@@ -773,6 +943,8 @@
         "round": "Semifinals",
         "team1": "Team LDLC",
         "team2": "Natus Vincere",
+        "team1Logo": "assets/tournament_logos/team_ldlc_100px_team_ldlc_2012_lightmode_png.png",
+        "team2Logo": "assets/tournament_logos/natus_vincere_56px_natus_vincere_allmode_png.png",
         "score1": "2",
         "score2": "0",
         "date": "November 29, 2014 - 16:30 CET"
@@ -781,6 +953,8 @@
         "round": "Grand Final",
         "team1": "Ninjas in Pyjamas",
         "team2": "Team LDLC",
+        "team1Logo": "assets/tournament_logos/ninjas_in_pyjamas_50px_ninjas_in_pyjamas_2012_allmode_png.png",
+        "team2Logo": "assets/tournament_logos/team_ldlc_100px_team_ldlc_2012_lightmode_png.png",
         "score1": "1",
         "score2": "2",
         "date": "November 29, 2014 - 21:00 CET"
@@ -795,67 +969,83 @@
     "placements": [
       {
         "place": "1st",
-        "team": "Astralis"
+        "team": "Astralis",
+        "teamLogo": "assets/tournament_logos/astralis_41px_astralis_logo_png.png"
       },
       {
         "place": "2nd",
-        "team": "Virtus.pro"
+        "team": "Virtus.pro",
+        "teamLogo": "assets/tournament_logos/virtus_pro_48px_virtus_pro_allmode_png.png"
       },
       {
         "place": "3rd-4th",
-        "team": "Fnatic"
+        "team": "Fnatic",
+        "teamLogo": "assets/tournament_logos/fnatic_60px_fnatic_2015_allmode_png.png"
       },
       {
         "place": "3rd-4th",
-        "team": "SK Gaming"
+        "team": "SK Gaming",
+        "teamLogo": "assets/tournament_logos/sk_gaming_50px_sk_gaming_2003_lightmode_png.png"
       },
       {
         "place": "5th-8th",
-        "team": "Natus Vincere"
+        "team": "Natus Vincere",
+        "teamLogo": "assets/tournament_logos/natus_vincere_56px_natus_vincere_allmode_png.png"
       },
       {
         "place": "5th-8th",
-        "team": "Gambit Esports"
+        "team": "Gambit Esports",
+        "teamLogo": "assets/tournament_logos/gambit_esports_46px_gambit_esports_allmode_png.png"
       },
       {
         "place": "5th-8th",
-        "team": "North"
+        "team": "North",
+        "teamLogo": "assets/tournament_logos/north_48px_north_lightmode_png.png"
       },
       {
         "place": "5th-8th",
-        "team": "FaZe Clan"
+        "team": "FaZe Clan",
+        "teamLogo": "assets/tournament_logos/faze_clan_76px_faze_clan_2017_allmode_png.png"
       },
       {
         "place": "9th-11th",
-        "team": "Team EnVyUs"
+        "team": "Team EnVyUs",
+        "teamLogo": "assets/tournament_logos/team_envyus_50px_team_envyus_lightmode_png.png"
       },
       {
         "place": "9th-11th",
-        "team": "GODSENT"
+        "team": "GODSENT",
+        "teamLogo": "assets/tournament_logos/godsent_58px_godsent_lightmode_png.png"
       },
       {
         "place": "9th-11th",
-        "team": "Team Liquid"
+        "team": "Team Liquid",
+        "teamLogo": "assets/tournament_logos/team_liquid_50px_team_liquid_2017_lightmode_png.png"
       },
       {
         "place": "12th-14th",
-        "team": "OpTic Gaming"
+        "team": "OpTic Gaming",
+        "teamLogo": "assets/tournament_logos/optic_gaming_77px_optic_gaming_lightmode_png.png"
       },
       {
         "place": "12th-14th",
-        "team": "G2 Esports"
+        "team": "G2 Esports",
+        "teamLogo": "assets/tournament_logos/g2_esports_43px_g2_esports_allmode_png.png"
       },
       {
         "place": "12th-14th",
-        "team": "mousesports"
+        "team": "mousesports",
+        "teamLogo": "assets/tournament_logos/mousesports_92px_mousesports_2016_allmode_png.png"
       },
       {
         "place": "15th-16th",
-        "team": "FlipSid3 Tactics"
+        "team": "FlipSid3 Tactics",
+        "teamLogo": "assets/tournament_logos/flipsid3_tactics_47px_flipsid3_tactics_lightmode_png.png"
       },
       {
         "place": "15th-16th",
-        "team": "HellRaisers"
+        "team": "HellRaisers",
+        "teamLogo": "assets/tournament_logos/hellraisers_57px_hellraisers_2014_allmode_png.png"
       }
     ],
     "stageDates": [],
@@ -864,6 +1054,8 @@
         "round": "Quarterfinals",
         "team1": "Natus Vincere",
         "team2": "Astralis",
+        "team1Logo": "assets/tournament_logos/natus_vincere_56px_natus_vincere_allmode_png.png",
+        "team2Logo": "assets/tournament_logos/astralis_41px_astralis_logo_png.png",
         "score1": "1",
         "score2": "2",
         "date": "January 27, 2017 - 10:00 EST"
@@ -872,6 +1064,8 @@
         "round": "Quarterfinals",
         "team1": "Fnatic",
         "team2": "Gambit Esports",
+        "team1Logo": "assets/tournament_logos/fnatic_60px_fnatic_2015_allmode_png.png",
+        "team2Logo": "assets/tournament_logos/gambit_esports_46px_gambit_esports_allmode_png.png",
         "score1": "2",
         "score2": "1",
         "date": "January 27, 2017 - 14:45 EST"
@@ -880,6 +1074,8 @@
         "round": "Semifinals",
         "team1": "Astralis",
         "team2": "Fnatic",
+        "team1Logo": "assets/tournament_logos/astralis_41px_astralis_logo_png.png",
+        "team2Logo": "assets/tournament_logos/fnatic_60px_fnatic_2015_allmode_png.png",
         "score1": "2",
         "score2": "0",
         "date": "January 28, 2017 - 13:40 EST"
@@ -888,6 +1084,8 @@
         "round": "Quarterfinals",
         "team1": "Virtus.pro",
         "team2": "North",
+        "team1Logo": "assets/tournament_logos/virtus_pro_48px_virtus_pro_allmode_png.png",
+        "team2Logo": "assets/tournament_logos/north_48px_north_lightmode_png.png",
         "score1": "2",
         "score2": "1",
         "date": "January 27, 2017 - 18:35 EST"
@@ -896,6 +1094,8 @@
         "round": "Quarterfinals",
         "team1": "FaZe Clan",
         "team2": "SK Gaming",
+        "team1Logo": "assets/tournament_logos/faze_clan_76px_faze_clan_2017_allmode_png.png",
+        "team2Logo": "assets/tournament_logos/sk_gaming_50px_sk_gaming_2003_lightmode_png.png",
         "score1": "1",
         "score2": "2",
         "date": "January 28, 2017 - 10:00 EST"
@@ -904,6 +1104,8 @@
         "round": "Semifinals",
         "team1": "Virtus.pro",
         "team2": "SK Gaming",
+        "team1Logo": "assets/tournament_logos/virtus_pro_48px_virtus_pro_allmode_png.png",
+        "team2Logo": "assets/tournament_logos/sk_gaming_50px_sk_gaming_2003_lightmode_png.png",
         "score1": "2",
         "score2": "0",
         "date": "January 28, 2017 - 17:00 EST"
@@ -912,6 +1114,8 @@
         "round": "Grand Final",
         "team1": "Astralis",
         "team2": "Virtus.pro",
+        "team1Logo": "assets/tournament_logos/astralis_41px_astralis_logo_png.png",
+        "team2Logo": "assets/tournament_logos/virtus_pro_48px_virtus_pro_allmode_png.png",
         "score1": "2",
         "score2": "1",
         "date": "January 29, 2017 - 10:00 EST"
@@ -926,95 +1130,118 @@
     "placements": [
       {
         "place": "1st",
-        "team": "Cloud9"
+        "team": "Cloud9",
+        "teamLogo": "assets/tournament_logos/cloud9_70px_cloud9_allmode_png.png"
       },
       {
         "place": "2nd",
-        "team": "FaZe Clan"
+        "team": "FaZe Clan",
+        "teamLogo": "assets/tournament_logos/faze_clan_76px_faze_clan_2017_allmode_png.png"
       },
       {
         "place": "3rd-4th",
-        "team": "Natus Vincere"
+        "team": "Natus Vincere",
+        "teamLogo": "assets/tournament_logos/natus_vincere_56px_natus_vincere_allmode_png.png"
       },
       {
         "place": "3rd-4th",
-        "team": "SK Gaming"
+        "team": "SK Gaming",
+        "teamLogo": "assets/tournament_logos/sk_gaming_50px_sk_gaming_2003_lightmode_png.png"
       },
       {
         "place": "5th-8th",
-        "team": "mousesports"
+        "team": "mousesports",
+        "teamLogo": "assets/tournament_logos/mousesports_92px_mousesports_2016_allmode_png.png"
       },
       {
         "place": "5th-8th",
-        "team": "Quantum Bellator Fire"
+        "team": "Quantum Bellator Fire",
+        "teamLogo": "assets/tournament_logos/quantum_bellator_fire_38px_quantum_bellator_fire_allmode_png.png"
       },
       {
         "place": "5th-8th",
-        "team": "G2 Esports"
+        "team": "G2 Esports",
+        "teamLogo": "assets/tournament_logos/g2_esports_43px_g2_esports_2020_lightmode_png.png"
       },
       {
         "place": "5th-8th",
-        "team": "Fnatic"
+        "team": "Fnatic",
+        "teamLogo": "assets/tournament_logos/fnatic_60px_fnatic_2015_allmode_png.png"
       },
       {
         "place": "9th-11th",
-        "team": "Gambit Esports"
+        "team": "Gambit Esports",
+        "teamLogo": "assets/tournament_logos/gambit_esports_46px_gambit_esports_allmode_png.png"
       },
       {
         "place": "9th-11th",
-        "team": "Vega Squadron"
+        "team": "Vega Squadron",
+        "teamLogo": "assets/tournament_logos/vega_squadron_47px_vega_squadron_2016_allmode_png.png"
       },
       {
         "place": "9th-11th",
-        "team": "Space Soldiers"
+        "team": "Space Soldiers",
+        "teamLogo": "assets/tournament_logos/space_soldiers_57px_space_soldiers_lightmode_png.png"
       },
       {
         "place": "12th-14th",
-        "team": "BIG"
+        "team": "BIG",
+        "teamLogo": "assets/tournament_logos/big_35px_big_lightmode_png.png"
       },
       {
         "place": "12th-14th",
-        "team": "Astralis"
+        "team": "Astralis",
+        "teamLogo": "assets/tournament_logos/astralis_41px_astralis_logo_png.png"
       },
       {
         "place": "12th-14th",
-        "team": "Team Liquid"
+        "team": "Team Liquid",
+        "teamLogo": "assets/tournament_logos/team_liquid_50px_team_liquid_2017_lightmode_png.png"
       },
       {
         "place": "15th-16th",
-        "team": "North"
+        "team": "North",
+        "teamLogo": "assets/tournament_logos/north_48px_north_lightmode_png.png"
       },
       {
         "place": "15th-16th",
-        "team": "Virtus.pro"
+        "team": "Virtus.pro",
+        "teamLogo": "assets/tournament_logos/virtus_pro_48px_virtus_pro_allmode_png.png"
       },
       {
         "place": "17th",
-        "team": "AVANGAR"
+        "team": "AVANGAR",
+        "teamLogo": "assets/tournament_logos/avangar_57px_avangar_allmode_png.png"
       },
       {
         "place": "18th",
-        "team": "Renegades"
+        "team": "Renegades",
+        "teamLogo": "assets/tournament_logos/renegades_47px_renegades_png.png"
       },
       {
         "place": "19th-21st",
-        "team": "Sprout"
+        "team": "Sprout",
+        "teamLogo": "assets/tournament_logos/sprout_29px_sprout_allmode_png.png"
       },
       {
         "place": "19th-21st",
-        "team": "Team Envy"
+        "team": "Team Envy",
+        "teamLogo": "assets/tournament_logos/team_envy_50px_team_envy_2018_lightmode_png.png"
       },
       {
         "place": "19th-21st",
-        "team": "Misfits Gaming"
+        "team": "Misfits Gaming",
+        "teamLogo": "assets/tournament_logos/misfits_gaming_36px_misfits_gaming_2017_allmode_png.png"
       },
       {
         "place": "22nd-23rd",
-        "team": "Flash Gaming"
+        "team": "Flash Gaming",
+        "teamLogo": "assets/tournament_logos/flash_gaming_56px_flash_gaming_allmode_png.png"
       },
       {
         "place": "22nd-23rd",
-        "team": "FlipSid3 Tactics"
+        "team": "FlipSid3 Tactics",
+        "teamLogo": "assets/tournament_logos/flipsid3_tactics_47px_flipsid3_tactics_lightmode_png.png"
       }
     ],
     "stageDates": [
@@ -1029,6 +1256,8 @@
         "round": "Quarterfinals",
         "team1": "FaZe Clan",
         "team2": "MOUZ",
+        "team1Logo": "assets/tournament_logos/faze_clan_76px_faze_clan_2017_allmode_png.png",
+        "team2Logo": "assets/tournament_logos/mouz_92px_mousesports_2016_allmode_png.png",
         "score1": "2",
         "score2": "0",
         "date": "January 26, 2018 - 10:00 EST"
@@ -1037,6 +1266,8 @@
         "round": "Quarterfinals",
         "team1": "Natus Vincere",
         "team2": "Quantum Bellator Fire",
+        "team1Logo": "assets/tournament_logos/natus_vincere_56px_natus_vincere_allmode_png.png",
+        "team2Logo": "assets/tournament_logos/quantum_bellator_fire_38px_quantum_bellator_fire_allmode_png.png",
         "score1": "2",
         "score2": "0",
         "date": "January 26, 2018 - 14:35 EST"
@@ -1045,6 +1276,8 @@
         "round": "Semifinals",
         "team1": "FaZe Clan",
         "team2": "Natus Vincere",
+        "team1Logo": "assets/tournament_logos/faze_clan_76px_faze_clan_2017_allmode_png.png",
+        "team2Logo": "assets/tournament_logos/natus_vincere_56px_natus_vincere_allmode_png.png",
         "score1": "2",
         "score2": "0",
         "date": "January 27, 2018 - 16:00 EST"
@@ -1053,6 +1286,8 @@
         "round": "Quarterfinals",
         "team1": "G2 Esports",
         "team2": "Cloud9",
+        "team1Logo": "assets/tournament_logos/g2_esports_43px_g2_esports_2020_lightmode_png.png",
+        "team2Logo": "assets/tournament_logos/cloud9_70px_cloud9_allmode_png.png",
         "score1": "0",
         "score2": "2",
         "date": "January 26, 2018 - 16:30 EST"
@@ -1061,6 +1296,8 @@
         "round": "Quarterfinals",
         "team1": "SK Gaming",
         "team2": "Fnatic",
+        "team1Logo": "assets/tournament_logos/sk_gaming_50px_sk_gaming_2003_lightmode_png.png",
+        "team2Logo": "assets/tournament_logos/fnatic_60px_fnatic_2015_allmode_png.png",
         "score1": "2",
         "score2": "1",
         "date": "January 27, 2018 - 10:00 EST"
@@ -1069,6 +1306,8 @@
         "round": "Semifinals",
         "team1": "Cloud9",
         "team2": "SK Gaming",
+        "team1Logo": "assets/tournament_logos/cloud9_70px_cloud9_allmode_png.png",
+        "team2Logo": "assets/tournament_logos/sk_gaming_50px_sk_gaming_2003_lightmode_png.png",
         "score1": "2",
         "score2": "1",
         "date": "January 27, 2018 - 18:30 EST"
@@ -1077,6 +1316,8 @@
         "round": "Grand Final",
         "team1": "FaZe Clan",
         "team2": "Cloud9",
+        "team1Logo": "assets/tournament_logos/faze_clan_76px_faze_clan_2017_allmode_png.png",
+        "team2Logo": "assets/tournament_logos/cloud9_70px_cloud9_allmode_png.png",
         "score1": "1",
         "score2": "2",
         "date": "January 28, 2018 - 14:00 EST"
@@ -1091,67 +1332,83 @@
     "placements": [
       {
         "place": "1st",
-        "team": "Virtus.pro"
+        "team": "Virtus.pro",
+        "teamLogo": "assets/tournament_logos/virtus_pro_48px_virtus_pro_allmode_png.png"
       },
       {
         "place": "2nd",
-        "team": "Ninjas in Pyjamas"
+        "team": "Ninjas in Pyjamas",
+        "teamLogo": "assets/tournament_logos/ninjas_in_pyjamas_50px_ninjas_in_pyjamas_2012_allmode_png.png"
       },
       {
         "place": "3rd-4th",
-        "team": "Team Dignitas"
+        "team": "Team Dignitas",
+        "teamLogo": "assets/tournament_logos/team_dignitas_44px_team_dignitas_allmode_png.png"
       },
       {
         "place": "3rd-4th",
-        "team": "LGB eSports"
+        "team": "LGB eSports",
+        "teamLogo": "assets/tournament_logos/lgb_esports_43px_lgb_esports_allmode_png.png"
       },
       {
         "place": "5th-8th",
-        "team": "compLexity Gaming"
+        "team": "compLexity Gaming",
+        "teamLogo": "assets/tournament_logos/complexity_gaming_100px_complexity_logo_png.png"
       },
       {
         "place": "5th-8th",
-        "team": "HellRaisers"
+        "team": "HellRaisers",
+        "teamLogo": "assets/tournament_logos/hellraisers_57px_hellraisers_2014_allmode_png.png"
       },
       {
         "place": "5th-8th",
-        "team": "Team LDLC.com"
+        "team": "Team LDLC.com",
+        "teamLogo": "assets/tournament_logos/team_ldlc_com_100px_team_ldlc_2012_lightmode_png.png"
       },
       {
         "place": "5th-8th",
-        "team": "Fnatic"
+        "team": "Fnatic",
+        "teamLogo": "assets/tournament_logos/fnatic_61px_fnatic_allmode_png.png"
       },
       {
         "place": "9th-12th",
-        "team": "Titan"
+        "team": "Titan",
+        "teamLogo": "assets/tournament_logos/titan_46px_titan_lightmode_png.png"
       },
       {
         "place": "9th-12th",
-        "team": "3DMAX"
+        "team": "3DMAX",
+        "teamLogo": "assets/tournament_logos/3dmax_36px_3dmax_2011_allmode_png.png"
       },
       {
         "place": "9th-12th",
-        "team": "Reason Gaming"
+        "team": "Reason Gaming",
+        "teamLogo": "assets/tournament_logos/reason_gaming_49px_reason_gaming_allmode_png.png"
       },
       {
         "place": "9th-12th",
-        "team": "Clan-Mystik"
+        "team": "Clan-Mystik",
+        "teamLogo": "assets/tournament_logos/clan_mystik_36px_clan_mystik_lightmode_png.png"
       },
       {
         "place": "13th-16th",
-        "team": "mousesports"
+        "team": "mousesports",
+        "teamLogo": "assets/tournament_logos/mousesports_92px_mousesports_new_png.png"
       },
       {
         "place": "13th-16th",
-        "team": "Vox Eminor"
+        "team": "Vox Eminor",
+        "teamLogo": "assets/tournament_logos/vox_eminor_89px_vox_eminor_allmode_png.png"
       },
       {
         "place": "13th-16th",
-        "team": "Team iBUYPOWER"
+        "team": "Team iBUYPOWER",
+        "teamLogo": "assets/tournament_logos/team_ibuypower_86px_ibuypower_lightmode_png.png"
       },
       {
         "place": "13th-16th",
-        "team": "Natus Vincere"
+        "team": "Natus Vincere",
+        "teamLogo": "assets/tournament_logos/natus_vincere_56px_natus_vincere_allmode_png.png"
       }
     ],
     "stageDates": [],
@@ -1160,6 +1417,8 @@
         "round": "Quarterfinals",
         "team1": "Ninjas in Pyjamas",
         "team2": "Complexity",
+        "team1Logo": "assets/tournament_logos/ninjas_in_pyjamas_50px_ninjas_in_pyjamas_2012_allmode_png.png",
+        "team2Logo": "assets/tournament_logos/complexity_100px_complexity_logo_png.png",
         "score1": "2",
         "score2": "1",
         "date": "March 14, 2014 - 18:55 CET"
@@ -1168,6 +1427,8 @@
         "round": "Quarterfinals",
         "team1": "Dignitas",
         "team2": "HellRaisers",
+        "team1Logo": "assets/tournament_logos/dignitas_44px_team_dignitas_allmode_png.png",
+        "team2Logo": "assets/tournament_logos/hellraisers_57px_hellraisers_2014_allmode_png.png",
         "score1": "2",
         "score2": "0",
         "date": "March 14, 2014 - 13:00 CET"
@@ -1176,6 +1437,8 @@
         "round": "Semifinals",
         "team1": "Ninjas in Pyjamas",
         "team2": "Dignitas",
+        "team1Logo": "assets/tournament_logos/ninjas_in_pyjamas_50px_ninjas_in_pyjamas_2012_allmode_png.png",
+        "team2Logo": "assets/tournament_logos/dignitas_44px_team_dignitas_allmode_png.png",
         "score1": "2",
         "score2": "0",
         "date": "March 15, 2014 - 17:05 CET"
@@ -1184,6 +1447,8 @@
         "round": "Quarterfinals",
         "team1": "Virtus.pro",
         "team2": "Team LDLC",
+        "team1Logo": "assets/tournament_logos/virtus_pro_48px_virtus_pro_allmode_png.png",
+        "team2Logo": "assets/tournament_logos/team_ldlc_100px_team_ldlc_2012_lightmode_png.png",
         "score1": "2",
         "score2": "0",
         "date": "March 14, 2014 - 16:00 CET"
@@ -1192,6 +1457,8 @@
         "round": "Quarterfinals",
         "team1": "Fnatic",
         "team2": "LGB eSports",
+        "team1Logo": "assets/tournament_logos/fnatic_61px_fnatic_allmode_png.png",
+        "team2Logo": "assets/tournament_logos/lgb_esports_43px_lgb_esports_allmode_png.png",
         "score1": "1",
         "score2": "2",
         "date": "March 15, 2014 - 13:00 CET"
@@ -1200,6 +1467,8 @@
         "round": "Semifinals",
         "team1": "Virtus.pro",
         "team2": "LGB eSports",
+        "team1Logo": "assets/tournament_logos/virtus_pro_48px_virtus_pro_allmode_png.png",
+        "team2Logo": "assets/tournament_logos/lgb_esports_43px_lgb_esports_allmode_png.png",
         "score1": "2",
         "score2": "1",
         "date": "March 15, 2014 - 19:00 CET"
@@ -1208,6 +1477,8 @@
         "round": "Grand Final",
         "team1": "Ninjas in Pyjamas",
         "team2": "Virtus.pro",
+        "team1Logo": "assets/tournament_logos/ninjas_in_pyjamas_50px_ninjas_in_pyjamas_2012_allmode_png.png",
+        "team2Logo": "assets/tournament_logos/virtus_pro_48px_virtus_pro_allmode_png.png",
         "score1": "0",
         "score2": "2",
         "date": "March 16, 2014 - 13:00 CET"
@@ -1222,67 +1493,83 @@
     "placements": [
       {
         "place": "1st",
-        "team": "Ninjas in Pyjamas"
+        "team": "Ninjas in Pyjamas",
+        "teamLogo": "assets/tournament_logos/ninjas_in_pyjamas_50px_ninjas_in_pyjamas_2012_allmode_png.png"
       },
       {
         "place": "2nd",
-        "team": "Fnatic"
+        "team": "Fnatic",
+        "teamLogo": "assets/tournament_logos/fnatic_61px_fnatic_allmode_png.png"
       },
       {
         "place": "3rd-4th",
-        "team": "Team Dignitas"
+        "team": "Team Dignitas",
+        "teamLogo": "assets/tournament_logos/team_dignitas_44px_team_dignitas_allmode_png.png"
       },
       {
         "place": "3rd-4th",
-        "team": "Team LDLC.com"
+        "team": "Team LDLC.com",
+        "teamLogo": "assets/tournament_logos/team_ldlc_com_100px_team_ldlc_2012_lightmode_png.png"
       },
       {
         "place": "5th-8th",
-        "team": "Natus Vincere"
+        "team": "Natus Vincere",
+        "teamLogo": "assets/tournament_logos/natus_vincere_56px_natus_vincere_allmode_png.png"
       },
       {
         "place": "5th-8th",
-        "team": "Epsilon eSports"
+        "team": "Epsilon eSports",
+        "teamLogo": "assets/tournament_logos/epsilon_esports_100px_epsilon_esports_lightmode_png.png"
       },
       {
         "place": "5th-8th",
-        "team": "Virtus.pro"
+        "team": "Virtus.pro",
+        "teamLogo": "assets/tournament_logos/virtus_pro_48px_virtus_pro_allmode_png.png"
       },
       {
         "place": "5th-8th",
-        "team": "Cloud9"
+        "team": "Cloud9",
+        "teamLogo": "assets/tournament_logos/cloud9_70px_cloud9_allmode_png.png"
       },
       {
         "place": "9th-12th",
-        "team": "HellRaisers"
+        "team": "HellRaisers",
+        "teamLogo": "assets/tournament_logos/hellraisers_57px_hellraisers_2014_allmode_png.png"
       },
       {
         "place": "9th-12th",
-        "team": "Copenhagen Wolves"
+        "team": "Copenhagen Wolves",
+        "teamLogo": "assets/tournament_logos/copenhagen_wolves_50px_copenhagen_wolves_2012_allmode_png.png"
       },
       {
         "place": "9th-12th",
-        "team": "Team iBUYPOWER"
+        "team": "Team iBUYPOWER",
+        "teamLogo": "assets/tournament_logos/team_ibuypower_86px_ibuypower_lightmode_png.png"
       },
       {
         "place": "9th-12th",
-        "team": "Titan"
+        "team": "Titan",
+        "teamLogo": "assets/tournament_logos/titan_46px_titan_lightmode_png.png"
       },
       {
         "place": "13th-16th",
-        "team": "Team Wolf"
+        "team": "Team Wolf",
+        "teamLogo": "assets/tournament_logos/team_wolf_53px_team_wolf_allmode_png.png"
       },
       {
         "place": "13th-16th",
-        "team": "London Conspiracy"
+        "team": "London Conspiracy",
+        "teamLogo": "assets/tournament_logos/london_conspiracy_50px_london_conspiracy_allmode_png.png"
       },
       {
         "place": "13th-16th",
-        "team": "dAT Team"
+        "team": "dAT Team",
+        "teamLogo": "assets/tournament_logos/dat_team_47px_dat_team_allmode_png.png"
       },
       {
         "place": "13th-16th",
-        "team": "Vox Eminor"
+        "team": "Vox Eminor",
+        "teamLogo": "assets/tournament_logos/vox_eminor_89px_vox_eminor_allmode_png.png"
       }
     ],
     "stageDates": [],
@@ -1291,6 +1578,8 @@
         "round": "Quarterfinals",
         "team1": "Fnatic",
         "team2": "Natus Vincere",
+        "team1Logo": "assets/tournament_logos/fnatic_61px_fnatic_allmode_png.png",
+        "team2Logo": "assets/tournament_logos/natus_vincere_56px_natus_vincere_allmode_png.png",
         "score1": "2",
         "score2": "1",
         "date": "August 16, 2014 - 09:25 CEST"
@@ -1299,6 +1588,8 @@
         "round": "Quarterfinals",
         "team1": "Epsilon Esports",
         "team2": "Dignitas",
+        "team1Logo": "assets/tournament_logos/epsilon_esports_100px_epsilon_esports_lightmode_png.png",
+        "team2Logo": "assets/tournament_logos/dignitas_44px_team_dignitas_allmode_png.png",
         "score1": "0",
         "score2": "2",
         "date": "August 16, 2014 - 13:25 CEST"
@@ -1307,6 +1598,8 @@
         "round": "Semifinals",
         "team1": "Fnatic",
         "team2": "Dignitas",
+        "team1Logo": "assets/tournament_logos/fnatic_61px_fnatic_allmode_png.png",
+        "team2Logo": "assets/tournament_logos/dignitas_44px_team_dignitas_allmode_png.png",
         "score1": "2",
         "score2": "0",
         "date": "August 17, 2014 - 09:00 CEST"
@@ -1315,6 +1608,8 @@
         "round": "Quarterfinals",
         "team1": "Team LDLC",
         "team2": "Virtus.pro",
+        "team1Logo": "assets/tournament_logos/team_ldlc_100px_team_ldlc_2012_lightmode_png.png",
+        "team2Logo": "assets/tournament_logos/virtus_pro_48px_virtus_pro_allmode_png.png",
         "score1": "2",
         "score2": "0",
         "date": "August 16, 2014 - 14:40 CEST"
@@ -1323,6 +1618,8 @@
         "round": "Quarterfinals",
         "team1": "Cloud9",
         "team2": "Ninjas in Pyjamas",
+        "team1Logo": "assets/tournament_logos/cloud9_70px_cloud9_allmode_png.png",
+        "team2Logo": "assets/tournament_logos/ninjas_in_pyjamas_50px_ninjas_in_pyjamas_2012_allmode_png.png",
         "score1": "1",
         "score2": "2",
         "date": "August 16, 2014 - 17:30 CEST"
@@ -1331,6 +1628,8 @@
         "round": "Semifinals",
         "team1": "Team LDLC",
         "team2": "Ninjas in Pyjamas",
+        "team1Logo": "assets/tournament_logos/team_ldlc_100px_team_ldlc_2012_lightmode_png.png",
+        "team2Logo": "assets/tournament_logos/ninjas_in_pyjamas_50px_ninjas_in_pyjamas_2012_allmode_png.png",
         "score1": "1",
         "score2": "2",
         "date": "August 17, 2014 - 11:55 CEST"
@@ -1339,6 +1638,8 @@
         "round": "Grand Final",
         "team1": "Fnatic",
         "team2": "Ninjas in Pyjamas",
+        "team1Logo": "assets/tournament_logos/fnatic_61px_fnatic_allmode_png.png",
+        "team2Logo": "assets/tournament_logos/ninjas_in_pyjamas_50px_ninjas_in_pyjamas_2012_allmode_png.png",
         "score1": "1",
         "score2": "2",
         "date": "August 17, 2014 - 16:00 CEST"
@@ -1353,67 +1654,83 @@
     "placements": [
       {
         "place": "1st",
-        "team": "Fnatic"
+        "team": "Fnatic",
+        "teamLogo": "assets/tournament_logos/fnatic_61px_fnatic_allmode_png.png"
       },
       {
         "place": "2nd",
-        "team": "Team EnVyUs"
+        "team": "Team EnVyUs",
+        "teamLogo": "assets/tournament_logos/team_envyus_50px_team_envyus_lightmode_png.png"
       },
       {
         "place": "3rd-4th",
-        "team": "Team SoloMid"
+        "team": "Team SoloMid",
+        "teamLogo": "assets/tournament_logos/team_solomid_50px_team_solomid_lightmode_png.png"
       },
       {
         "place": "3rd-4th",
-        "team": "Virtus.pro"
+        "team": "Virtus.pro",
+        "teamLogo": "assets/tournament_logos/virtus_pro_48px_virtus_pro_allmode_png.png"
       },
       {
         "place": "5th-8th",
-        "team": "Natus Vincere"
+        "team": "Natus Vincere",
+        "teamLogo": "assets/tournament_logos/natus_vincere_56px_natus_vincere_allmode_png.png"
       },
       {
         "place": "5th-8th",
-        "team": "Team Kinguin"
+        "team": "Team Kinguin",
+        "teamLogo": "assets/tournament_logos/team_kinguin_33px_team_kinguin_allmode_png.png"
       },
       {
         "place": "5th-8th",
-        "team": "Ninjas in Pyjamas"
+        "team": "Ninjas in Pyjamas",
+        "teamLogo": "assets/tournament_logos/ninjas_in_pyjamas_50px_ninjas_in_pyjamas_2012_allmode_png.png"
       },
       {
         "place": "5th-8th",
-        "team": "Luminosity Gaming"
+        "team": "Luminosity Gaming",
+        "teamLogo": "assets/tournament_logos/luminosity_gaming_51px_luminosity_gaming_allmode_png.png"
       },
       {
         "place": "9th-12th",
-        "team": "Counter Logic Gaming"
+        "team": "Counter Logic Gaming",
+        "teamLogo": "assets/tournament_logos/counter_logic_gaming_70px_counter_logic_gaming_allmode_png.png"
       },
       {
         "place": "9th-12th",
-        "team": "Cloud9"
+        "team": "Cloud9",
+        "teamLogo": "assets/tournament_logos/cloud9_70px_cloud9_allmode_png.png"
       },
       {
         "place": "9th-12th",
-        "team": "Renegades"
+        "team": "Renegades",
+        "teamLogo": "assets/tournament_logos/renegades_47px_renegades_png.png"
       },
       {
         "place": "9th-12th",
-        "team": "FlipSid3 Tactics"
+        "team": "FlipSid3 Tactics",
+        "teamLogo": "assets/tournament_logos/flipsid3_tactics_47px_flipsid3_tactics_lightmode_png.png"
       },
       {
         "place": "13th-16th",
-        "team": "Team eBettle"
+        "team": "Team eBettle",
+        "teamLogo": "assets/tournament_logos/team_ebettle_38px_team_ebettle_allmode_png.png"
       },
       {
         "place": "13th-16th",
-        "team": "Team Immunity"
+        "team": "Team Immunity",
+        "teamLogo": "assets/tournament_logos/team_immunity_61px_team_immunity_allmode_png.png"
       },
       {
         "place": "13th-16th",
-        "team": "Titan"
+        "team": "Titan",
+        "teamLogo": "assets/tournament_logos/titan_46px_titan_lightmode_png.png"
       },
       {
         "place": "13th-16th",
-        "team": "mousesports"
+        "team": "mousesports",
+        "teamLogo": "assets/tournament_logos/mousesports_92px_mousesports_new_png.png"
       }
     ],
     "stageDates": [],
@@ -1422,6 +1739,8 @@
         "round": "Qualified",
         "team1": "Ninjas in Pyjamas",
         "team2": "Counter Logic Gaming",
+        "team1Logo": "assets/tournament_logos/ninjas_in_pyjamas_50px_ninjas_in_pyjamas_2012_allmode_png.png",
+        "team2Logo": "assets/tournament_logos/counter_logic_gaming_70px_counter_logic_gaming_allmode_png.png",
         "score1": "16",
         "score2": "13",
         "date": "August 20, 2015 - 14:15 CEST"
@@ -1430,6 +1749,8 @@
         "round": "Qualified",
         "team1": "Renegades",
         "team2": "TSM",
+        "team1Logo": "assets/tournament_logos/renegades_47px_renegades_png.png",
+        "team2Logo": "assets/tournament_logos/tsm_50px_team_solomid_lightmode_png.png",
         "score1": "11",
         "score2": "16",
         "date": "August 20, 2015 - 15:45 CEST"
@@ -1438,6 +1759,8 @@
         "round": "Qualified",
         "team1": "Ninjas in Pyjamas",
         "team2": "TSM",
+        "team1Logo": "assets/tournament_logos/ninjas_in_pyjamas_50px_ninjas_in_pyjamas_2012_allmode_png.png",
+        "team2Logo": "assets/tournament_logos/tsm_50px_team_solomid_lightmode_png.png",
         "score1": "3",
         "score2": "16",
         "date": "August 20, 2015 - 17:10 CEST"
@@ -1446,6 +1769,8 @@
         "round": "Qualified",
         "team1": "Team Envy",
         "team2": "FlipSid3 Tactics",
+        "team1Logo": "assets/tournament_logos/team_envy_50px_team_envyus_lightmode_png.png",
+        "team2Logo": "assets/tournament_logos/flipsid3_tactics_47px_flipsid3_tactics_lightmode_png.png",
         "score1": "16",
         "score2": "3",
         "date": "August 20, 2015 - 14:15 CEST"
@@ -1454,6 +1779,8 @@
         "round": "Qualified",
         "team1": "Luminosity Gaming",
         "team2": "Devils.one",
+        "team1Logo": "assets/tournament_logos/luminosity_gaming_51px_luminosity_gaming_allmode_png.png",
+        "team2Logo": "assets/tournament_logos/devils_one_33px_team_kinguin_allmode_png.png",
         "score1": "16",
         "score2": "6",
         "date": "August 20, 2015 - 15:25 CEST"
@@ -1462,6 +1789,8 @@
         "round": "Qualified",
         "team1": "Team Envy",
         "team2": "Luminosity Gaming",
+        "team1Logo": "assets/tournament_logos/team_envy_50px_team_envyus_lightmode_png.png",
+        "team2Logo": "assets/tournament_logos/luminosity_gaming_51px_luminosity_gaming_allmode_png.png",
         "score1": "19",
         "score2": "16",
         "date": "August 20, 2015 - 16:35 CEST"
@@ -1470,6 +1799,8 @@
         "round": "Qualified",
         "team1": "Fnatic",
         "team2": "Team eBettle",
+        "team1Logo": "assets/tournament_logos/fnatic_61px_fnatic_allmode_png.png",
+        "team2Logo": "assets/tournament_logos/team_ebettle_38px_team_ebettle_allmode_png.png",
         "score1": "16",
         "score2": "2",
         "date": "August 20, 2015 - 18:35 CEST"
@@ -1478,6 +1809,8 @@
         "round": "Qualified",
         "team1": "Titan",
         "team2": "Natus Vincere",
+        "team1Logo": "assets/tournament_logos/titan_46px_titan_lightmode_png.png",
+        "team2Logo": "assets/tournament_logos/natus_vincere_56px_natus_vincere_allmode_png.png",
         "score1": "17",
         "score2": "19",
         "date": "August 20, 2015 - 19:50 CEST"
@@ -1486,6 +1819,8 @@
         "round": "Qualified",
         "team1": "Fnatic",
         "team2": "Natus Vincere",
+        "team1Logo": "assets/tournament_logos/fnatic_61px_fnatic_allmode_png.png",
+        "team2Logo": "assets/tournament_logos/natus_vincere_56px_natus_vincere_allmode_png.png",
         "score1": "16",
         "score2": "2",
         "date": "August 20, 2015 - 22:25 CEST"
@@ -1494,6 +1829,8 @@
         "round": "Qualified",
         "team1": "Virtus.pro",
         "team2": "Team Immunity",
+        "team1Logo": "assets/tournament_logos/virtus_pro_48px_virtus_pro_allmode_png.png",
+        "team2Logo": "assets/tournament_logos/team_immunity_61px_team_immunity_allmode_png.png",
         "score1": "16",
         "score2": "8",
         "date": "August 20, 2015 - 18:20 CEST"
@@ -1502,6 +1839,8 @@
         "round": "Qualified",
         "team1": "MOUZ",
         "team2": "Cloud9",
+        "team1Logo": "assets/tournament_logos/mouz_92px_mousesports_new_png.png",
+        "team2Logo": "assets/tournament_logos/cloud9_70px_cloud9_allmode_png.png",
         "score1": "10",
         "score2": "16",
         "date": "August 20, 2015 - 19:45 CEST"
@@ -1510,6 +1849,8 @@
         "round": "Qualified",
         "team1": "Virtus.pro",
         "team2": "Cloud9",
+        "team1Logo": "assets/tournament_logos/virtus_pro_48px_virtus_pro_allmode_png.png",
+        "team2Logo": "assets/tournament_logos/cloud9_70px_cloud9_allmode_png.png",
         "score1": "16",
         "score2": "8",
         "date": "August 20, 2015 - 21:20 CEST"
@@ -1518,6 +1859,8 @@
         "round": "Qualified",
         "team1": "Renegades",
         "team2": "Titan",
+        "team1Logo": "assets/tournament_logos/renegades_47px_renegades_png.png",
+        "team2Logo": "assets/tournament_logos/titan_46px_titan_lightmode_png.png",
         "score1": "16",
         "score2": "9",
         "date": "August 21, 2015 - 18:30 CEST"
@@ -1526,6 +1869,8 @@
         "round": "Qualified",
         "team1": "Ninjas in Pyjamas",
         "team2": "Renegades",
+        "team1Logo": "assets/tournament_logos/ninjas_in_pyjamas_50px_ninjas_in_pyjamas_2012_allmode_png.png",
+        "team2Logo": "assets/tournament_logos/renegades_47px_renegades_png.png",
         "score1": "16",
         "score2": "5",
         "date": "August 21, 2015 - 19:35 CEST"
@@ -1534,6 +1879,8 @@
         "round": "Qualified",
         "team1": "FlipSid3 Tactics",
         "team2": "MOUZ",
+        "team1Logo": "assets/tournament_logos/flipsid3_tactics_47px_flipsid3_tactics_lightmode_png.png",
+        "team2Logo": "assets/tournament_logos/mouz_92px_mousesports_new_png.png",
         "score1": "16",
         "score2": "14",
         "date": "August 21, 2015 - 20:40 CEST"
@@ -1542,6 +1889,8 @@
         "round": "Qualified",
         "team1": "Luminosity Gaming",
         "team2": "FlipSid3 Tactics",
+        "team1Logo": "assets/tournament_logos/luminosity_gaming_51px_luminosity_gaming_allmode_png.png",
+        "team2Logo": "assets/tournament_logos/flipsid3_tactics_47px_flipsid3_tactics_lightmode_png.png",
         "score1": "22",
         "score2": "18",
         "date": "August 21, 2015 - 22:10 CEST"
@@ -1550,6 +1899,8 @@
         "round": "Qualified",
         "team1": "Team eBettle",
         "team2": "Counter Logic Gaming",
+        "team1Logo": "assets/tournament_logos/team_ebettle_38px_team_ebettle_allmode_png.png",
+        "team2Logo": "assets/tournament_logos/counter_logic_gaming_70px_counter_logic_gaming_allmode_png.png",
         "score1": "14",
         "score2": "16",
         "date": "August 21, 2015 - 15:25 CEST"
@@ -1558,6 +1909,8 @@
         "round": "Qualified",
         "team1": "Natus Vincere",
         "team2": "Counter Logic Gaming",
+        "team1Logo": "assets/tournament_logos/natus_vincere_56px_natus_vincere_allmode_png.png",
+        "team2Logo": "assets/tournament_logos/counter_logic_gaming_70px_counter_logic_gaming_allmode_png.png",
         "score1": "16",
         "score2": "14",
         "date": "August 21, 2015 - 17:00 CEST"
@@ -1566,6 +1919,8 @@
         "round": "Qualified",
         "team1": "Team Immunity",
         "team2": "Devils.one",
+        "team1Logo": "assets/tournament_logos/team_immunity_61px_team_immunity_allmode_png.png",
+        "team2Logo": "assets/tournament_logos/devils_one_33px_team_kinguin_allmode_png.png",
         "score1": "13",
         "score2": "16",
         "date": "August 21, 2015 - 12:30 CEST"
@@ -1574,6 +1929,8 @@
         "round": "Qualified",
         "team1": "Cloud9",
         "team2": "Devils.one",
+        "team1Logo": "assets/tournament_logos/cloud9_70px_cloud9_allmode_png.png",
+        "team2Logo": "assets/tournament_logos/devils_one_33px_team_kinguin_allmode_png.png",
         "score1": "13",
         "score2": "16",
         "date": "August 21, 2015 - 14:00 CEST"
@@ -1582,6 +1939,8 @@
         "round": "Qualified",
         "team1": "Team Envy",
         "team2": "Natus Vincere",
+        "team1Logo": "assets/tournament_logos/team_envy_50px_team_envyus_lightmode_png.png",
+        "team2Logo": "assets/tournament_logos/natus_vincere_56px_natus_vincere_allmode_png.png",
         "score1": "2",
         "score2": "0",
         "date": "August 22, 2015 - 12:00 CEST"
@@ -1590,6 +1949,8 @@
         "round": "Qualified",
         "team1": "TSM",
         "team2": "Devils.one",
+        "team1Logo": "assets/tournament_logos/tsm_50px_team_solomid_lightmode_png.png",
+        "team2Logo": "assets/tournament_logos/devils_one_33px_team_kinguin_allmode_png.png",
         "score1": "2",
         "score2": "0",
         "date": "August 22, 2015 - 15:55 CEST"
@@ -1598,6 +1959,8 @@
         "round": "Qualified",
         "team1": "Team Envy",
         "team2": "TSM",
+        "team1Logo": "assets/tournament_logos/team_envy_50px_team_envyus_lightmode_png.png",
+        "team2Logo": "assets/tournament_logos/tsm_50px_team_solomid_lightmode_png.png",
         "score1": "2",
         "score2": "1",
         "date": "August 23, 2015 - 12:25 CEST"
@@ -1606,6 +1969,8 @@
         "round": "Qualified",
         "team1": "Virtus.pro",
         "team2": "Ninjas in Pyjamas",
+        "team1Logo": "assets/tournament_logos/virtus_pro_48px_virtus_pro_allmode_png.png",
+        "team2Logo": "assets/tournament_logos/ninjas_in_pyjamas_50px_ninjas_in_pyjamas_2012_allmode_png.png",
         "score1": "2",
         "score2": "0",
         "date": "August 22, 2015 - 18:30 CEST"
@@ -1614,6 +1979,8 @@
         "round": "Qualified",
         "team1": "Fnatic",
         "team2": "Luminosity Gaming",
+        "team1Logo": "assets/tournament_logos/fnatic_61px_fnatic_allmode_png.png",
+        "team2Logo": "assets/tournament_logos/luminosity_gaming_51px_luminosity_gaming_allmode_png.png",
         "score1": "2",
         "score2": "0",
         "date": "August 22, 2015 - 21:20 CEST"
@@ -1622,6 +1989,8 @@
         "round": "Qualified",
         "team1": "Virtus.pro",
         "team2": "Fnatic",
+        "team1Logo": "assets/tournament_logos/virtus_pro_48px_virtus_pro_allmode_png.png",
+        "team2Logo": "assets/tournament_logos/fnatic_61px_fnatic_allmode_png.png",
         "score1": "1",
         "score2": "2",
         "date": "August 23, 2015 - 15:50 CEST"
@@ -1630,6 +1999,8 @@
         "round": "Qualified",
         "team1": "Team Envy",
         "team2": "Fnatic",
+        "team1Logo": "assets/tournament_logos/team_envy_50px_team_envyus_lightmode_png.png",
+        "team2Logo": "assets/tournament_logos/fnatic_61px_fnatic_allmode_png.png",
         "score1": "0",
         "score2": "2",
         "date": "August 23, 2015 - 19:25 CEST"
@@ -1644,67 +2015,83 @@
     "placements": [
       {
         "place": "1st",
-        "team": "SK Gaming"
+        "team": "SK Gaming",
+        "teamLogo": "assets/tournament_logos/sk_gaming_50px_sk_gaming_2003_lightmode_png.png"
       },
       {
         "place": "2nd",
-        "team": "Team Liquid"
+        "team": "Team Liquid",
+        "teamLogo": "assets/tournament_logos/team_liquid_50px_team_liquid_allmode_png.png"
       },
       {
         "place": "3rd-4th",
-        "team": "Virtus.pro"
+        "team": "Virtus.pro",
+        "teamLogo": "assets/tournament_logos/virtus_pro_48px_virtus_pro_allmode_png.png"
       },
       {
         "place": "3rd-4th",
-        "team": "Fnatic"
+        "team": "Fnatic",
+        "teamLogo": "assets/tournament_logos/fnatic_60px_fnatic_2015_allmode_png.png"
       },
       {
         "place": "5th-8th",
-        "team": "Astralis"
+        "team": "Astralis",
+        "teamLogo": "assets/tournament_logos/astralis_41px_astralis_logo_png.png"
       },
       {
         "place": "5th-8th",
-        "team": "FlipSid3 Tactics"
+        "team": "FlipSid3 Tactics",
+        "teamLogo": "assets/tournament_logos/flipsid3_tactics_47px_flipsid3_tactics_lightmode_png.png"
       },
       {
         "place": "5th-8th",
-        "team": "Natus Vincere"
+        "team": "Natus Vincere",
+        "teamLogo": "assets/tournament_logos/natus_vincere_56px_natus_vincere_allmode_png.png"
       },
       {
         "place": "5th-8th",
-        "team": "Gambit Gaming"
+        "team": "Gambit Gaming",
+        "teamLogo": "assets/tournament_logos/gambit_gaming_46px_gambit_esports_allmode_png.png"
       },
       {
         "place": "9th-12th",
-        "team": "Team Dignitas"
+        "team": "Team Dignitas",
+        "teamLogo": "assets/tournament_logos/team_dignitas_44px_team_dignitas_allmode_png.png"
       },
       {
         "place": "9th-12th",
-        "team": "Ninjas in Pyjamas"
+        "team": "Ninjas in Pyjamas",
+        "teamLogo": "assets/tournament_logos/ninjas_in_pyjamas_50px_ninjas_in_pyjamas_2012_allmode_png.png"
       },
       {
         "place": "9th-12th",
-        "team": "mousesports"
+        "team": "mousesports",
+        "teamLogo": "assets/tournament_logos/mousesports_92px_mousesports_2016_allmode_png.png"
       },
       {
         "place": "9th-12th",
-        "team": "FaZe Clan"
+        "team": "FaZe Clan",
+        "teamLogo": "assets/tournament_logos/faze_clan_76px_faze_clan_2017_allmode_png.png"
       },
       {
         "place": "13th-16th",
-        "team": "Counter Logic Gaming"
+        "team": "Counter Logic Gaming",
+        "teamLogo": "assets/tournament_logos/counter_logic_gaming_70px_counter_logic_gaming_allmode_png.png"
       },
       {
         "place": "13th-16th",
-        "team": "OpTic Gaming"
+        "team": "OpTic Gaming",
+        "teamLogo": "assets/tournament_logos/optic_gaming_77px_optic_gaming_lightmode_png.png"
       },
       {
         "place": "13th-16th",
-        "team": "Team EnVyUs"
+        "team": "Team EnVyUs",
+        "teamLogo": "assets/tournament_logos/team_envyus_50px_team_envyus_lightmode_png.png"
       },
       {
         "place": "13th-16th",
-        "team": "G2 Esports"
+        "team": "G2 Esports",
+        "teamLogo": "assets/tournament_logos/g2_esports_43px_g2_esports_allmode_png.png"
       }
     ],
     "stageDates": [],
@@ -1713,6 +2100,8 @@
         "round": "Quarterfinals",
         "team1": "Virtus.pro",
         "team2": "Astralis",
+        "team1Logo": "assets/tournament_logos/virtus_pro_48px_virtus_pro_allmode_png.png",
+        "team2Logo": "assets/tournament_logos/astralis_41px_astralis_logo_png.png",
         "score1": "2",
         "score2": "0",
         "date": "July 8, 2016 - 10:00 CEST"
@@ -1721,6 +2110,8 @@
         "round": "Quarterfinals",
         "team1": "SK Gaming",
         "team2": "FlipSid3 Tactics",
+        "team1Logo": "assets/tournament_logos/sk_gaming_50px_sk_gaming_2003_lightmode_png.png",
+        "team2Logo": "assets/tournament_logos/flipsid3_tactics_47px_flipsid3_tactics_lightmode_png.png",
         "score1": "2",
         "score2": "0",
         "date": "July 8, 2016 - 14:00 CEST"
@@ -1729,6 +2120,8 @@
         "round": "Semifinals",
         "team1": "Virtus.pro",
         "team2": "SK Gaming",
+        "team1Logo": "assets/tournament_logos/virtus_pro_48px_virtus_pro_allmode_png.png",
+        "team2Logo": "assets/tournament_logos/sk_gaming_50px_sk_gaming_2003_lightmode_png.png",
         "score1": "1",
         "score2": "2",
         "date": "July 9, 2016 - 15:00 CEST"
@@ -1737,6 +2130,8 @@
         "round": "Quarterfinals",
         "team1": "Natus Vincere",
         "team2": "Team Liquid",
+        "team1Logo": "assets/tournament_logos/natus_vincere_56px_natus_vincere_allmode_png.png",
+        "team2Logo": "assets/tournament_logos/team_liquid_50px_team_liquid_allmode_png.png",
         "score1": "1",
         "score2": "2",
         "date": "July 8, 2016 - 17:15 CEST"
@@ -1745,6 +2140,8 @@
         "round": "Quarterfinals",
         "team1": "Gambit Esports",
         "team2": "Fnatic",
+        "team1Logo": "assets/tournament_logos/gambit_esports_46px_gambit_esports_allmode_png.png",
+        "team2Logo": "assets/tournament_logos/fnatic_60px_fnatic_2015_allmode_png.png",
         "score1": "0",
         "score2": "2",
         "date": "July 8, 2016 - 21:15 CEST"
@@ -1753,6 +2150,8 @@
         "round": "Semifinals",
         "team1": "Team Liquid",
         "team2": "Fnatic",
+        "team1Logo": "assets/tournament_logos/team_liquid_50px_team_liquid_allmode_png.png",
+        "team2Logo": "assets/tournament_logos/fnatic_60px_fnatic_2015_allmode_png.png",
         "score1": "2",
         "score2": "0",
         "date": "July 9, 2016 - 19:30 CEST"
@@ -1761,6 +2160,8 @@
         "round": "Grand Final",
         "team1": "SK Gaming",
         "team2": "Team Liquid",
+        "team1Logo": "assets/tournament_logos/sk_gaming_50px_sk_gaming_2003_lightmode_png.png",
+        "team2Logo": "assets/tournament_logos/team_liquid_50px_team_liquid_allmode_png.png",
         "score1": "2",
         "score2": "0",
         "date": "July 10, 2016 - 17:00 CEST"
@@ -1775,67 +2176,83 @@
     "placements": [
       {
         "place": "1st",
-        "team": "Fnatic"
+        "team": "Fnatic",
+        "teamLogo": "assets/tournament_logos/fnatic_61px_fnatic_allmode_png.png"
       },
       {
         "place": "2nd",
-        "team": "Ninjas in Pyjamas"
+        "team": "Ninjas in Pyjamas",
+        "teamLogo": "assets/tournament_logos/ninjas_in_pyjamas_50px_ninjas_in_pyjamas_2012_allmode_png.png"
       },
       {
         "place": "3rd-4th",
-        "team": "Virtus.pro"
+        "team": "Virtus.pro",
+        "teamLogo": "assets/tournament_logos/virtus_pro_48px_virtus_pro_allmode_png.png"
       },
       {
         "place": "3rd-4th",
-        "team": "Team EnVyUs"
+        "team": "Team EnVyUs",
+        "teamLogo": "assets/tournament_logos/team_envyus_50px_team_envyus_lightmode_png.png"
       },
       {
         "place": "5th-8th",
-        "team": "PENTA Sports"
+        "team": "PENTA Sports",
+        "teamLogo": "assets/tournament_logos/penta_sports_37px_penta_sports_lightmode_png.png"
       },
       {
         "place": "5th-8th",
-        "team": "Keyd Stars"
+        "team": "Keyd Stars",
+        "teamLogo": "assets/tournament_logos/keyd_stars_38px_keyd_stars_2015_allmode_png.png"
       },
       {
         "place": "5th-8th",
-        "team": "Natus Vincere"
+        "team": "Natus Vincere",
+        "teamLogo": "assets/tournament_logos/natus_vincere_56px_natus_vincere_allmode_png.png"
       },
       {
         "place": "5th-8th",
-        "team": "Team SoloMid"
+        "team": "Team SoloMid",
+        "teamLogo": "assets/tournament_logos/team_solomid_50px_team_solomid_lightmode_png.png"
       },
       {
         "place": "9th-12th",
-        "team": "Vox Eminor"
+        "team": "Vox Eminor",
+        "teamLogo": "assets/tournament_logos/vox_eminor_89px_vox_eminor_allmode_png.png"
       },
       {
         "place": "9th-12th",
-        "team": "LGB eSports"
+        "team": "LGB eSports",
+        "teamLogo": "assets/tournament_logos/lgb_esports_43px_lgb_esports_allmode_png.png"
       },
       {
         "place": "9th-12th",
-        "team": "Counter Logic Gaming"
+        "team": "Counter Logic Gaming",
+        "teamLogo": "assets/tournament_logos/counter_logic_gaming_70px_counter_logic_gaming_allmode_png.png"
       },
       {
         "place": "9th-12th",
-        "team": "Cloud9"
+        "team": "Cloud9",
+        "teamLogo": "assets/tournament_logos/cloud9_70px_cloud9_allmode_png.png"
       },
       {
         "place": "13th-16th",
-        "team": "FlipSid3 Tactics"
+        "team": "FlipSid3 Tactics",
+        "teamLogo": "assets/tournament_logos/flipsid3_tactics_47px_flipsid3_tactics_lightmode_png.png"
       },
       {
         "place": "13th-16th",
-        "team": "Titan"
+        "team": "Titan",
+        "teamLogo": "assets/tournament_logos/titan_46px_titan_lightmode_png.png"
       },
       {
         "place": "13th-16th",
-        "team": "HellRaisers"
+        "team": "HellRaisers",
+        "teamLogo": "assets/tournament_logos/hellraisers_57px_hellraisers_2014_allmode_png.png"
       },
       {
         "place": "13th-16th",
-        "team": "3DMAX"
+        "team": "3DMAX",
+        "teamLogo": "assets/tournament_logos/3dmax_36px_3dmax_2011_allmode_png.png"
       }
     ],
     "stageDates": [],
@@ -1844,6 +2261,8 @@
         "round": "Quarterfinals",
         "team1": "Fnatic",
         "team2": "PENTA Sports",
+        "team1Logo": "assets/tournament_logos/fnatic_61px_fnatic_allmode_png.png",
+        "team2Logo": "assets/tournament_logos/penta_sports_37px_penta_sports_lightmode_png.png",
         "score1": "2",
         "score2": "0",
         "date": "March 13, 2015 - 17:00 CET"
@@ -1852,6 +2271,8 @@
         "round": "Quarterfinals",
         "team1": "Virtus.pro",
         "team2": "Keyd Stars",
+        "team1Logo": "assets/tournament_logos/virtus_pro_48px_virtus_pro_allmode_png.png",
+        "team2Logo": "assets/tournament_logos/keyd_stars_38px_keyd_stars_2015_allmode_png.png",
         "score1": "2",
         "score2": "1",
         "date": "March 13, 2015 - 19:45 CET"
@@ -1860,6 +2281,8 @@
         "round": "Semifinals",
         "team1": "Fnatic",
         "team2": "Virtus.pro",
+        "team1Logo": "assets/tournament_logos/fnatic_61px_fnatic_allmode_png.png",
+        "team2Logo": "assets/tournament_logos/virtus_pro_48px_virtus_pro_allmode_png.png",
         "score1": "2",
         "score2": "0",
         "date": "March 14, 2015 - 17:00 CET"
@@ -1868,6 +2291,8 @@
         "round": "Quarterfinals",
         "team1": "Team Envy",
         "team2": "Natus Vincere",
+        "team1Logo": "assets/tournament_logos/team_envy_50px_team_envyus_lightmode_png.png",
+        "team2Logo": "assets/tournament_logos/natus_vincere_56px_natus_vincere_allmode_png.png",
         "score1": "2",
         "score2": "1",
         "date": "March 13, 2015 - 13:00 CET"
@@ -1876,6 +2301,8 @@
         "round": "Quarterfinals",
         "team1": "Ninjas in Pyjamas",
         "team2": "TSM",
+        "team1Logo": "assets/tournament_logos/ninjas_in_pyjamas_50px_ninjas_in_pyjamas_2012_allmode_png.png",
+        "team2Logo": "assets/tournament_logos/tsm_50px_team_solomid_lightmode_png.png",
         "score1": "2",
         "score2": "1",
         "date": "March 14, 2015 - 13:00 CET"
@@ -1884,6 +2311,8 @@
         "round": "Semifinals",
         "team1": "Team Envy",
         "team2": "Ninjas in Pyjamas",
+        "team1Logo": "assets/tournament_logos/team_envy_50px_team_envyus_lightmode_png.png",
+        "team2Logo": "assets/tournament_logos/ninjas_in_pyjamas_50px_ninjas_in_pyjamas_2012_allmode_png.png",
         "score1": "0",
         "score2": "2",
         "date": "March 14, 2015 - 20:00 CET"
@@ -1892,6 +2321,8 @@
         "round": "Grand Final",
         "team1": "Fnatic",
         "team2": "Ninjas in Pyjamas",
+        "team1Logo": "assets/tournament_logos/fnatic_61px_fnatic_allmode_png.png",
+        "team2Logo": "assets/tournament_logos/ninjas_in_pyjamas_50px_ninjas_in_pyjamas_2012_allmode_png.png",
         "score1": "2",
         "score2": "1",
         "date": "March 15, 2015 - 13:00 CET"
@@ -1906,99 +2337,123 @@
     "placements": [
       {
         "place": "1st",
-        "team": "Astralis"
+        "team": "Astralis",
+        "teamLogo": "assets/tournament_logos/astralis_41px_astralis_logo_png.png"
       },
       {
         "place": "2nd",
-        "team": "Natus Vincere"
+        "team": "Natus Vincere",
+        "teamLogo": "assets/tournament_logos/natus_vincere_56px_natus_vincere_allmode_png.png"
       },
       {
         "place": "3rd-4th",
-        "team": "MIBR"
+        "team": "MIBR",
+        "teamLogo": "assets/tournament_logos/mibr_100px_mibr_2018_lightmode_png.png"
       },
       {
         "place": "3rd-4th",
-        "team": "Team Liquid"
+        "team": "Team Liquid",
+        "teamLogo": "assets/tournament_logos/team_liquid_50px_team_liquid_2017_lightmode_png.png"
       },
       {
         "place": "5th-8th",
-        "team": "compLexity Gaming"
+        "team": "compLexity Gaming",
+        "teamLogo": "assets/tournament_logos/complexity_gaming_85px_complexity_gaming_2016_allmode_png.png"
       },
       {
         "place": "5th-8th",
-        "team": "BIG"
+        "team": "BIG",
+        "teamLogo": "assets/tournament_logos/big_35px_big_lightmode_png.png"
       },
       {
         "place": "5th-8th",
-        "team": "HellRaisers"
+        "team": "HellRaisers",
+        "teamLogo": "assets/tournament_logos/hellraisers_57px_hellraisers_2018_allmode_png.png"
       },
       {
         "place": "5th-8th",
-        "team": "FaZe Clan"
+        "team": "FaZe Clan",
+        "teamLogo": "assets/tournament_logos/faze_clan_76px_faze_clan_2018_lightmode_png.png"
       },
       {
         "place": "9th-11th",
-        "team": "Ninjas in Pyjamas"
+        "team": "Ninjas in Pyjamas",
+        "teamLogo": "assets/tournament_logos/ninjas_in_pyjamas_50px_ninjas_in_pyjamas_2017_lightmode_png.png"
       },
       {
         "place": "9th-11th",
-        "team": "Fnatic"
+        "team": "Fnatic",
+        "teamLogo": "assets/tournament_logos/fnatic_60px_fnatic_2015_allmode_png.png"
       },
       {
         "place": "9th-11th",
-        "team": "G2 Esports"
+        "team": "G2 Esports",
+        "teamLogo": "assets/tournament_logos/g2_esports_43px_g2_esports_2020_lightmode_png.png"
       },
       {
         "place": "12th-14th",
-        "team": "Vega Squadron"
+        "team": "Vega Squadron",
+        "teamLogo": "assets/tournament_logos/vega_squadron_47px_vega_squadron_2016_allmode_png.png"
       },
       {
         "place": "12th-14th",
-        "team": "Cloud9"
+        "team": "Cloud9",
+        "teamLogo": "assets/tournament_logos/cloud9_70px_cloud9_allmode_png.png"
       },
       {
         "place": "12th-14th",
-        "team": "TYLOO"
+        "team": "TYLOO",
+        "teamLogo": "assets/tournament_logos/tyloo_56px_tyloo_2016_allmode_png.png"
       },
       {
         "place": "15th-16th",
-        "team": "Winstrike Team"
+        "team": "Winstrike Team",
+        "teamLogo": "assets/tournament_logos/winstrike_team_75px_winstrike_team_2018_allmode_png.png"
       },
       {
         "place": "15th-16th",
-        "team": "mousesports"
+        "team": "mousesports",
+        "teamLogo": "assets/tournament_logos/mousesports_92px_mousesports_2016_allmode_png.png"
       },
       {
         "place": "17th-19th",
-        "team": "Team Spirit"
+        "team": "Team Spirit",
+        "teamLogo": "assets/tournament_logos/team_spirit_38px_team_spirit_2016_alt_allmode_png.png"
       },
       {
         "place": "17th-19th",
-        "team": "OpTic Gaming"
+        "team": "OpTic Gaming",
+        "teamLogo": "assets/tournament_logos/optic_gaming_77px_optic_gaming_lightmode_png.png"
       },
       {
         "place": "17th-19th",
-        "team": "North"
+        "team": "North",
+        "teamLogo": "assets/tournament_logos/north_48px_north_lightmode_png.png"
       },
       {
         "place": "20th-22nd",
-        "team": "Renegades"
+        "team": "Renegades",
+        "teamLogo": "assets/tournament_logos/renegades_47px_renegades_png.png"
       },
       {
         "place": "20th-22nd",
-        "team": "Gambit Esports"
+        "team": "Gambit Esports",
+        "teamLogo": "assets/tournament_logos/gambit_esports_46px_gambit_esports_allmode_png.png"
       },
       {
         "place": "20th-22nd",
-        "team": "Rogue"
+        "team": "Rogue",
+        "teamLogo": "assets/tournament_logos/rogue_44px_rogue_allmode_png.png"
       },
       {
         "place": "23rd-24th",
-        "team": "Space Soldiers"
+        "team": "Space Soldiers",
+        "teamLogo": "assets/tournament_logos/space_soldiers_57px_space_soldiers_lightmode_png.png"
       },
       {
         "place": "23rd-24th",
-        "team": "Virtus.pro"
+        "team": "Virtus.pro",
+        "teamLogo": "assets/tournament_logos/virtus_pro_48px_vp_megafon_style_png.png"
       }
     ],
     "stageDates": [],
@@ -2007,6 +2462,8 @@
         "round": "Quarterfinals",
         "team1": "Complexity",
         "team2": "MIBR",
+        "team1Logo": "assets/tournament_logos/complexity_85px_complexity_gaming_2016_allmode_png.png",
+        "team2Logo": "assets/tournament_logos/mibr_100px_mibr_2018_lightmode_png.png",
         "score1": "0",
         "score2": "2",
         "date": "September 20, 2018 - 18:05 BST"
@@ -2015,6 +2472,8 @@
         "round": "Quarterfinals",
         "team1": "BIG",
         "team2": "Natus Vincere",
+        "team1Logo": "assets/tournament_logos/big_35px_big_lightmode_png.png",
+        "team2Logo": "assets/tournament_logos/natus_vincere_56px_natus_vincere_allmode_png.png",
         "score1": "0",
         "score2": "2",
         "date": "September 20, 2018 - 15:15 BST"
@@ -2023,6 +2482,8 @@
         "round": "Semifinals",
         "team1": "MIBR",
         "team2": "Natus Vincere",
+        "team1Logo": "assets/tournament_logos/mibr_100px_mibr_2018_lightmode_png.png",
+        "team2Logo": "assets/tournament_logos/natus_vincere_56px_natus_vincere_allmode_png.png",
         "score1": "0",
         "score2": "2",
         "date": "September 22, 2018 - 16:15 BST"
@@ -2031,6 +2492,8 @@
         "round": "Quarterfinals",
         "team1": "Team Liquid",
         "team2": "HellRaisers",
+        "team1Logo": "assets/tournament_logos/team_liquid_50px_team_liquid_2017_lightmode_png.png",
+        "team2Logo": "assets/tournament_logos/hellraisers_57px_hellraisers_2018_allmode_png.png",
         "score1": "2",
         "score2": "1",
         "date": "September 21, 2018 - 16:15 BST"
@@ -2039,6 +2502,8 @@
         "round": "Quarterfinals",
         "team1": "Astralis",
         "team2": "FaZe Clan",
+        "team1Logo": "assets/tournament_logos/astralis_41px_astralis_logo_png.png",
+        "team2Logo": "assets/tournament_logos/faze_clan_76px_faze_clan_2018_lightmode_png.png",
         "score1": "2",
         "score2": "0",
         "date": "September 21, 2018 - 20:05 BST"
@@ -2047,6 +2512,8 @@
         "round": "Semifinals",
         "team1": "Team Liquid",
         "team2": "Astralis",
+        "team1Logo": "assets/tournament_logos/team_liquid_50px_team_liquid_2017_lightmode_png.png",
+        "team2Logo": "assets/tournament_logos/astralis_41px_astralis_logo_png.png",
         "score1": "0",
         "score2": "2",
         "date": "September 22, 2018 - 20:05 BST"
@@ -2055,6 +2522,8 @@
         "round": "Grand Final",
         "team1": "Natus Vincere",
         "team2": "Astralis",
+        "team1Logo": "assets/tournament_logos/natus_vincere_56px_natus_vincere_allmode_png.png",
+        "team2Logo": "assets/tournament_logos/astralis_41px_astralis_logo_png.png",
         "score1": "0",
         "score2": "2",
         "date": "September 23, 2018 - 18:10 BST"
@@ -2069,99 +2538,123 @@
     "placements": [
       {
         "place": "1st",
-        "team": "Astralis"
+        "team": "Astralis",
+        "teamLogo": "assets/tournament_logos/astralis_41px_astralis_logo_png.png"
       },
       {
         "place": "2nd",
-        "team": "ENCE"
+        "team": "ENCE",
+        "teamLogo": "assets/tournament_logos/ence_50px_ence_esports_2016_allmode_png.png"
       },
       {
         "place": "3rd-4th",
-        "team": "Natus Vincere"
+        "team": "Natus Vincere",
+        "teamLogo": "assets/tournament_logos/natus_vincere_56px_natus_vincere_allmode_png.png"
       },
       {
         "place": "3rd-4th",
-        "team": "MIBR"
+        "team": "MIBR",
+        "teamLogo": "assets/tournament_logos/mibr_100px_mibr_2018_lightmode_png.png"
       },
       {
         "place": "5th-8th",
-        "team": "FaZe Clan"
+        "team": "FaZe Clan",
+        "teamLogo": "assets/tournament_logos/faze_clan_76px_faze_clan_2018_lightmode_png.png"
       },
       {
         "place": "5th-8th",
-        "team": "Team Liquid"
+        "team": "Team Liquid",
+        "teamLogo": "assets/tournament_logos/team_liquid_50px_team_liquid_2017_lightmode_png.png"
       },
       {
         "place": "5th-8th",
-        "team": "Renegades"
+        "team": "Renegades",
+        "teamLogo": "assets/tournament_logos/renegades_47px_renegades_2019_allmode_png.png"
       },
       {
         "place": "5th-8th",
-        "team": "Ninjas in Pyjamas"
+        "team": "Ninjas in Pyjamas",
+        "teamLogo": "assets/tournament_logos/ninjas_in_pyjamas_50px_ninjas_in_pyjamas_2017_lightmode_png.png"
       },
       {
         "place": "9th-11th",
-        "team": "Team Vitality"
+        "team": "Team Vitality",
+        "teamLogo": "assets/tournament_logos/team_vitality_39px_team_vitality_2018_allmode_png.png"
       },
       {
         "place": "9th-11th",
-        "team": "Cloud9"
+        "team": "Cloud9",
+        "teamLogo": "assets/tournament_logos/cloud9_70px_cloud9_allmode_png.png"
       },
       {
         "place": "9th-11th",
-        "team": "AVANGAR"
+        "team": "AVANGAR",
+        "teamLogo": "assets/tournament_logos/avangar_53px_avangar_2018_allmode_png.png"
       },
       {
         "place": "12th-14th",
-        "team": "HellRaisers"
+        "team": "HellRaisers",
+        "teamLogo": "assets/tournament_logos/hellraisers_57px_hellraisers_2018_allmode_png.png"
       },
       {
         "place": "12th-14th",
-        "team": "G2 Esports"
+        "team": "G2 Esports",
+        "teamLogo": "assets/tournament_logos/g2_esports_43px_g2_esports_2020_lightmode_png.png"
       },
       {
         "place": "12th-14th",
-        "team": "compLexity Gaming"
+        "team": "compLexity Gaming",
+        "teamLogo": "assets/tournament_logos/complexity_gaming_85px_complexity_gaming_2016_allmode_png.png"
       },
       {
         "place": "15th-16th",
-        "team": "BIG"
+        "team": "BIG",
+        "teamLogo": "assets/tournament_logos/big_35px_big_lightmode_png.png"
       },
       {
         "place": "15th-16th",
-        "team": "NRG Esports"
+        "team": "NRG Esports",
+        "teamLogo": "assets/tournament_logos/nrg_esports_76px_nrg_esports_2017_lightmode_png.png"
       },
       {
         "place": "17th-19th",
-        "team": "TYLOO"
+        "team": "TYLOO",
+        "teamLogo": "assets/tournament_logos/tyloo_56px_tyloo_2016_allmode_png.png"
       },
       {
         "place": "17th-19th",
-        "team": "ViCi Gaming"
+        "team": "ViCi Gaming",
+        "teamLogo": "assets/tournament_logos/vici_gaming_49px_vici_gaming_allmode_png.png"
       },
       {
         "place": "17th-19th",
-        "team": "Winstrike Team"
+        "team": "Winstrike Team",
+        "teamLogo": "assets/tournament_logos/winstrike_team_75px_winstrike_team_2018_allmode_png.png"
       },
       {
         "place": "20th-22nd",
-        "team": "Fnatic"
+        "team": "Fnatic",
+        "teamLogo": "assets/tournament_logos/fnatic_60px_fnatic_2015_allmode_png.png"
       },
       {
         "place": "20th-22nd",
-        "team": "Vega Squadron"
+        "team": "Vega Squadron",
+        "teamLogo": "assets/tournament_logos/vega_squadron_47px_vega_squadron_2016_allmode_png.png"
       },
       {
         "place": "20th-22nd",
-        "team": "FURIA Esports"
+        "team": "FURIA Esports",
+        "teamLogo": "assets/tournament_logos/furia_esports_51px_furia_esports_allmode_png.png"
       },
       {
         "place": "23rd-24th",
-        "team": "Team Spirit"
+        "team": "Team Spirit",
+        "teamLogo": "assets/tournament_logos/team_spirit_38px_team_spirit_2016_alt_allmode_png.png"
       },
       {
         "place": "23rd-24th",
-        "team": "Grayhound Gaming"
+        "team": "Grayhound Gaming",
+        "teamLogo": "assets/tournament_logos/grayhound_gaming_43px_grayhound_gaming_allmode_png.png"
       }
     ],
     "stageDates": [
@@ -2186,6 +2679,8 @@
         "round": "Quarterfinals",
         "team1": "Natus Vincere",
         "team2": "FaZe Clan",
+        "team1Logo": "assets/tournament_logos/natus_vincere_56px_natus_vincere_allmode_png.png",
+        "team2Logo": "assets/tournament_logos/faze_clan_76px_faze_clan_2018_lightmode_png.png",
         "score1": "2",
         "score2": "0",
         "date": "February 28, 2019 - 16:20 CET"
@@ -2194,6 +2689,8 @@
         "round": "Quarterfinals",
         "team1": "Team Liquid",
         "team2": "ENCE",
+        "team1Logo": "assets/tournament_logos/team_liquid_50px_team_liquid_2017_lightmode_png.png",
+        "team2Logo": "assets/tournament_logos/ence_50px_ence_esports_2016_allmode_png.png",
         "score1": "0",
         "score2": "2",
         "date": "February 28, 2019 - 19:40 CET"
@@ -2202,6 +2699,8 @@
         "round": "Semifinals",
         "team1": "Natus Vincere",
         "team2": "ENCE",
+        "team1Logo": "assets/tournament_logos/natus_vincere_56px_natus_vincere_allmode_png.png",
+        "team2Logo": "assets/tournament_logos/ence_50px_ence_esports_2016_allmode_png.png",
         "score1": "1",
         "score2": "2",
         "date": "March 2, 2019 - 16:10 CET"
@@ -2210,6 +2709,8 @@
         "round": "Quarterfinals",
         "team1": "MIBR",
         "team2": "Renegades",
+        "team1Logo": "assets/tournament_logos/mibr_100px_mibr_2018_lightmode_png.png",
+        "team2Logo": "assets/tournament_logos/renegades_47px_renegades_2019_allmode_png.png",
         "score1": "2",
         "score2": "0",
         "date": "March 1, 2019 - 16:10 CET"
@@ -2218,6 +2719,8 @@
         "round": "Quarterfinals",
         "team1": "Astralis",
         "team2": "Ninjas in Pyjamas",
+        "team1Logo": "assets/tournament_logos/astralis_41px_astralis_logo_png.png",
+        "team2Logo": "assets/tournament_logos/ninjas_in_pyjamas_50px_ninjas_in_pyjamas_2017_lightmode_png.png",
         "score1": "2",
         "score2": "0",
         "date": "March 1, 2019 - 19:35 CET"
@@ -2226,6 +2729,8 @@
         "round": "Semifinals",
         "team1": "MIBR",
         "team2": "Astralis",
+        "team1Logo": "assets/tournament_logos/mibr_100px_mibr_2018_lightmode_png.png",
+        "team2Logo": "assets/tournament_logos/astralis_41px_astralis_logo_png.png",
         "score1": "0",
         "score2": "2",
         "date": "March 2, 2019 - 20:20 CET"
@@ -2234,6 +2739,8 @@
         "round": "Grand Final",
         "team1": "ENCE",
         "team2": "Astralis",
+        "team1Logo": "assets/tournament_logos/ence_50px_ence_esports_2016_allmode_png.png",
+        "team2Logo": "assets/tournament_logos/astralis_41px_astralis_logo_png.png",
         "score1": "0",
         "score2": "2",
         "date": "March 3, 2019 - 19:00 CET"
@@ -2248,99 +2755,123 @@
     "placements": [
       {
         "place": "1st",
-        "team": "Outsiders"
+        "team": "Outsiders",
+        "teamLogo": "assets/tournament_logos/outsiders_49px_outsiders_csgo_allmode_png.png"
       },
       {
         "place": "2nd",
-        "team": "Heroic"
+        "team": "Heroic",
+        "teamLogo": "assets/tournament_logos/heroic_100px_heroic_2019_lightmode_png.png"
       },
       {
         "place": "3rd-4th",
-        "team": "MOUZ"
+        "team": "MOUZ",
+        "teamLogo": "assets/tournament_logos/mouz_47px_mouz_2021_allmode_png.png"
       },
       {
         "place": "3rd-4th",
-        "team": "FURIA Esports"
+        "team": "FURIA Esports",
+        "teamLogo": "assets/tournament_logos/furia_esports_51px_furia_esports_allmode_png.png"
       },
       {
         "place": "5th-8th",
-        "team": "Cloud9"
+        "team": "Cloud9",
+        "teamLogo": "assets/tournament_logos/cloud9_70px_cloud9_allmode_png.png"
       },
       {
         "place": "5th-8th",
-        "team": "Fnatic"
+        "team": "Fnatic",
+        "teamLogo": "assets/tournament_logos/fnatic_77px_fnatic_2020_allmode_png.png"
       },
       {
         "place": "5th-8th",
-        "team": "Team Spirit"
+        "team": "Team Spirit",
+        "teamLogo": "assets/tournament_logos/team_spirit_43px_team_spirit_2022_lightmode_png.png"
       },
       {
         "place": "5th-8th",
-        "team": "Natus Vincere"
+        "team": "Natus Vincere",
+        "teamLogo": "assets/tournament_logos/natus_vincere_57px_natus_vincere_2021_lightmode_png.png"
       },
       {
         "place": "9th-11th",
-        "team": "BIG"
+        "team": "BIG",
+        "teamLogo": "assets/tournament_logos/big_35px_big_2020_lightmode_png.png"
       },
       {
         "place": "9th-11th",
-        "team": "Team Liquid"
+        "team": "Team Liquid",
+        "teamLogo": "assets/tournament_logos/team_liquid_44px_team_liquid_2020_lightmode_png.png"
       },
       {
         "place": "9th-11th",
-        "team": "ENCE"
+        "team": "ENCE",
+        "teamLogo": "assets/tournament_logos/ence_50px_ence_2020_allmode_png.png"
       },
       {
         "place": "12th-14th",
-        "team": "Bad News Eagles"
+        "team": "Bad News Eagles",
+        "teamLogo": "assets/tournament_logos/bad_news_eagles_34px_bad_news_eagles_allmode_png.png"
       },
       {
         "place": "12th-14th",
-        "team": "Team Vitality"
+        "team": "Team Vitality",
+        "teamLogo": "assets/tournament_logos/team_vitality_40px_team_vitality_2021_allmode_png.png"
       },
       {
         "place": "12th-14th",
-        "team": "Sprout"
+        "team": "Sprout",
+        "teamLogo": "assets/tournament_logos/sprout_29px_sprout_allmode_png.png"
       },
       {
         "place": "15th-16th",
-        "team": "Ninjas in Pyjamas"
+        "team": "Ninjas in Pyjamas",
+        "teamLogo": "assets/tournament_logos/ninjas_in_pyjamas_50px_ninjas_in_pyjamas_2021_lightmode_png.png"
       },
       {
         "place": "15th-16th",
-        "team": "FaZe Clan"
+        "team": "FaZe Clan",
+        "teamLogo": "assets/tournament_logos/faze_clan_75px_faze_clan_november_2021_lightmode_png.png"
       },
       {
         "place": "17th-19th",
-        "team": "Team GamerLegion"
+        "team": "Team GamerLegion",
+        "teamLogo": "assets/tournament_logos/team_gamerlegion_50px_team_gamerlegion_allmode_png.png"
       },
       {
         "place": "17th-19th",
-        "team": "OG"
+        "team": "OG",
+        "teamLogo": "assets/tournament_logos/og_34px_og_rb_allmode_png.png"
       },
       {
         "place": "17th-19th",
-        "team": "9z Team"
+        "team": "9z Team",
+        "teamLogo": "assets/tournament_logos/9z_team_54px_9z_team_allmode_png.png"
       },
       {
         "place": "20th-22nd",
-        "team": "Grayhound Gaming"
+        "team": "Grayhound Gaming",
+        "teamLogo": "assets/tournament_logos/grayhound_gaming_43px_grayhound_gaming_allmode_png.png"
       },
       {
         "place": "20th-22nd",
-        "team": "Evil Geniuses"
+        "team": "Evil Geniuses",
+        "teamLogo": "assets/tournament_logos/evil_geniuses_37px_evil_geniuses_2020_lightmode_png.png"
       },
       {
         "place": "20th-22nd",
-        "team": "IHC Esports"
+        "team": "IHC Esports",
+        "teamLogo": "assets/tournament_logos/ihc_esports_42px_ihc_esports_allmode_png.png"
       },
       {
         "place": "23rd-24th",
-        "team": "00 Nation"
+        "team": "00 Nation",
+        "teamLogo": "assets/tournament_logos/00_nation_50px_00_nation_2022_lightmode_2_png.png"
       },
       {
         "place": "23rd-24th",
-        "team": "Imperial Esports"
+        "team": "Imperial Esports",
+        "teamLogo": "assets/tournament_logos/imperial_esports_44px_imperial_esports_2022_allmode_png.png"
       }
     ],
     "stageDates": [
@@ -2365,6 +2896,8 @@
         "round": "Quarterfinals",
         "team1": "Cloud9",
         "team2": "MOUZ",
+        "team1Logo": "assets/tournament_logos/cloud9_70px_cloud9_allmode_png.png",
+        "team2Logo": "assets/tournament_logos/mouz_47px_mouz_2021_allmode_png.png",
         "score1": "1",
         "score2": "2",
         "date": "November 10, 2022 - 17:30 BRT"
@@ -2373,6 +2906,8 @@
         "round": "Quarterfinals",
         "team1": "Fnatic",
         "team2": "Outsiders",
+        "team1Logo": "assets/tournament_logos/fnatic_77px_fnatic_2020_allmode_png.png",
+        "team2Logo": "assets/tournament_logos/outsiders_49px_outsiders_csgo_allmode_png.png",
         "score1": "0",
         "score2": "2",
         "date": "November 10, 2022 - 14:00 BRT"
@@ -2381,6 +2916,8 @@
         "round": "Semifinals",
         "team1": "MOUZ",
         "team2": "Outsiders",
+        "team1Logo": "assets/tournament_logos/mouz_47px_mouz_2021_allmode_png.png",
+        "team2Logo": "assets/tournament_logos/outsiders_49px_outsiders_csgo_allmode_png.png",
         "score1": "1",
         "score2": "2",
         "date": "November 12, 2022 - 14:00 BRT"
@@ -2389,6 +2926,8 @@
         "round": "Quarterfinals",
         "team1": "HEROIC",
         "team2": "Team Spirit",
+        "team1Logo": "assets/tournament_logos/heroic_100px_heroic_2019_lightmode_png.png",
+        "team2Logo": "assets/tournament_logos/team_spirit_43px_team_spirit_2022_lightmode_png.png",
         "score1": "2",
         "score2": "0",
         "date": "November 11, 2022 - 14:15 BRT"
@@ -2397,6 +2936,8 @@
         "round": "Quarterfinals",
         "team1": "Natus Vincere",
         "team2": "FURIA",
+        "team1Logo": "assets/tournament_logos/natus_vincere_57px_natus_vincere_2021_lightmode_png.png",
+        "team2Logo": "assets/tournament_logos/furia_51px_furia_esports_allmode_png.png",
         "score1": "1",
         "score2": "2",
         "date": "November 11, 2022 - 17:45 BRT"
@@ -2405,6 +2946,8 @@
         "round": "Semifinals",
         "team1": "HEROIC",
         "team2": "FURIA",
+        "team1Logo": "assets/tournament_logos/heroic_100px_heroic_2019_lightmode_png.png",
+        "team2Logo": "assets/tournament_logos/furia_51px_furia_esports_allmode_png.png",
         "score1": "2",
         "score2": "1",
         "date": "November 12, 2022 - 19:00 BRT"
@@ -2413,6 +2956,8 @@
         "round": "Grand Final",
         "team1": "Outsiders",
         "team2": "HEROIC",
+        "team1Logo": "assets/tournament_logos/outsiders_49px_outsiders_csgo_allmode_png.png",
+        "team2Logo": "assets/tournament_logos/heroic_100px_heroic_2019_lightmode_png.png",
         "score1": "2",
         "score2": "0",
         "date": "November 13, 2022 - 15:00 BRT"
@@ -2427,67 +2972,83 @@
     "placements": [
       {
         "place": "1st",
-        "team": "Luminosity Gaming"
+        "team": "Luminosity Gaming",
+        "teamLogo": "assets/tournament_logos/luminosity_gaming_51px_luminosity_gaming_allmode_png.png"
       },
       {
         "place": "2nd",
-        "team": "Natus Vincere"
+        "team": "Natus Vincere",
+        "teamLogo": "assets/tournament_logos/natus_vincere_56px_natus_vincere_allmode_png.png"
       },
       {
         "place": "3rd-4th",
-        "team": "Astralis"
+        "team": "Astralis",
+        "teamLogo": "assets/tournament_logos/astralis_41px_astralis_logo_png.png"
       },
       {
         "place": "3rd-4th",
-        "team": "Team Liquid"
+        "team": "Team Liquid",
+        "teamLogo": "assets/tournament_logos/team_liquid_50px_team_liquid_allmode_png.png"
       },
       {
         "place": "5th-8th",
-        "team": "Ninjas in Pyjamas"
+        "team": "Ninjas in Pyjamas",
+        "teamLogo": "assets/tournament_logos/ninjas_in_pyjamas_50px_ninjas_in_pyjamas_2012_allmode_png.png"
       },
       {
         "place": "5th-8th",
-        "team": "Fnatic"
+        "team": "Fnatic",
+        "teamLogo": "assets/tournament_logos/fnatic_60px_fnatic_2015_allmode_png.png"
       },
       {
         "place": "5th-8th",
-        "team": "Counter Logic Gaming"
+        "team": "Counter Logic Gaming",
+        "teamLogo": "assets/tournament_logos/counter_logic_gaming_70px_counter_logic_gaming_allmode_png.png"
       },
       {
         "place": "5th-8th",
-        "team": "Virtus.pro"
+        "team": "Virtus.pro",
+        "teamLogo": "assets/tournament_logos/virtus_pro_48px_virtus_pro_allmode_png.png"
       },
       {
         "place": "9th-12th",
-        "team": "mousesports"
+        "team": "mousesports",
+        "teamLogo": "assets/tournament_logos/mousesports_92px_mousesports_new_png.png"
       },
       {
         "place": "9th-12th",
-        "team": "FaZe Clan"
+        "team": "FaZe Clan",
+        "teamLogo": "assets/tournament_logos/faze_clan_76px_faze_clan_2017_allmode_png.png"
       },
       {
         "place": "9th-12th",
-        "team": "Gambit Gaming"
+        "team": "Gambit Gaming",
+        "teamLogo": "assets/tournament_logos/gambit_gaming_41px_gambit_gaming_allmode_png.png"
       },
       {
         "place": "9th-12th",
-        "team": "G2 Esports"
+        "team": "G2 Esports",
+        "teamLogo": "assets/tournament_logos/g2_esports_43px_g2_esports_allmode_png.png"
       },
       {
         "place": "13th-16th",
-        "team": "FlipSid3 Tactics"
+        "team": "FlipSid3 Tactics",
+        "teamLogo": "assets/tournament_logos/flipsid3_tactics_47px_flipsid3_tactics_lightmode_png.png"
       },
       {
         "place": "13th-16th",
-        "team": "Splyce"
+        "team": "Splyce",
+        "teamLogo": "assets/tournament_logos/splyce_43px_splyce_2015_allmode_png.png"
       },
       {
         "place": "13th-16th",
-        "team": "Team EnVyUs"
+        "team": "Team EnVyUs",
+        "teamLogo": "assets/tournament_logos/team_envyus_50px_team_envyus_lightmode_png.png"
       },
       {
         "place": "13th-16th",
-        "team": "Cloud9"
+        "team": "Cloud9",
+        "teamLogo": "assets/tournament_logos/cloud9_70px_cloud9_allmode_png.png"
       }
     ],
     "stageDates": [],
@@ -2496,6 +3057,8 @@
         "round": "Quarterfinals",
         "team1": "Natus Vincere",
         "team2": "Ninjas in Pyjamas",
+        "team1Logo": "assets/tournament_logos/natus_vincere_56px_natus_vincere_allmode_png.png",
+        "team2Logo": "assets/tournament_logos/ninjas_in_pyjamas_50px_ninjas_in_pyjamas_2012_allmode_png.png",
         "score1": "2",
         "score2": "0",
         "date": "April 1, 2016 - 10:00 EDT"
@@ -2504,6 +3067,8 @@
         "round": "Quarterfinals",
         "team1": "Astralis",
         "team2": "Fnatic",
+        "team1Logo": "assets/tournament_logos/astralis_41px_astralis_logo_png.png",
+        "team2Logo": "assets/tournament_logos/fnatic_60px_fnatic_2015_allmode_png.png",
         "score1": "2",
         "score2": "0",
         "date": "April 1, 2016 - 13:30 EDT"
@@ -2512,6 +3077,8 @@
         "round": "Semifinals",
         "team1": "Natus Vincere",
         "team2": "Astralis",
+        "team1Logo": "assets/tournament_logos/natus_vincere_56px_natus_vincere_allmode_png.png",
+        "team2Logo": "assets/tournament_logos/astralis_41px_astralis_logo_png.png",
         "score1": "2",
         "score2": "0",
         "date": "April 2, 2016 - 15:15 EDT"
@@ -2520,6 +3087,8 @@
         "round": "Quarterfinals",
         "team1": "Team Liquid",
         "team2": "Counter Logic Gaming",
+        "team1Logo": "assets/tournament_logos/team_liquid_50px_team_liquid_allmode_png.png",
+        "team2Logo": "assets/tournament_logos/counter_logic_gaming_70px_counter_logic_gaming_allmode_png.png",
         "score1": "2",
         "score2": "0",
         "date": "April 1, 2016 - 16:20 EDT"
@@ -2528,6 +3097,8 @@
         "round": "Quarterfinals",
         "team1": "Luminosity Gaming",
         "team2": "Virtus.pro",
+        "team1Logo": "assets/tournament_logos/luminosity_gaming_51px_luminosity_gaming_allmode_png.png",
+        "team2Logo": "assets/tournament_logos/virtus_pro_48px_virtus_pro_allmode_png.png",
         "score1": "2",
         "score2": "1",
         "date": "April 2, 2016 - 10:30 EDT"
@@ -2536,6 +3107,8 @@
         "round": "Semifinals",
         "team1": "Team Liquid",
         "team2": "Luminosity Gaming",
+        "team1Logo": "assets/tournament_logos/team_liquid_50px_team_liquid_allmode_png.png",
+        "team2Logo": "assets/tournament_logos/luminosity_gaming_51px_luminosity_gaming_allmode_png.png",
         "score1": "0",
         "score2": "2",
         "date": "April 2, 2016 - 18:15 EDT"
@@ -2544,6 +3117,8 @@
         "round": "Grand Final",
         "team1": "Natus Vincere",
         "team2": "Luminosity Gaming",
+        "team1Logo": "assets/tournament_logos/natus_vincere_56px_natus_vincere_allmode_png.png",
+        "team2Logo": "assets/tournament_logos/luminosity_gaming_51px_luminosity_gaming_allmode_png.png",
         "score1": "0",
         "score2": "2",
         "date": "April 3, 2016 - 14:15 EDT"
@@ -2558,99 +3133,123 @@
     "placements": [
       {
         "place": "1st",
-        "team": "FaZe Clan"
+        "team": "FaZe Clan",
+        "teamLogo": "assets/tournament_logos/faze_clan_75px_faze_clan_november_2021_lightmode_png.png"
       },
       {
         "place": "2nd",
-        "team": "Natus Vincere"
+        "team": "Natus Vincere",
+        "teamLogo": "assets/tournament_logos/natus_vincere_57px_natus_vincere_2021_lightmode_png.png"
       },
       {
         "place": "3rd-4th",
-        "team": "Team Spirit"
+        "team": "Team Spirit",
+        "teamLogo": "assets/tournament_logos/team_spirit_43px_team_spirit_2022_lightmode_png.png"
       },
       {
         "place": "3rd-4th",
-        "team": "ENCE"
+        "team": "ENCE",
+        "teamLogo": "assets/tournament_logos/ence_50px_ence_2020_allmode_png.png"
       },
       {
         "place": "5th-8th",
-        "team": "FURIA Esports"
+        "team": "FURIA Esports",
+        "teamLogo": "assets/tournament_logos/furia_esports_51px_furia_esports_allmode_png.png"
       },
       {
         "place": "5th-8th",
-        "team": "Ninjas in Pyjamas"
+        "team": "Ninjas in Pyjamas",
+        "teamLogo": "assets/tournament_logos/ninjas_in_pyjamas_50px_ninjas_in_pyjamas_2021_lightmode_png.png"
       },
       {
         "place": "5th-8th",
-        "team": "Copenhagen Flames"
+        "team": "Copenhagen Flames",
+        "teamLogo": "assets/tournament_logos/copenhagen_flames_30px_copenhagen_flames_2018_lightmode_png.png"
       },
       {
         "place": "5th-8th",
-        "team": "Heroic"
+        "team": "Heroic",
+        "teamLogo": "assets/tournament_logos/heroic_100px_heroic_2019_lightmode_png.png"
       },
       {
         "place": "9th-11th",
-        "team": "G2 Esports"
+        "team": "G2 Esports",
+        "teamLogo": "assets/tournament_logos/g2_esports_43px_g2_esports_2020_lightmode_png.png"
       },
       {
         "place": "9th-11th",
-        "team": "Team Vitality"
+        "team": "Team Vitality",
+        "teamLogo": "assets/tournament_logos/team_vitality_40px_team_vitality_2021_allmode_png.png"
       },
       {
         "place": "9th-11th",
-        "team": "Imperial Esports"
+        "team": "Imperial Esports",
+        "teamLogo": "assets/tournament_logos/imperial_esports_44px_imperial_esports_2022_allmode_png.png"
       },
       {
         "place": "12th-14th",
-        "team": "BIG"
+        "team": "BIG",
+        "teamLogo": "assets/tournament_logos/big_35px_big_2020_lightmode_png.png"
       },
       {
         "place": "12th-14th",
-        "team": "Cloud9"
+        "team": "Cloud9",
+        "teamLogo": "assets/tournament_logos/cloud9_70px_cloud9_allmode_png.png"
       },
       {
         "place": "12th-14th",
-        "team": "Outsiders"
+        "team": "Outsiders",
+        "teamLogo": "assets/tournament_logos/outsiders_49px_outsiders_csgo_allmode_png.png"
       },
       {
         "place": "15th-16th",
-        "team": "Bad News Eagles"
+        "team": "Bad News Eagles",
+        "teamLogo": "assets/tournament_logos/bad_news_eagles_34px_bad_news_eagles_allmode_png.png"
       },
       {
         "place": "15th-16th",
-        "team": "Team Liquid"
+        "team": "Team Liquid",
+        "teamLogo": "assets/tournament_logos/team_liquid_44px_team_liquid_2020_lightmode_png.png"
       },
       {
         "place": "17th-19th",
-        "team": "forZe"
+        "team": "forZe",
+        "teamLogo": "assets/tournament_logos/forze_42px_forze_2019_allmode_png.png"
       },
       {
         "place": "17th-19th",
-        "team": "Astralis"
+        "team": "Astralis",
+        "teamLogo": "assets/tournament_logos/astralis_41px_astralis_2020_allmode_png.png"
       },
       {
         "place": "17th-19th",
-        "team": "MIBR"
+        "team": "MIBR",
+        "teamLogo": "assets/tournament_logos/mibr_100px_mibr_2018_lightmode_png.png"
       },
       {
         "place": "20th-22nd",
-        "team": "Complexity Gaming"
+        "team": "Complexity Gaming",
+        "teamLogo": "assets/tournament_logos/complexity_gaming_53px_complexity_gaming_2019_lightmode_png.png"
       },
       {
         "place": "20th-22nd",
-        "team": "Eternal Fire"
+        "team": "Eternal Fire",
+        "teamLogo": "assets/tournament_logos/eternal_fire_95px_eternal_fire_allmode_png.png"
       },
       {
         "place": "20th-22nd",
-        "team": "IHC Esports"
+        "team": "IHC Esports",
+        "teamLogo": "assets/tournament_logos/ihc_esports_42px_ihc_esports_allmode_png.png"
       },
       {
         "place": "23rd-24th",
-        "team": "9z Team"
+        "team": "9z Team",
+        "teamLogo": "assets/tournament_logos/9z_team_54px_9z_team_allmode_png.png"
       },
       {
         "place": "23rd-24th",
-        "team": "Renegades"
+        "team": "Renegades",
+        "teamLogo": "assets/tournament_logos/renegades_47px_renegades_2019_allmode_png.png"
       }
     ],
     "stageDates": [
@@ -2675,6 +3274,8 @@
         "round": "Quarterfinals",
         "team1": "Team Spirit",
         "team2": "FURIA",
+        "team1Logo": "assets/tournament_logos/team_spirit_43px_team_spirit_2022_lightmode_png.png",
+        "team2Logo": "assets/tournament_logos/furia_51px_furia_esports_allmode_png.png",
         "score1": "2",
         "score2": "0",
         "date": "May 19, 2022 - 21:05 CEST"
@@ -2683,6 +3284,8 @@
         "round": "Quarterfinals",
         "team1": "FaZe Clan",
         "team2": "Ninjas in Pyjamas",
+        "team1Logo": "assets/tournament_logos/faze_clan_75px_faze_clan_november_2021_lightmode_png.png",
+        "team2Logo": "assets/tournament_logos/ninjas_in_pyjamas_50px_ninjas_in_pyjamas_2021_lightmode_png.png",
         "score1": "2",
         "score2": "1",
         "date": "May 19, 2022 - 16:30 CEST"
@@ -2691,6 +3294,8 @@
         "round": "Semifinals",
         "team1": "Team Spirit",
         "team2": "FaZe Clan",
+        "team1Logo": "assets/tournament_logos/team_spirit_43px_team_spirit_2022_lightmode_png.png",
+        "team2Logo": "assets/tournament_logos/faze_clan_75px_faze_clan_november_2021_lightmode_png.png",
         "score1": "0",
         "score2": "2",
         "date": "May 21, 2022 - 16:30 CEST"
@@ -2699,6 +3304,8 @@
         "round": "Quarterfinals",
         "team1": "ENCE",
         "team2": "Copenhagen Flames",
+        "team1Logo": "assets/tournament_logos/ence_50px_ence_2020_allmode_png.png",
+        "team2Logo": "assets/tournament_logos/copenhagen_flames_30px_copenhagen_flames_2018_lightmode_png.png",
         "score1": "2",
         "score2": "0",
         "date": "May 20, 2022 - 16:30 CEST"
@@ -2707,6 +3314,8 @@
         "round": "Quarterfinals",
         "team1": "HEROIC",
         "team2": "Natus Vincere",
+        "team1Logo": "assets/tournament_logos/heroic_100px_heroic_2019_lightmode_png.png",
+        "team2Logo": "assets/tournament_logos/natus_vincere_57px_natus_vincere_2021_lightmode_png.png",
         "score1": "1",
         "score2": "2",
         "date": "May 20, 2022 - 19:30 CEST"
@@ -2715,6 +3324,8 @@
         "round": "Semifinals",
         "team1": "ENCE",
         "team2": "Natus Vincere",
+        "team1Logo": "assets/tournament_logos/ence_50px_ence_2020_allmode_png.png",
+        "team2Logo": "assets/tournament_logos/natus_vincere_57px_natus_vincere_2021_lightmode_png.png",
         "score1": "0",
         "score2": "2",
         "date": "May 21, 2022 - 20:25 CEST"
@@ -2723,6 +3334,8 @@
         "round": "Grand Final",
         "team1": "FaZe Clan",
         "team2": "Natus Vincere",
+        "team1Logo": "assets/tournament_logos/faze_clan_75px_faze_clan_november_2021_lightmode_png.png",
+        "team2Logo": "assets/tournament_logos/natus_vincere_57px_natus_vincere_2021_lightmode_png.png",
         "score1": "2",
         "score2": "0",
         "date": "May 22, 2022 - 20:00 CEST"
@@ -2737,99 +3350,123 @@
     "placements": [
       {
         "place": "1st",
-        "team": "Natus Vincere"
+        "team": "Natus Vincere",
+        "teamLogo": "assets/tournament_logos/natus_vincere_57px_natus_vincere_2021_lightmode_png.png"
       },
       {
         "place": "2nd",
-        "team": "FaZe Clan"
+        "team": "FaZe Clan",
+        "teamLogo": "assets/tournament_logos/faze_clan_75px_faze_clan_november_2021_lightmode_png.png"
       },
       {
         "place": "3rd-4th",
-        "team": "Team Vitality"
+        "team": "Team Vitality",
+        "teamLogo": "assets/tournament_logos/team_vitality_41px_team_vitality_2023_lightmode_png.png"
       },
       {
         "place": "3rd-4th",
-        "team": "G2 Esports"
+        "team": "G2 Esports",
+        "teamLogo": "assets/tournament_logos/g2_esports_43px_g2_esports_2020_lightmode_png.png"
       },
       {
         "place": "5th-8th",
-        "team": "Team Spirit"
+        "team": "Team Spirit",
+        "teamLogo": "assets/tournament_logos/team_spirit_43px_team_spirit_2022_lightmode_png.png"
       },
       {
         "place": "5th-8th",
-        "team": "Cloud9"
+        "team": "Cloud9",
+        "teamLogo": "assets/tournament_logos/cloud9_73px_cloud9_2023_allmode_png.png"
       },
       {
         "place": "5th-8th",
-        "team": "Eternal Fire"
+        "team": "Eternal Fire",
+        "teamLogo": "assets/tournament_logos/eternal_fire_95px_eternal_fire_2023_allmode_png.png"
       },
       {
         "place": "5th-8th",
-        "team": "MOUZ"
+        "team": "MOUZ",
+        "teamLogo": "assets/tournament_logos/mouz_47px_mouz_2021_allmode_png.png"
       },
       {
         "place": "9th-11th",
-        "team": "Complexity Gaming"
+        "team": "Complexity Gaming",
+        "teamLogo": "assets/tournament_logos/complexity_gaming_53px_complexity_gaming_2019_lightmode_png.png"
       },
       {
         "place": "9th-11th",
-        "team": "Virtus.pro"
+        "team": "Virtus.pro",
+        "teamLogo": "assets/tournament_logos/virtus_pro_51px_virtus_pro_2019_allmode_png.png"
       },
       {
         "place": "9th-11th",
-        "team": "paiN Gaming"
+        "team": "paiN Gaming",
+        "teamLogo": "assets/tournament_logos/pain_gaming_75px_pain_gaming_2023_lightmode_png.png"
       },
       {
         "place": "12th-14th",
-        "team": "Imperial Esports"
+        "team": "Imperial Esports",
+        "teamLogo": "assets/tournament_logos/imperial_esports_44px_imperial_esports_2022_allmode_png.png"
       },
       {
         "place": "12th-14th",
-        "team": "ECSTATIC"
+        "team": "ECSTATIC",
+        "teamLogo": "assets/tournament_logos/ecstatic_50px_ecstatic_2023_allmode_png.png"
       },
       {
         "place": "12th-14th",
-        "team": "HEROIC"
+        "team": "HEROIC",
+        "teamLogo": "assets/tournament_logos/heroic_57px_heroic_2023_allmode_png.png"
       },
       {
         "place": "15th-16th",
-        "team": "The MongolZ"
+        "team": "The MongolZ",
+        "teamLogo": "assets/tournament_logos/the_mongolz_39px_the_mongolz_2024_03_allmode_png.png"
       },
       {
         "place": "15th-16th",
-        "team": "FURIA Esports"
+        "team": "FURIA Esports",
+        "teamLogo": "assets/tournament_logos/furia_esports_51px_furia_esports_allmode_png.png"
       },
       {
         "place": "17th-19th",
-        "team": "SAW"
+        "team": "SAW",
+        "teamLogo": "assets/tournament_logos/saw_60px_saw_2021_allmode_png.png"
       },
       {
         "place": "17th-19th",
-        "team": "Legacy"
+        "team": "Legacy",
+        "teamLogo": "assets/tournament_logos/legacy_49px_legacy_allmode_png.png"
       },
       {
         "place": "17th-19th",
-        "team": "GamerLegion"
+        "team": "GamerLegion",
+        "teamLogo": "assets/tournament_logos/gamerlegion_91px_gamerlegion_cs_2023_allmode_png.png"
       },
       {
         "place": "20th-22nd",
-        "team": "Lynn Vision Gaming"
+        "team": "Lynn Vision Gaming",
+        "teamLogo": "assets/tournament_logos/lynn_vision_gaming_56px_lynn_vision_gaming_2020_allmode_png.png"
       },
       {
         "place": "20th-22nd",
-        "team": "ENCE"
+        "team": "ENCE",
+        "teamLogo": "assets/tournament_logos/ence_50px_ence_2020_allmode_png.png"
       },
       {
         "place": "20th-22nd",
-        "team": "Apeks"
+        "team": "Apeks",
+        "teamLogo": "assets/tournament_logos/apeks_100px_apeks_2021_darkmode_png.png"
       },
       {
         "place": "23rd-24th",
-        "team": "AMKAL ESPORTS"
+        "team": "AMKAL ESPORTS",
+        "teamLogo": "assets/tournament_logos/amkal_esports_49px_amkal_esports_lightmode_png.png"
       },
       {
         "place": "23rd-24th",
-        "team": "KOI"
+        "team": "KOI",
+        "teamLogo": "assets/tournament_logos/koi_31px_koi_2024_blue_allmode_png.png"
       }
     ],
     "stageDates": [
@@ -2854,6 +3491,8 @@
         "round": "Quarterfinals",
         "team1": "Team Spirit",
         "team2": "FaZe Clan",
+        "team1Logo": "assets/tournament_logos/team_spirit_43px_team_spirit_2022_lightmode_png.png",
+        "team2Logo": "assets/tournament_logos/faze_clan_75px_faze_clan_november_2021_lightmode_png.png",
         "score1": "1",
         "score2": "2",
         "date": "March 28, 2024 - 19:55 CET"
@@ -2862,6 +3501,8 @@
         "round": "Quarterfinals",
         "team1": "Team Vitality",
         "team2": "Cloud9",
+        "team1Logo": "assets/tournament_logos/team_vitality_41px_team_vitality_2023_lightmode_png.png",
+        "team2Logo": "assets/tournament_logos/cloud9_73px_cloud9_2023_allmode_png.png",
         "score1": "2",
         "score2": "0",
         "date": "March 28, 2024 - 17:00 CET"
@@ -2870,6 +3511,8 @@
         "round": "Semifinals",
         "team1": "FaZe Clan",
         "team2": "Team Vitality",
+        "team1Logo": "assets/tournament_logos/faze_clan_75px_faze_clan_november_2021_lightmode_png.png",
+        "team2Logo": "assets/tournament_logos/team_vitality_41px_team_vitality_2023_lightmode_png.png",
         "score1": "2",
         "score2": "1",
         "date": "March 30, 2024 - 17:00 CET"
@@ -2878,6 +3521,8 @@
         "round": "Quarterfinals",
         "team1": "Eternal Fire",
         "team2": "Natus Vincere",
+        "team1Logo": "assets/tournament_logos/eternal_fire_95px_eternal_fire_2023_allmode_png.png",
+        "team2Logo": "assets/tournament_logos/natus_vincere_57px_natus_vincere_2021_lightmode_png.png",
         "score1": "0",
         "score2": "2",
         "date": "March 29, 2024 - 17:00 CET"
@@ -2886,6 +3531,8 @@
         "round": "Quarterfinals",
         "team1": "G2 Esports",
         "team2": "MOUZ",
+        "team1Logo": "assets/tournament_logos/g2_esports_43px_g2_esports_2020_lightmode_png.png",
+        "team2Logo": "assets/tournament_logos/mouz_47px_mouz_2021_allmode_png.png",
         "score1": "2",
         "score2": "0",
         "date": "March 29, 2024 - 20:20 CET"
@@ -2894,6 +3541,8 @@
         "round": "Semifinals",
         "team1": "Natus Vincere",
         "team2": "G2 Esports",
+        "team1Logo": "assets/tournament_logos/natus_vincere_57px_natus_vincere_2021_lightmode_png.png",
+        "team2Logo": "assets/tournament_logos/g2_esports_43px_g2_esports_2020_lightmode_png.png",
         "score1": "2",
         "score2": "1",
         "date": "March 30, 2024 - 20:50 CET"
@@ -2902,6 +3551,8 @@
         "round": "Grand Final",
         "team1": "FaZe Clan",
         "team2": "Natus Vincere",
+        "team1Logo": "assets/tournament_logos/faze_clan_75px_faze_clan_november_2021_lightmode_png.png",
+        "team2Logo": "assets/tournament_logos/natus_vincere_57px_natus_vincere_2021_lightmode_png.png",
         "score1": "1",
         "score2": "2",
         "date": "March 31, 2024 - 20:00 CEST"
@@ -2916,67 +3567,83 @@
     "placements": [
       {
         "place": "1st",
-        "team": "Gambit Esports"
+        "team": "Gambit Esports",
+        "teamLogo": "assets/tournament_logos/gambit_esports_46px_gambit_esports_allmode_png.png"
       },
       {
         "place": "2nd",
-        "team": "Immortals"
+        "team": "Immortals",
+        "teamLogo": "assets/tournament_logos/immortals_50px_immortals_allmode_png.png"
       },
       {
         "place": "3rd-4th",
-        "team": "Astralis"
+        "team": "Astralis",
+        "teamLogo": "assets/tournament_logos/astralis_41px_astralis_logo_png.png"
       },
       {
         "place": "3rd-4th",
-        "team": "Virtus.pro"
+        "team": "Virtus.pro",
+        "teamLogo": "assets/tournament_logos/virtus_pro_48px_virtus_pro_allmode_png.png"
       },
       {
         "place": "5th-8th",
-        "team": "Fnatic"
+        "team": "Fnatic",
+        "teamLogo": "assets/tournament_logos/fnatic_60px_fnatic_2015_allmode_png.png"
       },
       {
         "place": "5th-8th",
-        "team": "SK Gaming"
+        "team": "SK Gaming",
+        "teamLogo": "assets/tournament_logos/sk_gaming_50px_sk_gaming_2003_lightmode_png.png"
       },
       {
         "place": "5th-8th",
-        "team": "BIG"
+        "team": "BIG",
+        "teamLogo": "assets/tournament_logos/big_35px_big_lightmode_png.png"
       },
       {
         "place": "5th-8th",
-        "team": "North"
+        "team": "North",
+        "teamLogo": "assets/tournament_logos/north_48px_north_lightmode_png.png"
       },
       {
         "place": "9th-11th",
-        "team": "Cloud9"
+        "team": "Cloud9",
+        "teamLogo": "assets/tournament_logos/cloud9_70px_cloud9_allmode_png.png"
       },
       {
         "place": "9th-11th",
-        "team": "FlipSid3 Tactics"
+        "team": "FlipSid3 Tactics",
+        "teamLogo": "assets/tournament_logos/flipsid3_tactics_47px_flipsid3_tactics_lightmode_png.png"
       },
       {
         "place": "9th-11th",
-        "team": "G2 Esports"
+        "team": "G2 Esports",
+        "teamLogo": "assets/tournament_logos/g2_esports_43px_g2_esports_allmode_png.png"
       },
       {
         "place": "12th-14th",
-        "team": "Natus Vincere"
+        "team": "Natus Vincere",
+        "teamLogo": "assets/tournament_logos/natus_vincere_56px_natus_vincere_allmode_png.png"
       },
       {
         "place": "12th-14th",
-        "team": "mousesports"
+        "team": "mousesports",
+        "teamLogo": "assets/tournament_logos/mousesports_92px_mousesports_2016_allmode_png.png"
       },
       {
         "place": "12th-14th",
-        "team": "PENTA Sports"
+        "team": "PENTA Sports",
+        "teamLogo": "assets/tournament_logos/penta_sports_37px_penta_sports_lightmode_png.png"
       },
       {
         "place": "15th-16th",
-        "team": "FaZe Clan"
+        "team": "FaZe Clan",
+        "teamLogo": "assets/tournament_logos/faze_clan_76px_faze_clan_2017_allmode_png.png"
       },
       {
         "place": "15th-16th",
-        "team": "Vega Squadron"
+        "team": "Vega Squadron",
+        "teamLogo": "assets/tournament_logos/vega_squadron_47px_vega_squadron_2016_allmode_png.png"
       }
     ],
     "stageDates": [],
@@ -2985,6 +3652,8 @@
         "round": "Quarterfinals",
         "team1": "Gambit Esports",
         "team2": "Fnatic",
+        "team1Logo": "assets/tournament_logos/gambit_esports_46px_gambit_esports_allmode_png.png",
+        "team2Logo": "assets/tournament_logos/fnatic_60px_fnatic_2015_allmode_png.png",
         "score1": "2",
         "score2": "0",
         "date": "July 21, 2017 - 13:00 CEST"
@@ -2993,6 +3662,8 @@
         "round": "Quarterfinals",
         "team1": "SK Gaming",
         "team2": "Astralis",
+        "team1Logo": "assets/tournament_logos/sk_gaming_50px_sk_gaming_2003_lightmode_png.png",
+        "team2Logo": "assets/tournament_logos/astralis_41px_astralis_logo_png.png",
         "score1": "0",
         "score2": "2",
         "date": "July 21, 2017 - 17:15 CEST"
@@ -3001,6 +3672,8 @@
         "round": "Semifinals",
         "team1": "Gambit Esports",
         "team2": "Astralis",
+        "team1Logo": "assets/tournament_logos/gambit_esports_46px_gambit_esports_allmode_png.png",
+        "team2Logo": "assets/tournament_logos/astralis_41px_astralis_logo_png.png",
         "score1": "2",
         "score2": "1",
         "date": "July 22, 2017 - 15:30 CEST"
@@ -3009,6 +3682,8 @@
         "round": "Quarterfinals",
         "team1": "BIG",
         "team2": "Immortals",
+        "team1Logo": "assets/tournament_logos/big_35px_big_lightmode_png.png",
+        "team2Logo": "assets/tournament_logos/immortals_50px_immortals_allmode_png.png",
         "score1": "1",
         "score2": "2",
         "date": "July 21, 2017 - 20:25 CEST"
@@ -3017,6 +3692,8 @@
         "round": "Quarterfinals",
         "team1": "North",
         "team2": "Virtus.pro",
+        "team1Logo": "assets/tournament_logos/north_48px_north_lightmode_png.png",
+        "team2Logo": "assets/tournament_logos/virtus_pro_48px_virtus_pro_allmode_png.png",
         "score1": "0",
         "score2": "2",
         "date": "July 22, 2017 - 13:00 CEST"
@@ -3025,6 +3702,8 @@
         "round": "Semifinals",
         "team1": "Immortals",
         "team2": "Virtus.pro",
+        "team1Logo": "assets/tournament_logos/immortals_50px_immortals_allmode_png.png",
+        "team2Logo": "assets/tournament_logos/virtus_pro_48px_virtus_pro_allmode_png.png",
         "score1": "2",
         "score2": "0",
         "date": "July 22, 2017 - 19:45 CEST"
@@ -3033,6 +3712,8 @@
         "round": "Grand Final",
         "team1": "Gambit Esports",
         "team2": "Immortals",
+        "team1Logo": "assets/tournament_logos/gambit_esports_46px_gambit_esports_allmode_png.png",
+        "team2Logo": "assets/tournament_logos/immortals_50px_immortals_allmode_png.png",
         "score1": "2",
         "score2": "1",
         "date": "July 23, 2017 - 17:00 CEST"
@@ -3047,99 +3728,123 @@
     "placements": [
       {
         "place": "1st",
-        "team": "Natus Vincere"
+        "team": "Natus Vincere",
+        "teamLogo": "assets/tournament_logos/natus_vincere_57px_natus_vincere_2021_lightmode_png.png"
       },
       {
         "place": "2nd",
-        "team": "G2 Esports"
+        "team": "G2 Esports",
+        "teamLogo": "assets/tournament_logos/g2_esports_43px_g2_esports_2020_lightmode_png.png"
       },
       {
         "place": "3rd-4th",
-        "team": "Gambit Esports"
+        "team": "Gambit Esports",
+        "teamLogo": "assets/tournament_logos/gambit_esports_44px_gambit_esports_sep_2020_allmode_png.png"
       },
       {
         "place": "3rd-4th",
-        "team": "Heroic"
+        "team": "Heroic",
+        "teamLogo": "assets/tournament_logos/heroic_100px_heroic_2019_lightmode_png.png"
       },
       {
         "place": "5th-8th",
-        "team": "Team Vitality"
+        "team": "Team Vitality",
+        "teamLogo": "assets/tournament_logos/team_vitality_40px_team_vitality_2021_allmode_png.png"
       },
       {
         "place": "5th-8th",
-        "team": "FURIA Esports"
+        "team": "FURIA Esports",
+        "teamLogo": "assets/tournament_logos/furia_esports_51px_furia_esports_allmode_png.png"
       },
       {
         "place": "5th-8th",
-        "team": "Virtus.pro"
+        "team": "Virtus.pro",
+        "teamLogo": "assets/tournament_logos/virtus_pro_51px_virtus_pro_2019_allmode_png.png"
       },
       {
         "place": "5th-8th",
-        "team": "Ninjas in Pyjamas"
+        "team": "Ninjas in Pyjamas",
+        "teamLogo": "assets/tournament_logos/ninjas_in_pyjamas_50px_ninjas_in_pyjamas_2021_lightmode_png.png"
       },
       {
         "place": "9th-11th",
-        "team": "Entropiq"
+        "team": "Entropiq",
+        "teamLogo": "assets/tournament_logos/entropiq_38px_entropiq_allmode_png.png"
       },
       {
         "place": "9th-11th",
-        "team": "Copenhagen Flames"
+        "team": "Copenhagen Flames",
+        "teamLogo": "assets/tournament_logos/copenhagen_flames_30px_copenhagen_flames_2018_lightmode_png.png"
       },
       {
         "place": "9th-11th",
-        "team": "FaZe Clan"
+        "team": "FaZe Clan",
+        "teamLogo": "assets/tournament_logos/faze_clan_76px_faze_clan_2021_lightmode_png.png"
       },
       {
         "place": "12th-14th",
-        "team": "Astralis"
+        "team": "Astralis",
+        "teamLogo": "assets/tournament_logos/astralis_41px_astralis_2020_allmode_png.png"
       },
       {
         "place": "12th-14th",
-        "team": "MOUZ"
+        "team": "MOUZ",
+        "teamLogo": "assets/tournament_logos/mouz_47px_mouz_2021_allmode_png.png"
       },
       {
         "place": "12th-14th",
-        "team": "Team Liquid"
+        "team": "Team Liquid",
+        "teamLogo": "assets/tournament_logos/team_liquid_44px_team_liquid_2020_lightmode_png.png"
       },
       {
         "place": "15th-16th",
-        "team": "Evil Geniuses"
+        "team": "Evil Geniuses",
+        "teamLogo": "assets/tournament_logos/evil_geniuses_37px_evil_geniuses_2020_lightmode_png.png"
       },
       {
         "place": "15th-16th",
-        "team": "ENCE"
+        "team": "ENCE",
+        "teamLogo": "assets/tournament_logos/ence_50px_ence_2020_allmode_png.png"
       },
       {
         "place": "17th-19th",
-        "team": "BIG"
+        "team": "BIG",
+        "teamLogo": "assets/tournament_logos/big_35px_big_2020_lightmode_png.png"
       },
       {
         "place": "17th-19th",
-        "team": "Team Spirit"
+        "team": "Team Spirit",
+        "teamLogo": "assets/tournament_logos/team_spirit_43px_team_spirit_2021_lightmode_png.png"
       },
       {
         "place": "17th-19th",
-        "team": "Movistar Riders"
+        "team": "Movistar Riders",
+        "teamLogo": "assets/tournament_logos/movistar_riders_69px_movistar_riders_allmode_png.png"
       },
       {
         "place": "20th-22nd",
-        "team": "paiN Gaming"
+        "team": "paiN Gaming",
+        "teamLogo": "assets/tournament_logos/pain_gaming_75px_pain_gaming_2017_lightmode_png.png"
       },
       {
         "place": "20th-22nd",
-        "team": "Renegades"
+        "team": "Renegades",
+        "teamLogo": "assets/tournament_logos/renegades_47px_renegades_2019_allmode_png.png"
       },
       {
         "place": "20th-22nd",
-        "team": "TYLOO"
+        "team": "TYLOO",
+        "teamLogo": "assets/tournament_logos/tyloo_56px_tyloo_2016_allmode_png.png"
       },
       {
         "place": "23rd-24th",
-        "team": "GODSENT"
+        "team": "GODSENT",
+        "teamLogo": "assets/tournament_logos/godsent_58px_godsent_lightmode_png.png"
       },
       {
         "place": "23rd-24th",
-        "team": "Sharks Esports"
+        "team": "Sharks Esports",
+        "teamLogo": "assets/tournament_logos/sharks_esports_54px_sharks_esports_png.png"
       }
     ],
     "stageDates": [
@@ -3164,6 +3869,8 @@
         "round": "Quarterfinals",
         "team1": "Natus Vincere",
         "team2": "Team Vitality",
+        "team1Logo": "assets/tournament_logos/natus_vincere_57px_natus_vincere_2021_lightmode_png.png",
+        "team2Logo": "assets/tournament_logos/team_vitality_40px_team_vitality_2021_allmode_png.png",
         "score1": "2",
         "score2": "0",
         "date": "November 5, 2021 - 20:05 CET"
@@ -3172,6 +3879,8 @@
         "round": "Quarterfinals",
         "team1": "FURIA",
         "team2": "Gambit Esports",
+        "team1Logo": "assets/tournament_logos/furia_51px_furia_esports_allmode_png.png",
+        "team2Logo": "assets/tournament_logos/gambit_esports_44px_gambit_esports_sep_2020_allmode_png.png",
         "score1": "0",
         "score2": "2",
         "date": "November 5, 2021 - 16:30 CET"
@@ -3180,6 +3889,8 @@
         "round": "Semifinals",
         "team1": "Natus Vincere",
         "team2": "Gambit Esports",
+        "team1Logo": "assets/tournament_logos/natus_vincere_57px_natus_vincere_2021_lightmode_png.png",
+        "team2Logo": "assets/tournament_logos/gambit_esports_44px_gambit_esports_sep_2020_allmode_png.png",
         "score1": "2",
         "score2": "0",
         "date": "November 6, 2021 - 21:10 CET"
@@ -3188,6 +3899,8 @@
         "round": "Quarterfinals",
         "team1": "HEROIC",
         "team2": "Virtus.pro",
+        "team1Logo": "assets/tournament_logos/heroic_100px_heroic_2019_lightmode_png.png",
+        "team2Logo": "assets/tournament_logos/virtus_pro_51px_virtus_pro_2019_allmode_png.png",
         "score1": "2",
         "score2": "1",
         "date": "November 4, 2021 - 16:30 CET"
@@ -3196,6 +3909,8 @@
         "round": "Quarterfinals",
         "team1": "Ninjas in Pyjamas",
         "team2": "G2 Esports",
+        "team1Logo": "assets/tournament_logos/ninjas_in_pyjamas_50px_ninjas_in_pyjamas_2021_lightmode_png.png",
+        "team2Logo": "assets/tournament_logos/g2_esports_43px_g2_esports_2020_lightmode_png.png",
         "score1": "0",
         "score2": "2",
         "date": "November 4, 2021 - 21:00 CET"
@@ -3204,6 +3919,8 @@
         "round": "Semifinals",
         "team1": "HEROIC",
         "team2": "G2 Esports",
+        "team1Logo": "assets/tournament_logos/heroic_100px_heroic_2019_lightmode_png.png",
+        "team2Logo": "assets/tournament_logos/g2_esports_43px_g2_esports_2020_lightmode_png.png",
         "score1": "1",
         "score2": "2",
         "date": "November 6, 2021 - 16:30 CET"
@@ -3212,6 +3929,8 @@
         "round": "Grand Final",
         "team1": "Natus Vincere",
         "team2": "G2 Esports",
+        "team1Logo": "assets/tournament_logos/natus_vincere_57px_natus_vincere_2021_lightmode_png.png",
+        "team2Logo": "assets/tournament_logos/g2_esports_43px_g2_esports_2020_lightmode_png.png",
         "score1": "2",
         "score2": "0",
         "date": "November 7, 2021 - 20:00 CET"
@@ -3226,99 +3945,123 @@
     "placements": [
       {
         "place": "1st",
-        "team": "Team Spirit"
+        "team": "Team Spirit",
+        "teamLogo": "assets/tournament_logos/team_spirit_43px_team_spirit_2022_lightmode_png.png"
       },
       {
         "place": "2nd",
-        "team": "FaZe Clan"
+        "team": "FaZe Clan",
+        "teamLogo": "assets/tournament_logos/faze_clan_75px_faze_clan_2024_allmode_png.png"
       },
       {
         "place": "3rd-4th",
-        "team": "MOUZ"
+        "team": "MOUZ",
+        "teamLogo": "assets/tournament_logos/mouz_47px_mouz_2021_allmode_png.png"
       },
       {
         "place": "3rd-4th",
-        "team": "G2 Esports"
+        "team": "G2 Esports",
+        "teamLogo": "assets/tournament_logos/g2_esports_43px_g2_esports_2020_lightmode_png.png"
       },
       {
         "place": "5th-8th",
-        "team": "The MongolZ"
+        "team": "The MongolZ",
+        "teamLogo": "assets/tournament_logos/the_mongolz_39px_the_mongolz_2024_03_allmode_png.png"
       },
       {
         "place": "5th-8th",
-        "team": "Team Liquid"
+        "team": "Team Liquid",
+        "teamLogo": "assets/tournament_logos/team_liquid_44px_team_liquid_2024_lightmode_png.png"
       },
       {
         "place": "5th-8th",
-        "team": "HEROIC"
+        "team": "HEROIC",
+        "teamLogo": "assets/tournament_logos/heroic_57px_heroic_2024_allmode_png.png"
       },
       {
         "place": "5th-8th",
-        "team": "Team Vitality"
+        "team": "Team Vitality",
+        "teamLogo": "assets/tournament_logos/team_vitality_41px_team_vitality_2023_lightmode_png.png"
       },
       {
         "place": "9th-11th",
-        "team": "FURIA Esports"
+        "team": "FURIA Esports",
+        "teamLogo": "assets/tournament_logos/furia_esports_51px_furia_esports_allmode_png.png"
       },
       {
         "place": "9th-11th",
-        "team": "MIBR"
+        "team": "MIBR",
+        "teamLogo": "assets/tournament_logos/mibr_100px_mibr_2018_lightmode_png.png"
       },
       {
         "place": "9th-11th",
-        "team": "Natus Vincere"
+        "team": "Natus Vincere",
+        "teamLogo": "assets/tournament_logos/natus_vincere_57px_natus_vincere_2021_lightmode_png.png"
       },
       {
         "place": "12th-14th",
-        "team": "GamerLegion"
+        "team": "GamerLegion",
+        "teamLogo": "assets/tournament_logos/gamerlegion_91px_gamerlegion_cs_2023_allmode_png.png"
       },
       {
         "place": "12th-14th",
-        "team": "3DMAX"
+        "team": "3DMAX",
+        "teamLogo": "assets/tournament_logos/3dmax_36px_3dmax_2024_allmode_png.png"
       },
       {
         "place": "12th-14th",
-        "team": "paiN Gaming"
+        "team": "paiN Gaming",
+        "teamLogo": "assets/tournament_logos/pain_gaming_75px_pain_gaming_2023_lightmode_png.png"
       },
       {
         "place": "15th-16th",
-        "team": "Wildcard"
+        "team": "Wildcard",
+        "teamLogo": "assets/tournament_logos/wildcard_42px_wildcard_2024_lightmode_png.png"
       },
       {
         "place": "15th-16th",
-        "team": "BIG"
+        "team": "BIG",
+        "teamLogo": "assets/tournament_logos/big_35px_big_2020_lightmode_png.png"
       },
       {
         "place": "17th-19th",
-        "team": "FlyQuest"
+        "team": "FlyQuest",
+        "teamLogo": "assets/tournament_logos/flyquest_51px_flyquest_2021_allmode_png.png"
       },
       {
         "place": "17th-19th",
-        "team": "Passion UA"
+        "team": "Passion UA",
+        "teamLogo": "assets/tournament_logos/passion_ua_27px_passion_ua_2024_allmode_png.png"
       },
       {
         "place": "17th-19th",
-        "team": "Complexity Gaming"
+        "team": "Complexity Gaming",
+        "teamLogo": "assets/tournament_logos/complexity_gaming_53px_complexity_gaming_2019_lightmode_png.png"
       },
       {
         "place": "20th-22nd",
-        "team": "Virtus.pro"
+        "team": "Virtus.pro",
+        "teamLogo": "assets/tournament_logos/virtus_pro_51px_virtus_pro_2019_allmode_png.png"
       },
       {
         "place": "20th-22nd",
-        "team": "Cloud9"
+        "team": "Cloud9",
+        "teamLogo": "assets/tournament_logos/cloud9_73px_cloud9_2023_allmode_png.png"
       },
       {
         "place": "20th-22nd",
-        "team": "Rare Atom"
+        "team": "Rare Atom",
+        "teamLogo": "assets/tournament_logos/rare_atom_55px_rare_atom_2024_allmode_png.png"
       },
       {
         "place": "23rd-24th",
-        "team": "Imperial Esports"
+        "team": "Imperial Esports",
+        "teamLogo": "assets/tournament_logos/imperial_esports_44px_imperial_esports_2022_allmode_png.png"
       },
       {
         "place": "23rd-24th",
-        "team": "Fnatic"
+        "team": "Fnatic",
+        "teamLogo": "assets/tournament_logos/fnatic_77px_fnatic_2020_allmode_png.png"
       }
     ],
     "stageDates": [
@@ -3343,6 +4086,8 @@
         "round": "Quarterfinals",
         "team1": "The MongolZ",
         "team2": "MOUZ",
+        "team1Logo": "assets/tournament_logos/the_mongolz_39px_the_mongolz_2024_03_allmode_png.png",
+        "team2Logo": "assets/tournament_logos/mouz_47px_mouz_2021_allmode_png.png",
         "score1": "0",
         "score2": "2",
         "date": "December 12, 2024 - 14:00 CST"
@@ -3351,6 +4096,8 @@
         "round": "Quarterfinals",
         "team1": "Team Liquid",
         "team2": "Team Spirit",
+        "team1Logo": "assets/tournament_logos/team_liquid_44px_team_liquid_2024_lightmode_png.png",
+        "team2Logo": "assets/tournament_logos/team_spirit_43px_team_spirit_2022_lightmode_png.png",
         "score1": "0",
         "score2": "2",
         "date": "December 12, 2024 - 17:30 CST"
@@ -3359,6 +4106,8 @@
         "round": "Semifinals",
         "team1": "MOUZ",
         "team2": "Team Spirit",
+        "team1Logo": "assets/tournament_logos/mouz_47px_mouz_2021_allmode_png.png",
+        "team2Logo": "assets/tournament_logos/team_spirit_43px_team_spirit_2022_lightmode_png.png",
         "score1": "1",
         "score2": "2",
         "date": "December 14, 2024 - 14:00 CST"
@@ -3367,6 +4116,8 @@
         "round": "Quarterfinals",
         "team1": "G2 Esports",
         "team2": "HEROIC",
+        "team1Logo": "assets/tournament_logos/g2_esports_43px_g2_esports_2020_lightmode_png.png",
+        "team2Logo": "assets/tournament_logos/heroic_57px_heroic_2024_allmode_png.png",
         "score1": "2",
         "score2": "1",
         "date": "December 13, 2024 - 14:00 CST"
@@ -3375,6 +4126,8 @@
         "round": "Quarterfinals",
         "team1": "FaZe Clan",
         "team2": "Team Vitality",
+        "team1Logo": "assets/tournament_logos/faze_clan_75px_faze_clan_2024_allmode_png.png",
+        "team2Logo": "assets/tournament_logos/team_vitality_41px_team_vitality_2023_lightmode_png.png",
         "score1": "2",
         "score2": "1",
         "date": "December 13, 2024 - 18:25 CST"
@@ -3383,6 +4136,8 @@
         "round": "Semifinals",
         "team1": "G2 Esports",
         "team2": "FaZe Clan",
+        "team1Logo": "assets/tournament_logos/g2_esports_43px_g2_esports_2020_lightmode_png.png",
+        "team2Logo": "assets/tournament_logos/faze_clan_75px_faze_clan_2024_allmode_png.png",
         "score1": "0",
         "score2": "2",
         "date": "December 14, 2024 - 18:35 CST"
@@ -3391,6 +4146,8 @@
         "round": "Grand Final",
         "team1": "Team Spirit",
         "team2": "FaZe Clan",
+        "team1Logo": "assets/tournament_logos/team_spirit_43px_team_spirit_2022_lightmode_png.png",
+        "team2Logo": "assets/tournament_logos/faze_clan_75px_faze_clan_2024_allmode_png.png",
         "score1": "2",
         "score2": "1",
         "date": "December 15, 2024 - 17:25 CST"
@@ -3405,99 +4162,123 @@
     "placements": [
       {
         "place": "1st",
-        "team": "Astralis"
+        "team": "Astralis",
+        "teamLogo": "assets/tournament_logos/astralis_41px_astralis_logo_png.png"
       },
       {
         "place": "2nd",
-        "team": "AVANGAR"
+        "team": "AVANGAR",
+        "teamLogo": "assets/tournament_logos/avangar_56px_avangar_2019_allmode_png.png"
       },
       {
         "place": "3rd-4th",
-        "team": "Renegades"
+        "team": "Renegades",
+        "teamLogo": "assets/tournament_logos/renegades_47px_renegades_2019_allmode_png.png"
       },
       {
         "place": "3rd-4th",
-        "team": "NRG Esports"
+        "team": "NRG Esports",
+        "teamLogo": "assets/tournament_logos/nrg_esports_89px_nrg_2019_lightmode_png.png"
       },
       {
         "place": "5th-8th",
-        "team": "ENCE"
+        "team": "ENCE",
+        "teamLogo": "assets/tournament_logos/ence_50px_ence_esports_2016_allmode_png.png"
       },
       {
         "place": "5th-8th",
-        "team": "Team Vitality"
+        "team": "Team Vitality",
+        "teamLogo": "assets/tournament_logos/team_vitality_39px_team_vitality_2018_allmode_png.png"
       },
       {
         "place": "5th-8th",
-        "team": "Natus Vincere"
+        "team": "Natus Vincere",
+        "teamLogo": "assets/tournament_logos/natus_vincere_56px_natus_vincere_allmode_png.png"
       },
       {
         "place": "5th-8th",
-        "team": "Team Liquid"
+        "team": "Team Liquid",
+        "teamLogo": "assets/tournament_logos/team_liquid_50px_team_liquid_2017_lightmode_png.png"
       },
       {
         "place": "9th-11th",
-        "team": "mousesports"
+        "team": "mousesports",
+        "teamLogo": "assets/tournament_logos/mousesports_92px_mousesports_2016_allmode_png.png"
       },
       {
         "place": "9th-11th",
-        "team": "G2 Esports"
+        "team": "G2 Esports",
+        "teamLogo": "assets/tournament_logos/g2_esports_43px_g2_esports_2020_lightmode_png.png"
       },
       {
         "place": "9th-11th",
-        "team": "CR4ZY"
+        "team": "CR4ZY",
+        "teamLogo": "assets/tournament_logos/cr4zy_50px_cr4zy_allmode_png.png"
       },
       {
         "place": "12th-14th",
-        "team": "MIBR"
+        "team": "MIBR",
+        "teamLogo": "assets/tournament_logos/mibr_100px_mibr_2018_lightmode_png.png"
       },
       {
         "place": "12th-14th",
-        "team": "FaZe Clan"
+        "team": "FaZe Clan",
+        "teamLogo": "assets/tournament_logos/faze_clan_76px_faze_clan_2018_lightmode_png.png"
       },
       {
         "place": "12th-14th",
-        "team": "North"
+        "team": "North",
+        "teamLogo": "assets/tournament_logos/north_48px_north_lightmode_png.png"
       },
       {
         "place": "15th-16th",
-        "team": "Ninjas in Pyjamas"
+        "team": "Ninjas in Pyjamas",
+        "teamLogo": "assets/tournament_logos/ninjas_in_pyjamas_50px_ninjas_in_pyjamas_2017_lightmode_png.png"
       },
       {
         "place": "15th-16th",
-        "team": "DreamEaters"
+        "team": "DreamEaters",
+        "teamLogo": "assets/tournament_logos/dreameaters_49px_dreameaters_2018_allmode_png.png"
       },
       {
         "place": "17th-19th",
-        "team": "forZe"
+        "team": "forZe",
+        "teamLogo": "assets/tournament_logos/forze_42px_forze_2019_allmode_png.png"
       },
       {
         "place": "17th-19th",
-        "team": "Grayhound Gaming"
+        "team": "Grayhound Gaming",
+        "teamLogo": "assets/tournament_logos/grayhound_gaming_43px_grayhound_gaming_allmode_png.png"
       },
       {
         "place": "17th-19th",
-        "team": "Syman Gaming"
+        "team": "Syman Gaming",
+        "teamLogo": "assets/tournament_logos/syman_gaming_50px_syman_2018_png.png"
       },
       {
         "place": "20th-22nd",
-        "team": "FURIA Esports"
+        "team": "FURIA Esports",
+        "teamLogo": "assets/tournament_logos/furia_esports_51px_furia_esports_allmode_png.png"
       },
       {
         "place": "20th-22nd",
-        "team": "HellRaisers"
+        "team": "HellRaisers",
+        "teamLogo": "assets/tournament_logos/hellraisers_57px_hellraisers_2018_allmode_png.png"
       },
       {
         "place": "20th-22nd",
-        "team": "Complexity Gaming"
+        "team": "Complexity Gaming",
+        "teamLogo": "assets/tournament_logos/complexity_gaming_53px_complexity_gaming_2019_lightmode_png.png"
       },
       {
         "place": "23rd-24th",
-        "team": "TYLOO"
+        "team": "TYLOO",
+        "teamLogo": "assets/tournament_logos/tyloo_56px_tyloo_2016_allmode_png.png"
       },
       {
         "place": "23rd-24th",
-        "team": "INTZ eSports"
+        "team": "INTZ eSports",
+        "teamLogo": "assets/tournament_logos/intz_esports_79px_intz_esports_allmode_png.png"
       }
     ],
     "stageDates": [
@@ -3522,6 +4303,8 @@
         "round": "Quarterfinals",
         "team1": "ENCE",
         "team2": "Renegades",
+        "team1Logo": "assets/tournament_logos/ence_50px_ence_esports_2016_allmode_png.png",
+        "team2Logo": "assets/tournament_logos/renegades_47px_renegades_2019_allmode_png.png",
         "score1": "0",
         "score2": "2",
         "date": "September 5, 2019 - 15:30 CEST"
@@ -3530,6 +4313,8 @@
         "round": "Quarterfinals",
         "team1": "Team Vitality",
         "team2": "AVANGAR",
+        "team1Logo": "assets/tournament_logos/team_vitality_39px_team_vitality_2018_allmode_png.png",
+        "team2Logo": "assets/tournament_logos/avangar_56px_avangar_2019_allmode_png.png",
         "score1": "1",
         "score2": "2",
         "date": "September 5, 2019 - 18:30 CEST"
@@ -3538,6 +4323,8 @@
         "round": "Semifinals",
         "team1": "Renegades",
         "team2": "AVANGAR",
+        "team1Logo": "assets/tournament_logos/renegades_47px_renegades_2019_allmode_png.png",
+        "team2Logo": "assets/tournament_logos/avangar_56px_avangar_2019_allmode_png.png",
         "score1": "0",
         "score2": "2",
         "date": "September 7, 2019 - 15:00 CEST"
@@ -3546,6 +4333,8 @@
         "round": "Quarterfinals",
         "team1": "NRG",
         "team2": "Natus Vincere",
+        "team1Logo": "assets/tournament_logos/nrg_89px_nrg_2019_lightmode_png.png",
+        "team2Logo": "assets/tournament_logos/natus_vincere_56px_natus_vincere_allmode_png.png",
         "score1": "2",
         "score2": "0",
         "date": "September 6, 2019 - 15:00 CEST"
@@ -3554,6 +4343,8 @@
         "round": "Quarterfinals",
         "team1": "Astralis",
         "team2": "Team Liquid",
+        "team1Logo": "assets/tournament_logos/astralis_41px_astralis_logo_png.png",
+        "team2Logo": "assets/tournament_logos/team_liquid_50px_team_liquid_2017_lightmode_png.png",
         "score1": "2",
         "score2": "0",
         "date": "September 6, 2019 - 18:30 CEST"
@@ -3562,6 +4353,8 @@
         "round": "Semifinals",
         "team1": "NRG",
         "team2": "Astralis",
+        "team1Logo": "assets/tournament_logos/nrg_89px_nrg_2019_lightmode_png.png",
+        "team2Logo": "assets/tournament_logos/astralis_41px_astralis_logo_png.png",
         "score1": "0",
         "score2": "2",
         "date": "September 7, 2019 - 18:30 CEST"
@@ -3570,6 +4363,8 @@
         "round": "Grand Final",
         "team1": "AVANGAR",
         "team2": "Astralis",
+        "team1Logo": "assets/tournament_logos/avangar_56px_avangar_2019_allmode_png.png",
+        "team2Logo": "assets/tournament_logos/astralis_41px_astralis_logo_png.png",
         "score1": "0",
         "score2": "2",
         "date": "September 8, 2019 - 18:00 CEST"
@@ -3584,131 +4379,163 @@
     "placements": [
       {
         "place": "1st",
-        "team": "Team Vitality"
+        "team": "Team Vitality",
+        "teamLogo": "assets/tournament_logos/team_vitality_41px_team_vitality_2023_lightmode_png.png"
       },
       {
         "place": "2nd",
-        "team": "FaZe Clan"
+        "team": "FaZe Clan",
+        "teamLogo": "assets/tournament_logos/faze_clan_59px_faze_esports_october_2025_lightmode_png.png"
       },
       {
         "place": "3rd-4th",
-        "team": "Team Spirit"
+        "team": "Team Spirit",
+        "teamLogo": "assets/tournament_logos/team_spirit_43px_team_spirit_2022_lightmode_png.png"
       },
       {
         "place": "3rd-4th",
-        "team": "Natus Vincere"
+        "team": "Natus Vincere",
+        "teamLogo": "assets/tournament_logos/natus_vincere_57px_natus_vincere_2021_lightmode_png.png"
       },
       {
         "place": "5th-8th",
-        "team": "Team Falcons"
+        "team": "Team Falcons",
+        "teamLogo": "assets/tournament_logos/team_falcons_41px_team_falcons_2022_allmode_png.png"
       },
       {
         "place": "5th-8th",
-        "team": "The MongolZ"
+        "team": "The MongolZ",
+        "teamLogo": "assets/tournament_logos/the_mongolz_39px_the_mongolz_2024_03_allmode_png.png"
       },
       {
         "place": "5th-8th",
-        "team": "MOUZ"
+        "team": "MOUZ",
+        "teamLogo": "assets/tournament_logos/mouz_47px_mouz_2021_allmode_png.png"
       },
       {
         "place": "5th-8th",
-        "team": "FURIA"
+        "team": "FURIA",
+        "teamLogo": "assets/tournament_logos/furia_51px_furia_esports_allmode_png.png"
       },
       {
         "place": "9th-11th",
-        "team": "B8"
+        "team": "B8",
+        "teamLogo": "assets/tournament_logos/b8_41px_b8_lightmode_png.png"
       },
       {
         "place": "9th-11th",
-        "team": "G2 Esports"
+        "team": "G2 Esports",
+        "teamLogo": "assets/tournament_logos/g2_esports_43px_g2_esports_2020_lightmode_png.png"
       },
       {
         "place": "9th-11th",
-        "team": "Passion UA"
+        "team": "Passion UA",
+        "teamLogo": "assets/tournament_logos/passion_ua_27px_passion_ua_2025_lightmode_png.png"
       },
       {
         "place": "12th-14th",
-        "team": "Imperial Esports"
+        "team": "Imperial Esports",
+        "teamLogo": "assets/tournament_logos/imperial_esports_39px_imperial_esports_2025_allmode_png.png"
       },
       {
         "place": "12th-14th",
-        "team": "3DMAX"
+        "team": "3DMAX",
+        "teamLogo": "assets/tournament_logos/3dmax_36px_3dmax_2024_allmode_png.png"
       },
       {
         "place": "12th-14th",
-        "team": "paiN Gaming"
+        "team": "paiN Gaming",
+        "teamLogo": "assets/tournament_logos/pain_gaming_75px_pain_gaming_2023_lightmode_png.png"
       },
       {
         "place": "15th-16th",
-        "team": "Team Liquid"
+        "team": "Team Liquid",
+        "teamLogo": "assets/tournament_logos/team_liquid_44px_team_liquid_2024_lightmode_png.png"
       },
       {
         "place": "15th-16th",
-        "team": "PARIVISION"
+        "team": "PARIVISION",
+        "teamLogo": "assets/tournament_logos/parivision_56px_parivision_allmode_png.png"
       },
       {
         "place": "17th-19th",
-        "team": "Ninjas in Pyjamas"
+        "team": "Ninjas in Pyjamas",
+        "teamLogo": "assets/tournament_logos/ninjas_in_pyjamas_50px_ninjas_in_pyjamas_2021_lightmode_png.png"
       },
       {
         "place": "17th-19th",
-        "team": "M80"
+        "team": "M80",
+        "teamLogo": "assets/tournament_logos/m80_44px_m80_2023_allmode_png.png"
       },
       {
         "place": "17th-19th",
-        "team": "Astralis"
+        "team": "Astralis",
+        "teamLogo": "assets/tournament_logos/astralis_41px_astralis_2020_allmode_png.png"
       },
       {
         "place": "20th-22nd",
-        "team": "Fnatic"
+        "team": "Fnatic",
+        "teamLogo": "assets/tournament_logos/fnatic_77px_fnatic_2020_allmode_png.png"
       },
       {
         "place": "20th-22nd",
-        "team": "Aurora Gaming"
+        "team": "Aurora Gaming",
+        "teamLogo": "assets/tournament_logos/aurora_gaming_50px_aurora_gaming_2025_allmode_png.png"
       },
       {
         "place": "20th-22nd",
-        "team": "TYLOO"
+        "team": "TYLOO",
+        "teamLogo": "assets/tournament_logos/tyloo_56px_tyloo_2016_allmode_png.png"
       },
       {
         "place": "23rd-24th",
-        "team": "MIBR"
+        "team": "MIBR",
+        "teamLogo": "assets/tournament_logos/mibr_100px_mibr_2018_lightmode_png.png"
       },
       {
         "place": "23rd-24th",
-        "team": "FlyQuest"
+        "team": "FlyQuest",
+        "teamLogo": "assets/tournament_logos/flyquest_51px_flyquest_2021_allmode_png.png"
       },
       {
         "place": "25th-27th",
-        "team": "NRG"
+        "team": "NRG",
+        "teamLogo": "assets/tournament_logos/nrg_100px_nrg_2024_lightmode_png.png"
       },
       {
         "place": "25th-27th",
-        "team": "Fluxo"
+        "team": "Fluxo",
+        "teamLogo": "assets/tournament_logos/fluxo_50px_fluxo_lightmode_png.png"
       },
       {
         "place": "25th-27th",
-        "team": "Legacy"
+        "team": "Legacy",
+        "teamLogo": "assets/tournament_logos/legacy_49px_legacy_allmode_png.png"
       },
       {
         "place": "28th-30th",
-        "team": "The Huns Esports"
+        "team": "The Huns Esports",
+        "teamLogo": "assets/tournament_logos/the_huns_esports_45px_the_huns_esports_2025_allmode_png.png"
       },
       {
         "place": "28th-30th",
-        "team": "RED Canids"
+        "team": "RED Canids",
+        "teamLogo": "assets/tournament_logos/red_canids_57px_red_canids_allmode_png.png"
       },
       {
         "place": "28th-30th",
-        "team": "GamerLegion"
+        "team": "GamerLegion",
+        "teamLogo": "assets/tournament_logos/gamerlegion_91px_gamerlegion_cs_2023_allmode_png.png"
       },
       {
         "place": "31st-32nd",
-        "team": "Lynn Vision Gaming"
+        "team": "Lynn Vision Gaming",
+        "teamLogo": "assets/tournament_logos/lynn_vision_gaming_74px_lynn_vision_gaming_2024_allmode_png.png"
       },
       {
         "place": "31st-32nd",
-        "team": "Rare Atom"
+        "team": "Rare Atom",
+        "teamLogo": "assets/tournament_logos/rare_atom_55px_rare_atom_2024_allmode_png.png"
       }
     ],
     "stageDates": [
@@ -3738,6 +4565,8 @@
         "round": "Quarterfinals",
         "team1": "Team Spirit",
         "team2": "Team Falcons",
+        "team1Logo": "assets/tournament_logos/team_spirit_43px_team_spirit_2022_lightmode_png.png",
+        "team2Logo": "assets/tournament_logos/team_falcons_41px_team_falcons_2022_allmode_png.png",
         "score1": "2",
         "score2": "0",
         "date": "December 11, 2025 - 17:00 CET"
@@ -3746,6 +4575,8 @@
         "round": "Quarterfinals",
         "team1": "The MongolZ",
         "team2": "Team Vitality",
+        "team1Logo": "assets/tournament_logos/the_mongolz_39px_the_mongolz_2024_03_allmode_png.png",
+        "team2Logo": "assets/tournament_logos/team_vitality_41px_team_vitality_2023_lightmode_png.png",
         "score1": "0",
         "score2": "2",
         "date": "December 11, 2025 - 20:10 CET"
@@ -3754,6 +4585,8 @@
         "round": "Semifinals",
         "team1": "Team Spirit",
         "team2": "Team Vitality",
+        "team1Logo": "assets/tournament_logos/team_spirit_43px_team_spirit_2022_lightmode_png.png",
+        "team2Logo": "assets/tournament_logos/team_vitality_41px_team_vitality_2023_lightmode_png.png",
         "score1": "0",
         "score2": "2",
         "date": "December 13, 2025 - 17:00 CET"
@@ -3762,6 +4595,8 @@
         "round": "Quarterfinals",
         "team1": "MOUZ",
         "team2": "FaZe Clan",
+        "team1Logo": "assets/tournament_logos/mouz_47px_mouz_2021_allmode_png.png",
+        "team2Logo": "assets/tournament_logos/faze_clan_59px_faze_esports_october_2025_lightmode_png.png",
         "score1": "0",
         "score2": "2",
         "date": "December 12, 2025 - 17:00 CET"
@@ -3770,6 +4605,8 @@
         "round": "Quarterfinals",
         "team1": "Natus Vincere",
         "team2": "FURIA",
+        "team1Logo": "assets/tournament_logos/natus_vincere_57px_natus_vincere_2021_lightmode_png.png",
+        "team2Logo": "assets/tournament_logos/furia_51px_furia_esports_allmode_png.png",
         "score1": "2",
         "score2": "1",
         "date": "December 12, 2025 - 20:00 CET"
@@ -3778,6 +4615,8 @@
         "round": "Semifinals",
         "team1": "FaZe Clan",
         "team2": "Natus Vincere",
+        "team1Logo": "assets/tournament_logos/faze_clan_59px_faze_esports_october_2025_lightmode_png.png",
+        "team2Logo": "assets/tournament_logos/natus_vincere_57px_natus_vincere_2021_lightmode_png.png",
         "score1": "2",
         "score2": "1",
         "date": "December 13, 2025 - 21:00 CET"
@@ -3786,6 +4625,8 @@
         "round": "Grand Final",
         "team1": "Team Vitality",
         "team2": "FaZe Clan",
+        "team1Logo": "assets/tournament_logos/team_vitality_41px_team_vitality_2023_lightmode_png.png",
+        "team2Logo": "assets/tournament_logos/faze_clan_59px_faze_esports_october_2025_lightmode_png.png",
         "score1": "3",
         "score2": "1",
         "date": "December 14, 2025 - 18:00 CET"

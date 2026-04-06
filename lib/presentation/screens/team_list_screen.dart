@@ -112,16 +112,7 @@ class _TeamSummaryCard extends StatelessWidget {
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Container(
-                width: 56,
-                height: 56,
-                decoration: BoxDecoration(
-                  color: Colors.white.withValues(alpha: 0.06),
-                  shape: BoxShape.circle,
-                  border: Border.all(color: Colors.white10),
-                ),
-                child: const Icon(Icons.groups_2_outlined, size: 28),
-              ),
+              _TeamLogoBadge(logoUrl: team.teamLogo, size: 56),
               const SizedBox(width: 14),
               Expanded(
                 child: Column(
@@ -210,6 +201,48 @@ class _StatChip extends StatelessWidget {
           fontWeight: FontWeight.w700,
         ),
       ),
+    );
+  }
+}
+
+class _TeamLogoBadge extends StatelessWidget {
+  final String? logoUrl;
+  final double size;
+
+  const _TeamLogoBadge({required this.logoUrl, required this.size});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: size,
+      height: size,
+      decoration: BoxDecoration(
+        color: Colors.white.withValues(alpha: 0.06),
+        shape: BoxShape.circle,
+        border: Border.all(color: Colors.white10),
+      ),
+      clipBehavior: Clip.antiAlias,
+      child: Padding(padding: const EdgeInsets.all(8), child: _buildLogo()),
+    );
+  }
+
+  Widget _buildLogo() {
+    final value = logoUrl ?? '';
+    if (value.isEmpty) {
+      return const Icon(Icons.groups_2_outlined, size: 28);
+    }
+    if (value.startsWith('assets/')) {
+      return Image.asset(
+        value,
+        fit: BoxFit.contain,
+        errorBuilder: (_, _, _) =>
+            const Icon(Icons.groups_2_outlined, size: 28),
+      );
+    }
+    return Image.network(
+      value,
+      fit: BoxFit.contain,
+      errorBuilder: (_, _, _) => const Icon(Icons.groups_2_outlined, size: 28),
     );
   }
 }

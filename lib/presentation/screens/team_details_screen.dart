@@ -65,16 +65,7 @@ class _TeamDetailsScreenState extends State<TeamDetailsScreen> {
                     child: Row(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Container(
-                          width: 72,
-                          height: 72,
-                          decoration: BoxDecoration(
-                            color: Colors.white.withValues(alpha: 0.06),
-                            shape: BoxShape.circle,
-                            border: Border.all(color: Colors.white10),
-                          ),
-                          child: const Icon(Icons.groups_2, size: 34),
-                        ),
+                        _TeamLogoBadge(logoUrl: latest?.teamLogo, size: 72),
                         const SizedBox(width: 16),
                         Expanded(
                           child: Column(
@@ -203,6 +194,47 @@ class _TeamPlaceChip extends StatelessWidget {
           fontWeight: FontWeight.w700,
         ),
       ),
+    );
+  }
+}
+
+class _TeamLogoBadge extends StatelessWidget {
+  final String? logoUrl;
+  final double size;
+
+  const _TeamLogoBadge({required this.logoUrl, required this.size});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: size,
+      height: size,
+      decoration: BoxDecoration(
+        color: Colors.white.withValues(alpha: 0.06),
+        shape: BoxShape.circle,
+        border: Border.all(color: Colors.white10),
+      ),
+      clipBehavior: Clip.antiAlias,
+      child: Padding(padding: const EdgeInsets.all(10), child: _buildLogo()),
+    );
+  }
+
+  Widget _buildLogo() {
+    final value = logoUrl ?? '';
+    if (value.isEmpty) {
+      return const Icon(Icons.groups_2, size: 34);
+    }
+    if (value.startsWith('assets/')) {
+      return Image.asset(
+        value,
+        fit: BoxFit.contain,
+        errorBuilder: (_, _, _) => const Icon(Icons.groups_2, size: 34),
+      );
+    }
+    return Image.network(
+      value,
+      fit: BoxFit.contain,
+      errorBuilder: (_, _, _) => const Icon(Icons.groups_2, size: 34),
     );
   }
 }

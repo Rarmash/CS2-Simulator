@@ -100,6 +100,7 @@ Future<void> main() async {
                 _playoffPageTitle(pageTitle, tournamentName),
               ),
       );
+      await _materializeTeamLogos(client, placements, playoffMatches);
       final stageDates = <Map<String, String>>[];
       for (final stagePage in stagePages) {
         try {
@@ -252,17 +253,19 @@ List<Map<String, String>> _parsePlacementsFromRenderedHtml(
       continue;
     }
 
-    final teamMatches = RegExp(
-      r'<span class="name"[^>]*>\s*<a [^>]*>(.*?)</a>\s*</span>',
-      dotAll: true,
-    ).allMatches(chunk);
+    final teams = _parseTeamBlocks(chunk);
 
-    for (final teamMatch in teamMatches) {
-      final team = _cleanHtmlText(teamMatch.group(1) ?? '');
+    for (final teamEntry in teams) {
+      final team = teamEntry.$1;
+      final logo = teamEntry.$2;
       if (team.isEmpty) {
         continue;
       }
-      placements.add({'place': place, 'team': team});
+      placements.add({
+        'place': place,
+        'team': team,
+        if ((logo ?? '').isNotEmpty) 'teamLogo': logo!,
+      });
     }
   }
 
@@ -342,13 +345,11 @@ List<Map<String, String>> _parsePlayoffMatchesFromRenderedHtml(
   final results = <Map<String, String>>[];
   for (var i = 0; i < matchParts.length; i++) {
     final block = matchParts[i];
-    final roundIndex = i < roundOrder.length ? roundOrder[i] : headers.length - 1;
+    final roundIndex = i < roundOrder.length
+        ? roundOrder[i]
+        : headers.length - 1;
     final round = headers[roundIndex];
-    final teams = RegExp(r'aria-label="([^"]+)"')
-        .allMatches(block)
-        .take(2)
-        .map((match) => _cleanHtmlText(match.group(1) ?? ''))
-        .toList();
+    final teams = _parseBracketTeams(block);
     final scores =
         RegExp(
           r'<div class="brkts-opponent-score-inner">(.*?)</div>',
@@ -369,8 +370,10 @@ List<Map<String, String>> _parsePlayoffMatchesFromRenderedHtml(
 
     results.add({
       'round': round,
-      'team1': teams[0],
-      'team2': teams[1],
+      'team1': teams[0].$1,
+      'team2': teams[1].$1,
+      if ((teams[0].$2 ?? '').isNotEmpty) 'team1Logo': teams[0].$2!,
+      if ((teams[1].$2 ?? '').isNotEmpty) 'team2Logo': teams[1].$2!,
       if (scores.isNotEmpty) 'score1': scores[0],
       if (scores.length > 1) 'score2': scores[1],
       if (date.isNotEmpty) 'date': date,
@@ -457,6 +460,8 @@ List<Map<String, String>> _readExistingPlacements(
         (entry) => {
           'place': (entry['place'] ?? '').toString(),
           'team': (entry['team'] ?? '').toString(),
+          if ((entry['teamLogo'] ?? '').toString().isNotEmpty)
+            'teamLogo': (entry['teamLogo'] ?? '').toString(),
         },
       )
       .where((entry) => entry['place']!.isNotEmpty && entry['team']!.isNotEmpty)
@@ -543,6 +548,160 @@ String _cleanHtmlText(String input) {
       .replaceAll('&mdash;', '-');
   value = value.replaceAll(RegExp(r'\s+'), ' ');
   return value.trim();
+}
+
+List<(String, String?)> _parseTeamBlocks(String htmlChunk) {
+  final blocks = RegExp(
+    r'<div class="block-team">(.*?)</div>\s*</div>',
+    dotAll: true,
+  ).allMatches(htmlChunk);
+
+  final teams = <(String, String?)>[];
+  for (final block in blocks) {
+    final inner = block.group(1) ?? '';
+    final nameMatch = RegExp(
+      r'<span class="name"[^>]*>\s*<a [^>]*>(.*?)</a>\s*</span>',
+      dotAll: true,
+    ).firstMatch(inner);
+    final name = _cleanHtmlText(nameMatch?.group(1) ?? '');
+    if (name.isEmpty) {
+      continue;
+    }
+    teams.add((name, _extractPreferredTeamLogo(inner)));
+  }
+
+  return teams;
+}
+
+List<(String, String?)> _parseBracketTeams(String htmlChunk) {
+  final entries = RegExp(
+    r'<div class="brkts-opponent-entry[^"]*"[^>]*aria-label="([^"]+)"[^>]*>(.*?)</div>\s*</div>',
+    dotAll: true,
+  ).allMatches(htmlChunk);
+
+  final teams = <(String, String?)>[];
+  for (final entry in entries.take(2)) {
+    final name = _cleanHtmlText(entry.group(1) ?? '');
+    if (name.isEmpty) {
+      continue;
+    }
+    teams.add((name, _extractPreferredTeamLogo(entry.group(2) ?? '')));
+  }
+  return teams;
+}
+
+String? _extractPreferredTeamLogo(String htmlChunk) {
+  final imageMatches = RegExp(
+    r'<img[^>]+src="([^"]+)"',
+    dotAll: true,
+  ).allMatches(htmlChunk);
+
+  String? fallback;
+  for (final match in imageMatches) {
+    final raw = match.group(1) ?? '';
+    if (raw.isEmpty) {
+      continue;
+    }
+    final resolved = _resolveLiquipediaAssetUrl(raw);
+    fallback ??= resolved;
+    if (raw.contains('allmode') || raw.contains('lightmode')) {
+      return resolved;
+    }
+  }
+
+  return fallback;
+}
+
+String _resolveLiquipediaAssetUrl(String rawUrl) {
+  if (rawUrl.startsWith('http://') || rawUrl.startsWith('https://')) {
+    return rawUrl;
+  }
+  if (rawUrl.startsWith('//')) {
+    return 'https:$rawUrl';
+  }
+  if (rawUrl.startsWith('/')) {
+    return 'https://liquipedia.net$rawUrl';
+  }
+  return 'https://liquipedia.net/$rawUrl';
+}
+
+Future<void> _materializeTeamLogos(
+  HttpClient client,
+  List<Map<String, String>> placements,
+  List<Map<String, String>> playoffMatches,
+) async {
+  final logoDir = Directory('assets/tournament_logos');
+  if (!logoDir.existsSync()) {
+    await logoDir.create(recursive: true);
+  }
+
+  Future<String?> localize(String? value, String teamName) async {
+    if (value == null || value.isEmpty) {
+      return null;
+    }
+    if (value.startsWith('assets/')) {
+      return value;
+    }
+
+    final uri = Uri.parse(value);
+    final extension = _detectImageExtension(value);
+    final fileName =
+        '${_slugify(teamName)}_${_slugify(uri.pathSegments.last)}$extension';
+    final file = File('${logoDir.path}/$fileName');
+    if (!file.existsSync()) {
+      try {
+        final request = await client.getUrl(uri);
+        final response = await request.close();
+        if (response.statusCode >= 200 && response.statusCode < 300) {
+          final bytes = await response.fold<List<int>>(
+            <int>[],
+            (acc, data) => acc..addAll(data),
+          );
+          await file.writeAsBytes(bytes);
+        }
+      } catch (_) {
+        return value;
+      }
+    }
+    return 'assets/tournament_logos/$fileName';
+  }
+
+  for (final placement in placements) {
+    if ((placement['teamLogo'] ?? '').isNotEmpty) {
+      placement['teamLogo'] =
+          await localize(placement['teamLogo'], placement['team'] ?? '') ??
+          placement['teamLogo']!;
+    }
+  }
+
+  for (final match in playoffMatches) {
+    if ((match['team1Logo'] ?? '').isNotEmpty) {
+      match['team1Logo'] =
+          await localize(match['team1Logo'], match['team1'] ?? '') ??
+          match['team1Logo']!;
+    }
+    if ((match['team2Logo'] ?? '').isNotEmpty) {
+      match['team2Logo'] =
+          await localize(match['team2Logo'], match['team2'] ?? '') ??
+          match['team2Logo']!;
+    }
+  }
+}
+
+String _detectImageExtension(String url) {
+  final lower = Uri.parse(url).path.toLowerCase();
+  if (lower.endsWith('.svg')) return '.svg';
+  if (lower.endsWith('.webp')) return '.webp';
+  if (lower.endsWith('.jpg') || lower.endsWith('.jpeg')) return '.jpg';
+  return '.png';
+}
+
+String _slugify(String value) {
+  return value
+      .toLowerCase()
+      .replaceAll(RegExp(r'[^a-z0-9]+'), '_')
+      .replaceAll(RegExp(r'_+'), '_')
+      .replaceAll(RegExp(r'^_|_$'), '');
 }
 
 String _canonicalTournamentName(String rawTournamentName) {

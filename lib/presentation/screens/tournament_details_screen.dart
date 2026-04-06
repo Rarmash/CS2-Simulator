@@ -357,11 +357,25 @@ class TournamentDetailsScreen extends StatelessWidget {
                               borderRadius: BorderRadius.circular(10),
                               border: Border.all(color: Colors.white12),
                             ),
-                            child: Text(
-                              team,
-                              style: const TextStyle(
-                                fontWeight: FontWeight.w600,
-                              ),
+                            child: Row(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                _TeamLogo(
+                                  logoPath: items
+                                      .firstWhere((item) => item.team == team)
+                                      .teamLogo,
+                                  size: 18,
+                                ),
+                                const SizedBox(width: 8),
+                                Flexible(
+                                  child: Text(
+                                    team,
+                                    style: const TextStyle(
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                                  ),
+                                ),
+                              ],
                             ),
                           ),
                         ),
@@ -470,9 +484,19 @@ class TournamentDetailsScreen extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          _buildPlayoffTeamRow(context, match.team1, match.score1),
+          _buildPlayoffTeamRow(
+            context,
+            match.team1,
+            match.team1Logo,
+            match.score1,
+          ),
           const SizedBox(height: 6),
-          _buildPlayoffTeamRow(context, match.team2, match.score2),
+          _buildPlayoffTeamRow(
+            context,
+            match.team2,
+            match.team2Logo,
+            match.score2,
+          ),
           if ((match.date ?? '').isNotEmpty) ...[
             const SizedBox(height: 10),
             Text(
@@ -488,6 +512,7 @@ class TournamentDetailsScreen extends StatelessWidget {
   Widget _buildPlayoffTeamRow(
     BuildContext context,
     String team,
+    String? logoPath,
     String? score,
   ) {
     return Row(
@@ -503,9 +528,17 @@ class TournamentDetailsScreen extends StatelessWidget {
             },
             child: Padding(
               padding: const EdgeInsets.symmetric(vertical: 2),
-              child: Text(
-                team,
-                style: const TextStyle(fontWeight: FontWeight.w600),
+              child: Row(
+                children: [
+                  _TeamLogo(logoPath: logoPath, size: 18),
+                  const SizedBox(width: 8),
+                  Expanded(
+                    child: Text(
+                      team,
+                      style: const TextStyle(fontWeight: FontWeight.w600),
+                    ),
+                  ),
+                ],
               ),
             ),
           ),
@@ -665,6 +698,41 @@ const _classicStageMajors = <String>{
 };
 
 enum _PlacementScheme { none, classic, cs2Transitional, modern }
+
+class _TeamLogo extends StatelessWidget {
+  final String? logoPath;
+  final double size;
+
+  const _TeamLogo({required this.logoPath, required this.size});
+
+  @override
+  Widget build(BuildContext context) {
+    final value = logoPath ?? '';
+    if (value.isEmpty) {
+      return Icon(Icons.shield_outlined, size: size, color: Colors.white60);
+    }
+
+    if (value.startsWith('assets/')) {
+      return Image.asset(
+        value,
+        width: size,
+        height: size,
+        fit: BoxFit.contain,
+        errorBuilder: (_, _, _) =>
+            Icon(Icons.shield_outlined, size: size, color: Colors.white60),
+      );
+    }
+
+    return Image.network(
+      value,
+      width: size,
+      height: size,
+      fit: BoxFit.contain,
+      errorBuilder: (_, _, _) =>
+          Icon(Icons.shield_outlined, size: size, color: Colors.white60),
+    );
+  }
+}
 
 class _TournamentDetailsData {
   final TournamentMetadataDto? metadata;

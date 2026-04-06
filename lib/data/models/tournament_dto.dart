@@ -32,6 +32,7 @@ class TournamentDto {
 
 class TournamentTeamResultDto {
   final String teamName;
+  final String? teamLogo;
   final String tournamentName;
   final String tournamentImagePath;
   final String organizer;
@@ -41,6 +42,7 @@ class TournamentTeamResultDto {
 
   const TournamentTeamResultDto({
     required this.teamName,
+    required this.teamLogo,
     required this.tournamentName,
     required this.tournamentImagePath,
     required this.organizer,
@@ -52,6 +54,7 @@ class TournamentTeamResultDto {
 
 class TournamentTeamSummaryDto {
   final String teamName;
+  final String? teamLogo;
   final int tournamentCount;
   final int titleCount;
   final String? bestPlace;
@@ -61,6 +64,7 @@ class TournamentTeamSummaryDto {
 
   const TournamentTeamSummaryDto({
     required this.teamName,
+    required this.teamLogo,
     required this.tournamentCount,
     required this.titleCount,
     required this.bestPlace,

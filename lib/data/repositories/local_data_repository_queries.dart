@@ -127,6 +127,7 @@ mixin _LocalDataRepositoryQueries on _LocalDataRepositoryLoaders {
         results.add(
           TournamentTeamResultDto(
             teamName: teamName,
+            teamLogo: placement.teamLogo,
             tournamentName: tournament.name,
             tournamentImagePath: tournament.imagePath,
             organizer: tournament.organizer,
@@ -176,6 +177,10 @@ mixin _LocalDataRepositoryQueries on _LocalDataRepositoryLoaders {
 
       return TournamentTeamSummaryDto(
         teamName: entry.key,
+        teamLogo: items.map((item) => item.teamLogo).firstWhere(
+          (logo) => (logo ?? '').isNotEmpty,
+          orElse: () => null,
+        ),
         tournamentCount: items.length,
         titleCount: titleCount,
         bestPlace: bestPlace,
@@ -286,6 +291,7 @@ mixin _LocalDataRepositoryQueries on _LocalDataRepositoryLoaders {
         results.add(
           TournamentTeamResultDto(
             teamName: placement.team,
+            teamLogo: placement.teamLogo,
             tournamentName: tournament.name,
             tournamentImagePath: tournament.imagePath,
             organizer: tournament.organizer,
