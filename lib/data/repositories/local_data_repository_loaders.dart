@@ -42,6 +42,13 @@ mixin _LocalDataRepositoryLoaders {
     return _loadDtoList('assets/data/charms.json', CharmDto.fromJson);
   }
 
+  Future<List<TournamentMetadataDto>> loadTournamentMetadata() async {
+    return _loadDtoList(
+      'assets/data/tournament_metadata.json',
+      TournamentMetadataDto.fromJson,
+    );
+  }
+
   Future<List<ContainerContentDto>> loadContainerContents() async {
     return _loadDtoList(
       'assets/data/container_contents.json',

@@ -27,7 +27,7 @@ import '../widgets/xray_reveal_card.dart';
 class ContainerOpenScreen extends StatefulWidget {
   final ContainerDto containerDto;
   final LocalDataRepository repository;
-  final SettingsController settingsController;
+  final SettingsController? settingsController;
 
   const ContainerOpenScreen({
     super.key,
@@ -57,7 +57,8 @@ class _ContainerOpenScreenState extends State<ContainerOpenScreen> {
   bool get _isSouvenirPackage => widget.containerDto.isSouvenirPackage;
   bool get _isCollectionPackage => widget.containerDto.isCollectionPackage;
   bool get _isXrayPackage => widget.containerDto.isXrayPackage;
-  bool get _xrayModeEnabled => widget.settingsController.xrayOpeningEnabled;
+  bool get _xrayModeEnabled =>
+      widget.settingsController?.xrayOpeningEnabled ?? false;
 
   bool get _shouldUseSettingsXrayMode =>
       _xrayModeEnabled && _isRegularCase && !_isXrayPackage;

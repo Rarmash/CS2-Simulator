@@ -99,7 +99,7 @@ class AppNavigationHelper {
     return ContainerOpenScreen(
       containerDto: containerDto,
       repository: repository,
-      settingsController: settingsController!,
+      settingsController: settingsController,
     );
   }
 }

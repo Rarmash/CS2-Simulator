@@ -12,7 +12,9 @@ import 'operation_collection_list_screen.dart';
 import 'patch_collection_list_screen.dart';
 import 'reward_collection_list_screen.dart';
 import 'settings_screen.dart';
+import 'team_list_screen.dart';
 import 'sticker_collection_list_screen.dart';
+import 'tournament_list_screen.dart';
 import 'tradeup_screen.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -74,6 +76,16 @@ class HomeScreen extends StatelessWidget {
         icon: Icons.key,
         title: 'Charm Collections',
         buildScreen: () => CharmCollectionListScreen(repository: repository),
+      ),
+      _HomeMenuItem(
+        icon: Icons.emoji_events,
+        title: 'Majors',
+        buildScreen: () => TournamentListScreen(repository: repository),
+      ),
+      _HomeMenuItem(
+        icon: Icons.groups_2,
+        title: 'Major Teams',
+        buildScreen: () => TeamListScreen(repository: repository),
       ),
       _HomeMenuItem(
         icon: Icons.swap_horiz,

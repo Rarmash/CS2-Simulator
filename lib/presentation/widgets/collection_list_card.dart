@@ -7,6 +7,7 @@ class CollectionListCard extends StatelessWidget {
   final String imagePath;
   final String title;
   final String? releaseDate;
+  final String dateLabel;
   final List<Widget> chips;
   final List<Widget> metadata;
   final VoidCallback onTap;
@@ -16,6 +17,7 @@ class CollectionListCard extends StatelessWidget {
     required this.imagePath,
     required this.title,
     required this.releaseDate,
+    this.dateLabel = 'Released',
     required this.chips,
     required this.metadata,
     required this.onTap,
@@ -66,7 +68,7 @@ class CollectionListCard extends StatelessWidget {
                   if (formattedReleaseDate != null) ...[
                     const SizedBox(height: 6),
                     Text(
-                      'Released: $formattedReleaseDate',
+                      '$dateLabel: $formattedReleaseDate',
                       style: const TextStyle(
                         color: Colors.white70,
                         fontSize: 13,

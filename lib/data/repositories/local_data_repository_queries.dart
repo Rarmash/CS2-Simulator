@@ -1,6 +1,305 @@
 part of 'local_data_repository.dart';
 
 mixin _LocalDataRepositoryQueries on _LocalDataRepositoryLoaders {
+  Future<List<TournamentDto>> loadTournaments() async {
+    final containers = await loadContainers();
+    final stickers = await loadStickers();
+    final stickerContents = await loadStickerContents();
+    final metadata = await loadTournamentMetadata();
+    final metadataByName = {
+      for (final entry in metadata) _canonicalTournamentName(entry.name): entry,
+    };
+
+    final containerById = {
+      for (final container in containers) container.id: container,
+    };
+    final stickerById = {for (final sticker in stickers) sticker.id: sticker};
+    final tournamentBuilders = <String, _TournamentBuilder>{};
+
+    _TournamentBuilder ensureBuilder(String tournamentName) {
+      final canonicalName = _canonicalTournamentName(tournamentName);
+      if (_isIgnoredTournamentName(canonicalName)) {
+        return _TournamentBuilder(name: '');
+      }
+      return tournamentBuilders.putIfAbsent(
+        canonicalName,
+        () => _TournamentBuilder(name: canonicalName),
+      );
+    }
+
+    for (final container in containers) {
+      final tournamentName = (container.tournamentName ?? '').trim();
+      if (tournamentName.isEmpty) continue;
+
+      final builder = ensureBuilder(tournamentName);
+      if (builder.name.isEmpty) continue;
+      builder.imagePath ??= _preferredTournamentImage(container);
+      builder.releaseDate = _earlierDate(
+        builder.releaseDate,
+        container.releaseDate,
+      );
+
+      if (container.isSouvenirPackage) {
+        builder.souvenirContainerIds.add(container.id);
+      }
+      if (container.isStickerCapsule || container.isStickerCollection) {
+        builder.stickerContainerIds.add(container.id);
+      }
+    }
+
+    for (final content in stickerContents) {
+      final container = containerById[content.containerId];
+      if (container == null) continue;
+
+      final tournamentNames = <String>{};
+      for (final stickerId in content.stickerIds) {
+        final tournamentName = (stickerById[stickerId]?.tournament ?? '')
+            .trim();
+        if (tournamentName.isNotEmpty) {
+          tournamentNames.add(tournamentName);
+        }
+      }
+
+      for (final tournamentName in tournamentNames) {
+        final builder = ensureBuilder(tournamentName);
+        if (builder.name.isEmpty) continue;
+        builder.imagePath ??= _preferredTournamentImage(container);
+        builder.releaseDate = _earlierDate(
+          builder.releaseDate,
+          container.releaseDate,
+        );
+
+        if (container.isStickerCapsule || container.isStickerCollection) {
+          builder.stickerContainerIds.add(container.id);
+        }
+      }
+    }
+
+    final tournaments = tournamentBuilders.values
+        .where((builder) => builder.imagePath != null)
+        .map((builder) {
+          final metadata = metadataByName[builder.name];
+          return TournamentDto(
+            name: builder.name,
+            imagePath: builder.imagePath!,
+            releaseDate: builder.releaseDate,
+            startDate: metadata?.startDate,
+            endDate: metadata?.endDate,
+            organizer: _inferTournamentOrganizer(builder.name),
+            souvenirPackageCount: builder.souvenirContainerIds.length,
+            stickerContainerCount: builder.stickerContainerIds.length,
+          );
+        })
+        .toList();
+
+    tournaments.sort((a, b) {
+      final byDate = (b.startDate ?? b.releaseDate ?? '').compareTo(
+        a.startDate ?? a.releaseDate ?? '',
+      );
+      if (byDate != 0) return byDate;
+      return a.name.compareTo(b.name);
+    });
+
+    return tournaments;
+  }
+
+  Future<List<TournamentTeamResultDto>> loadTeamTournamentResults(
+    String teamName,
+  ) async {
+    final tournaments = await loadTournaments();
+    final metadata = await loadTournamentMetadata();
+    final tournamentByName = {
+      for (final tournament in tournaments)
+        _canonicalTournamentName(tournament.name): tournament,
+    };
+
+    final results = <TournamentTeamResultDto>[];
+    for (final entry in metadata) {
+      final tournament = tournamentByName[_canonicalTournamentName(entry.name)];
+      if (tournament == null) {
+        continue;
+      }
+
+      for (final placement in entry.placements) {
+        if (placement.team != teamName) {
+          continue;
+        }
+        results.add(
+          TournamentTeamResultDto(
+            teamName: teamName,
+            tournamentName: tournament.name,
+            tournamentImagePath: tournament.imagePath,
+            organizer: tournament.organizer,
+            place: placement.place,
+            startDate: entry.startDate ?? tournament.startDate,
+            endDate: entry.endDate ?? tournament.endDate,
+          ),
+        );
+      }
+    }
+
+    results.sort((a, b) {
+      final byDate = (b.startDate ?? '').compareTo(a.startDate ?? '');
+      if (byDate != 0) return byDate;
+      return a.tournamentName.compareTo(b.tournamentName);
+    });
+    return results;
+  }
+
+  Future<List<TournamentTeamSummaryDto>> loadTournamentTeams() async {
+    final results = <String, List<TournamentTeamResultDto>>{};
+    final allResults = await _loadAllTeamTournamentResults();
+
+    for (final result in allResults) {
+      results
+          .putIfAbsent(result.teamName, () => <TournamentTeamResultDto>[])
+          .add(result);
+    }
+
+    final summaries = results.entries.map((entry) {
+      final items = List<TournamentTeamResultDto>.from(entry.value)
+        ..sort((a, b) {
+          final byDate = (b.startDate ?? '').compareTo(a.startDate ?? '');
+          if (byDate != 0) return byDate;
+          return _comparePlace(a.place, b.place);
+        });
+
+      String? bestPlace;
+      for (final item in items) {
+        if (bestPlace == null || _comparePlace(item.place, bestPlace) < 0) {
+          bestPlace = item.place;
+        }
+      }
+
+      final latest = items.isNotEmpty ? items.first : null;
+      final titleCount = items.where((item) => item.place == '1st').length;
+
+      return TournamentTeamSummaryDto(
+        teamName: entry.key,
+        tournamentCount: items.length,
+        titleCount: titleCount,
+        bestPlace: bestPlace,
+        latestTournamentName: latest?.tournamentName,
+        latestTournamentImagePath: latest?.tournamentImagePath,
+        latestStartDate: latest?.startDate,
+      );
+    }).toList();
+
+    summaries.sort((a, b) {
+      final byTitles = b.titleCount.compareTo(a.titleCount);
+      if (byTitles != 0) return byTitles;
+      final byBestPlace = _comparePlace(a.bestPlace, b.bestPlace);
+      if (byBestPlace != 0) return byBestPlace;
+      final byAppearances = b.tournamentCount.compareTo(a.tournamentCount);
+      if (byAppearances != 0) return byAppearances;
+      return a.teamName.compareTo(b.teamName);
+    });
+
+    return summaries;
+  }
+
+  Future<TournamentMetadataDto?> loadTournamentMetadataByName(
+    String tournamentName,
+  ) async {
+    final metadata = await loadTournamentMetadata();
+    final normalizedName = _canonicalTournamentName(tournamentName);
+
+    for (final entry in metadata) {
+      if (_canonicalTournamentName(entry.name) == normalizedName) {
+        return entry;
+      }
+    }
+
+    return null;
+  }
+
+  Future<List<ContainerDto>> loadSouvenirPackagesForTournament(
+    String tournamentName,
+  ) async {
+    final containers = await loadContainers();
+    final normalizedTournamentName = _canonicalTournamentName(tournamentName);
+    final result = containers
+        .where(
+          (container) =>
+              container.isSouvenirPackage &&
+              _canonicalTournamentName(
+                    (container.tournamentName ?? '').trim(),
+                  ) ==
+                  normalizedTournamentName,
+        )
+        .toList();
+    result.sort(_compareContainerByReleaseDateAsc);
+    return result;
+  }
+
+  Future<List<ContainerDto>> loadStickerContainersForTournament(
+    String tournamentName,
+  ) async {
+    final containers = await loadContainers();
+    final stickerContents = await loadStickerContents();
+    final stickers = await loadStickers();
+    final normalizedTournamentName = _canonicalTournamentName(tournamentName);
+
+    final stickerById = {for (final sticker in stickers) sticker.id: sticker};
+    final relevantContainerIds = <String>{};
+
+    for (final content in stickerContents) {
+      final hasTournamentSticker = content.stickerIds.any(
+        (stickerId) =>
+            _canonicalTournamentName(
+              (stickerById[stickerId]?.tournament ?? '').trim(),
+            ) ==
+            normalizedTournamentName,
+      );
+      if (hasTournamentSticker) {
+        relevantContainerIds.add(content.containerId);
+      }
+    }
+
+    final result = containers
+        .where(
+          (container) =>
+              relevantContainerIds.contains(container.id) &&
+              (container.isStickerCapsule || container.isStickerCollection),
+        )
+        .toList();
+    result.sort(_compareContainerByReleaseDateAsc);
+    return result;
+  }
+
+  Future<List<TournamentTeamResultDto>> _loadAllTeamTournamentResults() async {
+    final tournaments = await loadTournaments();
+    final metadata = await loadTournamentMetadata();
+    final tournamentByName = {
+      for (final tournament in tournaments)
+        _canonicalTournamentName(tournament.name): tournament,
+    };
+
+    final results = <TournamentTeamResultDto>[];
+    for (final entry in metadata) {
+      final tournament = tournamentByName[_canonicalTournamentName(entry.name)];
+      if (tournament == null) {
+        continue;
+      }
+
+      for (final placement in entry.placements) {
+        results.add(
+          TournamentTeamResultDto(
+            teamName: placement.team,
+            tournamentName: tournament.name,
+            tournamentImagePath: tournament.imagePath,
+            organizer: tournament.organizer,
+            place: placement.place,
+            startDate: entry.startDate ?? tournament.startDate,
+            endDate: entry.endDate ?? tournament.endDate,
+          ),
+        );
+      }
+    }
+
+    return results;
+  }
+
   Future<List<SkinDto>> loadSkinsForContainer(String containerId) async {
     final skins = await loadSkins();
     final contents = await loadContainerContents();
@@ -447,4 +746,104 @@ mixin _LocalDataRepositoryQueries on _LocalDataRepositoryLoaders {
     result.sort(_compareCollectibleCollectionAsc);
     return result;
   }
+}
+
+class _TournamentBuilder {
+  final String name;
+  String? imagePath;
+  String? releaseDate;
+  final Set<String> souvenirContainerIds = <String>{};
+  final Set<String> stickerContainerIds = <String>{};
+
+  _TournamentBuilder({required this.name});
+}
+
+String? _earlierDate(String? a, String? b) {
+  if (a == null || a.isEmpty) return b;
+  if (b == null || b.isEmpty) return a;
+  return a.compareTo(b) <= 0 ? a : b;
+}
+
+String _preferredTournamentImage(ContainerDto container) {
+  final tournamentLogo = (container.tournamentLogo ?? '').trim();
+  if (tournamentLogo.isNotEmpty) {
+    return tournamentLogo;
+  }
+  return container.containerImage;
+}
+
+String _inferTournamentOrganizer(String tournamentName) {
+  const prefixes = <String, String>{
+    'DreamHack ': 'DreamHack',
+    'EMS One ': 'EMS One',
+    'ESL One ': 'ESL One',
+    'MLG ': 'MLG',
+    'ELEAGUE ': 'ELEAGUE',
+    'PGL ': 'PGL',
+    'FACEIT ': 'FACEIT',
+    'StarLadder ': 'StarLadder',
+    'IEM ': 'Intel Extreme Masters',
+    'BLAST.tv ': 'BLAST.tv',
+    'Perfect World ': 'Perfect World',
+  };
+
+  for (final entry in prefixes.entries) {
+    if (tournamentName.startsWith(entry.key)) {
+      return entry.value;
+    }
+  }
+
+  return tournamentName.split(' ').first;
+}
+
+String _canonicalTournamentName(String rawTournamentName) {
+  final trimmed = rawTournamentName
+      .trim()
+      .replaceAll('ELEAGUE Major Boston 2018', 'ELEAGUE Boston 2018')
+      .replaceAll('KrakГіw', 'Kraków')
+      .replaceAll('Krakow', 'Kraków')
+      .replaceAll(RegExp(r'\s+'), ' ');
+  if (trimmed.isEmpty) {
+    return trimmed;
+  }
+
+  final yearPrefix = RegExp(r'^(20\d{2}) (.+)$').firstMatch(trimmed);
+  if (yearPrefix != null) {
+    final year = yearPrefix.group(1)!;
+    final rest = yearPrefix.group(2)!;
+    return '$rest $year';
+  }
+
+  return trimmed;
+}
+
+bool _isIgnoredTournamentName(String tournamentName) {
+  return tournamentName == '2020 RMR' ||
+      tournamentName.contains('2020 RMR') ||
+      tournamentName.contains('RMR 2020');
+}
+
+int _comparePlace(String? a, String? b) {
+  final rankA = _placeRank(a);
+  final rankB = _placeRank(b);
+  if (rankA != rankB) {
+    return rankA.compareTo(rankB);
+  }
+  return (a ?? '').compareTo(b ?? '');
+}
+
+int _placeRank(String? place) {
+  if (place == null || place.isEmpty) {
+    return 1 << 20;
+  }
+
+  final match = RegExp(
+    r'^(\d+)(?:st|nd|rd|th)?(?:-(\d+)(?:st|nd|rd|th)?)?$',
+  ).firstMatch(place);
+  if (match == null) {
+    return 1 << 20;
+  }
+
+  final start = int.tryParse(match.group(1) ?? '');
+  return start ?? (1 << 20);
 }

@@ -1,0 +1,3795 @@
+[
+  {
+    "name": "BLAST.tv Austin 2025",
+    "winner": "Team Vitality",
+    "startDate": "2025-06-03",
+    "endDate": "2025-06-22",
+    "placements": [
+      {
+        "place": "1st",
+        "team": "Team Vitality"
+      },
+      {
+        "place": "2nd",
+        "team": "The MongolZ"
+      },
+      {
+        "place": "3rd-4th",
+        "team": "MOUZ"
+      },
+      {
+        "place": "3rd-4th",
+        "team": "paiN Gaming"
+      },
+      {
+        "place": "5th-8th",
+        "team": "Team Spirit"
+      },
+      {
+        "place": "5th-8th",
+        "team": "Natus Vincere"
+      },
+      {
+        "place": "5th-8th",
+        "team": "FaZe Clan"
+      },
+      {
+        "place": "5th-8th",
+        "team": "FURIA"
+      },
+      {
+        "place": "9th-11th",
+        "team": "Virtus.pro"
+      },
+      {
+        "place": "9th-11th",
+        "team": "Legacy"
+      },
+      {
+        "place": "9th-11th",
+        "team": "G2 Esports"
+      },
+      {
+        "place": "12th-14th",
+        "team": "Aurora Gaming"
+      },
+      {
+        "place": "12th-14th",
+        "team": "3DMAX"
+      },
+      {
+        "place": "12th-14th",
+        "team": "Lynn Vision Gaming"
+      },
+      {
+        "place": "15th-16th",
+        "team": "Nemiga Gaming"
+      },
+      {
+        "place": "15th-16th",
+        "team": "Team Liquid"
+      },
+      {
+        "place": "17th-19th",
+        "team": "B8"
+      },
+      {
+        "place": "17th-19th",
+        "team": "MIBR"
+      },
+      {
+        "place": "17th-19th",
+        "team": "HEROIC"
+      },
+      {
+        "place": "20th-22nd",
+        "team": "TYLOO"
+      },
+      {
+        "place": "20th-22nd",
+        "team": "M80"
+      },
+      {
+        "place": "20th-22nd",
+        "team": "Team Falcons"
+      },
+      {
+        "place": "23rd-24th",
+        "team": "BetBoom Team"
+      },
+      {
+        "place": "23rd-24th",
+        "team": "OG"
+      },
+      {
+        "place": "25th-27th",
+        "team": "FlyQuest"
+      },
+      {
+        "place": "25th-27th",
+        "team": "NRG"
+      },
+      {
+        "place": "25th-27th",
+        "team": "Wildcard"
+      },
+      {
+        "place": "28th-30th",
+        "team": "Imperial Esports"
+      },
+      {
+        "place": "28th-30th",
+        "team": "Chinggis Warriors"
+      },
+      {
+        "place": "28th-30th",
+        "team": "Complexity"
+      },
+      {
+        "place": "31st-32nd",
+        "team": "Metizport"
+      },
+      {
+        "place": "31st-32nd",
+        "team": "Fluxo"
+      }
+    ],
+    "stageDates": [
+      {
+        "phase": "Stage 1",
+        "startDate": "2025-06-03",
+        "endDate": "2025-06-06"
+      },
+      {
+        "phase": "Stage 2",
+        "startDate": "2025-06-07",
+        "endDate": "2025-06-10"
+      },
+      {
+        "phase": "Stage 3",
+        "startDate": "2025-06-12",
+        "endDate": "2025-06-15"
+      },
+      {
+        "phase": "Playoffs",
+        "startDate": "2025-06-19",
+        "endDate": "2025-06-22"
+      }
+    ],
+    "playoffMatches": [
+      {
+        "round": "Quarterfinals",
+        "team1": "Team Spirit",
+        "team2": "MOUZ",
+        "score1": "1",
+        "score2": "2",
+        "date": "June 19, 2025 - 14:05 CDT"
+      },
+      {
+        "round": "Quarterfinals",
+        "team1": "Team Vitality",
+        "team2": "Natus Vincere",
+        "score1": "2",
+        "score2": "0",
+        "date": "June 20, 2025 - 13:10 CDT"
+      },
+      {
+        "round": "Semifinals",
+        "team1": "MOUZ",
+        "team2": "Team Vitality",
+        "score1": "1",
+        "score2": "2",
+        "date": "June 21, 2025 - 13:00 CDT"
+      },
+      {
+        "round": "Quarterfinals",
+        "team1": "FaZe Clan",
+        "team2": "The MongolZ",
+        "score1": "0",
+        "score2": "2",
+        "date": "June 20, 2025 - 16:15 CDT"
+      },
+      {
+        "round": "Quarterfinals",
+        "team1": "PaiN Gaming",
+        "team2": "FURIA",
+        "score1": "2",
+        "score2": "1",
+        "date": "June 19, 2025 - 19:20 CDT"
+      },
+      {
+        "round": "Semifinals",
+        "team1": "The MongolZ",
+        "team2": "PaiN Gaming",
+        "score1": "2",
+        "score2": "0",
+        "date": "June 21, 2025 - 16:50 CDT"
+      },
+      {
+        "round": "Grand Final",
+        "team1": "Team Vitality",
+        "team2": "The MongolZ",
+        "score1": "2",
+        "score2": "1",
+        "date": "June 22, 2025 - 14:30 CDT"
+      }
+    ]
+  },
+  {
+    "name": "BLAST.tv Paris 2023",
+    "winner": "Team Vitality",
+    "startDate": "2023-05-08",
+    "endDate": "2023-05-21",
+    "placements": [
+      {
+        "place": "1st",
+        "team": "Team Vitality"
+      },
+      {
+        "place": "2nd",
+        "team": "GamerLegion"
+      },
+      {
+        "place": "3rd-4th",
+        "team": "Heroic"
+      },
+      {
+        "place": "3rd-4th",
+        "team": "Apeks"
+      },
+      {
+        "place": "5th-8th",
+        "team": "FaZe Clan"
+      },
+      {
+        "place": "5th-8th",
+        "team": "Monte"
+      },
+      {
+        "place": "5th-8th",
+        "team": "Team Liquid"
+      },
+      {
+        "place": "5th-8th",
+        "team": "Into The Breach"
+      },
+      {
+        "place": "9th-11th",
+        "team": "Natus Vincere"
+      },
+      {
+        "place": "9th-11th",
+        "team": "Fnatic"
+      },
+      {
+        "place": "9th-11th",
+        "team": "Ninjas in Pyjamas"
+      },
+      {
+        "place": "12th-14th",
+        "team": "ENCE"
+      },
+      {
+        "place": "12th-14th",
+        "team": "Bad News Eagles"
+      },
+      {
+        "place": "12th-14th",
+        "team": "G2 Esports"
+      },
+      {
+        "place": "15th-16th",
+        "team": "9INE"
+      },
+      {
+        "place": "15th-16th",
+        "team": "FURIA Esports"
+      },
+      {
+        "place": "17th-19th",
+        "team": "FORZE Esports"
+      },
+      {
+        "place": "17th-19th",
+        "team": "Grayhound Gaming"
+      },
+      {
+        "place": "17th-19th",
+        "team": "paiN Gaming"
+      },
+      {
+        "place": "20th-22nd",
+        "team": "Complexity Gaming"
+      },
+      {
+        "place": "20th-22nd",
+        "team": "The MongolZ"
+      },
+      {
+        "place": "20th-22nd",
+        "team": "OG"
+      },
+      {
+        "place": "23rd-24th",
+        "team": "MOUZ"
+      },
+      {
+        "place": "23rd-24th",
+        "team": "Fluxo"
+      }
+    ],
+    "stageDates": [
+      {
+        "phase": "Challengers Stage",
+        "startDate": "2023-05-08",
+        "endDate": "2023-05-11"
+      },
+      {
+        "phase": "Legends Stage",
+        "startDate": "2023-05-13",
+        "endDate": "2023-05-16"
+      },
+      {
+        "phase": "Champions Stage",
+        "startDate": "2023-05-18",
+        "endDate": "2023-05-21"
+      }
+    ],
+    "playoffMatches": [
+      {
+        "round": "Quarterfinals",
+        "team1": "HEROIC",
+        "team2": "FaZe Clan",
+        "score1": "2",
+        "score2": "1",
+        "date": "May 18, 2023 - 15:00 CEST"
+      },
+      {
+        "round": "Quarterfinals",
+        "team1": "GamerLegion",
+        "team2": "Monte",
+        "score1": "2",
+        "score2": "0",
+        "date": "May 19, 2023 - 15:00 CEST"
+      },
+      {
+        "round": "Semifinals",
+        "team1": "HEROIC",
+        "team2": "GamerLegion",
+        "score1": "1",
+        "score2": "2",
+        "date": "May 20, 2023 - 15:00 CEST"
+      },
+      {
+        "round": "Quarterfinals",
+        "team1": "Team Liquid",
+        "team2": "Apeks",
+        "score1": "0",
+        "score2": "2",
+        "date": "May 19, 2023 - 17:55 CEST"
+      },
+      {
+        "round": "Quarterfinals",
+        "team1": "Into The Breach",
+        "team2": "Team Vitality",
+        "score1": "0",
+        "score2": "2",
+        "date": "May 18, 2023 - 19:15 CEST"
+      },
+      {
+        "round": "Semifinals",
+        "team1": "Apeks",
+        "team2": "Team Vitality",
+        "score1": "0",
+        "score2": "2",
+        "date": "May 20, 2023 - 19:35 CEST"
+      },
+      {
+        "round": "Grand Final",
+        "team1": "GamerLegion",
+        "team2": "Team Vitality",
+        "score1": "0",
+        "score2": "2",
+        "date": "May 21, 2023 - 17:00 CEST"
+      }
+    ]
+  },
+  {
+    "name": "DreamHack Cluj-Napoca 2015",
+    "winner": "Team EnVyUs",
+    "startDate": "2015-10-28",
+    "endDate": "2015-11-01",
+    "placements": [
+      {
+        "place": "1st",
+        "team": "Team EnVyUs"
+      },
+      {
+        "place": "2nd",
+        "team": "Natus Vincere"
+      },
+      {
+        "place": "3rd-4th",
+        "team": "G2 Esports"
+      },
+      {
+        "place": "3rd-4th",
+        "team": "Ninjas in Pyjamas"
+      },
+      {
+        "place": "5th-8th",
+        "team": "Fnatic"
+      },
+      {
+        "place": "5th-8th",
+        "team": "Virtus.pro"
+      },
+      {
+        "place": "5th-8th",
+        "team": "Team SoloMid"
+      },
+      {
+        "place": "5th-8th",
+        "team": "Luminosity Gaming"
+      },
+      {
+        "place": "9th-12th",
+        "team": "Cloud9"
+      },
+      {
+        "place": "9th-12th",
+        "team": "mousesports"
+      },
+      {
+        "place": "9th-12th",
+        "team": "Titan"
+      },
+      {
+        "place": "9th-12th",
+        "team": "Counter Logic Gaming"
+      },
+      {
+        "place": "13th-16th",
+        "team": "Vexed Gaming"
+      },
+      {
+        "place": "13th-16th",
+        "team": "FlipSid3 Tactics"
+      },
+      {
+        "place": "13th-16th",
+        "team": "Team Liquid"
+      },
+      {
+        "place": "13th-16th",
+        "team": "Team Dignitas"
+      }
+    ],
+    "stageDates": [],
+    "playoffMatches": [
+      {
+        "round": "Quarterfinals",
+        "team1": "Team Envy",
+        "team2": "Fnatic",
+        "score1": "2",
+        "score2": "1",
+        "date": "October 31, 2015 - 11:15 EET"
+      },
+      {
+        "round": "Quarterfinals",
+        "team1": "Virtus.pro",
+        "team2": "G2 Esports",
+        "score1": "0",
+        "score2": "2",
+        "date": "October 31, 2015 - 14:55 EET"
+      },
+      {
+        "round": "Semifinals",
+        "team1": "Team Envy",
+        "team2": "G2 Esports",
+        "score1": "2",
+        "score2": "1",
+        "date": "November 1, 2015 - 12:05 EET"
+      },
+      {
+        "round": "Quarterfinals",
+        "team1": "TSM",
+        "team2": "Ninjas in Pyjamas",
+        "score1": "0",
+        "score2": "2",
+        "date": "October 31, 2015 - 17:45 EET"
+      },
+      {
+        "round": "Quarterfinals",
+        "team1": "Luminosity Gaming",
+        "team2": "Natus Vincere",
+        "score1": "0",
+        "score2": "2",
+        "date": "October 31, 2015 - 20:25 EET"
+      },
+      {
+        "round": "Semifinals",
+        "team1": "Ninjas in Pyjamas",
+        "team2": "Natus Vincere",
+        "score1": "0",
+        "score2": "2",
+        "date": "November 1, 2015 - 16:30 EET"
+      },
+      {
+        "round": "Grand Final",
+        "team1": "Team Envy",
+        "team2": "Natus Vincere",
+        "score1": "2",
+        "score2": "0",
+        "date": "November 1, 2015 - 19:20 EET"
+      }
+    ]
+  },
+  {
+    "name": "DreamHack Winter 2013",
+    "winner": "Fnatic",
+    "startDate": "2013-11-28",
+    "endDate": "2013-11-30",
+    "placements": [
+      {
+        "place": "1st",
+        "team": "Fnatic"
+      },
+      {
+        "place": "2nd",
+        "team": "Ninjas in Pyjamas"
+      },
+      {
+        "place": "3rd-4th",
+        "team": "VeryGames"
+      },
+      {
+        "place": "3rd-4th",
+        "team": "compLexity Gaming"
+      },
+      {
+        "place": "5th-8th",
+        "team": "LGB eSports"
+      },
+      {
+        "place": "5th-8th",
+        "team": "Copenhagen Wolves"
+      },
+      {
+        "place": "5th-8th",
+        "team": "Recursive eSports"
+      },
+      {
+        "place": "5th-8th",
+        "team": "Astana Dragons"
+      },
+      {
+        "place": "9th-12th",
+        "team": "Clan-Mystik"
+      },
+      {
+        "place": "9th-12th",
+        "team": "Universal Soldiers"
+      },
+      {
+        "place": "9th-12th",
+        "team": "n!faculty"
+      },
+      {
+        "place": "9th-12th",
+        "team": "Reason Gaming"
+      },
+      {
+        "place": "13th-16th",
+        "team": "Natus Vincere"
+      },
+      {
+        "place": "13th-16th",
+        "team": "Team iBUYPOWER"
+      },
+      {
+        "place": "13th-16th",
+        "team": "Xapso"
+      },
+      {
+        "place": "13th-16th",
+        "team": "SK Gaming"
+      }
+    ],
+    "stageDates": [],
+    "playoffMatches": [
+      {
+        "round": "Quarterfinals",
+        "team1": "LGB eSports",
+        "team2": "Ninjas in Pyjamas",
+        "score1": "1",
+        "score2": "2",
+        "date": "November 28, 2013 - 22:45 CET"
+      },
+      {
+        "round": "Quarterfinals",
+        "team1": "Copenhagen Wolves",
+        "team2": "VeryGames",
+        "score1": "1",
+        "score2": "2",
+        "date": "November 29, 2013 - 20:00 CET"
+      },
+      {
+        "round": "Semifinals",
+        "team1": "Ninjas in Pyjamas",
+        "team2": "VeryGames",
+        "score1": "2",
+        "score2": "1",
+        "date": "November 30, 2013 - 14:30 CET"
+      },
+      {
+        "round": "Quarterfinals",
+        "team1": "Fnatic",
+        "team2": "Recursive eSports",
+        "score1": "2",
+        "score2": "1",
+        "date": "November 28, 2013 - 22:30 CET"
+      },
+      {
+        "round": "Quarterfinals",
+        "team1": "Complexity",
+        "team2": "Astana Dragons",
+        "score1": "2",
+        "score2": "1",
+        "date": "November 29, 2013 - 20:00 CET"
+      },
+      {
+        "round": "Semifinals",
+        "team1": "Fnatic",
+        "team2": "Complexity",
+        "score1": "2",
+        "score2": "0",
+        "date": "November 30, 2013 - 18:00 CET"
+      },
+      {
+        "round": "Grand Final",
+        "team1": "Ninjas in Pyjamas",
+        "team2": "Fnatic",
+        "score1": "1",
+        "score2": "2",
+        "date": "November 30, 2013 - 22:30 CET"
+      }
+    ]
+  },
+  {
+    "name": "DreamHack Winter 2014",
+    "winner": "Team LDLC.com",
+    "startDate": "2014-11-27",
+    "endDate": "2014-11-29",
+    "placements": [
+      {
+        "place": "1st",
+        "team": "Team LDLC.com"
+      },
+      {
+        "place": "2nd",
+        "team": "Ninjas in Pyjamas"
+      },
+      {
+        "place": "3rd-4th",
+        "team": "Virtus.pro"
+      },
+      {
+        "place": "3rd-4th",
+        "team": "Natus Vincere"
+      },
+      {
+        "place": "5th-8th",
+        "team": "HellRaisers"
+      },
+      {
+        "place": "5th-8th",
+        "team": "PENTA Sports"
+      },
+      {
+        "place": "5th-8th",
+        "team": "Fnatic"
+      },
+      {
+        "place": "5th-8th",
+        "team": "Team Dignitas"
+      },
+      {
+        "place": "9th-12th",
+        "team": "Cloud9"
+      },
+      {
+        "place": "9th-12th",
+        "team": "Team iBUYPOWER"
+      },
+      {
+        "place": "9th-12th",
+        "team": "ESC Gaming"
+      },
+      {
+        "place": "9th-12th",
+        "team": "FlipSid3 Tactics"
+      },
+      {
+        "place": "13th-16th",
+        "team": "Bravado Gaming"
+      },
+      {
+        "place": "13th-16th",
+        "team": "Copenhagen Wolves"
+      },
+      {
+        "place": "13th-16th",
+        "team": "Planetkey Dynamics"
+      },
+      {
+        "place": "13th-16th",
+        "team": "myXMG"
+      }
+    ],
+    "stageDates": [],
+    "playoffMatches": [
+      {
+        "round": "Quarterfinals",
+        "team1": "HellRaisers",
+        "team2": "Ninjas in Pyjamas",
+        "score1": "0",
+        "score2": "2",
+        "date": "November 28, 2014 - 11:05 CET"
+      },
+      {
+        "round": "Quarterfinals",
+        "team1": "Virtus.pro",
+        "team2": "PENTA Sports",
+        "score1": "2",
+        "score2": "0",
+        "date": "November 28, 2014 - 14:30 CET"
+      },
+      {
+        "round": "Semifinals",
+        "team1": "Ninjas in Pyjamas",
+        "team2": "Virtus.pro",
+        "score1": "2",
+        "score2": "1",
+        "date": "November 29, 2014 - 13:00 CET"
+      },
+      {
+        "round": "Quarterfinals",
+        "team1": "Team LDLC",
+        "team2": "Fnatic",
+        "score1": "2",
+        "score2": "1",
+        "date": "November 28, 2014 - 17:30 CET"
+      },
+      {
+        "round": "Quarterfinals",
+        "team1": "Dignitas",
+        "team2": "Natus Vincere",
+        "score1": "0",
+        "score2": "2",
+        "date": "November 28, 2014 - 21:30 CET"
+      },
+      {
+        "round": "Semifinals",
+        "team1": "Team LDLC",
+        "team2": "Natus Vincere",
+        "score1": "2",
+        "score2": "0",
+        "date": "November 29, 2014 - 16:30 CET"
+      },
+      {
+        "round": "Grand Final",
+        "team1": "Ninjas in Pyjamas",
+        "team2": "Team LDLC",
+        "score1": "1",
+        "score2": "2",
+        "date": "November 29, 2014 - 21:00 CET"
+      }
+    ]
+  },
+  {
+    "name": "ELEAGUE Atlanta 2017",
+    "winner": "Astralis",
+    "startDate": "2017-01-22",
+    "endDate": "2017-01-29",
+    "placements": [
+      {
+        "place": "1st",
+        "team": "Astralis"
+      },
+      {
+        "place": "2nd",
+        "team": "Virtus.pro"
+      },
+      {
+        "place": "3rd-4th",
+        "team": "Fnatic"
+      },
+      {
+        "place": "3rd-4th",
+        "team": "SK Gaming"
+      },
+      {
+        "place": "5th-8th",
+        "team": "Natus Vincere"
+      },
+      {
+        "place": "5th-8th",
+        "team": "Gambit Esports"
+      },
+      {
+        "place": "5th-8th",
+        "team": "North"
+      },
+      {
+        "place": "5th-8th",
+        "team": "FaZe Clan"
+      },
+      {
+        "place": "9th-11th",
+        "team": "Team EnVyUs"
+      },
+      {
+        "place": "9th-11th",
+        "team": "GODSENT"
+      },
+      {
+        "place": "9th-11th",
+        "team": "Team Liquid"
+      },
+      {
+        "place": "12th-14th",
+        "team": "OpTic Gaming"
+      },
+      {
+        "place": "12th-14th",
+        "team": "G2 Esports"
+      },
+      {
+        "place": "12th-14th",
+        "team": "mousesports"
+      },
+      {
+        "place": "15th-16th",
+        "team": "FlipSid3 Tactics"
+      },
+      {
+        "place": "15th-16th",
+        "team": "HellRaisers"
+      }
+    ],
+    "stageDates": [],
+    "playoffMatches": [
+      {
+        "round": "Quarterfinals",
+        "team1": "Natus Vincere",
+        "team2": "Astralis",
+        "score1": "1",
+        "score2": "2",
+        "date": "January 27, 2017 - 10:00 EST"
+      },
+      {
+        "round": "Quarterfinals",
+        "team1": "Fnatic",
+        "team2": "Gambit Esports",
+        "score1": "2",
+        "score2": "1",
+        "date": "January 27, 2017 - 14:45 EST"
+      },
+      {
+        "round": "Semifinals",
+        "team1": "Astralis",
+        "team2": "Fnatic",
+        "score1": "2",
+        "score2": "0",
+        "date": "January 28, 2017 - 13:40 EST"
+      },
+      {
+        "round": "Quarterfinals",
+        "team1": "Virtus.pro",
+        "team2": "North",
+        "score1": "2",
+        "score2": "1",
+        "date": "January 27, 2017 - 18:35 EST"
+      },
+      {
+        "round": "Quarterfinals",
+        "team1": "FaZe Clan",
+        "team2": "SK Gaming",
+        "score1": "1",
+        "score2": "2",
+        "date": "January 28, 2017 - 10:00 EST"
+      },
+      {
+        "round": "Semifinals",
+        "team1": "Virtus.pro",
+        "team2": "SK Gaming",
+        "score1": "2",
+        "score2": "0",
+        "date": "January 28, 2017 - 17:00 EST"
+      },
+      {
+        "round": "Grand Final",
+        "team1": "Astralis",
+        "team2": "Virtus.pro",
+        "score1": "2",
+        "score2": "1",
+        "date": "January 29, 2017 - 10:00 EST"
+      }
+    ]
+  },
+  {
+    "name": "ELEAGUE Boston 2018",
+    "winner": "Cloud9",
+    "startDate": "2018-01-12",
+    "endDate": "2018-01-28",
+    "placements": [
+      {
+        "place": "1st",
+        "team": "Cloud9"
+      },
+      {
+        "place": "2nd",
+        "team": "FaZe Clan"
+      },
+      {
+        "place": "3rd-4th",
+        "team": "Natus Vincere"
+      },
+      {
+        "place": "3rd-4th",
+        "team": "SK Gaming"
+      },
+      {
+        "place": "5th-8th",
+        "team": "mousesports"
+      },
+      {
+        "place": "5th-8th",
+        "team": "Quantum Bellator Fire"
+      },
+      {
+        "place": "5th-8th",
+        "team": "G2 Esports"
+      },
+      {
+        "place": "5th-8th",
+        "team": "Fnatic"
+      },
+      {
+        "place": "9th-11th",
+        "team": "Gambit Esports"
+      },
+      {
+        "place": "9th-11th",
+        "team": "Vega Squadron"
+      },
+      {
+        "place": "9th-11th",
+        "team": "Space Soldiers"
+      },
+      {
+        "place": "12th-14th",
+        "team": "BIG"
+      },
+      {
+        "place": "12th-14th",
+        "team": "Astralis"
+      },
+      {
+        "place": "12th-14th",
+        "team": "Team Liquid"
+      },
+      {
+        "place": "15th-16th",
+        "team": "North"
+      },
+      {
+        "place": "15th-16th",
+        "team": "Virtus.pro"
+      },
+      {
+        "place": "17th",
+        "team": "AVANGAR"
+      },
+      {
+        "place": "18th",
+        "team": "Renegades"
+      },
+      {
+        "place": "19th-21st",
+        "team": "Sprout"
+      },
+      {
+        "place": "19th-21st",
+        "team": "Team Envy"
+      },
+      {
+        "place": "19th-21st",
+        "team": "Misfits Gaming"
+      },
+      {
+        "place": "22nd-23rd",
+        "team": "Flash Gaming"
+      },
+      {
+        "place": "22nd-23rd",
+        "team": "FlipSid3 Tactics"
+      }
+    ],
+    "stageDates": [
+      {
+        "phase": "Challengers Stage",
+        "startDate": "2018-01-12",
+        "endDate": "2018-01-15"
+      }
+    ],
+    "playoffMatches": [
+      {
+        "round": "Quarterfinals",
+        "team1": "FaZe Clan",
+        "team2": "MOUZ",
+        "score1": "2",
+        "score2": "0",
+        "date": "January 26, 2018 - 10:00 EST"
+      },
+      {
+        "round": "Quarterfinals",
+        "team1": "Natus Vincere",
+        "team2": "Quantum Bellator Fire",
+        "score1": "2",
+        "score2": "0",
+        "date": "January 26, 2018 - 14:35 EST"
+      },
+      {
+        "round": "Semifinals",
+        "team1": "FaZe Clan",
+        "team2": "Natus Vincere",
+        "score1": "2",
+        "score2": "0",
+        "date": "January 27, 2018 - 16:00 EST"
+      },
+      {
+        "round": "Quarterfinals",
+        "team1": "G2 Esports",
+        "team2": "Cloud9",
+        "score1": "0",
+        "score2": "2",
+        "date": "January 26, 2018 - 16:30 EST"
+      },
+      {
+        "round": "Quarterfinals",
+        "team1": "SK Gaming",
+        "team2": "Fnatic",
+        "score1": "2",
+        "score2": "1",
+        "date": "January 27, 2018 - 10:00 EST"
+      },
+      {
+        "round": "Semifinals",
+        "team1": "Cloud9",
+        "team2": "SK Gaming",
+        "score1": "2",
+        "score2": "1",
+        "date": "January 27, 2018 - 18:30 EST"
+      },
+      {
+        "round": "Grand Final",
+        "team1": "FaZe Clan",
+        "team2": "Cloud9",
+        "score1": "1",
+        "score2": "2",
+        "date": "January 28, 2018 - 14:00 EST"
+      }
+    ]
+  },
+  {
+    "name": "EMS One Katowice 2014",
+    "winner": "Virtus.pro",
+    "startDate": "2014-03-13",
+    "endDate": "2014-03-16",
+    "placements": [
+      {
+        "place": "1st",
+        "team": "Virtus.pro"
+      },
+      {
+        "place": "2nd",
+        "team": "Ninjas in Pyjamas"
+      },
+      {
+        "place": "3rd-4th",
+        "team": "Team Dignitas"
+      },
+      {
+        "place": "3rd-4th",
+        "team": "LGB eSports"
+      },
+      {
+        "place": "5th-8th",
+        "team": "compLexity Gaming"
+      },
+      {
+        "place": "5th-8th",
+        "team": "HellRaisers"
+      },
+      {
+        "place": "5th-8th",
+        "team": "Team LDLC.com"
+      },
+      {
+        "place": "5th-8th",
+        "team": "Fnatic"
+      },
+      {
+        "place": "9th-12th",
+        "team": "Titan"
+      },
+      {
+        "place": "9th-12th",
+        "team": "3DMAX"
+      },
+      {
+        "place": "9th-12th",
+        "team": "Reason Gaming"
+      },
+      {
+        "place": "9th-12th",
+        "team": "Clan-Mystik"
+      },
+      {
+        "place": "13th-16th",
+        "team": "mousesports"
+      },
+      {
+        "place": "13th-16th",
+        "team": "Vox Eminor"
+      },
+      {
+        "place": "13th-16th",
+        "team": "Team iBUYPOWER"
+      },
+      {
+        "place": "13th-16th",
+        "team": "Natus Vincere"
+      }
+    ],
+    "stageDates": [],
+    "playoffMatches": [
+      {
+        "round": "Quarterfinals",
+        "team1": "Ninjas in Pyjamas",
+        "team2": "Complexity",
+        "score1": "2",
+        "score2": "1",
+        "date": "March 14, 2014 - 18:55 CET"
+      },
+      {
+        "round": "Quarterfinals",
+        "team1": "Dignitas",
+        "team2": "HellRaisers",
+        "score1": "2",
+        "score2": "0",
+        "date": "March 14, 2014 - 13:00 CET"
+      },
+      {
+        "round": "Semifinals",
+        "team1": "Ninjas in Pyjamas",
+        "team2": "Dignitas",
+        "score1": "2",
+        "score2": "0",
+        "date": "March 15, 2014 - 17:05 CET"
+      },
+      {
+        "round": "Quarterfinals",
+        "team1": "Virtus.pro",
+        "team2": "Team LDLC",
+        "score1": "2",
+        "score2": "0",
+        "date": "March 14, 2014 - 16:00 CET"
+      },
+      {
+        "round": "Quarterfinals",
+        "team1": "Fnatic",
+        "team2": "LGB eSports",
+        "score1": "1",
+        "score2": "2",
+        "date": "March 15, 2014 - 13:00 CET"
+      },
+      {
+        "round": "Semifinals",
+        "team1": "Virtus.pro",
+        "team2": "LGB eSports",
+        "score1": "2",
+        "score2": "1",
+        "date": "March 15, 2014 - 19:00 CET"
+      },
+      {
+        "round": "Grand Final",
+        "team1": "Ninjas in Pyjamas",
+        "team2": "Virtus.pro",
+        "score1": "0",
+        "score2": "2",
+        "date": "March 16, 2014 - 13:00 CET"
+      }
+    ]
+  },
+  {
+    "name": "ESL One Cologne 2014",
+    "winner": "Ninjas in Pyjamas",
+    "startDate": "2014-08-14",
+    "endDate": "2014-08-17",
+    "placements": [
+      {
+        "place": "1st",
+        "team": "Ninjas in Pyjamas"
+      },
+      {
+        "place": "2nd",
+        "team": "Fnatic"
+      },
+      {
+        "place": "3rd-4th",
+        "team": "Team Dignitas"
+      },
+      {
+        "place": "3rd-4th",
+        "team": "Team LDLC.com"
+      },
+      {
+        "place": "5th-8th",
+        "team": "Natus Vincere"
+      },
+      {
+        "place": "5th-8th",
+        "team": "Epsilon eSports"
+      },
+      {
+        "place": "5th-8th",
+        "team": "Virtus.pro"
+      },
+      {
+        "place": "5th-8th",
+        "team": "Cloud9"
+      },
+      {
+        "place": "9th-12th",
+        "team": "HellRaisers"
+      },
+      {
+        "place": "9th-12th",
+        "team": "Copenhagen Wolves"
+      },
+      {
+        "place": "9th-12th",
+        "team": "Team iBUYPOWER"
+      },
+      {
+        "place": "9th-12th",
+        "team": "Titan"
+      },
+      {
+        "place": "13th-16th",
+        "team": "Team Wolf"
+      },
+      {
+        "place": "13th-16th",
+        "team": "London Conspiracy"
+      },
+      {
+        "place": "13th-16th",
+        "team": "dAT Team"
+      },
+      {
+        "place": "13th-16th",
+        "team": "Vox Eminor"
+      }
+    ],
+    "stageDates": [],
+    "playoffMatches": [
+      {
+        "round": "Quarterfinals",
+        "team1": "Fnatic",
+        "team2": "Natus Vincere",
+        "score1": "2",
+        "score2": "1",
+        "date": "August 16, 2014 - 09:25 CEST"
+      },
+      {
+        "round": "Quarterfinals",
+        "team1": "Epsilon Esports",
+        "team2": "Dignitas",
+        "score1": "0",
+        "score2": "2",
+        "date": "August 16, 2014 - 13:25 CEST"
+      },
+      {
+        "round": "Semifinals",
+        "team1": "Fnatic",
+        "team2": "Dignitas",
+        "score1": "2",
+        "score2": "0",
+        "date": "August 17, 2014 - 09:00 CEST"
+      },
+      {
+        "round": "Quarterfinals",
+        "team1": "Team LDLC",
+        "team2": "Virtus.pro",
+        "score1": "2",
+        "score2": "0",
+        "date": "August 16, 2014 - 14:40 CEST"
+      },
+      {
+        "round": "Quarterfinals",
+        "team1": "Cloud9",
+        "team2": "Ninjas in Pyjamas",
+        "score1": "1",
+        "score2": "2",
+        "date": "August 16, 2014 - 17:30 CEST"
+      },
+      {
+        "round": "Semifinals",
+        "team1": "Team LDLC",
+        "team2": "Ninjas in Pyjamas",
+        "score1": "1",
+        "score2": "2",
+        "date": "August 17, 2014 - 11:55 CEST"
+      },
+      {
+        "round": "Grand Final",
+        "team1": "Fnatic",
+        "team2": "Ninjas in Pyjamas",
+        "score1": "1",
+        "score2": "2",
+        "date": "August 17, 2014 - 16:00 CEST"
+      }
+    ]
+  },
+  {
+    "name": "ESL One Cologne 2015",
+    "winner": "Fnatic",
+    "startDate": "2015-08-20",
+    "endDate": "2015-08-23",
+    "placements": [
+      {
+        "place": "1st",
+        "team": "Fnatic"
+      },
+      {
+        "place": "2nd",
+        "team": "Team EnVyUs"
+      },
+      {
+        "place": "3rd-4th",
+        "team": "Team SoloMid"
+      },
+      {
+        "place": "3rd-4th",
+        "team": "Virtus.pro"
+      },
+      {
+        "place": "5th-8th",
+        "team": "Natus Vincere"
+      },
+      {
+        "place": "5th-8th",
+        "team": "Team Kinguin"
+      },
+      {
+        "place": "5th-8th",
+        "team": "Ninjas in Pyjamas"
+      },
+      {
+        "place": "5th-8th",
+        "team": "Luminosity Gaming"
+      },
+      {
+        "place": "9th-12th",
+        "team": "Counter Logic Gaming"
+      },
+      {
+        "place": "9th-12th",
+        "team": "Cloud9"
+      },
+      {
+        "place": "9th-12th",
+        "team": "Renegades"
+      },
+      {
+        "place": "9th-12th",
+        "team": "FlipSid3 Tactics"
+      },
+      {
+        "place": "13th-16th",
+        "team": "Team eBettle"
+      },
+      {
+        "place": "13th-16th",
+        "team": "Team Immunity"
+      },
+      {
+        "place": "13th-16th",
+        "team": "Titan"
+      },
+      {
+        "place": "13th-16th",
+        "team": "mousesports"
+      }
+    ],
+    "stageDates": [],
+    "playoffMatches": [
+      {
+        "round": "Qualified",
+        "team1": "Ninjas in Pyjamas",
+        "team2": "Counter Logic Gaming",
+        "score1": "16",
+        "score2": "13",
+        "date": "August 20, 2015 - 14:15 CEST"
+      },
+      {
+        "round": "Qualified",
+        "team1": "Renegades",
+        "team2": "TSM",
+        "score1": "11",
+        "score2": "16",
+        "date": "August 20, 2015 - 15:45 CEST"
+      },
+      {
+        "round": "Qualified",
+        "team1": "Ninjas in Pyjamas",
+        "team2": "TSM",
+        "score1": "3",
+        "score2": "16",
+        "date": "August 20, 2015 - 17:10 CEST"
+      },
+      {
+        "round": "Qualified",
+        "team1": "Team Envy",
+        "team2": "FlipSid3 Tactics",
+        "score1": "16",
+        "score2": "3",
+        "date": "August 20, 2015 - 14:15 CEST"
+      },
+      {
+        "round": "Qualified",
+        "team1": "Luminosity Gaming",
+        "team2": "Devils.one",
+        "score1": "16",
+        "score2": "6",
+        "date": "August 20, 2015 - 15:25 CEST"
+      },
+      {
+        "round": "Qualified",
+        "team1": "Team Envy",
+        "team2": "Luminosity Gaming",
+        "score1": "19",
+        "score2": "16",
+        "date": "August 20, 2015 - 16:35 CEST"
+      },
+      {
+        "round": "Qualified",
+        "team1": "Fnatic",
+        "team2": "Team eBettle",
+        "score1": "16",
+        "score2": "2",
+        "date": "August 20, 2015 - 18:35 CEST"
+      },
+      {
+        "round": "Qualified",
+        "team1": "Titan",
+        "team2": "Natus Vincere",
+        "score1": "17",
+        "score2": "19",
+        "date": "August 20, 2015 - 19:50 CEST"
+      },
+      {
+        "round": "Qualified",
+        "team1": "Fnatic",
+        "team2": "Natus Vincere",
+        "score1": "16",
+        "score2": "2",
+        "date": "August 20, 2015 - 22:25 CEST"
+      },
+      {
+        "round": "Qualified",
+        "team1": "Virtus.pro",
+        "team2": "Team Immunity",
+        "score1": "16",
+        "score2": "8",
+        "date": "August 20, 2015 - 18:20 CEST"
+      },
+      {
+        "round": "Qualified",
+        "team1": "MOUZ",
+        "team2": "Cloud9",
+        "score1": "10",
+        "score2": "16",
+        "date": "August 20, 2015 - 19:45 CEST"
+      },
+      {
+        "round": "Qualified",
+        "team1": "Virtus.pro",
+        "team2": "Cloud9",
+        "score1": "16",
+        "score2": "8",
+        "date": "August 20, 2015 - 21:20 CEST"
+      },
+      {
+        "round": "Qualified",
+        "team1": "Renegades",
+        "team2": "Titan",
+        "score1": "16",
+        "score2": "9",
+        "date": "August 21, 2015 - 18:30 CEST"
+      },
+      {
+        "round": "Qualified",
+        "team1": "Ninjas in Pyjamas",
+        "team2": "Renegades",
+        "score1": "16",
+        "score2": "5",
+        "date": "August 21, 2015 - 19:35 CEST"
+      },
+      {
+        "round": "Qualified",
+        "team1": "FlipSid3 Tactics",
+        "team2": "MOUZ",
+        "score1": "16",
+        "score2": "14",
+        "date": "August 21, 2015 - 20:40 CEST"
+      },
+      {
+        "round": "Qualified",
+        "team1": "Luminosity Gaming",
+        "team2": "FlipSid3 Tactics",
+        "score1": "22",
+        "score2": "18",
+        "date": "August 21, 2015 - 22:10 CEST"
+      },
+      {
+        "round": "Qualified",
+        "team1": "Team eBettle",
+        "team2": "Counter Logic Gaming",
+        "score1": "14",
+        "score2": "16",
+        "date": "August 21, 2015 - 15:25 CEST"
+      },
+      {
+        "round": "Qualified",
+        "team1": "Natus Vincere",
+        "team2": "Counter Logic Gaming",
+        "score1": "16",
+        "score2": "14",
+        "date": "August 21, 2015 - 17:00 CEST"
+      },
+      {
+        "round": "Qualified",
+        "team1": "Team Immunity",
+        "team2": "Devils.one",
+        "score1": "13",
+        "score2": "16",
+        "date": "August 21, 2015 - 12:30 CEST"
+      },
+      {
+        "round": "Qualified",
+        "team1": "Cloud9",
+        "team2": "Devils.one",
+        "score1": "13",
+        "score2": "16",
+        "date": "August 21, 2015 - 14:00 CEST"
+      },
+      {
+        "round": "Qualified",
+        "team1": "Team Envy",
+        "team2": "Natus Vincere",
+        "score1": "2",
+        "score2": "0",
+        "date": "August 22, 2015 - 12:00 CEST"
+      },
+      {
+        "round": "Qualified",
+        "team1": "TSM",
+        "team2": "Devils.one",
+        "score1": "2",
+        "score2": "0",
+        "date": "August 22, 2015 - 15:55 CEST"
+      },
+      {
+        "round": "Qualified",
+        "team1": "Team Envy",
+        "team2": "TSM",
+        "score1": "2",
+        "score2": "1",
+        "date": "August 23, 2015 - 12:25 CEST"
+      },
+      {
+        "round": "Qualified",
+        "team1": "Virtus.pro",
+        "team2": "Ninjas in Pyjamas",
+        "score1": "2",
+        "score2": "0",
+        "date": "August 22, 2015 - 18:30 CEST"
+      },
+      {
+        "round": "Qualified",
+        "team1": "Fnatic",
+        "team2": "Luminosity Gaming",
+        "score1": "2",
+        "score2": "0",
+        "date": "August 22, 2015 - 21:20 CEST"
+      },
+      {
+        "round": "Qualified",
+        "team1": "Virtus.pro",
+        "team2": "Fnatic",
+        "score1": "1",
+        "score2": "2",
+        "date": "August 23, 2015 - 15:50 CEST"
+      },
+      {
+        "round": "Qualified",
+        "team1": "Team Envy",
+        "team2": "Fnatic",
+        "score1": "0",
+        "score2": "2",
+        "date": "August 23, 2015 - 19:25 CEST"
+      }
+    ]
+  },
+  {
+    "name": "ESL One Cologne 2016",
+    "winner": "SK Gaming",
+    "startDate": "2016-07-05",
+    "endDate": "2016-07-10",
+    "placements": [
+      {
+        "place": "1st",
+        "team": "SK Gaming"
+      },
+      {
+        "place": "2nd",
+        "team": "Team Liquid"
+      },
+      {
+        "place": "3rd-4th",
+        "team": "Virtus.pro"
+      },
+      {
+        "place": "3rd-4th",
+        "team": "Fnatic"
+      },
+      {
+        "place": "5th-8th",
+        "team": "Astralis"
+      },
+      {
+        "place": "5th-8th",
+        "team": "FlipSid3 Tactics"
+      },
+      {
+        "place": "5th-8th",
+        "team": "Natus Vincere"
+      },
+      {
+        "place": "5th-8th",
+        "team": "Gambit Gaming"
+      },
+      {
+        "place": "9th-12th",
+        "team": "Team Dignitas"
+      },
+      {
+        "place": "9th-12th",
+        "team": "Ninjas in Pyjamas"
+      },
+      {
+        "place": "9th-12th",
+        "team": "mousesports"
+      },
+      {
+        "place": "9th-12th",
+        "team": "FaZe Clan"
+      },
+      {
+        "place": "13th-16th",
+        "team": "Counter Logic Gaming"
+      },
+      {
+        "place": "13th-16th",
+        "team": "OpTic Gaming"
+      },
+      {
+        "place": "13th-16th",
+        "team": "Team EnVyUs"
+      },
+      {
+        "place": "13th-16th",
+        "team": "G2 Esports"
+      }
+    ],
+    "stageDates": [],
+    "playoffMatches": [
+      {
+        "round": "Quarterfinals",
+        "team1": "Virtus.pro",
+        "team2": "Astralis",
+        "score1": "2",
+        "score2": "0",
+        "date": "July 8, 2016 - 10:00 CEST"
+      },
+      {
+        "round": "Quarterfinals",
+        "team1": "SK Gaming",
+        "team2": "FlipSid3 Tactics",
+        "score1": "2",
+        "score2": "0",
+        "date": "July 8, 2016 - 14:00 CEST"
+      },
+      {
+        "round": "Semifinals",
+        "team1": "Virtus.pro",
+        "team2": "SK Gaming",
+        "score1": "1",
+        "score2": "2",
+        "date": "July 9, 2016 - 15:00 CEST"
+      },
+      {
+        "round": "Quarterfinals",
+        "team1": "Natus Vincere",
+        "team2": "Team Liquid",
+        "score1": "1",
+        "score2": "2",
+        "date": "July 8, 2016 - 17:15 CEST"
+      },
+      {
+        "round": "Quarterfinals",
+        "team1": "Gambit Esports",
+        "team2": "Fnatic",
+        "score1": "0",
+        "score2": "2",
+        "date": "July 8, 2016 - 21:15 CEST"
+      },
+      {
+        "round": "Semifinals",
+        "team1": "Team Liquid",
+        "team2": "Fnatic",
+        "score1": "2",
+        "score2": "0",
+        "date": "July 9, 2016 - 19:30 CEST"
+      },
+      {
+        "round": "Grand Final",
+        "team1": "SK Gaming",
+        "team2": "Team Liquid",
+        "score1": "2",
+        "score2": "0",
+        "date": "July 10, 2016 - 17:00 CEST"
+      }
+    ]
+  },
+  {
+    "name": "ESL One Katowice 2015",
+    "winner": "Fnatic",
+    "startDate": "2015-03-12",
+    "endDate": "2015-03-15",
+    "placements": [
+      {
+        "place": "1st",
+        "team": "Fnatic"
+      },
+      {
+        "place": "2nd",
+        "team": "Ninjas in Pyjamas"
+      },
+      {
+        "place": "3rd-4th",
+        "team": "Virtus.pro"
+      },
+      {
+        "place": "3rd-4th",
+        "team": "Team EnVyUs"
+      },
+      {
+        "place": "5th-8th",
+        "team": "PENTA Sports"
+      },
+      {
+        "place": "5th-8th",
+        "team": "Keyd Stars"
+      },
+      {
+        "place": "5th-8th",
+        "team": "Natus Vincere"
+      },
+      {
+        "place": "5th-8th",
+        "team": "Team SoloMid"
+      },
+      {
+        "place": "9th-12th",
+        "team": "Vox Eminor"
+      },
+      {
+        "place": "9th-12th",
+        "team": "LGB eSports"
+      },
+      {
+        "place": "9th-12th",
+        "team": "Counter Logic Gaming"
+      },
+      {
+        "place": "9th-12th",
+        "team": "Cloud9"
+      },
+      {
+        "place": "13th-16th",
+        "team": "FlipSid3 Tactics"
+      },
+      {
+        "place": "13th-16th",
+        "team": "Titan"
+      },
+      {
+        "place": "13th-16th",
+        "team": "HellRaisers"
+      },
+      {
+        "place": "13th-16th",
+        "team": "3DMAX"
+      }
+    ],
+    "stageDates": [],
+    "playoffMatches": [
+      {
+        "round": "Quarterfinals",
+        "team1": "Fnatic",
+        "team2": "PENTA Sports",
+        "score1": "2",
+        "score2": "0",
+        "date": "March 13, 2015 - 17:00 CET"
+      },
+      {
+        "round": "Quarterfinals",
+        "team1": "Virtus.pro",
+        "team2": "Keyd Stars",
+        "score1": "2",
+        "score2": "1",
+        "date": "March 13, 2015 - 19:45 CET"
+      },
+      {
+        "round": "Semifinals",
+        "team1": "Fnatic",
+        "team2": "Virtus.pro",
+        "score1": "2",
+        "score2": "0",
+        "date": "March 14, 2015 - 17:00 CET"
+      },
+      {
+        "round": "Quarterfinals",
+        "team1": "Team Envy",
+        "team2": "Natus Vincere",
+        "score1": "2",
+        "score2": "1",
+        "date": "March 13, 2015 - 13:00 CET"
+      },
+      {
+        "round": "Quarterfinals",
+        "team1": "Ninjas in Pyjamas",
+        "team2": "TSM",
+        "score1": "2",
+        "score2": "1",
+        "date": "March 14, 2015 - 13:00 CET"
+      },
+      {
+        "round": "Semifinals",
+        "team1": "Team Envy",
+        "team2": "Ninjas in Pyjamas",
+        "score1": "0",
+        "score2": "2",
+        "date": "March 14, 2015 - 20:00 CET"
+      },
+      {
+        "round": "Grand Final",
+        "team1": "Fnatic",
+        "team2": "Ninjas in Pyjamas",
+        "score1": "2",
+        "score2": "1",
+        "date": "March 15, 2015 - 13:00 CET"
+      }
+    ]
+  },
+  {
+    "name": "FACEIT London 2018",
+    "winner": "Astralis",
+    "startDate": "2018-09-05",
+    "endDate": "2018-09-23",
+    "placements": [
+      {
+        "place": "1st",
+        "team": "Astralis"
+      },
+      {
+        "place": "2nd",
+        "team": "Natus Vincere"
+      },
+      {
+        "place": "3rd-4th",
+        "team": "MIBR"
+      },
+      {
+        "place": "3rd-4th",
+        "team": "Team Liquid"
+      },
+      {
+        "place": "5th-8th",
+        "team": "compLexity Gaming"
+      },
+      {
+        "place": "5th-8th",
+        "team": "BIG"
+      },
+      {
+        "place": "5th-8th",
+        "team": "HellRaisers"
+      },
+      {
+        "place": "5th-8th",
+        "team": "FaZe Clan"
+      },
+      {
+        "place": "9th-11th",
+        "team": "Ninjas in Pyjamas"
+      },
+      {
+        "place": "9th-11th",
+        "team": "Fnatic"
+      },
+      {
+        "place": "9th-11th",
+        "team": "G2 Esports"
+      },
+      {
+        "place": "12th-14th",
+        "team": "Vega Squadron"
+      },
+      {
+        "place": "12th-14th",
+        "team": "Cloud9"
+      },
+      {
+        "place": "12th-14th",
+        "team": "TYLOO"
+      },
+      {
+        "place": "15th-16th",
+        "team": "Winstrike Team"
+      },
+      {
+        "place": "15th-16th",
+        "team": "mousesports"
+      },
+      {
+        "place": "17th-19th",
+        "team": "Team Spirit"
+      },
+      {
+        "place": "17th-19th",
+        "team": "OpTic Gaming"
+      },
+      {
+        "place": "17th-19th",
+        "team": "North"
+      },
+      {
+        "place": "20th-22nd",
+        "team": "Renegades"
+      },
+      {
+        "place": "20th-22nd",
+        "team": "Gambit Esports"
+      },
+      {
+        "place": "20th-22nd",
+        "team": "Rogue"
+      },
+      {
+        "place": "23rd-24th",
+        "team": "Space Soldiers"
+      },
+      {
+        "place": "23rd-24th",
+        "team": "Virtus.pro"
+      }
+    ],
+    "stageDates": [],
+    "playoffMatches": [
+      {
+        "round": "Quarterfinals",
+        "team1": "Complexity",
+        "team2": "MIBR",
+        "score1": "0",
+        "score2": "2",
+        "date": "September 20, 2018 - 18:05 BST"
+      },
+      {
+        "round": "Quarterfinals",
+        "team1": "BIG",
+        "team2": "Natus Vincere",
+        "score1": "0",
+        "score2": "2",
+        "date": "September 20, 2018 - 15:15 BST"
+      },
+      {
+        "round": "Semifinals",
+        "team1": "MIBR",
+        "team2": "Natus Vincere",
+        "score1": "0",
+        "score2": "2",
+        "date": "September 22, 2018 - 16:15 BST"
+      },
+      {
+        "round": "Quarterfinals",
+        "team1": "Team Liquid",
+        "team2": "HellRaisers",
+        "score1": "2",
+        "score2": "1",
+        "date": "September 21, 2018 - 16:15 BST"
+      },
+      {
+        "round": "Quarterfinals",
+        "team1": "Astralis",
+        "team2": "FaZe Clan",
+        "score1": "2",
+        "score2": "0",
+        "date": "September 21, 2018 - 20:05 BST"
+      },
+      {
+        "round": "Semifinals",
+        "team1": "Team Liquid",
+        "team2": "Astralis",
+        "score1": "0",
+        "score2": "2",
+        "date": "September 22, 2018 - 20:05 BST"
+      },
+      {
+        "round": "Grand Final",
+        "team1": "Natus Vincere",
+        "team2": "Astralis",
+        "score1": "0",
+        "score2": "2",
+        "date": "September 23, 2018 - 18:10 BST"
+      }
+    ]
+  },
+  {
+    "name": "IEM Katowice 2019",
+    "winner": "Astralis",
+    "startDate": "2019-02-13",
+    "endDate": "2019-03-03",
+    "placements": [
+      {
+        "place": "1st",
+        "team": "Astralis"
+      },
+      {
+        "place": "2nd",
+        "team": "ENCE"
+      },
+      {
+        "place": "3rd-4th",
+        "team": "Natus Vincere"
+      },
+      {
+        "place": "3rd-4th",
+        "team": "MIBR"
+      },
+      {
+        "place": "5th-8th",
+        "team": "FaZe Clan"
+      },
+      {
+        "place": "5th-8th",
+        "team": "Team Liquid"
+      },
+      {
+        "place": "5th-8th",
+        "team": "Renegades"
+      },
+      {
+        "place": "5th-8th",
+        "team": "Ninjas in Pyjamas"
+      },
+      {
+        "place": "9th-11th",
+        "team": "Team Vitality"
+      },
+      {
+        "place": "9th-11th",
+        "team": "Cloud9"
+      },
+      {
+        "place": "9th-11th",
+        "team": "AVANGAR"
+      },
+      {
+        "place": "12th-14th",
+        "team": "HellRaisers"
+      },
+      {
+        "place": "12th-14th",
+        "team": "G2 Esports"
+      },
+      {
+        "place": "12th-14th",
+        "team": "compLexity Gaming"
+      },
+      {
+        "place": "15th-16th",
+        "team": "BIG"
+      },
+      {
+        "place": "15th-16th",
+        "team": "NRG Esports"
+      },
+      {
+        "place": "17th-19th",
+        "team": "TYLOO"
+      },
+      {
+        "place": "17th-19th",
+        "team": "ViCi Gaming"
+      },
+      {
+        "place": "17th-19th",
+        "team": "Winstrike Team"
+      },
+      {
+        "place": "20th-22nd",
+        "team": "Fnatic"
+      },
+      {
+        "place": "20th-22nd",
+        "team": "Vega Squadron"
+      },
+      {
+        "place": "20th-22nd",
+        "team": "FURIA Esports"
+      },
+      {
+        "place": "23rd-24th",
+        "team": "Team Spirit"
+      },
+      {
+        "place": "23rd-24th",
+        "team": "Grayhound Gaming"
+      }
+    ],
+    "stageDates": [
+      {
+        "phase": "Challengers Stage",
+        "startDate": "2019-02-13",
+        "endDate": "2019-02-17"
+      },
+      {
+        "phase": "Legends Stage",
+        "startDate": "2019-02-20",
+        "endDate": "2019-02-24"
+      },
+      {
+        "phase": "Champions Stage",
+        "startDate": "2019-02-28",
+        "endDate": "2019-03-03"
+      }
+    ],
+    "playoffMatches": [
+      {
+        "round": "Quarterfinals",
+        "team1": "Natus Vincere",
+        "team2": "FaZe Clan",
+        "score1": "2",
+        "score2": "0",
+        "date": "February 28, 2019 - 16:20 CET"
+      },
+      {
+        "round": "Quarterfinals",
+        "team1": "Team Liquid",
+        "team2": "ENCE",
+        "score1": "0",
+        "score2": "2",
+        "date": "February 28, 2019 - 19:40 CET"
+      },
+      {
+        "round": "Semifinals",
+        "team1": "Natus Vincere",
+        "team2": "ENCE",
+        "score1": "1",
+        "score2": "2",
+        "date": "March 2, 2019 - 16:10 CET"
+      },
+      {
+        "round": "Quarterfinals",
+        "team1": "MIBR",
+        "team2": "Renegades",
+        "score1": "2",
+        "score2": "0",
+        "date": "March 1, 2019 - 16:10 CET"
+      },
+      {
+        "round": "Quarterfinals",
+        "team1": "Astralis",
+        "team2": "Ninjas in Pyjamas",
+        "score1": "2",
+        "score2": "0",
+        "date": "March 1, 2019 - 19:35 CET"
+      },
+      {
+        "round": "Semifinals",
+        "team1": "MIBR",
+        "team2": "Astralis",
+        "score1": "0",
+        "score2": "2",
+        "date": "March 2, 2019 - 20:20 CET"
+      },
+      {
+        "round": "Grand Final",
+        "team1": "ENCE",
+        "team2": "Astralis",
+        "score1": "0",
+        "score2": "2",
+        "date": "March 3, 2019 - 19:00 CET"
+      }
+    ]
+  },
+  {
+    "name": "IEM Rio 2022",
+    "winner": "Outsiders",
+    "startDate": "2022-10-31",
+    "endDate": "2022-11-13",
+    "placements": [
+      {
+        "place": "1st",
+        "team": "Outsiders"
+      },
+      {
+        "place": "2nd",
+        "team": "Heroic"
+      },
+      {
+        "place": "3rd-4th",
+        "team": "MOUZ"
+      },
+      {
+        "place": "3rd-4th",
+        "team": "FURIA Esports"
+      },
+      {
+        "place": "5th-8th",
+        "team": "Cloud9"
+      },
+      {
+        "place": "5th-8th",
+        "team": "Fnatic"
+      },
+      {
+        "place": "5th-8th",
+        "team": "Team Spirit"
+      },
+      {
+        "place": "5th-8th",
+        "team": "Natus Vincere"
+      },
+      {
+        "place": "9th-11th",
+        "team": "BIG"
+      },
+      {
+        "place": "9th-11th",
+        "team": "Team Liquid"
+      },
+      {
+        "place": "9th-11th",
+        "team": "ENCE"
+      },
+      {
+        "place": "12th-14th",
+        "team": "Bad News Eagles"
+      },
+      {
+        "place": "12th-14th",
+        "team": "Team Vitality"
+      },
+      {
+        "place": "12th-14th",
+        "team": "Sprout"
+      },
+      {
+        "place": "15th-16th",
+        "team": "Ninjas in Pyjamas"
+      },
+      {
+        "place": "15th-16th",
+        "team": "FaZe Clan"
+      },
+      {
+        "place": "17th-19th",
+        "team": "Team GamerLegion"
+      },
+      {
+        "place": "17th-19th",
+        "team": "OG"
+      },
+      {
+        "place": "17th-19th",
+        "team": "9z Team"
+      },
+      {
+        "place": "20th-22nd",
+        "team": "Grayhound Gaming"
+      },
+      {
+        "place": "20th-22nd",
+        "team": "Evil Geniuses"
+      },
+      {
+        "place": "20th-22nd",
+        "team": "IHC Esports"
+      },
+      {
+        "place": "23rd-24th",
+        "team": "00 Nation"
+      },
+      {
+        "place": "23rd-24th",
+        "team": "Imperial Esports"
+      }
+    ],
+    "stageDates": [
+      {
+        "phase": "Challengers Stage",
+        "startDate": "2022-10-31",
+        "endDate": "2022-11-03"
+      },
+      {
+        "phase": "Legends Stage",
+        "startDate": "2022-11-05",
+        "endDate": "2022-11-08"
+      },
+      {
+        "phase": "Champions Stage",
+        "startDate": "2022-11-10",
+        "endDate": "2022-11-13"
+      }
+    ],
+    "playoffMatches": [
+      {
+        "round": "Quarterfinals",
+        "team1": "Cloud9",
+        "team2": "MOUZ",
+        "score1": "1",
+        "score2": "2",
+        "date": "November 10, 2022 - 17:30 BRT"
+      },
+      {
+        "round": "Quarterfinals",
+        "team1": "Fnatic",
+        "team2": "Outsiders",
+        "score1": "0",
+        "score2": "2",
+        "date": "November 10, 2022 - 14:00 BRT"
+      },
+      {
+        "round": "Semifinals",
+        "team1": "MOUZ",
+        "team2": "Outsiders",
+        "score1": "1",
+        "score2": "2",
+        "date": "November 12, 2022 - 14:00 BRT"
+      },
+      {
+        "round": "Quarterfinals",
+        "team1": "HEROIC",
+        "team2": "Team Spirit",
+        "score1": "2",
+        "score2": "0",
+        "date": "November 11, 2022 - 14:15 BRT"
+      },
+      {
+        "round": "Quarterfinals",
+        "team1": "Natus Vincere",
+        "team2": "FURIA",
+        "score1": "1",
+        "score2": "2",
+        "date": "November 11, 2022 - 17:45 BRT"
+      },
+      {
+        "round": "Semifinals",
+        "team1": "HEROIC",
+        "team2": "FURIA",
+        "score1": "2",
+        "score2": "1",
+        "date": "November 12, 2022 - 19:00 BRT"
+      },
+      {
+        "round": "Grand Final",
+        "team1": "Outsiders",
+        "team2": "HEROIC",
+        "score1": "2",
+        "score2": "0",
+        "date": "November 13, 2022 - 15:00 BRT"
+      }
+    ]
+  },
+  {
+    "name": "MLG Columbus 2016",
+    "winner": "Luminosity Gaming",
+    "startDate": "2016-03-29",
+    "endDate": "2016-04-03",
+    "placements": [
+      {
+        "place": "1st",
+        "team": "Luminosity Gaming"
+      },
+      {
+        "place": "2nd",
+        "team": "Natus Vincere"
+      },
+      {
+        "place": "3rd-4th",
+        "team": "Astralis"
+      },
+      {
+        "place": "3rd-4th",
+        "team": "Team Liquid"
+      },
+      {
+        "place": "5th-8th",
+        "team": "Ninjas in Pyjamas"
+      },
+      {
+        "place": "5th-8th",
+        "team": "Fnatic"
+      },
+      {
+        "place": "5th-8th",
+        "team": "Counter Logic Gaming"
+      },
+      {
+        "place": "5th-8th",
+        "team": "Virtus.pro"
+      },
+      {
+        "place": "9th-12th",
+        "team": "mousesports"
+      },
+      {
+        "place": "9th-12th",
+        "team": "FaZe Clan"
+      },
+      {
+        "place": "9th-12th",
+        "team": "Gambit Gaming"
+      },
+      {
+        "place": "9th-12th",
+        "team": "G2 Esports"
+      },
+      {
+        "place": "13th-16th",
+        "team": "FlipSid3 Tactics"
+      },
+      {
+        "place": "13th-16th",
+        "team": "Splyce"
+      },
+      {
+        "place": "13th-16th",
+        "team": "Team EnVyUs"
+      },
+      {
+        "place": "13th-16th",
+        "team": "Cloud9"
+      }
+    ],
+    "stageDates": [],
+    "playoffMatches": [
+      {
+        "round": "Quarterfinals",
+        "team1": "Natus Vincere",
+        "team2": "Ninjas in Pyjamas",
+        "score1": "2",
+        "score2": "0",
+        "date": "April 1, 2016 - 10:00 EDT"
+      },
+      {
+        "round": "Quarterfinals",
+        "team1": "Astralis",
+        "team2": "Fnatic",
+        "score1": "2",
+        "score2": "0",
+        "date": "April 1, 2016 - 13:30 EDT"
+      },
+      {
+        "round": "Semifinals",
+        "team1": "Natus Vincere",
+        "team2": "Astralis",
+        "score1": "2",
+        "score2": "0",
+        "date": "April 2, 2016 - 15:15 EDT"
+      },
+      {
+        "round": "Quarterfinals",
+        "team1": "Team Liquid",
+        "team2": "Counter Logic Gaming",
+        "score1": "2",
+        "score2": "0",
+        "date": "April 1, 2016 - 16:20 EDT"
+      },
+      {
+        "round": "Quarterfinals",
+        "team1": "Luminosity Gaming",
+        "team2": "Virtus.pro",
+        "score1": "2",
+        "score2": "1",
+        "date": "April 2, 2016 - 10:30 EDT"
+      },
+      {
+        "round": "Semifinals",
+        "team1": "Team Liquid",
+        "team2": "Luminosity Gaming",
+        "score1": "0",
+        "score2": "2",
+        "date": "April 2, 2016 - 18:15 EDT"
+      },
+      {
+        "round": "Grand Final",
+        "team1": "Natus Vincere",
+        "team2": "Luminosity Gaming",
+        "score1": "0",
+        "score2": "2",
+        "date": "April 3, 2016 - 14:15 EDT"
+      }
+    ]
+  },
+  {
+    "name": "PGL Antwerp 2022",
+    "winner": "FaZe Clan",
+    "startDate": "2022-05-09",
+    "endDate": "2022-05-22",
+    "placements": [
+      {
+        "place": "1st",
+        "team": "FaZe Clan"
+      },
+      {
+        "place": "2nd",
+        "team": "Natus Vincere"
+      },
+      {
+        "place": "3rd-4th",
+        "team": "Team Spirit"
+      },
+      {
+        "place": "3rd-4th",
+        "team": "ENCE"
+      },
+      {
+        "place": "5th-8th",
+        "team": "FURIA Esports"
+      },
+      {
+        "place": "5th-8th",
+        "team": "Ninjas in Pyjamas"
+      },
+      {
+        "place": "5th-8th",
+        "team": "Copenhagen Flames"
+      },
+      {
+        "place": "5th-8th",
+        "team": "Heroic"
+      },
+      {
+        "place": "9th-11th",
+        "team": "G2 Esports"
+      },
+      {
+        "place": "9th-11th",
+        "team": "Team Vitality"
+      },
+      {
+        "place": "9th-11th",
+        "team": "Imperial Esports"
+      },
+      {
+        "place": "12th-14th",
+        "team": "BIG"
+      },
+      {
+        "place": "12th-14th",
+        "team": "Cloud9"
+      },
+      {
+        "place": "12th-14th",
+        "team": "Outsiders"
+      },
+      {
+        "place": "15th-16th",
+        "team": "Bad News Eagles"
+      },
+      {
+        "place": "15th-16th",
+        "team": "Team Liquid"
+      },
+      {
+        "place": "17th-19th",
+        "team": "forZe"
+      },
+      {
+        "place": "17th-19th",
+        "team": "Astralis"
+      },
+      {
+        "place": "17th-19th",
+        "team": "MIBR"
+      },
+      {
+        "place": "20th-22nd",
+        "team": "Complexity Gaming"
+      },
+      {
+        "place": "20th-22nd",
+        "team": "Eternal Fire"
+      },
+      {
+        "place": "20th-22nd",
+        "team": "IHC Esports"
+      },
+      {
+        "place": "23rd-24th",
+        "team": "9z Team"
+      },
+      {
+        "place": "23rd-24th",
+        "team": "Renegades"
+      }
+    ],
+    "stageDates": [
+      {
+        "phase": "Challengers Stage",
+        "startDate": "2022-05-09",
+        "endDate": "2022-05-12"
+      },
+      {
+        "phase": "Legends Stage",
+        "startDate": "2022-05-14",
+        "endDate": "2022-05-17"
+      },
+      {
+        "phase": "Champions Stage",
+        "startDate": "2022-05-19",
+        "endDate": "2022-05-22"
+      }
+    ],
+    "playoffMatches": [
+      {
+        "round": "Quarterfinals",
+        "team1": "Team Spirit",
+        "team2": "FURIA",
+        "score1": "2",
+        "score2": "0",
+        "date": "May 19, 2022 - 21:05 CEST"
+      },
+      {
+        "round": "Quarterfinals",
+        "team1": "FaZe Clan",
+        "team2": "Ninjas in Pyjamas",
+        "score1": "2",
+        "score2": "1",
+        "date": "May 19, 2022 - 16:30 CEST"
+      },
+      {
+        "round": "Semifinals",
+        "team1": "Team Spirit",
+        "team2": "FaZe Clan",
+        "score1": "0",
+        "score2": "2",
+        "date": "May 21, 2022 - 16:30 CEST"
+      },
+      {
+        "round": "Quarterfinals",
+        "team1": "ENCE",
+        "team2": "Copenhagen Flames",
+        "score1": "2",
+        "score2": "0",
+        "date": "May 20, 2022 - 16:30 CEST"
+      },
+      {
+        "round": "Quarterfinals",
+        "team1": "HEROIC",
+        "team2": "Natus Vincere",
+        "score1": "1",
+        "score2": "2",
+        "date": "May 20, 2022 - 19:30 CEST"
+      },
+      {
+        "round": "Semifinals",
+        "team1": "ENCE",
+        "team2": "Natus Vincere",
+        "score1": "0",
+        "score2": "2",
+        "date": "May 21, 2022 - 20:25 CEST"
+      },
+      {
+        "round": "Grand Final",
+        "team1": "FaZe Clan",
+        "team2": "Natus Vincere",
+        "score1": "2",
+        "score2": "0",
+        "date": "May 22, 2022 - 20:00 CEST"
+      }
+    ]
+  },
+  {
+    "name": "PGL Copenhagen 2024",
+    "winner": "Natus Vincere",
+    "startDate": "2024-03-17",
+    "endDate": "2024-03-31",
+    "placements": [
+      {
+        "place": "1st",
+        "team": "Natus Vincere"
+      },
+      {
+        "place": "2nd",
+        "team": "FaZe Clan"
+      },
+      {
+        "place": "3rd-4th",
+        "team": "Team Vitality"
+      },
+      {
+        "place": "3rd-4th",
+        "team": "G2 Esports"
+      },
+      {
+        "place": "5th-8th",
+        "team": "Team Spirit"
+      },
+      {
+        "place": "5th-8th",
+        "team": "Cloud9"
+      },
+      {
+        "place": "5th-8th",
+        "team": "Eternal Fire"
+      },
+      {
+        "place": "5th-8th",
+        "team": "MOUZ"
+      },
+      {
+        "place": "9th-11th",
+        "team": "Complexity Gaming"
+      },
+      {
+        "place": "9th-11th",
+        "team": "Virtus.pro"
+      },
+      {
+        "place": "9th-11th",
+        "team": "paiN Gaming"
+      },
+      {
+        "place": "12th-14th",
+        "team": "Imperial Esports"
+      },
+      {
+        "place": "12th-14th",
+        "team": "ECSTATIC"
+      },
+      {
+        "place": "12th-14th",
+        "team": "HEROIC"
+      },
+      {
+        "place": "15th-16th",
+        "team": "The MongolZ"
+      },
+      {
+        "place": "15th-16th",
+        "team": "FURIA Esports"
+      },
+      {
+        "place": "17th-19th",
+        "team": "SAW"
+      },
+      {
+        "place": "17th-19th",
+        "team": "Legacy"
+      },
+      {
+        "place": "17th-19th",
+        "team": "GamerLegion"
+      },
+      {
+        "place": "20th-22nd",
+        "team": "Lynn Vision Gaming"
+      },
+      {
+        "place": "20th-22nd",
+        "team": "ENCE"
+      },
+      {
+        "place": "20th-22nd",
+        "team": "Apeks"
+      },
+      {
+        "place": "23rd-24th",
+        "team": "AMKAL ESPORTS"
+      },
+      {
+        "place": "23rd-24th",
+        "team": "KOI"
+      }
+    ],
+    "stageDates": [
+      {
+        "phase": "Opening Stage",
+        "startDate": "2024-03-17",
+        "endDate": "2024-03-20"
+      },
+      {
+        "phase": "Elimination Stage",
+        "startDate": "2024-03-21",
+        "endDate": "2024-03-24"
+      },
+      {
+        "phase": "Playoff Stage",
+        "startDate": "2024-03-28",
+        "endDate": "2024-03-31"
+      }
+    ],
+    "playoffMatches": [
+      {
+        "round": "Quarterfinals",
+        "team1": "Team Spirit",
+        "team2": "FaZe Clan",
+        "score1": "1",
+        "score2": "2",
+        "date": "March 28, 2024 - 19:55 CET"
+      },
+      {
+        "round": "Quarterfinals",
+        "team1": "Team Vitality",
+        "team2": "Cloud9",
+        "score1": "2",
+        "score2": "0",
+        "date": "March 28, 2024 - 17:00 CET"
+      },
+      {
+        "round": "Semifinals",
+        "team1": "FaZe Clan",
+        "team2": "Team Vitality",
+        "score1": "2",
+        "score2": "1",
+        "date": "March 30, 2024 - 17:00 CET"
+      },
+      {
+        "round": "Quarterfinals",
+        "team1": "Eternal Fire",
+        "team2": "Natus Vincere",
+        "score1": "0",
+        "score2": "2",
+        "date": "March 29, 2024 - 17:00 CET"
+      },
+      {
+        "round": "Quarterfinals",
+        "team1": "G2 Esports",
+        "team2": "MOUZ",
+        "score1": "2",
+        "score2": "0",
+        "date": "March 29, 2024 - 20:20 CET"
+      },
+      {
+        "round": "Semifinals",
+        "team1": "Natus Vincere",
+        "team2": "G2 Esports",
+        "score1": "2",
+        "score2": "1",
+        "date": "March 30, 2024 - 20:50 CET"
+      },
+      {
+        "round": "Grand Final",
+        "team1": "FaZe Clan",
+        "team2": "Natus Vincere",
+        "score1": "1",
+        "score2": "2",
+        "date": "March 31, 2024 - 20:00 CEST"
+      }
+    ]
+  },
+  {
+    "name": "PGL Kraków 2017",
+    "winner": "Gambit Esports",
+    "startDate": "2017-07-16",
+    "endDate": "2017-07-23",
+    "placements": [
+      {
+        "place": "1st",
+        "team": "Gambit Esports"
+      },
+      {
+        "place": "2nd",
+        "team": "Immortals"
+      },
+      {
+        "place": "3rd-4th",
+        "team": "Astralis"
+      },
+      {
+        "place": "3rd-4th",
+        "team": "Virtus.pro"
+      },
+      {
+        "place": "5th-8th",
+        "team": "Fnatic"
+      },
+      {
+        "place": "5th-8th",
+        "team": "SK Gaming"
+      },
+      {
+        "place": "5th-8th",
+        "team": "BIG"
+      },
+      {
+        "place": "5th-8th",
+        "team": "North"
+      },
+      {
+        "place": "9th-11th",
+        "team": "Cloud9"
+      },
+      {
+        "place": "9th-11th",
+        "team": "FlipSid3 Tactics"
+      },
+      {
+        "place": "9th-11th",
+        "team": "G2 Esports"
+      },
+      {
+        "place": "12th-14th",
+        "team": "Natus Vincere"
+      },
+      {
+        "place": "12th-14th",
+        "team": "mousesports"
+      },
+      {
+        "place": "12th-14th",
+        "team": "PENTA Sports"
+      },
+      {
+        "place": "15th-16th",
+        "team": "FaZe Clan"
+      },
+      {
+        "place": "15th-16th",
+        "team": "Vega Squadron"
+      }
+    ],
+    "stageDates": [],
+    "playoffMatches": [
+      {
+        "round": "Quarterfinals",
+        "team1": "Gambit Esports",
+        "team2": "Fnatic",
+        "score1": "2",
+        "score2": "0",
+        "date": "July 21, 2017 - 13:00 CEST"
+      },
+      {
+        "round": "Quarterfinals",
+        "team1": "SK Gaming",
+        "team2": "Astralis",
+        "score1": "0",
+        "score2": "2",
+        "date": "July 21, 2017 - 17:15 CEST"
+      },
+      {
+        "round": "Semifinals",
+        "team1": "Gambit Esports",
+        "team2": "Astralis",
+        "score1": "2",
+        "score2": "1",
+        "date": "July 22, 2017 - 15:30 CEST"
+      },
+      {
+        "round": "Quarterfinals",
+        "team1": "BIG",
+        "team2": "Immortals",
+        "score1": "1",
+        "score2": "2",
+        "date": "July 21, 2017 - 20:25 CEST"
+      },
+      {
+        "round": "Quarterfinals",
+        "team1": "North",
+        "team2": "Virtus.pro",
+        "score1": "0",
+        "score2": "2",
+        "date": "July 22, 2017 - 13:00 CEST"
+      },
+      {
+        "round": "Semifinals",
+        "team1": "Immortals",
+        "team2": "Virtus.pro",
+        "score1": "2",
+        "score2": "0",
+        "date": "July 22, 2017 - 19:45 CEST"
+      },
+      {
+        "round": "Grand Final",
+        "team1": "Gambit Esports",
+        "team2": "Immortals",
+        "score1": "2",
+        "score2": "1",
+        "date": "July 23, 2017 - 17:00 CEST"
+      }
+    ]
+  },
+  {
+    "name": "PGL Stockholm 2021",
+    "winner": "Natus Vincere",
+    "startDate": "2021-10-26",
+    "endDate": "2021-11-07",
+    "placements": [
+      {
+        "place": "1st",
+        "team": "Natus Vincere"
+      },
+      {
+        "place": "2nd",
+        "team": "G2 Esports"
+      },
+      {
+        "place": "3rd-4th",
+        "team": "Gambit Esports"
+      },
+      {
+        "place": "3rd-4th",
+        "team": "Heroic"
+      },
+      {
+        "place": "5th-8th",
+        "team": "Team Vitality"
+      },
+      {
+        "place": "5th-8th",
+        "team": "FURIA Esports"
+      },
+      {
+        "place": "5th-8th",
+        "team": "Virtus.pro"
+      },
+      {
+        "place": "5th-8th",
+        "team": "Ninjas in Pyjamas"
+      },
+      {
+        "place": "9th-11th",
+        "team": "Entropiq"
+      },
+      {
+        "place": "9th-11th",
+        "team": "Copenhagen Flames"
+      },
+      {
+        "place": "9th-11th",
+        "team": "FaZe Clan"
+      },
+      {
+        "place": "12th-14th",
+        "team": "Astralis"
+      },
+      {
+        "place": "12th-14th",
+        "team": "MOUZ"
+      },
+      {
+        "place": "12th-14th",
+        "team": "Team Liquid"
+      },
+      {
+        "place": "15th-16th",
+        "team": "Evil Geniuses"
+      },
+      {
+        "place": "15th-16th",
+        "team": "ENCE"
+      },
+      {
+        "place": "17th-19th",
+        "team": "BIG"
+      },
+      {
+        "place": "17th-19th",
+        "team": "Team Spirit"
+      },
+      {
+        "place": "17th-19th",
+        "team": "Movistar Riders"
+      },
+      {
+        "place": "20th-22nd",
+        "team": "paiN Gaming"
+      },
+      {
+        "place": "20th-22nd",
+        "team": "Renegades"
+      },
+      {
+        "place": "20th-22nd",
+        "team": "TYLOO"
+      },
+      {
+        "place": "23rd-24th",
+        "team": "GODSENT"
+      },
+      {
+        "place": "23rd-24th",
+        "team": "Sharks Esports"
+      }
+    ],
+    "stageDates": [
+      {
+        "phase": "Challengers Stage",
+        "startDate": "2021-10-26",
+        "endDate": "2021-10-29"
+      },
+      {
+        "phase": "Legends Stage",
+        "startDate": "2021-10-30",
+        "endDate": "2021-11-02"
+      },
+      {
+        "phase": "Champions Stage",
+        "startDate": "2021-11-04",
+        "endDate": "2021-11-07"
+      }
+    ],
+    "playoffMatches": [
+      {
+        "round": "Quarterfinals",
+        "team1": "Natus Vincere",
+        "team2": "Team Vitality",
+        "score1": "2",
+        "score2": "0",
+        "date": "November 5, 2021 - 20:05 CET"
+      },
+      {
+        "round": "Quarterfinals",
+        "team1": "FURIA",
+        "team2": "Gambit Esports",
+        "score1": "0",
+        "score2": "2",
+        "date": "November 5, 2021 - 16:30 CET"
+      },
+      {
+        "round": "Semifinals",
+        "team1": "Natus Vincere",
+        "team2": "Gambit Esports",
+        "score1": "2",
+        "score2": "0",
+        "date": "November 6, 2021 - 21:10 CET"
+      },
+      {
+        "round": "Quarterfinals",
+        "team1": "HEROIC",
+        "team2": "Virtus.pro",
+        "score1": "2",
+        "score2": "1",
+        "date": "November 4, 2021 - 16:30 CET"
+      },
+      {
+        "round": "Quarterfinals",
+        "team1": "Ninjas in Pyjamas",
+        "team2": "G2 Esports",
+        "score1": "0",
+        "score2": "2",
+        "date": "November 4, 2021 - 21:00 CET"
+      },
+      {
+        "round": "Semifinals",
+        "team1": "HEROIC",
+        "team2": "G2 Esports",
+        "score1": "1",
+        "score2": "2",
+        "date": "November 6, 2021 - 16:30 CET"
+      },
+      {
+        "round": "Grand Final",
+        "team1": "Natus Vincere",
+        "team2": "G2 Esports",
+        "score1": "2",
+        "score2": "0",
+        "date": "November 7, 2021 - 20:00 CET"
+      }
+    ]
+  },
+  {
+    "name": "Perfect World Shanghai 2024",
+    "winner": "Team Spirit",
+    "startDate": "2024-11-30",
+    "endDate": "2024-12-15",
+    "placements": [
+      {
+        "place": "1st",
+        "team": "Team Spirit"
+      },
+      {
+        "place": "2nd",
+        "team": "FaZe Clan"
+      },
+      {
+        "place": "3rd-4th",
+        "team": "MOUZ"
+      },
+      {
+        "place": "3rd-4th",
+        "team": "G2 Esports"
+      },
+      {
+        "place": "5th-8th",
+        "team": "The MongolZ"
+      },
+      {
+        "place": "5th-8th",
+        "team": "Team Liquid"
+      },
+      {
+        "place": "5th-8th",
+        "team": "HEROIC"
+      },
+      {
+        "place": "5th-8th",
+        "team": "Team Vitality"
+      },
+      {
+        "place": "9th-11th",
+        "team": "FURIA Esports"
+      },
+      {
+        "place": "9th-11th",
+        "team": "MIBR"
+      },
+      {
+        "place": "9th-11th",
+        "team": "Natus Vincere"
+      },
+      {
+        "place": "12th-14th",
+        "team": "GamerLegion"
+      },
+      {
+        "place": "12th-14th",
+        "team": "3DMAX"
+      },
+      {
+        "place": "12th-14th",
+        "team": "paiN Gaming"
+      },
+      {
+        "place": "15th-16th",
+        "team": "Wildcard"
+      },
+      {
+        "place": "15th-16th",
+        "team": "BIG"
+      },
+      {
+        "place": "17th-19th",
+        "team": "FlyQuest"
+      },
+      {
+        "place": "17th-19th",
+        "team": "Passion UA"
+      },
+      {
+        "place": "17th-19th",
+        "team": "Complexity Gaming"
+      },
+      {
+        "place": "20th-22nd",
+        "team": "Virtus.pro"
+      },
+      {
+        "place": "20th-22nd",
+        "team": "Cloud9"
+      },
+      {
+        "place": "20th-22nd",
+        "team": "Rare Atom"
+      },
+      {
+        "place": "23rd-24th",
+        "team": "Imperial Esports"
+      },
+      {
+        "place": "23rd-24th",
+        "team": "Fnatic"
+      }
+    ],
+    "stageDates": [
+      {
+        "phase": "Opening Stage",
+        "startDate": "2024-11-30",
+        "endDate": "2024-12-03"
+      },
+      {
+        "phase": "Elimination Stage",
+        "startDate": "2024-12-05",
+        "endDate": "2024-12-08"
+      },
+      {
+        "phase": "Playoff Stage",
+        "startDate": "2024-12-12",
+        "endDate": "2024-12-15"
+      }
+    ],
+    "playoffMatches": [
+      {
+        "round": "Quarterfinals",
+        "team1": "The MongolZ",
+        "team2": "MOUZ",
+        "score1": "0",
+        "score2": "2",
+        "date": "December 12, 2024 - 14:00 CST"
+      },
+      {
+        "round": "Quarterfinals",
+        "team1": "Team Liquid",
+        "team2": "Team Spirit",
+        "score1": "0",
+        "score2": "2",
+        "date": "December 12, 2024 - 17:30 CST"
+      },
+      {
+        "round": "Semifinals",
+        "team1": "MOUZ",
+        "team2": "Team Spirit",
+        "score1": "1",
+        "score2": "2",
+        "date": "December 14, 2024 - 14:00 CST"
+      },
+      {
+        "round": "Quarterfinals",
+        "team1": "G2 Esports",
+        "team2": "HEROIC",
+        "score1": "2",
+        "score2": "1",
+        "date": "December 13, 2024 - 14:00 CST"
+      },
+      {
+        "round": "Quarterfinals",
+        "team1": "FaZe Clan",
+        "team2": "Team Vitality",
+        "score1": "2",
+        "score2": "1",
+        "date": "December 13, 2024 - 18:25 CST"
+      },
+      {
+        "round": "Semifinals",
+        "team1": "G2 Esports",
+        "team2": "FaZe Clan",
+        "score1": "0",
+        "score2": "2",
+        "date": "December 14, 2024 - 18:35 CST"
+      },
+      {
+        "round": "Grand Final",
+        "team1": "Team Spirit",
+        "team2": "FaZe Clan",
+        "score1": "2",
+        "score2": "1",
+        "date": "December 15, 2024 - 17:25 CST"
+      }
+    ]
+  },
+  {
+    "name": "StarLadder Berlin 2019",
+    "winner": "Astralis",
+    "startDate": "2019-08-23",
+    "endDate": "2019-09-08",
+    "placements": [
+      {
+        "place": "1st",
+        "team": "Astralis"
+      },
+      {
+        "place": "2nd",
+        "team": "AVANGAR"
+      },
+      {
+        "place": "3rd-4th",
+        "team": "Renegades"
+      },
+      {
+        "place": "3rd-4th",
+        "team": "NRG Esports"
+      },
+      {
+        "place": "5th-8th",
+        "team": "ENCE"
+      },
+      {
+        "place": "5th-8th",
+        "team": "Team Vitality"
+      },
+      {
+        "place": "5th-8th",
+        "team": "Natus Vincere"
+      },
+      {
+        "place": "5th-8th",
+        "team": "Team Liquid"
+      },
+      {
+        "place": "9th-11th",
+        "team": "mousesports"
+      },
+      {
+        "place": "9th-11th",
+        "team": "G2 Esports"
+      },
+      {
+        "place": "9th-11th",
+        "team": "CR4ZY"
+      },
+      {
+        "place": "12th-14th",
+        "team": "MIBR"
+      },
+      {
+        "place": "12th-14th",
+        "team": "FaZe Clan"
+      },
+      {
+        "place": "12th-14th",
+        "team": "North"
+      },
+      {
+        "place": "15th-16th",
+        "team": "Ninjas in Pyjamas"
+      },
+      {
+        "place": "15th-16th",
+        "team": "DreamEaters"
+      },
+      {
+        "place": "17th-19th",
+        "team": "forZe"
+      },
+      {
+        "place": "17th-19th",
+        "team": "Grayhound Gaming"
+      },
+      {
+        "place": "17th-19th",
+        "team": "Syman Gaming"
+      },
+      {
+        "place": "20th-22nd",
+        "team": "FURIA Esports"
+      },
+      {
+        "place": "20th-22nd",
+        "team": "HellRaisers"
+      },
+      {
+        "place": "20th-22nd",
+        "team": "Complexity Gaming"
+      },
+      {
+        "place": "23rd-24th",
+        "team": "TYLOO"
+      },
+      {
+        "place": "23rd-24th",
+        "team": "INTZ eSports"
+      }
+    ],
+    "stageDates": [
+      {
+        "phase": "Challengers Stage",
+        "startDate": "2019-08-23",
+        "endDate": "2019-08-26"
+      },
+      {
+        "phase": "Legends Stage",
+        "startDate": "2019-08-28",
+        "endDate": "2019-09-01"
+      },
+      {
+        "phase": "Champions Stage",
+        "startDate": "2019-08-05",
+        "endDate": "2019-09-08"
+      }
+    ],
+    "playoffMatches": [
+      {
+        "round": "Quarterfinals",
+        "team1": "ENCE",
+        "team2": "Renegades",
+        "score1": "0",
+        "score2": "2",
+        "date": "September 5, 2019 - 15:30 CEST"
+      },
+      {
+        "round": "Quarterfinals",
+        "team1": "Team Vitality",
+        "team2": "AVANGAR",
+        "score1": "1",
+        "score2": "2",
+        "date": "September 5, 2019 - 18:30 CEST"
+      },
+      {
+        "round": "Semifinals",
+        "team1": "Renegades",
+        "team2": "AVANGAR",
+        "score1": "0",
+        "score2": "2",
+        "date": "September 7, 2019 - 15:00 CEST"
+      },
+      {
+        "round": "Quarterfinals",
+        "team1": "NRG",
+        "team2": "Natus Vincere",
+        "score1": "2",
+        "score2": "0",
+        "date": "September 6, 2019 - 15:00 CEST"
+      },
+      {
+        "round": "Quarterfinals",
+        "team1": "Astralis",
+        "team2": "Team Liquid",
+        "score1": "2",
+        "score2": "0",
+        "date": "September 6, 2019 - 18:30 CEST"
+      },
+      {
+        "round": "Semifinals",
+        "team1": "NRG",
+        "team2": "Astralis",
+        "score1": "0",
+        "score2": "2",
+        "date": "September 7, 2019 - 18:30 CEST"
+      },
+      {
+        "round": "Grand Final",
+        "team1": "AVANGAR",
+        "team2": "Astralis",
+        "score1": "0",
+        "score2": "2",
+        "date": "September 8, 2019 - 18:00 CEST"
+      }
+    ]
+  },
+  {
+    "name": "StarLadder Budapest 2025",
+    "winner": "Team Vitality",
+    "startDate": "2025-11-24",
+    "endDate": "2025-12-14",
+    "placements": [
+      {
+        "place": "1st",
+        "team": "Team Vitality"
+      },
+      {
+        "place": "2nd",
+        "team": "FaZe Clan"
+      },
+      {
+        "place": "3rd-4th",
+        "team": "Team Spirit"
+      },
+      {
+        "place": "3rd-4th",
+        "team": "Natus Vincere"
+      },
+      {
+        "place": "5th-8th",
+        "team": "Team Falcons"
+      },
+      {
+        "place": "5th-8th",
+        "team": "The MongolZ"
+      },
+      {
+        "place": "5th-8th",
+        "team": "MOUZ"
+      },
+      {
+        "place": "5th-8th",
+        "team": "FURIA"
+      },
+      {
+        "place": "9th-11th",
+        "team": "B8"
+      },
+      {
+        "place": "9th-11th",
+        "team": "G2 Esports"
+      },
+      {
+        "place": "9th-11th",
+        "team": "Passion UA"
+      },
+      {
+        "place": "12th-14th",
+        "team": "Imperial Esports"
+      },
+      {
+        "place": "12th-14th",
+        "team": "3DMAX"
+      },
+      {
+        "place": "12th-14th",
+        "team": "paiN Gaming"
+      },
+      {
+        "place": "15th-16th",
+        "team": "Team Liquid"
+      },
+      {
+        "place": "15th-16th",
+        "team": "PARIVISION"
+      },
+      {
+        "place": "17th-19th",
+        "team": "Ninjas in Pyjamas"
+      },
+      {
+        "place": "17th-19th",
+        "team": "M80"
+      },
+      {
+        "place": "17th-19th",
+        "team": "Astralis"
+      },
+      {
+        "place": "20th-22nd",
+        "team": "Fnatic"
+      },
+      {
+        "place": "20th-22nd",
+        "team": "Aurora Gaming"
+      },
+      {
+        "place": "20th-22nd",
+        "team": "TYLOO"
+      },
+      {
+        "place": "23rd-24th",
+        "team": "MIBR"
+      },
+      {
+        "place": "23rd-24th",
+        "team": "FlyQuest"
+      },
+      {
+        "place": "25th-27th",
+        "team": "NRG"
+      },
+      {
+        "place": "25th-27th",
+        "team": "Fluxo"
+      },
+      {
+        "place": "25th-27th",
+        "team": "Legacy"
+      },
+      {
+        "place": "28th-30th",
+        "team": "The Huns Esports"
+      },
+      {
+        "place": "28th-30th",
+        "team": "RED Canids"
+      },
+      {
+        "place": "28th-30th",
+        "team": "GamerLegion"
+      },
+      {
+        "place": "31st-32nd",
+        "team": "Lynn Vision Gaming"
+      },
+      {
+        "place": "31st-32nd",
+        "team": "Rare Atom"
+      }
+    ],
+    "stageDates": [
+      {
+        "phase": "Stage 1",
+        "startDate": "2025-11-24",
+        "endDate": "2025-11-27"
+      },
+      {
+        "phase": "Stage 2",
+        "startDate": "2025-11-29",
+        "endDate": "2025-12-02"
+      },
+      {
+        "phase": "Stage 3",
+        "startDate": "2025-12-04",
+        "endDate": "2025-12-07"
+      },
+      {
+        "phase": "Playoffs",
+        "startDate": "2025-12-11",
+        "endDate": "2025-12-14"
+      }
+    ],
+    "playoffMatches": [
+      {
+        "round": "Quarterfinals",
+        "team1": "Team Spirit",
+        "team2": "Team Falcons",
+        "score1": "2",
+        "score2": "0",
+        "date": "December 11, 2025 - 17:00 CET"
+      },
+      {
+        "round": "Quarterfinals",
+        "team1": "The MongolZ",
+        "team2": "Team Vitality",
+        "score1": "0",
+        "score2": "2",
+        "date": "December 11, 2025 - 20:10 CET"
+      },
+      {
+        "round": "Semifinals",
+        "team1": "Team Spirit",
+        "team2": "Team Vitality",
+        "score1": "0",
+        "score2": "2",
+        "date": "December 13, 2025 - 17:00 CET"
+      },
+      {
+        "round": "Quarterfinals",
+        "team1": "MOUZ",
+        "team2": "FaZe Clan",
+        "score1": "0",
+        "score2": "2",
+        "date": "December 12, 2025 - 17:00 CET"
+      },
+      {
+        "round": "Quarterfinals",
+        "team1": "Natus Vincere",
+        "team2": "FURIA",
+        "score1": "2",
+        "score2": "1",
+        "date": "December 12, 2025 - 20:00 CET"
+      },
+      {
+        "round": "Semifinals",
+        "team1": "FaZe Clan",
+        "team2": "Natus Vincere",
+        "score1": "2",
+        "score2": "1",
+        "date": "December 13, 2025 - 21:00 CET"
+      },
+      {
+        "round": "Grand Final",
+        "team1": "Team Vitality",
+        "team2": "FaZe Clan",
+        "score1": "3",
+        "score2": "1",
+        "date": "December 14, 2025 - 18:00 CET"
+      }
+    ]
+  }
+]
