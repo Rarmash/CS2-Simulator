@@ -1,4 +1,4 @@
-# CS2 Simulator
+﻿# CS2 Simulator
 
 [![Release](https://img.shields.io/github/v/release/Rarmash/CS2-Simulator?display_name=tag)](https://github.com/Rarmash/CS2-Simulator/releases)
 [![Release Build](https://img.shields.io/github/actions/workflow/status/Rarmash/CS2-Simulator/release.yml?label=release%20build)](https://github.com/Rarmash/CS2-Simulator/actions/workflows/release.yml)
@@ -23,6 +23,8 @@ Unless explicitly stated otherwise, the repository license applies to the source
 - Case opening with roulette animation
 - Optional X-Ray opening mechanic
 - Souvenir packages with tournament-based dates
+- Major tournament section covering CS:GO and CS2 eras
+- Major teams and players browsing
 - Operation and Armory reward collections
 - Legacy operation collections
 - Sticker capsules
@@ -142,18 +144,12 @@ The source code in this repository is licensed under `AGPL-3.0`.
 
 The project is actively evolving, with current work focused on:
 
-- expanding simulator coverage for CS2 collectible content
+- expanding the simulation layer beyond basic opening flows
+- improving long-term data quality for tournaments, teams, and players
 - continuing UI/codebase refactoring to reduce duplicated screen logic
-- reducing release size through better asset compression
-- preparing a more reusable foundation for future non-skin glossaries
+- preparing larger simulation features such as pattern support and collection tracking
 
 ## Roadmap
-
-### v0.11
-
-- Major tournament section covering CS:GO and CS2 eras
-- Tournament pages with dates, organizers, winners, and placements
-- Better linking between Majors and their souvenir packages, sticker capsules, and autograph capsules
 
 ### v0.12
 
@@ -171,3 +167,4 @@ The project is actively evolving, with current work focused on:
 - Better automated test coverage beyond basic smoke checks
 - Music Kit preview playback if a reliable audio source is available
 - Optional China / Perfect World visual mode if a reliable alternate asset source is available
+

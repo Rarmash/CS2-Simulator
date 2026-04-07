@@ -459,7 +459,6 @@ mixin _LocalDataRepositoryQueries on _LocalDataRepositoryLoaders {
   Future<List<TournamentPlayerAppearanceDto>>
   _loadAllPlayerAppearances() async {
     final tournaments = await loadTournaments();
-    final stickers = await loadStickers();
     final metadata = await loadTournamentMetadata();
     final tournamentByName = {
       for (final tournament in tournaments)
@@ -503,6 +502,45 @@ mixin _LocalDataRepositoryQueries on _LocalDataRepositoryLoaders {
 
     final grouped = <String, _PlayerAppearanceBuilder>{};
 
+    for (final entry in metadata) {
+      final canonicalTournamentName = _canonicalTournamentName(entry.name);
+      final tournament = tournamentByName[canonicalTournamentName];
+      if (tournament == null) {
+        continue;
+      }
+
+      for (final roster in entry.teamRosters) {
+        final canonicalTeamName = TeamNameHelper.canonicalize(roster.team);
+        final placement = entry.placements
+            .where(
+              (item) =>
+                  TeamNameHelper.canonicalize(item.team) == canonicalTeamName,
+            )
+            .cast<TournamentPlacementDto?>()
+            .firstOrNull;
+
+        for (final rawPlayerName in roster.players) {
+          final playerName = _preferredPlayerDisplayName(rawPlayerName);
+          final key =
+              '${_playerLookupKey(playerName)}|$canonicalTournamentName';
+          grouped.putIfAbsent(
+            key,
+            () => _PlayerAppearanceBuilder(
+              playerName: playerName,
+              teamName: roster.team,
+              teamLogo: roster.teamLogo ?? placement?.teamLogo,
+              place: placement?.place,
+              tournamentName: tournament.name,
+              tournamentImagePath: tournament.imagePath,
+              startDate: entry.startDate ?? tournament.startDate,
+              endDate: entry.endDate ?? tournament.endDate,
+            ),
+          );
+        }
+      }
+    }
+
+    final stickers = await loadStickers();
     for (final sticker in stickers) {
       if (sticker.stickerType != 'AUTOGRAPH') {
         continue;
