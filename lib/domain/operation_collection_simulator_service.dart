@@ -5,6 +5,7 @@ import '../data/models/skin_dto.dart';
 import 'dropped_skin.dart';
 import 'package_odds.dart';
 import 'skin_float_helper.dart';
+import 'skin_pattern_helper.dart';
 
 class OperationCollectionSimulatorService {
   final Random _random = Random();
@@ -30,6 +31,10 @@ class OperationCollectionSimulatorService {
       isSouvenir: false,
       skinFloat: wear.floatValue,
       exterior: wear.exterior,
+      patternSeed: SkinPatternHelper.generateSeed(
+        random: _random,
+        skin: selectedSkin,
+      ),
     );
   }
 

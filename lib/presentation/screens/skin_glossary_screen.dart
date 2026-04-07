@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 
 import '../../core/settings/settings_controller.dart';
+import '../../data/models/skin_group_dto.dart';
 import '../../data/models/skin_dto.dart';
 import '../../data/repositories/local_data_repository.dart';
+import '../../domain/skin_pattern_helper.dart';
 import '../helpers/app_navigation_helper.dart';
 import '../helpers/skin_ui_helper.dart';
 import '../widgets/detail_tag.dart';
@@ -24,12 +26,13 @@ class SkinGlossaryScreen extends StatefulWidget {
 }
 
 class _SkinGlossaryScreenState extends State<SkinGlossaryScreen> {
-  late final Future<List<SkinDto>> _future;
+  late final Future<List<SkinGroupDto>> _future;
   final TextEditingController _searchController = TextEditingController();
 
   String _query = '';
   String _rarityFilter = 'ALL';
   String _typeFilter = 'ALL';
+  String _patternFilter = 'ALL';
 
   static const List<_DropdownItem> _rarityItems = [
     _DropdownItem('ALL', 'All rarities'),
@@ -50,10 +53,17 @@ class _SkinGlossaryScreenState extends State<SkinGlossaryScreen> {
     _DropdownItem('GLOVES', 'Gloves'),
   ];
 
+  static const List<_DropdownItem> _patternItems = [
+    _DropdownItem('ALL', 'All finishes'),
+    _DropdownItem('PATTERN', 'Pattern-sensitive'),
+    _DropdownItem('SEED', 'Seed-based'),
+    _DropdownItem('PHASE', 'Phase-based'),
+  ];
+
   @override
   void initState() {
     super.initState();
-    _future = widget.repository.loadSkins();
+    _future = widget.repository.loadSkinGroups();
     _searchController.addListener(() {
       setState(() {
         _query = _searchController.text.trim().toLowerCase();
@@ -67,13 +77,19 @@ class _SkinGlossaryScreenState extends State<SkinGlossaryScreen> {
     super.dispose();
   }
 
-  List<SkinDto> _applyFilters(List<SkinDto> skins) {
-    final filtered = skins.where((skin) {
-      if (_rarityFilter != 'ALL' && skin.rarity != _rarityFilter) {
+  List<SkinGroupDto> _applyFilters(List<SkinGroupDto> skins) {
+    final filtered = skins.where((group) {
+      final skin = group.primary;
+
+      if (_rarityFilter != 'ALL' && group.rarity != _rarityFilter) {
         return false;
       }
 
-      if (_typeFilter != 'ALL' && skin.itemKind != _typeFilter) {
+      if (_typeFilter != 'ALL' && group.itemKind != _typeFilter) {
+        return false;
+      }
+
+      if (!_matchesPatternFilter(skin)) {
         return false;
       }
 
@@ -86,6 +102,7 @@ class _SkinGlossaryScreenState extends State<SkinGlossaryScreen> {
         skin.finishCatalogName ?? '',
         skin.variantName ?? '',
         skin.phase ?? '',
+        group.variantLabels.join(' '),
         skin.rarity,
         skin.weaponType,
         skin.itemKind,
@@ -100,7 +117,9 @@ class _SkinGlossaryScreenState extends State<SkinGlossaryScreen> {
       );
       if (specialCompare != 0) return specialCompare;
 
-      final rarityCompare = _rarityOrder(a).compareTo(_rarityOrder(b));
+      final rarityCompare = _rarityOrder(
+        a.primary,
+      ).compareTo(_rarityOrder(b.primary));
       if (rarityCompare != 0) return rarityCompare;
 
       final weaponCompare = a.itemDisplayName.compareTo(b.itemDisplayName);
@@ -110,6 +129,22 @@ class _SkinGlossaryScreenState extends State<SkinGlossaryScreen> {
     });
 
     return filtered;
+  }
+
+  bool _matchesPatternFilter(SkinDto skin) {
+    switch (_patternFilter) {
+      case 'ALL':
+        return true;
+      case 'PATTERN':
+        return SkinPatternHelper.supportsPatternSeed(skin) ||
+            SkinPatternHelper.hasExplicitPhaseVariant(skin);
+      case 'SEED':
+        return SkinPatternHelper.supportsPatternSeed(skin);
+      case 'PHASE':
+        return SkinPatternHelper.hasExplicitPhaseVariant(skin);
+      default:
+        return true;
+    }
   }
 
   int _rarityOrder(SkinDto skin) {
@@ -141,7 +176,7 @@ class _SkinGlossaryScreenState extends State<SkinGlossaryScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text('Skin Glossary')),
-      body: FutureBuilder<List<SkinDto>>(
+      body: FutureBuilder<List<SkinGroupDto>>(
         future: _future,
         builder: (context, snapshot) {
           if (snapshot.connectionState != ConnectionState.done) {
@@ -160,7 +195,7 @@ class _SkinGlossaryScreenState extends State<SkinGlossaryScreen> {
             );
           }
 
-          final skins = snapshot.data ?? const <SkinDto>[];
+          final skins = snapshot.data ?? const <SkinGroupDto>[];
           final filtered = _applyFilters(skins);
 
           return Column(
@@ -244,6 +279,29 @@ class _SkinGlossaryScreenState extends State<SkinGlossaryScreen> {
                       ],
                     ),
                     const SizedBox(height: 10),
+                    DropdownButtonFormField<String>(
+                      initialValue: _patternFilter,
+                      decoration: InputDecoration(
+                        labelText: 'Pattern behavior',
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(14),
+                        ),
+                      ),
+                      items: _patternItems
+                          .map(
+                            (e) => DropdownMenuItem<String>(
+                              value: e.value,
+                              child: Text(e.label),
+                            ),
+                          )
+                          .toList(),
+                      onChanged: (value) {
+                        setState(() {
+                          _patternFilter = value ?? 'ALL';
+                        });
+                      },
+                    ),
+                    const SizedBox(height: 10),
                     Align(
                       alignment: Alignment.centerLeft,
                       child: Text(
@@ -275,30 +333,46 @@ class _SkinGlossaryScreenState extends State<SkinGlossaryScreen> {
                         itemCount: filtered.length,
                         separatorBuilder: (_, _) => const SizedBox(height: 10),
                         itemBuilder: (context, index) {
-                          final skin = filtered[index];
+                          final group = filtered[index];
+                          final skin = group.primary;
                           final rarityColor = SkinUiHelper.rarityColor(skin);
 
                           return GlossaryListItem(
                             accentColor: rarityColor,
-                            imagePath: skin.skinImage,
-                            title: skin.itemDisplayName,
-                            subtitle: SkinUiHelper.secondaryText(skin),
+                            imagePath: group.skinImage,
+                            title: group.itemDisplayName,
+                            subtitle: _subtitle(group),
                             tags: [
                               _pill(
-                                SkinUiHelper.rarityLabel(skin),
+                                SkinUiHelper.rarityLabel(group.primary),
                                 color: rarityColor,
                               ),
                               _pill(
-                                skin.itemKind == 'WEAPON'
+                                group.itemKind == 'WEAPON'
                                     ? SkinUiHelper.weaponTypeLabel(
-                                        skin.weaponType,
+                                        group.weaponType,
                                       )
-                                    : skin.itemKind == 'KNIFE'
+                                    : group.itemKind == 'KNIFE'
                                     ? 'Knife'
                                     : 'Gloves',
                               ),
-                              if ((skin.collection ?? '').isNotEmpty)
-                                _pill(skin.collection!),
+                              if ((group.collection ?? '').isNotEmpty)
+                                _pill(group.collection!),
+                              if (SkinPatternHelper.hasExplicitPhaseVariant(
+                                group.primary,
+                              ))
+                                _pill('Phase-based'),
+                              if (SkinPatternHelper.supportsPatternSeed(
+                                group.primary,
+                              ))
+                                _pill('Seed-based'),
+                              if (SkinPatternHelper.patternFamilyLabel(
+                                    group.primary,
+                                  )
+                                  case final patternFamily?)
+                                _pill(patternFamily),
+                              if (group.hasMultipleVariants)
+                                _pill('${group.variants.length} variants'),
                             ],
                             onTap: () {
                               AppNavigationHelper.pushScreen(
@@ -306,7 +380,7 @@ class _SkinGlossaryScreenState extends State<SkinGlossaryScreen> {
                                 SkinDetailsScreen(
                                   repository: widget.repository,
                                   settingsController: widget.settingsController,
-                                  skin: skin,
+                                  skin: group.primary,
                                 ),
                               );
                             },
@@ -323,6 +397,14 @@ class _SkinGlossaryScreenState extends State<SkinGlossaryScreen> {
 
   Widget _pill(String text, {Color? color}) {
     return DetailTag(text: text, color: color);
+  }
+
+  String _subtitle(SkinGroupDto group) {
+    final labels = group.variantLabels;
+    if (labels.isNotEmpty) {
+      return '${group.name} • ${labels.join(', ')}';
+    }
+    return group.name;
   }
 }
 

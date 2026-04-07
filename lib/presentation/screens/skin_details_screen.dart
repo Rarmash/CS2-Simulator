@@ -5,6 +5,7 @@ import '../../core/utils/date_format_helper.dart';
 import '../../data/models/container_dto.dart';
 import '../../data/models/skin_dto.dart';
 import '../../data/repositories/local_data_repository.dart';
+import '../../domain/skin_pattern_helper.dart';
 import '../helpers/app_navigation_helper.dart';
 import '../helpers/skin_ui_helper.dart';
 import '../widgets/detail_info_row.dart';
@@ -30,6 +31,14 @@ class SkinDetailsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final rarityColor = SkinUiHelper.rarityColor(skin);
+    final patternFamily = SkinPatternHelper.patternFamilyLabel(skin);
+    final patternExplanation = SkinPatternHelper.patternExplanation(skin);
+    final patternOutcomes = SkinPatternHelper.possiblePatternOutcomes(skin);
+    final hasPatternSection =
+        patternFamily != null ||
+        SkinPatternHelper.supportsPatternSeed(skin) ||
+        patternExplanation != null ||
+        patternOutcomes.isNotEmpty;
 
     return Scaffold(
       appBar: AppBar(title: Text(skin.itemDisplayName)),
@@ -58,6 +67,7 @@ class SkinDetailsScreen extends StatelessWidget {
                 containers: [],
                 rewardCollections: [],
                 operationCollections: [],
+                variants: [],
               );
 
           return ListView(
@@ -151,6 +161,20 @@ class SkinDetailsScreen extends StatelessWidget {
                               _infoRow('Phase', skin.phase!),
                             if ((skin.apiPaintIndex ?? '').isNotEmpty)
                               _infoRow('Paint index', skin.apiPaintIndex!),
+                            if (patternFamily case final value?)
+                              _infoRow('Pattern family', value),
+                            if (SkinPatternHelper.supportsPatternSeed(skin))
+                              _infoRow('Pattern support', 'Seed-based'),
+                            if (SkinPatternHelper.hasExplicitPhaseVariant(skin))
+                              _infoRow(
+                                'Phase logic',
+                                'Explicit variant with weighted family odds',
+                              ),
+                            if (SkinPatternHelper.supportsPatternSeed(skin))
+                              _infoRow(
+                                'Pattern notes',
+                                'Drops may derive seed-based pattern details',
+                              ),
                           ],
                         );
 
@@ -174,6 +198,66 @@ class SkinDetailsScreen extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 12),
+              if (hasPatternSection) ...[
+                Card(
+                  child: Padding(
+                    padding: const EdgeInsets.fromLTRB(16, 16, 16, 14),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const Text(
+                          'Pattern Behavior',
+                          style: TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.w700,
+                          ),
+                        ),
+                        if (patternExplanation != null) ...[
+                          const SizedBox(height: 12),
+                          Text(
+                            patternExplanation,
+                            style: const TextStyle(
+                              color: Colors.white70,
+                              fontSize: 13,
+                            ),
+                          ),
+                        ],
+                        if (patternOutcomes.isNotEmpty) ...[
+                          const SizedBox(height: 14),
+                          for (final outcome in patternOutcomes)
+                            Padding(
+                              padding: const EdgeInsets.only(bottom: 8),
+                              child: Row(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  const Padding(
+                                    padding: EdgeInsets.only(top: 2),
+                                    child: Icon(
+                                      Icons.circle,
+                                      size: 7,
+                                      color: Colors.white54,
+                                    ),
+                                  ),
+                                  const SizedBox(width: 8),
+                                  Expanded(
+                                    child: Text(
+                                      outcome,
+                                      style: const TextStyle(
+                                        color: Colors.white70,
+                                        fontSize: 13,
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                        ],
+                      ],
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 12),
+              ],
               Card(
                 child: Padding(
                   padding: const EdgeInsets.fromLTRB(16, 16, 16, 14),
@@ -201,6 +285,40 @@ class SkinDetailsScreen extends StatelessWidget {
                   ),
                 ),
               ),
+              if (data.variants.length > 1) ...[
+                const SizedBox(height: 12),
+                Card(
+                  child: Padding(
+                    padding: const EdgeInsets.fromLTRB(16, 16, 16, 14),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const Text(
+                          'Finish Variants',
+                          style: TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.w700,
+                          ),
+                        ),
+                        const SizedBox(height: 14),
+                        Wrap(
+                          spacing: 10,
+                          runSpacing: 10,
+                          children: data.variants
+                              .map(
+                                (variant) => _variantCard(
+                                  context,
+                                  variant,
+                                  selected: variant.id == skin.id,
+                                ),
+                              )
+                              .toList(),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
               const SizedBox(height: 12),
               _sourceSection<ContainerDto>(
                 title: 'Cases / Containers',
@@ -283,12 +401,14 @@ class SkinDetailsScreen extends StatelessWidget {
       repository.loadContainersForSkin(skin.id),
       repository.loadRewardCollectionsForSkin(skin.id),
       repository.loadOperationCollectionsForSkin(skin.id),
+      repository.loadSkinVariantsForSkin(skin.id),
     ]);
 
     return _SkinSourcesData(
       containers: results[0] as List<ContainerDto>,
       rewardCollections: results[1] as List<ContainerDto>,
       operationCollections: results[2] as List<ContainerDto>,
+      variants: results[3] as List<SkinDto>,
     );
   }
 
@@ -330,6 +450,64 @@ class SkinDetailsScreen extends StatelessWidget {
     );
   }
 
+  Widget _variantCard(
+    BuildContext context,
+    SkinDto variant, {
+    required bool selected,
+  }) {
+    final rarityColor = SkinUiHelper.rarityColor(variant);
+
+    return InkWell(
+      borderRadius: BorderRadius.circular(12),
+      onTap: selected
+          ? null
+          : () {
+              AppNavigationHelper.replaceScreen(
+                context,
+                SkinDetailsScreen(
+                  repository: repository,
+                  settingsController: settingsController,
+                  skin: variant,
+                ),
+              );
+            },
+      child: Container(
+        width: 144,
+        padding: const EdgeInsets.all(10),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(12),
+          border: Border.all(
+            color: selected ? rarityColor : Colors.white12,
+            width: selected ? 2 : 1,
+          ),
+          color: selected ? rarityColor.withValues(alpha: 0.1) : null,
+        ),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            SizedBox(
+              height: 70,
+              child: Image.asset(
+                variant.skinImage,
+                fit: BoxFit.contain,
+                errorBuilder: (_, _, _) =>
+                    const Icon(Icons.image_not_supported, size: 28),
+              ),
+            ),
+            const SizedBox(height: 8),
+            Text(
+              variant.displayVariant ?? variant.name,
+              textAlign: TextAlign.center,
+              maxLines: 2,
+              overflow: TextOverflow.ellipsis,
+              style: const TextStyle(fontSize: 12),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
   String _rewardCollectionSubtitle(ContainerDto item) {
     final parts = <String>[item.sourceLabel, item.actionLabel];
 
@@ -341,10 +519,12 @@ class _SkinSourcesData {
   final List<ContainerDto> containers;
   final List<ContainerDto> rewardCollections;
   final List<ContainerDto> operationCollections;
+  final List<SkinDto> variants;
 
   const _SkinSourcesData({
     required this.containers,
     required this.rewardCollections,
     required this.operationCollections,
+    required this.variants,
   });
 }

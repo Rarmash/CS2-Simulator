@@ -6,6 +6,8 @@ import 'case_odds.dart';
 import 'dropped_skin.dart';
 import 'package_odds.dart';
 import 'skin_float_helper.dart';
+import 'skin_pattern_helper.dart';
+import 'special_item_variant_helper.dart';
 import 'terminal_offer.dart';
 
 class ContainerSimulatorService {
@@ -37,6 +39,10 @@ class ContainerSimulatorService {
         isSouvenir: false,
         skinFloat: wear.floatValue,
         exterior: wear.exterior,
+        patternSeed: SkinPatternHelper.generateSeed(
+          random: _random,
+          skin: guaranteedSkin,
+        ),
       );
     }
 
@@ -76,6 +82,10 @@ class ContainerSimulatorService {
       isSouvenir: isSouvenir,
       skinFloat: value,
       exterior: exterior,
+      patternSeed: SkinPatternHelper.generateSeed(
+        random: _random,
+        skin: selectedSkin,
+      ),
     );
   }
 
@@ -113,6 +123,10 @@ class ContainerSimulatorService {
         isStatTrak: isStatTrak,
         skinFloat: value,
         exterior: exterior,
+        patternSeed: SkinPatternHelper.generateSeed(
+          random: _random,
+          skin: skin,
+        ),
         offerIndex: index + 1,
       );
     });
@@ -126,7 +140,21 @@ class ContainerSimulatorService {
       throw Exception('No skins available for rarity: $odds');
     }
 
+    if (odds == CaseOdds.specialItem) {
+      return _selectSpecialItemSkin(filtered);
+    }
+
     return filtered[_random.nextInt(filtered.length)];
+  }
+
+  SkinDto _selectSpecialItemSkin(List<SkinDto> skins) {
+    final families = SpecialItemVariantHelper.groupFamilies(skins);
+    if (families.isEmpty) {
+      throw Exception('No special items available');
+    }
+
+    final family = families[_random.nextInt(families.length)];
+    return SpecialItemVariantHelper.rollVariant(_random, family);
   }
 
   SkinDto _selectPackageSkin(List<SkinDto> skins) {

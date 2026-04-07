@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../domain/dropped_skin.dart';
+import '../../domain/skin_pattern_helper.dart';
 import '../helpers/skin_ui_helper.dart';
 import 'info_row.dart';
 
@@ -13,6 +14,15 @@ class SkinDropCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final rarityColor = SkinUiHelper.rarityColor(drop.skin);
     final variantText = SkinUiHelper.secondaryText(drop.skin);
+    final patternSummary = SkinPatternHelper.describePattern(
+      skin: drop.skin,
+      patternSeed: drop.patternSeed,
+    );
+    final patternMetric = SkinPatternHelper.describePatternMetric(
+      skin: drop.skin,
+      patternSeed: drop.patternSeed,
+    );
+    final patternFamily = SkinPatternHelper.patternFamilyLabel(drop.skin);
 
     return Card(
       margin: const EdgeInsets.all(12),
@@ -86,6 +96,19 @@ class SkinDropCard extends StatelessWidget {
                     value: drop.skinFloat?.toStringAsFixed(6) ?? '-',
                   ),
                   InfoRow(title: 'Exterior', value: drop.exterior ?? '-'),
+                  if ((drop.skin.phase ?? '').trim().isNotEmpty)
+                    InfoRow(title: 'Phase', value: drop.skin.phase!.trim()),
+                  if (drop.patternSeed != null)
+                    InfoRow(
+                      title: 'Pattern seed',
+                      value: drop.patternSeed.toString(),
+                    ),
+                  if (patternFamily != null)
+                    InfoRow(title: 'Pattern family', value: patternFamily),
+                  if (patternSummary != null)
+                    InfoRow(title: 'Pattern', value: patternSummary),
+                  if (patternMetric != null)
+                    InfoRow(title: 'Pattern detail', value: patternMetric),
                   if (drop.skin.collection != null &&
                       drop.skin.collection!.isNotEmpty)
                     InfoRow(title: 'Collection', value: drop.skin.collection!),

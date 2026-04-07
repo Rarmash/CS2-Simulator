@@ -5,6 +5,7 @@ class TerminalOffer {
   final bool isStatTrak;
   final double? skinFloat;
   final String? exterior;
+  final int? patternSeed;
   final int offerIndex; // 1..5
 
   const TerminalOffer({
@@ -12,6 +13,7 @@ class TerminalOffer {
     required this.isStatTrak,
     required this.skinFloat,
     required this.exterior,
+    required this.patternSeed,
     required this.offerIndex,
   });
 }

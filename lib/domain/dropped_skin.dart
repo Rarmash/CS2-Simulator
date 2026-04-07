@@ -6,6 +6,7 @@ class DroppedSkin {
   final bool isSouvenir;
   final double? skinFloat;
   final String? exterior;
+  final int? patternSeed;
 
   const DroppedSkin({
     required this.skin,
@@ -13,6 +14,7 @@ class DroppedSkin {
     required this.isSouvenir,
     required this.skinFloat,
     required this.exterior,
+    required this.patternSeed,
   });
 
   bool get isVanillaKnife => skin.isKnife && skin.name == 'Vanilla';

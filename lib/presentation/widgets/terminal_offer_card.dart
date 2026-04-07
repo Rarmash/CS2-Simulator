@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../domain/terminal_offer.dart';
+import '../../domain/skin_pattern_helper.dart';
 import '../helpers/skin_ui_helper.dart';
 import 'hold_to_confirm_button.dart';
 import 'info_row.dart';
@@ -22,6 +23,15 @@ class TerminalOfferCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final rarityColor = SkinUiHelper.rarityColor(offer.skin);
+    final patternSummary = SkinPatternHelper.describePattern(
+      skin: offer.skin,
+      patternSeed: offer.patternSeed,
+    );
+    final patternMetric = SkinPatternHelper.describePatternMetric(
+      skin: offer.skin,
+      patternSeed: offer.patternSeed,
+    );
+    final patternFamily = SkinPatternHelper.patternFamilyLabel(offer.skin);
 
     return Card(
       margin: const EdgeInsets.all(12),
@@ -78,6 +88,19 @@ class TerminalOfferCard extends StatelessWidget {
               value: offer.skinFloat?.toStringAsFixed(6) ?? '-',
             ),
             InfoRow(title: 'Exterior', value: offer.exterior ?? '-'),
+            if ((offer.skin.phase ?? '').trim().isNotEmpty)
+              InfoRow(title: 'Phase', value: offer.skin.phase!.trim()),
+            if (offer.patternSeed != null)
+              InfoRow(
+                title: 'Pattern seed',
+                value: offer.patternSeed.toString(),
+              ),
+            if (patternFamily != null)
+              InfoRow(title: 'Pattern family', value: patternFamily),
+            if (patternSummary != null)
+              InfoRow(title: 'Pattern', value: patternSummary),
+            if (patternMetric != null)
+              InfoRow(title: 'Pattern detail', value: patternMetric),
             if (offer.skin.collection != null &&
                 offer.skin.collection!.isNotEmpty)
               InfoRow(title: 'Collection', value: offer.skin.collection!),
