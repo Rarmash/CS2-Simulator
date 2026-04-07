@@ -163,7 +163,7 @@ class TournamentDetailsScreen extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 12),
-              if ((data.metadata?.playoffMatches ?? const []).isNotEmpty) ...[
+              if (_hasMeaningfulPlayoffBracket(data.metadata)) ...[
                 DetailSourceSection<TournamentPlayoffMatchDto>(
                   title: 'Playoff Bracket',
                   items: data.metadata!.playoffMatches,
@@ -861,4 +861,22 @@ class _TournamentDetailsData {
     this.souvenirPackages = const [],
     this.stickerSources = const [],
   });
+}
+
+bool _hasMeaningfulPlayoffBracket(TournamentMetadataDto? metadata) {
+  final matches =
+      metadata?.playoffMatches ?? const <TournamentPlayoffMatchDto>[];
+  if (matches.isEmpty) {
+    return false;
+  }
+
+  final validRounds = {
+    'Quarterfinals',
+    'Semifinals',
+    'Grand Final',
+    'Playoff Stage',
+    'Playoffs',
+  };
+
+  return matches.any((match) => validRounds.contains(match.round));
 }
