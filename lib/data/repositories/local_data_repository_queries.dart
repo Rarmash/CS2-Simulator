@@ -33,7 +33,9 @@ mixin _LocalDataRepositoryQueries on _LocalDataRepositoryLoaders {
 
       final builder = ensureBuilder(tournamentName);
       if (builder.name.isEmpty) continue;
-      builder.imagePath ??= _preferredTournamentImage(container);
+      builder.imagePath ??=
+          metadataByName[builder.name]?.tournamentLogo ??
+          _preferredTournamentImage(container);
       builder.releaseDate = _earlierDate(
         builder.releaseDate,
         container.releaseDate,
@@ -63,7 +65,9 @@ mixin _LocalDataRepositoryQueries on _LocalDataRepositoryLoaders {
       for (final tournamentName in tournamentNames) {
         final builder = ensureBuilder(tournamentName);
         if (builder.name.isEmpty) continue;
-        builder.imagePath ??= _preferredTournamentImage(container);
+        builder.imagePath ??=
+            metadataByName[builder.name]?.tournamentLogo ??
+            _preferredTournamentImage(container);
         builder.releaseDate = _earlierDate(
           builder.releaseDate,
           container.releaseDate,
@@ -81,7 +85,9 @@ mixin _LocalDataRepositoryQueries on _LocalDataRepositoryLoaders {
           final metadata = metadataByName[builder.name];
           return TournamentDto(
             name: builder.name,
-            imagePath: builder.imagePath!,
+            imagePath: ((metadata?.tournamentLogo ?? '').trim().isNotEmpty
+                ? metadata!.tournamentLogo!
+                : builder.imagePath!),
             releaseDate: builder.releaseDate,
             startDate: metadata?.startDate,
             endDate: metadata?.endDate,
@@ -203,6 +209,149 @@ mixin _LocalDataRepositoryQueries on _LocalDataRepositoryLoaders {
     return summaries;
   }
 
+  Future<List<TournamentPlayerSummaryDto>> loadTournamentPlayers() async {
+    final appearances = await _loadAllPlayerAppearances();
+    final grouped = <String, List<TournamentPlayerAppearanceDto>>{};
+
+    for (final appearance in appearances) {
+      grouped
+          .putIfAbsent(
+            _playerLookupKey(appearance.playerName),
+            () => <TournamentPlayerAppearanceDto>[],
+          )
+          .add(appearance);
+    }
+
+    final summaries = grouped.entries.map((entry) {
+      final items = List<TournamentPlayerAppearanceDto>.from(entry.value)
+        ..sort((a, b) {
+          final byDate = (b.startDate ?? '').compareTo(a.startDate ?? '');
+          if (byDate != 0) return byDate;
+          return a.playerName.compareTo(b.playerName);
+        });
+
+      final latest = items.isNotEmpty ? items.first : null;
+      final autographCount = items.fold<int>(
+        0,
+        (sum, item) => sum + item.autographCount,
+      );
+      String? bestPlace;
+      for (final item in items) {
+        if ((item.place ?? '').isEmpty) {
+          continue;
+        }
+        if (bestPlace == null || _comparePlace(item.place, bestPlace) < 0) {
+          bestPlace = item.place;
+        }
+      }
+      final titleCount = items.where((item) => item.place == '1st').length;
+
+      return TournamentPlayerSummaryDto(
+        playerName: latest?.playerName ?? entry.value.first.playerName,
+        tournamentCount: items.length,
+        autographCount: autographCount,
+        titleCount: titleCount,
+        bestPlace: bestPlace,
+        latestTournamentName: latest?.tournamentName,
+        latestTournamentImagePath: latest?.tournamentImagePath,
+        latestStartDate: latest?.startDate,
+        latestTeamName: latest?.teamName,
+        latestTeamLogo: latest?.teamLogo,
+        sampleStickerImage: latest?.sampleStickerImage,
+      );
+    }).toList();
+
+    summaries.sort((a, b) {
+      final byTournaments = b.tournamentCount.compareTo(a.tournamentCount);
+      if (byTournaments != 0) return byTournaments;
+      final byAutographs = b.autographCount.compareTo(a.autographCount);
+      if (byAutographs != 0) return byAutographs;
+      return a.playerName.toLowerCase().compareTo(b.playerName.toLowerCase());
+    });
+
+    return summaries;
+  }
+
+  Future<List<TournamentPlayerAppearanceDto>> loadPlayerTournamentAppearances(
+    String playerName,
+  ) async {
+    final canonical = _playerLookupKey(playerName);
+    final appearances = await _loadAllPlayerAppearances();
+    final result =
+        appearances
+            .where(
+              (appearance) =>
+                  _playerLookupKey(appearance.playerName) == canonical,
+            )
+            .toList()
+          ..sort((a, b) {
+            final byDate = (b.startDate ?? '').compareTo(a.startDate ?? '');
+            if (byDate != 0) return byDate;
+            return a.tournamentName.compareTo(b.tournamentName);
+          });
+    return result;
+  }
+
+  Future<List<TournamentPlayerSummaryDto>> loadPlayersForTournament(
+    String tournamentName,
+  ) async {
+    final normalizedTournamentName = _canonicalTournamentName(tournamentName);
+    final appearances = await _loadAllPlayerAppearances();
+    final grouped = <String, List<TournamentPlayerAppearanceDto>>{};
+
+    for (final appearance in appearances) {
+      if (_canonicalTournamentName(appearance.tournamentName) !=
+          normalizedTournamentName) {
+        continue;
+      }
+      grouped
+          .putIfAbsent(
+            _playerLookupKey(appearance.playerName),
+            () => <TournamentPlayerAppearanceDto>[],
+          )
+          .add(appearance);
+    }
+
+    final result =
+        grouped.entries.map((entry) {
+          final items = entry.value;
+          final first = items.first;
+          return TournamentPlayerSummaryDto(
+            playerName: first.playerName,
+            tournamentCount: items.length,
+            autographCount: items.fold<int>(
+              0,
+              (sum, item) => sum + item.autographCount,
+            ),
+            titleCount: items.where((item) => item.place == '1st').length,
+            bestPlace: (() {
+              String? bestPlace;
+              for (final item in items) {
+                if ((item.place ?? '').isEmpty) {
+                  continue;
+                }
+                if (bestPlace == null ||
+                    _comparePlace(item.place, bestPlace) < 0) {
+                  bestPlace = item.place;
+                }
+              }
+              return bestPlace;
+            })(),
+            latestTournamentName: first.tournamentName,
+            latestTournamentImagePath: first.tournamentImagePath,
+            latestStartDate: first.startDate,
+            latestTeamName: first.teamName,
+            latestTeamLogo: first.teamLogo,
+            sampleStickerImage: first.sampleStickerImage,
+          );
+        }).toList()..sort(
+          (a, b) =>
+              a.playerName.toLowerCase().compareTo(b.playerName.toLowerCase()),
+        );
+
+    return result;
+  }
+
   Future<TournamentMetadataDto?> loadTournamentMetadataByName(
     String tournamentName,
   ) async {
@@ -305,6 +454,113 @@ mixin _LocalDataRepositoryQueries on _LocalDataRepositoryLoaders {
     }
 
     return results;
+  }
+
+  Future<List<TournamentPlayerAppearanceDto>>
+  _loadAllPlayerAppearances() async {
+    final tournaments = await loadTournaments();
+    final stickers = await loadStickers();
+    final metadata = await loadTournamentMetadata();
+    final tournamentByName = {
+      for (final tournament in tournaments)
+        _canonicalTournamentName(tournament.name): tournament,
+    };
+    final metadataByName = {
+      for (final entry in metadata) _canonicalTournamentName(entry.name): entry,
+    };
+    final teamInfoByPlayerTournament =
+        <
+          String,
+          ({
+            String playerName,
+            String? teamName,
+            String? teamLogo,
+            String? place,
+          })
+        >{};
+
+    for (final entry in metadata) {
+      final canonicalTournamentName = _canonicalTournamentName(entry.name);
+      final placeByTeam = {
+        for (final placement in entry.placements)
+          TeamNameHelper.canonicalize(placement.team): placement,
+      };
+
+      for (final roster in entry.teamRosters) {
+        final canonicalTeamName = TeamNameHelper.canonicalize(roster.team);
+        final placement = placeByTeam[canonicalTeamName];
+        for (final player in roster.players) {
+          final playerKey = _playerLookupKey(player);
+          teamInfoByPlayerTournament['$playerKey|$canonicalTournamentName'] = (
+            playerName: _preferredPlayerDisplayName(player),
+            teamName: roster.team,
+            teamLogo: roster.teamLogo ?? placement?.teamLogo,
+            place: placement?.place,
+          );
+        }
+      }
+    }
+
+    final grouped = <String, _PlayerAppearanceBuilder>{};
+
+    for (final sticker in stickers) {
+      if (sticker.stickerType != 'AUTOGRAPH') {
+        continue;
+      }
+
+      final tournamentName = (sticker.tournament ?? '').trim();
+      if (tournamentName.isEmpty) {
+        continue;
+      }
+
+      final canonicalTournamentName = _canonicalTournamentName(tournamentName);
+      final tournament = tournamentByName[canonicalTournamentName];
+      if (tournament == null) {
+        continue;
+      }
+
+      final playerName = _extractAutographPlayerName(sticker.name);
+      if (playerName.isEmpty) {
+        continue;
+      }
+
+      final key = '${_playerLookupKey(playerName)}|$canonicalTournamentName';
+      final builder = grouped.putIfAbsent(key, () {
+        final teamInfo = teamInfoByPlayerTournament[key];
+        final tournamentMetadata = metadataByName[canonicalTournamentName];
+        return _PlayerAppearanceBuilder(
+          playerName: teamInfo?.playerName ?? playerName,
+          teamName: teamInfo?.teamName,
+          teamLogo: teamInfo?.teamLogo,
+          place: teamInfo?.place,
+          tournamentName: tournament.name,
+          tournamentImagePath: tournament.imagePath,
+          startDate: tournamentMetadata?.startDate ?? tournament.startDate,
+          endDate: tournamentMetadata?.endDate ?? tournament.endDate,
+        );
+      });
+      builder.autographCount += 1;
+      builder.sampleStickerImage ??= sticker.stickerImage;
+      builder.effects.add(_autographEffectLabel(sticker.effect));
+    }
+
+    return grouped.values
+        .map(
+          (item) => TournamentPlayerAppearanceDto(
+            playerName: item.playerName,
+            teamName: item.teamName,
+            teamLogo: item.teamLogo,
+            place: item.place,
+            tournamentName: item.tournamentName,
+            tournamentImagePath: item.tournamentImagePath,
+            startDate: item.startDate,
+            endDate: item.endDate,
+            autographCount: item.autographCount,
+            effects: item.effects.toList()..sort(),
+            sampleStickerImage: item.sampleStickerImage,
+          ),
+        )
+        .toList();
   }
 
   Future<List<SkinDto>> loadSkinsForContainer(String containerId) async {
@@ -765,6 +1021,31 @@ class _TournamentBuilder {
   _TournamentBuilder({required this.name});
 }
 
+class _PlayerAppearanceBuilder {
+  final String playerName;
+  final String? teamName;
+  final String? teamLogo;
+  final String? place;
+  final String tournamentName;
+  final String tournamentImagePath;
+  final String? startDate;
+  final String? endDate;
+  int autographCount = 0;
+  String? sampleStickerImage;
+  final Set<String> effects = <String>{};
+
+  _PlayerAppearanceBuilder({
+    required this.playerName,
+    required this.teamName,
+    required this.teamLogo,
+    required this.place,
+    required this.tournamentName,
+    required this.tournamentImagePath,
+    required this.startDate,
+    required this.endDate,
+  });
+}
+
 String? _earlierDate(String? a, String? b) {
   if (a == null || a.isEmpty) return b;
   if (b == null || b.isEmpty) return a;
@@ -777,6 +1058,59 @@ String _preferredTournamentImage(ContainerDto container) {
     return tournamentLogo;
   }
   return container.containerImage;
+}
+
+String _extractAutographPlayerName(String stickerName) {
+  final left = stickerName.split(' | ').first.trim();
+  return _preferredPlayerDisplayName(
+    _cleanPlayerName(left.replaceFirst(RegExp(r'\s+\([^)]*\)$'), '')),
+  );
+}
+
+String _cleanPlayerName(String playerName) {
+  return playerName
+      .trim()
+      .replaceAll(RegExp(r'\s*\|[A-Za-z0-9_]+\s*=.*$'), '')
+      .replaceFirst(RegExp(r'\s+\([^)]*\)$'), '')
+      .trim();
+}
+
+String _playerLookupKey(String playerName) {
+  return _cleanPlayerName(playerName).toLowerCase();
+}
+
+String _preferredPlayerDisplayName(String playerName) {
+  return _preferredPlayerNames[_playerLookupKey(playerName)] ??
+      _cleanPlayerName(playerName);
+}
+
+const _preferredPlayerNames = <String, String>{
+  'adren': 'AdreN',
+  'amanek': 'AmaNEk',
+  'dycha': 'dycha',
+  'electronic': 'electroNic',
+  'hobbit': 'Hobbit',
+  'ins': 'INS',
+  'jackz': 'JACKZ',
+  'niko': 'NiKo',
+  'qikert': 'Qikert',
+  'sico': 'sico',
+  'tenzki': 'TENZKI',
+};
+
+String _autographEffectLabel(String effect) {
+  switch (effect) {
+    case 'FOIL':
+      return 'Foil';
+    case 'GOLD':
+      return 'Gold';
+    case 'GLITTER':
+      return 'Glitter';
+    case 'HOLO':
+      return 'Holo';
+    default:
+      return 'Paper';
+  }
 }
 
 String _inferTournamentOrganizer(String tournamentName) {

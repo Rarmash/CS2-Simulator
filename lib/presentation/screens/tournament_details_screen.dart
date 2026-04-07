@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../core/utils/team_name_helper.dart';
 import '../../core/utils/date_format_helper.dart';
 import '../../data/models/container_dto.dart';
 import '../../data/models/tournament_dto.dart';
@@ -10,6 +11,8 @@ import '../widgets/detail_info_row.dart';
 import '../widgets/detail_source_section.dart';
 import '../widgets/detail_source_tile.dart';
 import '../widgets/detail_tag.dart';
+import '../widgets/adaptive_logo_image.dart';
+import 'player_details_screen.dart';
 import 'team_details_screen.dart';
 
 class TournamentDetailsScreen extends StatelessWidget {
@@ -59,16 +62,11 @@ class TournamentDetailsScreen extends StatelessWidget {
 
                       final image = Container(
                         alignment: Alignment.center,
-                        child: Image.asset(
-                          tournament.imagePath,
+                        child: AdaptiveLogoImage(
+                          logoPath: tournament.imagePath,
                           height: narrow ? 150 : 200,
                           fit: BoxFit.contain,
-                          filterQuality: FilterQuality.low,
-                          isAntiAlias: false,
-                          gaplessPlayback: true,
-                          cacheWidth: narrow ? 420 : 640,
-                          errorBuilder: (_, _, _) =>
-                              const Icon(Icons.emoji_events, size: 72),
+                          fallback: const Icon(Icons.emoji_events, size: 72),
                         ),
                       );
 
@@ -172,7 +170,7 @@ class TournamentDetailsScreen extends StatelessWidget {
                   emptyText: 'No playoff bracket data available.',
                   itemBuilder: (_) => const SizedBox.shrink(),
                   contentBuilder: (items) =>
-                      _buildPlayoffBracket(context, items),
+                      _buildPlayoffBracket(context, items, data.metadata),
                 ),
                 const SizedBox(height: 12),
               ],
@@ -231,7 +229,7 @@ class TournamentDetailsScreen extends StatelessWidget {
   ) {
     final scheme = _placementScheme(tournament);
     if (scheme == _PlacementScheme.none) {
-      return _buildPlacementRows(context, items);
+      return _buildPlacementRows(context, items, metadata);
     }
 
     final groupedByPhase = <String, List<TournamentPlacementDto>>{};
@@ -286,7 +284,7 @@ class TournamentDetailsScreen extends StatelessWidget {
               ],
             ),
           ),
-          _buildPlacementRows(context, groupedByPhase[phase]!),
+          _buildPlacementRows(context, groupedByPhase[phase]!, metadata),
           if (phase != orderedPhases.last) const SizedBox(height: 8),
         ],
       ],
@@ -296,6 +294,7 @@ class TournamentDetailsScreen extends StatelessWidget {
   Widget _buildPlacementRows(
     BuildContext context,
     List<TournamentPlacementDto> items,
+    TournamentMetadataDto? metadata,
   ) {
     final grouped = <String, List<String>>{};
     for (final item in items) {
@@ -339,12 +338,13 @@ class TournamentDetailsScreen extends StatelessWidget {
                         InkWell(
                           borderRadius: BorderRadius.circular(10),
                           onTap: () {
-                            AppNavigationHelper.pushScreen(
+                            _showTournamentTeamSheet(
                               context,
-                              TeamDetailsScreen(
-                                teamName: team,
-                                repository: repository,
-                              ),
+                              team: team,
+                              logoPath: items
+                                  .firstWhere((item) => item.team == team)
+                                  .teamLogo,
+                              metadata: metadata,
                             );
                           },
                           child: Container(
@@ -429,6 +429,7 @@ class TournamentDetailsScreen extends StatelessWidget {
   Widget _buildPlayoffBracket(
     BuildContext context,
     List<TournamentPlayoffMatchDto> items,
+    TournamentMetadataDto? metadata,
   ) {
     final grouped = <String, List<TournamentPlayoffMatchDto>>{};
     for (final item in items) {
@@ -459,7 +460,7 @@ class TournamentDetailsScreen extends StatelessWidget {
                   ),
                   const SizedBox(height: 8),
                   ...grouped[round]!.map(
-                    (match) => _buildPlayoffMatchCard(context, match),
+                    (match) => _buildPlayoffMatchCard(context, match, metadata),
                   ),
                 ],
               ),
@@ -472,6 +473,7 @@ class TournamentDetailsScreen extends StatelessWidget {
   Widget _buildPlayoffMatchCard(
     BuildContext context,
     TournamentPlayoffMatchDto match,
+    TournamentMetadataDto? metadata,
   ) {
     return Container(
       margin: const EdgeInsets.only(bottom: 10),
@@ -489,6 +491,7 @@ class TournamentDetailsScreen extends StatelessWidget {
             match.team1,
             match.team1Logo,
             match.score1,
+            metadata,
           ),
           const SizedBox(height: 6),
           _buildPlayoffTeamRow(
@@ -496,6 +499,7 @@ class TournamentDetailsScreen extends StatelessWidget {
             match.team2,
             match.team2Logo,
             match.score2,
+            metadata,
           ),
           if ((match.date ?? '').isNotEmpty) ...[
             const SizedBox(height: 10),
@@ -514,6 +518,7 @@ class TournamentDetailsScreen extends StatelessWidget {
     String team,
     String? logoPath,
     String? score,
+    TournamentMetadataDto? metadata,
   ) {
     return Row(
       children: [
@@ -521,9 +526,11 @@ class TournamentDetailsScreen extends StatelessWidget {
           child: InkWell(
             borderRadius: BorderRadius.circular(8),
             onTap: () {
-              AppNavigationHelper.pushScreen(
+              _showTournamentTeamSheet(
                 context,
-                TeamDetailsScreen(teamName: team, repository: repository),
+                team: team,
+                logoPath: logoPath,
+                metadata: metadata,
               );
             },
             child: Padding(
@@ -552,6 +559,113 @@ class TournamentDetailsScreen extends StatelessWidget {
             ),
           ),
       ],
+    );
+  }
+
+  void _showTournamentTeamSheet(
+    BuildContext context, {
+    required String team,
+    required String? logoPath,
+    required TournamentMetadataDto? metadata,
+  }) {
+    final canonical = TeamNameHelper.canonicalize(team);
+    TournamentTeamRosterDto? roster;
+
+    if (metadata != null) {
+      for (final entry in metadata.teamRosters) {
+        if (TeamNameHelper.canonicalize(entry.team) == canonical) {
+          roster = entry;
+          break;
+        }
+      }
+    }
+
+    showModalBottomSheet<void>(
+      context: context,
+      isScrollControlled: true,
+      builder: (sheetContext) {
+        return SafeArea(
+          child: Padding(
+            padding: const EdgeInsets.fromLTRB(16, 16, 16, 24),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  children: [
+                    _TeamLogo(logoPath: roster?.teamLogo ?? logoPath, size: 28),
+                    const SizedBox(width: 10),
+                    Expanded(
+                      child: Text(
+                        team,
+                        style: const TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 14),
+                if (roster != null && roster.players.isNotEmpty) ...[
+                  const Text(
+                    'Tournament roster',
+                    style: TextStyle(
+                      color: Colors.white70,
+                      fontSize: 13,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                  const SizedBox(height: 10),
+                  Wrap(
+                    spacing: 8,
+                    runSpacing: 8,
+                    children: [
+                      for (final player in roster.players)
+                        ActionChip(
+                          label: Text(player),
+                          onPressed: () {
+                            Navigator.pop(sheetContext);
+                            AppNavigationHelper.pushScreen(
+                              context,
+                              PlayerDetailsScreen(
+                                playerName: player,
+                                repository: repository,
+                              ),
+                            );
+                          },
+                        ),
+                    ],
+                  ),
+                  const SizedBox(height: 16),
+                ] else ...[
+                  const Text(
+                    'No roster data available for this tournament team.',
+                    style: TextStyle(color: Colors.white70),
+                  ),
+                  const SizedBox(height: 16),
+                ],
+                SizedBox(
+                  width: double.infinity,
+                  child: FilledButton.tonal(
+                    onPressed: () {
+                      Navigator.pop(sheetContext);
+                      AppNavigationHelper.pushScreen(
+                        context,
+                        TeamDetailsScreen(
+                          teamName: team,
+                          repository: repository,
+                        ),
+                      );
+                    },
+                    child: const Text('Open team page'),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        );
+      },
     );
   }
 }
@@ -713,13 +827,16 @@ class _TeamLogo extends StatelessWidget {
     }
 
     if (value.startsWith('assets/')) {
-      return Image.asset(
-        value,
+      return AdaptiveLogoImage(
+        logoPath: value,
         width: size,
         height: size,
         fit: BoxFit.contain,
-        errorBuilder: (_, _, _) =>
-            Icon(Icons.shield_outlined, size: size, color: Colors.white60),
+        fallback: Icon(
+          Icons.shield_outlined,
+          size: size,
+          color: Colors.white60,
+        ),
       );
     }
 

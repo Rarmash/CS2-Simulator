@@ -42,6 +42,12 @@ class DartImporterBackend implements ImporterBackend {
     final existingCharms = _io.loadJsonList(
       File('${dataDir.path}/charms.json'),
     );
+    final tournamentMetadataFile = File(
+      '${dataDir.path}/tournament_metadata.json',
+    );
+    final tournamentMetadata = tournamentMetadataFile.existsSync()
+        ? _io.loadJsonList(tournamentMetadataFile)
+        : <Map<String, dynamic>>[];
     final existingCases = allExistingCases.where((item) {
       final type = (item['type'] ?? '').toString().trim().toUpperCase();
       return !{
@@ -215,7 +221,10 @@ class DartImporterBackend implements ImporterBackend {
 
     final collectionImageByName = buildCollectionImageMap(skinsData);
     buildCollectionMetaMap(collectionsData);
-    final tournamentLogoByName = buildTournamentLogoMap(stickersData);
+    final tournamentLogoByName = {
+      ...buildTournamentLogoMap(stickersData),
+      ...buildTournamentLogoMapFromMetadata(tournamentMetadata),
+    };
 
     _io.printInfo('Tournament logo candidates: ${tournamentLogoByName.length}');
 

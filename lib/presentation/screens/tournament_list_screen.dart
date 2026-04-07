@@ -8,6 +8,7 @@ import '../widgets/async_collection_loader.dart';
 import '../widgets/chip_badge.dart';
 import '../widgets/collection_list_card.dart';
 import '../widgets/responsive_collection_grid.dart';
+import 'player_list_screen.dart';
 import 'team_list_screen.dart';
 import 'tournament_details_screen.dart';
 
@@ -35,6 +36,19 @@ class _TournamentListScreenState extends State<TournamentListScreen> {
       appBar: AppBar(
         title: const Text('Majors'),
         actions: [
+          IconButton(
+            tooltip: 'Players',
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (_) =>
+                      PlayerListScreen(repository: widget.repository),
+                ),
+              );
+            },
+            icon: const Icon(Icons.person_search_outlined),
+          ),
           IconButton(
             tooltip: 'Teams',
             onPressed: () {

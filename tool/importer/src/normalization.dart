@@ -842,6 +842,26 @@ Map<String, String> buildTournamentLogoMap(
   return result;
 }
 
+Map<String, String> buildTournamentLogoMapFromMetadata(
+  List<Map<String, dynamic>> metadataEntries,
+) {
+  final result = <String, String>{};
+
+  for (final entry in metadataEntries) {
+    final tournamentName = (entry['name'] ?? '').toString().trim();
+    final logo = (entry['tournamentLogo'] ?? '').toString().trim();
+    if (tournamentName.isEmpty || logo.isEmpty) {
+      continue;
+    }
+
+    for (final key in tournamentNameCandidates(tournamentName)) {
+      result.putIfAbsent(key, () => logo);
+    }
+  }
+
+  return result;
+}
+
 String resolveContainerReleaseDate({
   required String crateName,
   required String containerType,

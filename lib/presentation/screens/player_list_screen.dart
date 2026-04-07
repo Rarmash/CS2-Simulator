@@ -1,42 +1,41 @@
 import 'package:flutter/material.dart';
 
 import '../../core/utils/date_format_helper.dart';
-import '../../data/models/tournament_dto.dart';
+import '../../data/models/tournament_player_dto.dart';
 import '../../data/repositories/local_data_repository.dart';
-import '../widgets/adaptive_logo_image.dart';
 import '../widgets/async_collection_loader.dart';
-import 'team_details_screen.dart';
+import 'player_details_screen.dart';
 
-class TeamListScreen extends StatefulWidget {
+class PlayerListScreen extends StatefulWidget {
   final LocalDataRepository repository;
 
-  const TeamListScreen({super.key, required this.repository});
+  const PlayerListScreen({super.key, required this.repository});
 
   @override
-  State<TeamListScreen> createState() => _TeamListScreenState();
+  State<PlayerListScreen> createState() => _PlayerListScreenState();
 }
 
-class _TeamListScreenState extends State<TeamListScreen> {
-  late Future<List<TournamentTeamSummaryDto>> _future;
+class _PlayerListScreenState extends State<PlayerListScreen> {
+  late Future<List<TournamentPlayerSummaryDto>> _future;
   String _query = '';
 
   @override
   void initState() {
     super.initState();
-    _future = widget.repository.loadTournamentTeams();
+    _future = widget.repository.loadTournamentPlayers();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Major Teams')),
-      body: AsyncCollectionLoader<TournamentTeamSummaryDto>(
+      appBar: AppBar(title: const Text('Major Players')),
+      body: AsyncCollectionLoader<TournamentPlayerSummaryDto>(
         future: _future,
         builder: (context, items) {
           final filtered = items.where((item) {
             final query = _query.trim().toLowerCase();
             if (query.isEmpty) return true;
-            return item.teamName.toLowerCase().contains(query);
+            return item.playerName.toLowerCase().contains(query);
           }).toList();
 
           return Column(
@@ -47,7 +46,7 @@ class _TeamListScreenState extends State<TeamListScreen> {
                   onChanged: (value) => setState(() => _query = value),
                   decoration: const InputDecoration(
                     prefixIcon: Icon(Icons.search),
-                    hintText: 'Search teams',
+                    hintText: 'Search players',
                   ),
                 ),
               ),
@@ -55,7 +54,7 @@ class _TeamListScreenState extends State<TeamListScreen> {
                 child: filtered.isEmpty
                     ? const Center(
                         child: Text(
-                          'No teams found.',
+                          'No players found.',
                           style: TextStyle(color: Colors.white70),
                         ),
                       )
@@ -64,15 +63,15 @@ class _TeamListScreenState extends State<TeamListScreen> {
                         itemCount: filtered.length,
                         separatorBuilder: (_, _) => const SizedBox(height: 12),
                         itemBuilder: (context, index) {
-                          final team = filtered[index];
-                          return _TeamSummaryCard(
-                            team: team,
+                          final player = filtered[index];
+                          return _PlayerSummaryCard(
+                            player: player,
                             onTap: () {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (_) => TeamDetailsScreen(
-                                    teamName: team.teamName,
+                                  builder: (_) => PlayerDetailsScreen(
+                                    playerName: player.playerName,
                                     repository: widget.repository,
                                   ),
                                 ),
@@ -90,15 +89,17 @@ class _TeamListScreenState extends State<TeamListScreen> {
   }
 }
 
-class _TeamSummaryCard extends StatelessWidget {
-  final TournamentTeamSummaryDto team;
+class _PlayerSummaryCard extends StatelessWidget {
+  final TournamentPlayerSummaryDto player;
   final VoidCallback onTap;
 
-  const _TeamSummaryCard({required this.team, required this.onTap});
+  const _PlayerSummaryCard({required this.player, required this.onTap});
 
   @override
   Widget build(BuildContext context) {
-    final latestDate = DateFormatHelper.formatReleaseDate(team.latestStartDate);
+    final latestDate = DateFormatHelper.formatReleaseDate(
+      player.latestStartDate,
+    );
 
     return InkWell(
       borderRadius: BorderRadius.circular(16),
@@ -111,16 +112,18 @@ class _TeamSummaryCard extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.all(16),
           child: Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              _TeamLogoBadge(logoUrl: team.teamLogo, size: 56),
+              _PlayerStickerBadge(
+                imagePath: player.sampleStickerImage,
+                size: 56,
+              ),
               const SizedBox(width: 14),
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      team.teamName,
+                      player.playerName,
                       style: const TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.w700,
@@ -131,26 +134,20 @@ class _TeamSummaryCard extends StatelessWidget {
                       spacing: 8,
                       runSpacing: 8,
                       children: [
-                        _StatChip(
-                          label: '${team.tournamentCount} Majors',
+                        _PlayerStatChip(
+                          label: '${player.tournamentCount} Majors',
                           color: Colors.blueAccent,
                         ),
-                        if ((team.bestPlace ?? '').isNotEmpty)
-                          _StatChip(
-                            label: 'Best: ${team.bestPlace}',
-                            color: Colors.amber,
-                          ),
-                        if (team.titleCount > 0)
-                          _StatChip(
-                            label: '${team.titleCount} titles',
-                            color: Colors.greenAccent,
-                          ),
+                        _PlayerStatChip(
+                          label: '${player.autographCount} autographs',
+                          color: Colors.amber,
+                        ),
                       ],
                     ),
-                    if ((team.latestTournamentName ?? '').isNotEmpty) ...[
+                    if ((player.latestTournamentName ?? '').isNotEmpty) ...[
                       const SizedBox(height: 10),
                       Text(
-                        'Latest Major: ${team.latestTournamentName}',
+                        'Latest Major: ${player.latestTournamentName}',
                         style: const TextStyle(
                           color: Colors.white70,
                           fontSize: 13,
@@ -179,11 +176,11 @@ class _TeamSummaryCard extends StatelessWidget {
   }
 }
 
-class _StatChip extends StatelessWidget {
+class _PlayerStatChip extends StatelessWidget {
   final String label;
   final Color color;
 
-  const _StatChip({required this.label, required this.color});
+  const _PlayerStatChip({required this.label, required this.color});
 
   @override
   Widget build(BuildContext context) {
@@ -206,11 +203,11 @@ class _StatChip extends StatelessWidget {
   }
 }
 
-class _TeamLogoBadge extends StatelessWidget {
-  final String? logoUrl;
+class _PlayerStickerBadge extends StatelessWidget {
+  final String? imagePath;
   final double size;
 
-  const _TeamLogoBadge({required this.logoUrl, required this.size});
+  const _PlayerStickerBadge({required this.imagePath, required this.size});
 
   @override
   Widget build(BuildContext context) {
@@ -223,26 +220,19 @@ class _TeamLogoBadge extends StatelessWidget {
         border: Border.all(color: Colors.white10),
       ),
       clipBehavior: Clip.antiAlias,
-      child: Padding(padding: const EdgeInsets.all(8), child: _buildLogo()),
+      child: Padding(padding: const EdgeInsets.all(8), child: _buildImage()),
     );
   }
 
-  Widget _buildLogo() {
-    final value = logoUrl ?? '';
+  Widget _buildImage() {
+    final value = imagePath ?? '';
     if (value.isEmpty) {
-      return const Icon(Icons.groups_2_outlined, size: 28);
+      return const Icon(Icons.draw_outlined, size: 28);
     }
-    if (value.startsWith('assets/')) {
-      return AdaptiveLogoImage(
-        logoPath: value,
-        fit: BoxFit.contain,
-        fallback: const Icon(Icons.groups_2_outlined, size: 28),
-      );
-    }
-    return Image.network(
+    return Image.asset(
       value,
       fit: BoxFit.contain,
-      errorBuilder: (_, _, _) => const Icon(Icons.groups_2_outlined, size: 28),
+      errorBuilder: (_, _, _) => const Icon(Icons.draw_outlined, size: 28),
     );
   }
 }

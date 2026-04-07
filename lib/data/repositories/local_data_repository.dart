@@ -25,6 +25,7 @@ import '../models/sticker_content_dto.dart';
 import '../models/sticker_dto.dart';
 import '../models/tournament_dto.dart';
 import '../models/tournament_metadata_dto.dart';
+import '../models/tournament_player_dto.dart';
 
 part 'local_data_repository_loaders.dart';
 part 'local_data_repository_queries.dart';

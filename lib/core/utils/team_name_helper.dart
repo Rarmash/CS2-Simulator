@@ -4,6 +4,8 @@ class TeamNameHelper {
   static const Map<String, String> _aliases = {
     'complexity gaming': 'Complexity',
     'complexitygaming': 'Complexity',
+    'gambit gaming': 'Gambit Esports',
+    'gambit esports': 'Gambit Esports',
     'heroic': 'HEROIC',
     'mousesports': 'MOUZ',
     'team envy': 'Team EnVyUs',

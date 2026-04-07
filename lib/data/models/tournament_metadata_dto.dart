@@ -18,6 +18,29 @@ class TournamentPlacementDto {
   }
 }
 
+class TournamentTeamRosterDto {
+  final String team;
+  final String? teamLogo;
+  final List<String> players;
+
+  const TournamentTeamRosterDto({
+    required this.team,
+    required this.teamLogo,
+    required this.players,
+  });
+
+  factory TournamentTeamRosterDto.fromJson(Map<String, dynamic> json) {
+    return TournamentTeamRosterDto(
+      team: json['team'] as String,
+      teamLogo: json['teamLogo'] as String?,
+      players: (json['players'] as List<dynamic>? ?? const [])
+          .map((entry) => entry.toString())
+          .where((entry) => entry.trim().isNotEmpty)
+          .toList(),
+    );
+  }
+}
+
 class TournamentStageDateDto {
   final String phase;
   final String? startDate;
@@ -76,18 +99,22 @@ class TournamentPlayoffMatchDto {
 class TournamentMetadataDto {
   final String name;
   final String winner;
+  final String? tournamentLogo;
   final String? startDate;
   final String? endDate;
   final List<TournamentPlacementDto> placements;
+  final List<TournamentTeamRosterDto> teamRosters;
   final List<TournamentStageDateDto> stageDates;
   final List<TournamentPlayoffMatchDto> playoffMatches;
 
   const TournamentMetadataDto({
     required this.name,
     required this.winner,
+    required this.tournamentLogo,
     required this.startDate,
     required this.endDate,
     required this.placements,
+    required this.teamRosters,
     required this.stageDates,
     required this.playoffMatches,
   });
@@ -96,12 +123,19 @@ class TournamentMetadataDto {
     return TournamentMetadataDto(
       name: json['name'] as String,
       winner: json['winner'] as String,
+      tournamentLogo: json['tournamentLogo'] as String?,
       startDate: json['startDate'] as String?,
       endDate: json['endDate'] as String?,
       placements: (json['placements'] as List<dynamic>)
           .map(
             (entry) =>
                 TournamentPlacementDto.fromJson(entry as Map<String, dynamic>),
+          )
+          .toList(),
+      teamRosters: (json['teamRosters'] as List<dynamic>? ?? const [])
+          .map(
+            (entry) =>
+                TournamentTeamRosterDto.fromJson(entry as Map<String, dynamic>),
           )
           .toList(),
       stageDates: (json['stageDates'] as List<dynamic>? ?? const [])

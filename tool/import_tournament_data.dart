@@ -82,7 +82,14 @@ Future<void> main() async {
     final existing = existingByName[tournamentName];
     try {
       final pageTitle = await _resolvePageTitle(client, tournamentName);
+      final rawPage = await _fetchPage(client, 'raw', pageTitle);
       final renderedPage = await _fetchPage(client, 'render', pageTitle);
+      final tournamentLogo = await _materializeTournamentLogo(
+        client,
+        tournamentName,
+        await _extractPreferredTournamentLogo(client, rawPage, renderedPage) ??
+            (existing?['tournamentLogo'] as String?),
+      );
       final tournamentDates = _parseStartEndDates(renderedPage);
       final stagePages = _stagePagesForTournament(pageTitle, tournamentName);
 
@@ -101,6 +108,7 @@ Future<void> main() async {
               ),
       );
       await _materializeTeamLogos(client, placements, playoffMatches);
+      final teamRosters = _parseTeamRostersFromRawPage(rawPage, placements);
       final stageDates = <Map<String, String>>[];
       for (final stagePage in stagePages) {
         try {
@@ -126,11 +134,13 @@ Future<void> main() async {
       results.add({
         'name': tournamentName,
         'winner': winner,
+        if ((tournamentLogo ?? '').isNotEmpty) 'tournamentLogo': tournamentLogo,
         if ((tournamentDates.$1 ?? '').isNotEmpty)
           'startDate': tournamentDates.$1,
         if ((tournamentDates.$2 ?? '').isNotEmpty)
           'endDate': tournamentDates.$2,
         'placements': placements,
+        'teamRosters': teamRosters,
         'stageDates': stageDates,
         'playoffMatches': playoffMatches,
       });
@@ -142,9 +152,11 @@ Future<void> main() async {
         results.add({
           'name': tournamentName,
           'winner': '',
+          'tournamentLogo': existing?['tournamentLogo'],
           'startDate': null,
           'endDate': null,
           'placements': const <Map<String, String>>[],
+          'teamRosters': const <Map<String, dynamic>>[],
           'stageDates': const <Map<String, String>>[],
           'playoffMatches': const <Map<String, String>>[],
         });
@@ -270,6 +282,61 @@ List<Map<String, String>> _parsePlacementsFromRenderedHtml(
   }
 
   return placements;
+}
+
+List<Map<String, dynamic>> _parseTeamRostersFromRawPage(
+  String rawPage,
+  List<Map<String, String>> placements,
+) {
+  final start = rawPage.indexOf('==Participants==');
+  if (start < 0) {
+    return const [];
+  }
+
+  final afterStart = rawPage.substring(start);
+  final resultsIndex = afterStart.indexOf('\n==Results==');
+  final section = resultsIndex < 0
+      ? afterStart
+      : afterStart.substring(0, resultsIndex);
+
+  final rosterBlocks = _extractTemplateBlocks(section, '{{TeamCard');
+  if (rosterBlocks.isEmpty) {
+    return const [];
+  }
+
+  final placementLogoByTeam = <String, String?>{
+    for (final placement in placements)
+      placement['team']!: placement['teamLogo'],
+  };
+  final rosters = <Map<String, dynamic>>[];
+  final seenTeams = <String>{};
+
+  for (final block in rosterBlocks) {
+    final team = _extractTemplateField(block, 'team')?.trim() ?? '';
+    if (team.isEmpty || !seenTeams.add(team)) {
+      continue;
+    }
+
+    final players = <String>[];
+    for (var i = 1; i <= 5; i++) {
+      final player = _extractTemplateField(block, 'p$i')?.trim() ?? '';
+      if (player.isEmpty) continue;
+      players.add(_cleanWikiValue(player));
+    }
+
+    if (players.isEmpty) {
+      continue;
+    }
+
+    rosters.add({
+      'team': _cleanWikiValue(team),
+      if ((placementLogoByTeam[_cleanWikiValue(team)] ?? '').isNotEmpty)
+        'teamLogo': placementLogoByTeam[_cleanWikiValue(team)],
+      'players': players,
+    });
+  }
+
+  return rosters;
 }
 
 (String?, String?) _parseStartEndDates(String renderedPage) {
@@ -416,6 +483,95 @@ String? _extractInfoboxValue(String renderedPage, String label) {
   return cleaned.isEmpty ? null : cleaned;
 }
 
+Future<String?> _extractPreferredTournamentLogo(
+  HttpClient client,
+  String rawPage,
+  String renderedPage,
+) async {
+  final renderedFileImages = _extractRenderedFileImageMap(renderedPage);
+  final preferredFileNames = <String>[
+    if ((_extractTemplateField(rawPage, 'icon') ?? '').isNotEmpty)
+      _extractTemplateField(rawPage, 'icon')!,
+    if ((_extractTemplateField(rawPage, 'icondarkmode') ?? '').isNotEmpty)
+      _extractTemplateField(rawPage, 'icondarkmode')!,
+    if ((_extractTemplateField(rawPage, 'image') ?? '').isNotEmpty)
+      _extractTemplateField(rawPage, 'image')!,
+    if ((_extractTemplateField(rawPage, 'imagedark') ?? '').isNotEmpty)
+      _extractTemplateField(rawPage, 'imagedark')!,
+  ];
+
+  for (final fileName in preferredFileNames) {
+    final normalized = fileName.trim().replaceAll('_', ' ');
+    final fileUrl = await _fetchLiquipediaFileUrl(client, normalized);
+    if ((fileUrl ?? '').isNotEmpty) {
+      return fileUrl;
+    }
+    final resolved = renderedFileImages[normalized];
+    if ((resolved ?? '').isNotEmpty) {
+      return resolved;
+    }
+  }
+
+  return null;
+}
+
+Future<String?> _fetchLiquipediaFileUrl(
+  HttpClient client,
+  String fileName,
+) async {
+  if (fileName.isEmpty) {
+    return null;
+  }
+
+  final title = Uri.encodeQueryComponent('File:$fileName');
+  final uri = Uri.parse(
+    '$_liquipediaApiBase?action=query&titles=$title&prop=imageinfo&iiprop=url&format=json',
+  );
+
+  try {
+    final json = await _fetchJson(client, uri);
+    final pages = ((json['query'] as Map?)?['pages'] as Map?) ?? const {};
+    for (final page in pages.values) {
+      if (page is! Map) {
+        continue;
+      }
+      final imageInfo = page['imageinfo'];
+      if (imageInfo is! List || imageInfo.isEmpty || imageInfo.first is! Map) {
+        continue;
+      }
+      final url = (imageInfo.first as Map)['url']?.toString().trim();
+      if ((url ?? '').isNotEmpty) {
+        return url;
+      }
+    }
+  } catch (_) {
+    return null;
+  }
+
+  return null;
+}
+
+Map<String, String> _extractRenderedFileImageMap(String renderedPage) {
+  final result = <String, String>{};
+  final matches = RegExp(
+    r'<a href="/counterstrike/File:([^"]+)"[^>]* class="image"><img alt="" src="([^"]+)"',
+    dotAll: true,
+  ).allMatches(renderedPage);
+
+  for (final match in matches) {
+    final fileName = Uri.decodeComponent(
+      (match.group(1) ?? '').trim(),
+    ).replaceAll('_', ' ');
+    final src = (match.group(2) ?? '').trim();
+    if (fileName.isEmpty || src.isEmpty) {
+      continue;
+    }
+    result.putIfAbsent(fileName, () => _resolveLiquipediaAssetUrl(src));
+  }
+
+  return result;
+}
+
 String? _extractTemplateField(String rawPage, String fieldName) {
   final match = RegExp(
     r'^\|' + RegExp.escape(fieldName) + r'\s*=\s*(.+?)\s*$',
@@ -426,6 +582,41 @@ String? _extractTemplateField(String rawPage, String fieldName) {
   }
   final value = match.group(1)?.trim();
   return (value == null || value.isEmpty) ? null : value;
+}
+
+List<String> _extractTemplateBlocks(String source, String templateStart) {
+  final blocks = <String>[];
+  var searchIndex = 0;
+
+  while (true) {
+    final start = source.indexOf(templateStart, searchIndex);
+    if (start < 0) break;
+
+    var depth = 0;
+    var end = start;
+    while (end < source.length - 1) {
+      final pair = source.substring(end, end + 2);
+      if (pair == '{{') {
+        depth += 1;
+        end += 2;
+        continue;
+      }
+      if (pair == '}}') {
+        depth -= 1;
+        end += 2;
+        if (depth <= 0) {
+          blocks.add(source.substring(start, end));
+          break;
+        }
+        continue;
+      }
+      end += 1;
+    }
+
+    searchIndex = end;
+  }
+
+  return blocks;
 }
 
 String? _extractHtmlSection(String html, String sectionId) {
@@ -546,6 +737,21 @@ String _cleanHtmlText(String input) {
       .replaceAll('&nbsp;', ' ')
       .replaceAll('&ndash;', '-')
       .replaceAll('&mdash;', '-');
+  value = value.replaceAll(RegExp(r'\s+'), ' ');
+  return value.trim();
+}
+
+String _cleanWikiValue(String input) {
+  var value = input.trim();
+  value = value.replaceAll(RegExp(r'\s*\|[A-Za-z0-9_]+\s*=.*$'), '');
+  value = value.replaceAll(RegExp(r'<ref[^>]*>.*?</ref>', dotAll: true), '');
+  value = value.replaceAll(RegExp(r'<[^>]+>'), ' ');
+  value = value.replaceAll(RegExp(r'\[\[(?:[^|\]]+\|)?([^\]]+)\]\]'), r'$1');
+  value = value.replaceAll(RegExp(r'\{\{player\|([^|}]+).*?\}\}'), r'$1');
+  value = value.replaceAll(RegExp(r'\{\{!.*?\}\}'), '');
+  value = value.replaceAll("'''", '');
+  value = value.replaceAll("''", '');
+  value = value.replaceAll('&nbsp;', ' ');
   value = value.replaceAll(RegExp(r'\s+'), ' ');
   return value.trim();
 }
@@ -686,6 +892,53 @@ Future<void> _materializeTeamLogos(
           match['team2Logo']!;
     }
   }
+}
+
+Future<String?> _materializeTournamentLogo(
+  HttpClient client,
+  String tournamentName,
+  String? logoValue,
+) async {
+  if (logoValue == null || logoValue.isEmpty) {
+    return null;
+  }
+  if (logoValue.startsWith('assets/')) {
+    return logoValue;
+  }
+
+  final logoDir = Directory('assets/tournament_logos');
+  if (!logoDir.existsSync()) {
+    await logoDir.create(recursive: true);
+  }
+
+  final uri = Uri.parse(logoValue);
+  final extension = _detectImageExtension(logoValue);
+  final slug = _slugify(tournamentName);
+  for (final ext in ['.png', '.svg', '.webp', '.jpg']) {
+    final candidate = File('${logoDir.path}/$slug$ext');
+    if (candidate.existsSync()) {
+      await candidate.delete();
+    }
+  }
+
+  final fileName = '$slug$extension';
+  final file = File('${logoDir.path}/$fileName');
+  try {
+    final request = await client.getUrl(uri);
+    final response = await request.close();
+    if (response.statusCode >= 200 && response.statusCode < 300) {
+      final bytes = await response.fold<List<int>>(
+        <int>[],
+        (acc, data) => acc..addAll(data),
+      );
+      await file.writeAsBytes(bytes);
+    } else {
+      return logoValue;
+    }
+  } catch (_) {
+    return logoValue;
+  }
+  return 'assets/tournament_logos/$fileName';
 }
 
 String _detectImageExtension(String url) {

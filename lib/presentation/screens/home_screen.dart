@@ -10,6 +10,7 @@ import 'charm_collection_list_screen.dart';
 import 'glossary_hub_screen.dart';
 import 'operation_collection_list_screen.dart';
 import 'patch_collection_list_screen.dart';
+import 'player_list_screen.dart';
 import 'reward_collection_list_screen.dart';
 import 'settings_screen.dart';
 import 'team_list_screen.dart';
@@ -86,6 +87,11 @@ class HomeScreen extends StatelessWidget {
         icon: Icons.groups_2,
         title: 'Major Teams',
         buildScreen: () => TeamListScreen(repository: repository),
+      ),
+      _HomeMenuItem(
+        icon: Icons.person_search,
+        title: 'Major Players',
+        buildScreen: () => PlayerListScreen(repository: repository),
       ),
       _HomeMenuItem(
         icon: Icons.swap_horiz,
