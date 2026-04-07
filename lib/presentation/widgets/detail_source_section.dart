@@ -5,6 +5,7 @@ class DetailSourceSection<T> extends StatelessWidget {
   final List<T> items;
   final String emptyText;
   final Widget Function(T item) itemBuilder;
+  final Widget Function(List<T> items)? contentBuilder;
 
   const DetailSourceSection({
     super.key,
@@ -12,6 +13,7 @@ class DetailSourceSection<T> extends StatelessWidget {
     required this.items,
     required this.emptyText,
     required this.itemBuilder,
+    this.contentBuilder,
   });
 
   @override
@@ -29,6 +31,8 @@ class DetailSourceSection<T> extends StatelessWidget {
             const SizedBox(height: 12),
             if (items.isEmpty)
               Text(emptyText, style: const TextStyle(color: Colors.white70))
+            else if (contentBuilder != null)
+              contentBuilder!(items)
             else
               ...items.map(itemBuilder),
           ],

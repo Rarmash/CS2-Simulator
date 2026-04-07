@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
+import 'adaptive_logo_image.dart';
+
 class AssetCollectionImage extends StatelessWidget {
   final String assetPath;
   final double? height;
@@ -17,6 +19,10 @@ class AssetCollectionImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    if (AdaptiveLogoImage.shouldUseAdaptiveTint(assetPath)) {
+      return AdaptiveLogoImage(logoPath: assetPath, height: height, fit: fit);
+    }
+
     if (_isSvg) {
       return SvgPicture.asset(
         assetPath,

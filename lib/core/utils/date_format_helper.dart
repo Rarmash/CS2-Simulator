@@ -26,4 +26,20 @@ class DateFormatHelper {
 
     return '$day $month $year';
   }
+
+  static String? formatDateRange(String? start, String? end) {
+    final formattedStart = formatReleaseDate(start);
+    final formattedEnd = formatReleaseDate(end);
+
+    if (formattedStart == null || formattedStart.isEmpty) {
+      return formattedEnd;
+    }
+    if (formattedEnd == null || formattedEnd.isEmpty) {
+      return formattedStart;
+    }
+    if (start == end) {
+      return formattedStart;
+    }
+    return '$formattedStart - $formattedEnd';
+  }
 }

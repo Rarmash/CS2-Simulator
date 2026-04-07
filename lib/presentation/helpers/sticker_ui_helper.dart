@@ -12,7 +12,7 @@ class StickerUiHelper {
       case 'EXOTIC':
         return Colors.pink;
       case 'EXTRAORDINARY':
-        return Colors.amber;
+        return const Color(0xFFEB4B4B);
       case 'CONTRABAND':
         return const Color(0xFFFF8A00);
       default:

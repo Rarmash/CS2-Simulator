@@ -7,6 +7,9 @@ void main() async {
   final root = Directory.current;
 
   final containersFile = File('${root.path}/assets/data/containers.json');
+  final tournamentMetadataFile = File(
+    '${root.path}/assets/data/tournament_metadata.json',
+  );
 
   if (!containersFile.existsSync()) {
     stderr.writeln('containers.json not found: ${containersFile.path}');
@@ -17,6 +20,19 @@ void main() async {
     await containersFile.readAsString(),
     'containers.json',
   );
+  final tournamentMetadata = tournamentMetadataFile.existsSync()
+      ? _readJsonList(
+          await tournamentMetadataFile.readAsString(),
+          'tournament_metadata.json',
+        )
+      : const <Map<String, dynamic>>[];
+  final tournamentLogoByName = {
+    for (final item in tournamentMetadata)
+      if (((item['name'] as String?) ?? '').trim().isNotEmpty &&
+          ((item['tournamentLogo'] as String?) ?? '').trim().isNotEmpty)
+        _canonicalTournamentName((item['name'] as String).trim()):
+            (item['tournamentLogo'] as String).trim(),
+  };
 
   final candidates = <_IconCandidate>[];
 
@@ -29,7 +45,12 @@ void main() async {
     String? imageRel;
     switch (type) {
       case 'SOUVENIR_PACKAGE':
-        final tournamentLogo = (item['tournamentLogo'] as String?)?.trim();
+        final tournamentName = (item['tournamentName'] as String?)?.trim();
+        final tournamentLogo =
+            ((tournamentName != null && tournamentName.isNotEmpty)
+                ? tournamentLogoByName[_canonicalTournamentName(tournamentName)]
+                : null) ??
+            (item['tournamentLogo'] as String?)?.trim();
         imageRel = (tournamentLogo != null && tournamentLogo.isNotEmpty)
             ? tournamentLogo
             : (item['containerImage'] as String?)?.trim();
@@ -233,6 +254,26 @@ void main() async {
   stdout.writeln('Generated: assets/app_icon/latest_container_ios_dark.png');
   stdout.writeln('Generated: assets/app_icon/latest_container_ios_tinted.png');
   stdout.writeln('Generated: assets/app_icon/transparent_bg.png');
+}
+
+String _canonicalTournamentName(String rawTournamentName) {
+  final trimmed = rawTournamentName
+      .trim()
+      .replaceAll('ELEAGUE Major Boston 2018', 'ELEAGUE Boston 2018')
+      .replaceAll('Krakow', 'Kraków')
+      .replaceAll(RegExp(r'\s+'), ' ');
+  if (trimmed.isEmpty) {
+    return trimmed;
+  }
+
+  final yearPrefix = RegExp(r'^(20\d{2}) (.+)$').firstMatch(trimmed);
+  if (yearPrefix != null) {
+    final year = yearPrefix.group(1)!;
+    final rest = yearPrefix.group(2)!;
+    return '$rest $year';
+  }
+
+  return trimmed;
 }
 
 class _IconCandidate {

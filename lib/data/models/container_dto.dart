@@ -7,6 +7,8 @@ class ContainerDto {
   final String? sourceType;
   final String? sourceId;
   final String? sourceName;
+  final String? tournamentName;
+  final String? tournamentLogo;
   final String? currency;
   final int? cost;
 
@@ -19,6 +21,8 @@ class ContainerDto {
     required this.sourceType,
     required this.sourceId,
     required this.sourceName,
+    required this.tournamentName,
+    required this.tournamentLogo,
     required this.currency,
     required this.cost,
   });
@@ -33,6 +37,8 @@ class ContainerDto {
       sourceType: json['sourceType'] as String?,
       sourceId: json['sourceId'] as String?,
       sourceName: json['sourceName'] as String?,
+      tournamentName: json['tournamentName'] as String?,
+      tournamentLogo: json['tournamentLogo'] as String?,
       currency: json['currency'] as String?,
       cost: (json['cost'] as num?)?.toInt(),
     );
