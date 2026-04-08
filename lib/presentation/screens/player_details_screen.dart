@@ -7,6 +7,8 @@ import '../../data/repositories/local_data_repository.dart';
 import '../helpers/app_navigation_helper.dart';
 import '../widgets/adaptive_logo_image.dart';
 import '../widgets/async_collection_loader.dart';
+import '../widgets/detail_info_row.dart';
+import '../widgets/major_summary_card.dart';
 import 'team_details_screen.dart';
 import 'tournament_details_screen.dart';
 
@@ -67,111 +69,59 @@ class _PlayerDetailsScreenState extends State<PlayerDetailsScreen> {
           return ListView(
             padding: const EdgeInsets.all(12),
             children: [
-              Card(
-                child: Padding(
-                  padding: const EdgeInsets.all(16),
-                  child: Row(
-                    children: [
-                      _PlayerStickerBadge(
-                        imagePath: latest?.sampleStickerImage,
-                        size: 72,
-                      ),
-                      const SizedBox(width: 16),
-                      Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              widget.playerName,
-                              style: const TextStyle(
-                                fontSize: 24,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                            const SizedBox(height: 8),
-                            Wrap(
-                              spacing: 8,
-                              runSpacing: 8,
-                              children: [
-                                _PlayerStatChip(
-                                  label: '${items.length} Major appearances',
-                                  color: Colors.blueAccent,
-                                ),
-                                _PlayerStatChip(
-                                  label: '$autographCount autographs',
-                                  color: Colors.amber,
-                                ),
-                                if (bestPlace != null)
-                                  _PlayerStatChip(
-                                    label: 'Best: $bestPlace',
-                                    color: Colors.greenAccent,
-                                  ),
-                                if (titleCount > 0)
-                                  _PlayerStatChip(
-                                    label: '$titleCount titles',
-                                    color: Colors.pinkAccent,
-                                  ),
-                              ],
-                            ),
-                            if (teams.isNotEmpty) ...[
-                              const SizedBox(height: 10),
-                              Text(
-                                'Teams: ${teams.join(', ')}',
-                                style: const TextStyle(
-                                  color: Colors.white70,
-                                  fontSize: 13,
-                                  fontWeight: FontWeight.w600,
-                                ),
-                              ),
-                            ],
-                            if ((latest?.latestDateText ?? '').isNotEmpty) ...[
-                              const SizedBox(height: 10),
-                              Text(
-                                'Latest Major: ${latest!.tournamentName}',
-                                style: const TextStyle(
-                                  color: Colors.white70,
-                                  fontSize: 13,
-                                  fontWeight: FontWeight.w600,
-                                ),
-                              ),
-                              const SizedBox(height: 4),
-                              Text(
-                                latest.latestDateText!,
-                                style: const TextStyle(
-                                  color: Colors.white60,
-                                  fontSize: 12,
-                                ),
-                              ),
-                              if ((latest.teamName ?? '').isNotEmpty) ...[
-                                const SizedBox(height: 6),
-                                Row(
-                                  children: [
-                                    _PlayerTeamLogo(
-                                      logoPath: latest.teamLogo,
-                                      size: 18,
-                                    ),
-                                    const SizedBox(width: 8),
-                                    Expanded(
-                                      child: Text(
-                                        '${latest.teamName}${(latest.place ?? '').isNotEmpty ? ' • ${latest.place}' : ''}',
-                                        style: const TextStyle(
-                                          color: Colors.white70,
-                                          fontSize: 13,
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ],
-                            ],
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
+              MajorSummaryCard(
+                leading: _PlayerStickerBadge(
+                  imagePath: latest?.sampleStickerImage,
+                  size: 92,
                 ),
+                title: widget.playerName,
+                subtitle: teams.isEmpty ? null : 'Teams: ${teams.join(', ')}',
+                tags: [
+                  _PlayerStatChip(
+                    label: '${items.length} Major appearances',
+                    color: Colors.blueAccent,
+                  ),
+                  _PlayerStatChip(
+                    label: '$autographCount autographs',
+                    color: Colors.amber,
+                  ),
+                  if (bestPlace != null)
+                    _PlayerStatChip(
+                      label: 'Best: $bestPlace',
+                      color: Colors.greenAccent,
+                    ),
+                  if (titleCount > 0)
+                    _PlayerStatChip(
+                      label: '$titleCount titles',
+                      color: Colors.pinkAccent,
+                    ),
+                ],
+                infoRows: [
+                  if ((latest?.tournamentName ?? '').isNotEmpty)
+                    DetailInfoRow(
+                      title: 'Latest Major',
+                      value: latest!.tournamentName,
+                    ),
+                  if ((latest?.latestDateText ?? '').isNotEmpty)
+                    DetailInfoRow(
+                      title: 'Latest Dates',
+                      value: latest!.latestDateText!,
+                    ),
+                  if ((latest?.teamName ?? '').isNotEmpty)
+                    DetailInfoRow(
+                      title: 'Latest Team',
+                      value:
+                          '${latest!.teamName}${(latest.place ?? '').isNotEmpty ? ' - ${latest.place}' : ''}',
+                    ),
+                ],
               ),
               const SizedBox(height: 12),
+              const MajorSectionHeader(
+                icon: Icons.timeline_outlined,
+                title: 'Major Timeline',
+                subtitle:
+                    'Tournament results, teams, autograph variants, and career context.',
+              ),
               ...items.map(
                 (item) => Padding(
                   padding: const EdgeInsets.only(bottom: 12),
