@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../../data/models/skin_dto.dart';
 import '../../data/repositories/local_data_repository.dart';
 import '../../domain/dropped_skin.dart';
+import '../../domain/special_item_variant_helper.dart';
 import '../../domain/tradeup_service.dart';
 import '../helpers/responsive_grid_helper.dart';
 import '../helpers/tradeup_controller.dart';
@@ -281,6 +282,58 @@ class _TradeUpScreenState extends State<TradeUpScreen> {
         collection.contains(q);
   }
 
+  List<_DisplayedTradeUpChance> _displayedChances(List<TradeUpChance> chances) {
+    if (chances.isEmpty) {
+      return const [];
+    }
+
+    final grouped = <String, List<TradeUpChance>>{};
+    for (final chance in chances) {
+      final skin = chance.skin;
+      final key = (skin.displayVariant ?? '').trim().isNotEmpty
+          ? SpecialItemVariantHelper.familyKeyForSkin(skin)
+          : skin.id;
+      grouped.putIfAbsent(key, () => <TradeUpChance>[]).add(chance);
+    }
+
+    final displayed = grouped.values.map((group) {
+      group.sort((a, b) => b.probability.compareTo(a.probability));
+      final representative = group.first;
+      final familySkins = group.map((item) => item.skin).toList();
+      final shouldGroup =
+          group.length > 1 &&
+          SpecialItemVariantHelper.hasConfiguredVariantWeights(familySkins);
+
+      if (!shouldGroup) {
+        return _DisplayedTradeUpChance(chance: representative);
+      }
+
+      final totalProbability = group.fold<double>(
+        0,
+        (sum, item) => sum + item.probability,
+      );
+      final labels = group
+          .map((item) => item.skin.displayVariant?.trim())
+          .whereType<String>()
+          .where((value) => value.isNotEmpty)
+          .toList();
+      final detail = labels.isEmpty
+          ? 'Family total'
+          : 'Includes ${labels.join(', ')}';
+
+      return _DisplayedTradeUpChance(
+        chance: representative,
+        probabilityOverride: totalProbability,
+        detailOverride: detail,
+      );
+    }).toList();
+
+    displayed.sort(
+      (a, b) => b.displayedProbability.compareTo(a.displayedProbability),
+    );
+    return displayed;
+  }
+
   String _qualityLabel(TradeUpInputQuality quality) {
     switch (quality) {
       case TradeUpInputQuality.regular:
@@ -333,6 +386,7 @@ class _TradeUpScreenState extends State<TradeUpScreen> {
           }).toList();
 
           filtered.sort((a, b) => int.parse(a.id).compareTo(int.parse(b.id)));
+          final displayedChances = _displayedChances(_controller.chances);
 
           return LayoutBuilder(
             builder: (context, constraints) {
@@ -526,12 +580,13 @@ class _TradeUpScreenState extends State<TradeUpScreen> {
                                   isSouvenir: _controller.result!.isSouvenir,
                                   skinFloat: _controller.result!.floatValue,
                                   exterior: _controller.result!.exterior,
+                                  patternSeed: _controller.result!.patternSeed,
                                 ),
                               ),
                       ),
                     ),
                   ),
-                  if (_controller.chances.isNotEmpty)
+                  if (displayedChances.isNotEmpty)
                     const SliverToBoxAdapter(
                       child: Padding(
                         padding: EdgeInsets.fromLTRB(12, 12, 12, 8),
@@ -544,15 +599,19 @@ class _TradeUpScreenState extends State<TradeUpScreen> {
                         ),
                       ),
                     ),
-                  if (_controller.chances.isNotEmpty)
+                  if (displayedChances.isNotEmpty)
                     SliverPadding(
                       padding: const EdgeInsets.symmetric(horizontal: 12),
                       sliver: SliverGrid(
                         delegate: SliverChildBuilderDelegate(
                           (_, index) => TradeUpChanceCard(
-                            chance: _controller.chances[index],
+                            chance: displayedChances[index].chance,
+                            probabilityOverride:
+                                displayedChances[index].probabilityOverride,
+                            detailOverride:
+                                displayedChances[index].detailOverride,
                           ),
-                          childCount: _controller.chances.length,
+                          childCount: displayedChances.length,
                         ),
                         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                           crossAxisCount:
@@ -622,4 +681,18 @@ class _TradeUpData {
     required this.skinIdToRegularCaseIds,
     required this.regularCaseIdToSkinIds,
   });
+}
+
+class _DisplayedTradeUpChance {
+  final TradeUpChance chance;
+  final double? probabilityOverride;
+  final String? detailOverride;
+
+  const _DisplayedTradeUpChance({
+    required this.chance,
+    this.probabilityOverride,
+    this.detailOverride,
+  });
+
+  double get displayedProbability => probabilityOverride ?? chance.probability;
 }

@@ -9,6 +9,7 @@ import '../helpers/app_navigation_helper.dart';
 import '../widgets/adaptive_logo_image.dart';
 import '../widgets/detail_info_row.dart';
 import '../widgets/detail_tag.dart';
+import '../widgets/major_summary_card.dart';
 import 'player_details_screen.dart';
 import 'tournament_details_screen.dart';
 
@@ -103,65 +104,38 @@ class _TeamDetailsScreenState extends State<TeamDetailsScreen> {
             children: [
               Padding(
                 padding: const EdgeInsets.fromLTRB(12, 12, 12, 0),
-                child: Card(
-                  child: Padding(
-                    padding: const EdgeInsets.all(16),
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        _TeamLogoBadge(logoUrl: latest?.teamLogo, size: 72),
-                        const SizedBox(width: 16),
-                        Expanded(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                canonicalTeamName,
-                                style: const TextStyle(
-                                  fontSize: 24,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                              const SizedBox(height: 10),
-                              Wrap(
-                                spacing: 8,
-                                runSpacing: 8,
-                                children: [
-                                  DetailTag(
-                                    text: '${sorted.length} Major appearances',
-                                  ),
-                                  if (bestPlace != null)
-                                    DetailTag(
-                                      text: 'Best: $bestPlace',
-                                      color: Colors.amber.shade400,
-                                    ),
-                                  if (titles > 0)
-                                    DetailTag(
-                                      text: '$titles Major titles',
-                                      color: Colors.greenAccent.shade400,
-                                    ),
-                                ],
-                              ),
-                              const SizedBox(height: 14),
-                              DetailInfoRow(
-                                title: 'Latest Major',
-                                value: latest?.tournamentName ?? '-',
-                              ),
-                              DetailInfoRow(
-                                title: 'Latest Dates',
-                                value:
-                                    DateFormatHelper.formatDateRange(
-                                      latest?.startDate,
-                                      latest?.endDate,
-                                    ) ??
-                                    '-',
-                              ),
-                            ],
-                          ),
-                        ),
-                      ],
+                child: MajorSummaryCard(
+                  leading: _TeamLogoBadge(logoUrl: latest?.teamLogo, size: 92),
+                  title: canonicalTeamName,
+                  subtitle: 'Major team history and roster continuity',
+                  tags: [
+                    DetailTag(text: '${sorted.length} Major appearances'),
+                    if (bestPlace != null)
+                      DetailTag(
+                        text: 'Best: $bestPlace',
+                        color: Colors.amber.shade400,
+                      ),
+                    if (titles > 0)
+                      DetailTag(
+                        text: '$titles Major titles',
+                        color: Colors.greenAccent.shade400,
+                      ),
+                  ],
+                  infoRows: [
+                    DetailInfoRow(
+                      title: 'Latest Major',
+                      value: latest?.tournamentName ?? '-',
                     ),
-                  ),
+                    DetailInfoRow(
+                      title: 'Latest Dates',
+                      value:
+                          DateFormatHelper.formatDateRange(
+                            latest?.startDate,
+                            latest?.endDate,
+                          ) ??
+                          '-',
+                    ),
+                  ],
                 ),
               ),
               if (recurringPlayers.isNotEmpty)
@@ -173,14 +147,12 @@ class _TeamDetailsScreenState extends State<TeamDetailsScreen> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const Text(
-                            'Recurring Players',
-                            style: TextStyle(
-                              fontSize: 18,
-                              fontWeight: FontWeight.bold,
-                            ),
+                          const MajorSectionHeader(
+                            icon: Icons.people_alt_outlined,
+                            title: 'Recurring Players',
+                            subtitle:
+                                'Most common Major players for this organization.',
                           ),
-                          const SizedBox(height: 10),
                           Wrap(
                             spacing: 8,
                             runSpacing: 8,
@@ -465,7 +437,17 @@ class _TeamLogoBadge extends StatelessWidget {
         border: Border.all(color: Colors.white10),
       ),
       clipBehavior: Clip.antiAlias,
-      child: Padding(padding: const EdgeInsets.all(10), child: _buildLogo()),
+      child: Padding(
+        padding: const EdgeInsets.all(10),
+        child: Container(
+          decoration: const BoxDecoration(
+            color: Colors.white,
+            shape: BoxShape.circle,
+          ),
+          padding: const EdgeInsets.all(8),
+          child: _buildLogo(),
+        ),
+      ),
     );
   }
 

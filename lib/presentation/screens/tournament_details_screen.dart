@@ -12,6 +12,7 @@ import '../widgets/detail_source_section.dart';
 import '../widgets/detail_source_tile.dart';
 import '../widgets/detail_tag.dart';
 import '../widgets/adaptive_logo_image.dart';
+import '../widgets/major_summary_card.dart';
 import 'player_details_screen.dart';
 import 'team_details_screen.dart';
 
@@ -53,114 +54,50 @@ class TournamentDetailsScreen extends StatelessWidget {
           return ListView(
             padding: const EdgeInsets.all(12),
             children: [
-              Card(
-                child: Padding(
-                  padding: const EdgeInsets.all(16),
-                  child: LayoutBuilder(
-                    builder: (context, constraints) {
-                      final narrow = constraints.maxWidth < 700;
-
-                      final image = Container(
-                        alignment: Alignment.center,
-                        child: AdaptiveLogoImage(
-                          logoPath: tournament.imagePath,
-                          height: narrow ? 150 : 200,
-                          fit: BoxFit.contain,
-                          fallback: const Icon(Icons.emoji_events, size: 72),
-                        ),
-                      );
-
-                      final info = Column(
-                        crossAxisAlignment: narrow
-                            ? CrossAxisAlignment.center
-                            : CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            tournament.name,
-                            textAlign: narrow
-                                ? TextAlign.center
-                                : TextAlign.left,
-                            style: const TextStyle(
-                              fontSize: 22,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          const SizedBox(height: 6),
-                          Text(
-                            tournament.organizer,
-                            textAlign: narrow
-                                ? TextAlign.center
-                                : TextAlign.left,
-                            style: const TextStyle(
-                              color: Colors.white70,
-                              fontSize: 16,
-                            ),
-                          ),
-                          const SizedBox(height: 12),
-                          Wrap(
-                            spacing: 8,
-                            runSpacing: 8,
-                            children: [
-                              DetailTag(
-                                text: 'Major',
-                                color: Colors.amber.shade400,
-                              ),
-                              DetailTag(text: tournament.eraLabel),
-                            ],
-                          ),
-                          const SizedBox(height: 14),
-                          DetailInfoRow(
-                            title: 'Organizer',
-                            value: tournament.organizer,
-                          ),
-                          if (data.metadata != null)
-                            DetailInfoRow(
-                              title: 'Winner',
-                              value: data.metadata!.winner,
-                            ),
-                          DetailInfoRow(
-                            title: 'Era',
-                            value: tournament.eraLabel,
-                          ),
-                          if (data.metadata?.startDate != null ||
-                              data.metadata?.endDate != null)
-                            DetailInfoRow(
-                              title: 'Tournament Dates',
-                              value:
-                                  DateFormatHelper.formatDateRange(
-                                    data.metadata?.startDate,
-                                    data.metadata?.endDate,
-                                  ) ??
-                                  '-',
-                            ),
-                          DetailInfoRow(
-                            title: 'Souvenir Packages',
-                            value: data.souvenirPackages.length.toString(),
-                          ),
-                          DetailInfoRow(
-                            title: 'Sticker Sources',
-                            value: data.stickerSources.length.toString(),
-                          ),
-                        ],
-                      );
-
-                      if (narrow) {
-                        return Column(
-                          children: [image, const SizedBox(height: 16), info],
-                        );
-                      }
-
-                      return Row(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Expanded(flex: 4, child: image),
-                          const SizedBox(width: 16),
-                          Expanded(flex: 5, child: info),
-                        ],
-                      );
-                    },
-                  ),
+              MajorSummaryCard(
+                leading: AdaptiveLogoImage(
+                  logoPath: tournament.imagePath,
+                  height: 170,
+                  fit: BoxFit.contain,
+                  fallback: const Icon(Icons.emoji_events, size: 72),
                 ),
+                title: tournament.name,
+                subtitle: tournament.organizer,
+                tags: [
+                  DetailTag(text: 'Major', color: Colors.amber.shade400),
+                  DetailTag(text: tournament.eraLabel),
+                ],
+                infoRows: [
+                  DetailInfoRow(
+                    title: 'Organizer',
+                    value: tournament.organizer,
+                  ),
+                  if (data.metadata != null)
+                    DetailInfoRow(
+                      title: 'Winner',
+                      value: data.metadata!.winner,
+                    ),
+                  DetailInfoRow(title: 'Era', value: tournament.eraLabel),
+                  if (data.metadata?.startDate != null ||
+                      data.metadata?.endDate != null)
+                    DetailInfoRow(
+                      title: 'Tournament Dates',
+                      value:
+                          DateFormatHelper.formatDateRange(
+                            data.metadata?.startDate,
+                            data.metadata?.endDate,
+                          ) ??
+                          '-',
+                    ),
+                  DetailInfoRow(
+                    title: 'Souvenir Packages',
+                    value: data.souvenirPackages.length.toString(),
+                  ),
+                  DetailInfoRow(
+                    title: 'Sticker Sources',
+                    value: data.stickerSources.length.toString(),
+                  ),
+                ],
               ),
               const SizedBox(height: 12),
               if (_hasMeaningfulPlayoffBracket(data.metadata)) ...[
@@ -251,6 +188,11 @@ class TournamentDetailsScreen extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
+        const MajorSectionHeader(
+          icon: Icons.format_list_numbered,
+          title: 'Final Placements',
+          subtitle: 'Grouped by the tournament stage where teams finished.',
+        ),
         for (final phase in orderedPhases) ...[
           Padding(
             padding: const EdgeInsets.only(bottom: 8),
@@ -439,34 +381,45 @@ class TournamentDetailsScreen extends StatelessWidget {
     }
 
     final rounds = grouped.keys.toList();
-    return SingleChildScrollView(
-      scrollDirection: Axis.horizontal,
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          for (final round in rounds)
-            Container(
-              width: 260,
-              margin: EdgeInsets.only(right: round == rounds.last ? 0 : 12),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    round,
-                    style: const TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w700,
-                    ),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const MajorSectionHeader(
+          icon: Icons.account_tree_outlined,
+          title: 'Playoff Bracket',
+          subtitle: 'Quarterfinals, semifinals, and final results.',
+        ),
+        SingleChildScrollView(
+          scrollDirection: Axis.horizontal,
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              for (final round in rounds)
+                Container(
+                  width: 260,
+                  margin: EdgeInsets.only(right: round == rounds.last ? 0 : 12),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        round,
+                        style: const TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w700,
+                        ),
+                      ),
+                      const SizedBox(height: 8),
+                      ...grouped[round]!.map(
+                        (match) =>
+                            _buildPlayoffMatchCard(context, match, metadata),
+                      ),
+                    ],
                   ),
-                  const SizedBox(height: 8),
-                  ...grouped[round]!.map(
-                    (match) => _buildPlayoffMatchCard(context, match, metadata),
-                  ),
-                ],
-              ),
-            ),
-        ],
-      ),
+                ),
+            ],
+          ),
+        ),
+      ],
     );
   }
 
@@ -580,88 +533,109 @@ class TournamentDetailsScreen extends StatelessWidget {
       }
     }
 
-    showModalBottomSheet<void>(
+    showDialog<void>(
       context: context,
-      isScrollControlled: true,
-      builder: (sheetContext) {
-        return SafeArea(
-          child: Padding(
-            padding: const EdgeInsets.fromLTRB(16, 16, 16, 24),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Row(
-                  children: [
-                    _TeamLogo(logoPath: roster?.teamLogo ?? logoPath, size: 28),
-                    const SizedBox(width: 10),
-                    Expanded(
-                      child: Text(
-                        team,
-                        style: const TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
+      builder: (dialogContext) {
+        return Dialog(
+          insetPadding: const EdgeInsets.symmetric(
+            horizontal: 20,
+            vertical: 24,
+          ),
+          child: ConstrainedBox(
+            constraints: const BoxConstraints(maxWidth: 520),
+            child: Padding(
+              padding: const EdgeInsets.fromLTRB(18, 18, 18, 18),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    children: [
+                      _TeamLogo(
+                        logoPath: roster?.teamLogo ?? logoPath,
+                        size: 30,
+                      ),
+                      const SizedBox(width: 10),
+                      Expanded(
+                        child: Text(
+                          team,
+                          style: const TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                       ),
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 14),
-                if (roster != null && roster.players.isNotEmpty) ...[
-                  const Text(
-                    'Tournament roster',
-                    style: TextStyle(
-                      color: Colors.white70,
-                      fontSize: 13,
-                      fontWeight: FontWeight.w600,
-                    ),
+                      IconButton(
+                        tooltip: 'Close',
+                        onPressed: () => Navigator.pop(dialogContext),
+                        icon: const Icon(Icons.close),
+                      ),
+                    ],
                   ),
                   const SizedBox(height: 10),
-                  Wrap(
-                    spacing: 8,
-                    runSpacing: 8,
+                  const MajorSectionHeader(
+                    icon: Icons.groups_2_outlined,
+                    title: 'Tournament Roster',
+                    subtitle:
+                        'Open a player page or jump to the full team history.',
+                  ),
+                  if (roster != null && roster.players.isNotEmpty) ...[
+                    Wrap(
+                      spacing: 8,
+                      runSpacing: 8,
+                      children: [
+                        for (final player in roster.players)
+                          ActionChip(
+                            label: Text(player),
+                            onPressed: () {
+                              Navigator.pop(dialogContext);
+                              AppNavigationHelper.pushScreen(
+                                context,
+                                PlayerDetailsScreen(
+                                  playerName: player,
+                                  repository: repository,
+                                ),
+                              );
+                            },
+                          ),
+                      ],
+                    ),
+                    const SizedBox(height: 16),
+                  ] else ...[
+                    const Text(
+                      'No roster data available for this tournament team.',
+                      style: TextStyle(color: Colors.white70),
+                    ),
+                    const SizedBox(height: 16),
+                  ],
+                  Row(
                     children: [
-                      for (final player in roster.players)
-                        ActionChip(
-                          label: Text(player),
+                      Expanded(
+                        child: OutlinedButton(
+                          onPressed: () => Navigator.pop(dialogContext),
+                          child: const Text('Close'),
+                        ),
+                      ),
+                      const SizedBox(width: 10),
+                      Expanded(
+                        child: FilledButton.tonal(
                           onPressed: () {
-                            Navigator.pop(sheetContext);
+                            Navigator.pop(dialogContext);
                             AppNavigationHelper.pushScreen(
                               context,
-                              PlayerDetailsScreen(
-                                playerName: player,
+                              TeamDetailsScreen(
+                                teamName: team,
                                 repository: repository,
                               ),
                             );
                           },
+                          child: const Text('Open team page'),
                         ),
+                      ),
                     ],
                   ),
-                  const SizedBox(height: 16),
-                ] else ...[
-                  const Text(
-                    'No roster data available for this tournament team.',
-                    style: TextStyle(color: Colors.white70),
-                  ),
-                  const SizedBox(height: 16),
                 ],
-                SizedBox(
-                  width: double.infinity,
-                  child: FilledButton.tonal(
-                    onPressed: () {
-                      Navigator.pop(sheetContext);
-                      AppNavigationHelper.pushScreen(
-                        context,
-                        TeamDetailsScreen(
-                          teamName: team,
-                          repository: repository,
-                        ),
-                      );
-                    },
-                    child: const Text('Open team page'),
-                  ),
-                ),
-              ],
+              ),
             ),
           ),
         );

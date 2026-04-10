@@ -6,10 +6,33 @@ import 'case_odds.dart';
 import 'dropped_skin.dart';
 import 'package_odds.dart';
 import 'skin_float_helper.dart';
+import 'skin_pattern_helper.dart';
+import 'special_item_variant_helper.dart';
 import 'terminal_offer.dart';
 
 class ContainerSimulatorService {
   final Random _random = Random();
+
+  int? _generatePatternSeedForSkin(SkinDto skin, List<SkinDto> sourcePool) {
+    if (!SkinPatternHelper.hasExplicitPhaseVariant(skin)) {
+      return SkinPatternHelper.generateSeed(random: _random, skin: skin);
+    }
+
+    final family = sourcePool
+        .where(
+          (candidate) =>
+              candidate.id == skin.id ||
+              SpecialItemVariantHelper.familyKeyForSkin(candidate) ==
+                  SpecialItemVariantHelper.familyKeyForSkin(skin),
+        )
+        .toList();
+
+    return SkinPatternHelper.generateSeed(
+      random: _random,
+      skin: skin,
+      siblingVariants: family,
+    );
+  }
 
   DroppedSkin openCase({
     required List<SkinDto> skins,
@@ -37,6 +60,7 @@ class ContainerSimulatorService {
         isSouvenir: false,
         skinFloat: wear.floatValue,
         exterior: wear.exterior,
+        patternSeed: _generatePatternSeedForSkin(guaranteedSkin, skins),
       );
     }
 
@@ -76,6 +100,7 @@ class ContainerSimulatorService {
       isSouvenir: isSouvenir,
       skinFloat: value,
       exterior: exterior,
+      patternSeed: _generatePatternSeedForSkin(selectedSkin, skins),
     );
   }
 
@@ -113,6 +138,7 @@ class ContainerSimulatorService {
         isStatTrak: isStatTrak,
         skinFloat: value,
         exterior: exterior,
+        patternSeed: _generatePatternSeedForSkin(skin, skins),
         offerIndex: index + 1,
       );
     });
@@ -126,7 +152,21 @@ class ContainerSimulatorService {
       throw Exception('No skins available for rarity: $odds');
     }
 
-    return filtered[_random.nextInt(filtered.length)];
+    if (odds == CaseOdds.specialItem) {
+      return _selectSpecialItemSkin(filtered);
+    }
+
+    return _selectWeightedVariantSkin(filtered);
+  }
+
+  SkinDto _selectSpecialItemSkin(List<SkinDto> skins) {
+    final families = SpecialItemVariantHelper.groupFamilies(skins);
+    if (families.isEmpty) {
+      throw Exception('No special items available');
+    }
+
+    final family = families[_random.nextInt(families.length)];
+    return SpecialItemVariantHelper.rollVariant(_random, family);
   }
 
   SkinDto _selectPackageSkin(List<SkinDto> skins) {
@@ -152,7 +192,31 @@ class ContainerSimulatorService {
       return skins[_random.nextInt(skins.length)];
     }
 
-    return filtered[_random.nextInt(filtered.length)];
+    return _selectWeightedVariantSkin(filtered);
+  }
+
+  SkinDto _selectWeightedVariantSkin(List<SkinDto> skins) {
+    final families = SpecialItemVariantHelper.groupFamilies(skins);
+    if (families.isEmpty) {
+      throw Exception('No skins available');
+    }
+
+    final hasWeightedFamilies = families.any(
+      (family) =>
+          family.length > 1 &&
+          SpecialItemVariantHelper.hasConfiguredVariantWeights(family),
+    );
+
+    if (!hasWeightedFamilies) {
+      return skins[_random.nextInt(skins.length)];
+    }
+
+    final family = families[_random.nextInt(families.length)];
+    if (family.length == 1) {
+      return family.first;
+    }
+
+    return SpecialItemVariantHelper.rollVariant(_random, family);
   }
 
   CaseOdds _getRandomCaseOdds() {

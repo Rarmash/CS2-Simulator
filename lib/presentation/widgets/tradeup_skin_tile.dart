@@ -61,7 +61,7 @@ class TradeUpSkinTile extends StatelessWidget {
                         ),
                         const SizedBox(height: 3),
                         Text(
-                          skin.name,
+                          SkinUiHelper.secondaryText(skin),
                           maxLines: 2,
                           overflow: TextOverflow.ellipsis,
                           textAlign: TextAlign.center,

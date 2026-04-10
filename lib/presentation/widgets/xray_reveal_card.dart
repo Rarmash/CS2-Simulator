@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../domain/dropped_skin.dart';
+import '../../domain/skin_pattern_helper.dart';
 import '../helpers/skin_ui_helper.dart';
 import 'info_row.dart';
 
@@ -286,6 +287,16 @@ class _XrayRevealCardState extends State<XrayRevealCard>
   Widget build(BuildContext context) {
     final skin = widget.drop.skin;
     final rarityColor = SkinUiHelper.rarityColor(skin);
+    final patternSummary = SkinPatternHelper.describePattern(
+      skin: skin,
+      patternSeed: widget.drop.patternSeed,
+    );
+    final patternMetric = SkinPatternHelper.describePatternMetric(
+      skin: skin,
+      patternSeed: widget.drop.patternSeed,
+    );
+    final patternFamily = SkinPatternHelper.patternFamilyLabel(skin);
+    final phaseText = (skin.phase ?? '').trim();
 
     const xrayGlow = Color(0xFF78FFF0);
     const xrayPanel = Color(0xFF0B1A21);
@@ -354,6 +365,29 @@ class _XrayRevealCardState extends State<XrayRevealCard>
                           title: 'Exterior',
                           value: widget.drop.exterior ?? '-',
                         ),
+                        if (phaseText.isNotEmpty)
+                          InfoRow(title: 'Phase', value: phaseText),
+                        if (widget.drop.patternSeed != null)
+                          InfoRow(
+                            title: 'Pattern seed',
+                            value: widget.drop.patternSeed.toString(),
+                          ),
+                        if (patternFamily != null)
+                          InfoRow(
+                            title: 'Pattern family',
+                            value: patternFamily,
+                          ),
+                        if (patternSummary != null &&
+                            patternSummary.trim().isNotEmpty &&
+                            patternSummary.trim() != phaseText)
+                          InfoRow(title: 'Pattern', value: patternSummary),
+                        if (patternMetric != null &&
+                            patternMetric.trim().isNotEmpty &&
+                            patternMetric.trim() != patternSummary?.trim())
+                          InfoRow(
+                            title: 'Pattern detail',
+                            value: patternMetric,
+                          ),
                         InfoRow(
                           title: 'StatTrak',
                           value: widget.drop.isStatTrak ? 'Yes' : 'No',

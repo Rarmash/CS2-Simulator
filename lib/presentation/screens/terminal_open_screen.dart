@@ -111,6 +111,7 @@ class _TerminalOpenScreenState extends State<TerminalOpenScreen> {
         isSouvenir: false,
         skinFloat: offer.skinFloat,
         exterior: offer.exterior,
+        patternSeed: offer.patternSeed,
       );
     });
   }

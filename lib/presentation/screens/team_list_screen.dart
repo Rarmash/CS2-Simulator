@@ -223,7 +223,17 @@ class _TeamLogoBadge extends StatelessWidget {
         border: Border.all(color: Colors.white10),
       ),
       clipBehavior: Clip.antiAlias,
-      child: Padding(padding: const EdgeInsets.all(8), child: _buildLogo()),
+      child: Padding(
+        padding: const EdgeInsets.all(4),
+        child: Container(
+          decoration: const BoxDecoration(
+            color: Colors.white,
+            shape: BoxShape.circle,
+          ),
+          padding: const EdgeInsets.all(4),
+          child: _buildLogo(),
+        ),
+      ),
     );
   }
 

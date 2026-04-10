@@ -25,6 +25,13 @@ class AppNavigationHelper {
     );
   }
 
+  static Future<T?> replaceScreen<T, TO>(BuildContext context, Widget screen) {
+    return Navigator.pushReplacement<T, TO>(
+      context,
+      MaterialPageRoute(builder: (_) => screen),
+    );
+  }
+
   static Widget buildContainerOpenScreen({
     required ContainerDto containerDto,
     required LocalDataRepository repository,

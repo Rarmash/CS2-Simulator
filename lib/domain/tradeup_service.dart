@@ -2,6 +2,8 @@ import 'dart:math';
 
 import '../data/models/skin_dto.dart';
 import 'skin_float_helper.dart';
+import 'skin_pattern_helper.dart';
+import 'special_item_variant_helper.dart';
 
 enum TradeUpInputQuality { regular, statTrak, souvenir }
 
@@ -38,6 +40,7 @@ class TradeUpResult {
   final String exterior;
   final bool isStatTrak;
   final bool isSouvenir;
+  final int? patternSeed;
 
   const TradeUpResult({
     required this.skin,
@@ -45,6 +48,7 @@ class TradeUpResult {
     required this.exterior,
     required this.isStatTrak,
     required this.isSouvenir,
+    required this.patternSeed,
   });
 }
 
@@ -68,6 +72,31 @@ class TradeUpChance {
 
 class TradeUpService {
   final Random _random = Random();
+
+  int? _generatePatternSeedForTradeChance(
+    TradeUpChance chance,
+    List<TradeUpChance> allChances,
+  ) {
+    if (!SkinPatternHelper.hasExplicitPhaseVariant(chance.skin)) {
+      return SkinPatternHelper.generateSeed(random: _random, skin: chance.skin);
+    }
+
+    final familyVariants = allChances
+        .where(
+          (entry) =>
+              entry.skin.id == chance.skin.id ||
+              SpecialItemVariantHelper.familyKeyForSkin(entry.skin) ==
+                  SpecialItemVariantHelper.familyKeyForSkin(chance.skin),
+        )
+        .map((entry) => entry.skin)
+        .toList();
+
+    return SkinPatternHelper.generateSeed(
+      random: _random,
+      skin: chance.skin,
+      siblingVariants: familyVariants,
+    );
+  }
 
   TradeUpResult tradeUp({
     required List<TradeUpInputItem> input,
@@ -174,12 +203,26 @@ class TradeUpService {
 
         if (possibleSpecialSkins.isEmpty) continue;
 
-        final perSkinProbability =
-            caseProbability / possibleSpecialSkins.length;
+        final families = SpecialItemVariantHelper.groupFamilies(
+          possibleSpecialSkins,
+        );
+        if (families.isEmpty) continue;
 
-        for (final skin in possibleSpecialSkins) {
-          skinProbabilityById[skin.id] =
-              (skinProbabilityById[skin.id] ?? 0) + perSkinProbability;
+        final familyProbability = caseProbability / families.length;
+
+        for (final family in families) {
+          final variantWeights = SpecialItemVariantHelper.variantProbabilities(
+            family,
+          );
+          for (final skin in family) {
+            final contribution =
+                familyProbability * (variantWeights[skin.id] ?? 0);
+            if (contribution <= 0) {
+              continue;
+            }
+            skinProbabilityById[skin.id] =
+                (skinProbabilityById[skin.id] ?? 0) + contribution;
+          }
         }
       }
 
@@ -215,13 +258,31 @@ class TradeUpService {
             !s.isSpecialItem;
       }).toList();
 
-      if (possibleSkins.isEmpty) continue;
+      if (possibleSkins.isEmpty) {
+        continue;
+      }
 
-      final perSkinProbability = collectionProbability / possibleSkins.length;
+      final families = SpecialItemVariantHelper.groupFamilies(possibleSkins);
+      if (families.isEmpty) {
+        continue;
+      }
 
-      for (final skin in possibleSkins) {
-        skinProbabilityById[skin.id] =
-            (skinProbabilityById[skin.id] ?? 0) + perSkinProbability;
+      final familyProbability = collectionProbability / families.length;
+
+      for (final family in families) {
+        final variantWeights = SpecialItemVariantHelper.variantProbabilities(
+          family,
+        );
+
+        for (final skin in family) {
+          final contribution =
+              familyProbability * (variantWeights[skin.id] ?? 0);
+          if (contribution <= 0) {
+            continue;
+          }
+          skinProbabilityById[skin.id] =
+              (skinProbabilityById[skin.id] ?? 0) + contribution;
+        }
       }
     }
 
@@ -427,6 +488,7 @@ class TradeUpService {
           exterior: chance.exterior,
           isStatTrak: chance.isStatTrak,
           isSouvenir: chance.isSouvenir,
+          patternSeed: _generatePatternSeedForTradeChance(chance, chances),
         );
       }
     }
@@ -438,6 +500,7 @@ class TradeUpService {
       exterior: fallback.exterior,
       isStatTrak: fallback.isStatTrak,
       isSouvenir: fallback.isSouvenir,
+      patternSeed: _generatePatternSeedForTradeChance(fallback, chances),
     );
   }
 

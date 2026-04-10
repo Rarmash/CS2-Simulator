@@ -1047,6 +1047,57 @@ mixin _LocalDataRepositoryQueries on _LocalDataRepositoryLoaders {
     result.sort(_compareCollectibleCollectionAsc);
     return result;
   }
+
+  Future<List<SkinGroupDto>> loadSkinGroups() async {
+    final skins = await loadSkins();
+    final grouped = <String, List<SkinDto>>{};
+
+    for (final skin in skins) {
+      grouped.putIfAbsent(_skinGroupKey(skin), () => <SkinDto>[]).add(skin);
+    }
+
+    final result = grouped.entries.map((entry) {
+      final variants = List<SkinDto>.from(entry.value)
+        ..sort(_compareSkinVariantsForGroup);
+      return SkinGroupDto(
+        key: entry.key,
+        primary: variants.first,
+        variants: variants,
+      );
+    }).toList();
+
+    result.sort((a, b) {
+      final specialCompare = (a.isSpecialItem ? 1 : 0).compareTo(
+        b.isSpecialItem ? 1 : 0,
+      );
+      if (specialCompare != 0) return specialCompare;
+
+      final rarityCompare = _rarityOrder(
+        a.primary,
+      ).compareTo(_rarityOrder(b.primary));
+      if (rarityCompare != 0) return rarityCompare;
+
+      final weaponCompare = a.itemDisplayName.compareTo(b.itemDisplayName);
+      if (weaponCompare != 0) return weaponCompare;
+
+      return a.name.compareTo(b.name);
+    });
+
+    return result;
+  }
+
+  Future<List<SkinDto>> loadSkinVariantsForSkin(String skinId) async {
+    final skins = await loadSkins();
+    final selected = skins.firstWhere(
+      (skin) => skin.id == skinId,
+      orElse: () => throw StateError('Skin not found: $skinId'),
+    );
+    final groupKey = _skinGroupKey(selected);
+    final result =
+        skins.where((skin) => _skinGroupKey(skin) == groupKey).toList()
+          ..sort(_compareSkinVariantsForGroup);
+    return result;
+  }
 }
 
 class _TournamentBuilder {
@@ -1225,4 +1276,35 @@ int _placeRank(String? place) {
 
   final start = int.tryParse(match.group(1) ?? '');
   return start ?? (1 << 20);
+}
+
+String _skinGroupKey(SkinDto skin) {
+  return [
+    skin.itemKind,
+    skin.itemId,
+    skin.name.trim().toLowerCase(),
+    (skin.finishCatalogName ?? '').trim().toLowerCase(),
+    (skin.collection ?? '').trim().toLowerCase(),
+  ].join('|');
+}
+
+int _compareSkinVariantsForGroup(SkinDto a, SkinDto b) {
+  final variantCompare = _skinVariantOrder(a).compareTo(_skinVariantOrder(b));
+  if (variantCompare != 0) return variantCompare;
+  return int.parse(a.id).compareTo(int.parse(b.id));
+}
+
+int _skinVariantOrder(SkinDto skin) {
+  return switch ((skin.displayVariant ?? '').trim()) {
+    '' => 0,
+    'Phase 1' => 1,
+    'Phase 2' => 2,
+    'Phase 3' => 3,
+    'Phase 4' => 4,
+    'Ruby' => 5,
+    'Sapphire' => 6,
+    'Black Pearl' => 7,
+    'Emerald' => 8,
+    _ => 100,
+  };
 }

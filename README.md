@@ -23,6 +23,7 @@ Unless explicitly stated otherwise, the repository license applies to the source
 - Case opening with roulette animation
 - Optional X-Ray opening mechanic
 - Souvenir packages with tournament-based dates
+- Skin pattern seed and finish variant support, including phase-aware finishes
 - Major tournament section covering CS:GO and CS2 eras
 - Major teams and players browsing
 - Operation and Armory reward collections
@@ -144,16 +145,12 @@ The source code in this repository is licensed under `AGPL-3.0`.
 
 The project is actively evolving, with current work focused on:
 
-- expanding the simulation layer beyond basic opening flows
+- expanding the simulation layer beyond basic opening flows with deeper item metadata
 - improving long-term data quality for tournaments, teams, and players
 - continuing UI/codebase refactoring to reduce duplicated screen logic
-- preparing larger simulation features such as pattern support and collection tracking
+- preparing larger progression features such as collection tracking and ownership history
 
 ## Roadmap
-
-### v0.12
-
-- Skin pattern and finish seed support, including knife phases, gem variants, fade-style finishes, and other pattern-driven outcomes
 
 ### v0.13
 

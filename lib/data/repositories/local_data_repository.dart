@@ -21,6 +21,7 @@ import '../models/pin_content_dto.dart';
 import '../models/pin_dto.dart';
 import '../models/reward_collection_content_dto.dart';
 import '../models/skin_dto.dart';
+import '../models/skin_group_dto.dart';
 import '../models/sticker_content_dto.dart';
 import '../models/sticker_dto.dart';
 import '../models/tournament_dto.dart';

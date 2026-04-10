@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../domain/terminal_offer.dart';
+import '../../domain/skin_pattern_helper.dart';
 import '../helpers/skin_ui_helper.dart';
 import 'hold_to_confirm_button.dart';
 import 'info_row.dart';
@@ -22,6 +23,16 @@ class TerminalOfferCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final rarityColor = SkinUiHelper.rarityColor(offer.skin);
+    final patternSummary = SkinPatternHelper.describePattern(
+      skin: offer.skin,
+      patternSeed: offer.patternSeed,
+    );
+    final patternMetric = SkinPatternHelper.describePatternMetric(
+      skin: offer.skin,
+      patternSeed: offer.patternSeed,
+    );
+    final patternFamily = SkinPatternHelper.patternFamilyLabel(offer.skin);
+    final phaseText = (offer.skin.phase ?? '').trim();
 
     return Card(
       margin: const EdgeInsets.all(12),
@@ -78,6 +89,22 @@ class TerminalOfferCard extends StatelessWidget {
               value: offer.skinFloat?.toStringAsFixed(6) ?? '-',
             ),
             InfoRow(title: 'Exterior', value: offer.exterior ?? '-'),
+            if (phaseText.isNotEmpty) InfoRow(title: 'Phase', value: phaseText),
+            if (offer.patternSeed != null)
+              InfoRow(
+                title: 'Pattern seed',
+                value: offer.patternSeed.toString(),
+              ),
+            if (patternFamily != null)
+              InfoRow(title: 'Pattern family', value: patternFamily),
+            if (patternSummary != null &&
+                patternSummary.trim().isNotEmpty &&
+                patternSummary.trim() != phaseText)
+              InfoRow(title: 'Pattern', value: patternSummary),
+            if (patternMetric != null &&
+                patternMetric.trim().isNotEmpty &&
+                patternMetric.trim() != patternSummary?.trim())
+              InfoRow(title: 'Pattern detail', value: patternMetric),
             if (offer.skin.collection != null &&
                 offer.skin.collection!.isNotEmpty)
               InfoRow(title: 'Collection', value: offer.skin.collection!),
