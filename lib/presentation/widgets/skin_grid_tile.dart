@@ -7,12 +7,16 @@ class SkinGridTile extends StatelessWidget {
   final SkinDto skin;
   final bool highlighted;
   final int crossAxisCount;
+  final String? secondaryTextOverride;
+  final String? detailTextOverride;
 
   const SkinGridTile({
     super.key,
     required this.skin,
     this.highlighted = false,
     required this.crossAxisCount,
+    this.secondaryTextOverride,
+    this.detailTextOverride,
   });
 
   @override
@@ -68,7 +72,7 @@ class SkinGridTile extends StatelessWidget {
                   ),
                   const SizedBox(height: 4),
                   Text(
-                    SkinUiHelper.secondaryText(skin),
+                    secondaryTextOverride ?? SkinUiHelper.secondaryText(skin),
                     textAlign: TextAlign.center,
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,
@@ -77,6 +81,19 @@ class SkinGridTile extends StatelessWidget {
                       fontSize: compact ? 10 : 12,
                     ),
                   ),
+                  if ((detailTextOverride ?? '').trim().isNotEmpty) ...[
+                    const SizedBox(height: 4),
+                    Text(
+                      detailTextOverride!,
+                      textAlign: TextAlign.center,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: const TextStyle(
+                        color: Colors.white54,
+                        fontSize: 10,
+                      ),
+                    ),
+                  ],
                   const SizedBox(height: 4),
                   Text(
                     SkinUiHelper.rarityLabel(skin),

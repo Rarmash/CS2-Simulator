@@ -156,7 +156,7 @@ class ContainerSimulatorService {
       return _selectSpecialItemSkin(filtered);
     }
 
-    return filtered[_random.nextInt(filtered.length)];
+    return _selectWeightedVariantSkin(filtered);
   }
 
   SkinDto _selectSpecialItemSkin(List<SkinDto> skins) {
@@ -192,7 +192,31 @@ class ContainerSimulatorService {
       return skins[_random.nextInt(skins.length)];
     }
 
-    return filtered[_random.nextInt(filtered.length)];
+    return _selectWeightedVariantSkin(filtered);
+  }
+
+  SkinDto _selectWeightedVariantSkin(List<SkinDto> skins) {
+    final families = SpecialItemVariantHelper.groupFamilies(skins);
+    if (families.isEmpty) {
+      throw Exception('No skins available');
+    }
+
+    final hasWeightedFamilies = families.any(
+      (family) =>
+          family.length > 1 &&
+          SpecialItemVariantHelper.hasConfiguredVariantWeights(family),
+    );
+
+    if (!hasWeightedFamilies) {
+      return skins[_random.nextInt(skins.length)];
+    }
+
+    final family = families[_random.nextInt(families.length)];
+    if (family.length == 1) {
+      return family.first;
+    }
+
+    return SpecialItemVariantHelper.rollVariant(_random, family);
   }
 
   CaseOdds _getRandomCaseOdds() {

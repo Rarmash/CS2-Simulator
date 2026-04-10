@@ -26,6 +26,9 @@ class TradeUpChanceCard extends StatelessWidget {
     );
     final displayedProbability = probabilityOverride ?? chance.probability;
     final displayedDetail = detailOverride;
+    final displayedSecondary = (displayedDetail ?? '').trim().isNotEmpty
+        ? skin.name
+        : SkinUiHelper.secondaryText(skin);
 
     return Card(
       margin: EdgeInsets.zero,
@@ -60,7 +63,7 @@ class TradeUpChanceCard extends StatelessWidget {
                 ),
                 const SizedBox(height: 3),
                 Text(
-                  skin.name,
+                  displayedSecondary,
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
                   textAlign: TextAlign.center,

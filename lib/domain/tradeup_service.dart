@@ -258,13 +258,31 @@ class TradeUpService {
             !s.isSpecialItem;
       }).toList();
 
-      if (possibleSkins.isEmpty) continue;
+      if (possibleSkins.isEmpty) {
+        continue;
+      }
 
-      final perSkinProbability = collectionProbability / possibleSkins.length;
+      final families = SpecialItemVariantHelper.groupFamilies(possibleSkins);
+      if (families.isEmpty) {
+        continue;
+      }
 
-      for (final skin in possibleSkins) {
-        skinProbabilityById[skin.id] =
-            (skinProbabilityById[skin.id] ?? 0) + perSkinProbability;
+      final familyProbability = collectionProbability / families.length;
+
+      for (final family in families) {
+        final variantWeights = SpecialItemVariantHelper.variantProbabilities(
+          family,
+        );
+
+        for (final skin in family) {
+          final contribution =
+              familyProbability * (variantWeights[skin.id] ?? 0);
+          if (contribution <= 0) {
+            continue;
+          }
+          skinProbabilityById[skin.id] =
+              (skinProbabilityById[skin.id] ?? 0) + contribution;
+        }
       }
     }
 

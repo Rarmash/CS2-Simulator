@@ -8,7 +8,9 @@ import '../../data/models/skin_dto.dart';
 import '../../data/repositories/local_data_repository.dart';
 import '../../domain/dropped_skin.dart';
 import '../../domain/operation_collection_simulator_service.dart';
+import '../../domain/special_item_variant_helper.dart';
 import '../helpers/collectible_open_flow_helper.dart';
+import '../helpers/skin_ui_helper.dart';
 import '../helpers/source_color_helper.dart';
 import '../widgets/collectible_open_body.dart';
 import '../widgets/collectible_contents_title.dart';
@@ -84,6 +86,45 @@ class _OperationCollectionOpenScreenState
     return 'OPEN COLLECTION DROP';
   }
 
+  List<_DisplayedCollectionSkin> _displayedContents(List<SkinDto> skins) {
+    final families = <String, List<SkinDto>>{};
+    for (final skin in skins) {
+      final key = SpecialItemVariantHelper.familyKeyForSkin(skin);
+      families.putIfAbsent(key, () => <SkinDto>[]).add(skin);
+    }
+
+    final displayed = <_DisplayedCollectionSkin>[];
+    final emitted = <String>{};
+
+    for (final skin in skins) {
+      final key = SpecialItemVariantHelper.familyKeyForSkin(skin);
+      if (emitted.contains(key)) {
+        continue;
+      }
+
+      final family = families[key] ?? <SkinDto>[skin];
+      final shouldGroup =
+          family.length > 1 &&
+          SpecialItemVariantHelper.hasConfiguredVariantWeights(family);
+
+      displayed.add(
+        _DisplayedCollectionSkin(
+          skin: family.first,
+          family: shouldGroup ? family : const [],
+          secondaryText: shouldGroup
+              ? SkinUiHelper.familySecondaryText(family)
+              : SkinUiHelper.secondaryText(skin),
+          detailText: shouldGroup
+              ? SkinUiHelper.familyDetailText(family)
+              : null,
+        ),
+      );
+      emitted.add(key);
+    }
+
+    return displayed;
+  }
+
   @override
   Widget build(BuildContext context) {
     final formattedReleaseDate = DateFormatHelper.formatReleaseDate(
@@ -95,6 +136,8 @@ class _OperationCollectionOpenScreenState
       body: CollectibleOpenBody<SkinDto>(
         future: _skinsFuture,
         sliverBuilder: (context, constraints, skins, gridCount, aspectRatio) {
+          final displayedContents = _displayedContents(skins);
+
           return [
             SliverToBoxAdapter(
               child: CollectibleOpenHeader(
@@ -124,16 +167,21 @@ class _OperationCollectionOpenScreenState
             const SliverToBoxAdapter(
               child: CollectibleContentsTitle(title: 'Collection contents'),
             ),
-            CollectibleGridSliver<SkinDto>(
-              items: skins,
+            CollectibleGridSliver<_DisplayedCollectionSkin>(
+              items: displayedContents,
               crossAxisCount: gridCount,
               childAspectRatio: aspectRatio,
-              itemBuilder: (skin) {
-                final isDropped = _dropped?.skin.id == skin.id;
+              itemBuilder: (entry) {
+                final droppedId = _dropped?.skin.id;
+                final isDropped =
+                    droppedId == entry.skin.id ||
+                    entry.family.any((variant) => variant.id == droppedId);
                 return SkinGridTile(
-                  skin: skin,
+                  skin: entry.skin,
                   highlighted: isDropped,
                   crossAxisCount: gridCount,
+                  secondaryTextOverride: entry.secondaryText,
+                  detailTextOverride: entry.detailText,
                 );
               },
             ),
@@ -142,4 +190,18 @@ class _OperationCollectionOpenScreenState
       ),
     );
   }
+}
+
+class _DisplayedCollectionSkin {
+  final SkinDto skin;
+  final List<SkinDto> family;
+  final String secondaryText;
+  final String? detailText;
+
+  const _DisplayedCollectionSkin({
+    required this.skin,
+    required this.family,
+    required this.secondaryText,
+    this.detailText,
+  });
 }

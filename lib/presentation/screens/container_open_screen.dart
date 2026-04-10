@@ -9,6 +9,7 @@ import '../../data/models/skin_dto.dart';
 import '../../data/repositories/local_data_repository.dart';
 import '../../domain/container_simulator_service.dart';
 import '../../domain/dropped_skin.dart';
+import '../../domain/special_item_variant_helper.dart';
 import '../helpers/opening_roll_sequence_builder.dart';
 import '../helpers/skin_ui_helper.dart';
 import '../helpers/source_color_helper.dart';
@@ -347,6 +348,53 @@ class _ContainerOpenScreenState extends State<ContainerOpenScreen> {
             : 'Open the container to simulate a CS-style drop.');
   }
 
+  List<_DisplayedContainerSkin> _displayedContents(List<SkinDto> skins) {
+    final families = <String, List<SkinDto>>{};
+    for (final skin in skins) {
+      final key = SpecialItemVariantHelper.familyKeyForSkin(skin);
+      families.putIfAbsent(key, () => <SkinDto>[]).add(skin);
+    }
+
+    final displayed = <_DisplayedContainerSkin>[];
+    final emitted = <String>{};
+
+    for (final skin in skins) {
+      final key = SpecialItemVariantHelper.familyKeyForSkin(skin);
+      if (emitted.contains(key)) {
+        continue;
+      }
+
+      final family = families[key] ?? <SkinDto>[skin];
+      final shouldGroup =
+          family.length > 1 &&
+          SpecialItemVariantHelper.hasConfiguredVariantWeights(family);
+
+      if (!shouldGroup) {
+        displayed.add(
+          _DisplayedContainerSkin(
+            skin: skin,
+            family: const [],
+            secondaryText: SkinUiHelper.secondaryText(skin),
+          ),
+        );
+        emitted.add(key);
+        continue;
+      }
+
+      displayed.add(
+        _DisplayedContainerSkin(
+          skin: family.first,
+          family: family,
+          secondaryText: SkinUiHelper.familySecondaryText(family),
+          detailText: SkinUiHelper.familyDetailText(family),
+        ),
+      );
+      emitted.add(key);
+    }
+
+    return displayed;
+  }
+
   @override
   Widget build(BuildContext context) {
     final formattedReleaseDate = DateFormatHelper.formatReleaseDate(
@@ -361,6 +409,8 @@ class _ContainerOpenScreenState extends State<ContainerOpenScreen> {
       body: CollectibleOpenBody<SkinDto>(
         future: _skinsFuture,
         sliverBuilder: (context, constraints, skins, gridCount, aspectRatio) {
+          final displayedContents = _displayedContents(skins);
+
           return [
             SliverToBoxAdapter(
               child: CollectibleOpenHeader(
@@ -405,19 +455,27 @@ class _ContainerOpenScreenState extends State<ContainerOpenScreen> {
             const SliverToBoxAdapter(
               child: CollectibleContentsTitle(title: 'Case contents'),
             ),
-            CollectibleGridSliver<SkinDto>(
-              items: skins,
+            CollectibleGridSliver<_DisplayedContainerSkin>(
+              items: displayedContents,
               crossAxisCount: gridCount,
               childAspectRatio: aspectRatio,
-              itemBuilder: (skin) {
+              itemBuilder: (entry) {
+                final droppedId = _dropped?.skin.id;
+                final pendingId = _pendingXrayDrop?.skin.id;
                 final isDropped =
-                    _dropped?.skin.id == skin.id ||
-                    _pendingXrayDrop?.skin.id == skin.id;
+                    droppedId == entry.skin.id ||
+                    pendingId == entry.skin.id ||
+                    entry.family.any(
+                      (variant) =>
+                          variant.id == droppedId || variant.id == pendingId,
+                    );
 
                 return SkinGridTile(
-                  skin: skin,
+                  skin: entry.skin,
                   highlighted: isDropped,
                   crossAxisCount: gridCount,
+                  secondaryTextOverride: entry.secondaryText,
+                  detailTextOverride: entry.detailText,
                 );
               },
             ),
@@ -426,4 +484,18 @@ class _ContainerOpenScreenState extends State<ContainerOpenScreen> {
       ),
     );
   }
+}
+
+class _DisplayedContainerSkin {
+  final SkinDto skin;
+  final List<SkinDto> family;
+  final String secondaryText;
+  final String? detailText;
+
+  const _DisplayedContainerSkin({
+    required this.skin,
+    required this.family,
+    required this.secondaryText,
+    this.detailText,
+  });
 }

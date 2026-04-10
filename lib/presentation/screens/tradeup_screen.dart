@@ -287,17 +287,10 @@ class _TradeUpScreenState extends State<TradeUpScreen> {
       return const [];
     }
 
-    if (_controller.selected.isEmpty ||
-        _controller.selected.first.skin.rarity != 'COVERT') {
-      return chances
-          .map((chance) => _DisplayedTradeUpChance(chance: chance))
-          .toList();
-    }
-
     final grouped = <String, List<TradeUpChance>>{};
     for (final chance in chances) {
       final skin = chance.skin;
-      final key = skin.isSpecialItem
+      final key = (skin.displayVariant ?? '').trim().isNotEmpty
           ? SpecialItemVariantHelper.familyKeyForSkin(skin)
           : skin.id;
       grouped.putIfAbsent(key, () => <TradeUpChance>[]).add(chance);
@@ -306,7 +299,12 @@ class _TradeUpScreenState extends State<TradeUpScreen> {
     final displayed = grouped.values.map((group) {
       group.sort((a, b) => b.probability.compareTo(a.probability));
       final representative = group.first;
-      if (group.length == 1) {
+      final familySkins = group.map((item) => item.skin).toList();
+      final shouldGroup =
+          group.length > 1 &&
+          SpecialItemVariantHelper.hasConfiguredVariantWeights(familySkins);
+
+      if (!shouldGroup) {
         return _DisplayedTradeUpChance(chance: representative);
       }
 

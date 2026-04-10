@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../data/models/skin_dto.dart';
+import '../../domain/special_item_variant_helper.dart';
 
 class SkinUiHelper {
   static Color rarityColor(SkinDto skin) {
@@ -81,9 +82,48 @@ class SkinUiHelper {
   static String secondaryText(SkinDto skin) {
     final variant = skin.displayVariant;
     if (variant != null && variant.isNotEmpty) {
-      return '${skin.name} • $variant';
+      return '${skin.name} - $variant';
     }
     return skin.name;
+  }
+
+  static String familySecondaryText(List<SkinDto> variants) {
+    if (variants.isEmpty) {
+      return '';
+    }
+
+    final primary = variants.first;
+    final hasWeightedVariants =
+        variants.length > 1 &&
+        SpecialItemVariantHelper.hasConfiguredVariantWeights(variants);
+
+    if (!hasWeightedVariants) {
+      return secondaryText(primary);
+    }
+
+    return primary.name;
+  }
+
+  static String? familyDetailText(List<SkinDto> variants) {
+    final hasWeightedVariants =
+        variants.length > 1 &&
+        SpecialItemVariantHelper.hasConfiguredVariantWeights(variants);
+    if (!hasWeightedVariants) {
+      return null;
+    }
+
+    final count = variants.length;
+    final labels = variants
+        .map((variant) => variant.displayVariant?.trim())
+        .whereType<String>()
+        .where((label) => label.isNotEmpty)
+        .toList();
+
+    if (labels.isEmpty) {
+      return '$count finish variants';
+    }
+
+    return count <= 3 ? labels.join(', ') : '$count finish variants';
   }
 
   static String fullDropDisplayName({
@@ -91,9 +131,9 @@ class SkinUiHelper {
     required bool isStatTrak,
     required bool isSouvenir,
   }) {
-    final star = skin.isSpecialItem ? '★ ' : '';
+    final star = skin.isSpecialItem ? '\u2605 ' : '';
     final souvenirPrefix = isSouvenir ? 'Souvenir ' : '';
-    final statTrakPrefix = isStatTrak ? 'StatTrak™ ' : '';
+    final statTrakPrefix = isStatTrak ? 'StatTrak\u2122 ' : '';
     return '$star$souvenirPrefix$statTrakPrefix${skin.itemDisplayName} | ${skin.name}';
   }
 }
