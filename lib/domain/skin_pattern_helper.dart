@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import '../data/models/skin_dto.dart';
+import 'special_item_variant_helper.dart';
 
 class SkinPatternHelper {
   static const _seedDrivenFinishes = <String>{
@@ -13,10 +14,26 @@ class SkinPatternHelper {
   };
   static const _phaseSplitFinishes = <String>{'DOPPLER', 'GAMMA DOPPLER'};
 
-  static int? generateSeed({required Random random, required SkinDto skin}) {
+  static int? generateSeed({
+    required Random random,
+    required SkinDto skin,
+    List<SkinDto>? siblingVariants,
+  }) {
     if (!supportsPatternSeed(skin)) {
       return null;
     }
+
+    if (hasExplicitPhaseVariant(skin) &&
+        siblingVariants != null &&
+        siblingVariants.isNotEmpty &&
+        SpecialItemVariantHelper.hasConfiguredVariantWeights(siblingVariants)) {
+      return SpecialItemVariantHelper.generateSeedForVariant(
+        random,
+        siblingVariants,
+        skin,
+      );
+    }
+
     return random.nextInt(1000);
   }
 
@@ -62,8 +79,7 @@ class SkinPatternHelper {
     required int? patternSeed,
   }) {
     if (hasExplicitPhaseVariant(skin)) {
-      final phase = (skin.phase ?? '').trim();
-      return phase.isEmpty ? null : phase;
+      return null;
     }
 
     if (patternSeed == null) {
@@ -72,18 +88,16 @@ class SkinPatternHelper {
 
     final finish = _normalizedFinish(skin);
     if (finish == null) {
-      return 'Seed $patternSeed';
+      return null;
     }
 
     return switch (finish) {
       'CASE HARDENED' => _caseHardenedLabel(skin, patternSeed),
       'HEAT TREATED' => _heatTreatedLabel(patternSeed),
       'CRIMSON WEB' => _crimsonWebLabel(patternSeed),
-      'FADE' ||
-      'CROSSFADE' => 'Fade ${_fadePercent(patternSeed).toStringAsFixed(1)}%',
-      'MARBLE FADE' =>
-        'Marble Fade ${_fadePercent(patternSeed).toStringAsFixed(1)}%',
-      _ => 'Seed $patternSeed',
+      'FADE' || 'CROSSFADE' => _fadeLabel(patternSeed),
+      'MARBLE FADE' => _marbleFadeLabel(patternSeed),
+      _ => null,
     };
   }
 
@@ -252,6 +266,31 @@ class SkinPatternHelper {
 
   static double _fadePercent(int seed) {
     return 100 * (1 - (seed / 999));
+  }
+
+  static String _fadeLabel(int seed) {
+    final percent = _fadePercent(seed);
+    if (percent >= 95) {
+      return 'Near full fade';
+    }
+    if (percent >= 85) {
+      return 'High fade';
+    }
+    if (percent >= 70) {
+      return 'Mid fade';
+    }
+    return 'Low fade';
+  }
+
+  static String _marbleFadeLabel(int seed) {
+    final percent = _fadePercent(seed);
+    if (percent >= 90) {
+      return 'Blue-heavy blend';
+    }
+    if (percent >= 72) {
+      return 'Balanced blend';
+    }
+    return 'Warm-heavy blend';
   }
 
   static double _normalizedHash(String input) {

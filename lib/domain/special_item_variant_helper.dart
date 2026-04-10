@@ -88,7 +88,52 @@ class SpecialItemVariantHelper {
     return variants.last;
   }
 
+  static SkinDto variantForSeed(List<SkinDto> variants, int seed) {
+    if (variants.isEmpty) {
+      throw ArgumentError('variants must not be empty');
+    }
+
+    final buckets = _variantBuckets(variants);
+    for (final bucket in buckets) {
+      if (seed >= bucket.start && seed <= bucket.end) {
+        return bucket.skin;
+      }
+    }
+
+    return variants.last;
+  }
+
+  static int generateSeedForVariant(
+    Random random,
+    List<SkinDto> variants,
+    SkinDto selected,
+  ) {
+    final buckets = _variantBuckets(variants);
+    for (final bucket in buckets) {
+      if (bucket.skin.id == selected.id) {
+        final width = bucket.end - bucket.start + 1;
+        if (width <= 0) {
+          return bucket.start.clamp(0, 999);
+        }
+        return bucket.start + random.nextInt(width);
+      }
+    }
+
+    return random.nextInt(1000);
+  }
+
   static String familyKeyForSkin(SkinDto skin) => _familyKey(skin);
+
+  static bool hasConfiguredVariantWeights(Iterable<SkinDto> variants) {
+    if (variants.isEmpty) {
+      return false;
+    }
+
+    final finish = (variants.first.finishCatalogName ?? '')
+        .trim()
+        .toUpperCase();
+    return finish == 'DOPPLER' || finish == 'GAMMA DOPPLER';
+  }
 
   static String _familyKey(SkinDto skin) {
     return [
@@ -121,4 +166,36 @@ class SpecialItemVariantHelper {
       _ => 100,
     };
   }
+
+  static List<_VariantBucket> _variantBuckets(List<SkinDto> variants) {
+    final ordered = List<SkinDto>.from(variants)..sort(_compareVariants);
+    final probabilities = variantProbabilities(ordered);
+
+    var cumulative = 0.0;
+    final buckets = <_VariantBucket>[];
+
+    for (var index = 0; index < ordered.length; index++) {
+      final skin = ordered[index];
+      final start = (cumulative * 1000).round();
+      cumulative += probabilities[skin.id] ?? 0;
+      final end = index == ordered.length - 1
+          ? 999
+          : ((cumulative * 1000).round() - 1).clamp(start, 999);
+      buckets.add(_VariantBucket(skin: skin, start: start, end: end));
+    }
+
+    return buckets;
+  }
+}
+
+class _VariantBucket {
+  final SkinDto skin;
+  final int start;
+  final int end;
+
+  const _VariantBucket({
+    required this.skin,
+    required this.start,
+    required this.end,
+  });
 }

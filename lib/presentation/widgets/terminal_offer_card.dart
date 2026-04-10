@@ -32,6 +32,7 @@ class TerminalOfferCard extends StatelessWidget {
       patternSeed: offer.patternSeed,
     );
     final patternFamily = SkinPatternHelper.patternFamilyLabel(offer.skin);
+    final phaseText = (offer.skin.phase ?? '').trim();
 
     return Card(
       margin: const EdgeInsets.all(12),
@@ -88,8 +89,7 @@ class TerminalOfferCard extends StatelessWidget {
               value: offer.skinFloat?.toStringAsFixed(6) ?? '-',
             ),
             InfoRow(title: 'Exterior', value: offer.exterior ?? '-'),
-            if ((offer.skin.phase ?? '').trim().isNotEmpty)
-              InfoRow(title: 'Phase', value: offer.skin.phase!.trim()),
+            if (phaseText.isNotEmpty) InfoRow(title: 'Phase', value: phaseText),
             if (offer.patternSeed != null)
               InfoRow(
                 title: 'Pattern seed',
@@ -97,9 +97,13 @@ class TerminalOfferCard extends StatelessWidget {
               ),
             if (patternFamily != null)
               InfoRow(title: 'Pattern family', value: patternFamily),
-            if (patternSummary != null)
+            if (patternSummary != null &&
+                patternSummary.trim().isNotEmpty &&
+                patternSummary.trim() != phaseText)
               InfoRow(title: 'Pattern', value: patternSummary),
-            if (patternMetric != null)
+            if (patternMetric != null &&
+                patternMetric.trim().isNotEmpty &&
+                patternMetric.trim() != patternSummary?.trim())
               InfoRow(title: 'Pattern detail', value: patternMetric),
             if (offer.skin.collection != null &&
                 offer.skin.collection!.isNotEmpty)

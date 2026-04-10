@@ -296,6 +296,7 @@ class _XrayRevealCardState extends State<XrayRevealCard>
       patternSeed: widget.drop.patternSeed,
     );
     final patternFamily = SkinPatternHelper.patternFamilyLabel(skin);
+    final phaseText = (skin.phase ?? '').trim();
 
     const xrayGlow = Color(0xFF78FFF0);
     const xrayPanel = Color(0xFF0B1A21);
@@ -364,8 +365,8 @@ class _XrayRevealCardState extends State<XrayRevealCard>
                           title: 'Exterior',
                           value: widget.drop.exterior ?? '-',
                         ),
-                        if ((skin.phase ?? '').trim().isNotEmpty)
-                          InfoRow(title: 'Phase', value: skin.phase!.trim()),
+                        if (phaseText.isNotEmpty)
+                          InfoRow(title: 'Phase', value: phaseText),
                         if (widget.drop.patternSeed != null)
                           InfoRow(
                             title: 'Pattern seed',
@@ -376,9 +377,13 @@ class _XrayRevealCardState extends State<XrayRevealCard>
                             title: 'Pattern family',
                             value: patternFamily,
                           ),
-                        if (patternSummary != null)
+                        if (patternSummary != null &&
+                            patternSummary.trim().isNotEmpty &&
+                            patternSummary.trim() != phaseText)
                           InfoRow(title: 'Pattern', value: patternSummary),
-                        if (patternMetric != null)
+                        if (patternMetric != null &&
+                            patternMetric.trim().isNotEmpty &&
+                            patternMetric.trim() != patternSummary?.trim())
                           InfoRow(
                             title: 'Pattern detail',
                             value: patternMetric,

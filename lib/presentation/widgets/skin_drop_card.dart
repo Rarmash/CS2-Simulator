@@ -23,6 +23,7 @@ class SkinDropCard extends StatelessWidget {
       patternSeed: drop.patternSeed,
     );
     final patternFamily = SkinPatternHelper.patternFamilyLabel(drop.skin);
+    final phaseText = (drop.skin.phase ?? '').trim();
 
     return Card(
       margin: const EdgeInsets.all(12),
@@ -96,8 +97,8 @@ class SkinDropCard extends StatelessWidget {
                     value: drop.skinFloat?.toStringAsFixed(6) ?? '-',
                   ),
                   InfoRow(title: 'Exterior', value: drop.exterior ?? '-'),
-                  if ((drop.skin.phase ?? '').trim().isNotEmpty)
-                    InfoRow(title: 'Phase', value: drop.skin.phase!.trim()),
+                  if (phaseText.isNotEmpty)
+                    InfoRow(title: 'Phase', value: phaseText),
                   if (drop.patternSeed != null)
                     InfoRow(
                       title: 'Pattern seed',
@@ -105,9 +106,13 @@ class SkinDropCard extends StatelessWidget {
                     ),
                   if (patternFamily != null)
                     InfoRow(title: 'Pattern family', value: patternFamily),
-                  if (patternSummary != null)
+                  if (patternSummary != null &&
+                      patternSummary.trim().isNotEmpty &&
+                      patternSummary.trim() != phaseText)
                     InfoRow(title: 'Pattern', value: patternSummary),
-                  if (patternMetric != null)
+                  if (patternMetric != null &&
+                      patternMetric.trim().isNotEmpty &&
+                      patternMetric.trim() != patternSummary?.trim())
                     InfoRow(title: 'Pattern detail', value: patternMetric),
                   if (drop.skin.collection != null &&
                       drop.skin.collection!.isNotEmpty)

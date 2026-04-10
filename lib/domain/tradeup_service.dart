@@ -73,6 +73,31 @@ class TradeUpChance {
 class TradeUpService {
   final Random _random = Random();
 
+  int? _generatePatternSeedForTradeChance(
+    TradeUpChance chance,
+    List<TradeUpChance> allChances,
+  ) {
+    if (!SkinPatternHelper.hasExplicitPhaseVariant(chance.skin)) {
+      return SkinPatternHelper.generateSeed(random: _random, skin: chance.skin);
+    }
+
+    final familyVariants = allChances
+        .where(
+          (entry) =>
+              entry.skin.id == chance.skin.id ||
+              SpecialItemVariantHelper.familyKeyForSkin(entry.skin) ==
+                  SpecialItemVariantHelper.familyKeyForSkin(chance.skin),
+        )
+        .map((entry) => entry.skin)
+        .toList();
+
+    return SkinPatternHelper.generateSeed(
+      random: _random,
+      skin: chance.skin,
+      siblingVariants: familyVariants,
+    );
+  }
+
   TradeUpResult tradeUp({
     required List<TradeUpInputItem> input,
     required List<SkinDto> allSkins,
@@ -445,10 +470,7 @@ class TradeUpService {
           exterior: chance.exterior,
           isStatTrak: chance.isStatTrak,
           isSouvenir: chance.isSouvenir,
-          patternSeed: SkinPatternHelper.generateSeed(
-            random: _random,
-            skin: chance.skin,
-          ),
+          patternSeed: _generatePatternSeedForTradeChance(chance, chances),
         );
       }
     }
@@ -460,10 +482,7 @@ class TradeUpService {
       exterior: fallback.exterior,
       isStatTrak: fallback.isStatTrak,
       isSouvenir: fallback.isSouvenir,
-      patternSeed: SkinPatternHelper.generateSeed(
-        random: _random,
-        skin: fallback.skin,
-      ),
+      patternSeed: _generatePatternSeedForTradeChance(fallback, chances),
     );
   }
 

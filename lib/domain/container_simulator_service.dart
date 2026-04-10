@@ -13,6 +13,27 @@ import 'terminal_offer.dart';
 class ContainerSimulatorService {
   final Random _random = Random();
 
+  int? _generatePatternSeedForSkin(SkinDto skin, List<SkinDto> sourcePool) {
+    if (!SkinPatternHelper.hasExplicitPhaseVariant(skin)) {
+      return SkinPatternHelper.generateSeed(random: _random, skin: skin);
+    }
+
+    final family = sourcePool
+        .where(
+          (candidate) =>
+              candidate.id == skin.id ||
+              SpecialItemVariantHelper.familyKeyForSkin(candidate) ==
+                  SpecialItemVariantHelper.familyKeyForSkin(skin),
+        )
+        .toList();
+
+    return SkinPatternHelper.generateSeed(
+      random: _random,
+      skin: skin,
+      siblingVariants: family,
+    );
+  }
+
   DroppedSkin openCase({
     required List<SkinDto> skins,
     required ContainerDto containerDto,
@@ -39,10 +60,7 @@ class ContainerSimulatorService {
         isSouvenir: false,
         skinFloat: wear.floatValue,
         exterior: wear.exterior,
-        patternSeed: SkinPatternHelper.generateSeed(
-          random: _random,
-          skin: guaranteedSkin,
-        ),
+        patternSeed: _generatePatternSeedForSkin(guaranteedSkin, skins),
       );
     }
 
@@ -82,10 +100,7 @@ class ContainerSimulatorService {
       isSouvenir: isSouvenir,
       skinFloat: value,
       exterior: exterior,
-      patternSeed: SkinPatternHelper.generateSeed(
-        random: _random,
-        skin: selectedSkin,
-      ),
+      patternSeed: _generatePatternSeedForSkin(selectedSkin, skins),
     );
   }
 
@@ -123,10 +138,7 @@ class ContainerSimulatorService {
         isStatTrak: isStatTrak,
         skinFloat: value,
         exterior: exterior,
-        patternSeed: SkinPatternHelper.generateSeed(
-          random: _random,
-          skin: skin,
-        ),
+        patternSeed: _generatePatternSeedForSkin(skin, skins),
         offerIndex: index + 1,
       );
     });
