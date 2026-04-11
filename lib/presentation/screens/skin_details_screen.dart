@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../core/collection/collection_summary.dart';
+import '../../core/collection/collection_tracking_service.dart';
 import '../../core/settings/settings_controller.dart';
 import '../../core/utils/date_format_helper.dart';
 import '../../data/models/container_dto.dart';
@@ -20,6 +22,8 @@ class SkinDetailsScreen extends StatelessWidget {
   final LocalDataRepository repository;
   final SettingsController settingsController;
   final SkinDto skin;
+  static final CollectionTrackingService _collectionTracking =
+      CollectionTrackingService();
 
   const SkinDetailsScreen({
     super.key,
@@ -68,6 +72,7 @@ class SkinDetailsScreen extends StatelessWidget {
                 rewardCollections: [],
                 operationCollections: [],
                 variants: [],
+                collectedCount: 0,
               );
 
           return ListView(
@@ -143,6 +148,8 @@ class SkinDetailsScreen extends StatelessWidget {
                                 ),
                                 if ((skin.collection ?? '').isNotEmpty)
                                   _tag(skin.collection!),
+                                if (data.collectedCount > 0)
+                                  _tag('Collected ${data.collectedCount}'),
                               ],
                             ),
                             const SizedBox(height: 14),
@@ -402,13 +409,26 @@ class SkinDetailsScreen extends StatelessWidget {
       repository.loadRewardCollectionsForSkin(skin.id),
       repository.loadOperationCollectionsForSkin(skin.id),
       repository.loadSkinVariantsForSkin(skin.id),
+      _collectionTracking.loadSummaries(),
     ]);
+
+    final variants = results[3] as List<SkinDto>;
+    final summaries = results[4] as List<CollectionSummary>;
+    final variantIds = variants.map((item) => item.id).toSet();
+    final collectedCount = summaries
+        .where(
+          (item) =>
+              item.category == 'skin' &&
+              variantIds.contains(item.latestEntry.itemId),
+        )
+        .fold<int>(0, (sum, item) => sum + item.count);
 
     return _SkinSourcesData(
       containers: results[0] as List<ContainerDto>,
       rewardCollections: results[1] as List<ContainerDto>,
       operationCollections: results[2] as List<ContainerDto>,
-      variants: results[3] as List<SkinDto>,
+      variants: variants,
+      collectedCount: collectedCount,
     );
   }
 
@@ -520,11 +540,13 @@ class _SkinSourcesData {
   final List<ContainerDto> rewardCollections;
   final List<ContainerDto> operationCollections;
   final List<SkinDto> variants;
+  final int collectedCount;
 
   const _SkinSourcesData({
     required this.containers,
     required this.rewardCollections,
     required this.operationCollections,
     required this.variants,
+    required this.collectedCount,
   });
 }

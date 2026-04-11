@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 
+import '../../core/collection/collection_tracking_service.dart';
 import '../../core/utils/date_format_helper.dart';
 import '../../data/models/container_dto.dart';
 import '../../data/models/skin_dto.dart';
@@ -41,6 +42,8 @@ class _RewardCollectionOpenScreenState
   late Future<List<SkinDto>> _skinsFuture;
   final RewardCollectionSimulatorService _simulator =
       RewardCollectionSimulatorService();
+  final CollectionTrackingService _collectionTracking =
+      CollectionTrackingService();
   final Random _random = Random();
 
   DroppedSkin? _dropped;
@@ -76,6 +79,11 @@ class _RewardCollectionOpenScreenState
       onComplete: (drop) {
         _dropped = drop;
         _isOpening = false;
+        _collectionTracking.recordSkinDrop(
+          drop: drop,
+          sourceName: widget.collection.name,
+          sourceType: widget.collection.typeLabel,
+        );
       },
     );
   }

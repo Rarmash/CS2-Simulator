@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import '../../core/collection/collection_tracking_service.dart';
 import '../../core/utils/date_format_helper.dart';
 import '../../data/models/container_dto.dart';
 import '../../data/models/graffiti_dto.dart';
@@ -38,6 +39,8 @@ class GraffitiBoxOpenScreen extends StatefulWidget {
 class _GraffitiBoxOpenScreenState extends State<GraffitiBoxOpenScreen> {
   late Future<List<GraffitiDto>> _graffitiFuture;
   final GraffitiSimulatorService _simulator = GraffitiSimulatorService();
+  final CollectionTrackingService _collectionTracking =
+      CollectionTrackingService();
   final Random _random = Random();
   final ScrollController _rollController = ScrollController();
 
@@ -80,6 +83,11 @@ class _GraffitiBoxOpenScreenState extends State<GraffitiBoxOpenScreen> {
       onComplete: (drop) {
         _dropped = drop;
         _isOpening = false;
+        _collectionTracking.recordGraffitiDrop(
+          drop: drop,
+          sourceName: widget.containerDto.name,
+          sourceType: widget.containerDto.typeLabel,
+        );
       },
     );
   }

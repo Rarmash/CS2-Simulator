@@ -5,6 +5,7 @@ class GlossaryListItem extends StatelessWidget {
   final String imagePath;
   final String title;
   final String subtitle;
+  final String? collectionInfo;
   final List<Widget> tags;
   final VoidCallback onTap;
 
@@ -14,6 +15,7 @@ class GlossaryListItem extends StatelessWidget {
     required this.imagePath,
     required this.title,
     required this.subtitle,
+    this.collectionInfo,
     required this.tags,
     required this.onTap,
   });
@@ -68,6 +70,41 @@ class GlossaryListItem extends StatelessWidget {
                             fontSize: 14,
                           ),
                         ),
+                        if ((collectionInfo ?? '').isNotEmpty) ...[
+                          const SizedBox(height: 6),
+                          Container(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 8,
+                              vertical: 5,
+                            ),
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10),
+                              color: Colors.white.withValues(alpha: 0.05),
+                              border: Border.all(color: Colors.white10),
+                            ),
+                            child: Row(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                const Icon(
+                                  Icons.inventory_2_outlined,
+                                  size: 14,
+                                  color: Colors.white60,
+                                ),
+                                const SizedBox(width: 6),
+                                Flexible(
+                                  child: Text(
+                                    collectionInfo!,
+                                    style: const TextStyle(
+                                      color: Colors.white70,
+                                      fontSize: 12,
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
                         if (tags.isNotEmpty) ...[
                           const SizedBox(height: 8),
                           Wrap(spacing: 8, runSpacing: 8, children: tags),

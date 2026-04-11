@@ -8,6 +8,7 @@ import 'agent_collection_list_screen.dart';
 import 'charm_collection_list_screen.dart';
 import 'container_list_screen.dart';
 import 'glossary_hub_screen.dart';
+import 'my_collection_screen.dart';
 import 'operation_collection_list_screen.dart';
 import 'patch_collection_list_screen.dart';
 import 'player_list_screen.dart';
@@ -74,6 +75,8 @@ class HomeScreen extends StatelessWidget {
                       ),
                       onTradeUp: () =>
                           _push(context, TradeUpScreen(repository: repository)),
+                      onCollection: () =>
+                          _push(context, const MyCollectionScreen()),
                     ),
                     const SizedBox(height: 16),
                     _ResponsiveSectionGrid(
@@ -245,11 +248,13 @@ class _HeroSection extends StatelessWidget {
   final VoidCallback onOpenContainers;
   final VoidCallback onGlossary;
   final VoidCallback onTradeUp;
+  final VoidCallback onCollection;
 
   const _HeroSection({
     required this.onOpenContainers,
     required this.onGlossary,
     required this.onTradeUp,
+    required this.onCollection,
   });
 
   @override
@@ -283,7 +288,7 @@ class _HeroSection extends StatelessWidget {
           ),
           const SizedBox(height: 8),
           Text(
-            'Containers, trade-ups, pattern-aware skin browsing, and full Major tournament history all live here now.',
+            'Containers, trade-ups, collection tracking, pattern-aware skin browsing, and full Major tournament history all live here now.',
             style: theme.textTheme.bodyMedium?.copyWith(
               color: Colors.white70,
               height: 1.4,
@@ -309,6 +314,11 @@ class _HeroSection extends StatelessWidget {
                 icon: Icons.swap_horiz,
                 title: 'Trade-Up',
                 onTap: onTradeUp,
+              ),
+              _HeroButton(
+                icon: Icons.inventory_2_outlined,
+                title: 'My Collection',
+                onTap: onCollection,
               ),
             ],
           ),

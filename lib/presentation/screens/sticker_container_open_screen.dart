@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import '../../core/collection/collection_tracking_service.dart';
 import '../../core/utils/date_format_helper.dart';
 import '../../data/models/container_dto.dart';
 import '../../data/models/sticker_dto.dart';
@@ -41,6 +42,8 @@ class _StickerContainerOpenScreenState
     extends State<StickerContainerOpenScreen> {
   late Future<List<StickerDto>> _stickersFuture;
   final StickerSimulatorService _simulator = StickerSimulatorService();
+  final CollectionTrackingService _collectionTracking =
+      CollectionTrackingService();
   final Random _random = Random();
   final ScrollController _rollController = ScrollController();
 
@@ -85,6 +88,11 @@ class _StickerContainerOpenScreenState
         onComplete: (drop) {
           _dropped = drop;
           _isOpening = false;
+          _collectionTracking.recordStickerDrop(
+            drop: drop,
+            sourceName: widget.containerDto.name,
+            sourceType: widget.containerDto.typeLabel,
+          );
         },
       );
       return;
@@ -107,6 +115,11 @@ class _StickerContainerOpenScreenState
       onComplete: (drop) {
         _dropped = drop;
         _isOpening = false;
+        _collectionTracking.recordStickerDrop(
+          drop: drop,
+          sourceName: widget.containerDto.name,
+          sourceType: widget.containerDto.typeLabel,
+        );
       },
     );
   }

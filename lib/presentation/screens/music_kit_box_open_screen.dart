@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import '../../core/collection/collection_tracking_service.dart';
 import '../../core/utils/date_format_helper.dart';
 import '../../data/models/container_dto.dart';
 import '../../data/models/music_kit_dto.dart';
@@ -38,6 +39,8 @@ class MusicKitBoxOpenScreen extends StatefulWidget {
 class _MusicKitBoxOpenScreenState extends State<MusicKitBoxOpenScreen> {
   late Future<List<MusicKitDto>> _musicKitsFuture;
   final MusicKitSimulatorService _simulator = MusicKitSimulatorService();
+  final CollectionTrackingService _collectionTracking =
+      CollectionTrackingService();
   final Random _random = Random();
   final ScrollController _rollController = ScrollController();
 
@@ -80,6 +83,11 @@ class _MusicKitBoxOpenScreenState extends State<MusicKitBoxOpenScreen> {
       onComplete: (drop) {
         _dropped = drop;
         _isOpening = false;
+        _collectionTracking.recordMusicKitDrop(
+          drop: drop,
+          sourceName: widget.containerDto.name,
+          sourceType: widget.containerDto.typeLabel,
+        );
       },
     );
   }

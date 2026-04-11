@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../core/collection/collection_tracking_service.dart';
 import '../../data/models/skin_dto.dart';
 import '../../data/repositories/local_data_repository.dart';
 import '../../domain/dropped_skin.dart';
@@ -27,6 +28,8 @@ class _TradeUpScreenState extends State<TradeUpScreen> {
   late Future<_TradeUpData> _dataFuture;
 
   late final TradeUpController _controller;
+  final CollectionTrackingService _collectionTracking =
+      CollectionTrackingService();
 
   String _search = '';
   String? _rarity = 'MIL_SPEC';
@@ -113,6 +116,9 @@ class _TradeUpScreenState extends State<TradeUpScreen> {
       );
       setState(() {});
     } catch (e) {
+      if (!mounted) {
+        return;
+      }
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text(e.toString().replaceFirst('Exception: ', ''))),
       );
@@ -264,7 +270,24 @@ class _TradeUpScreenState extends State<TradeUpScreen> {
       setState(() {
         // Controller already updated its state.
       });
+      if (_controller.result != null) {
+        await _collectionTracking.recordSkinDrop(
+          drop: DroppedSkin(
+            skin: _controller.result!.skin,
+            isStatTrak: _controller.result!.isStatTrak,
+            isSouvenir: _controller.result!.isSouvenir,
+            skinFloat: _controller.result!.floatValue,
+            exterior: _controller.result!.exterior,
+            patternSeed: _controller.result!.patternSeed,
+          ),
+          sourceName: 'Trade-Up Contract',
+          sourceType: 'Trade-Up',
+        );
+      }
     } catch (e) {
+      if (!mounted) {
+        return;
+      }
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text(e.toString().replaceFirst('Exception: ', ''))),
       );

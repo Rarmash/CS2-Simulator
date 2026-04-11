@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import '../../core/collection/collection_tracking_service.dart';
 import '../../core/utils/date_format_helper.dart';
 import '../../data/models/container_dto.dart';
 import '../../data/models/patch_dto.dart';
@@ -39,6 +40,8 @@ class PatchContainerOpenScreen extends StatefulWidget {
 class _PatchContainerOpenScreenState extends State<PatchContainerOpenScreen> {
   late Future<List<PatchDto>> _patchesFuture;
   final PatchSimulatorService _simulator = PatchSimulatorService();
+  final CollectionTrackingService _collectionTracking =
+      CollectionTrackingService();
   final Random _random = Random();
   final ScrollController _rollController = ScrollController();
 
@@ -81,6 +84,11 @@ class _PatchContainerOpenScreenState extends State<PatchContainerOpenScreen> {
       onComplete: (drop) {
         _dropped = drop;
         _isOpening = false;
+        _collectionTracking.recordPatchDrop(
+          drop: drop,
+          sourceName: widget.containerDto.name,
+          sourceType: widget.containerDto.typeLabel,
+        );
       },
     );
   }

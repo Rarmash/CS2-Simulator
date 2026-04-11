@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 
+import '../../core/collection/collection_tracking_service.dart';
 import '../../core/settings/settings_controller.dart';
 import '../../core/utils/date_format_helper.dart';
 import '../../data/models/container_dto.dart';
@@ -44,6 +45,8 @@ class ContainerOpenScreen extends StatefulWidget {
 class _ContainerOpenScreenState extends State<ContainerOpenScreen> {
   late Future<List<SkinDto>> _skinsFuture;
   final ContainerSimulatorService _simulator = ContainerSimulatorService();
+  final CollectionTrackingService _collectionTracking =
+      CollectionTrackingService();
   final Random _random = Random();
   final ScrollController _rollController = ScrollController();
 
@@ -104,6 +107,11 @@ class _ContainerOpenScreenState extends State<ContainerOpenScreen> {
         _isRolling = false;
         _resetXrayState();
       });
+      await _collectionTracking.recordSkinDrop(
+        drop: drop,
+        sourceName: widget.containerDto.name,
+        sourceType: widget.containerDto.typeLabel,
+      );
       return;
     }
 
@@ -160,6 +168,11 @@ class _ContainerOpenScreenState extends State<ContainerOpenScreen> {
       _dropped = drop;
       _isRolling = false;
     });
+    await _collectionTracking.recordSkinDrop(
+      drop: drop,
+      sourceName: widget.containerDto.name,
+      sourceType: widget.containerDto.typeLabel,
+    );
   }
 
   Future<void> _claimXrayDrop() async {
@@ -172,6 +185,11 @@ class _ContainerOpenScreenState extends State<ContainerOpenScreen> {
       _pendingXrayDrop = null;
       _xrayRevealActive = false;
     });
+    await _collectionTracking.recordSkinDrop(
+      drop: _dropped!,
+      sourceName: widget.containerDto.name,
+      sourceType: widget.containerDto.typeLabel,
+    );
   }
 
   Future<void> _destroyXrayDrop() async {

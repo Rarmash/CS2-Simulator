@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import '../../core/collection/collection_tracking_service.dart';
 import '../../core/utils/date_format_helper.dart';
 import '../../data/models/container_dto.dart';
 import '../../data/models/pin_dto.dart';
@@ -38,6 +39,8 @@ class PinContainerOpenScreen extends StatefulWidget {
 class _PinContainerOpenScreenState extends State<PinContainerOpenScreen> {
   late Future<List<PinDto>> _pinsFuture;
   final PinSimulatorService _simulator = PinSimulatorService();
+  final CollectionTrackingService _collectionTracking =
+      CollectionTrackingService();
   final Random _random = Random();
   final ScrollController _rollController = ScrollController();
 
@@ -80,6 +83,11 @@ class _PinContainerOpenScreenState extends State<PinContainerOpenScreen> {
       onComplete: (drop) {
         _dropped = drop;
         _isOpening = false;
+        _collectionTracking.recordPinDrop(
+          drop: drop,
+          sourceName: widget.containerDto.name,
+          sourceType: widget.containerDto.typeLabel,
+        );
       },
     );
   }

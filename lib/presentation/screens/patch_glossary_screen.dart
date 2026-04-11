@@ -126,13 +126,18 @@ class _PatchGlossaryScreenState extends State<PatchGlossaryScreen> {
           ],
         ),
       ],
-      itemBuilder: (context, patch) {
+      collectedCountBuilder: (patch, collectedByItemId) =>
+          collectedByItemId[patch.id] ?? 0,
+      itemBuilder: (context, patch, collectedCount) {
         final color = PatchUiHelper.rarityColor(patch);
         return GlossaryListItem(
           accentColor: color,
           imagePath: patch.patchImage,
           title: patch.name,
           subtitle: PatchUiHelper.secondaryText(patch),
+          collectionInfo: collectedCount > 0
+              ? 'Collected $collectedCount'
+              : null,
           tags: [
             DetailTag(text: PatchUiHelper.rarityLabel(patch), color: color),
             if ((patch.collection ?? '').isNotEmpty)

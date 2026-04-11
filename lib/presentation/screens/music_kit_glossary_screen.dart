@@ -146,13 +146,21 @@ class _MusicKitGlossaryScreenState extends State<MusicKitGlossaryScreen> {
           ],
         ),
       ],
-      itemBuilder: (context, musicKit) {
+      collectedCountBuilder: (musicKit, collectedByItemId) =>
+          musicKit.variants.fold<int>(
+            0,
+            (sum, variant) => sum + (collectedByItemId[variant.id] ?? 0),
+          ),
+      itemBuilder: (context, musicKit, collectedCount) {
         final color = MusicKitUiHelper.rarityColor(musicKit.primary);
         return GlossaryListItem(
           accentColor: color,
           imagePath: musicKit.imagePath,
           title: musicKit.trackName,
           subtitle: MusicKitUiHelper.groupedSecondaryText(musicKit),
+          collectionInfo: collectedCount > 0
+              ? 'Collected $collectedCount'
+              : null,
           tags: [
             DetailTag(
               text: MusicKitUiHelper.rarityLabel(musicKit.primary),
