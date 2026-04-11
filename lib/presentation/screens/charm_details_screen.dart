@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../core/collection/collection_summary.dart';
+import '../../core/collection/collection_tracking_service.dart';
 import '../../core/utils/date_format_helper.dart';
 import '../../data/models/container_dto.dart';
 import '../../data/models/charm_dto.dart';
@@ -15,6 +17,8 @@ import '../widgets/detail_tag.dart';
 class CharmDetailsScreen extends StatelessWidget {
   final LocalDataRepository repository;
   final CharmDto charm;
+  static final CollectionTrackingService _collectionTracking =
+      CollectionTrackingService();
 
   const CharmDetailsScreen({
     super.key,
@@ -28,8 +32,8 @@ class CharmDetailsScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(title: Text(charm.name)),
-      body: FutureBuilder<List<ContainerDto>>(
-        future: repository.loadContainersForCharm(charm.id),
+      body: FutureBuilder<_CharmDetailsData>(
+        future: _loadData(),
         builder: (context, snapshot) {
           if (snapshot.connectionState != ConnectionState.done) {
             return const Center(child: CircularProgressIndicator());
@@ -47,7 +51,7 @@ class CharmDetailsScreen extends StatelessWidget {
             );
           }
 
-          final cases = snapshot.data ?? const <ContainerDto>[];
+          final data = snapshot.data ?? const _CharmDetailsData(containers: []);
 
           return ListView(
             padding: const EdgeInsets.all(12),
@@ -69,6 +73,11 @@ class CharmDetailsScreen extends StatelessWidget {
                     title: 'Rarity',
                     value: CharmUiHelper.rarityLabel(charm),
                   ),
+                  if (data.collectedCount > 0)
+                    DetailInfoRow(
+                      title: 'Collected',
+                      value: '${data.collectedCount}',
+                    ),
                   if ((charm.collection ?? '').isNotEmpty)
                     DetailInfoRow(
                       title: 'Collection',
@@ -79,7 +88,7 @@ class CharmDetailsScreen extends StatelessWidget {
               const SizedBox(height: 12),
               DetailSourceSection<ContainerDto>(
                 title: 'Collections',
-                items: cases,
+                items: data.containers,
                 emptyText: 'No charm collection sources found.',
                 itemBuilder: (item) => DetailSourceTile(
                   imagePath: item.containerImage,
@@ -105,4 +114,31 @@ class CharmDetailsScreen extends StatelessWidget {
       ),
     );
   }
+
+  Future<_CharmDetailsData> _loadData() async {
+    final results = await Future.wait<dynamic>([
+      repository.loadContainersForCharm(charm.id),
+      _collectionTracking.loadSummaries(),
+    ]);
+
+    final summaries = results[1] as List<CollectionSummary>;
+    final collectedCount = summaries
+        .where(
+          (item) =>
+              item.category == 'charm' && item.latestEntry.itemId == charm.id,
+        )
+        .fold<int>(0, (sum, item) => sum + item.count);
+
+    return _CharmDetailsData(
+      containers: results[0] as List<ContainerDto>,
+      collectedCount: collectedCount,
+    );
+  }
+}
+
+class _CharmDetailsData {
+  final List<ContainerDto> containers;
+  final int collectedCount;
+
+  const _CharmDetailsData({required this.containers, this.collectedCount = 0});
 }

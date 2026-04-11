@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../core/collection/collection_summary.dart';
+import '../../core/collection/collection_tracking_service.dart';
 import '../../core/utils/date_format_helper.dart';
 import '../../data/models/container_dto.dart';
 import '../../data/models/patch_dto.dart';
@@ -15,6 +17,8 @@ import '../widgets/detail_tag.dart';
 class PatchDetailsScreen extends StatelessWidget {
   final LocalDataRepository repository;
   final PatchDto patch;
+  static final CollectionTrackingService _collectionTracking =
+      CollectionTrackingService();
 
   const PatchDetailsScreen({
     super.key,
@@ -28,8 +32,8 @@ class PatchDetailsScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(title: Text(patch.name)),
-      body: FutureBuilder<List<ContainerDto>>(
-        future: repository.loadContainersForPatch(patch.id),
+      body: FutureBuilder<_PatchDetailsData>(
+        future: _loadData(),
         builder: (context, snapshot) {
           if (snapshot.connectionState != ConnectionState.done) {
             return const Center(child: CircularProgressIndicator());
@@ -47,7 +51,7 @@ class PatchDetailsScreen extends StatelessWidget {
             );
           }
 
-          final cases = snapshot.data ?? const <ContainerDto>[];
+          final data = snapshot.data ?? const _PatchDetailsData(containers: []);
 
           return ListView(
             padding: const EdgeInsets.all(12),
@@ -69,6 +73,11 @@ class PatchDetailsScreen extends StatelessWidget {
                     title: 'Rarity',
                     value: PatchUiHelper.rarityLabel(patch),
                   ),
+                  if (data.collectedCount > 0)
+                    DetailInfoRow(
+                      title: 'Collected',
+                      value: '${data.collectedCount}',
+                    ),
                   if ((patch.collection ?? '').isNotEmpty)
                     DetailInfoRow(
                       title: 'Collection',
@@ -79,7 +88,7 @@ class PatchDetailsScreen extends StatelessWidget {
               const SizedBox(height: 12),
               DetailSourceSection<ContainerDto>(
                 title: 'Sources',
-                items: cases,
+                items: data.containers,
                 emptyText: 'No patch sources found.',
                 itemBuilder: (item) => DetailSourceTile(
                   imagePath: item.containerImage,
@@ -105,4 +114,31 @@ class PatchDetailsScreen extends StatelessWidget {
       ),
     );
   }
+
+  Future<_PatchDetailsData> _loadData() async {
+    final results = await Future.wait<dynamic>([
+      repository.loadContainersForPatch(patch.id),
+      _collectionTracking.loadSummaries(),
+    ]);
+
+    final summaries = results[1] as List<CollectionSummary>;
+    final collectedCount = summaries
+        .where(
+          (item) =>
+              item.category == 'patch' && item.latestEntry.itemId == patch.id,
+        )
+        .fold<int>(0, (sum, item) => sum + item.count);
+
+    return _PatchDetailsData(
+      containers: results[0] as List<ContainerDto>,
+      collectedCount: collectedCount,
+    );
+  }
+}
+
+class _PatchDetailsData {
+  final List<ContainerDto> containers;
+  final int collectedCount;
+
+  const _PatchDetailsData({required this.containers, this.collectedCount = 0});
 }

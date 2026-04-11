@@ -3,10 +3,27 @@ import 'package:flutter/material.dart';
 import '../../core/collection/collection_entry.dart';
 import '../../core/collection/collection_summary.dart';
 import '../../core/collection/collection_tracking_service.dart';
+import '../../core/settings/settings_controller.dart';
+import '../../data/repositories/local_data_repository.dart';
 import '../helpers/app_navigation_helper.dart';
+import 'agent_details_screen.dart';
+import 'charm_details_screen.dart';
+import 'graffiti_details_screen.dart';
+import 'music_kit_details_screen.dart';
+import 'patch_details_screen.dart';
+import 'pin_details_screen.dart';
+import 'skin_details_screen.dart';
+import 'sticker_details_screen.dart';
 
 class MyCollectionScreen extends StatefulWidget {
-  const MyCollectionScreen({super.key});
+  final LocalDataRepository repository;
+  final SettingsController settingsController;
+
+  const MyCollectionScreen({
+    super.key,
+    required this.repository,
+    required this.settingsController,
+  });
 
   @override
   State<MyCollectionScreen> createState() => _MyCollectionScreenState();
@@ -140,7 +157,10 @@ class _MyCollectionScreenState extends State<MyCollectionScreen> {
             onPressed: () {
               AppNavigationHelper.pushScreen(
                 context,
-                const CollectionHistoryScreen(),
+                CollectionHistoryScreen(
+                  repository: widget.repository,
+                  settingsController: widget.settingsController,
+                ),
               );
             },
             icon: const Icon(Icons.history),
@@ -207,6 +227,7 @@ class _MyCollectionScreenState extends State<MyCollectionScreen> {
                       _inventorySort = value;
                     });
                   },
+                  onItemTap: _openSummary,
                 ),
               ),
             ],
@@ -218,7 +239,14 @@ class _MyCollectionScreenState extends State<MyCollectionScreen> {
 }
 
 class CollectionHistoryScreen extends StatefulWidget {
-  const CollectionHistoryScreen({super.key});
+  final LocalDataRepository repository;
+  final SettingsController settingsController;
+
+  const CollectionHistoryScreen({
+    super.key,
+    required this.repository,
+    required this.settingsController,
+  });
 
   @override
   State<CollectionHistoryScreen> createState() =>
@@ -263,8 +291,38 @@ class _CollectionHistoryScreenState extends State<CollectionHistoryScreen> {
             return const Center(child: CircularProgressIndicator());
           }
 
-          return _HistoryTab(entries: snapshot.data!);
+          return _HistoryTab(entries: snapshot.data!, onItemTap: _openEntry);
         },
+      ),
+    );
+  }
+
+  Future<void> _openEntry(CollectionEntry entry) async {
+    final screen = await _buildDetailsScreen(
+      repository: widget.repository,
+      settingsController: widget.settingsController,
+      category: entry.category,
+      itemId: entry.itemId,
+    );
+
+    if (!mounted) {
+      return;
+    }
+
+    if (screen == null) {
+      _showMissingItemMessage();
+      return;
+    }
+
+    AppNavigationHelper.pushScreen(context, screen);
+  }
+
+  void _showMissingItemMessage() {
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(
+        content: Text(
+          'This item is no longer available in the current glossary data.',
+        ),
       ),
     );
   }
@@ -367,6 +425,7 @@ class _InventoryTab extends StatelessWidget {
   final ValueChanged<String> onRarityChanged;
   final ValueChanged<String> onStatTrakChanged;
   final ValueChanged<String> onSortChanged;
+  final ValueChanged<CollectionSummary> onItemTap;
 
   const _InventoryTab({
     required this.summaries,
@@ -381,6 +440,7 @@ class _InventoryTab extends StatelessWidget {
     required this.onRarityChanged,
     required this.onStatTrakChanged,
     required this.onSortChanged,
+    required this.onItemTap,
   });
 
   @override
@@ -574,8 +634,10 @@ class _InventoryTab extends StatelessWidget {
                   padding: const EdgeInsets.all(12),
                   itemCount: summaries.length,
                   separatorBuilder: (_, _) => const SizedBox(height: 10),
-                  itemBuilder: (context, index) =>
-                      _InventoryCard(summary: summaries[index]),
+                  itemBuilder: (context, index) => _InventoryCard(
+                    summary: summaries[index],
+                    onTap: () => onItemTap(summaries[index]),
+                  ),
                 ),
         ),
       ],
@@ -585,8 +647,9 @@ class _InventoryTab extends StatelessWidget {
 
 class _InventoryCard extends StatelessWidget {
   final CollectionSummary summary;
+  final VoidCallback onTap;
 
-  const _InventoryCard({required this.summary});
+  const _InventoryCard({required this.summary, required this.onTap});
 
   @override
   Widget build(BuildContext context) {
@@ -594,69 +657,81 @@ class _InventoryCard extends StatelessWidget {
 
     return Card(
       margin: EdgeInsets.zero,
-      child: Padding(
-        padding: const EdgeInsets.all(12),
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Container(
-              width: 88,
-              height: 72,
-              alignment: Alignment.center,
-              child: Image.asset(
-                summary.imagePath,
-                fit: BoxFit.contain,
-                errorBuilder: (_, _, _) =>
-                    const Icon(Icons.image_not_supported),
+      clipBehavior: Clip.antiAlias,
+      child: InkWell(
+        onTap: onTap,
+        child: Padding(
+          padding: const EdgeInsets.all(12),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Container(
+                width: 88,
+                height: 72,
+                alignment: Alignment.center,
+                child: Image.asset(
+                  summary.imagePath,
+                  fit: BoxFit.contain,
+                  errorBuilder: (_, _, _) =>
+                      const Icon(Icons.image_not_supported),
+                ),
               ),
-            ),
-            const SizedBox(width: 12),
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    summary.title,
-                    style: const TextStyle(
-                      fontSize: 15,
-                      fontWeight: FontWeight.w700,
-                    ),
-                  ),
-                  const SizedBox(height: 4),
-                  Text(
-                    summary.subtitle,
-                    style: const TextStyle(color: Colors.white70, fontSize: 13),
-                  ),
-                  const SizedBox(height: 8),
-                  Wrap(
-                    spacing: 8,
-                    runSpacing: 8,
-                    children: [
-                      _MetaBadge(
-                        label: '${summary.count} collected',
-                        color: accent,
+              const SizedBox(width: 12),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      summary.title,
+                      style: const TextStyle(
+                        fontSize: 15,
+                        fontWeight: FontWeight.w700,
                       ),
-                      _MetaBadge(label: summary.categoryLabel),
-                      if (summary.bestFloat != null)
+                    ),
+                    const SizedBox(height: 4),
+                    Text(
+                      summary.subtitle,
+                      style: const TextStyle(
+                        color: Colors.white70,
+                        fontSize: 13,
+                      ),
+                    ),
+                    const SizedBox(height: 8),
+                    Wrap(
+                      spacing: 8,
+                      runSpacing: 8,
+                      children: [
                         _MetaBadge(
-                          label:
-                              'Best FV ${summary.bestFloat!.toStringAsFixed(5)}',
+                          label: '${summary.count} collected',
+                          color: accent,
                         ),
-                      if (summary.hasStatTrak)
-                        const _MetaBadge(label: 'StatTrak'),
-                      if (summary.hasSouvenir)
-                        const _MetaBadge(label: 'Souvenir'),
-                    ],
-                  ),
-                  const SizedBox(height: 8),
-                  Text(
-                    'Latest: ${summary.latestEntry.sourceName} - ${_formatDateTime(summary.latestAcquiredAt)}',
-                    style: const TextStyle(color: Colors.white54, fontSize: 12),
-                  ),
-                ],
+                        _MetaBadge(label: summary.categoryLabel),
+                        if (summary.bestFloat != null)
+                          _MetaBadge(
+                            label:
+                                'Best FV ${summary.bestFloat!.toStringAsFixed(5)}',
+                          ),
+                        if (summary.hasStatTrak)
+                          const _MetaBadge(label: 'StatTrak'),
+                        if (summary.hasSouvenir)
+                          const _MetaBadge(label: 'Souvenir'),
+                      ],
+                    ),
+                    const SizedBox(height: 8),
+                    Text(
+                      'Latest: ${summary.latestEntry.sourceName} - ${_formatDateTime(summary.latestAcquiredAt)}',
+                      style: const TextStyle(
+                        color: Colors.white54,
+                        fontSize: 12,
+                      ),
+                    ),
+                  ],
+                ),
               ),
-            ),
-          ],
+              const SizedBox(width: 8),
+              const Icon(Icons.chevron_right, color: Colors.white38),
+            ],
+          ),
         ),
       ),
     );
@@ -665,8 +740,9 @@ class _InventoryCard extends StatelessWidget {
 
 class _HistoryTab extends StatelessWidget {
   final List<CollectionEntry> entries;
+  final ValueChanged<CollectionEntry> onItemTap;
 
-  const _HistoryTab({required this.entries});
+  const _HistoryTab({required this.entries, required this.onItemTap});
 
   @override
   Widget build(BuildContext context) {
@@ -682,15 +758,19 @@ class _HistoryTab extends StatelessWidget {
       padding: const EdgeInsets.all(12),
       itemCount: entries.length,
       separatorBuilder: (_, _) => const SizedBox(height: 10),
-      itemBuilder: (context, index) => _HistoryCard(entry: entries[index]),
+      itemBuilder: (context, index) => _HistoryCard(
+        entry: entries[index],
+        onTap: () => onItemTap(entries[index]),
+      ),
     );
   }
 }
 
 class _HistoryCard extends StatelessWidget {
   final CollectionEntry entry;
+  final VoidCallback onTap;
 
-  const _HistoryCard({required this.entry});
+  const _HistoryCard({required this.entry, required this.onTap});
 
   @override
   Widget build(BuildContext context) {
@@ -698,64 +778,76 @@ class _HistoryCard extends StatelessWidget {
 
     return Card(
       margin: EdgeInsets.zero,
-      child: Padding(
-        padding: const EdgeInsets.all(12),
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Container(
-              width: 76,
-              height: 60,
-              alignment: Alignment.center,
-              child: Image.asset(
-                entry.imagePath,
-                fit: BoxFit.contain,
-                errorBuilder: (_, _, _) =>
-                    const Icon(Icons.image_not_supported),
+      clipBehavior: Clip.antiAlias,
+      child: InkWell(
+        onTap: onTap,
+        child: Padding(
+          padding: const EdgeInsets.all(12),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Container(
+                width: 76,
+                height: 60,
+                alignment: Alignment.center,
+                child: Image.asset(
+                  entry.imagePath,
+                  fit: BoxFit.contain,
+                  errorBuilder: (_, _, _) =>
+                      const Icon(Icons.image_not_supported),
+                ),
               ),
-            ),
-            const SizedBox(width: 12),
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    entry.title,
-                    style: const TextStyle(
-                      fontSize: 14,
-                      fontWeight: FontWeight.w700,
+              const SizedBox(width: 12),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      entry.title,
+                      style: const TextStyle(
+                        fontSize: 14,
+                        fontWeight: FontWeight.w700,
+                      ),
                     ),
-                  ),
-                  const SizedBox(height: 4),
-                  Text(
-                    entry.subtitle,
-                    style: const TextStyle(color: Colors.white70, fontSize: 12),
-                  ),
-                  const SizedBox(height: 8),
-                  Wrap(
-                    spacing: 8,
-                    runSpacing: 8,
-                    children: [
-                      _MetaBadge(label: entry.categoryLabel, color: accent),
-                      if ((entry.exterior ?? '').isNotEmpty)
-                        _MetaBadge(label: entry.exterior!),
-                      if (entry.floatValue != null)
-                        _MetaBadge(
-                          label: 'FV ${entry.floatValue!.toStringAsFixed(5)}',
-                        ),
-                      if (entry.patternSeed != null)
-                        _MetaBadge(label: 'Pattern ${entry.patternSeed}'),
-                    ],
-                  ),
-                  const SizedBox(height: 8),
-                  Text(
-                    '${entry.sourceName} - ${_formatDateTime(entry.acquiredAt)}',
-                    style: const TextStyle(color: Colors.white54, fontSize: 12),
-                  ),
-                ],
+                    const SizedBox(height: 4),
+                    Text(
+                      entry.subtitle,
+                      style: const TextStyle(
+                        color: Colors.white70,
+                        fontSize: 12,
+                      ),
+                    ),
+                    const SizedBox(height: 8),
+                    Wrap(
+                      spacing: 8,
+                      runSpacing: 8,
+                      children: [
+                        _MetaBadge(label: entry.categoryLabel, color: accent),
+                        if ((entry.exterior ?? '').isNotEmpty)
+                          _MetaBadge(label: entry.exterior!),
+                        if (entry.floatValue != null)
+                          _MetaBadge(
+                            label: 'FV ${entry.floatValue!.toStringAsFixed(5)}',
+                          ),
+                        if (entry.patternSeed != null)
+                          _MetaBadge(label: 'Pattern ${entry.patternSeed}'),
+                      ],
+                    ),
+                    const SizedBox(height: 8),
+                    Text(
+                      '${entry.sourceName} - ${_formatDateTime(entry.acquiredAt)}',
+                      style: const TextStyle(
+                        color: Colors.white54,
+                        fontSize: 12,
+                      ),
+                    ),
+                  ],
+                ),
               ),
-            ),
-          ],
+              const SizedBox(width: 8),
+              const Icon(Icons.chevron_right, color: Colors.white38),
+            ],
+          ),
         ),
       ),
     );
@@ -935,4 +1027,126 @@ String _rarityLabel(String rarity) {
     default:
       return rarity;
   }
+}
+
+extension on _MyCollectionScreenState {
+  Future<void> _openSummary(CollectionSummary summary) async {
+    final screen = await _buildDetailsScreen(
+      repository: widget.repository,
+      settingsController: widget.settingsController,
+      category: summary.category,
+      itemId: summary.latestEntry.itemId,
+    );
+
+    if (!mounted) {
+      return;
+    }
+
+    if (screen == null) {
+      _showMissingItemMessage();
+      return;
+    }
+
+    AppNavigationHelper.pushScreen(context, screen);
+  }
+
+  void _showMissingItemMessage() {
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(
+        content: Text(
+          'This item is no longer available in the current glossary data.',
+        ),
+      ),
+    );
+  }
+}
+
+Future<Widget?> _buildDetailsScreen({
+  required LocalDataRepository repository,
+  required SettingsController settingsController,
+  required String category,
+  required String itemId,
+}) async {
+  switch (category) {
+    case 'skin':
+    case 'knife':
+    case 'gloves':
+      final items = await repository.loadSkins();
+      final skin = _firstWhereOrNull(items, (item) => item.id == itemId);
+      if (skin == null) {
+        return null;
+      }
+      return SkinDetailsScreen(
+        repository: repository,
+        settingsController: settingsController,
+        skin: skin,
+      );
+    case 'sticker':
+      final items = await repository.loadStickers();
+      final sticker = _firstWhereOrNull(items, (item) => item.id == itemId);
+      if (sticker == null) {
+        return null;
+      }
+      return StickerDetailsScreen(repository: repository, sticker: sticker);
+    case 'pin':
+      final items = await repository.loadPins();
+      final pin = _firstWhereOrNull(items, (item) => item.id == itemId);
+      if (pin == null) {
+        return null;
+      }
+      return PinDetailsScreen(repository: repository, pin: pin);
+    case 'music_kit':
+      final items = await repository.loadGroupedMusicKits();
+      final group = _firstWhereOrNull(
+        items,
+        (item) => item.variants.any((variant) => variant.id == itemId),
+      );
+      if (group == null) {
+        return null;
+      }
+      return MusicKitDetailsScreen(
+        repository: repository,
+        musicKitName: group.name,
+        collection: group.collection,
+      );
+    case 'agent':
+      final items = await repository.loadAgents();
+      final agent = _firstWhereOrNull(items, (item) => item.id == itemId);
+      if (agent == null) {
+        return null;
+      }
+      return AgentDetailsScreen(repository: repository, agent: agent);
+    case 'graffiti':
+      final items = await repository.loadGraffiti();
+      final graffiti = _firstWhereOrNull(items, (item) => item.id == itemId);
+      if (graffiti == null) {
+        return null;
+      }
+      return GraffitiDetailsScreen(repository: repository, graffiti: graffiti);
+    case 'patch':
+      final items = await repository.loadPatches();
+      final patch = _firstWhereOrNull(items, (item) => item.id == itemId);
+      if (patch == null) {
+        return null;
+      }
+      return PatchDetailsScreen(repository: repository, patch: patch);
+    case 'charm':
+      final items = await repository.loadCharms();
+      final charm = _firstWhereOrNull(items, (item) => item.id == itemId);
+      if (charm == null) {
+        return null;
+      }
+      return CharmDetailsScreen(repository: repository, charm: charm);
+    default:
+      return null;
+  }
+}
+
+T? _firstWhereOrNull<T>(List<T> items, bool Function(T item) test) {
+  for (final item in items) {
+    if (test(item)) {
+      return item;
+    }
+  }
+  return null;
 }

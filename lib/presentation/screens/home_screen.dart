@@ -75,8 +75,13 @@ class HomeScreen extends StatelessWidget {
                       ),
                       onTradeUp: () =>
                           _push(context, TradeUpScreen(repository: repository)),
-                      onCollection: () =>
-                          _push(context, const MyCollectionScreen()),
+                      onCollection: () => _push(
+                        context,
+                        MyCollectionScreen(
+                          repository: repository,
+                          settingsController: settingsController,
+                        ),
+                      ),
                     ),
                     const SizedBox(height: 16),
                     _ResponsiveSectionGrid(

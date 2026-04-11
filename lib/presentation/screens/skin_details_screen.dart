@@ -148,8 +148,6 @@ class SkinDetailsScreen extends StatelessWidget {
                                 ),
                                 if ((skin.collection ?? '').isNotEmpty)
                                   _tag(skin.collection!),
-                                if (data.collectedCount > 0)
-                                  _tag('Collected ${data.collectedCount}'),
                               ],
                             ),
                             const SizedBox(height: 14),
@@ -157,6 +155,8 @@ class SkinDetailsScreen extends StatelessWidget {
                               'Weapon / slot',
                               SkinUiHelper.weaponTypeLabel(skin.weaponType),
                             ),
+                            if (data.collectedCount > 0)
+                              _infoRow('Collected', '${data.collectedCount}'),
                             if ((skin.finishCatalogName ?? '').isNotEmpty)
                               _infoRow(
                                 'Finish catalog',

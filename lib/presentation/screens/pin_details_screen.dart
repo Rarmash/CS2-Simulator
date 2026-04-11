@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../core/collection/collection_summary.dart';
+import '../../core/collection/collection_tracking_service.dart';
 import '../../core/utils/date_format_helper.dart';
 import '../../data/models/container_dto.dart';
 import '../../data/models/pin_dto.dart';
@@ -15,6 +17,8 @@ import '../widgets/detail_tag.dart';
 class PinDetailsScreen extends StatelessWidget {
   final LocalDataRepository repository;
   final PinDto pin;
+  static final CollectionTrackingService _collectionTracking =
+      CollectionTrackingService();
 
   const PinDetailsScreen({
     super.key,
@@ -28,8 +32,8 @@ class PinDetailsScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(title: Text(pin.name)),
-      body: FutureBuilder<List<ContainerDto>>(
-        future: repository.loadContainersForPin(pin.id),
+      body: FutureBuilder<_PinDetailsData>(
+        future: _loadData(),
         builder: (context, snapshot) {
           if (snapshot.connectionState != ConnectionState.done) {
             return const Center(child: CircularProgressIndicator());
@@ -47,7 +51,7 @@ class PinDetailsScreen extends StatelessWidget {
             );
           }
 
-          final cases = snapshot.data ?? const <ContainerDto>[];
+          final data = snapshot.data ?? const _PinDetailsData(containers: []);
 
           return ListView(
             padding: const EdgeInsets.all(12),
@@ -69,6 +73,11 @@ class PinDetailsScreen extends StatelessWidget {
                     title: 'Rarity',
                     value: PinUiHelper.rarityLabel(pin),
                   ),
+                  if (data.collectedCount > 0)
+                    DetailInfoRow(
+                      title: 'Collected',
+                      value: '${data.collectedCount}',
+                    ),
                   if ((pin.collection ?? '').isNotEmpty)
                     DetailInfoRow(title: 'Collection', value: pin.collection!),
                 ],
@@ -76,7 +85,7 @@ class PinDetailsScreen extends StatelessWidget {
               const SizedBox(height: 12),
               DetailSourceSection<ContainerDto>(
                 title: 'Containers',
-                items: cases,
+                items: data.containers,
                 emptyText: 'No pin capsule sources found.',
                 itemBuilder: (item) => DetailSourceTile(
                   imagePath: item.containerImage,
@@ -102,4 +111,30 @@ class PinDetailsScreen extends StatelessWidget {
       ),
     );
   }
+
+  Future<_PinDetailsData> _loadData() async {
+    final results = await Future.wait<dynamic>([
+      repository.loadContainersForPin(pin.id),
+      _collectionTracking.loadSummaries(),
+    ]);
+
+    final summaries = results[1] as List<CollectionSummary>;
+    final collectedCount = summaries
+        .where(
+          (item) => item.category == 'pin' && item.latestEntry.itemId == pin.id,
+        )
+        .fold<int>(0, (sum, item) => sum + item.count);
+
+    return _PinDetailsData(
+      containers: results[0] as List<ContainerDto>,
+      collectedCount: collectedCount,
+    );
+  }
+}
+
+class _PinDetailsData {
+  final List<ContainerDto> containers;
+  final int collectedCount;
+
+  const _PinDetailsData({required this.containers, this.collectedCount = 0});
 }
