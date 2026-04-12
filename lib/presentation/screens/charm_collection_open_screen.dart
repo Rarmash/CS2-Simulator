@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 
+import '../../core/collection/collection_tracking_service.dart';
 import '../../core/utils/date_format_helper.dart';
 import '../../data/models/container_dto.dart';
 import '../../data/models/charm_dto.dart';
@@ -17,6 +18,7 @@ import '../widgets/collectible_contents_title.dart';
 import '../widgets/collectible_grid_sliver.dart';
 import '../widgets/collectible_open_body.dart';
 import '../widgets/collectible_open_header.dart';
+import '../widgets/collection_source_stats.dart';
 import '../widgets/opening_loading_card.dart';
 
 class CharmCollectionOpenScreen extends StatefulWidget {
@@ -38,6 +40,8 @@ class _CharmCollectionOpenScreenState extends State<CharmCollectionOpenScreen> {
   late Future<List<CharmDto>> _charmsFuture;
   final CharmCollectionSimulatorService _simulator =
       CharmCollectionSimulatorService();
+  final CollectionTrackingService _collectionTracking =
+      CollectionTrackingService();
   final Random _random = Random();
 
   DroppedCharm? _dropped;
@@ -66,6 +70,11 @@ class _CharmCollectionOpenScreenState extends State<CharmCollectionOpenScreen> {
       onComplete: (drop) {
         _dropped = drop;
         _isOpening = false;
+        _collectionTracking.recordCharmDrop(
+          drop: drop,
+          sourceName: widget.collection.name,
+          sourceType: widget.collection.typeLabel,
+        );
       },
     );
   }
@@ -105,6 +114,12 @@ class _CharmCollectionOpenScreenState extends State<CharmCollectionOpenScreen> {
                     ),
                 ],
                 metadata: [
+                  CollectionSourceStatsWidget(
+                    sourceName: widget.collection.name,
+                    sourceType: widget.collection.typeLabel,
+                    service: _collectionTracking,
+                    totalCount: charms.length,
+                  ),
                   if ((widget.collection.sourceName ?? '').isNotEmpty) ...[
                     const SizedBox(height: 8),
                     Text(

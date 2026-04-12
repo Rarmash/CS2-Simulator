@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../core/collection/collection_summary.dart';
+import '../../core/collection/collection_tracking_service.dart';
 import '../../core/utils/date_format_helper.dart';
 import '../../data/models/container_dto.dart';
 import '../../data/models/music_kit_dto.dart';
@@ -17,6 +19,8 @@ class MusicKitDetailsScreen extends StatelessWidget {
   final LocalDataRepository repository;
   final String musicKitName;
   final String? collection;
+  static final CollectionTrackingService _collectionTracking =
+      CollectionTrackingService();
 
   const MusicKitDetailsScreen({
     super.key,
@@ -95,8 +99,13 @@ class MusicKitDetailsScreen extends StatelessWidget {
                     title: 'Type',
                     value: MusicKitUiHelper.groupedTypeLabel(group),
                   ),
+                  if (data.collectedCount > 0)
+                    DetailInfoRow(
+                      title: 'Collected',
+                      value: '${data.collectedCount}',
+                    ),
                   DetailInfoRow(
-                    title: 'StatTrak™ variant',
+                    title: 'StatTrak variant',
                     value: _statTrakAvailabilityLabel(
                       hasRegular: group.hasRegular,
                       hasStatTrak: group.hasStatTrak,
@@ -138,12 +147,28 @@ class MusicKitDetailsScreen extends StatelessWidget {
 
   Future<_MusicKitDetailsData> _loadData() async {
     final group = await repository.loadMusicKitGroup(musicKitName, collection);
-    final containers = await repository.loadContainersForMusicKitGroup(
-      musicKitName,
-      collection,
-    );
+    final results = await Future.wait<dynamic>([
+      repository.loadContainersForMusicKitGroup(musicKitName, collection),
+      _collectionTracking.loadSummaries(),
+    ]);
 
-    return _MusicKitDetailsData(group: group, containers: containers);
+    final summaries = results[1] as List<CollectionSummary>;
+    final variantIds = (group?.variants ?? const <MusicKitDto>[])
+        .map((item) => item.id)
+        .toSet();
+    final collectedCount = summaries
+        .where(
+          (item) =>
+              item.category == 'music_kit' &&
+              variantIds.contains(item.latestEntry.itemId),
+        )
+        .fold<int>(0, (sum, item) => sum + item.count);
+
+    return _MusicKitDetailsData(
+      group: group,
+      containers: results[0] as List<ContainerDto>,
+      collectedCount: collectedCount,
+    );
   }
 
   String _titleFromName(String fullName) {
@@ -176,6 +201,11 @@ class MusicKitDetailsScreen extends StatelessWidget {
 class _MusicKitDetailsData {
   final MusicKitGroupDto? group;
   final List<ContainerDto> containers;
+  final int collectedCount;
 
-  const _MusicKitDetailsData({required this.group, required this.containers});
+  const _MusicKitDetailsData({
+    required this.group,
+    required this.containers,
+    this.collectedCount = 0,
+  });
 }

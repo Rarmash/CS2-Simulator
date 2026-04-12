@@ -134,13 +134,18 @@ class _StickerGlossaryScreenState extends State<StickerGlossaryScreen> {
           ],
         ),
       ],
-      itemBuilder: (context, sticker) {
+      collectedCountBuilder: (sticker, collectedByItemId) =>
+          collectedByItemId[sticker.id] ?? 0,
+      itemBuilder: (context, sticker, collectedCount) {
         final color = StickerUiHelper.rarityColor(sticker);
         return GlossaryListItem(
           accentColor: color,
           imagePath: sticker.stickerImage,
           title: sticker.name,
           subtitle: StickerUiHelper.secondaryText(sticker),
+          collectionInfo: collectedCount > 0
+              ? 'Collected $collectedCount'
+              : null,
           tags: [
             DetailTag(text: StickerUiHelper.rarityLabel(sticker), color: color),
             DetailTag(text: sticker.stickerTypeLabel),

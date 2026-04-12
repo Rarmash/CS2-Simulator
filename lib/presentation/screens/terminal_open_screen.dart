@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../core/collection/collection_tracking_service.dart';
 import '../../core/utils/date_format_helper.dart';
 import '../../data/models/container_dto.dart';
 import '../../data/models/skin_dto.dart';
@@ -35,6 +36,8 @@ class TerminalOpenScreen extends StatefulWidget {
 class _TerminalOpenScreenState extends State<TerminalOpenScreen> {
   late Future<List<SkinDto>> _skinsFuture;
   final ContainerSimulatorService _simulator = ContainerSimulatorService();
+  final CollectionTrackingService _collectionTracking =
+      CollectionTrackingService();
 
   List<TerminalOffer> _terminalOffers = const [];
   int _terminalOfferIndex = 0;
@@ -114,6 +117,11 @@ class _TerminalOpenScreenState extends State<TerminalOpenScreen> {
         patternSeed: offer.patternSeed,
       );
     });
+    await _collectionTracking.recordSkinDrop(
+      drop: _dropped!,
+      sourceName: widget.containerDto.name,
+      sourceType: widget.containerDto.typeLabel,
+    );
   }
 
   Future<void> _skipTerminalOffer() async {

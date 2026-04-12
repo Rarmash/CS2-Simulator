@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../core/collection/collection_summary.dart';
+import '../../core/collection/collection_tracking_service.dart';
 import '../../core/settings/settings_controller.dart';
 import '../../data/models/skin_group_dto.dart';
 import '../../data/models/skin_dto.dart';
@@ -26,8 +28,10 @@ class SkinGlossaryScreen extends StatefulWidget {
 }
 
 class _SkinGlossaryScreenState extends State<SkinGlossaryScreen> {
-  late final Future<List<SkinGroupDto>> _future;
+  late final Future<_SkinGlossaryData> _future;
   final TextEditingController _searchController = TextEditingController();
+  final CollectionTrackingService _collectionTracking =
+      CollectionTrackingService();
 
   String _query = '';
   String _rarityFilter = 'ALL';
@@ -63,12 +67,31 @@ class _SkinGlossaryScreenState extends State<SkinGlossaryScreen> {
   @override
   void initState() {
     super.initState();
-    _future = widget.repository.loadSkinGroups();
+    _future = _loadData();
     _searchController.addListener(() {
       setState(() {
         _query = _searchController.text.trim().toLowerCase();
       });
     });
+  }
+
+  Future<_SkinGlossaryData> _loadData() async {
+    final results = await Future.wait([
+      widget.repository.loadSkinGroups(),
+      _collectionTracking.loadSummaries(),
+    ]);
+
+    final summaries = results[1] as List<CollectionSummary>;
+    final collectedByItemId = <String, int>{};
+    for (final summary in summaries.where((item) => item.category == 'skin')) {
+      collectedByItemId[summary.latestEntry.itemId] =
+          (collectedByItemId[summary.latestEntry.itemId] ?? 0) + summary.count;
+    }
+
+    return _SkinGlossaryData(
+      groups: results[0] as List<SkinGroupDto>,
+      collectedByItemId: collectedByItemId,
+    );
   }
 
   @override
@@ -176,7 +199,7 @@ class _SkinGlossaryScreenState extends State<SkinGlossaryScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text('Skin Glossary')),
-      body: FutureBuilder<List<SkinGroupDto>>(
+      body: FutureBuilder<_SkinGlossaryData>(
         future: _future,
         builder: (context, snapshot) {
           if (snapshot.connectionState != ConnectionState.done) {
@@ -195,7 +218,10 @@ class _SkinGlossaryScreenState extends State<SkinGlossaryScreen> {
             );
           }
 
-          final skins = snapshot.data ?? const <SkinGroupDto>[];
+          final data =
+              snapshot.data ??
+              const _SkinGlossaryData(groups: [], collectedByItemId: {});
+          final skins = data.groups;
           final filtered = _applyFilters(skins);
 
           return Column(
@@ -336,12 +362,20 @@ class _SkinGlossaryScreenState extends State<SkinGlossaryScreen> {
                           final group = filtered[index];
                           final skin = group.primary;
                           final rarityColor = SkinUiHelper.rarityColor(skin);
+                          final collectedCount = group.variants.fold<int>(
+                            0,
+                            (sum, variant) =>
+                                sum + (data.collectedByItemId[variant.id] ?? 0),
+                          );
 
                           return GlossaryListItem(
                             accentColor: rarityColor,
                             imagePath: group.skinImage,
                             title: group.itemDisplayName,
                             subtitle: _subtitle(group),
+                            collectionInfo: collectedCount > 0
+                                ? 'Collected $collectedCount'
+                                : null,
                             tags: [
                               _pill(
                                 SkinUiHelper.rarityLabel(group.primary),
@@ -406,6 +440,16 @@ class _SkinGlossaryScreenState extends State<SkinGlossaryScreen> {
     }
     return group.name;
   }
+}
+
+class _SkinGlossaryData {
+  final List<SkinGroupDto> groups;
+  final Map<String, int> collectedByItemId;
+
+  const _SkinGlossaryData({
+    required this.groups,
+    required this.collectedByItemId,
+  });
 }
 
 class _DropdownItem {

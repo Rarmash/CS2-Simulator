@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import '../../core/collection/collection_tracking_service.dart';
 import '../../core/utils/date_format_helper.dart';
 import '../../data/models/container_dto.dart';
 import '../../data/models/sticker_dto.dart';
@@ -17,6 +18,7 @@ import '../widgets/collectible_contents_title.dart';
 import '../widgets/collectible_grid_sliver.dart';
 import '../widgets/collectible_open_header.dart';
 import '../widgets/collectible_roller_sliver.dart';
+import '../widgets/collection_source_stats.dart';
 import '../widgets/opening_roll_item_card.dart';
 import '../widgets/opening_loading_card.dart';
 import '../widgets/sticker_drop_card.dart';
@@ -41,6 +43,8 @@ class _StickerContainerOpenScreenState
     extends State<StickerContainerOpenScreen> {
   late Future<List<StickerDto>> _stickersFuture;
   final StickerSimulatorService _simulator = StickerSimulatorService();
+  final CollectionTrackingService _collectionTracking =
+      CollectionTrackingService();
   final Random _random = Random();
   final ScrollController _rollController = ScrollController();
 
@@ -85,6 +89,11 @@ class _StickerContainerOpenScreenState
         onComplete: (drop) {
           _dropped = drop;
           _isOpening = false;
+          _collectionTracking.recordStickerDrop(
+            drop: drop,
+            sourceName: widget.containerDto.name,
+            sourceType: widget.containerDto.typeLabel,
+          );
         },
       );
       return;
@@ -107,6 +116,11 @@ class _StickerContainerOpenScreenState
       onComplete: (drop) {
         _dropped = drop;
         _isOpening = false;
+        _collectionTracking.recordStickerDrop(
+          drop: drop,
+          sourceName: widget.containerDto.name,
+          sourceType: widget.containerDto.typeLabel,
+        );
       },
     );
   }
@@ -227,6 +241,14 @@ class _StickerContainerOpenScreenState
                       label: widget.containerDto.sourceName!,
                       color: sourceColor,
                     ),
+                ],
+                metadata: [
+                  CollectionSourceStatsWidget(
+                    sourceName: widget.containerDto.name,
+                    sourceType: widget.containerDto.typeLabel,
+                    service: _collectionTracking,
+                    totalCount: stickers.length,
+                  ),
                 ],
                 releaseDateText: formattedReleaseDate,
                 description:

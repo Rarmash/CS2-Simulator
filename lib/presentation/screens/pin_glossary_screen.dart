@@ -132,13 +132,18 @@ class _PinGlossaryScreenState extends State<PinGlossaryScreen> {
           ],
         ),
       ],
-      itemBuilder: (context, pin) {
+      collectedCountBuilder: (pin, collectedByItemId) =>
+          collectedByItemId[pin.id] ?? 0,
+      itemBuilder: (context, pin, collectedCount) {
         final color = PinUiHelper.rarityColor(pin);
         return GlossaryListItem(
           accentColor: color,
           imagePath: pin.pinImage,
           title: pin.name,
           subtitle: PinUiHelper.secondaryText(pin),
+          collectionInfo: collectedCount > 0
+              ? 'Collected $collectedCount'
+              : null,
           tags: [
             DetailTag(text: PinUiHelper.rarityLabel(pin), color: color),
             if ((pin.collection ?? '').isNotEmpty)

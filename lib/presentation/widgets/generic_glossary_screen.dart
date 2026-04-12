@@ -1,16 +1,22 @@
 import 'package:flutter/material.dart';
 
+import '../../core/collection/collection_summary.dart';
+import '../../core/collection/collection_tracking_service.dart';
+
 class GenericGlossaryScreen<T> extends StatefulWidget {
   final String title;
   final String searchHint;
   final Future<List<T>> future;
   final List<T> Function(List<T> items, String query) filterAndSort;
-  final Widget Function(BuildContext context, T item) itemBuilder;
+  final Widget Function(BuildContext context, T item, int collectedCount)
+  itemBuilder;
   final String Function(int count) countLabelBuilder;
   final String emptyMessage;
   final String errorPrefix;
   final List<Widget> Function(BuildContext context, List<T> items)?
   headerControlsBuilder;
+  final int Function(T item, Map<String, int> collectedByItemId)?
+  collectedCountBuilder;
 
   const GenericGlossaryScreen({
     super.key,
@@ -23,6 +29,7 @@ class GenericGlossaryScreen<T> extends StatefulWidget {
     required this.emptyMessage,
     required this.errorPrefix,
     this.headerControlsBuilder,
+    this.collectedCountBuilder,
   });
 
   @override
@@ -32,6 +39,8 @@ class GenericGlossaryScreen<T> extends StatefulWidget {
 
 class _GenericGlossaryScreenState<T> extends State<GenericGlossaryScreen<T>> {
   final TextEditingController _searchController = TextEditingController();
+  final CollectionTrackingService _collectionTracking =
+      CollectionTrackingService();
   String _query = '';
 
   @override
@@ -54,8 +63,8 @@ class _GenericGlossaryScreenState<T> extends State<GenericGlossaryScreen<T>> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text(widget.title)),
-      body: FutureBuilder<List<T>>(
-        future: widget.future,
+      body: FutureBuilder<_GenericGlossaryData<T>>(
+        future: _loadData(),
         builder: (context, snapshot) {
           if (snapshot.connectionState != ConnectionState.done) {
             return const Center(child: CircularProgressIndicator());
@@ -73,7 +82,10 @@ class _GenericGlossaryScreenState<T> extends State<GenericGlossaryScreen<T>> {
             );
           }
 
-          final items = snapshot.data ?? <T>[];
+          final data =
+              snapshot.data ??
+              const _GenericGlossaryData(items: [], collectedByItemId: {});
+          final items = data.items;
           final filtered = widget.filterAndSort(items, _query);
           final headerControls =
               widget.headerControlsBuilder?.call(context, items) ??
@@ -138,8 +150,20 @@ class _GenericGlossaryScreenState<T> extends State<GenericGlossaryScreen<T>> {
                         padding: const EdgeInsets.all(12),
                         itemCount: filtered.length,
                         separatorBuilder: (_, _) => const SizedBox(height: 10),
-                        itemBuilder: (context, index) =>
-                            widget.itemBuilder(context, filtered[index]),
+                        itemBuilder: (context, index) {
+                          final item = filtered[index];
+                          final collectedCount =
+                              widget.collectedCountBuilder?.call(
+                                item,
+                                data.collectedByItemId,
+                              ) ??
+                              0;
+                          return widget.itemBuilder(
+                            context,
+                            item,
+                            collectedCount,
+                          );
+                        },
                       ),
               ),
             ],
@@ -148,4 +172,33 @@ class _GenericGlossaryScreenState<T> extends State<GenericGlossaryScreen<T>> {
       ),
     );
   }
+
+  Future<_GenericGlossaryData<T>> _loadData() async {
+    final results = await Future.wait([
+      widget.future,
+      _collectionTracking.loadSummaries(),
+    ]);
+
+    final summaries = results[1] as List<CollectionSummary>;
+    final collectedByItemId = <String, int>{};
+    for (final summary in summaries) {
+      collectedByItemId[summary.latestEntry.itemId] =
+          (collectedByItemId[summary.latestEntry.itemId] ?? 0) + summary.count;
+    }
+
+    return _GenericGlossaryData(
+      items: results[0] as List<T>,
+      collectedByItemId: collectedByItemId,
+    );
+  }
+}
+
+class _GenericGlossaryData<T> {
+  final List<T> items;
+  final Map<String, int> collectedByItemId;
+
+  const _GenericGlossaryData({
+    required this.items,
+    required this.collectedByItemId,
+  });
 }

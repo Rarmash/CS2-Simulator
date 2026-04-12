@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import '../../core/collection/collection_tracking_service.dart';
 import '../../core/utils/date_format_helper.dart';
 import '../../data/models/container_dto.dart';
 import '../../data/models/pin_dto.dart';
@@ -17,6 +18,7 @@ import '../widgets/collectible_contents_title.dart';
 import '../widgets/collectible_grid_sliver.dart';
 import '../widgets/collectible_open_header.dart';
 import '../widgets/collectible_roller_sliver.dart';
+import '../widgets/collection_source_stats.dart';
 import '../widgets/opening_roll_item_card.dart';
 import '../widgets/pin_drop_card.dart';
 import '../widgets/pin_grid_tile.dart';
@@ -38,6 +40,8 @@ class PinContainerOpenScreen extends StatefulWidget {
 class _PinContainerOpenScreenState extends State<PinContainerOpenScreen> {
   late Future<List<PinDto>> _pinsFuture;
   final PinSimulatorService _simulator = PinSimulatorService();
+  final CollectionTrackingService _collectionTracking =
+      CollectionTrackingService();
   final Random _random = Random();
   final ScrollController _rollController = ScrollController();
 
@@ -80,6 +84,11 @@ class _PinContainerOpenScreenState extends State<PinContainerOpenScreen> {
       onComplete: (drop) {
         _dropped = drop;
         _isOpening = false;
+        _collectionTracking.recordPinDrop(
+          drop: drop,
+          sourceName: widget.containerDto.name,
+          sourceType: widget.containerDto.typeLabel,
+        );
       },
     );
   }
@@ -158,6 +167,14 @@ class _PinContainerOpenScreenState extends State<PinContainerOpenScreen> {
                 imageHeight: constraints.maxWidth < 700 ? 90 : 120,
                 badges: [
                   ChipBadge(label: widget.containerDto.typeLabel, color: color),
+                ],
+                metadata: [
+                  CollectionSourceStatsWidget(
+                    sourceName: widget.containerDto.name,
+                    sourceType: widget.containerDto.typeLabel,
+                    service: _collectionTracking,
+                    totalCount: pins.length,
+                  ),
                 ],
                 releaseDateText: formattedReleaseDate,
                 description: 'Pin capsules roll collectible pins only.',

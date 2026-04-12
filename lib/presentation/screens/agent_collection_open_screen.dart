@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 
+import '../../core/collection/collection_tracking_service.dart';
 import '../../core/utils/date_format_helper.dart';
 import '../../data/models/agent_dto.dart';
 import '../../data/models/container_dto.dart';
@@ -16,6 +17,7 @@ import '../widgets/collectible_open_body.dart';
 import '../widgets/collectible_contents_title.dart';
 import '../widgets/collectible_grid_sliver.dart';
 import '../widgets/collectible_open_header.dart';
+import '../widgets/collection_source_stats.dart';
 import '../widgets/opening_loading_card.dart';
 import '../widgets/source_badge.dart';
 
@@ -38,6 +40,8 @@ class _AgentCollectionOpenScreenState extends State<AgentCollectionOpenScreen> {
   late Future<List<AgentDto>> _agentsFuture;
   final AgentCollectionSimulatorService _simulator =
       AgentCollectionSimulatorService();
+  final CollectionTrackingService _collectionTracking =
+      CollectionTrackingService();
   final Random _random = Random();
 
   DroppedAgent? _dropped;
@@ -69,6 +73,11 @@ class _AgentCollectionOpenScreenState extends State<AgentCollectionOpenScreen> {
       onComplete: (drop) {
         _dropped = drop;
         _isOpening = false;
+        _collectionTracking.recordAgentDrop(
+          drop: drop,
+          sourceName: widget.collection.name,
+          sourceType: widget.collection.typeLabel,
+        );
       },
     );
   }
@@ -96,6 +105,14 @@ class _AgentCollectionOpenScreenState extends State<AgentCollectionOpenScreen> {
                   SourceBadge(
                     label: widget.collection.sourceLabel,
                     color: color,
+                  ),
+                ],
+                metadata: [
+                  CollectionSourceStatsWidget(
+                    sourceName: widget.collection.name,
+                    sourceType: widget.collection.typeLabel,
+                    service: _collectionTracking,
+                    totalCount: agents.length,
                   ),
                 ],
                 releaseDateText: formattedReleaseDate,

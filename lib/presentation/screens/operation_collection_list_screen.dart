@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../core/collection/collection_tracking_service.dart';
 import '../../data/models/container_dto.dart';
 import '../../data/repositories/local_data_repository.dart';
 import '../helpers/app_navigation_helper.dart';
@@ -8,6 +9,7 @@ import '../widgets/async_collection_loader.dart';
 import '../widgets/chip_badge.dart';
 import '../widgets/collection_filter_bar.dart';
 import '../widgets/collection_list_card.dart';
+import '../widgets/collection_source_progress_metadata.dart';
 import '../widgets/responsive_collection_grid.dart';
 import 'operation_collection_open_screen.dart';
 
@@ -24,6 +26,8 @@ class OperationCollectionListScreen extends StatefulWidget {
 class _OperationCollectionListScreenState
     extends State<OperationCollectionListScreen> {
   late Future<List<ContainerDto>> _future;
+  final CollectionTrackingService _collectionTracking =
+      CollectionTrackingService();
 
   static const String _filterAll = 'ALL';
   String _selectedFilter = _filterAll;
@@ -130,7 +134,13 @@ class _OperationCollectionListScreenState
       title: collection.name,
       releaseDate: collection.releaseDate,
       chips: [ChipBadge(label: collection.sourceLabel, color: color)],
-      metadata: const [],
+      metadata: [
+        CollectionSourceProgressMetadata(
+          container: collection,
+          repository: widget.repository,
+          trackingService: _collectionTracking,
+        ),
+      ],
       onTap: () {
         AppNavigationHelper.pushScreen(
           context,

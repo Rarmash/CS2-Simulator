@@ -129,13 +129,18 @@ class _GraffitiGlossaryScreenState extends State<GraffitiGlossaryScreen> {
           ],
         ),
       ],
-      itemBuilder: (context, graffiti) {
+      collectedCountBuilder: (graffiti, collectedByItemId) =>
+          collectedByItemId[graffiti.id] ?? 0,
+      itemBuilder: (context, graffiti, collectedCount) {
         final color = GraffitiUiHelper.rarityColor(graffiti);
         return GlossaryListItem(
           accentColor: color,
           imagePath: graffiti.graffitiImage,
           title: graffiti.name,
           subtitle: GraffitiUiHelper.secondaryText(graffiti),
+          collectionInfo: collectedCount > 0
+              ? 'Collected $collectedCount'
+              : null,
           tags: [
             DetailTag(
               text: GraffitiUiHelper.rarityLabel(graffiti),

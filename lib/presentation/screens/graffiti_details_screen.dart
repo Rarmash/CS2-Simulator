@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../core/collection/collection_summary.dart';
+import '../../core/collection/collection_tracking_service.dart';
 import '../../core/utils/date_format_helper.dart';
 import '../../data/models/container_dto.dart';
 import '../../data/models/graffiti_dto.dart';
@@ -15,6 +17,8 @@ import '../widgets/detail_tag.dart';
 class GraffitiDetailsScreen extends StatelessWidget {
   final LocalDataRepository repository;
   final GraffitiDto graffiti;
+  static final CollectionTrackingService _collectionTracking =
+      CollectionTrackingService();
 
   const GraffitiDetailsScreen({
     super.key,
@@ -28,8 +32,8 @@ class GraffitiDetailsScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(title: Text(graffiti.name)),
-      body: FutureBuilder<List<ContainerDto>>(
-        future: repository.loadContainersForGraffiti(graffiti.id),
+      body: FutureBuilder<_GraffitiDetailsData>(
+        future: _loadData(),
         builder: (context, snapshot) {
           if (snapshot.connectionState != ConnectionState.done) {
             return const Center(child: CircularProgressIndicator());
@@ -47,7 +51,8 @@ class GraffitiDetailsScreen extends StatelessWidget {
             );
           }
 
-          final cases = snapshot.data ?? const <ContainerDto>[];
+          final data =
+              snapshot.data ?? const _GraffitiDetailsData(containers: []);
 
           return ListView(
             padding: const EdgeInsets.all(12),
@@ -69,6 +74,11 @@ class GraffitiDetailsScreen extends StatelessWidget {
                     title: 'Rarity',
                     value: GraffitiUiHelper.rarityLabel(graffiti),
                   ),
+                  if (data.collectedCount > 0)
+                    DetailInfoRow(
+                      title: 'Collected',
+                      value: '${data.collectedCount}',
+                    ),
                   if ((graffiti.collection ?? '').isNotEmpty)
                     DetailInfoRow(
                       title: 'Collection',
@@ -79,7 +89,7 @@ class GraffitiDetailsScreen extends StatelessWidget {
               const SizedBox(height: 12),
               DetailSourceSection<ContainerDto>(
                 title: 'Boxes',
-                items: cases,
+                items: data.containers,
                 emptyText: 'No graffiti box sources found.',
                 itemBuilder: (item) => DetailSourceTile(
                   imagePath: item.containerImage,
@@ -105,4 +115,35 @@ class GraffitiDetailsScreen extends StatelessWidget {
       ),
     );
   }
+
+  Future<_GraffitiDetailsData> _loadData() async {
+    final results = await Future.wait<dynamic>([
+      repository.loadContainersForGraffiti(graffiti.id),
+      _collectionTracking.loadSummaries(),
+    ]);
+
+    final summaries = results[1] as List<CollectionSummary>;
+    final collectedCount = summaries
+        .where(
+          (item) =>
+              item.category == 'graffiti' &&
+              item.latestEntry.itemId == graffiti.id,
+        )
+        .fold<int>(0, (sum, item) => sum + item.count);
+
+    return _GraffitiDetailsData(
+      containers: results[0] as List<ContainerDto>,
+      collectedCount: collectedCount,
+    );
+  }
+}
+
+class _GraffitiDetailsData {
+  final List<ContainerDto> containers;
+  final int collectedCount;
+
+  const _GraffitiDetailsData({
+    required this.containers,
+    this.collectedCount = 0,
+  });
 }

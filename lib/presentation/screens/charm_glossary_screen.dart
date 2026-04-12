@@ -129,13 +129,18 @@ class _CharmGlossaryScreenState extends State<CharmGlossaryScreen> {
           ],
         ),
       ],
-      itemBuilder: (context, charm) {
+      collectedCountBuilder: (charm, collectedByItemId) =>
+          collectedByItemId[charm.id] ?? 0,
+      itemBuilder: (context, charm, collectedCount) {
         final color = CharmUiHelper.rarityColor(charm);
         return GlossaryListItem(
           accentColor: color,
           imagePath: charm.charmImage,
           title: charm.name,
           subtitle: CharmUiHelper.secondaryText(charm),
+          collectionInfo: collectedCount > 0
+              ? 'Collected $collectedCount'
+              : null,
           tags: [
             DetailTag(text: CharmUiHelper.rarityLabel(charm), color: color),
             if ((charm.collection ?? '').isNotEmpty)

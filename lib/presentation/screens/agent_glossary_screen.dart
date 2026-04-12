@@ -151,13 +151,18 @@ class _AgentGlossaryScreenState extends State<AgentGlossaryScreen> {
           },
         ),
       ],
-      itemBuilder: (context, agent) {
+      collectedCountBuilder: (agent, collectedByItemId) =>
+          collectedByItemId[agent.id] ?? 0,
+      itemBuilder: (context, agent, collectedCount) {
         final color = AgentUiHelper.rarityColor(agent);
         return GlossaryListItem(
           accentColor: color,
           imagePath: agent.agentImage,
           title: agent.name,
           subtitle: AgentUiHelper.secondaryText(agent),
+          collectionInfo: collectedCount > 0
+              ? 'Collected $collectedCount'
+              : null,
           tags: [
             DetailTag(text: AgentUiHelper.rarityLabel(agent), color: color),
             DetailTag(

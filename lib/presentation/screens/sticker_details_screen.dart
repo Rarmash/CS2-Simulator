@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../core/collection/collection_summary.dart';
+import '../../core/collection/collection_tracking_service.dart';
 import '../../core/utils/date_format_helper.dart';
 import '../../data/models/container_dto.dart';
 import '../../data/models/sticker_dto.dart';
@@ -15,6 +17,8 @@ import '../widgets/detail_tag.dart';
 class StickerDetailsScreen extends StatelessWidget {
   final LocalDataRepository repository;
   final StickerDto sticker;
+  static final CollectionTrackingService _collectionTracking =
+      CollectionTrackingService();
 
   const StickerDetailsScreen({
     super.key,
@@ -28,8 +32,8 @@ class StickerDetailsScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(title: Text(sticker.name)),
-      body: FutureBuilder<List<ContainerDto>>(
-        future: repository.loadContainersForSticker(sticker.id),
+      body: FutureBuilder<_StickerDetailsData>(
+        future: _loadData(),
         builder: (context, snapshot) {
           if (snapshot.connectionState != ConnectionState.done) {
             return const Center(child: CircularProgressIndicator());
@@ -47,7 +51,8 @@ class StickerDetailsScreen extends StatelessWidget {
             );
           }
 
-          final cases = snapshot.data ?? const <ContainerDto>[];
+          final data =
+              snapshot.data ?? const _StickerDetailsData(containers: []);
 
           return ListView(
             padding: const EdgeInsets.all(12),
@@ -81,6 +86,11 @@ class StickerDetailsScreen extends StatelessWidget {
                     title: 'Effect',
                     value: StickerUiHelper.effectLabel(sticker.effect),
                   ),
+                  if (data.collectedCount > 0)
+                    DetailInfoRow(
+                      title: 'Collected',
+                      value: '${data.collectedCount}',
+                    ),
                   if ((sticker.collection ?? '').isNotEmpty)
                     DetailInfoRow(
                       title: 'Collection',
@@ -96,7 +106,7 @@ class StickerDetailsScreen extends StatelessWidget {
               const SizedBox(height: 12),
               DetailSourceSection<ContainerDto>(
                 title: 'Containers',
-                items: cases,
+                items: data.containers,
                 emptyText: 'No sticker container sources found.',
                 itemBuilder: (item) {
                   final subtitleParts = <String>[item.typeLabel];
@@ -128,4 +138,35 @@ class StickerDetailsScreen extends StatelessWidget {
       ),
     );
   }
+
+  Future<_StickerDetailsData> _loadData() async {
+    final results = await Future.wait<dynamic>([
+      repository.loadContainersForSticker(sticker.id),
+      _collectionTracking.loadSummaries(),
+    ]);
+
+    final summaries = results[1] as List<CollectionSummary>;
+    final collectedCount = summaries
+        .where(
+          (item) =>
+              item.category == 'sticker' &&
+              item.latestEntry.itemId == sticker.id,
+        )
+        .fold<int>(0, (sum, item) => sum + item.count);
+
+    return _StickerDetailsData(
+      containers: results[0] as List<ContainerDto>,
+      collectedCount: collectedCount,
+    );
+  }
+}
+
+class _StickerDetailsData {
+  final List<ContainerDto> containers;
+  final int collectedCount;
+
+  const _StickerDetailsData({
+    required this.containers,
+    this.collectedCount = 0,
+  });
 }

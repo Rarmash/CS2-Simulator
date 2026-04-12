@@ -24,6 +24,9 @@ Unless explicitly stated otherwise, the repository license applies to the source
 - Optional X-Ray opening mechanic
 - Souvenir packages with tournament-based dates
 - Skin pattern seed and finish variant support, including phase-aware finishes
+- Persistent collection tracking with a saved inventory and recent activity
+- Collection-aware glossary browsing with per-item collected counts
+- Collection progress and per-source stats across containers and collections
 - Major tournament section covering CS:GO and CS2 eras
 - Major teams and players browsing
 - Operation and Armory reward collections
@@ -145,23 +148,21 @@ The source code in this repository is licensed under `AGPL-3.0`.
 
 The project is actively evolving, with current work focused on:
 
-- expanding the simulation layer beyond basic opening flows with deeper item metadata
+- polishing the collection layer with stronger progress tracking across containers, collections, and collectibles
 - improving long-term data quality for tournaments, teams, and players
 - continuing UI/codebase refactoring to reduce duplicated screen logic
-- preparing larger progression features such as collection tracking and ownership history
+- hardening the simulator around long-term product polish rather than major missing content
 
 ## Roadmap
 
-### v0.13
+### v0.14
 
-- Inventory or item ownership tracking in some form
-- Opening and Trade-Up history with per-container and per-item stats
-- Better collection browsing around owned items, seen drops, and completion progress
+- Better automated test coverage for core simulator and collection logic
+- Deeper collection analytics across items, duplicates, sessions, and finishing variants
+- Cleaner navigation and final UI consistency pass across major app sections
 
 ### Future
 
-- Cleaner navigation across containers, collections, and collectibles
-- Better automated test coverage beyond basic smoke checks
-- Music Kit preview playback if a reliable audio source is available
-- Optional China / Perfect World visual mode if a reliable alternate asset source is available
+- Music Kit preview playback if a maintainable preview-audio import pipeline becomes available
+- Optional China / Perfect World visual mode once a reliable alternate asset source is available
 

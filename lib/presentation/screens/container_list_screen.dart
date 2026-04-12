@@ -1,14 +1,18 @@
 import 'package:flutter/material.dart';
 
+import '../../core/collection/collection_tracking_service.dart';
 import '../../core/settings/settings_controller.dart';
 import '../../data/models/container_dto.dart';
+import '../../data/models/skin_dto.dart';
 import '../../data/repositories/local_data_repository.dart';
+import '../../domain/special_item_variant_helper.dart';
 import '../helpers/app_navigation_helper.dart';
 import '../helpers/source_color_helper.dart';
 import '../widgets/async_collection_loader.dart';
 import '../widgets/chip_badge.dart';
 import '../widgets/collection_filter_bar.dart';
 import '../widgets/collection_list_card.dart';
+import '../widgets/collection_source_stats.dart';
 import '../widgets/responsive_collection_grid.dart';
 
 class ContainerListScreen extends StatefulWidget {
@@ -27,6 +31,8 @@ class ContainerListScreen extends StatefulWidget {
 
 class _ContainerListScreenState extends State<ContainerListScreen> {
   late Future<List<ContainerDto>> _containersFuture;
+  final CollectionTrackingService _collectionTracking =
+      CollectionTrackingService();
 
   static const String _filterAll = 'ALL';
   String _selectedFilter = _filterAll;
@@ -186,7 +192,7 @@ class _ContainerListScreenState extends State<ContainerListScreen> {
       title: containerDto.name,
       releaseDate: containerDto.releaseDate,
       chips: chips,
-      metadata: const [],
+      metadata: [_buildProgressMetadata(containerDto)],
       onTap: () {
         AppNavigationHelper.pushScreen(
           context,
@@ -198,6 +204,83 @@ class _ContainerListScreenState extends State<ContainerListScreen> {
         );
       },
     );
+  }
+
+  Widget _buildProgressMetadata(ContainerDto containerDto) {
+    return FutureBuilder<int>(
+      future: _loadTotalCount(containerDto),
+      builder: (context, snapshot) {
+        final totalCount = snapshot.data;
+        if (totalCount == null || totalCount <= 0) {
+          return const SizedBox.shrink();
+        }
+
+        return CollectionSourceStatsWidget(
+          sourceName: containerDto.name,
+          sourceType: containerDto.typeLabel,
+          service: _collectionTracking,
+          totalCount: totalCount,
+          compact: true,
+        );
+      },
+    );
+  }
+
+  Future<int> _loadTotalCount(ContainerDto containerDto) async {
+    switch (containerDto.type) {
+      case 'CASE':
+      case 'SOUVENIR_PACKAGE':
+      case 'COLLECTION_PACKAGE':
+      case 'TERMINAL':
+        final skins = await widget.repository.loadSkinsForContainer(
+          containerDto.id,
+        );
+        return _groupedSkinFamilyCount(skins);
+      case 'STICKER_CAPSULE':
+        final stickers = await widget.repository.loadStickersForContainer(
+          containerDto.id,
+        );
+        return stickers.length;
+      case 'PIN_CAPSULE':
+        final pins = await widget.repository.loadPinsForContainer(
+          containerDto.id,
+        );
+        return pins.length;
+      case 'MUSIC_KIT_BOX':
+        final musicKits = await widget.repository.loadMusicKitsForContainer(
+          containerDto.id,
+        );
+        return musicKits.length;
+      case 'GRAFFITI_BOX':
+        final graffiti = await widget.repository.loadGraffitiForContainer(
+          containerDto.id,
+        );
+        return graffiti.length;
+      case 'PATCH_PACK':
+        final patches = await widget.repository.loadPatchesForContainer(
+          containerDto.id,
+        );
+        return patches.length;
+      default:
+        return 0;
+    }
+  }
+
+  int _groupedSkinFamilyCount(List<SkinDto> skins) {
+    final families = <String, List<SkinDto>>{};
+    for (final skin in skins) {
+      final key = SpecialItemVariantHelper.familyKeyForSkin(skin);
+      families.putIfAbsent(key, () => <SkinDto>[]).add(skin);
+    }
+
+    var count = 0;
+    for (final family in families.values) {
+      final shouldGroup =
+          family.length > 1 &&
+          SpecialItemVariantHelper.hasConfiguredVariantWeights(family);
+      count += shouldGroup ? 1 : family.length;
+    }
+    return count;
   }
 
   @override

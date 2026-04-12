@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import '../../core/collection/collection_tracking_service.dart';
 import '../../core/utils/date_format_helper.dart';
 import '../../data/models/container_dto.dart';
 import '../../data/models/patch_dto.dart';
@@ -17,6 +18,7 @@ import '../widgets/collectible_contents_title.dart';
 import '../widgets/collectible_grid_sliver.dart';
 import '../widgets/collectible_open_header.dart';
 import '../widgets/collectible_roller_sliver.dart';
+import '../widgets/collection_source_stats.dart';
 import '../widgets/opening_roll_item_card.dart';
 import '../widgets/patch_drop_card.dart';
 import '../widgets/patch_grid_tile.dart';
@@ -39,6 +41,8 @@ class PatchContainerOpenScreen extends StatefulWidget {
 class _PatchContainerOpenScreenState extends State<PatchContainerOpenScreen> {
   late Future<List<PatchDto>> _patchesFuture;
   final PatchSimulatorService _simulator = PatchSimulatorService();
+  final CollectionTrackingService _collectionTracking =
+      CollectionTrackingService();
   final Random _random = Random();
   final ScrollController _rollController = ScrollController();
 
@@ -81,6 +85,11 @@ class _PatchContainerOpenScreenState extends State<PatchContainerOpenScreen> {
       onComplete: (drop) {
         _dropped = drop;
         _isOpening = false;
+        _collectionTracking.recordPatchDrop(
+          drop: drop,
+          sourceName: widget.containerDto.name,
+          sourceType: widget.containerDto.typeLabel,
+        );
       },
     );
   }
@@ -151,6 +160,14 @@ class _PatchContainerOpenScreenState extends State<PatchContainerOpenScreen> {
                 imageHeight: constraints.maxWidth < 700 ? 90 : 120,
                 badges: [
                   ChipBadge(label: widget.containerDto.typeLabel, color: color),
+                ],
+                metadata: [
+                  CollectionSourceStatsWidget(
+                    sourceName: widget.containerDto.name,
+                    sourceType: widget.containerDto.typeLabel,
+                    service: _collectionTracking,
+                    totalCount: patches.length,
+                  ),
                 ],
                 releaseDateText: formattedReleaseDate,
                 description:
