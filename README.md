@@ -27,6 +27,7 @@ Unless explicitly stated otherwise, the repository license applies to the source
 - Persistent collection tracking with a saved inventory and recent activity
 - Collection-aware glossary browsing with per-item collected counts
 - Collection progress and per-source stats across containers and collections
+- Broad automated test coverage across simulator, collection, repository, and helper layers
 - Major tournament section covering CS:GO and CS2 eras
 - Major teams and players browsing
 - Operation and Armory reward collections
@@ -151,13 +152,12 @@ The project is actively evolving, with current work focused on:
 - polishing the collection layer with stronger progress tracking across containers, collections, and collectibles
 - improving long-term data quality for tournaments, teams, and players
 - continuing UI/codebase refactoring to reduce duplicated screen logic
-- hardening the simulator around long-term product polish rather than major missing content
+- pushing the app toward 1.0 through analytics, polish, and overall product consistency
 
 ## Roadmap
 
 ### v0.14
 
-- Better automated test coverage for core simulator and collection logic
 - Deeper collection analytics across items, duplicates, sessions, and finishing variants
 - Cleaner navigation and final UI consistency pass across major app sections
 
