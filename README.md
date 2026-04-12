@@ -2,6 +2,7 @@
 
 [![Release](https://img.shields.io/github/v/release/Rarmash/CS2-Simulator?display_name=tag)](https://github.com/Rarmash/CS2-Simulator/releases)
 [![Release Build](https://img.shields.io/github/actions/workflow/status/Rarmash/CS2-Simulator/release.yml?label=release%20build)](https://github.com/Rarmash/CS2-Simulator/actions/workflows/release.yml)
+[![PR Checks](https://img.shields.io/github/actions/workflow/status/Rarmash/CS2-Simulator/pr.yml?label=PR%20checks)](https://github.com/Rarmash/CS2-Simulator/actions/workflows/pr.yml)
 [![Flutter](https://img.shields.io/badge/Flutter-3.x-02569B?logo=flutter&logoColor=white)](https://flutter.dev/)
 [![Dart](https://img.shields.io/badge/Dart-3.11+-0175C2?logo=dart&logoColor=white)](https://dart.dev/)
 [![Platforms](https://img.shields.io/badge/Platforms-Android%20%7C%20iOS%20%7C%20Windows%20%7C%20Linux%20%7C%20macOS%20%7C%20Web-4EAA25)](https://github.com/Rarmash/CS2-Simulator/releases)
