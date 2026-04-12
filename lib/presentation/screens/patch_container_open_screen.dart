@@ -18,6 +18,7 @@ import '../widgets/collectible_contents_title.dart';
 import '../widgets/collectible_grid_sliver.dart';
 import '../widgets/collectible_open_header.dart';
 import '../widgets/collectible_roller_sliver.dart';
+import '../widgets/collection_source_stats.dart';
 import '../widgets/opening_roll_item_card.dart';
 import '../widgets/patch_drop_card.dart';
 import '../widgets/patch_grid_tile.dart';
@@ -159,6 +160,14 @@ class _PatchContainerOpenScreenState extends State<PatchContainerOpenScreen> {
                 imageHeight: constraints.maxWidth < 700 ? 90 : 120,
                 badges: [
                   ChipBadge(label: widget.containerDto.typeLabel, color: color),
+                ],
+                metadata: [
+                  CollectionSourceStatsWidget(
+                    sourceName: widget.containerDto.name,
+                    sourceType: widget.containerDto.typeLabel,
+                    service: _collectionTracking,
+                    totalCount: patches.length,
+                  ),
                 ],
                 releaseDateText: formattedReleaseDate,
                 description:

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../core/collection/collection_tracking_service.dart';
 import '../../data/models/container_dto.dart';
 import '../../data/repositories/local_data_repository.dart';
 import '../helpers/app_navigation_helper.dart';
@@ -7,6 +8,7 @@ import '../helpers/source_color_helper.dart';
 import '../widgets/async_collection_loader.dart';
 import '../widgets/chip_badge.dart';
 import '../widgets/collection_list_card.dart';
+import '../widgets/collection_source_progress_metadata.dart';
 import '../widgets/responsive_collection_grid.dart';
 import 'charm_collection_open_screen.dart';
 
@@ -22,6 +24,8 @@ class CharmCollectionListScreen extends StatefulWidget {
 
 class _CharmCollectionListScreenState extends State<CharmCollectionListScreen> {
   late Future<List<ContainerDto>> _future;
+  final CollectionTrackingService _collectionTracking =
+      CollectionTrackingService();
 
   @override
   void initState() {
@@ -57,6 +61,11 @@ class _CharmCollectionListScreenState extends State<CharmCollectionListScreen> {
             ),
           ),
         ],
+        CollectionSourceProgressMetadata(
+          container: collection,
+          repository: widget.repository,
+          trackingService: _collectionTracking,
+        ),
       ],
       onTap: () {
         AppNavigationHelper.pushScreen(

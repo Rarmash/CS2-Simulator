@@ -89,6 +89,27 @@ class CollectionTrackingService {
     return summaries;
   }
 
+  Future<CollectionSourceStats> loadSourceStats({
+    required String sourceName,
+    required String sourceType,
+  }) async {
+    final entries = await loadEntries();
+    final sourceEntries = entries
+        .where(
+          (item) =>
+              item.sourceName == sourceName && item.sourceType == sourceType,
+        )
+        .toList();
+
+    return CollectionSourceStats(
+      openedCount: sourceEntries.length,
+      collectedUniqueCount: sourceEntries
+          .map((item) => '${item.category}:${item.itemId}')
+          .toSet()
+          .length,
+    );
+  }
+
   Future<void> clearAll() async {
     await _prefs.remove(_entriesKey);
   }
@@ -336,4 +357,14 @@ class CollectionTrackingService {
     }
     return 'skin';
   }
+}
+
+class CollectionSourceStats {
+  final int openedCount;
+  final int collectedUniqueCount;
+
+  const CollectionSourceStats({
+    required this.openedCount,
+    required this.collectedUniqueCount,
+  });
 }

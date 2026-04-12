@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../core/collection/collection_tracking_service.dart';
 import '../../data/models/container_dto.dart';
 import '../../data/repositories/local_data_repository.dart';
 import '../helpers/app_navigation_helper.dart';
@@ -8,6 +9,7 @@ import '../widgets/async_collection_loader.dart';
 import '../widgets/chip_badge.dart';
 import '../widgets/collection_filter_bar.dart';
 import '../widgets/collection_list_card.dart';
+import '../widgets/collection_source_progress_metadata.dart';
 import '../widgets/responsive_collection_grid.dart';
 import 'reward_collection_open_screen.dart';
 
@@ -24,6 +26,8 @@ class RewardCollectionListScreen extends StatefulWidget {
 class _RewardCollectionListScreenState
     extends State<RewardCollectionListScreen> {
   late Future<List<ContainerDto>> _future;
+  final CollectionTrackingService _collectionTracking =
+      CollectionTrackingService();
 
   static const String _filterAll = 'ALL';
   static const String _filterOperation = 'OPERATION';
@@ -113,6 +117,11 @@ class _RewardCollectionListScreenState
             fontSize: 13,
             fontWeight: FontWeight.w600,
           ),
+        ),
+        CollectionSourceProgressMetadata(
+          container: collection,
+          repository: widget.repository,
+          trackingService: _collectionTracking,
         ),
       ],
       onTap: () {

@@ -46,9 +46,157 @@ class _MyCollectionScreenState extends State<MyCollectionScreen> {
   }
 
   Future<_CollectionData> _loadData() async {
-    final entries = await _service.loadEntries();
-    final summaries = await _service.loadSummaries();
-    return _CollectionData(entries: entries, summaries: summaries);
+    final results = await Future.wait([
+      _service.loadEntries(),
+      _service.loadSummaries(),
+      _loadProgress(),
+    ]);
+
+    return _CollectionData(
+      entries: results[0] as List<CollectionEntry>,
+      summaries: results[1] as List<CollectionSummary>,
+      progress: results[2] as List<_CollectionProgressItem>,
+    );
+  }
+
+  Future<List<_CollectionProgressItem>> _loadProgress() async {
+    final results = await Future.wait<dynamic>([
+      _service.loadSummaries(),
+      widget.repository.loadSkinGroups(),
+      widget.repository.loadStickers(),
+      widget.repository.loadPins(),
+      widget.repository.loadGroupedMusicKits(),
+      widget.repository.loadAgents(),
+      widget.repository.loadGraffiti(),
+      widget.repository.loadPatches(),
+      widget.repository.loadCharms(),
+    ]);
+
+    final summaries = results[0] as List<CollectionSummary>;
+    final skinGroups = results[1] as List<dynamic>;
+    final stickers = results[2] as List<dynamic>;
+    final pins = results[3] as List<dynamic>;
+    final musicKits = results[4] as List<dynamic>;
+    final agents = results[5] as List<dynamic>;
+    final graffiti = results[6] as List<dynamic>;
+    final patches = results[7] as List<dynamic>;
+    final charms = results[8] as List<dynamic>;
+
+    final collectedByCategory = <String, Set<String>>{};
+    for (final summary in summaries) {
+      collectedByCategory
+          .putIfAbsent(summary.category, () => <String>{})
+          .add(summary.latestEntry.itemId);
+      collectedByCategory
+          .putIfAbsent(summary.filterCategory, () => <String>{})
+          .add(summary.latestEntry.itemId);
+    }
+
+    int groupedCollectedCount(
+      Iterable<dynamic> groups,
+      String category,
+      bool Function(dynamic group) predicate,
+    ) {
+      final collected = collectedByCategory[category] ?? const <String>{};
+      return groups.where(predicate).where((group) {
+        final variants = (group.variants as List<dynamic>)
+            .map((variant) => variant.id as String)
+            .toSet();
+        return variants.any(collected.contains);
+      }).length;
+    }
+
+    return [
+      _CollectionProgressItem(
+        key: 'skin',
+        label: 'Skins',
+        icon: Icons.menu_book,
+        collected: groupedCollectedCount(
+          skinGroups,
+          'skin',
+          (group) => group.itemKind == 'WEAPON',
+        ),
+        total: skinGroups.where((group) => group.itemKind == 'WEAPON').length,
+      ),
+      _CollectionProgressItem(
+        key: 'knife',
+        label: 'Knives',
+        icon: Icons.content_cut,
+        collected: groupedCollectedCount(
+          skinGroups,
+          'knife',
+          (group) => group.itemKind == 'KNIFE',
+        ),
+        total: skinGroups.where((group) => group.itemKind == 'KNIFE').length,
+      ),
+      _CollectionProgressItem(
+        key: 'gloves',
+        label: 'Gloves',
+        icon: Icons.back_hand_outlined,
+        collected: groupedCollectedCount(
+          skinGroups,
+          'gloves',
+          (group) => group.itemKind == 'GLOVES',
+        ),
+        total: skinGroups.where((group) => group.itemKind == 'GLOVES').length,
+      ),
+      _CollectionProgressItem(
+        key: 'sticker',
+        label: 'Stickers',
+        icon: Icons.sell,
+        collected: (collectedByCategory['sticker'] ?? const <String>{}).length,
+        total: stickers.length,
+      ),
+      _CollectionProgressItem(
+        key: 'pin',
+        label: 'Pins',
+        icon: Icons.push_pin,
+        collected: (collectedByCategory['pin'] ?? const <String>{}).length,
+        total: pins.length,
+      ),
+      _CollectionProgressItem(
+        key: 'music_kit',
+        label: 'Music Kits',
+        icon: Icons.library_music,
+        collected: musicKits.where((group) {
+          final collected =
+              collectedByCategory['music_kit'] ?? const <String>{};
+          final variants = (group.variants as List<dynamic>)
+              .map((variant) => variant.id as String)
+              .toSet();
+          return variants.any(collected.contains);
+        }).length,
+        total: musicKits.length,
+      ),
+      _CollectionProgressItem(
+        key: 'agent',
+        label: 'Agents',
+        icon: Icons.badge,
+        collected: (collectedByCategory['agent'] ?? const <String>{}).length,
+        total: agents.length,
+      ),
+      _CollectionProgressItem(
+        key: 'graffiti',
+        label: 'Graffiti',
+        icon: Icons.brush,
+        collected: (collectedByCategory['graffiti'] ?? const <String>{}).length,
+        total: graffiti.length,
+      ),
+      _CollectionProgressItem(
+        key: 'patch',
+        label: 'Patches',
+        icon: Icons.style,
+        collected: (collectedByCategory['patch'] ?? const <String>{}).length,
+        total: patches.length,
+      ),
+      _CollectionProgressItem(
+        key: 'charm',
+        label: 'Charms',
+        icon: Icons.key,
+        collected: (collectedByCategory['charm'] ?? const <String>{}).length,
+        total: charms.length,
+      ),
+    ];
   }
 
   Future<void> _refresh() async {
@@ -193,6 +341,7 @@ class _MyCollectionScreenState extends State<MyCollectionScreen> {
                 totalEntries: data.entries.length,
                 uniqueItems: data.summaries.length,
               ),
+              _CollectionProgressSection(items: data.progress),
               Expanded(
                 child: _InventoryTab(
                   summaries: filteredSummaries,
@@ -360,6 +509,108 @@ class _CollectionOverview extends StatelessWidget {
               ),
             ],
           ),
+        ),
+      ),
+    );
+  }
+}
+
+class _CollectionProgressSection extends StatelessWidget {
+  final List<_CollectionProgressItem> items;
+
+  const _CollectionProgressSection({required this.items});
+
+  @override
+  Widget build(BuildContext context) {
+    if (items.isEmpty) {
+      return const SizedBox.shrink();
+    }
+
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(12, 12, 12, 0),
+      child: Card(
+        child: Padding(
+          padding: const EdgeInsets.all(14),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const Text(
+                'Collection Progress',
+                style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700),
+              ),
+              const SizedBox(height: 12),
+              Wrap(
+                spacing: 10,
+                runSpacing: 10,
+                children: items
+                    .map((item) => _ProgressTile(item: item))
+                    .toList(),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class _ProgressTile extends StatelessWidget {
+  final _CollectionProgressItem item;
+
+  const _ProgressTile({required this.item});
+
+  @override
+  Widget build(BuildContext context) {
+    final total = item.total == 0 ? 1 : item.total;
+    final progress = item.collected / total;
+
+    return ConstrainedBox(
+      constraints: const BoxConstraints(minWidth: 170, maxWidth: 220),
+      child: Container(
+        padding: const EdgeInsets.all(12),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(14),
+          border: Border.all(color: Colors.white10),
+          color: Colors.white.withValues(alpha: 0.03),
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              children: [
+                Icon(item.icon, size: 18),
+                const SizedBox(width: 8),
+                Expanded(
+                  child: Text(
+                    item.label,
+                    style: const TextStyle(fontWeight: FontWeight.w600),
+                  ),
+                ),
+                Text(
+                  '${item.collected}/${item.total}',
+                  style: const TextStyle(
+                    color: Colors.white70,
+                    fontSize: 12,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 10),
+            ClipRRect(
+              borderRadius: BorderRadius.circular(999),
+              child: LinearProgressIndicator(
+                value: progress.clamp(0, 1),
+                minHeight: 8,
+                backgroundColor: Colors.white10,
+              ),
+            ),
+            const SizedBox(height: 8),
+            Text(
+              '${(progress * 100).floor()}% complete',
+              style: const TextStyle(color: Colors.white54, fontSize: 12),
+            ),
+          ],
         ),
       ),
     );
@@ -924,8 +1175,29 @@ class _EmptyCollectionState extends StatelessWidget {
 class _CollectionData {
   final List<CollectionEntry> entries;
   final List<CollectionSummary> summaries;
+  final List<_CollectionProgressItem> progress;
 
-  const _CollectionData({required this.entries, required this.summaries});
+  const _CollectionData({
+    required this.entries,
+    required this.summaries,
+    required this.progress,
+  });
+}
+
+class _CollectionProgressItem {
+  final String key;
+  final String label;
+  final IconData icon;
+  final int collected;
+  final int total;
+
+  const _CollectionProgressItem({
+    required this.key,
+    required this.label,
+    required this.icon,
+    required this.collected,
+    required this.total,
+  });
 }
 
 Color _rarityColor(String rarity) {

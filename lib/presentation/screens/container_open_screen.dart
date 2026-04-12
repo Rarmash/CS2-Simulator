@@ -20,6 +20,7 @@ import '../widgets/collectible_grid_sliver.dart';
 import '../widgets/collectible_open_body.dart';
 import '../widgets/collectible_open_header.dart';
 import '../widgets/collectible_roller_sliver.dart';
+import '../widgets/collection_source_stats.dart';
 import '../widgets/opening_roll_item_card.dart';
 import '../widgets/opening_roller.dart';
 import '../widgets/skin_drop_card.dart';
@@ -438,6 +439,14 @@ class _ContainerOpenScreenState extends State<ContainerOpenScreen> {
                   ChipBadge(
                     label: widget.containerDto.typeLabel,
                     color: typeColor,
+                  ),
+                ],
+                metadata: [
+                  CollectionSourceStatsWidget(
+                    sourceName: widget.containerDto.name,
+                    sourceType: widget.containerDto.typeLabel,
+                    service: _collectionTracking,
+                    totalCount: displayedContents.length,
                   ),
                 ],
                 releaseDateText: formattedReleaseDate,
