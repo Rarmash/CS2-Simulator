@@ -26,6 +26,7 @@ Unless explicitly stated otherwise, the repository license applies to the source
 - Skin pattern seed and finish variant support, including phase-aware finishes
 - Persistent collection tracking with a saved inventory and recent activity
 - Collection-aware glossary browsing with per-item collected counts
+- Collection progress and per-source stats across containers and collections
 - Major tournament section covering CS:GO and CS2 eras
 - Major teams and players browsing
 - Operation and Armory reward collections
@@ -147,7 +148,7 @@ The source code in this repository is licensed under `AGPL-3.0`.
 
 The project is actively evolving, with current work focused on:
 
-- expanding the collection layer with better browsing, progress, and history views
+- polishing the collection layer with stronger progress tracking across containers, collections, and collectibles
 - improving long-term data quality for tournaments, teams, and players
 - continuing UI/codebase refactoring to reduce duplicated screen logic
 - hardening the simulator around long-term product polish rather than major missing content
@@ -158,7 +159,7 @@ The project is actively evolving, with current work focused on:
 
 - Cleaner navigation across containers, collections, and collectibles
 - Better automated test coverage beyond basic smoke checks
-- Deeper collection progress and statistics across containers, items, and finishing variants
+- Deeper collection analytics across items, duplicates, sessions, and finishing variants
 - Music Kit preview playback if a reliable audio source is available
 - Optional China / Perfect World visual mode if a reliable alternate asset source is available
 
