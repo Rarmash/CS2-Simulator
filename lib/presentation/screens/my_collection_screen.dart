@@ -4,6 +4,7 @@ import '../../core/collection/collection_entry.dart';
 import '../../core/collection/collection_summary.dart';
 import '../../core/collection/collection_tracking_service.dart';
 import '../../core/settings/settings_controller.dart';
+import '../../data/models/container_dto.dart';
 import '../../data/repositories/local_data_repository.dart';
 import '../helpers/app_navigation_helper.dart';
 import 'agent_details_screen.dart';
@@ -46,22 +47,23 @@ class _MyCollectionScreenState extends State<MyCollectionScreen> {
   }
 
   Future<_CollectionData> _loadData() async {
-    final results = await Future.wait([
-      _service.loadEntries(),
-      _service.loadSummaries(),
-      _loadProgress(),
-    ]);
+    final entries = await _service.loadEntries();
+    final summaries = await _service.loadSummaries();
+    final progress = await _loadProgress(summaries);
+    final sourceHighlights = await _loadSourceHighlights(entries);
 
     return _CollectionData(
-      entries: results[0] as List<CollectionEntry>,
-      summaries: results[1] as List<CollectionSummary>,
-      progress: results[2] as List<_CollectionProgressItem>,
+      entries: entries,
+      summaries: summaries,
+      progress: progress,
+      sourceHighlights: sourceHighlights,
     );
   }
 
-  Future<List<_CollectionProgressItem>> _loadProgress() async {
+  Future<List<_CollectionProgressItem>> _loadProgress(
+    List<CollectionSummary> summaries,
+  ) async {
     final results = await Future.wait<dynamic>([
-      _service.loadSummaries(),
       widget.repository.loadSkinGroups(),
       widget.repository.loadStickers(),
       widget.repository.loadPins(),
@@ -72,15 +74,14 @@ class _MyCollectionScreenState extends State<MyCollectionScreen> {
       widget.repository.loadCharms(),
     ]);
 
-    final summaries = results[0] as List<CollectionSummary>;
-    final skinGroups = results[1] as List<dynamic>;
-    final stickers = results[2] as List<dynamic>;
-    final pins = results[3] as List<dynamic>;
-    final musicKits = results[4] as List<dynamic>;
-    final agents = results[5] as List<dynamic>;
-    final graffiti = results[6] as List<dynamic>;
-    final patches = results[7] as List<dynamic>;
-    final charms = results[8] as List<dynamic>;
+    final skinGroups = results[0] as List<dynamic>;
+    final stickers = results[1] as List<dynamic>;
+    final pins = results[2] as List<dynamic>;
+    final musicKits = results[3] as List<dynamic>;
+    final agents = results[4] as List<dynamic>;
+    final graffiti = results[5] as List<dynamic>;
+    final patches = results[6] as List<dynamic>;
+    final charms = results[7] as List<dynamic>;
 
     final collectedByCategory = <String, Set<String>>{};
     for (final summary in summaries) {
@@ -197,6 +198,158 @@ class _MyCollectionScreenState extends State<MyCollectionScreen> {
         total: charms.length,
       ),
     ];
+  }
+
+  Future<List<_SourceProgressItem>> _loadSourceHighlights(
+    List<CollectionEntry> entries,
+  ) async {
+    final sourceEntriesByKey = <String, List<CollectionEntry>>{};
+    for (final entry in entries) {
+      final key = '${entry.sourceType}|${entry.sourceName}';
+      sourceEntriesByKey.putIfAbsent(key, () => <CollectionEntry>[]).add(entry);
+    }
+
+    if (sourceEntriesByKey.isEmpty) {
+      return const [];
+    }
+
+    final results = await Future.wait<dynamic>([
+      widget.repository.loadContainers(),
+      widget.repository.loadContainerContents(),
+      widget.repository.loadStickerContents(),
+      widget.repository.loadPinContents(),
+      widget.repository.loadMusicKitContents(),
+      widget.repository.loadGraffitiContents(),
+      widget.repository.loadPatchContents(),
+      widget.repository.loadCharmContents(),
+      widget.repository.loadAgentCollectionContents(),
+      widget.repository.loadRewardCollectionContents(),
+      widget.repository.loadOperationCollectionContents(),
+    ]);
+
+    final containers = results[0] as List<ContainerDto>;
+    final containerItemCounts = {
+      for (final item in results[1] as List<dynamic>)
+        item.containerId as String: (item.skinIds as List<dynamic>).length,
+    };
+    final stickerItemCounts = {
+      for (final item in results[2] as List<dynamic>)
+        item.containerId as String: (item.stickerIds as List<dynamic>).length,
+    };
+    final pinItemCounts = {
+      for (final item in results[3] as List<dynamic>)
+        item.containerId as String: (item.pinIds as List<dynamic>).length,
+    };
+    final musicKitItemCounts = {
+      for (final item in results[4] as List<dynamic>)
+        item.containerId as String: (item.items as List<dynamic>)
+            .map((entry) => entry.musicKitId as String)
+            .toSet()
+            .length,
+    };
+    final graffitiItemCounts = {
+      for (final item in results[5] as List<dynamic>)
+        item.containerId as String: (item.graffitiIds as List<dynamic>).length,
+    };
+    final patchItemCounts = {
+      for (final item in results[6] as List<dynamic>)
+        item.containerId as String: (item.patchIds as List<dynamic>).length,
+    };
+    final charmItemCounts = {
+      for (final item in results[7] as List<dynamic>)
+        item.containerId as String: (item.charmIds as List<dynamic>).length,
+    };
+    final agentItemCounts = {
+      for (final item in results[8] as List<dynamic>)
+        item.agentCollectionId as String:
+            (item.agentIds as List<dynamic>).length,
+    };
+    final rewardItemCounts = {
+      for (final item in results[9] as List<dynamic>)
+        item.rewardCollectionId as String:
+            (item.skinIds as List<dynamic>).length,
+    };
+    final operationItemCounts = {
+      for (final item in results[10] as List<dynamic>)
+        item.operationCollectionId as String:
+            (item.skinIds as List<dynamic>).length,
+    };
+
+    int? totalCountFor(ContainerDto container) {
+      switch (container.type) {
+        case 'CASE':
+        case 'SOUVENIR_PACKAGE':
+        case 'TERMINAL':
+        case 'XRAY_PACKAGE':
+          return containerItemCounts[container.id];
+        case 'STICKER_CAPSULE':
+        case 'STICKER_COLLECTION':
+          return stickerItemCounts[container.id];
+        case 'PIN_CAPSULE':
+          return pinItemCounts[container.id];
+        case 'MUSIC_KIT_BOX':
+          return musicKitItemCounts[container.id];
+        case 'GRAFFITI_BOX':
+          return graffitiItemCounts[container.id];
+        case 'PATCH_PACK':
+        case 'PATCH_COLLECTION':
+          return patchItemCounts[container.id];
+        case 'CHARM_COLLECTION':
+          return charmItemCounts[container.id];
+        case 'AGENT_COLLECTION':
+          return agentItemCounts[container.id];
+        case 'REWARD_COLLECTION':
+          return rewardItemCounts[container.id];
+        case 'OPERATION_COLLECTION':
+          return operationItemCounts[container.id];
+        default:
+          return null;
+      }
+    }
+
+    final highlights = <_SourceProgressItem>[];
+    for (final container in containers) {
+      final key = '${container.type}|${container.name}';
+      final sourceEntries = sourceEntriesByKey[key];
+      if (sourceEntries == null || sourceEntries.isEmpty) {
+        continue;
+      }
+
+      final totalCount = totalCountFor(container);
+      if (totalCount == null || totalCount == 0) {
+        continue;
+      }
+
+      highlights.add(
+        _SourceProgressItem(
+          container: container,
+          openedCount: sourceEntries.length,
+          collectedCount: sourceEntries
+              .map((item) => '${item.category}:${item.itemId}')
+              .toSet()
+              .length,
+          totalCount: totalCount,
+        ),
+      );
+    }
+
+    highlights.sort((a, b) {
+      final completionCompare = b.completion.compareTo(a.completion);
+      if (completionCompare != 0) {
+        return completionCompare;
+      }
+      final collectedCompare = b.collectedCount.compareTo(a.collectedCount);
+      if (collectedCompare != 0) {
+        return collectedCompare;
+      }
+      final openedCompare = b.openedCount.compareTo(a.openedCount);
+      if (openedCompare != 0) {
+        return openedCompare;
+      }
+      return a.container.name.compareTo(b.container.name);
+    });
+
+    return highlights.take(6).toList();
   }
 
   Future<void> _refresh() async {
@@ -352,6 +505,10 @@ class _MyCollectionScreenState extends State<MyCollectionScreen> {
                 totalAvailable: totalAvailable,
               ),
               _CollectionProgressSection(items: data.progress),
+              _SourceHighlightsSection(
+                items: data.sourceHighlights,
+                onItemTap: _openSourceHighlight,
+              ),
               Expanded(
                 child: _InventoryTab(
                   summaries: filteredSummaries,
@@ -570,6 +727,140 @@ class _CollectionProgressSection extends StatelessWidget {
                     .map((item) => _ProgressTile(item: item))
                     .toList(),
               ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class _SourceHighlightsSection extends StatelessWidget {
+  final List<_SourceProgressItem> items;
+  final ValueChanged<_SourceProgressItem> onItemTap;
+
+  const _SourceHighlightsSection({
+    required this.items,
+    required this.onItemTap,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    if (items.isEmpty) {
+      return const SizedBox.shrink();
+    }
+
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(12, 12, 12, 0),
+      child: Card(
+        child: Padding(
+          padding: const EdgeInsets.all(14),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const Text(
+                'Best Source Progress',
+                style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700),
+              ),
+              const SizedBox(height: 4),
+              const Text(
+                'Your most completed containers and collection sources.',
+                style: TextStyle(color: Colors.white70, fontSize: 12),
+              ),
+              const SizedBox(height: 12),
+              ...items.map(
+                (item) => Padding(
+                  padding: const EdgeInsets.only(bottom: 10),
+                  child: _SourceHighlightTile(
+                    item: item,
+                    onTap: () => onItemTap(item),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class _SourceHighlightTile extends StatelessWidget {
+  final _SourceProgressItem item;
+  final VoidCallback onTap;
+
+  const _SourceHighlightTile({required this.item, required this.onTap});
+
+  @override
+  Widget build(BuildContext context) {
+    return Material(
+      color: Colors.transparent,
+      child: InkWell(
+        borderRadius: BorderRadius.circular(14),
+        onTap: onTap,
+        child: Ink(
+          padding: const EdgeInsets.all(12),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(14),
+            border: Border.all(color: Colors.white10),
+            color: Colors.white.withValues(alpha: 0.03),
+          ),
+          child: Row(
+            children: [
+              SizedBox(
+                width: 54,
+                height: 54,
+                child: Image.asset(
+                  item.container.containerImage,
+                  fit: BoxFit.contain,
+                  errorBuilder: (_, _, _) =>
+                      const Icon(Icons.image_not_supported),
+                ),
+              ),
+              const SizedBox(width: 12),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      item.container.name,
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                      style: const TextStyle(fontWeight: FontWeight.w700),
+                    ),
+                    const SizedBox(height: 4),
+                    Text(
+                      '${item.container.typeLabel} • ${item.collectedCount}/${item.totalCount} collected • ${item.openedCount} opened',
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                      style: const TextStyle(
+                        color: Colors.white70,
+                        fontSize: 12,
+                      ),
+                    ),
+                    const SizedBox(height: 8),
+                    ClipRRect(
+                      borderRadius: BorderRadius.circular(999),
+                      child: LinearProgressIndicator(
+                        value: item.completion,
+                        minHeight: 8,
+                        backgroundColor: Colors.white10,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              const SizedBox(width: 8),
+              Text(
+                '${(item.completion * 100).floor()}%',
+                style: const TextStyle(
+                  color: Colors.white70,
+                  fontSize: 12,
+                  fontWeight: FontWeight.w700,
+                ),
+              ),
+              const SizedBox(width: 4),
+              const Icon(Icons.chevron_right, color: Colors.white38),
             ],
           ),
         ),
@@ -1200,11 +1491,13 @@ class _CollectionData {
   final List<CollectionEntry> entries;
   final List<CollectionSummary> summaries;
   final List<_CollectionProgressItem> progress;
+  final List<_SourceProgressItem> sourceHighlights;
 
   const _CollectionData({
     required this.entries,
     required this.summaries,
     required this.progress,
+    required this.sourceHighlights,
   });
 }
 
@@ -1222,6 +1515,22 @@ class _CollectionProgressItem {
     required this.collected,
     required this.total,
   });
+}
+
+class _SourceProgressItem {
+  final ContainerDto container;
+  final int openedCount;
+  final int collectedCount;
+  final int totalCount;
+
+  const _SourceProgressItem({
+    required this.container,
+    required this.openedCount,
+    required this.collectedCount,
+    required this.totalCount,
+  });
+
+  double get completion => totalCount == 0 ? 0 : collectedCount / totalCount;
 }
 
 Color _rarityColor(String rarity) {
@@ -1326,6 +1635,17 @@ String _rarityLabel(String rarity) {
 }
 
 extension on _MyCollectionScreenState {
+  void _openSourceHighlight(_SourceProgressItem item) {
+    AppNavigationHelper.pushScreen(
+      context,
+      AppNavigationHelper.buildContainerOpenScreen(
+        containerDto: item.container,
+        repository: widget.repository,
+        settingsController: widget.settingsController,
+      ),
+    );
+  }
+
   Future<void> _openSummary(CollectionSummary summary) async {
     final screen = await _buildDetailsScreen(
       repository: widget.repository,

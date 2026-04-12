@@ -150,7 +150,7 @@ The source code in this repository is licensed under `AGPL-3.0`.
 
 The project is actively evolving, with current work focused on:
 
-- polishing the collection layer with stronger progress tracking across containers, collections, and collectibles
+- expanding collection analytics beyond raw progress tracking
 - improving long-term data quality for tournaments, teams, and players
 - continuing UI/codebase refactoring to reduce duplicated screen logic
 - pushing the app toward 1.0 through analytics, polish, and overall product consistency
