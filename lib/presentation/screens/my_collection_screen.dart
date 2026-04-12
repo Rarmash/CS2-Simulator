@@ -334,12 +334,22 @@ class _MyCollectionScreenState extends State<MyCollectionScreen> {
 
           final data = snapshot.data!;
           final filteredSummaries = _filterInventory(data.summaries);
+          final totalCollected = data.progress.fold<int>(
+            0,
+            (sum, item) => sum + item.collected,
+          );
+          final totalAvailable = data.progress.fold<int>(
+            0,
+            (sum, item) => sum + item.total,
+          );
 
           return Column(
             children: [
               _CollectionOverview(
                 totalEntries: data.entries.length,
                 uniqueItems: data.summaries.length,
+                totalCollected: totalCollected,
+                totalAvailable: totalAvailable,
               ),
               _CollectionProgressSection(items: data.progress),
               Expanded(
@@ -480,14 +490,22 @@ class _CollectionHistoryScreenState extends State<CollectionHistoryScreen> {
 class _CollectionOverview extends StatelessWidget {
   final int totalEntries;
   final int uniqueItems;
+  final int totalCollected;
+  final int totalAvailable;
 
   const _CollectionOverview({
     required this.totalEntries,
     required this.uniqueItems,
+    required this.totalCollected,
+    required this.totalAvailable,
   });
 
   @override
   Widget build(BuildContext context) {
+    final completion = totalAvailable == 0
+        ? 0
+        : totalCollected / totalAvailable;
+
     return Padding(
       padding: const EdgeInsets.fromLTRB(12, 12, 12, 0),
       child: Card(
@@ -506,6 +524,12 @@ class _CollectionOverview extends StatelessWidget {
                 icon: Icons.collections_bookmark_outlined,
                 label: 'Unique items',
                 value: '$uniqueItems',
+              ),
+              _StatChip(
+                icon: Icons.checklist_outlined,
+                label: 'Overall completion',
+                value:
+                    '$totalCollected / $totalAvailable (${(completion * 100).floor()}%)',
               ),
             ],
           ),

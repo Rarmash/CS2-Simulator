@@ -37,7 +37,7 @@ class CollectionSourceStatsWidget extends StatelessWidget {
           return Padding(
             padding: const EdgeInsets.only(top: 8),
             child: Text(
-              '$progressText  •  Opened: ${stats.openedCount}',
+              '$progressText  |  Opened: ${stats.openedCount}',
               style: const TextStyle(
                 color: Colors.white70,
                 fontSize: 13,
