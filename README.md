@@ -155,11 +155,14 @@ The project is actively evolving, with current work focused on:
 
 ## Roadmap
 
+### v0.14
+
+- Better automated test coverage for core simulator and collection logic
+- Deeper collection analytics across items, duplicates, sessions, and finishing variants
+- Cleaner navigation and final UI consistency pass across major app sections
+
 ### Future
 
-- Cleaner navigation across containers, collections, and collectibles
-- Better automated test coverage beyond basic smoke checks
-- Deeper collection analytics across items, duplicates, sessions, and finishing variants
-- Music Kit preview playback if a reliable audio source is available
-- Optional China / Perfect World visual mode if a reliable alternate asset source is available
+- Music Kit preview playback if a maintainable preview-audio import pipeline becomes available
+- Optional China / Perfect World visual mode once a reliable alternate asset source is available
 
