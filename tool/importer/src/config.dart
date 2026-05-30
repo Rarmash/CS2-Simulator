@@ -227,6 +227,11 @@ const excludedContainerNames = <String>{
   'Cologne 2026 Team Sticker Capsule',
 };
 
+const tournamentLogoUrlOverrides = <String, String>{
+  'IEM Cologne 2026':
+      'https://liquipedia.net/commons/images/4/4d/Intel_Extreme_Masters_2022_icon_allmode.png',
+};
+
 const weaponTypeMap = <String, String>{
   'Pistols': 'PISTOL',
   'SMGs': 'SMG',

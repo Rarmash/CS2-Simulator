@@ -1019,193 +1019,202 @@ class _InventoryTab extends StatelessWidget {
     final categoryOptions = <String>['ALL', ...categoryValues];
     final rarityOptions = <String>['ALL', ...rarityValues];
 
-    return Column(
-      children: [
-        Padding(
-          padding: const EdgeInsets.fromLTRB(12, 12, 12, 0),
-          child: Card(
-            child: Padding(
-              padding: const EdgeInsets.all(12),
-              child: LayoutBuilder(
-                builder: (context, constraints) {
-                  final wide = constraints.maxWidth >= 720;
-                  final fieldWidth = wide
-                      ? (constraints.maxWidth - 24) / 3
-                      : null;
+    return CustomScrollView(
+      slivers: [
+        SliverToBoxAdapter(
+          child: Padding(
+            padding: const EdgeInsets.fromLTRB(12, 12, 12, 0),
+            child: Card(
+              child: Padding(
+                padding: const EdgeInsets.all(12),
+                child: LayoutBuilder(
+                  builder: (context, constraints) {
+                    final wide = constraints.maxWidth >= 720;
+                    final fieldWidth = wide
+                        ? (constraints.maxWidth - 24) / 3
+                        : null;
 
-                  return Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      TextFormField(
-                        initialValue: search,
-                        decoration: const InputDecoration(
-                          hintText: 'Search your collection...',
-                          prefixIcon: Icon(Icons.search),
-                          isDense: true,
+                    return Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        TextFormField(
+                          initialValue: search,
+                          decoration: const InputDecoration(
+                            hintText: 'Search your collection...',
+                            prefixIcon: Icon(Icons.search),
+                            isDense: true,
+                          ),
+                          onChanged: onSearchChanged,
                         ),
-                        onChanged: onSearchChanged,
-                      ),
-                      const SizedBox(height: 10),
-                      Wrap(
-                        spacing: 10,
-                        runSpacing: 10,
-                        children: [
-                          SizedBox(
-                            width: fieldWidth,
-                            child: DropdownButtonFormField<String>(
-                              initialValue: selectedCategory,
-                              decoration: const InputDecoration(
-                                labelText: 'Category',
-                                isDense: true,
-                              ),
-                              items: categoryOptions
-                                  .map(
-                                    (option) => DropdownMenuItem<String>(
-                                      value: option,
-                                      child: Text(
-                                        option == 'ALL'
-                                            ? 'All'
-                                            : _categoryLabelFor(option),
+                        const SizedBox(height: 10),
+                        Wrap(
+                          spacing: 10,
+                          runSpacing: 10,
+                          children: [
+                            SizedBox(
+                              width: fieldWidth,
+                              child: DropdownButtonFormField<String>(
+                                initialValue: selectedCategory,
+                                decoration: const InputDecoration(
+                                  labelText: 'Category',
+                                  isDense: true,
+                                ),
+                                items: categoryOptions
+                                    .map(
+                                      (option) => DropdownMenuItem<String>(
+                                        value: option,
+                                        child: Text(
+                                          option == 'ALL'
+                                              ? 'All'
+                                              : _categoryLabelFor(option),
+                                        ),
                                       ),
-                                    ),
-                                  )
-                                  .toList(),
-                              onChanged: (value) {
-                                if (value != null) {
-                                  onCategoryChanged(value);
-                                }
-                              },
-                            ),
-                          ),
-                          SizedBox(
-                            width: fieldWidth,
-                            child: DropdownButtonFormField<String>(
-                              initialValue: selectedRarity,
-                              decoration: const InputDecoration(
-                                labelText: 'Rarity',
-                                isDense: true,
+                                    )
+                                    .toList(),
+                                onChanged: (value) {
+                                  if (value != null) {
+                                    onCategoryChanged(value);
+                                  }
+                                },
                               ),
-                              items: rarityOptions
-                                  .map(
-                                    (option) => DropdownMenuItem<String>(
-                                      value: option,
-                                      child: Text(
-                                        option == 'ALL'
-                                            ? 'All'
-                                            : _rarityLabel(option),
+                            ),
+                            SizedBox(
+                              width: fieldWidth,
+                              child: DropdownButtonFormField<String>(
+                                initialValue: selectedRarity,
+                                decoration: const InputDecoration(
+                                  labelText: 'Rarity',
+                                  isDense: true,
+                                ),
+                                items: rarityOptions
+                                    .map(
+                                      (option) => DropdownMenuItem<String>(
+                                        value: option,
+                                        child: Text(
+                                          option == 'ALL'
+                                              ? 'All'
+                                              : _rarityLabel(option),
+                                        ),
                                       ),
-                                    ),
-                                  )
-                                  .toList(),
-                              onChanged: (value) {
-                                if (value != null) {
-                                  onRarityChanged(value);
-                                }
-                              },
-                            ),
-                          ),
-                          SizedBox(
-                            width: fieldWidth,
-                            child: DropdownButtonFormField<String>(
-                              initialValue: selectedStatTrak,
-                              decoration: const InputDecoration(
-                                labelText: 'StatTrak',
-                                isDense: true,
+                                    )
+                                    .toList(),
+                                onChanged: (value) {
+                                  if (value != null) {
+                                    onRarityChanged(value);
+                                  }
+                                },
                               ),
-                              items: const [
-                                DropdownMenuItem(
-                                  value: 'ALL',
-                                  child: Text('All'),
-                                ),
-                                DropdownMenuItem(
-                                  value: 'ONLY',
-                                  child: Text('Only StatTrak'),
-                                ),
-                                DropdownMenuItem(
-                                  value: 'NONE',
-                                  child: Text('No StatTrak'),
-                                ),
-                              ],
-                              onChanged: (value) {
-                                if (value != null) {
-                                  onStatTrakChanged(value);
-                                }
-                              },
                             ),
-                          ),
-                        ],
-                      ),
-                      const SizedBox(height: 10),
-                      Row(
-                        children: [
-                          Expanded(
-                            child: DropdownButtonFormField<String>(
-                              initialValue: selectedSort,
-                              decoration: const InputDecoration(
-                                labelText: 'Sort by',
-                                isDense: true,
+                            SizedBox(
+                              width: fieldWidth,
+                              child: DropdownButtonFormField<String>(
+                                initialValue: selectedStatTrak,
+                                decoration: const InputDecoration(
+                                  labelText: 'StatTrak',
+                                  isDense: true,
+                                ),
+                                items: const [
+                                  DropdownMenuItem(
+                                    value: 'ALL',
+                                    child: Text('All'),
+                                  ),
+                                  DropdownMenuItem(
+                                    value: 'ONLY',
+                                    child: Text('Only StatTrak'),
+                                  ),
+                                  DropdownMenuItem(
+                                    value: 'NONE',
+                                    child: Text('No StatTrak'),
+                                  ),
+                                ],
+                                onChanged: (value) {
+                                  if (value != null) {
+                                    onStatTrakChanged(value);
+                                  }
+                                },
                               ),
-                              items: const [
-                                DropdownMenuItem(
-                                  value: 'LATEST',
-                                  child: Text('Latest'),
-                                ),
-                                DropdownMenuItem(
-                                  value: 'MOST_OWNED',
-                                  child: Text('Most collected'),
-                                ),
-                                DropdownMenuItem(
-                                  value: 'BEST_FLOAT',
-                                  child: Text('Best float'),
-                                ),
-                                DropdownMenuItem(
-                                  value: 'A_Z',
-                                  child: Text('Name A-Z'),
-                                ),
-                              ],
-                              onChanged: (value) {
-                                if (value != null) {
-                                  onSortChanged(value);
-                                }
-                              },
                             ),
-                          ),
-                          const SizedBox(width: 12),
-                          Text(
-                            '${summaries.length} / $totalCount',
-                            style: const TextStyle(
-                              color: Colors.white54,
-                              fontSize: 12,
-                              fontWeight: FontWeight.w600,
+                          ],
+                        ),
+                        const SizedBox(height: 10),
+                        Row(
+                          children: [
+                            Expanded(
+                              child: DropdownButtonFormField<String>(
+                                initialValue: selectedSort,
+                                decoration: const InputDecoration(
+                                  labelText: 'Sort by',
+                                  isDense: true,
+                                ),
+                                items: const [
+                                  DropdownMenuItem(
+                                    value: 'LATEST',
+                                    child: Text('Latest'),
+                                  ),
+                                  DropdownMenuItem(
+                                    value: 'MOST_OWNED',
+                                    child: Text('Most collected'),
+                                  ),
+                                  DropdownMenuItem(
+                                    value: 'BEST_FLOAT',
+                                    child: Text('Best float'),
+                                  ),
+                                  DropdownMenuItem(
+                                    value: 'A_Z',
+                                    child: Text('Name A-Z'),
+                                  ),
+                                ],
+                                onChanged: (value) {
+                                  if (value != null) {
+                                    onSortChanged(value);
+                                  }
+                                },
+                              ),
                             ),
-                          ),
-                        ],
-                      ),
-                    ],
-                  );
-                },
+                            const SizedBox(width: 12),
+                            Text(
+                              '${summaries.length} / $totalCount',
+                              style: const TextStyle(
+                                color: Colors.white54,
+                                fontSize: 12,
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    );
+                  },
+                ),
               ),
             ),
           ),
         ),
-        Expanded(
-          child: summaries.isEmpty
-              ? const _EmptyCollectionState(
-                  icon: Icons.inventory_2_outlined,
-                  title: 'No items match these filters',
-                  subtitle:
-                      'Try a broader search or clear one of the active filters.',
-                )
-              : ListView.separated(
-                  padding: const EdgeInsets.all(12),
-                  itemCount: summaries.length,
-                  separatorBuilder: (_, _) => const SizedBox(height: 10),
-                  itemBuilder: (context, index) => _InventoryCard(
-                    summary: summaries[index],
-                    onTap: () => onItemTap(summaries[index]),
-                  ),
-                ),
-        ),
+        if (summaries.isEmpty)
+          const SliverFillRemaining(
+            hasScrollBody: false,
+            child: _EmptyCollectionState(
+              icon: Icons.inventory_2_outlined,
+              title: 'No items match these filters',
+              subtitle:
+                  'Try a broader search or clear one of the active filters.',
+            ),
+          )
+        else
+          SliverPadding(
+            padding: const EdgeInsets.all(12),
+            sliver: SliverList(
+              delegate: SliverChildBuilderDelegate(
+                (context, index) => index.isOdd
+                    ? const SizedBox(height: 10)
+                    : _InventoryCard(
+                        summary: summaries[index ~/ 2],
+                        onTap: () => onItemTap(summaries[index ~/ 2]),
+                      ),
+                childCount: summaries.length * 2 - 1,
+              ),
+            ),
+          ),
       ],
     );
   }

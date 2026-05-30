@@ -219,6 +219,32 @@ class DartImporterBackend implements ImporterBackend {
     _io.printInfo('Fetching keychains.json ...');
     final keychainsData = _asJsonList(await _io.fetchJson(keychainsUrl));
 
+    var tournamentLogosCreated = 0;
+    for (final entry in tournamentMetadata) {
+      final tournamentName = (entry['name'] ?? '').toString().trim();
+      final logoUrl = tournamentLogoUrlOverrides[tournamentName];
+      if (logoUrl == null) {
+        continue;
+      }
+
+      final logoSlug = makeSafeSlug(tournamentName);
+      final existingLogoRel = findExistingLogoPathBySlug(logoSlug);
+      if (existingLogoRel != null) {
+        entry['tournamentLogo'] = existingLogoRel;
+        continue;
+      }
+
+      final ext = await _io.downloadFileWithRealExtension(
+        logoUrl,
+        '${tournamentLogosDir.path}/$logoSlug',
+      );
+      if (ext != null) {
+        entry['tournamentLogo'] = 'assets/tournament_logos/$logoSlug$ext';
+        tournamentLogosCreated += 1;
+      }
+    }
+    await _io.writeJson(tournamentMetadataFile, tournamentMetadata);
+
     final collectionImageByName = buildCollectionImageMap(skinsData);
     buildCollectionMetaMap(collectionsData);
     final tournamentLogoByName = {
@@ -303,7 +329,6 @@ class DartImporterBackend implements ImporterBackend {
       );
     }
 
-    var tournamentLogosCreated = 0;
     for (final crate in supportedCrates) {
       final crateName = (crate['name'] ?? '').toString().trim();
       if (crateName.isEmpty) {
