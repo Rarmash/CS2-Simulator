@@ -212,6 +212,21 @@ const stickerCollectionSourceOverrides = <String, Map<String, String>>{
   },
 };
 
+const musicKitCollectionOverrides = <String, String>{
+  'ALRT, DOPAMINE HIT': 'NIGHTMODE II',
+  'Altare, Change My Mind': 'NIGHTMODE II',
+  'borne, Give It To Me': 'NIGHTMODE II',
+  'Pirapus, EVERYNITE': 'NIGHTMODE II',
+  'Repiet & Julia Kleijn, On And On': 'NIGHTMODE II',
+  'ShockOne, Voices': 'NIGHTMODE II',
+};
+
+const excludedContainerNames = <String>{
+  'Cologne 2026 Autograph Capsule',
+  'Cologne 2026 Sticker Capsule',
+  'Cologne 2026 Team Sticker Capsule',
+};
+
 const weaponTypeMap = <String, String>{
   'Pistols': 'PISTOL',
   'SMGs': 'SMG',
@@ -613,6 +628,7 @@ const tournamentNameAliases = <String, String>{
   'Shanghai 2024': 'Perfect World Shanghai 2024',
   'Austin 2025': 'BLAST.tv Austin 2025',
   'Budapest 2025': 'StarLadder Budapest 2025',
+  'Cologne 2026': 'IEM Cologne 2026',
   'Katowice 2019': 'IEM Katowice 2019',
   'Krakow 2017': 'PGL Kraków 2017',
   'London 2018': 'FACEIT London 2018',
@@ -633,6 +649,7 @@ const tournamentStartDates = <String, String>{
   'Shanghai 2024': '2024-11-30',
   'Austin 2025': '2025-06-03',
   'Budapest 2025': '2025-11-24',
+  'Cologne 2026': '2026-06-02',
 };
 
 const tournamentContainerStartDates = <String, String>{

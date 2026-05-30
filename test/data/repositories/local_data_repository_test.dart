@@ -115,6 +115,13 @@ void main() {
         ),
         isTrue,
       );
+      final cologne = tournaments.firstWhere(
+        (tournament) => tournament.name == 'IEM Cologne 2026',
+      );
+      expect(cologne.startDate, '2026-06-02');
+      expect(cologne.endDate, '2026-06-21');
+      expect(cologne.souvenirPackageCount, 0);
+      expect(cologne.stickerContainerCount, 0);
     },
   );
 

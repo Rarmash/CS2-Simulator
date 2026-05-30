@@ -79,6 +79,13 @@ mixin _LocalDataRepositoryQueries on _LocalDataRepositoryLoaders {
       }
     }
 
+    for (final entry in metadata) {
+      final builder = ensureBuilder(entry.name);
+      if (builder.name.isEmpty) continue;
+      builder.imagePath ??= entry.tournamentLogo;
+      builder.releaseDate = _earlierDate(builder.releaseDate, entry.startDate);
+    }
+
     final tournaments = tournamentBuilders.values
         .where((builder) => builder.imagePath != null)
         .map((builder) {

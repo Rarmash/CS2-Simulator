@@ -762,7 +762,7 @@ class DartImporterBackend implements ImporterBackend {
           }
           final crateRef = crateRefRaw.map((k, v) => MapEntry(k.toString(), v));
           final crateName = (crateRef['name'] ?? '').toString().trim();
-          if (crateName.isEmpty) {
+          if (crateName.isEmpty || excludedContainerNames.contains(crateName)) {
             continue;
           }
 
@@ -899,7 +899,7 @@ class DartImporterBackend implements ImporterBackend {
           }
           final crateRef = crateRefRaw.map((k, v) => MapEntry(k.toString(), v));
           final crateName = (crateRef['name'] ?? '').toString().trim();
-          if (crateName.isEmpty) {
+          if (crateName.isEmpty || excludedContainerNames.contains(crateName)) {
             continue;
           }
 
@@ -1354,6 +1354,7 @@ class DartImporterBackend implements ImporterBackend {
           : '';
       final musicKitCollection =
           musicKitCollectionBySourceId[sourceMusicKitId] ??
+          musicKitCollectionOverrides[musicKitName] ??
           (explicitCollection.isEmpty ? null : explicitCollection);
       final key = (
         canonicalName(musicKitName),
@@ -1368,16 +1369,23 @@ class DartImporterBackend implements ImporterBackend {
       variantPresence['hasStatTrak'] =
           (variantPresence['hasStatTrak'] ?? false) || isStatTrak;
 
-      if (existingMusicKitByKey.containsKey(key)) {
-        final existingRecord = existingMusicKitByKey[key];
-        if (existingRecord != null) {
-          final existingId = existingRecord['id']?.toString();
-          if (existingId != null && newMusicKits.containsKey(existingId)) {
-            newMusicKits[existingId]!['hasRegular'] =
-                variantPresence['hasRegular'] ?? false;
-            newMusicKits[existingId]!['hasStatTrak'] =
-                variantPresence['hasStatTrak'] ?? false;
-          }
+      final existingRecord =
+          existingMusicKitByKey[key] ??
+          (musicKitCollectionOverrides.containsKey(musicKitName)
+              ? existingMusicKitByKey[(canonicalName(musicKitName), '')]
+              : null);
+      if (existingRecord != null) {
+        final existingId = existingRecord['id']?.toString();
+        if (existingId != null) {
+          final musicKitRecord = Map<String, dynamic>.from(existingRecord);
+          musicKitRecord['collection'] = musicKitCollection;
+          musicKitRecord['hasRegular'] = variantPresence['hasRegular'] ?? false;
+          musicKitRecord['hasStatTrak'] =
+              variantPresence['hasStatTrak'] ?? false;
+          newMusicKits[existingId] = musicKitRecord;
+          existingMusicKitByKey[key] = musicKitRecord;
+          musicKitCollectionBySourceId[sourceMusicKitId] = musicKitCollection;
+          reusedMusicKitCount += 1;
         }
         continue;
       }

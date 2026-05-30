@@ -117,6 +117,15 @@
     "hasStatTrak": true
   },
   {
+    "id": "982795548",
+    "name": "borne, Give It To Me",
+    "musicKitImage": "assets/music_kits/982795548.webp",
+    "rarity": "HIGH_GRADE",
+    "collection": "NIGHTMODE II",
+    "hasRegular": true,
+    "hasStatTrak": true
+  },
+  {
     "id": "983344523",
     "name": "Darren Korb, Hades Music Kit",
     "musicKitImage": "assets/music_kits/983344523.webp",
@@ -423,6 +432,15 @@
     "hasStatTrak": true
   },
   {
+    "id": "1010401958",
+    "name": "ShockOne, Voices",
+    "musicKitImage": "assets/music_kits/1010401958.webp",
+    "rarity": "HIGH_GRADE",
+    "collection": "NIGHTMODE II",
+    "hasRegular": true,
+    "hasStatTrak": true
+  },
+  {
     "id": "1010421769",
     "name": "DRYDEN, Feel The Power",
     "musicKitImage": "assets/music_kits/1010421769.webp",
@@ -437,6 +455,15 @@
     "musicKitImage": "assets/music_kits/1011148448.webp",
     "rarity": "HIGH_GRADE",
     "collection": "Tacticians",
+    "hasRegular": true,
+    "hasStatTrak": true
+  },
+  {
+    "id": "1011417379",
+    "name": "ALRT, DOPAMINE HIT",
+    "musicKitImage": "assets/music_kits/1011417379.webp",
+    "rarity": "HIGH_GRADE",
+    "collection": "NIGHTMODE II",
     "hasRegular": true,
     "hasStatTrak": true
   },
@@ -585,6 +612,15 @@
     "hasStatTrak": true
   },
   {
+    "id": "1033971637",
+    "name": "Altare, Change My Mind",
+    "musicKitImage": "assets/music_kits/1033971637.webp",
+    "rarity": "HIGH_GRADE",
+    "collection": "NIGHTMODE II",
+    "hasRegular": true,
+    "hasStatTrak": true
+  },
+  {
     "id": "1034191515",
     "name": "Lennie Moore, Java Havana Funkaloo",
     "musicKitImage": "assets/music_kits/1034191515.webp",
@@ -711,6 +747,15 @@
     "hasStatTrak": true
   },
   {
+    "id": "1050984752",
+    "name": "Repiet & Julia Kleijn, On And On",
+    "musicKitImage": "assets/music_kits/1050984752.webp",
+    "rarity": "HIGH_GRADE",
+    "collection": "NIGHTMODE II",
+    "hasRegular": true,
+    "hasStatTrak": true
+  },
+  {
     "id": "1052161809",
     "name": "James and the Cold Gun, Chewing Glass",
     "musicKitImage": "assets/music_kits/1052161809.webp",
@@ -725,6 +770,15 @@
     "musicKitImage": "assets/music_kits/1052316358.webp",
     "rarity": "HIGH_GRADE",
     "collection": "Masterminds 2",
+    "hasRegular": true,
+    "hasStatTrak": true
+  },
+  {
+    "id": "1053075594",
+    "name": "Pirapus, EVERYNITE",
+    "musicKitImage": "assets/music_kits/1053075594.webp",
+    "rarity": "HIGH_GRADE",
+    "collection": "NIGHTMODE II",
     "hasRegular": true,
     "hasStatTrak": true
   },

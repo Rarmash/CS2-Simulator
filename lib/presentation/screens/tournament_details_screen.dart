@@ -72,7 +72,7 @@ class TournamentDetailsScreen extends StatelessWidget {
                     title: 'Organizer',
                     value: tournament.organizer,
                   ),
-                  if (data.metadata != null)
+                  if ((data.metadata?.winner ?? '').trim().isNotEmpty)
                     DetailInfoRow(
                       title: 'Winner',
                       value: data.metadata!.winner,

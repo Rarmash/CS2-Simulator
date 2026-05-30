@@ -273,6 +273,10 @@ String inferWeaponTypeFromWeaponName(String name) {
 bool isSupportedContainer(Map<String, dynamic> crate) {
   final crateType = (crate['type'] ?? '').toString().trim();
   final crateName = (crate['name'] ?? '').toString().trim();
+  if (excludedContainerNames.contains(crateName)) {
+    return false;
+  }
+
   final lowerName = crateName.toLowerCase();
   final lowerType = crateType.toLowerCase();
 
