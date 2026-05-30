@@ -166,4 +166,15 @@ The project is actively evolving, with current work focused on:
 
 - Music Kit preview playback if a maintainable preview-audio import pipeline becomes available
 - Optional China / Perfect World visual mode once a reliable alternate asset source is available
+- In-game store for items purchased directly instead of opened from containers
+- Souvenir-O-Matic support for majors without traditional souvenir packages
+- Improved tournament metadata importer for logos, dates, teams, rosters, playoffs, and winners
+- Tournament history with richer team, roster, playoff, and winner browsing
+- Collection goals and achievements
+- Favorites, tags, and custom collection showcases
+- Saved Trade-Up contract templates
+- Tentative: inventory-based Trade-Up suggestions for contracts that can be assembled from collected skins
+- Multiple local profiles
+- Save import and export
+- Historical operations, passes, and limited stores
 
