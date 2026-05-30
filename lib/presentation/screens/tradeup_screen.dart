@@ -371,6 +371,7 @@ class _TradeUpScreenState extends State<TradeUpScreen> {
   List<TradeUpInputQuality> get _editableQualities => const [
     TradeUpInputQuality.regular,
     TradeUpInputQuality.statTrak,
+    TradeUpInputQuality.souvenir,
   ];
 
   @override

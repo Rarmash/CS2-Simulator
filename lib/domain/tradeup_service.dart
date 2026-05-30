@@ -329,13 +329,14 @@ class TradeUpService {
   }) {
     if (input.isEmpty) return null;
 
-    if (input.any((item) => item.isSouvenir)) {
-      return 'Souvenir items cannot be used in trade-up contracts';
-    }
-
     final firstQuality = input.first.quality;
     if (input.any((item) => item.quality != firstQuality)) {
       return 'All selected skins must use the same quality mode';
+    }
+
+    if (firstQuality == TradeUpInputQuality.souvenir &&
+        input.first.skin.rarity == 'COVERT') {
+      return 'Souvenir trade-up contracts require 10 non-Covert skins';
     }
 
     if (input.first.skin.rarity == 'COVERT' &&

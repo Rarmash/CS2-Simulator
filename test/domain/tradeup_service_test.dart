@@ -7,10 +7,47 @@ void main() {
   group('TradeUpService', () {
     final service = TradeUpService();
 
-    test('returns validation issue for souvenir inputs', () {
+    test('allows souvenir inputs for standard trade-up contracts', () {
+      final input = [
+        ...List.generate(
+          10,
+          (_) => TradeUpInputItem(
+            skin: buildSkin(
+              id: '1',
+              rarity: 'MIL_SPEC',
+              collection: 'Collection A',
+            ),
+            floatValue: 0.1,
+            quality: TradeUpInputQuality.souvenir,
+          ),
+        ),
+      ];
+      final outputSkin = buildSkin(
+        id: '2',
+        rarity: 'RESTRICTED',
+        collection: 'Collection A',
+      );
+
+      final issue = service.validationIssue(
+        input: input,
+        skinIdToRegularCaseIds: const {},
+      );
+      final chances = service.getTradeUpChances(
+        input: input,
+        allSkins: [input.first.skin, outputSkin],
+        skinIdToRegularCaseIds: const {},
+        regularCaseIdToSkinIds: const {},
+      );
+
+      expect(issue, isNull);
+      expect(chances.single.isStatTrak, isFalse);
+      expect(chances.single.isSouvenir, isFalse);
+    });
+
+    test('returns validation issue for souvenir covert inputs', () {
       final input = [
         TradeUpInputItem(
-          skin: buildSkin(id: '1', rarity: 'MIL_SPEC'),
+          skin: buildSkin(id: '1', rarity: 'COVERT'),
           floatValue: 0.1,
           quality: TradeUpInputQuality.souvenir,
         ),
@@ -21,7 +58,7 @@ void main() {
         skinIdToRegularCaseIds: const {},
       );
 
-      expect(issue, 'Souvenir items cannot be used in trade-up contracts');
+      expect(issue, 'Souvenir trade-up contracts require 10 non-Covert skins');
     });
 
     test('returns validation issue for mixed quality contract', () {
