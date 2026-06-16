@@ -2,6 +2,7 @@
 
 [![Release](https://img.shields.io/github/v/release/Rarmash/CS2-Simulator?display_name=tag)](https://github.com/Rarmash/CS2-Simulator/releases)
 [![Release Build](https://img.shields.io/github/actions/workflow/status/Rarmash/CS2-Simulator/release.yml?label=release%20build)](https://github.com/Rarmash/CS2-Simulator/actions/workflows/release.yml)
+[![PR Checks](https://img.shields.io/github/actions/workflow/status/Rarmash/CS2-Simulator/pr.yml?label=PR%20checks)](https://github.com/Rarmash/CS2-Simulator/actions/workflows/pr.yml)
 [![Flutter](https://img.shields.io/badge/Flutter-3.x-02569B?logo=flutter&logoColor=white)](https://flutter.dev/)
 [![Dart](https://img.shields.io/badge/Dart-3.11+-0175C2?logo=dart&logoColor=white)](https://dart.dev/)
 [![Platforms](https://img.shields.io/badge/Platforms-Android%20%7C%20iOS%20%7C%20Windows%20%7C%20Linux%20%7C%20macOS%20%7C%20Web-4EAA25)](https://github.com/Rarmash/CS2-Simulator/releases)
@@ -27,6 +28,7 @@ Unless explicitly stated otherwise, the repository license applies to the source
 - Persistent collection tracking with a saved inventory and recent activity
 - Collection-aware glossary browsing with per-item collected counts
 - Collection progress and per-source stats across containers and collections
+- Broad automated test coverage across simulator, collection, repository, and helper layers
 - Major tournament section covering CS:GO and CS2 eras
 - Major teams and players browsing
 - Operation and Armory reward collections
@@ -148,21 +150,38 @@ The source code in this repository is licensed under `AGPL-3.0`.
 
 The project is actively evolving, with current work focused on:
 
-- polishing the collection layer with stronger progress tracking across containers, collections, and collectibles
-- improving long-term data quality for tournaments, teams, and players
-- continuing UI/codebase refactoring to reduce duplicated screen logic
-- hardening the simulator around long-term product polish rather than major missing content
+- maintaining data quality for tournaments, teams, players, and item metadata
+- continuing UI/codebase cleanup to reduce duplicated screen logic
+- stabilizing the simulator experience ahead of a 1.0 release
+- deciding which remaining quality-of-life features belong in a final pre-1.0 update
 
 ## Roadmap
 
-### v0.14
+### v0.15
 
-- Better automated test coverage for core simulator and collection logic
-- Deeper collection analytics across items, duplicates, sessions, and finishing variants
-- Cleaner navigation and final UI consistency pass across major app sections
+- Final pre-1.0 quality-of-life pass across inventory, glossary, and simulator flows
+- Decide which remaining convenience features should land before 1.0 and which should move to post-1.0
+- Release-readiness pass on wording, navigation, empty states, and general UX consistency
+
+### Toward 1.0
+
+- Freeze the core feature set around simulator, collection, glossary, and Major history
+- Focus on stability, maintainability, and product consistency instead of broad new content expansion
+- Keep future additions optional unless they clearly strengthen the main simulator experience
 
 ### Future
 
 - Music Kit preview playback if a maintainable preview-audio import pipeline becomes available
 - Optional China / Perfect World visual mode once a reliable alternate asset source is available
+- In-game store for items purchased directly instead of opened from containers
+- Souvenir-O-Matic support for majors without traditional souvenir packages
+- Improved tournament metadata importer for logos, dates, teams, rosters, playoffs, and winners
+- Tournament history with richer team, roster, playoff, and winner browsing
+- Collection goals and achievements
+- Favorites, tags, and custom collection showcases
+- Saved Trade-Up contract templates
+- Tentative: inventory-based Trade-Up suggestions for contracts that can be assembled from collected skins
+- Multiple local profiles
+- Save import and export
+- Historical operations, passes, and limited stores
 

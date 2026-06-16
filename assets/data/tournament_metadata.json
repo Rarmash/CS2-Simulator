@@ -1,5 +1,37 @@
 [
   {
+    "name": "IEM Cologne 2026",
+    "winner": "",
+    "tournamentLogo": "assets/tournament_logos/iem_cologne_2026.png",
+    "startDate": "2026-06-02",
+    "endDate": "2026-06-21",
+    "placements": [],
+    "teamRosters": [],
+    "stageDates": [
+      {
+        "phase": "Stage 1",
+        "startDate": "2026-06-02",
+        "endDate": "2026-06-05"
+      },
+      {
+        "phase": "Stage 2",
+        "startDate": "2026-06-06",
+        "endDate": "2026-06-09"
+      },
+      {
+        "phase": "Stage 3",
+        "startDate": "2026-06-11",
+        "endDate": "2026-06-15"
+      },
+      {
+        "phase": "Playoffs",
+        "startDate": "2026-06-18",
+        "endDate": "2026-06-21"
+      }
+    ],
+    "playoffMatches": []
+  },
+  {
     "name": "BLAST.tv Austin 2025",
     "winner": "Team Vitality",
     "tournamentLogo": "assets/tournament_logos/blast_tv_austin_2025.png",

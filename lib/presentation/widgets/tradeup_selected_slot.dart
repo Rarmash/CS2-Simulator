@@ -103,7 +103,7 @@ class TradeUpSelectedSlot extends StatelessWidget {
       case TradeUpInputQuality.statTrak:
         return 'StatTrak™';
       case TradeUpInputQuality.souvenir:
-        return '';
+        return 'Souvenir';
     }
   }
 }

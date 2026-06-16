@@ -219,6 +219,32 @@ class DartImporterBackend implements ImporterBackend {
     _io.printInfo('Fetching keychains.json ...');
     final keychainsData = _asJsonList(await _io.fetchJson(keychainsUrl));
 
+    var tournamentLogosCreated = 0;
+    for (final entry in tournamentMetadata) {
+      final tournamentName = (entry['name'] ?? '').toString().trim();
+      final logoUrl = tournamentLogoUrlOverrides[tournamentName];
+      if (logoUrl == null) {
+        continue;
+      }
+
+      final logoSlug = makeSafeSlug(tournamentName);
+      final existingLogoRel = findExistingLogoPathBySlug(logoSlug);
+      if (existingLogoRel != null) {
+        entry['tournamentLogo'] = existingLogoRel;
+        continue;
+      }
+
+      final ext = await _io.downloadFileWithRealExtension(
+        logoUrl,
+        '${tournamentLogosDir.path}/$logoSlug',
+      );
+      if (ext != null) {
+        entry['tournamentLogo'] = 'assets/tournament_logos/$logoSlug$ext';
+        tournamentLogosCreated += 1;
+      }
+    }
+    await _io.writeJson(tournamentMetadataFile, tournamentMetadata);
+
     final collectionImageByName = buildCollectionImageMap(skinsData);
     buildCollectionMetaMap(collectionsData);
     final tournamentLogoByName = {
@@ -303,7 +329,6 @@ class DartImporterBackend implements ImporterBackend {
       );
     }
 
-    var tournamentLogosCreated = 0;
     for (final crate in supportedCrates) {
       final crateName = (crate['name'] ?? '').toString().trim();
       if (crateName.isEmpty) {
@@ -762,7 +787,7 @@ class DartImporterBackend implements ImporterBackend {
           }
           final crateRef = crateRefRaw.map((k, v) => MapEntry(k.toString(), v));
           final crateName = (crateRef['name'] ?? '').toString().trim();
-          if (crateName.isEmpty) {
+          if (crateName.isEmpty || excludedContainerNames.contains(crateName)) {
             continue;
           }
 
@@ -899,7 +924,7 @@ class DartImporterBackend implements ImporterBackend {
           }
           final crateRef = crateRefRaw.map((k, v) => MapEntry(k.toString(), v));
           final crateName = (crateRef['name'] ?? '').toString().trim();
-          if (crateName.isEmpty) {
+          if (crateName.isEmpty || excludedContainerNames.contains(crateName)) {
             continue;
           }
 
@@ -1354,6 +1379,7 @@ class DartImporterBackend implements ImporterBackend {
           : '';
       final musicKitCollection =
           musicKitCollectionBySourceId[sourceMusicKitId] ??
+          musicKitCollectionOverrides[musicKitName] ??
           (explicitCollection.isEmpty ? null : explicitCollection);
       final key = (
         canonicalName(musicKitName),
@@ -1368,16 +1394,23 @@ class DartImporterBackend implements ImporterBackend {
       variantPresence['hasStatTrak'] =
           (variantPresence['hasStatTrak'] ?? false) || isStatTrak;
 
-      if (existingMusicKitByKey.containsKey(key)) {
-        final existingRecord = existingMusicKitByKey[key];
-        if (existingRecord != null) {
-          final existingId = existingRecord['id']?.toString();
-          if (existingId != null && newMusicKits.containsKey(existingId)) {
-            newMusicKits[existingId]!['hasRegular'] =
-                variantPresence['hasRegular'] ?? false;
-            newMusicKits[existingId]!['hasStatTrak'] =
-                variantPresence['hasStatTrak'] ?? false;
-          }
+      final existingRecord =
+          existingMusicKitByKey[key] ??
+          (musicKitCollectionOverrides.containsKey(musicKitName)
+              ? existingMusicKitByKey[(canonicalName(musicKitName), '')]
+              : null);
+      if (existingRecord != null) {
+        final existingId = existingRecord['id']?.toString();
+        if (existingId != null) {
+          final musicKitRecord = Map<String, dynamic>.from(existingRecord);
+          musicKitRecord['collection'] = musicKitCollection;
+          musicKitRecord['hasRegular'] = variantPresence['hasRegular'] ?? false;
+          musicKitRecord['hasStatTrak'] =
+              variantPresence['hasStatTrak'] ?? false;
+          newMusicKits[existingId] = musicKitRecord;
+          existingMusicKitByKey[key] = musicKitRecord;
+          musicKitCollectionBySourceId[sourceMusicKitId] = musicKitCollection;
+          reusedMusicKitCount += 1;
         }
         continue;
       }

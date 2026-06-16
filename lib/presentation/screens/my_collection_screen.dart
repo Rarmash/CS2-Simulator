@@ -4,6 +4,7 @@ import '../../core/collection/collection_entry.dart';
 import '../../core/collection/collection_summary.dart';
 import '../../core/collection/collection_tracking_service.dart';
 import '../../core/settings/settings_controller.dart';
+import '../../data/models/container_dto.dart';
 import '../../data/repositories/local_data_repository.dart';
 import '../helpers/app_navigation_helper.dart';
 import 'agent_details_screen.dart';
@@ -46,22 +47,23 @@ class _MyCollectionScreenState extends State<MyCollectionScreen> {
   }
 
   Future<_CollectionData> _loadData() async {
-    final results = await Future.wait([
-      _service.loadEntries(),
-      _service.loadSummaries(),
-      _loadProgress(),
-    ]);
+    final entries = await _service.loadEntries();
+    final summaries = await _service.loadSummaries();
+    final progress = await _loadProgress(summaries);
+    final sourceHighlights = await _loadSourceHighlights(entries);
 
     return _CollectionData(
-      entries: results[0] as List<CollectionEntry>,
-      summaries: results[1] as List<CollectionSummary>,
-      progress: results[2] as List<_CollectionProgressItem>,
+      entries: entries,
+      summaries: summaries,
+      progress: progress,
+      sourceHighlights: sourceHighlights,
     );
   }
 
-  Future<List<_CollectionProgressItem>> _loadProgress() async {
+  Future<List<_CollectionProgressItem>> _loadProgress(
+    List<CollectionSummary> summaries,
+  ) async {
     final results = await Future.wait<dynamic>([
-      _service.loadSummaries(),
       widget.repository.loadSkinGroups(),
       widget.repository.loadStickers(),
       widget.repository.loadPins(),
@@ -72,15 +74,14 @@ class _MyCollectionScreenState extends State<MyCollectionScreen> {
       widget.repository.loadCharms(),
     ]);
 
-    final summaries = results[0] as List<CollectionSummary>;
-    final skinGroups = results[1] as List<dynamic>;
-    final stickers = results[2] as List<dynamic>;
-    final pins = results[3] as List<dynamic>;
-    final musicKits = results[4] as List<dynamic>;
-    final agents = results[5] as List<dynamic>;
-    final graffiti = results[6] as List<dynamic>;
-    final patches = results[7] as List<dynamic>;
-    final charms = results[8] as List<dynamic>;
+    final skinGroups = results[0] as List<dynamic>;
+    final stickers = results[1] as List<dynamic>;
+    final pins = results[2] as List<dynamic>;
+    final musicKits = results[3] as List<dynamic>;
+    final agents = results[4] as List<dynamic>;
+    final graffiti = results[5] as List<dynamic>;
+    final patches = results[6] as List<dynamic>;
+    final charms = results[7] as List<dynamic>;
 
     final collectedByCategory = <String, Set<String>>{};
     for (final summary in summaries) {
@@ -199,6 +200,158 @@ class _MyCollectionScreenState extends State<MyCollectionScreen> {
     ];
   }
 
+  Future<List<_SourceProgressItem>> _loadSourceHighlights(
+    List<CollectionEntry> entries,
+  ) async {
+    final sourceEntriesByKey = <String, List<CollectionEntry>>{};
+    for (final entry in entries) {
+      final key = '${entry.sourceType}|${entry.sourceName}';
+      sourceEntriesByKey.putIfAbsent(key, () => <CollectionEntry>[]).add(entry);
+    }
+
+    if (sourceEntriesByKey.isEmpty) {
+      return const [];
+    }
+
+    final results = await Future.wait<dynamic>([
+      widget.repository.loadContainers(),
+      widget.repository.loadContainerContents(),
+      widget.repository.loadStickerContents(),
+      widget.repository.loadPinContents(),
+      widget.repository.loadMusicKitContents(),
+      widget.repository.loadGraffitiContents(),
+      widget.repository.loadPatchContents(),
+      widget.repository.loadCharmContents(),
+      widget.repository.loadAgentCollectionContents(),
+      widget.repository.loadRewardCollectionContents(),
+      widget.repository.loadOperationCollectionContents(),
+    ]);
+
+    final containers = results[0] as List<ContainerDto>;
+    final containerItemCounts = {
+      for (final item in results[1] as List<dynamic>)
+        item.containerId as String: (item.skinIds as List<dynamic>).length,
+    };
+    final stickerItemCounts = {
+      for (final item in results[2] as List<dynamic>)
+        item.containerId as String: (item.stickerIds as List<dynamic>).length,
+    };
+    final pinItemCounts = {
+      for (final item in results[3] as List<dynamic>)
+        item.containerId as String: (item.pinIds as List<dynamic>).length,
+    };
+    final musicKitItemCounts = {
+      for (final item in results[4] as List<dynamic>)
+        item.containerId as String: (item.items as List<dynamic>)
+            .map((entry) => entry.musicKitId as String)
+            .toSet()
+            .length,
+    };
+    final graffitiItemCounts = {
+      for (final item in results[5] as List<dynamic>)
+        item.containerId as String: (item.graffitiIds as List<dynamic>).length,
+    };
+    final patchItemCounts = {
+      for (final item in results[6] as List<dynamic>)
+        item.containerId as String: (item.patchIds as List<dynamic>).length,
+    };
+    final charmItemCounts = {
+      for (final item in results[7] as List<dynamic>)
+        item.containerId as String: (item.charmIds as List<dynamic>).length,
+    };
+    final agentItemCounts = {
+      for (final item in results[8] as List<dynamic>)
+        item.agentCollectionId as String:
+            (item.agentIds as List<dynamic>).length,
+    };
+    final rewardItemCounts = {
+      for (final item in results[9] as List<dynamic>)
+        item.rewardCollectionId as String:
+            (item.skinIds as List<dynamic>).length,
+    };
+    final operationItemCounts = {
+      for (final item in results[10] as List<dynamic>)
+        item.operationCollectionId as String:
+            (item.skinIds as List<dynamic>).length,
+    };
+
+    int? totalCountFor(ContainerDto container) {
+      switch (container.type) {
+        case 'CASE':
+        case 'SOUVENIR_PACKAGE':
+        case 'TERMINAL':
+        case 'XRAY_PACKAGE':
+          return containerItemCounts[container.id];
+        case 'STICKER_CAPSULE':
+        case 'STICKER_COLLECTION':
+          return stickerItemCounts[container.id];
+        case 'PIN_CAPSULE':
+          return pinItemCounts[container.id];
+        case 'MUSIC_KIT_BOX':
+          return musicKitItemCounts[container.id];
+        case 'GRAFFITI_BOX':
+          return graffitiItemCounts[container.id];
+        case 'PATCH_PACK':
+        case 'PATCH_COLLECTION':
+          return patchItemCounts[container.id];
+        case 'CHARM_COLLECTION':
+          return charmItemCounts[container.id];
+        case 'AGENT_COLLECTION':
+          return agentItemCounts[container.id];
+        case 'REWARD_COLLECTION':
+          return rewardItemCounts[container.id];
+        case 'OPERATION_COLLECTION':
+          return operationItemCounts[container.id];
+        default:
+          return null;
+      }
+    }
+
+    final highlights = <_SourceProgressItem>[];
+    for (final container in containers) {
+      final key = '${container.type}|${container.name}';
+      final sourceEntries = sourceEntriesByKey[key];
+      if (sourceEntries == null || sourceEntries.isEmpty) {
+        continue;
+      }
+
+      final totalCount = totalCountFor(container);
+      if (totalCount == null || totalCount == 0) {
+        continue;
+      }
+
+      highlights.add(
+        _SourceProgressItem(
+          container: container,
+          openedCount: sourceEntries.length,
+          collectedCount: sourceEntries
+              .map((item) => '${item.category}:${item.itemId}')
+              .toSet()
+              .length,
+          totalCount: totalCount,
+        ),
+      );
+    }
+
+    highlights.sort((a, b) {
+      final completionCompare = b.completion.compareTo(a.completion);
+      if (completionCompare != 0) {
+        return completionCompare;
+      }
+      final collectedCompare = b.collectedCount.compareTo(a.collectedCount);
+      if (collectedCompare != 0) {
+        return collectedCompare;
+      }
+      final openedCompare = b.openedCount.compareTo(a.openedCount);
+      if (openedCompare != 0) {
+        return openedCompare;
+      }
+      return a.container.name.compareTo(b.container.name);
+    });
+
+    return highlights.take(6).toList();
+  }
+
   Future<void> _refresh() async {
     final future = _loadData();
     setState(() {
@@ -302,15 +455,7 @@ class _MyCollectionScreenState extends State<MyCollectionScreen> {
         actions: [
           IconButton(
             tooltip: 'Recent activity',
-            onPressed: () {
-              AppNavigationHelper.pushScreen(
-                context,
-                CollectionHistoryScreen(
-                  repository: widget.repository,
-                  settingsController: widget.settingsController,
-                ),
-              );
-            },
+            onPressed: _openHistory,
             icon: const Icon(Icons.history),
           ),
           IconButton(
@@ -350,8 +495,14 @@ class _MyCollectionScreenState extends State<MyCollectionScreen> {
                 uniqueItems: data.summaries.length,
                 totalCollected: totalCollected,
                 totalAvailable: totalAvailable,
+                onOpenHistory: _openHistory,
+                onRefresh: _refresh,
               ),
               _CollectionProgressSection(items: data.progress),
+              _SourceHighlightsSection(
+                items: data.sourceHighlights,
+                onItemTap: _openSourceHighlight,
+              ),
               Expanded(
                 child: _InventoryTab(
                   summaries: filteredSummaries,
@@ -450,7 +601,22 @@ class _CollectionHistoryScreenState extends State<CollectionHistoryScreen> {
             return const Center(child: CircularProgressIndicator());
           }
 
-          return _HistoryTab(entries: snapshot.data!, onItemTap: _openEntry);
+          return Column(
+            children: [
+              const _SecondaryScreenHint(
+                icon: Icons.history,
+                title: 'Recent Activity',
+                subtitle:
+                    'Newest drops and Trade-Up results appear first. Tap any entry to open it in the glossary.',
+              ),
+              Expanded(
+                child: _HistoryTab(
+                  entries: snapshot.data!,
+                  onItemTap: _openEntry,
+                ),
+              ),
+            ],
+          );
         },
       ),
     );
@@ -492,12 +658,16 @@ class _CollectionOverview extends StatelessWidget {
   final int uniqueItems;
   final int totalCollected;
   final int totalAvailable;
+  final VoidCallback onOpenHistory;
+  final VoidCallback onRefresh;
 
   const _CollectionOverview({
     required this.totalEntries,
     required this.uniqueItems,
     required this.totalCollected,
     required this.totalAvailable,
+    required this.onOpenHistory,
+    required this.onRefresh,
   });
 
   @override
@@ -511,25 +681,47 @@ class _CollectionOverview extends StatelessWidget {
       child: Card(
         child: Padding(
           padding: const EdgeInsets.all(14),
-          child: Wrap(
-            spacing: 12,
-            runSpacing: 12,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              _StatChip(
-                icon: Icons.inventory_2_outlined,
-                label: 'Collected entries',
-                value: '$totalEntries',
+              Wrap(
+                spacing: 12,
+                runSpacing: 12,
+                children: [
+                  _StatChip(
+                    icon: Icons.inventory_2_outlined,
+                    label: 'Collected entries',
+                    value: '$totalEntries',
+                  ),
+                  _StatChip(
+                    icon: Icons.collections_bookmark_outlined,
+                    label: 'Unique items',
+                    value: '$uniqueItems',
+                  ),
+                  _StatChip(
+                    icon: Icons.checklist_outlined,
+                    label: 'Overall completion',
+                    value:
+                        '$totalCollected / $totalAvailable (${(completion * 100).floor()}%)',
+                  ),
+                ],
               ),
-              _StatChip(
-                icon: Icons.collections_bookmark_outlined,
-                label: 'Unique items',
-                value: '$uniqueItems',
-              ),
-              _StatChip(
-                icon: Icons.checklist_outlined,
-                label: 'Overall completion',
-                value:
-                    '$totalCollected / $totalAvailable (${(completion * 100).floor()}%)',
+              const SizedBox(height: 12),
+              Wrap(
+                spacing: 10,
+                runSpacing: 10,
+                children: [
+                  OutlinedButton.icon(
+                    onPressed: onOpenHistory,
+                    icon: const Icon(Icons.history),
+                    label: const Text('Recent Activity'),
+                  ),
+                  OutlinedButton.icon(
+                    onPressed: onRefresh,
+                    icon: const Icon(Icons.refresh),
+                    label: const Text('Refresh Collection'),
+                  ),
+                ],
               ),
             ],
           ),
@@ -570,6 +762,140 @@ class _CollectionProgressSection extends StatelessWidget {
                     .map((item) => _ProgressTile(item: item))
                     .toList(),
               ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class _SourceHighlightsSection extends StatelessWidget {
+  final List<_SourceProgressItem> items;
+  final ValueChanged<_SourceProgressItem> onItemTap;
+
+  const _SourceHighlightsSection({
+    required this.items,
+    required this.onItemTap,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    if (items.isEmpty) {
+      return const SizedBox.shrink();
+    }
+
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(12, 12, 12, 0),
+      child: Card(
+        child: Padding(
+          padding: const EdgeInsets.all(14),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const Text(
+                'Best Source Progress',
+                style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700),
+              ),
+              const SizedBox(height: 4),
+              const Text(
+                'Your most completed containers and collection sources.',
+                style: TextStyle(color: Colors.white70, fontSize: 12),
+              ),
+              const SizedBox(height: 12),
+              ...items.map(
+                (item) => Padding(
+                  padding: const EdgeInsets.only(bottom: 10),
+                  child: _SourceHighlightTile(
+                    item: item,
+                    onTap: () => onItemTap(item),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class _SourceHighlightTile extends StatelessWidget {
+  final _SourceProgressItem item;
+  final VoidCallback onTap;
+
+  const _SourceHighlightTile({required this.item, required this.onTap});
+
+  @override
+  Widget build(BuildContext context) {
+    return Material(
+      color: Colors.transparent,
+      child: InkWell(
+        borderRadius: BorderRadius.circular(14),
+        onTap: onTap,
+        child: Ink(
+          padding: const EdgeInsets.all(12),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(14),
+            border: Border.all(color: Colors.white10),
+            color: Colors.white.withValues(alpha: 0.03),
+          ),
+          child: Row(
+            children: [
+              SizedBox(
+                width: 54,
+                height: 54,
+                child: Image.asset(
+                  item.container.containerImage,
+                  fit: BoxFit.contain,
+                  errorBuilder: (_, _, _) =>
+                      const Icon(Icons.image_not_supported),
+                ),
+              ),
+              const SizedBox(width: 12),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      item.container.name,
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                      style: const TextStyle(fontWeight: FontWeight.w700),
+                    ),
+                    const SizedBox(height: 4),
+                    Text(
+                      '${item.container.typeLabel} • ${item.collectedCount}/${item.totalCount} collected • ${item.openedCount} opened',
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                      style: const TextStyle(
+                        color: Colors.white70,
+                        fontSize: 12,
+                      ),
+                    ),
+                    const SizedBox(height: 8),
+                    ClipRRect(
+                      borderRadius: BorderRadius.circular(999),
+                      child: LinearProgressIndicator(
+                        value: item.completion,
+                        minHeight: 8,
+                        backgroundColor: Colors.white10,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              const SizedBox(width: 8),
+              Text(
+                '${(item.completion * 100).floor()}%',
+                style: const TextStyle(
+                  color: Colors.white70,
+                  fontSize: 12,
+                  fontWeight: FontWeight.w700,
+                ),
+              ),
+              const SizedBox(width: 4),
+              const Icon(Icons.chevron_right, color: Colors.white38),
             ],
           ),
         ),
@@ -687,6 +1013,60 @@ class _StatChip extends StatelessWidget {
   }
 }
 
+class _SecondaryScreenHint extends StatelessWidget {
+  final IconData icon;
+  final String title;
+  final String subtitle;
+
+  const _SecondaryScreenHint({
+    required this.icon,
+    required this.title,
+    required this.subtitle,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(12, 12, 12, 0),
+      child: Card(
+        child: Padding(
+          padding: const EdgeInsets.all(14),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Icon(icon, size: 20, color: Colors.white70),
+              const SizedBox(width: 10),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      title,
+                      style: const TextStyle(
+                        fontSize: 15,
+                        fontWeight: FontWeight.w700,
+                      ),
+                    ),
+                    const SizedBox(height: 4),
+                    Text(
+                      subtitle,
+                      style: const TextStyle(
+                        color: Colors.white70,
+                        fontSize: 12,
+                        height: 1.35,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
 class _InventoryTab extends StatelessWidget {
   final List<CollectionSummary> summaries;
   final int totalCount;
@@ -728,193 +1108,202 @@ class _InventoryTab extends StatelessWidget {
     final categoryOptions = <String>['ALL', ...categoryValues];
     final rarityOptions = <String>['ALL', ...rarityValues];
 
-    return Column(
-      children: [
-        Padding(
-          padding: const EdgeInsets.fromLTRB(12, 12, 12, 0),
-          child: Card(
-            child: Padding(
-              padding: const EdgeInsets.all(12),
-              child: LayoutBuilder(
-                builder: (context, constraints) {
-                  final wide = constraints.maxWidth >= 720;
-                  final fieldWidth = wide
-                      ? (constraints.maxWidth - 24) / 3
-                      : null;
+    return CustomScrollView(
+      slivers: [
+        SliverToBoxAdapter(
+          child: Padding(
+            padding: const EdgeInsets.fromLTRB(12, 12, 12, 0),
+            child: Card(
+              child: Padding(
+                padding: const EdgeInsets.all(12),
+                child: LayoutBuilder(
+                  builder: (context, constraints) {
+                    final wide = constraints.maxWidth >= 720;
+                    final fieldWidth = wide
+                        ? (constraints.maxWidth - 24) / 3
+                        : null;
 
-                  return Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      TextFormField(
-                        initialValue: search,
-                        decoration: const InputDecoration(
-                          hintText: 'Search your collection...',
-                          prefixIcon: Icon(Icons.search),
-                          isDense: true,
+                    return Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        TextFormField(
+                          initialValue: search,
+                          decoration: const InputDecoration(
+                            hintText: 'Search your collection...',
+                            prefixIcon: Icon(Icons.search),
+                            isDense: true,
+                          ),
+                          onChanged: onSearchChanged,
                         ),
-                        onChanged: onSearchChanged,
-                      ),
-                      const SizedBox(height: 10),
-                      Wrap(
-                        spacing: 10,
-                        runSpacing: 10,
-                        children: [
-                          SizedBox(
-                            width: fieldWidth,
-                            child: DropdownButtonFormField<String>(
-                              initialValue: selectedCategory,
-                              decoration: const InputDecoration(
-                                labelText: 'Category',
-                                isDense: true,
-                              ),
-                              items: categoryOptions
-                                  .map(
-                                    (option) => DropdownMenuItem<String>(
-                                      value: option,
-                                      child: Text(
-                                        option == 'ALL'
-                                            ? 'All'
-                                            : _categoryLabelFor(option),
+                        const SizedBox(height: 10),
+                        Wrap(
+                          spacing: 10,
+                          runSpacing: 10,
+                          children: [
+                            SizedBox(
+                              width: fieldWidth,
+                              child: DropdownButtonFormField<String>(
+                                initialValue: selectedCategory,
+                                decoration: const InputDecoration(
+                                  labelText: 'Category',
+                                  isDense: true,
+                                ),
+                                items: categoryOptions
+                                    .map(
+                                      (option) => DropdownMenuItem<String>(
+                                        value: option,
+                                        child: Text(
+                                          option == 'ALL'
+                                              ? 'All'
+                                              : _categoryLabelFor(option),
+                                        ),
                                       ),
-                                    ),
-                                  )
-                                  .toList(),
-                              onChanged: (value) {
-                                if (value != null) {
-                                  onCategoryChanged(value);
-                                }
-                              },
-                            ),
-                          ),
-                          SizedBox(
-                            width: fieldWidth,
-                            child: DropdownButtonFormField<String>(
-                              initialValue: selectedRarity,
-                              decoration: const InputDecoration(
-                                labelText: 'Rarity',
-                                isDense: true,
+                                    )
+                                    .toList(),
+                                onChanged: (value) {
+                                  if (value != null) {
+                                    onCategoryChanged(value);
+                                  }
+                                },
                               ),
-                              items: rarityOptions
-                                  .map(
-                                    (option) => DropdownMenuItem<String>(
-                                      value: option,
-                                      child: Text(
-                                        option == 'ALL'
-                                            ? 'All'
-                                            : _rarityLabel(option),
+                            ),
+                            SizedBox(
+                              width: fieldWidth,
+                              child: DropdownButtonFormField<String>(
+                                initialValue: selectedRarity,
+                                decoration: const InputDecoration(
+                                  labelText: 'Rarity',
+                                  isDense: true,
+                                ),
+                                items: rarityOptions
+                                    .map(
+                                      (option) => DropdownMenuItem<String>(
+                                        value: option,
+                                        child: Text(
+                                          option == 'ALL'
+                                              ? 'All'
+                                              : _rarityLabel(option),
+                                        ),
                                       ),
-                                    ),
-                                  )
-                                  .toList(),
-                              onChanged: (value) {
-                                if (value != null) {
-                                  onRarityChanged(value);
-                                }
-                              },
-                            ),
-                          ),
-                          SizedBox(
-                            width: fieldWidth,
-                            child: DropdownButtonFormField<String>(
-                              initialValue: selectedStatTrak,
-                              decoration: const InputDecoration(
-                                labelText: 'StatTrak',
-                                isDense: true,
+                                    )
+                                    .toList(),
+                                onChanged: (value) {
+                                  if (value != null) {
+                                    onRarityChanged(value);
+                                  }
+                                },
                               ),
-                              items: const [
-                                DropdownMenuItem(
-                                  value: 'ALL',
-                                  child: Text('All'),
-                                ),
-                                DropdownMenuItem(
-                                  value: 'ONLY',
-                                  child: Text('Only StatTrak'),
-                                ),
-                                DropdownMenuItem(
-                                  value: 'NONE',
-                                  child: Text('No StatTrak'),
-                                ),
-                              ],
-                              onChanged: (value) {
-                                if (value != null) {
-                                  onStatTrakChanged(value);
-                                }
-                              },
                             ),
-                          ),
-                        ],
-                      ),
-                      const SizedBox(height: 10),
-                      Row(
-                        children: [
-                          Expanded(
-                            child: DropdownButtonFormField<String>(
-                              initialValue: selectedSort,
-                              decoration: const InputDecoration(
-                                labelText: 'Sort by',
-                                isDense: true,
+                            SizedBox(
+                              width: fieldWidth,
+                              child: DropdownButtonFormField<String>(
+                                initialValue: selectedStatTrak,
+                                decoration: const InputDecoration(
+                                  labelText: 'StatTrak',
+                                  isDense: true,
+                                ),
+                                items: const [
+                                  DropdownMenuItem(
+                                    value: 'ALL',
+                                    child: Text('All'),
+                                  ),
+                                  DropdownMenuItem(
+                                    value: 'ONLY',
+                                    child: Text('Only StatTrak'),
+                                  ),
+                                  DropdownMenuItem(
+                                    value: 'NONE',
+                                    child: Text('No StatTrak'),
+                                  ),
+                                ],
+                                onChanged: (value) {
+                                  if (value != null) {
+                                    onStatTrakChanged(value);
+                                  }
+                                },
                               ),
-                              items: const [
-                                DropdownMenuItem(
-                                  value: 'LATEST',
-                                  child: Text('Latest'),
-                                ),
-                                DropdownMenuItem(
-                                  value: 'MOST_OWNED',
-                                  child: Text('Most collected'),
-                                ),
-                                DropdownMenuItem(
-                                  value: 'BEST_FLOAT',
-                                  child: Text('Best float'),
-                                ),
-                                DropdownMenuItem(
-                                  value: 'A_Z',
-                                  child: Text('Name A-Z'),
-                                ),
-                              ],
-                              onChanged: (value) {
-                                if (value != null) {
-                                  onSortChanged(value);
-                                }
-                              },
                             ),
-                          ),
-                          const SizedBox(width: 12),
-                          Text(
-                            '${summaries.length} / $totalCount',
-                            style: const TextStyle(
-                              color: Colors.white54,
-                              fontSize: 12,
-                              fontWeight: FontWeight.w600,
+                          ],
+                        ),
+                        const SizedBox(height: 10),
+                        Row(
+                          children: [
+                            Expanded(
+                              child: DropdownButtonFormField<String>(
+                                initialValue: selectedSort,
+                                decoration: const InputDecoration(
+                                  labelText: 'Sort by',
+                                  isDense: true,
+                                ),
+                                items: const [
+                                  DropdownMenuItem(
+                                    value: 'LATEST',
+                                    child: Text('Latest'),
+                                  ),
+                                  DropdownMenuItem(
+                                    value: 'MOST_OWNED',
+                                    child: Text('Most collected'),
+                                  ),
+                                  DropdownMenuItem(
+                                    value: 'BEST_FLOAT',
+                                    child: Text('Best float'),
+                                  ),
+                                  DropdownMenuItem(
+                                    value: 'A_Z',
+                                    child: Text('Name A-Z'),
+                                  ),
+                                ],
+                                onChanged: (value) {
+                                  if (value != null) {
+                                    onSortChanged(value);
+                                  }
+                                },
+                              ),
                             ),
-                          ),
-                        ],
-                      ),
-                    ],
-                  );
-                },
+                            const SizedBox(width: 12),
+                            Text(
+                              '${summaries.length} / $totalCount',
+                              style: const TextStyle(
+                                color: Colors.white54,
+                                fontSize: 12,
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    );
+                  },
+                ),
               ),
             ),
           ),
         ),
-        Expanded(
-          child: summaries.isEmpty
-              ? const _EmptyCollectionState(
-                  icon: Icons.inventory_2_outlined,
-                  title: 'No items match these filters',
-                  subtitle:
-                      'Try a broader search or clear one of the active filters.',
-                )
-              : ListView.separated(
-                  padding: const EdgeInsets.all(12),
-                  itemCount: summaries.length,
-                  separatorBuilder: (_, _) => const SizedBox(height: 10),
-                  itemBuilder: (context, index) => _InventoryCard(
-                    summary: summaries[index],
-                    onTap: () => onItemTap(summaries[index]),
-                  ),
-                ),
-        ),
+        if (summaries.isEmpty)
+          const SliverFillRemaining(
+            hasScrollBody: false,
+            child: _EmptyCollectionState(
+              icon: Icons.inventory_2_outlined,
+              title: 'No items match these filters',
+              subtitle:
+                  'Try a broader search or clear one of the active filters.',
+            ),
+          )
+        else
+          SliverPadding(
+            padding: const EdgeInsets.all(12),
+            sliver: SliverList(
+              delegate: SliverChildBuilderDelegate(
+                (context, index) => index.isOdd
+                    ? const SizedBox(height: 10)
+                    : _InventoryCard(
+                        summary: summaries[index ~/ 2],
+                        onTap: () => onItemTap(summaries[index ~/ 2]),
+                      ),
+                childCount: summaries.length * 2 - 1,
+              ),
+            ),
+          ),
       ],
     );
   }
@@ -1200,11 +1589,13 @@ class _CollectionData {
   final List<CollectionEntry> entries;
   final List<CollectionSummary> summaries;
   final List<_CollectionProgressItem> progress;
+  final List<_SourceProgressItem> sourceHighlights;
 
   const _CollectionData({
     required this.entries,
     required this.summaries,
     required this.progress,
+    required this.sourceHighlights,
   });
 }
 
@@ -1222,6 +1613,22 @@ class _CollectionProgressItem {
     required this.collected,
     required this.total,
   });
+}
+
+class _SourceProgressItem {
+  final ContainerDto container;
+  final int openedCount;
+  final int collectedCount;
+  final int totalCount;
+
+  const _SourceProgressItem({
+    required this.container,
+    required this.openedCount,
+    required this.collectedCount,
+    required this.totalCount,
+  });
+
+  double get completion => totalCount == 0 ? 0 : collectedCount / totalCount;
 }
 
 Color _rarityColor(String rarity) {
@@ -1326,6 +1733,27 @@ String _rarityLabel(String rarity) {
 }
 
 extension on _MyCollectionScreenState {
+  void _openHistory() {
+    AppNavigationHelper.pushScreen(
+      context,
+      CollectionHistoryScreen(
+        repository: widget.repository,
+        settingsController: widget.settingsController,
+      ),
+    );
+  }
+
+  void _openSourceHighlight(_SourceProgressItem item) {
+    AppNavigationHelper.pushScreen(
+      context,
+      AppNavigationHelper.buildContainerOpenScreen(
+        containerDto: item.container,
+        repository: widget.repository,
+        settingsController: widget.settingsController,
+      ),
+    );
+  }
+
   Future<void> _openSummary(CollectionSummary summary) async {
     final screen = await _buildDetailsScreen(
       repository: widget.repository,

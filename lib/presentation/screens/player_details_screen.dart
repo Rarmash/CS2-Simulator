@@ -8,8 +8,11 @@ import '../helpers/app_navigation_helper.dart';
 import '../widgets/adaptive_logo_image.dart';
 import '../widgets/async_collection_loader.dart';
 import '../widgets/detail_info_row.dart';
+import '../widgets/detail_navigation_card.dart';
 import '../widgets/major_summary_card.dart';
+import 'player_list_screen.dart';
 import 'team_details_screen.dart';
+import 'tournament_list_screen.dart';
 import 'tournament_details_screen.dart';
 
 class PlayerDetailsScreen extends StatefulWidget {
@@ -40,7 +43,31 @@ class _PlayerDetailsScreenState extends State<PlayerDetailsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text(widget.playerName)),
+      appBar: AppBar(
+        title: Text(widget.playerName),
+        actions: [
+          IconButton(
+            tooltip: 'Majors',
+            onPressed: () {
+              AppNavigationHelper.pushScreen(
+                context,
+                TournamentListScreen(repository: widget.repository),
+              );
+            },
+            icon: const Icon(Icons.emoji_events_outlined),
+          ),
+          IconButton(
+            tooltip: 'Players',
+            onPressed: () {
+              AppNavigationHelper.pushScreen(
+                context,
+                PlayerListScreen(repository: widget.repository),
+              );
+            },
+            icon: const Icon(Icons.person_search_outlined),
+          ),
+        ],
+      ),
       body: AsyncCollectionLoader<TournamentPlayerAppearanceDto>(
         future: _future,
         builder: (context, items) {
@@ -113,6 +140,34 @@ class _PlayerDetailsScreenState extends State<PlayerDetailsScreen> {
                       value:
                           '${latest!.teamName}${(latest.place ?? '').isNotEmpty ? ' - ${latest.place}' : ''}',
                     ),
+                ],
+              ),
+              const SizedBox(height: 12),
+              DetailNavigationCard(
+                title: 'Explore Related Major Views',
+                subtitle:
+                    'Move from this player into the wider Major archive and linked team history.',
+                actions: [
+                  DetailNavigationAction(
+                    icon: Icons.emoji_events_outlined,
+                    label: 'Majors',
+                    onPressed: () {
+                      AppNavigationHelper.pushScreen(
+                        context,
+                        TournamentListScreen(repository: widget.repository),
+                      );
+                    },
+                  ),
+                  DetailNavigationAction(
+                    icon: Icons.person_search_outlined,
+                    label: 'All Players',
+                    onPressed: () {
+                      AppNavigationHelper.pushScreen(
+                        context,
+                        PlayerListScreen(repository: widget.repository),
+                      );
+                    },
+                  ),
                 ],
               ),
               const SizedBox(height: 12),

@@ -72,46 +72,48 @@ class GlossaryHubScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(title: const Text('Item Glossary')),
-      body: Center(
-        child: ConstrainedBox(
-          constraints: const BoxConstraints(maxWidth: 420),
-          child: Padding(
+      body: LayoutBuilder(
+        builder: (context, constraints) {
+          final wide = constraints.maxWidth >= 720;
+          final cardWidth = wide
+              ? (constraints.maxWidth - 48 - 12) / 2
+              : constraints.maxWidth - 32;
+
+          return SingleChildScrollView(
             padding: const EdgeInsets.all(16),
             child: Center(
-              child: ListView.separated(
-                shrinkWrap: true,
-                itemCount: items.length,
-                separatorBuilder: (_, _) => const SizedBox(height: 16),
-                itemBuilder: (context, index) {
-                  final item = items[index];
-                  return SizedBox(
-                    width: double.infinity,
-                    height: 64,
-                    child: ElevatedButton(
-                      onPressed: () {
-                        AppNavigationHelper.pushScreen(
-                          context,
-                          item.buildScreen(),
-                        );
-                      },
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Icon(item.icon),
-                          const SizedBox(width: 10),
-                          Text(
-                            item.title,
-                            style: const TextStyle(fontSize: 18),
+              child: ConstrainedBox(
+                constraints: const BoxConstraints(maxWidth: 920),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const _HubIntroCard(),
+                    const SizedBox(height: 16),
+                    Wrap(
+                      spacing: 12,
+                      runSpacing: 12,
+                      children: [
+                        for (final item in items)
+                          SizedBox(
+                            width: cardWidth,
+                            child: _GlossaryHubCard(
+                              item: item,
+                              onTap: () {
+                                AppNavigationHelper.pushScreen(
+                                  context,
+                                  item.buildScreen(),
+                                );
+                              },
+                            ),
                           ),
-                        ],
-                      ),
+                      ],
                     ),
-                  );
-                },
+                  ],
+                ),
               ),
             ),
-          ),
-        ),
+          );
+        },
       ),
     );
   }
@@ -127,4 +129,78 @@ class _GlossaryHubItem {
     required this.title,
     required this.buildScreen,
   });
+}
+
+class _HubIntroCard extends StatelessWidget {
+  const _HubIntroCard();
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      child: Padding(
+        padding: const EdgeInsets.all(16),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: const [
+            Text(
+              'Browse Every Item Type',
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.w700),
+            ),
+            SizedBox(height: 6),
+            Text(
+              'Open the full glossary by category and jump from collection tracking straight into detailed item pages.',
+              style: TextStyle(color: Colors.white70, height: 1.35),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class _GlossaryHubCard extends StatelessWidget {
+  final _GlossaryHubItem item;
+  final VoidCallback onTap;
+
+  const _GlossaryHubCard({required this.item, required this.onTap});
+
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      borderRadius: BorderRadius.circular(16),
+      onTap: onTap,
+      child: Ink(
+        padding: const EdgeInsets.all(16),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(16),
+          border: Border.all(color: Colors.white10),
+          color: Colors.white.withValues(alpha: 0.03),
+        ),
+        child: Row(
+          children: [
+            Container(
+              width: 46,
+              height: 46,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(14),
+                color: Colors.white.withValues(alpha: 0.06),
+              ),
+              child: Icon(item.icon),
+            ),
+            const SizedBox(width: 14),
+            Expanded(
+              child: Text(
+                item.title,
+                style: const TextStyle(
+                  fontSize: 17,
+                  fontWeight: FontWeight.w700,
+                ),
+              ),
+            ),
+            const Icon(Icons.chevron_right, color: Colors.white38),
+          ],
+        ),
+      ),
+    );
+  }
 }

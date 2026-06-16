@@ -2835,6 +2835,237 @@
     "collection": null
   },
   {
+    "id": "10501",
+    "name": "Vitality | Cologne 2026",
+    "graffitiImage": "assets/graffiti/10501.webp",
+    "rarity": "HIGH_GRADE",
+    "collection": null
+  },
+  {
+    "id": "10502",
+    "name": "Natus Vincere | Cologne 2026",
+    "graffitiImage": "assets/graffiti/10502.webp",
+    "rarity": "HIGH_GRADE",
+    "collection": null
+  },
+  {
+    "id": "10503",
+    "name": "Falcons | Cologne 2026",
+    "graffitiImage": "assets/graffiti/10503.webp",
+    "rarity": "HIGH_GRADE",
+    "collection": null
+  },
+  {
+    "id": "10504",
+    "name": "The Mongolz | Cologne 2026",
+    "graffitiImage": "assets/graffiti/10504.webp",
+    "rarity": "HIGH_GRADE",
+    "collection": null
+  },
+  {
+    "id": "10505",
+    "name": "PARIVISION | Cologne 2026",
+    "graffitiImage": "assets/graffiti/10505.webp",
+    "rarity": "HIGH_GRADE",
+    "collection": null
+  },
+  {
+    "id": "10506",
+    "name": "Aurora | Cologne 2026",
+    "graffitiImage": "assets/graffiti/10506.webp",
+    "rarity": "HIGH_GRADE",
+    "collection": null
+  },
+  {
+    "id": "10507",
+    "name": "FURIA | Cologne 2026",
+    "graffitiImage": "assets/graffiti/10507.webp",
+    "rarity": "HIGH_GRADE",
+    "collection": null
+  },
+  {
+    "id": "10508",
+    "name": "MOUZ | Cologne 2026",
+    "graffitiImage": "assets/graffiti/10508.webp",
+    "rarity": "HIGH_GRADE",
+    "collection": null
+  },
+  {
+    "id": "10509",
+    "name": "FUT | Cologne 2026",
+    "graffitiImage": "assets/graffiti/10509.webp",
+    "rarity": "HIGH_GRADE",
+    "collection": null
+  },
+  {
+    "id": "10510",
+    "name": "Team Spirit | Cologne 2026",
+    "graffitiImage": "assets/graffiti/10510.webp",
+    "rarity": "HIGH_GRADE",
+    "collection": null
+  },
+  {
+    "id": "10511",
+    "name": "Astralis | Cologne 2026",
+    "graffitiImage": "assets/graffiti/10511.webp",
+    "rarity": "HIGH_GRADE",
+    "collection": null
+  },
+  {
+    "id": "10512",
+    "name": "G2 esports | Cologne 2026",
+    "graffitiImage": "assets/graffiti/10512.webp",
+    "rarity": "HIGH_GRADE",
+    "collection": null
+  },
+  {
+    "id": "10513",
+    "name": "Legacy | Cologne 2026",
+    "graffitiImage": "assets/graffiti/10513.webp",
+    "rarity": "HIGH_GRADE",
+    "collection": null
+  },
+  {
+    "id": "10514",
+    "name": "paiN Gaming | Cologne 2026",
+    "graffitiImage": "assets/graffiti/10514.webp",
+    "rarity": "HIGH_GRADE",
+    "collection": null
+  },
+  {
+    "id": "10515",
+    "name": "Monte | Cologne 2026",
+    "graffitiImage": "assets/graffiti/10515.webp",
+    "rarity": "HIGH_GRADE",
+    "collection": null
+  },
+  {
+    "id": "10516",
+    "name": "9z Team | Cologne 2026",
+    "graffitiImage": "assets/graffiti/10516.webp",
+    "rarity": "HIGH_GRADE",
+    "collection": null
+  },
+  {
+    "id": "10517",
+    "name": "GamerLegion | Cologne 2026",
+    "graffitiImage": "assets/graffiti/10517.webp",
+    "rarity": "HIGH_GRADE",
+    "collection": null
+  },
+  {
+    "id": "10518",
+    "name": "B8 | Cologne 2026",
+    "graffitiImage": "assets/graffiti/10518.webp",
+    "rarity": "HIGH_GRADE",
+    "collection": null
+  },
+  {
+    "id": "10519",
+    "name": "HEROIC | Cologne 2026",
+    "graffitiImage": "assets/graffiti/10519.webp",
+    "rarity": "HIGH_GRADE",
+    "collection": null
+  },
+  {
+    "id": "10520",
+    "name": "BetBoom | Cologne 2026",
+    "graffitiImage": "assets/graffiti/10520.webp",
+    "rarity": "HIGH_GRADE",
+    "collection": null
+  },
+  {
+    "id": "10521",
+    "name": "BIG | Cologne 2026",
+    "graffitiImage": "assets/graffiti/10521.webp",
+    "rarity": "HIGH_GRADE",
+    "collection": null
+  },
+  {
+    "id": "10522",
+    "name": "M80 | Cologne 2026",
+    "graffitiImage": "assets/graffiti/10522.webp",
+    "rarity": "HIGH_GRADE",
+    "collection": null
+  },
+  {
+    "id": "10523",
+    "name": "MIBR | Cologne 2026",
+    "graffitiImage": "assets/graffiti/10523.webp",
+    "rarity": "HIGH_GRADE",
+    "collection": null
+  },
+  {
+    "id": "10524",
+    "name": "SINNERS | Cologne 2026",
+    "graffitiImage": "assets/graffiti/10524.webp",
+    "rarity": "HIGH_GRADE",
+    "collection": null
+  },
+  {
+    "id": "10525",
+    "name": "NRG | Cologne 2026",
+    "graffitiImage": "assets/graffiti/10525.webp",
+    "rarity": "HIGH_GRADE",
+    "collection": null
+  },
+  {
+    "id": "10526",
+    "name": "TYLOO | Cologne 2026",
+    "graffitiImage": "assets/graffiti/10526.webp",
+    "rarity": "HIGH_GRADE",
+    "collection": null
+  },
+  {
+    "id": "10527",
+    "name": "Sharks Esports | Cologne 2026",
+    "graffitiImage": "assets/graffiti/10527.webp",
+    "rarity": "HIGH_GRADE",
+    "collection": null
+  },
+  {
+    "id": "10528",
+    "name": "Gaimin Gladiators | Cologne 2026",
+    "graffitiImage": "assets/graffiti/10528.webp",
+    "rarity": "HIGH_GRADE",
+    "collection": null
+  },
+  {
+    "id": "10529",
+    "name": "Team Liquid | Cologne 2026",
+    "graffitiImage": "assets/graffiti/10529.webp",
+    "rarity": "HIGH_GRADE",
+    "collection": null
+  },
+  {
+    "id": "10530",
+    "name": "Lynn Vision | Cologne 2026",
+    "graffitiImage": "assets/graffiti/10530.webp",
+    "rarity": "HIGH_GRADE",
+    "collection": null
+  },
+  {
+    "id": "10531",
+    "name": "THUNDERdOWNUNDER | Cologne 2026",
+    "graffitiImage": "assets/graffiti/10531.webp",
+    "rarity": "HIGH_GRADE",
+    "collection": null
+  },
+  {
+    "id": "10532",
+    "name": "FlyQuest | Cologne 2026",
+    "graffitiImage": "assets/graffiti/10532.webp",
+    "rarity": "HIGH_GRADE",
+    "collection": null
+  },
+  {
+    "id": "10533",
+    "name": "IEM | Cologne 2026",
+    "graffitiImage": "assets/graffiti/10533.webp",
+    "rarity": "HIGH_GRADE",
+    "collection": null
+  },
+  {
     "id": "16971",
     "name": "X-Axes (Brick Red)",
     "graffitiImage": "assets/graffiti/16971.webp",
