@@ -8,11 +8,14 @@ import '../../data/models/tournament_metadata_dto.dart';
 import '../../data/repositories/local_data_repository.dart';
 import '../helpers/app_navigation_helper.dart';
 import '../widgets/detail_info_row.dart';
+import '../widgets/detail_navigation_card.dart';
 import '../widgets/detail_source_section.dart';
 import '../widgets/detail_source_tile.dart';
 import '../widgets/detail_tag.dart';
 import '../widgets/adaptive_logo_image.dart';
 import '../widgets/major_summary_card.dart';
+import 'player_list_screen.dart';
+import 'team_list_screen.dart';
 import 'player_details_screen.dart';
 import 'team_details_screen.dart';
 
@@ -29,7 +32,31 @@ class TournamentDetailsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text(tournament.name)),
+      appBar: AppBar(
+        title: Text(tournament.name),
+        actions: [
+          IconButton(
+            tooltip: 'Major Teams',
+            onPressed: () {
+              AppNavigationHelper.pushScreen(
+                context,
+                TeamListScreen(repository: repository),
+              );
+            },
+            icon: const Icon(Icons.groups_2_outlined),
+          ),
+          IconButton(
+            tooltip: 'Major Players',
+            onPressed: () {
+              AppNavigationHelper.pushScreen(
+                context,
+                PlayerListScreen(repository: repository),
+              );
+            },
+            icon: const Icon(Icons.person_search_outlined),
+          ),
+        ],
+      ),
       body: FutureBuilder<_TournamentDetailsData>(
         future: _loadData(),
         builder: (context, snapshot) {
@@ -96,6 +123,34 @@ class TournamentDetailsScreen extends StatelessWidget {
                   DetailInfoRow(
                     title: 'Sticker Sources',
                     value: data.stickerSources.length.toString(),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 12),
+              DetailNavigationCard(
+                title: 'Explore Major History',
+                subtitle:
+                    'Jump from this Major into the full team and player history views.',
+                actions: [
+                  DetailNavigationAction(
+                    icon: Icons.groups_2_outlined,
+                    label: 'Major Teams',
+                    onPressed: () {
+                      AppNavigationHelper.pushScreen(
+                        context,
+                        TeamListScreen(repository: repository),
+                      );
+                    },
+                  ),
+                  DetailNavigationAction(
+                    icon: Icons.person_search_outlined,
+                    label: 'Major Players',
+                    onPressed: () {
+                      AppNavigationHelper.pushScreen(
+                        context,
+                        PlayerListScreen(repository: repository),
+                      );
+                    },
                   ),
                 ],
               ),

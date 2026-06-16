@@ -455,15 +455,7 @@ class _MyCollectionScreenState extends State<MyCollectionScreen> {
         actions: [
           IconButton(
             tooltip: 'Recent activity',
-            onPressed: () {
-              AppNavigationHelper.pushScreen(
-                context,
-                CollectionHistoryScreen(
-                  repository: widget.repository,
-                  settingsController: widget.settingsController,
-                ),
-              );
-            },
+            onPressed: _openHistory,
             icon: const Icon(Icons.history),
           ),
           IconButton(
@@ -503,6 +495,8 @@ class _MyCollectionScreenState extends State<MyCollectionScreen> {
                 uniqueItems: data.summaries.length,
                 totalCollected: totalCollected,
                 totalAvailable: totalAvailable,
+                onOpenHistory: _openHistory,
+                onRefresh: _refresh,
               ),
               _CollectionProgressSection(items: data.progress),
               _SourceHighlightsSection(
@@ -607,7 +601,22 @@ class _CollectionHistoryScreenState extends State<CollectionHistoryScreen> {
             return const Center(child: CircularProgressIndicator());
           }
 
-          return _HistoryTab(entries: snapshot.data!, onItemTap: _openEntry);
+          return Column(
+            children: [
+              const _SecondaryScreenHint(
+                icon: Icons.history,
+                title: 'Recent Activity',
+                subtitle:
+                    'Newest drops and Trade-Up results appear first. Tap any entry to open it in the glossary.',
+              ),
+              Expanded(
+                child: _HistoryTab(
+                  entries: snapshot.data!,
+                  onItemTap: _openEntry,
+                ),
+              ),
+            ],
+          );
         },
       ),
     );
@@ -649,12 +658,16 @@ class _CollectionOverview extends StatelessWidget {
   final int uniqueItems;
   final int totalCollected;
   final int totalAvailable;
+  final VoidCallback onOpenHistory;
+  final VoidCallback onRefresh;
 
   const _CollectionOverview({
     required this.totalEntries,
     required this.uniqueItems,
     required this.totalCollected,
     required this.totalAvailable,
+    required this.onOpenHistory,
+    required this.onRefresh,
   });
 
   @override
@@ -668,25 +681,47 @@ class _CollectionOverview extends StatelessWidget {
       child: Card(
         child: Padding(
           padding: const EdgeInsets.all(14),
-          child: Wrap(
-            spacing: 12,
-            runSpacing: 12,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              _StatChip(
-                icon: Icons.inventory_2_outlined,
-                label: 'Collected entries',
-                value: '$totalEntries',
+              Wrap(
+                spacing: 12,
+                runSpacing: 12,
+                children: [
+                  _StatChip(
+                    icon: Icons.inventory_2_outlined,
+                    label: 'Collected entries',
+                    value: '$totalEntries',
+                  ),
+                  _StatChip(
+                    icon: Icons.collections_bookmark_outlined,
+                    label: 'Unique items',
+                    value: '$uniqueItems',
+                  ),
+                  _StatChip(
+                    icon: Icons.checklist_outlined,
+                    label: 'Overall completion',
+                    value:
+                        '$totalCollected / $totalAvailable (${(completion * 100).floor()}%)',
+                  ),
+                ],
               ),
-              _StatChip(
-                icon: Icons.collections_bookmark_outlined,
-                label: 'Unique items',
-                value: '$uniqueItems',
-              ),
-              _StatChip(
-                icon: Icons.checklist_outlined,
-                label: 'Overall completion',
-                value:
-                    '$totalCollected / $totalAvailable (${(completion * 100).floor()}%)',
+              const SizedBox(height: 12),
+              Wrap(
+                spacing: 10,
+                runSpacing: 10,
+                children: [
+                  OutlinedButton.icon(
+                    onPressed: onOpenHistory,
+                    icon: const Icon(Icons.history),
+                    label: const Text('Recent Activity'),
+                  ),
+                  OutlinedButton.icon(
+                    onPressed: onRefresh,
+                    icon: const Icon(Icons.refresh),
+                    label: const Text('Refresh Collection'),
+                  ),
+                ],
               ),
             ],
           ),
@@ -973,6 +1008,60 @@ class _StatChip extends StatelessWidget {
             ],
           ),
         ],
+      ),
+    );
+  }
+}
+
+class _SecondaryScreenHint extends StatelessWidget {
+  final IconData icon;
+  final String title;
+  final String subtitle;
+
+  const _SecondaryScreenHint({
+    required this.icon,
+    required this.title,
+    required this.subtitle,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(12, 12, 12, 0),
+      child: Card(
+        child: Padding(
+          padding: const EdgeInsets.all(14),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Icon(icon, size: 20, color: Colors.white70),
+              const SizedBox(width: 10),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      title,
+                      style: const TextStyle(
+                        fontSize: 15,
+                        fontWeight: FontWeight.w700,
+                      ),
+                    ),
+                    const SizedBox(height: 4),
+                    Text(
+                      subtitle,
+                      style: const TextStyle(
+                        color: Colors.white70,
+                        fontSize: 12,
+                        height: 1.35,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }
@@ -1644,6 +1733,16 @@ String _rarityLabel(String rarity) {
 }
 
 extension on _MyCollectionScreenState {
+  void _openHistory() {
+    AppNavigationHelper.pushScreen(
+      context,
+      CollectionHistoryScreen(
+        repository: widget.repository,
+        settingsController: widget.settingsController,
+      ),
+    );
+  }
+
   void _openSourceHighlight(_SourceProgressItem item) {
     AppNavigationHelper.pushScreen(
       context,

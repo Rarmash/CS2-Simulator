@@ -20,9 +20,9 @@ class DroppedSkin {
   bool get isVanillaKnife => skin.isKnife && skin.name == 'Vanilla';
 
   String get fullDisplayName {
-    final star = skin.isSpecialItem ? '★ ' : '';
+    final star = skin.isSpecialItem ? '\u2605 ' : '';
     final souvenirPrefix = isSouvenir ? 'Souvenir ' : '';
-    final statTrakPrefix = isStatTrak ? 'StatTrak™ ' : '';
+    final statTrakPrefix = isStatTrak ? 'StatTrak\u2122 ' : '';
     return '$star$souvenirPrefix$statTrakPrefix${skin.itemDisplayName} | ${skin.name}';
   }
 }

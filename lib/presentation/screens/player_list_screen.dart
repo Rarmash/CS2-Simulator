@@ -3,8 +3,11 @@ import 'package:flutter/material.dart';
 import '../../core/utils/date_format_helper.dart';
 import '../../data/models/tournament_player_dto.dart';
 import '../../data/repositories/local_data_repository.dart';
+import '../helpers/app_navigation_helper.dart';
 import '../widgets/async_collection_loader.dart';
 import 'player_details_screen.dart';
+import 'team_list_screen.dart';
+import 'tournament_list_screen.dart';
 
 class PlayerListScreen extends StatefulWidget {
   final LocalDataRepository repository;
@@ -28,7 +31,31 @@ class _PlayerListScreenState extends State<PlayerListScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Major Players')),
+      appBar: AppBar(
+        title: const Text('Major Players'),
+        actions: [
+          IconButton(
+            tooltip: 'Majors',
+            onPressed: () {
+              AppNavigationHelper.pushScreen(
+                context,
+                TournamentListScreen(repository: widget.repository),
+              );
+            },
+            icon: const Icon(Icons.emoji_events_outlined),
+          ),
+          IconButton(
+            tooltip: 'Teams',
+            onPressed: () {
+              AppNavigationHelper.pushScreen(
+                context,
+                TeamListScreen(repository: widget.repository),
+              );
+            },
+            icon: const Icon(Icons.groups_2_outlined),
+          ),
+        ],
+      ),
       body: AsyncCollectionLoader<TournamentPlayerSummaryDto>(
         future: _future,
         builder: (context, items) {
@@ -40,6 +67,21 @@ class _PlayerListScreenState extends State<PlayerListScreen> {
 
           return Column(
             children: [
+              _PlayerListHeader(
+                playerCount: items.length,
+                onOpenMajors: () {
+                  AppNavigationHelper.pushScreen(
+                    context,
+                    TournamentListScreen(repository: widget.repository),
+                  );
+                },
+                onOpenTeams: () {
+                  AppNavigationHelper.pushScreen(
+                    context,
+                    TeamListScreen(repository: widget.repository),
+                  );
+                },
+              ),
               Padding(
                 padding: const EdgeInsets.fromLTRB(12, 12, 12, 0),
                 child: TextField(
@@ -67,13 +109,11 @@ class _PlayerListScreenState extends State<PlayerListScreen> {
                           return _PlayerSummaryCard(
                             player: player,
                             onTap: () {
-                              Navigator.push(
+                              AppNavigationHelper.pushScreen(
                                 context,
-                                MaterialPageRoute(
-                                  builder: (_) => PlayerDetailsScreen(
-                                    playerName: player.playerName,
-                                    repository: widget.repository,
-                                  ),
+                                PlayerDetailsScreen(
+                                  playerName: player.playerName,
+                                  repository: widget.repository,
                                 ),
                               );
                             },
@@ -84,6 +124,61 @@ class _PlayerListScreenState extends State<PlayerListScreen> {
             ],
           );
         },
+      ),
+    );
+  }
+}
+
+class _PlayerListHeader extends StatelessWidget {
+  final int playerCount;
+  final VoidCallback onOpenMajors;
+  final VoidCallback onOpenTeams;
+
+  const _PlayerListHeader({
+    required this.playerCount,
+    required this.onOpenMajors,
+    required this.onOpenTeams,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(12, 12, 12, 0),
+      child: Card(
+        child: Padding(
+          padding: const EdgeInsets.all(14),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const Text(
+                'Major Player History',
+                style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700),
+              ),
+              const SizedBox(height: 6),
+              Text(
+                '$playerCount players with Major appearances, autograph coverage, and tournament timelines.',
+                style: const TextStyle(color: Colors.white70, height: 1.35),
+              ),
+              const SizedBox(height: 12),
+              Wrap(
+                spacing: 10,
+                runSpacing: 10,
+                children: [
+                  OutlinedButton.icon(
+                    onPressed: onOpenMajors,
+                    icon: const Icon(Icons.emoji_events_outlined),
+                    label: const Text('Majors'),
+                  ),
+                  OutlinedButton.icon(
+                    onPressed: onOpenTeams,
+                    icon: const Icon(Icons.groups_2_outlined),
+                    label: const Text('Teams'),
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }

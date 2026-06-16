@@ -150,17 +150,24 @@ The source code in this repository is licensed under `AGPL-3.0`.
 
 The project is actively evolving, with current work focused on:
 
-- expanding collection analytics beyond raw progress tracking
-- improving long-term data quality for tournaments, teams, and players
-- continuing UI/codebase refactoring to reduce duplicated screen logic
-- pushing the app toward 1.0 through analytics, polish, and overall product consistency
+- maintaining data quality for tournaments, teams, players, and item metadata
+- continuing UI/codebase cleanup to reduce duplicated screen logic
+- stabilizing the simulator experience ahead of a 1.0 release
+- deciding which remaining quality-of-life features belong in a final pre-1.0 update
 
 ## Roadmap
 
-### v0.14
+### v0.15
 
-- Deeper collection analytics across items, duplicates, sessions, and finishing variants
-- Cleaner navigation and final UI consistency pass across major app sections
+- Final pre-1.0 quality-of-life pass across inventory, glossary, and simulator flows
+- Decide which remaining convenience features should land before 1.0 and which should move to post-1.0
+- Release-readiness pass on wording, navigation, empty states, and general UX consistency
+
+### Toward 1.0
+
+- Freeze the core feature set around simulator, collection, glossary, and Major history
+- Focus on stability, maintainability, and product consistency instead of broad new content expansion
+- Keep future additions optional unless they clearly strengthen the main simulator experience
 
 ### Future
 

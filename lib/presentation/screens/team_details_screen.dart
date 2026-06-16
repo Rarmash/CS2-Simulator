@@ -7,9 +7,13 @@ import '../../data/models/tournament_metadata_dto.dart';
 import '../../data/repositories/local_data_repository.dart';
 import '../helpers/app_navigation_helper.dart';
 import '../widgets/adaptive_logo_image.dart';
+import '../widgets/detail_navigation_card.dart';
 import '../widgets/detail_info_row.dart';
 import '../widgets/detail_tag.dart';
 import '../widgets/major_summary_card.dart';
+import 'player_list_screen.dart';
+import 'team_list_screen.dart';
+import 'tournament_list_screen.dart';
 import 'player_details_screen.dart';
 import 'tournament_details_screen.dart';
 
@@ -51,7 +55,31 @@ class _TeamDetailsScreenState extends State<TeamDetailsScreen> {
     final canonicalTeamName = TeamNameHelper.canonicalize(widget.teamName);
 
     return Scaffold(
-      appBar: AppBar(title: Text(canonicalTeamName)),
+      appBar: AppBar(
+        title: Text(canonicalTeamName),
+        actions: [
+          IconButton(
+            tooltip: 'Majors',
+            onPressed: () {
+              AppNavigationHelper.pushScreen(
+                context,
+                TournamentListScreen(repository: widget.repository),
+              );
+            },
+            icon: const Icon(Icons.emoji_events_outlined),
+          ),
+          IconButton(
+            tooltip: 'Players',
+            onPressed: () {
+              AppNavigationHelper.pushScreen(
+                context,
+                PlayerListScreen(repository: widget.repository),
+              );
+            },
+            icon: const Icon(Icons.person_search_outlined),
+          ),
+        ],
+      ),
       body: FutureBuilder<_TeamDetailsData>(
         future: _future,
         builder: (context, snapshot) {
@@ -138,6 +166,46 @@ class _TeamDetailsScreenState extends State<TeamDetailsScreen> {
                   ],
                 ),
               ),
+              Padding(
+                padding: const EdgeInsets.fromLTRB(12, 12, 12, 0),
+                child: DetailNavigationCard(
+                  title: 'Explore Related Major Views',
+                  subtitle:
+                      'Move from this team into the broader Major archive or player history.',
+                  actions: [
+                    DetailNavigationAction(
+                      icon: Icons.emoji_events_outlined,
+                      label: 'Majors',
+                      onPressed: () {
+                        AppNavigationHelper.pushScreen(
+                          context,
+                          TournamentListScreen(repository: widget.repository),
+                        );
+                      },
+                    ),
+                    DetailNavigationAction(
+                      icon: Icons.person_search_outlined,
+                      label: 'Major Players',
+                      onPressed: () {
+                        AppNavigationHelper.pushScreen(
+                          context,
+                          PlayerListScreen(repository: widget.repository),
+                        );
+                      },
+                    ),
+                    DetailNavigationAction(
+                      icon: Icons.groups_2_outlined,
+                      label: 'All Teams',
+                      onPressed: () {
+                        AppNavigationHelper.pushScreen(
+                          context,
+                          TeamListScreen(repository: widget.repository),
+                        );
+                      },
+                    ),
+                  ],
+                ),
+              ),
               if (recurringPlayers.isNotEmpty)
                 Padding(
                   padding: const EdgeInsets.fromLTRB(12, 12, 12, 0),
@@ -195,21 +263,19 @@ class _TeamDetailsScreenState extends State<TeamDetailsScreen> {
                       result: result,
                       roster: roster,
                       onOpenTournament: () {
-                        Navigator.push(
+                        AppNavigationHelper.pushScreen(
                           context,
-                          MaterialPageRoute(
-                            builder: (_) => TournamentDetailsScreen(
-                              repository: widget.repository,
-                              tournament: TournamentDto(
-                                name: result.tournamentName,
-                                imagePath: result.tournamentImagePath,
-                                releaseDate: result.startDate,
-                                startDate: result.startDate,
-                                endDate: result.endDate,
-                                organizer: result.organizer,
-                                souvenirPackageCount: 0,
-                                stickerContainerCount: 0,
-                              ),
+                          TournamentDetailsScreen(
+                            repository: widget.repository,
+                            tournament: TournamentDto(
+                              name: result.tournamentName,
+                              imagePath: result.tournamentImagePath,
+                              releaseDate: result.startDate,
+                              startDate: result.startDate,
+                              endDate: result.endDate,
+                              organizer: result.organizer,
+                              souvenirPackageCount: 0,
+                              stickerContainerCount: 0,
                             ),
                           ),
                         );
