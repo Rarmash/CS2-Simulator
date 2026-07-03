@@ -104388,5 +104388,595 @@
     "effect": "GOLD",
     "collection": null,
     "tournament": "IEM Cologne 2026"
+  },
+  {
+    "id": "11174",
+    "name": "NiKo (Champion) | Cologne 2026",
+    "stickerImage": "assets/stickers/11174.webp",
+    "rarity": "HIGH_GRADE",
+    "stickerType": "AUTOGRAPH",
+    "effect": "OTHER",
+    "collection": null,
+    "tournament": "IEM Cologne 2026"
+  },
+  {
+    "id": "11175",
+    "name": "NiKo (Foil, Champion) | Cologne 2026",
+    "stickerImage": "assets/stickers/11175.webp",
+    "rarity": "REMARKABLE",
+    "stickerType": "AUTOGRAPH",
+    "effect": "OTHER",
+    "collection": null,
+    "tournament": "IEM Cologne 2026"
+  },
+  {
+    "id": "11176",
+    "name": "NiKo (Holo, Champion) | Cologne 2026",
+    "stickerImage": "assets/stickers/11176.webp",
+    "rarity": "EXOTIC",
+    "stickerType": "AUTOGRAPH",
+    "effect": "HOLO",
+    "collection": null,
+    "tournament": "IEM Cologne 2026"
+  },
+  {
+    "id": "11177",
+    "name": "NiKo (Gold, Champion) | Cologne 2026",
+    "stickerImage": "assets/stickers/11177.webp",
+    "rarity": "EXTRAORDINARY",
+    "stickerType": "AUTOGRAPH",
+    "effect": "GOLD",
+    "collection": null,
+    "tournament": "IEM Cologne 2026"
+  },
+  {
+    "id": "11178",
+    "name": "kyxsan (Champion) | Cologne 2026",
+    "stickerImage": "assets/stickers/11178.webp",
+    "rarity": "HIGH_GRADE",
+    "stickerType": "AUTOGRAPH",
+    "effect": "OTHER",
+    "collection": null,
+    "tournament": "IEM Cologne 2026"
+  },
+  {
+    "id": "11179",
+    "name": "kyxsan (Foil, Champion) | Cologne 2026",
+    "stickerImage": "assets/stickers/11179.webp",
+    "rarity": "REMARKABLE",
+    "stickerType": "AUTOGRAPH",
+    "effect": "OTHER",
+    "collection": null,
+    "tournament": "IEM Cologne 2026"
+  },
+  {
+    "id": "11180",
+    "name": "kyxsan (Holo, Champion) | Cologne 2026",
+    "stickerImage": "assets/stickers/11180.webp",
+    "rarity": "EXOTIC",
+    "stickerType": "AUTOGRAPH",
+    "effect": "HOLO",
+    "collection": null,
+    "tournament": "IEM Cologne 2026"
+  },
+  {
+    "id": "11181",
+    "name": "kyxsan (Gold, Champion) | Cologne 2026",
+    "stickerImage": "assets/stickers/11181.webp",
+    "rarity": "EXTRAORDINARY",
+    "stickerType": "AUTOGRAPH",
+    "effect": "GOLD",
+    "collection": null,
+    "tournament": "IEM Cologne 2026"
+  },
+  {
+    "id": "11182",
+    "name": "m0NESY (Champion) | Cologne 2026",
+    "stickerImage": "assets/stickers/11182.webp",
+    "rarity": "HIGH_GRADE",
+    "stickerType": "AUTOGRAPH",
+    "effect": "OTHER",
+    "collection": null,
+    "tournament": "IEM Cologne 2026"
+  },
+  {
+    "id": "11183",
+    "name": "m0NESY (Foil, Champion) | Cologne 2026",
+    "stickerImage": "assets/stickers/11183.webp",
+    "rarity": "REMARKABLE",
+    "stickerType": "AUTOGRAPH",
+    "effect": "OTHER",
+    "collection": null,
+    "tournament": "IEM Cologne 2026"
+  },
+  {
+    "id": "11184",
+    "name": "m0NESY (Holo, Champion) | Cologne 2026",
+    "stickerImage": "assets/stickers/11184.webp",
+    "rarity": "EXOTIC",
+    "stickerType": "AUTOGRAPH",
+    "effect": "HOLO",
+    "collection": null,
+    "tournament": "IEM Cologne 2026"
+  },
+  {
+    "id": "11185",
+    "name": "m0NESY (Gold, Champion) | Cologne 2026",
+    "stickerImage": "assets/stickers/11185.webp",
+    "rarity": "EXTRAORDINARY",
+    "stickerType": "AUTOGRAPH",
+    "effect": "GOLD",
+    "collection": null,
+    "tournament": "IEM Cologne 2026"
+  },
+  {
+    "id": "11186",
+    "name": "TeSeS (Champion) | Cologne 2026",
+    "stickerImage": "assets/stickers/11186.webp",
+    "rarity": "HIGH_GRADE",
+    "stickerType": "AUTOGRAPH",
+    "effect": "OTHER",
+    "collection": null,
+    "tournament": "IEM Cologne 2026"
+  },
+  {
+    "id": "11187",
+    "name": "TeSeS (Foil, Champion) | Cologne 2026",
+    "stickerImage": "assets/stickers/11187.webp",
+    "rarity": "REMARKABLE",
+    "stickerType": "AUTOGRAPH",
+    "effect": "OTHER",
+    "collection": null,
+    "tournament": "IEM Cologne 2026"
+  },
+  {
+    "id": "11188",
+    "name": "TeSeS (Holo, Champion) | Cologne 2026",
+    "stickerImage": "assets/stickers/11188.webp",
+    "rarity": "EXOTIC",
+    "stickerType": "AUTOGRAPH",
+    "effect": "HOLO",
+    "collection": null,
+    "tournament": "IEM Cologne 2026"
+  },
+  {
+    "id": "11189",
+    "name": "TeSeS (Gold, Champion) | Cologne 2026",
+    "stickerImage": "assets/stickers/11189.webp",
+    "rarity": "EXTRAORDINARY",
+    "stickerType": "AUTOGRAPH",
+    "effect": "GOLD",
+    "collection": null,
+    "tournament": "IEM Cologne 2026"
+  },
+  {
+    "id": "11190",
+    "name": "kyousuke (Champion) | Cologne 2026",
+    "stickerImage": "assets/stickers/11190.webp",
+    "rarity": "HIGH_GRADE",
+    "stickerType": "AUTOGRAPH",
+    "effect": "OTHER",
+    "collection": null,
+    "tournament": "IEM Cologne 2026"
+  },
+  {
+    "id": "11191",
+    "name": "kyousuke (Foil, Champion) | Cologne 2026",
+    "stickerImage": "assets/stickers/11191.webp",
+    "rarity": "REMARKABLE",
+    "stickerType": "AUTOGRAPH",
+    "effect": "OTHER",
+    "collection": null,
+    "tournament": "IEM Cologne 2026"
+  },
+  {
+    "id": "11192",
+    "name": "kyousuke (Holo, Champion) | Cologne 2026",
+    "stickerImage": "assets/stickers/11192.webp",
+    "rarity": "EXOTIC",
+    "stickerType": "AUTOGRAPH",
+    "effect": "HOLO",
+    "collection": null,
+    "tournament": "IEM Cologne 2026"
+  },
+  {
+    "id": "11193",
+    "name": "kyousuke (Gold, Champion) | Cologne 2026",
+    "stickerImage": "assets/stickers/11193.webp",
+    "rarity": "EXTRAORDINARY",
+    "stickerType": "AUTOGRAPH",
+    "effect": "GOLD",
+    "collection": null,
+    "tournament": "IEM Cologne 2026"
+  },
+  {
+    "id": "11196",
+    "name": "Airhorn",
+    "stickerImage": "assets/stickers/11196.webp",
+    "rarity": "HIGH_GRADE",
+    "stickerType": "STICKER",
+    "effect": "OTHER",
+    "collection": null,
+    "tournament": null
+  },
+  {
+    "id": "11197",
+    "name": "Assterisk",
+    "stickerImage": "assets/stickers/11197.webp",
+    "rarity": "HIGH_GRADE",
+    "stickerType": "STICKER",
+    "effect": "OTHER",
+    "collection": null,
+    "tournament": null
+  },
+  {
+    "id": "11198",
+    "name": "Big Red Rocket",
+    "stickerImage": "assets/stickers/11198.webp",
+    "rarity": "HIGH_GRADE",
+    "stickerType": "STICKER",
+    "effect": "OTHER",
+    "collection": null,
+    "tournament": null
+  },
+  {
+    "id": "11199",
+    "name": "Boner Snap",
+    "stickerImage": "assets/stickers/11199.webp",
+    "rarity": "HIGH_GRADE",
+    "stickerType": "STICKER",
+    "effect": "OTHER",
+    "collection": null,
+    "tournament": null
+  },
+  {
+    "id": "11200",
+    "name": "Censored",
+    "stickerImage": "assets/stickers/11200.webp",
+    "rarity": "HIGH_GRADE",
+    "stickerType": "STICKER",
+    "effect": "OTHER",
+    "collection": null,
+    "tournament": null
+  },
+  {
+    "id": "11201",
+    "name": "Explosives",
+    "stickerImage": "assets/stickers/11201.webp",
+    "rarity": "HIGH_GRADE",
+    "stickerType": "STICKER",
+    "effect": "OTHER",
+    "collection": null,
+    "tournament": null
+  },
+  {
+    "id": "11202",
+    "name": "Golf Cart",
+    "stickerImage": "assets/stickers/11202.webp",
+    "rarity": "HIGH_GRADE",
+    "stickerType": "STICKER",
+    "effect": "OTHER",
+    "collection": null,
+    "tournament": null
+  },
+  {
+    "id": "11203",
+    "name": "Gonna Leave A Mark",
+    "stickerImage": "assets/stickers/11203.webp",
+    "rarity": "HIGH_GRADE",
+    "stickerType": "STICKER",
+    "effect": "OTHER",
+    "collection": null,
+    "tournament": null
+  },
+  {
+    "id": "11204",
+    "name": "Head In Hands",
+    "stickerImage": "assets/stickers/11204.webp",
+    "rarity": "HIGH_GRADE",
+    "stickerType": "STICKER",
+    "effect": "OTHER",
+    "collection": null,
+    "tournament": null
+  },
+  {
+    "id": "11205",
+    "name": "High Five!",
+    "stickerImage": "assets/stickers/11205.webp",
+    "rarity": "HIGH_GRADE",
+    "stickerType": "STICKER",
+    "effect": "OTHER",
+    "collection": null,
+    "tournament": null
+  },
+  {
+    "id": "11206",
+    "name": "Jackass",
+    "stickerImage": "assets/stickers/11206.webp",
+    "rarity": "HIGH_GRADE",
+    "stickerType": "STICKER",
+    "effect": "OTHER",
+    "collection": null,
+    "tournament": null
+  },
+  {
+    "id": "11207",
+    "name": "Partyboy",
+    "stickerImage": "assets/stickers/11207.webp",
+    "rarity": "HIGH_GRADE",
+    "stickerType": "STICKER",
+    "effect": "OTHER",
+    "collection": null,
+    "tournament": null
+  },
+  {
+    "id": "11208",
+    "name": "Radiograph",
+    "stickerImage": "assets/stickers/11208.webp",
+    "rarity": "HIGH_GRADE",
+    "stickerType": "STICKER",
+    "effect": "OTHER",
+    "collection": null,
+    "tournament": null
+  },
+  {
+    "id": "11209",
+    "name": "Rocket Skates",
+    "stickerImage": "assets/stickers/11209.webp",
+    "rarity": "HIGH_GRADE",
+    "stickerType": "STICKER",
+    "effect": "OTHER",
+    "collection": null,
+    "tournament": null
+  },
+  {
+    "id": "11210",
+    "name": "Skull Bunny",
+    "stickerImage": "assets/stickers/11210.webp",
+    "rarity": "HIGH_GRADE",
+    "stickerType": "STICKER",
+    "effect": "OTHER",
+    "collection": null,
+    "tournament": null
+  },
+  {
+    "id": "11211",
+    "name": "The Magic Trick",
+    "stickerImage": "assets/stickers/11211.webp",
+    "rarity": "HIGH_GRADE",
+    "stickerType": "STICKER",
+    "effect": "OTHER",
+    "collection": null,
+    "tournament": null
+  },
+  {
+    "id": "11212",
+    "name": "WARNING",
+    "stickerImage": "assets/stickers/11212.webp",
+    "rarity": "HIGH_GRADE",
+    "stickerType": "STICKER",
+    "effect": "OTHER",
+    "collection": null,
+    "tournament": null
+  },
+  {
+    "id": "11213",
+    "name": "ZZZAP!",
+    "stickerImage": "assets/stickers/11213.webp",
+    "rarity": "HIGH_GRADE",
+    "stickerType": "STICKER",
+    "effect": "OTHER",
+    "collection": null,
+    "tournament": null
+  },
+  {
+    "id": "11214",
+    "name": "Airhorn (Glitter)",
+    "stickerImage": "assets/stickers/11214.webp",
+    "rarity": "REMARKABLE",
+    "stickerType": "STICKER",
+    "effect": "GLITTER",
+    "collection": null,
+    "tournament": null
+  },
+  {
+    "id": "11215",
+    "name": "Assterisk (Glitter)",
+    "stickerImage": "assets/stickers/11215.webp",
+    "rarity": "REMARKABLE",
+    "stickerType": "STICKER",
+    "effect": "GLITTER",
+    "collection": null,
+    "tournament": null
+  },
+  {
+    "id": "11216",
+    "name": "Big Red Rocket (Glitter)",
+    "stickerImage": "assets/stickers/11216.webp",
+    "rarity": "REMARKABLE",
+    "stickerType": "STICKER",
+    "effect": "GLITTER",
+    "collection": null,
+    "tournament": null
+  },
+  {
+    "id": "11217",
+    "name": "Head In Hands (Glitter)",
+    "stickerImage": "assets/stickers/11217.webp",
+    "rarity": "REMARKABLE",
+    "stickerType": "STICKER",
+    "effect": "GLITTER",
+    "collection": null,
+    "tournament": null
+  },
+  {
+    "id": "11218",
+    "name": "High Five! (Glitter)",
+    "stickerImage": "assets/stickers/11218.webp",
+    "rarity": "REMARKABLE",
+    "stickerType": "STICKER",
+    "effect": "GLITTER",
+    "collection": null,
+    "tournament": null
+  },
+  {
+    "id": "11219",
+    "name": "Skull Bunny (Glitter)",
+    "stickerImage": "assets/stickers/11219.webp",
+    "rarity": "REMARKABLE",
+    "stickerType": "STICKER",
+    "effect": "GLITTER",
+    "collection": null,
+    "tournament": null
+  },
+  {
+    "id": "11220",
+    "name": "The Magic Trick (Glitter)",
+    "stickerImage": "assets/stickers/11220.webp",
+    "rarity": "REMARKABLE",
+    "stickerType": "STICKER",
+    "effect": "GLITTER",
+    "collection": null,
+    "tournament": null
+  },
+  {
+    "id": "11221",
+    "name": "Boner Snap (Holo)",
+    "stickerImage": "assets/stickers/11221.webp",
+    "rarity": "REMARKABLE",
+    "stickerType": "STICKER",
+    "effect": "HOLO",
+    "collection": null,
+    "tournament": null
+  },
+  {
+    "id": "11222",
+    "name": "Jackass (Holo)",
+    "stickerImage": "assets/stickers/11222.webp",
+    "rarity": "REMARKABLE",
+    "stickerType": "STICKER",
+    "effect": "HOLO",
+    "collection": null,
+    "tournament": null
+  },
+  {
+    "id": "11223",
+    "name": "Gonna Leave A Mark (Holo)",
+    "stickerImage": "assets/stickers/11223.webp",
+    "rarity": "REMARKABLE",
+    "stickerType": "STICKER",
+    "effect": "HOLO",
+    "collection": null,
+    "tournament": null
+  },
+  {
+    "id": "11224",
+    "name": "Partyboy (Lenticular)",
+    "stickerImage": "assets/stickers/11224.webp",
+    "rarity": "EXTRAORDINARY",
+    "stickerType": "STICKER",
+    "effect": "LENTICULAR",
+    "collection": null,
+    "tournament": null
+  },
+  {
+    "id": "11225",
+    "name": "Radiograph (Holo)",
+    "stickerImage": "assets/stickers/11225.webp",
+    "rarity": "REMARKABLE",
+    "stickerType": "STICKER",
+    "effect": "HOLO",
+    "collection": null,
+    "tournament": null
+  },
+  {
+    "id": "11226",
+    "name": "Rocket Skates (Holo)",
+    "stickerImage": "assets/stickers/11226.webp",
+    "rarity": "REMARKABLE",
+    "stickerType": "STICKER",
+    "effect": "HOLO",
+    "collection": null,
+    "tournament": null
+  },
+  {
+    "id": "11227",
+    "name": "ZZZAP! (Holo)",
+    "stickerImage": "assets/stickers/11227.webp",
+    "rarity": "REMARKABLE",
+    "stickerType": "STICKER",
+    "effect": "HOLO",
+    "collection": null,
+    "tournament": null
+  },
+  {
+    "id": "11228",
+    "name": "Assterisk (Foil)",
+    "stickerImage": "assets/stickers/11228.webp",
+    "rarity": "EXOTIC",
+    "stickerType": "STICKER",
+    "effect": "FOIL",
+    "collection": null,
+    "tournament": null
+  },
+  {
+    "id": "11229",
+    "name": "Censored (Foil)",
+    "stickerImage": "assets/stickers/11229.webp",
+    "rarity": "EXOTIC",
+    "stickerType": "STICKER",
+    "effect": "FOIL",
+    "collection": null,
+    "tournament": null
+  },
+  {
+    "id": "11230",
+    "name": "Explosives (Foil)",
+    "stickerImage": "assets/stickers/11230.webp",
+    "rarity": "EXOTIC",
+    "stickerType": "STICKER",
+    "effect": "FOIL",
+    "collection": null,
+    "tournament": null
+  },
+  {
+    "id": "11231",
+    "name": "Radiograph (Foil)",
+    "stickerImage": "assets/stickers/11231.webp",
+    "rarity": "EXOTIC",
+    "stickerType": "STICKER",
+    "effect": "FOIL",
+    "collection": null,
+    "tournament": null
+  },
+  {
+    "id": "11232",
+    "name": "WARNING (Foil)",
+    "stickerImage": "assets/stickers/11232.webp",
+    "rarity": "EXOTIC",
+    "stickerType": "STICKER",
+    "effect": "FOIL",
+    "collection": null,
+    "tournament": null
+  },
+  {
+    "id": "11233",
+    "name": "Electric Avenue (Lenticular)",
+    "stickerImage": "assets/stickers/11233.webp",
+    "rarity": "EXTRAORDINARY",
+    "stickerType": "STICKER",
+    "effect": "LENTICULAR",
+    "collection": null,
+    "tournament": null
+  },
+  {
+    "id": "11234",
+    "name": "Poo Cocktail Supreme (Lenticular)",
+    "stickerImage": "assets/stickers/11234.webp",
+    "rarity": "EXTRAORDINARY",
+    "stickerType": "STICKER",
+    "effect": "LENTICULAR",
+    "collection": null,
+    "tournament": null
   }
 ]

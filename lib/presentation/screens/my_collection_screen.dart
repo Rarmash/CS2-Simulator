@@ -495,17 +495,16 @@ class _MyCollectionScreenState extends State<MyCollectionScreen> {
                 uniqueItems: data.summaries.length,
                 totalCollected: totalCollected,
                 totalAvailable: totalAvailable,
-                onOpenHistory: _openHistory,
-                onRefresh: _refresh,
               ),
-              _CollectionProgressSection(items: data.progress),
-              _SourceHighlightsSection(
-                items: data.sourceHighlights,
+              _CollectionInsightsPanel(
+                progressItems: data.progress,
+                sourceItems: data.sourceHighlights,
                 onItemTap: _openSourceHighlight,
               ),
               Expanded(
                 child: _InventoryTab(
                   summaries: filteredSummaries,
+                  allSummaries: data.summaries,
                   totalCount: data.summaries.length,
                   search: _inventorySearch,
                   selectedCategory: _inventoryCategory,
@@ -658,16 +657,12 @@ class _CollectionOverview extends StatelessWidget {
   final int uniqueItems;
   final int totalCollected;
   final int totalAvailable;
-  final VoidCallback onOpenHistory;
-  final VoidCallback onRefresh;
 
   const _CollectionOverview({
     required this.totalEntries,
     required this.uniqueItems,
     required this.totalCollected,
     required this.totalAvailable,
-    required this.onOpenHistory,
-    required this.onRefresh,
   });
 
   @override
@@ -680,51 +675,121 @@ class _CollectionOverview extends StatelessWidget {
       padding: const EdgeInsets.fromLTRB(12, 12, 12, 0),
       child: Card(
         child: Padding(
-          padding: const EdgeInsets.all(14),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+          child: Wrap(
+            spacing: 10,
+            runSpacing: 10,
             children: [
-              Wrap(
-                spacing: 12,
-                runSpacing: 12,
-                children: [
-                  _StatChip(
-                    icon: Icons.inventory_2_outlined,
-                    label: 'Collected entries',
-                    value: '$totalEntries',
-                  ),
-                  _StatChip(
-                    icon: Icons.collections_bookmark_outlined,
-                    label: 'Unique items',
-                    value: '$uniqueItems',
-                  ),
-                  _StatChip(
-                    icon: Icons.checklist_outlined,
-                    label: 'Overall completion',
-                    value:
-                        '$totalCollected / $totalAvailable (${(completion * 100).floor()}%)',
-                  ),
-                ],
+              _StatChip(
+                icon: Icons.inventory_2_outlined,
+                label: 'Entries',
+                value: '$totalEntries',
               ),
-              const SizedBox(height: 12),
-              Wrap(
-                spacing: 10,
-                runSpacing: 10,
-                children: [
-                  OutlinedButton.icon(
-                    onPressed: onOpenHistory,
-                    icon: const Icon(Icons.history),
-                    label: const Text('Recent Activity'),
-                  ),
-                  OutlinedButton.icon(
-                    onPressed: onRefresh,
-                    icon: const Icon(Icons.refresh),
-                    label: const Text('Refresh Collection'),
-                  ),
-                ],
+              _StatChip(
+                icon: Icons.collections_bookmark_outlined,
+                label: 'Unique',
+                value: '$uniqueItems',
+              ),
+              _StatChip(
+                icon: Icons.checklist_outlined,
+                label: 'Complete',
+                value:
+                    '$totalCollected/$totalAvailable (${(completion * 100).floor()}%)',
               ),
             ],
           ),
+        ),
+      ),
+    );
+  }
+}
+
+class _CollectionInsightsPanel extends StatefulWidget {
+  final List<_CollectionProgressItem> progressItems;
+  final List<_SourceProgressItem> sourceItems;
+  final ValueChanged<_SourceProgressItem> onItemTap;
+
+  const _CollectionInsightsPanel({
+    required this.progressItems,
+    required this.sourceItems,
+    required this.onItemTap,
+  });
+
+  @override
+  State<_CollectionInsightsPanel> createState() =>
+      _CollectionInsightsPanelState();
+}
+
+class _CollectionInsightsPanelState extends State<_CollectionInsightsPanel> {
+  bool _expanded = false;
+
+  @override
+  Widget build(BuildContext context) {
+    if (widget.progressItems.isEmpty && widget.sourceItems.isEmpty) {
+      return const SizedBox.shrink();
+    }
+
+    final progressCount = widget.progressItems.length;
+    final sourceCount = widget.sourceItems.length;
+
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(12, 8, 12, 0),
+      child: Card(
+        child: Column(
+          children: [
+            InkWell(
+              borderRadius: BorderRadius.circular(8),
+              onTap: () {
+                setState(() {
+                  _expanded = !_expanded;
+                });
+              },
+              child: Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 12,
+                  vertical: 10,
+                ),
+                child: Row(
+                  children: [
+                    const Icon(Icons.insights_outlined, size: 20),
+                    const SizedBox(width: 10),
+                    Expanded(
+                      child: Text(
+                        sourceCount == 0
+                            ? 'Progress by category'
+                            : 'Progress by category and source',
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: const TextStyle(fontWeight: FontWeight.w700),
+                      ),
+                    ),
+                    Text(
+                      '$progressCount groups'
+                      '${sourceCount == 0 ? '' : ' • $sourceCount sources'}',
+                      style: const TextStyle(
+                        color: Colors.white60,
+                        fontSize: 12,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                    const SizedBox(width: 6),
+                    Icon(
+                      _expanded ? Icons.expand_less : Icons.expand_more,
+                      color: Colors.white70,
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            if (_expanded) ...[
+              const Divider(height: 1),
+              _CollectionProgressSection(items: widget.progressItems),
+              _SourceHighlightsSection(
+                items: widget.sourceItems,
+                onItemTap: widget.onItemTap,
+              ),
+            ],
+          ],
         ),
       ),
     );
@@ -743,28 +808,21 @@ class _CollectionProgressSection extends StatelessWidget {
     }
 
     return Padding(
-      padding: const EdgeInsets.fromLTRB(12, 12, 12, 0),
-      child: Card(
-        child: Padding(
-          padding: const EdgeInsets.all(14),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const Text(
-                'Collection Progress',
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700),
-              ),
-              const SizedBox(height: 12),
-              Wrap(
-                spacing: 10,
-                runSpacing: 10,
-                children: items
-                    .map((item) => _ProgressTile(item: item))
-                    .toList(),
-              ),
-            ],
+      padding: const EdgeInsets.all(12),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const Text(
+            'Collection Progress',
+            style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700),
           ),
-        ),
+          const SizedBox(height: 12),
+          Wrap(
+            spacing: 10,
+            runSpacing: 10,
+            children: items.map((item) => _ProgressTile(item: item)).toList(),
+          ),
+        ],
       ),
     );
   }
@@ -786,35 +844,30 @@ class _SourceHighlightsSection extends StatelessWidget {
     }
 
     return Padding(
-      padding: const EdgeInsets.fromLTRB(12, 12, 12, 0),
-      child: Card(
-        child: Padding(
-          padding: const EdgeInsets.all(14),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const Text(
-                'Best Source Progress',
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700),
-              ),
-              const SizedBox(height: 4),
-              const Text(
-                'Your most completed containers and collection sources.',
-                style: TextStyle(color: Colors.white70, fontSize: 12),
-              ),
-              const SizedBox(height: 12),
-              ...items.map(
-                (item) => Padding(
-                  padding: const EdgeInsets.only(bottom: 10),
-                  child: _SourceHighlightTile(
-                    item: item,
-                    onTap: () => onItemTap(item),
-                  ),
-                ),
-              ),
-            ],
+      padding: const EdgeInsets.fromLTRB(12, 0, 12, 12),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const Text(
+            'Best Source Progress',
+            style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700),
           ),
-        ),
+          const SizedBox(height: 4),
+          const Text(
+            'Your most completed containers and collection sources.',
+            style: TextStyle(color: Colors.white70, fontSize: 12),
+          ),
+          const SizedBox(height: 12),
+          ...items.map(
+            (item) => Padding(
+              padding: const EdgeInsets.only(bottom: 10),
+              child: _SourceHighlightTile(
+                item: item,
+                onTap: () => onItemTap(item),
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }
@@ -1067,8 +1120,9 @@ class _SecondaryScreenHint extends StatelessWidget {
   }
 }
 
-class _InventoryTab extends StatelessWidget {
+class _InventoryTab extends StatefulWidget {
   final List<CollectionSummary> summaries;
+  final List<CollectionSummary> allSummaries;
   final int totalCount;
   final String search;
   final String selectedCategory;
@@ -1084,6 +1138,7 @@ class _InventoryTab extends StatelessWidget {
 
   const _InventoryTab({
     required this.summaries,
+    required this.allSummaries,
     required this.totalCount,
     required this.search,
     required this.selectedCategory,
@@ -1099,14 +1154,49 @@ class _InventoryTab extends StatelessWidget {
   });
 
   @override
+  State<_InventoryTab> createState() => _InventoryTabState();
+}
+
+class _InventoryTabState extends State<_InventoryTab> {
+  late final TextEditingController _searchController;
+  bool _filtersExpanded = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _searchController = TextEditingController(text: widget.search);
+  }
+
+  @override
+  void didUpdateWidget(covariant _InventoryTab oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (widget.search != _searchController.text) {
+      _searchController.text = widget.search;
+    }
+  }
+
+  @override
+  void dispose() {
+    _searchController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final categoryValues =
-        summaries.map((item) => item.filterCategory).toSet().toList()..sort();
-    final rarityValues = summaries.map((item) => item.rarity).toSet().toList()
-      ..sort();
+        widget.allSummaries.map((item) => item.filterCategory).toSet().toList()
+          ..sort();
+    final rarityValues =
+        widget.allSummaries.map((item) => item.rarity).toSet().toList()..sort();
 
     final categoryOptions = <String>['ALL', ...categoryValues];
     final rarityOptions = <String>['ALL', ...rarityValues];
+    final activeFilterCount = [
+      widget.selectedCategory != 'ALL',
+      widget.selectedRarity != 'ALL',
+      widget.selectedStatTrak != 'ALL',
+      widget.selectedSort != 'LATEST',
+    ].where((active) => active).length;
 
     return CustomScrollView(
       slivers: [
@@ -1126,151 +1216,197 @@ class _InventoryTab extends StatelessWidget {
                     return Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        TextFormField(
-                          initialValue: search,
-                          decoration: const InputDecoration(
-                            hintText: 'Search your collection...',
-                            prefixIcon: Icon(Icons.search),
-                            isDense: true,
-                          ),
-                          onChanged: onSearchChanged,
-                        ),
-                        const SizedBox(height: 10),
-                        Wrap(
-                          spacing: 10,
-                          runSpacing: 10,
-                          children: [
-                            SizedBox(
-                              width: fieldWidth,
-                              child: DropdownButtonFormField<String>(
-                                initialValue: selectedCategory,
-                                decoration: const InputDecoration(
-                                  labelText: 'Category',
-                                  isDense: true,
-                                ),
-                                items: categoryOptions
-                                    .map(
-                                      (option) => DropdownMenuItem<String>(
-                                        value: option,
-                                        child: Text(
-                                          option == 'ALL'
-                                              ? 'All'
-                                              : _categoryLabelFor(option),
-                                        ),
-                                      ),
-                                    )
-                                    .toList(),
-                                onChanged: (value) {
-                                  if (value != null) {
-                                    onCategoryChanged(value);
-                                  }
-                                },
-                              ),
-                            ),
-                            SizedBox(
-                              width: fieldWidth,
-                              child: DropdownButtonFormField<String>(
-                                initialValue: selectedRarity,
-                                decoration: const InputDecoration(
-                                  labelText: 'Rarity',
-                                  isDense: true,
-                                ),
-                                items: rarityOptions
-                                    .map(
-                                      (option) => DropdownMenuItem<String>(
-                                        value: option,
-                                        child: Text(
-                                          option == 'ALL'
-                                              ? 'All'
-                                              : _rarityLabel(option),
-                                        ),
-                                      ),
-                                    )
-                                    .toList(),
-                                onChanged: (value) {
-                                  if (value != null) {
-                                    onRarityChanged(value);
-                                  }
-                                },
-                              ),
-                            ),
-                            SizedBox(
-                              width: fieldWidth,
-                              child: DropdownButtonFormField<String>(
-                                initialValue: selectedStatTrak,
-                                decoration: const InputDecoration(
-                                  labelText: 'StatTrak',
-                                  isDense: true,
-                                ),
-                                items: const [
-                                  DropdownMenuItem(
-                                    value: 'ALL',
-                                    child: Text('All'),
-                                  ),
-                                  DropdownMenuItem(
-                                    value: 'ONLY',
-                                    child: Text('Only StatTrak'),
-                                  ),
-                                  DropdownMenuItem(
-                                    value: 'NONE',
-                                    child: Text('No StatTrak'),
-                                  ),
-                                ],
-                                onChanged: (value) {
-                                  if (value != null) {
-                                    onStatTrakChanged(value);
-                                  }
-                                },
-                              ),
-                            ),
-                          ],
-                        ),
-                        const SizedBox(height: 10),
                         Row(
                           children: [
                             Expanded(
-                              child: DropdownButtonFormField<String>(
-                                initialValue: selectedSort,
-                                decoration: const InputDecoration(
-                                  labelText: 'Sort by',
+                              child: TextField(
+                                controller: _searchController,
+                                decoration: InputDecoration(
+                                  hintText: 'Search your collection...',
+                                  prefixIcon: const Icon(Icons.search),
+                                  suffixIcon: widget.search.isEmpty
+                                      ? null
+                                      : IconButton(
+                                          tooltip: 'Clear',
+                                          onPressed: () {
+                                            _searchController.clear();
+                                            widget.onSearchChanged('');
+                                          },
+                                          icon: const Icon(Icons.clear),
+                                        ),
                                   isDense: true,
                                 ),
-                                items: const [
-                                  DropdownMenuItem(
-                                    value: 'LATEST',
-                                    child: Text('Latest'),
-                                  ),
-                                  DropdownMenuItem(
-                                    value: 'MOST_OWNED',
-                                    child: Text('Most collected'),
-                                  ),
-                                  DropdownMenuItem(
-                                    value: 'BEST_FLOAT',
-                                    child: Text('Best float'),
-                                  ),
-                                  DropdownMenuItem(
-                                    value: 'A_Z',
-                                    child: Text('Name A-Z'),
-                                  ),
-                                ],
-                                onChanged: (value) {
-                                  if (value != null) {
-                                    onSortChanged(value);
-                                  }
-                                },
+                                onChanged: widget.onSearchChanged,
                               ),
                             ),
-                            const SizedBox(width: 12),
-                            Text(
-                              '${summaries.length} / $totalCount',
-                              style: const TextStyle(
-                                color: Colors.white54,
-                                fontSize: 12,
-                                fontWeight: FontWeight.w600,
+                            const SizedBox(width: 8),
+                            IconButton.filledTonal(
+                              tooltip: 'Filters',
+                              onPressed: () {
+                                setState(() {
+                                  _filtersExpanded = !_filtersExpanded;
+                                });
+                              },
+                              icon: Badge.count(
+                                count: activeFilterCount,
+                                isLabelVisible: activeFilterCount > 0,
+                                child: Icon(
+                                  _filtersExpanded
+                                      ? Icons.tune
+                                      : Icons.tune_outlined,
+                                ),
                               ),
                             ),
                           ],
                         ),
+                        const SizedBox(height: 8),
+                        Row(
+                          children: [
+                            Expanded(
+                              child: Text(
+                                '${widget.summaries.length} / ${widget.totalCount} items',
+                                style: const TextStyle(
+                                  color: Colors.white60,
+                                  fontSize: 12,
+                                  fontWeight: FontWeight.w600,
+                                ),
+                              ),
+                            ),
+                            if (activeFilterCount > 0)
+                              Text(
+                                '$activeFilterCount active filter'
+                                '${activeFilterCount == 1 ? '' : 's'}',
+                                style: const TextStyle(
+                                  color: Colors.white60,
+                                  fontSize: 12,
+                                  fontWeight: FontWeight.w600,
+                                ),
+                              ),
+                          ],
+                        ),
+                        if (_filtersExpanded) ...[
+                          const SizedBox(height: 10),
+                          Wrap(
+                            spacing: 10,
+                            runSpacing: 10,
+                            children: [
+                              SizedBox(
+                                width: fieldWidth,
+                                child: DropdownButtonFormField<String>(
+                                  initialValue: widget.selectedCategory,
+                                  decoration: const InputDecoration(
+                                    labelText: 'Category',
+                                    isDense: true,
+                                  ),
+                                  items: categoryOptions
+                                      .map(
+                                        (option) => DropdownMenuItem<String>(
+                                          value: option,
+                                          child: Text(
+                                            option == 'ALL'
+                                                ? 'All'
+                                                : _categoryLabelFor(option),
+                                          ),
+                                        ),
+                                      )
+                                      .toList(),
+                                  onChanged: (value) {
+                                    if (value != null) {
+                                      widget.onCategoryChanged(value);
+                                    }
+                                  },
+                                ),
+                              ),
+                              SizedBox(
+                                width: fieldWidth,
+                                child: DropdownButtonFormField<String>(
+                                  initialValue: widget.selectedRarity,
+                                  decoration: const InputDecoration(
+                                    labelText: 'Rarity',
+                                    isDense: true,
+                                  ),
+                                  items: rarityOptions
+                                      .map(
+                                        (option) => DropdownMenuItem<String>(
+                                          value: option,
+                                          child: Text(
+                                            option == 'ALL'
+                                                ? 'All'
+                                                : _rarityLabel(option),
+                                          ),
+                                        ),
+                                      )
+                                      .toList(),
+                                  onChanged: (value) {
+                                    if (value != null) {
+                                      widget.onRarityChanged(value);
+                                    }
+                                  },
+                                ),
+                              ),
+                              SizedBox(
+                                width: fieldWidth,
+                                child: DropdownButtonFormField<String>(
+                                  initialValue: widget.selectedStatTrak,
+                                  decoration: const InputDecoration(
+                                    labelText: 'StatTrak',
+                                    isDense: true,
+                                  ),
+                                  items: const [
+                                    DropdownMenuItem(
+                                      value: 'ALL',
+                                      child: Text('All'),
+                                    ),
+                                    DropdownMenuItem(
+                                      value: 'ONLY',
+                                      child: Text('Only StatTrak'),
+                                    ),
+                                    DropdownMenuItem(
+                                      value: 'NONE',
+                                      child: Text('No StatTrak'),
+                                    ),
+                                  ],
+                                  onChanged: (value) {
+                                    if (value != null) {
+                                      widget.onStatTrakChanged(value);
+                                    }
+                                  },
+                                ),
+                              ),
+                            ],
+                          ),
+                          const SizedBox(height: 10),
+                          DropdownButtonFormField<String>(
+                            initialValue: widget.selectedSort,
+                            decoration: const InputDecoration(
+                              labelText: 'Sort by',
+                              isDense: true,
+                            ),
+                            items: const [
+                              DropdownMenuItem(
+                                value: 'LATEST',
+                                child: Text('Latest'),
+                              ),
+                              DropdownMenuItem(
+                                value: 'MOST_OWNED',
+                                child: Text('Most collected'),
+                              ),
+                              DropdownMenuItem(
+                                value: 'BEST_FLOAT',
+                                child: Text('Best float'),
+                              ),
+                              DropdownMenuItem(
+                                value: 'A_Z',
+                                child: Text('Name A-Z'),
+                              ),
+                            ],
+                            onChanged: (value) {
+                              if (value != null) {
+                                widget.onSortChanged(value);
+                              }
+                            },
+                          ),
+                        ],
                       ],
                     );
                   },
@@ -1279,7 +1415,7 @@ class _InventoryTab extends StatelessWidget {
             ),
           ),
         ),
-        if (summaries.isEmpty)
+        if (widget.summaries.isEmpty)
           const SliverFillRemaining(
             hasScrollBody: false,
             child: _EmptyCollectionState(
@@ -1297,10 +1433,11 @@ class _InventoryTab extends StatelessWidget {
                 (context, index) => index.isOdd
                     ? const SizedBox(height: 10)
                     : _InventoryCard(
-                        summary: summaries[index ~/ 2],
-                        onTap: () => onItemTap(summaries[index ~/ 2]),
+                        summary: widget.summaries[index ~/ 2],
+                        onTap: () =>
+                            widget.onItemTap(widget.summaries[index ~/ 2]),
                       ),
-                childCount: summaries.length * 2 - 1,
+                childCount: widget.summaries.length * 2 - 1,
               ),
             ),
           ),

@@ -38,6 +38,7 @@ class GenericGlossaryScreen<T> extends StatefulWidget {
 }
 
 class _GenericGlossaryScreenState<T> extends State<GenericGlossaryScreen<T>> {
+  late final Future<_GenericGlossaryData<T>> _future;
   final TextEditingController _searchController = TextEditingController();
   final CollectionTrackingService _collectionTracking =
       CollectionTrackingService();
@@ -46,6 +47,7 @@ class _GenericGlossaryScreenState<T> extends State<GenericGlossaryScreen<T>> {
   @override
   void initState() {
     super.initState();
+    _future = _loadData();
     _searchController.addListener(() {
       setState(() {
         _query = _searchController.text.trim().toLowerCase();
@@ -64,7 +66,7 @@ class _GenericGlossaryScreenState<T> extends State<GenericGlossaryScreen<T>> {
     return Scaffold(
       appBar: AppBar(title: Text(widget.title)),
       body: FutureBuilder<_GenericGlossaryData<T>>(
-        future: _loadData(),
+        future: _future,
         builder: (context, snapshot) {
           if (snapshot.connectionState != ConnectionState.done) {
             return const Center(child: CircularProgressIndicator());

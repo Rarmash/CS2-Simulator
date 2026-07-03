@@ -270,7 +270,7 @@ class IoUtils {
           try {
             await inputFile.writeAsBytes(bytes);
             await webpFile.parent.create(recursive: true);
-            final result = await Process.run(cwebpPath, [
+            final process = await Process.start(cwebpPath, [
               '-lossless',
               '-z',
               (compressionModeOverride ?? compressionMode) ==
@@ -283,11 +283,21 @@ class IoUtils {
               '-o',
               webpFile.path,
             ]);
-            if (result.exitCode == 0 && webpFile.existsSync()) {
+            final stderrOutput = StringBuffer();
+            process.stderr.transform(utf8.decoder).listen(stderrOutput.write);
+            process.stdout.drain<void>();
+            final exitCode = await process.exitCode.timeout(
+              const Duration(seconds: 15),
+              onTimeout: () {
+                process.kill();
+                return -1;
+              },
+            );
+            if (exitCode == 0 && webpFile.existsSync()) {
               return '.webp';
             }
             stderr.writeln(
-              '[WARN] cwebp failed for $url -> $pathWithoutExt: ${result.stderr}',
+              '[WARN] cwebp failed for $url -> $pathWithoutExt: $stderrOutput',
             );
           } finally {
             if (inputFile.existsSync()) {
