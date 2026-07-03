@@ -761,6 +761,7 @@ const containerReleaseDateOverrides = <String, String>{
   'Warhammer 40,000 Imperium Sticker Capsule': '2025-05-22',
   'Warhammer 40,000 Traitor Astartes Sticker Capsule': '2025-05-22',
   'Warhammer 40,000 Xenos Sticker Capsule': '2025-05-22',
+  'Jackass Sticker Capsule': '2026-07-03',
   'Collectible Pins Capsule Series 1': '2016-06-01',
   'Collectible Pins Capsule Series 2': '2016-09-28',
   'Collectible Pins Capsule Series 3': '2018-03-01',

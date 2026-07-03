@@ -6136,5 +6136,17 @@
     "sourceType": null,
     "sourceId": null,
     "sourceName": null
+  },
+  {
+    "id": "30004",
+    "name": "Jackass Sticker Capsule",
+    "containerImage": "assets/containers/30004.webp",
+    "releaseDate": "2026-07-03",
+    "type": "STICKER_CAPSULE",
+    "tournamentName": null,
+    "tournamentLogo": null,
+    "sourceType": null,
+    "sourceId": null,
+    "sourceName": null
   }
 ]

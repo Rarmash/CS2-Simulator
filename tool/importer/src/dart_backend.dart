@@ -386,6 +386,7 @@ class DartImporterBackend implements ImporterBackend {
         relativeDir: 'assets/containers',
         id: containerId,
         existingRelativePath: existingCase?['containerImage']?.toString(),
+        refreshWhenNoExisting: true,
       );
       final patchCollectionSource = containerType == 'PATCH_COLLECTION'
           ? resolvePatchCollectionSource(crateName)
@@ -810,6 +811,7 @@ class DartImporterBackend implements ImporterBackend {
               id: containerId,
               existingRelativePath: existingCaseMeta?['containerImage']
                   ?.toString(),
+              refreshWhenNoExisting: true,
             );
             newCases[containerId] = {
               'id': containerId,
@@ -961,6 +963,7 @@ class DartImporterBackend implements ImporterBackend {
               id: containerId,
               existingRelativePath: existingCaseMeta?['containerImage']
                   ?.toString(),
+              refreshWhenNoExisting: true,
             );
             newCases[containerId] = {
               'id': containerId,
@@ -2412,10 +2415,31 @@ class DartImporterBackend implements ImporterBackend {
     required String id,
     String? existingRelativePath,
     CompressionMode? compressionModeOverride,
+    bool refreshWhenNoExisting = false,
   }) async {
     final existing = (existingRelativePath ?? '').trim();
     if (existing.isNotEmpty && File(existing).existsSync()) {
       return existing;
+    }
+
+    if (refreshWhenNoExisting && existing.isEmpty) {
+      if (imageUrl != null && imageUrl.isNotEmpty) {
+        for (final ext in ['.webp', '.png', '.jpg', '.svg']) {
+          final file = File('$dirPath/$id$ext');
+          if (file.existsSync()) {
+            await file.delete();
+          }
+        }
+
+        final ext = await _io.downloadOptimizedAsset(
+          imageUrl,
+          '$dirPath/$id',
+          compressionModeOverride: compressionModeOverride,
+        );
+        if (ext != null) {
+          return '$relativeDir/$id$ext';
+        }
+      }
     }
 
     for (final ext in ['.webp', '.png', '.jpg', '.svg']) {
