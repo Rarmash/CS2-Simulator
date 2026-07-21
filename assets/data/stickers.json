@@ -96670,6 +96670,536 @@
     "tournament": "StarLadder Budapest 2025"
   },
   {
+    "id": "10314",
+    "name": "B'nana Strike",
+    "stickerImage": "assets/stickers/10314.webp",
+    "rarity": "HIGH_GRADE",
+    "stickerType": "STICKER",
+    "effect": "OTHER",
+    "collection": "Fruits And Veggies Sticker Collection",
+    "tournament": null
+  },
+  {
+    "id": "10315",
+    "name": "Agent Kucumber",
+    "stickerImage": "assets/stickers/10315.webp",
+    "rarity": "HIGH_GRADE",
+    "stickerType": "STICKER",
+    "effect": "OTHER",
+    "collection": "Fruits And Veggies Sticker Collection",
+    "tournament": null
+  },
+  {
+    "id": "10316",
+    "name": "Box Logo",
+    "stickerImage": "assets/stickers/10316.webp",
+    "rarity": "HIGH_GRADE",
+    "stickerType": "STICKER",
+    "effect": "OTHER",
+    "collection": "Fruits And Veggies Sticker Collection",
+    "tournament": null
+  },
+  {
+    "id": "10317",
+    "name": "Cry Baby",
+    "stickerImage": "assets/stickers/10317.webp",
+    "rarity": "HIGH_GRADE",
+    "stickerType": "STICKER",
+    "effect": "OTHER",
+    "collection": "Fruits And Veggies Sticker Collection",
+    "tournament": null
+  },
+  {
+    "id": "10318",
+    "name": "Fresh Cut",
+    "stickerImage": "assets/stickers/10318.webp",
+    "rarity": "HIGH_GRADE",
+    "stickerType": "STICKER",
+    "effect": "OTHER",
+    "collection": "Fruits And Veggies Sticker Collection",
+    "tournament": null
+  },
+  {
+    "id": "10319",
+    "name": "From The Source",
+    "stickerImage": "assets/stickers/10319.webp",
+    "rarity": "HIGH_GRADE",
+    "stickerType": "STICKER",
+    "effect": "OTHER",
+    "collection": "Fruits And Veggies Sticker Collection",
+    "tournament": null
+  },
+  {
+    "id": "10320",
+    "name": "Heckler",
+    "stickerImage": "assets/stickers/10320.webp",
+    "rarity": "HIGH_GRADE",
+    "stickerType": "STICKER",
+    "effect": "OTHER",
+    "collection": "Fruits And Veggies Sticker Collection",
+    "tournament": null
+  },
+  {
+    "id": "10321",
+    "name": "Lemin",
+    "stickerImage": "assets/stickers/10321.webp",
+    "rarity": "HIGH_GRADE",
+    "stickerType": "STICKER",
+    "effect": "OTHER",
+    "collection": "Fruits And Veggies Sticker Collection",
+    "tournament": null
+  },
+  {
+    "id": "10322",
+    "name": "Peekle",
+    "stickerImage": "assets/stickers/10322.webp",
+    "rarity": "HIGH_GRADE",
+    "stickerType": "STICKER",
+    "effect": "OTHER",
+    "collection": "Fruits And Veggies Sticker Collection",
+    "tournament": null
+  },
+  {
+    "id": "10323",
+    "name": "Pungent Comms",
+    "stickerImage": "assets/stickers/10323.webp",
+    "rarity": "HIGH_GRADE",
+    "stickerType": "STICKER",
+    "effect": "OTHER",
+    "collection": "Fruits And Veggies Sticker Collection",
+    "tournament": null
+  },
+  {
+    "id": "10324",
+    "name": "Radish K",
+    "stickerImage": "assets/stickers/10324.webp",
+    "rarity": "HIGH_GRADE",
+    "stickerType": "STICKER",
+    "effect": "OTHER",
+    "collection": "Fruits And Veggies Sticker Collection",
+    "tournament": null
+  },
+  {
+    "id": "10325",
+    "name": "Scratch N' Whiff",
+    "stickerImage": "assets/stickers/10325.webp",
+    "rarity": "HIGH_GRADE",
+    "stickerType": "STICKER",
+    "effect": "OTHER",
+    "collection": "Fruits And Veggies Sticker Collection",
+    "tournament": null
+  },
+  {
+    "id": "10326",
+    "name": "Aceberry (Glitter)",
+    "stickerImage": "assets/stickers/10326.webp",
+    "rarity": "REMARKABLE",
+    "stickerType": "STICKER",
+    "effect": "GLITTER",
+    "collection": "Fruits And Veggies Sticker Collection",
+    "tournament": null
+  },
+  {
+    "id": "10327",
+    "name": "Apple A Day (Glitter)",
+    "stickerImage": "assets/stickers/10327.webp",
+    "rarity": "REMARKABLE",
+    "stickerType": "STICKER",
+    "effect": "GLITTER",
+    "collection": "Fruits And Veggies Sticker Collection",
+    "tournament": null
+  },
+  {
+    "id": "10328",
+    "name": "Juice Box (Holo)",
+    "stickerImage": "assets/stickers/10328.webp",
+    "rarity": "REMARKABLE",
+    "stickerType": "STICKER",
+    "effect": "HOLO",
+    "collection": "Fruits And Veggies Sticker Collection",
+    "tournament": null
+  },
+  {
+    "id": "10329",
+    "name": "Knife Streak (Holo)",
+    "stickerImage": "assets/stickers/10329.webp",
+    "rarity": "REMARKABLE",
+    "stickerType": "STICKER",
+    "effect": "HOLO",
+    "collection": "Fruits And Veggies Sticker Collection",
+    "tournament": null
+  },
+  {
+    "id": "10330",
+    "name": "From The Vine (Holo)",
+    "stickerImage": "assets/stickers/10330.webp",
+    "rarity": "REMARKABLE",
+    "stickerType": "STICKER",
+    "effect": "HOLO",
+    "collection": "Fruits And Veggies Sticker Collection",
+    "tournament": null
+  },
+  {
+    "id": "10331",
+    "name": "Hot Pepper (Holo)",
+    "stickerImage": "assets/stickers/10331.webp",
+    "rarity": "REMARKABLE",
+    "stickerType": "STICKER",
+    "effect": "HOLO",
+    "collection": "Fruits And Veggies Sticker Collection",
+    "tournament": null
+  },
+  {
+    "id": "10332",
+    "name": "Quality Control (Holo)",
+    "stickerImage": "assets/stickers/10332.webp",
+    "rarity": "REMARKABLE",
+    "stickerType": "STICKER",
+    "effect": "HOLO",
+    "collection": "Fruits And Veggies Sticker Collection",
+    "tournament": null
+  },
+  {
+    "id": "10333",
+    "name": "Ultra Fruity (Holo)",
+    "stickerImage": "assets/stickers/10333.webp",
+    "rarity": "REMARKABLE",
+    "stickerType": "STICKER",
+    "effect": "HOLO",
+    "collection": "Fruits And Veggies Sticker Collection",
+    "tournament": null
+  },
+  {
+    "id": "10334",
+    "name": "B-A-N-A-N-A-S (Foil)",
+    "stickerImage": "assets/stickers/10334.webp",
+    "rarity": "EXOTIC",
+    "stickerType": "STICKER",
+    "effect": "FOIL",
+    "collection": "Fruits And Veggies Sticker Collection",
+    "tournament": null
+  },
+  {
+    "id": "10335",
+    "name": "Bananart (Foil)",
+    "stickerImage": "assets/stickers/10335.webp",
+    "rarity": "EXOTIC",
+    "stickerType": "STICKER",
+    "effect": "FOIL",
+    "collection": "Fruits And Veggies Sticker Collection",
+    "tournament": null
+  },
+  {
+    "id": "10336",
+    "name": "Dragon Fruit (Foil)",
+    "stickerImage": "assets/stickers/10336.webp",
+    "rarity": "EXOTIC",
+    "stickerType": "STICKER",
+    "effect": "FOIL",
+    "collection": "Fruits And Veggies Sticker Collection",
+    "tournament": null
+  },
+  {
+    "id": "10337",
+    "name": "Early Bird (Foil)",
+    "stickerImage": "assets/stickers/10337.webp",
+    "rarity": "EXOTIC",
+    "stickerType": "STICKER",
+    "effect": "FOIL",
+    "collection": "Fruits And Veggies Sticker Collection",
+    "tournament": null
+  },
+  {
+    "id": "10338",
+    "name": "Fruit Fly (Foil)",
+    "stickerImage": "assets/stickers/10338.webp",
+    "rarity": "EXOTIC",
+    "stickerType": "STICKER",
+    "effect": "FOIL",
+    "collection": "Fruits And Veggies Sticker Collection",
+    "tournament": null
+  },
+  {
+    "id": "10339",
+    "name": "Pineapple On Pizza (Lenticular)",
+    "stickerImage": "assets/stickers/10339.webp",
+    "rarity": "EXTRAORDINARY",
+    "stickerType": "STICKER",
+    "effect": "LENTICULAR",
+    "collection": "Fruits And Veggies Sticker Collection",
+    "tournament": null
+  },
+  {
+    "id": "10340",
+    "name": "Pepper Gauge (Lenticular)",
+    "stickerImage": "assets/stickers/10340.webp",
+    "rarity": "EXTRAORDINARY",
+    "stickerType": "STICKER",
+    "effect": "LENTICULAR",
+    "collection": "Fruits And Veggies Sticker Collection",
+    "tournament": null
+  },
+  {
+    "id": "10341",
+    "name": "Blaze Breeze",
+    "stickerImage": "assets/stickers/10341.webp",
+    "rarity": "HIGH_GRADE",
+    "stickerType": "STICKER",
+    "effect": "OTHER",
+    "collection": "Auto Racing Sticker Collection",
+    "tournament": null
+  },
+  {
+    "id": "10342",
+    "name": "Bomb On Board",
+    "stickerImage": "assets/stickers/10342.webp",
+    "rarity": "HIGH_GRADE",
+    "stickerType": "STICKER",
+    "effect": "OTHER",
+    "collection": "Auto Racing Sticker Collection",
+    "tournament": null
+  },
+  {
+    "id": "10343",
+    "name": "Boreal Blast",
+    "stickerImage": "assets/stickers/10343.webp",
+    "rarity": "HIGH_GRADE",
+    "stickerType": "STICKER",
+    "effect": "OTHER",
+    "collection": "Auto Racing Sticker Collection",
+    "tournament": null
+  },
+  {
+    "id": "10344",
+    "name": "Bunnyhop Hydraulics",
+    "stickerImage": "assets/stickers/10344.webp",
+    "rarity": "HIGH_GRADE",
+    "stickerType": "STICKER",
+    "effect": "OTHER",
+    "collection": "Auto Racing Sticker Collection",
+    "tournament": null
+  },
+  {
+    "id": "10345",
+    "name": "Checkered Kukri",
+    "stickerImage": "assets/stickers/10345.webp",
+    "rarity": "HIGH_GRADE",
+    "stickerType": "STICKER",
+    "effect": "OTHER",
+    "collection": "Auto Racing Sticker Collection",
+    "tournament": null
+  },
+  {
+    "id": "10346",
+    "name": "Defusal Sprint",
+    "stickerImage": "assets/stickers/10346.webp",
+    "rarity": "HIGH_GRADE",
+    "stickerType": "STICKER",
+    "effect": "OTHER",
+    "collection": "Auto Racing Sticker Collection",
+    "tournament": null
+  },
+  {
+    "id": "10347",
+    "name": "Killometer",
+    "stickerImage": "assets/stickers/10347.webp",
+    "rarity": "HIGH_GRADE",
+    "stickerType": "STICKER",
+    "effect": "OTHER",
+    "collection": "Auto Racing Sticker Collection",
+    "tournament": null
+  },
+  {
+    "id": "10348",
+    "name": "Roentgen Raceclub",
+    "stickerImage": "assets/stickers/10348.webp",
+    "rarity": "HIGH_GRADE",
+    "stickerType": "STICKER",
+    "effect": "OTHER",
+    "collection": "Auto Racing Sticker Collection",
+    "tournament": null
+  },
+  {
+    "id": "10349",
+    "name": "Run Boost Lift Kits",
+    "stickerImage": "assets/stickers/10349.webp",
+    "rarity": "HIGH_GRADE",
+    "stickerType": "STICKER",
+    "effect": "OTHER",
+    "collection": "Auto Racing Sticker Collection",
+    "tournament": null
+  },
+  {
+    "id": "10350",
+    "name": "Safari Shine",
+    "stickerImage": "assets/stickers/10350.webp",
+    "rarity": "HIGH_GRADE",
+    "stickerType": "STICKER",
+    "effect": "OTHER",
+    "collection": "Auto Racing Sticker Collection",
+    "tournament": null
+  },
+  {
+    "id": "10351",
+    "name": "Sand Dune Baja Tour",
+    "stickerImage": "assets/stickers/10351.webp",
+    "rarity": "HIGH_GRADE",
+    "stickerType": "STICKER",
+    "effect": "OTHER",
+    "collection": "Auto Racing Sticker Collection",
+    "tournament": null
+  },
+  {
+    "id": "10353",
+    "name": "W Performance Tires",
+    "stickerImage": "assets/stickers/10353.webp",
+    "rarity": "HIGH_GRADE",
+    "stickerType": "STICKER",
+    "effect": "OTHER",
+    "collection": "Auto Racing Sticker Collection",
+    "tournament": null
+  },
+  {
+    "id": "10354",
+    "name": "Cone Zone (Holo)",
+    "stickerImage": "assets/stickers/10354.webp",
+    "rarity": "REMARKABLE",
+    "stickerType": "STICKER",
+    "effect": "HOLO",
+    "collection": "Auto Racing Sticker Collection",
+    "tournament": null
+  },
+  {
+    "id": "10355",
+    "name": "Engine Start (Holo)",
+    "stickerImage": "assets/stickers/10355.webp",
+    "rarity": "REMARKABLE",
+    "stickerType": "STICKER",
+    "effect": "HOLO",
+    "collection": "Auto Racing Sticker Collection",
+    "tournament": null
+  },
+  {
+    "id": "10356",
+    "name": "First Lap (Holo)",
+    "stickerImage": "assets/stickers/10356.webp",
+    "rarity": "REMARKABLE",
+    "stickerType": "STICKER",
+    "effect": "HOLO",
+    "collection": "Auto Racing Sticker Collection",
+    "tournament": null
+  },
+  {
+    "id": "10357",
+    "name": "Neo-Hold (Holo)",
+    "stickerImage": "assets/stickers/10357.webp",
+    "rarity": "REMARKABLE",
+    "stickerType": "STICKER",
+    "effect": "HOLO",
+    "collection": "Auto Racing Sticker Collection",
+    "tournament": null
+  },
+  {
+    "id": "10358",
+    "name": "Neo-Rush (Holo)",
+    "stickerImage": "assets/stickers/10358.webp",
+    "rarity": "REMARKABLE",
+    "stickerType": "STICKER",
+    "effect": "HOLO",
+    "collection": "Auto Racing Sticker Collection",
+    "tournament": null
+  },
+  {
+    "id": "10359",
+    "name": "Safety First (Holo)",
+    "stickerImage": "assets/stickers/10359.webp",
+    "rarity": "REMARKABLE",
+    "stickerType": "STICKER",
+    "effect": "HOLO",
+    "collection": "Auto Racing Sticker Collection",
+    "tournament": null
+  },
+  {
+    "id": "10360",
+    "name": "Eco Mode (Foil)",
+    "stickerImage": "assets/stickers/10360.webp",
+    "rarity": "EXOTIC",
+    "stickerType": "STICKER",
+    "effect": "FOIL",
+    "collection": "Auto Racing Sticker Collection",
+    "tournament": null
+  },
+  {
+    "id": "10361",
+    "name": "Lucky Charms (Foil)",
+    "stickerImage": "assets/stickers/10361.webp",
+    "rarity": "EXOTIC",
+    "stickerType": "STICKER",
+    "effect": "FOIL",
+    "collection": "Auto Racing Sticker Collection",
+    "tournament": null
+  },
+  {
+    "id": "10363",
+    "name": "Turbo Peek (Foil)",
+    "stickerImage": "assets/stickers/10363.webp",
+    "rarity": "EXOTIC",
+    "stickerType": "STICKER",
+    "effect": "FOIL",
+    "collection": "Auto Racing Sticker Collection",
+    "tournament": null
+  },
+  {
+    "id": "10364",
+    "name": "Sniper Ahead (Foil)",
+    "stickerImage": "assets/stickers/10364.webp",
+    "rarity": "EXOTIC",
+    "stickerType": "STICKER",
+    "effect": "FOIL",
+    "collection": "Auto Racing Sticker Collection",
+    "tournament": null
+  },
+  {
+    "id": "10365",
+    "name": "Burnout (Lenticular)",
+    "stickerImage": "assets/stickers/10365.webp",
+    "rarity": "EXTRAORDINARY",
+    "stickerType": "STICKER",
+    "effect": "LENTICULAR",
+    "collection": "Auto Racing Sticker Collection",
+    "tournament": null
+  },
+  {
+    "id": "10366",
+    "name": "Digital Dashboard (Lenticular)",
+    "stickerImage": "assets/stickers/10366.webp",
+    "rarity": "EXTRAORDINARY",
+    "stickerType": "STICKER",
+    "effect": "LENTICULAR",
+    "collection": "Auto Racing Sticker Collection",
+    "tournament": null
+  },
+  {
+    "id": "10367",
+    "name": "Handheld (Lenticular)",
+    "stickerImage": "assets/stickers/10367.webp",
+    "rarity": "EXTRAORDINARY",
+    "stickerType": "STICKER",
+    "effect": "LENTICULAR",
+    "collection": "Auto Racing Sticker Collection",
+    "tournament": null
+  },
+  {
+    "id": "10368",
+    "name": "NITRO! (Lenticular)",
+    "stickerImage": "assets/stickers/10368.webp",
+    "rarity": "EXTRAORDINARY",
+    "stickerType": "STICKER",
+    "effect": "LENTICULAR",
+    "collection": "Auto Racing Sticker Collection",
+    "tournament": null
+  },
+  {
     "id": "10369",
     "name": "Vitality | Cologne 2026",
     "stickerImage": "assets/stickers/10369.webp",
@@ -104588,6 +105118,26 @@
     "effect": "GOLD",
     "collection": null,
     "tournament": "IEM Cologne 2026"
+  },
+  {
+    "id": "11194",
+    "name": "Please Be Patient",
+    "stickerImage": "assets/stickers/11194.webp",
+    "rarity": "HIGH_GRADE",
+    "stickerType": "STICKER",
+    "effect": "OTHER",
+    "collection": "Auto Racing Sticker Collection",
+    "tournament": null
+  },
+  {
+    "id": "11195",
+    "name": "Born To Peek (Foil)",
+    "stickerImage": "assets/stickers/11195.webp",
+    "rarity": "EXOTIC",
+    "stickerType": "STICKER",
+    "effect": "FOIL",
+    "collection": "Auto Racing Sticker Collection",
+    "tournament": null
   },
   {
     "id": "11196",
