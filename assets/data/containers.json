@@ -6148,5 +6148,57 @@
     "sourceType": null,
     "sourceId": null,
     "sourceName": null
+  },
+  {
+    "id": "30006",
+    "name": "Auto Racing Sticker Collection",
+    "containerImage": "assets/containers/30006.webp",
+    "releaseDate": "2026-07-08",
+    "type": "STICKER_COLLECTION",
+    "tournamentName": null,
+    "tournamentLogo": null,
+    "sourceType": "ARMORY_REWARD",
+    "sourceId": "ARMORY",
+    "sourceName": "The Armory"
+  },
+  {
+    "id": "30005",
+    "name": "Fruits And Veggies Sticker Collection",
+    "containerImage": "assets/containers/30005.webp",
+    "releaseDate": "2026-07-08",
+    "type": "STICKER_COLLECTION",
+    "tournamentName": null,
+    "tournamentLogo": null,
+    "sourceType": "ARMORY_REWARD",
+    "sourceId": "ARMORY",
+    "sourceName": "The Armory"
+  },
+  {
+    "id": "10013",
+    "name": "The Arabesque Collection",
+    "containerImage": "assets/containers/10013.webp",
+    "releaseDate": "2026-07-08",
+    "type": "REWARD_COLLECTION",
+    "tournamentName": null,
+    "tournamentLogo": null,
+    "sourceType": "ARMORY_REWARD",
+    "sourceId": "ARMORY",
+    "sourceName": "The Armory",
+    "currency": "CREDITS",
+    "cost": 4
+  },
+  {
+    "id": "10012",
+    "name": "The Spy Tech Collection",
+    "containerImage": "assets/containers/10012.webp",
+    "releaseDate": "2026-07-08",
+    "type": "REWARD_COLLECTION",
+    "tournamentName": null,
+    "tournamentLogo": null,
+    "sourceType": "ARMORY_REWARD",
+    "sourceId": "ARMORY",
+    "sourceName": "The Armory",
+    "currency": "CREDITS",
+    "cost": 4
   }
 ]

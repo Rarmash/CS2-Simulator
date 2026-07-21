@@ -210,6 +210,18 @@ const stickerCollectionSourceOverrides = <String, Map<String, String>>{
     'sourceName': 'The Armory',
     'releaseDate': '2025-10-02',
   },
+  'Fruits And Veggies Sticker Collection': {
+    'sourceType': 'ARMORY_REWARD',
+    'sourceId': 'ARMORY',
+    'sourceName': 'The Armory',
+    'releaseDate': '2026-07-08',
+  },
+  'Auto Racing Sticker Collection': {
+    'sourceType': 'ARMORY_REWARD',
+    'sourceId': 'ARMORY',
+    'sourceName': 'The Armory',
+    'releaseDate': '2026-07-08',
+  },
 };
 
 const musicKitCollectionOverrides = <String, String>{
@@ -431,6 +443,20 @@ const defaultRewardSourceOverrides = <String, Map<String, Object>>{
     'currency': 'CREDITS',
     'cost': 4,
     'releaseDate': '2025-03-31',
+  },
+  'The Arabesque Collection': {
+    'sourceType': 'ARMORY',
+    'sourceId': 'ARMORY',
+    'currency': 'CREDITS',
+    'cost': 4,
+    'releaseDate': '2026-07-08',
+  },
+  'The Spy Tech Collection': {
+    'sourceType': 'ARMORY',
+    'sourceId': 'ARMORY',
+    'currency': 'CREDITS',
+    'cost': 4,
+    'releaseDate': '2026-07-08',
   },
 };
 

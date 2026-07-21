@@ -1064,6 +1064,7 @@ class DartImporterBackend implements ImporterBackend {
                 existingRelativePath:
                     existingCaseMeta?['containerImage']?.toString() ??
                     newCases[containerId]?['containerImage']?.toString(),
+                refreshWhenNoExisting: existingCaseMeta == null,
               ),
               'releaseDate': releaseDate,
               'type': 'STICKER_COLLECTION',
