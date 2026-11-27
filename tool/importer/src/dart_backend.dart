@@ -2452,6 +2452,7 @@ class DartImporterBackend implements ImporterBackend {
           imageUrl,
           '$dirPath/$id',
           compressionModeOverride: compressionModeOverride,
+          optimizeSticker: relativeDir == 'assets/stickers',
         );
         if (ext != null) {
           return '$relativeDir/$id$ext';
@@ -2471,6 +2472,7 @@ class DartImporterBackend implements ImporterBackend {
         imageUrl,
         '$dirPath/$id',
         compressionModeOverride: compressionModeOverride,
+        optimizeSticker: relativeDir == 'assets/stickers',
       );
       if (ext != null) {
         return '$relativeDir/$id$ext';
