@@ -6,6 +6,7 @@ import '../../core/utils/date_format_helper.dart';
 import '../../data/models/container_dto.dart';
 import '../../data/models/charm_dto.dart';
 import '../../data/repositories/local_data_repository.dart';
+import 'highlight_viewer_screen.dart';
 import '../helpers/app_navigation_helper.dart';
 import '../helpers/charm_ui_helper.dart';
 import '../widgets/collectible_details_card.dart';
@@ -85,6 +86,19 @@ class CharmDetailsScreen extends StatelessWidget {
                     ),
                 ],
               ),
+              if ((charm.video ?? '').isNotEmpty)
+                FilledButton.icon(
+                  onPressed: () => Navigator.of(context).push(
+                    MaterialPageRoute<void>(
+                      builder: (_) => HighlightViewerScreen(
+                        charm: charm,
+                        videoUri: Uri.parse(charm.video ?? ''),
+                      ),
+                    ),
+                  ),
+                  icon: const Icon(Icons.play_arrow),
+                  label: const Text('Watch Highlight'),
+                ),
               const SizedBox(height: 12),
               DetailSourceSection<ContainerDto>(
                 title: 'Collections',

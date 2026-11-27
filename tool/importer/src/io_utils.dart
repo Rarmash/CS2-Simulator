@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:ffi';
 import 'dart:io';
 
 import 'config.dart';
@@ -12,7 +13,7 @@ class IoUtils {
     ..userAgent = 'cs2-simulator-parser/0.9';
   final CompressionMode compressionMode;
   String? _cwebpBinaryPath;
-  Directory? _webpTempDir;
+  void close() => _client.close(force: true);
 
   void printInfo(String message) {
     stdout.writeln(message);
@@ -188,6 +189,7 @@ class IoUtils {
     String url,
     String pathWithoutExt, {
     CompressionMode? compressionModeOverride,
+    bool optimizeSticker = false,
   }) async {
     if (url.isEmpty) {
       return null;
@@ -223,7 +225,7 @@ class IoUtils {
         return '.svg';
       }
 
-      if (sourceExt == '.webp') {
+      if (sourceExt == '.webp' && !optimizeSticker) {
         final webpFile = File('$pathWithoutExt.webp');
         if (!webpFile.existsSync()) {
           await webpFile.parent.create(recursive: true);
@@ -232,7 +234,7 @@ class IoUtils {
         return '.webp';
       }
 
-      if (sourceExt == '.png') {
+      if (sourceExt == '.png' || optimizeSticker) {
         final webpFile = File('$pathWithoutExt.webp');
         if (webpFile.existsSync()) {
           return '.webp';
@@ -240,25 +242,33 @@ class IoUtils {
 
         final cwebpPath = await _resolveCwebpBinaryPath();
         if (cwebpPath != null) {
-          final tempDir = await _resolveWebpTempDir();
-          final inputFile = File(
-            '${tempDir.path}/${DateTime.now().microsecondsSinceEpoch}.png',
-          );
+          final tempDir = await Directory.systemTemp.createTemp('cs2_webp_');
+          final inputFile = File('${tempDir.path}/input$sourceExt');
+          final outputFile = File('${tempDir.path}/output.webp');
           try {
             await inputFile.writeAsBytes(bytes);
             await webpFile.parent.create(recursive: true);
             final process = await Process.start(cwebpPath, [
-              '-lossless',
-              '-z',
-              (compressionModeOverride ?? compressionMode) ==
-                      CompressionMode.maxCompress
-                  ? '9'
-                  : '6',
+              if (optimizeSticker) ...[
+                '-q',
+                '90',
+                '-m',
+                '4',
+                '-alpha_q',
+                '100',
+              ] else ...[
+                '-lossless',
+                '-z',
+                (compressionModeOverride ?? compressionMode) ==
+                        CompressionMode.maxCompress
+                    ? '9'
+                    : '6',
+              ],
               '-mt',
               '-exact',
               inputFile.path,
               '-o',
-              webpFile.path,
+              outputFile.path,
             ]);
             final stderrOutput = StringBuffer();
             process.stderr.transform(utf8.decoder).listen(stderrOutput.write);
@@ -270,16 +280,21 @@ class IoUtils {
                 return -1;
               },
             );
-            if (exitCode == 0 && webpFile.existsSync()) {
+            if (exitCode == 0 && outputFile.existsSync()) {
+              // Keep an already smaller WebP rather than growing the asset.
+              final outputBytes = await outputFile.readAsBytes();
+              await webpFile.writeAsBytes(
+                sourceExt == '.webp' && outputBytes.length >= bytes.length
+                    ? bytes
+                    : outputBytes,
+              );
               return '.webp';
             }
             stderr.writeln(
               '[WARN] cwebp failed for $url -> $pathWithoutExt: $stderrOutput',
             );
           } finally {
-            if (inputFile.existsSync()) {
-              await inputFile.delete();
-            }
+            await tempDir.delete(recursive: true);
           }
         }
       }
@@ -359,26 +374,18 @@ class IoUtils {
   }
 
   String? _binaryPathForPlatform(String packageRootPath) {
+    final arm64 =
+        Abi.current() == Abi.macosArm64 || Abi.current() == Abi.linuxArm64;
+    final String platform;
     if (Platform.isWindows) {
-      return '$packageRootPath\\windows-x64\\cwebp.exe';
+      platform = 'windows-x64/cwebp.exe';
+    } else if (Platform.isMacOS) {
+      platform = 'mac-${arm64 ? 'arm64' : 'x86-64'}/cwebp';
+    } else if (Platform.isLinux) {
+      platform = 'linux-${arm64 ? 'aarch64' : 'x86-64'}/cwebp';
+    } else {
+      return null;
     }
-    if (Platform.isMacOS) {
-      return '$packageRootPath\\mac-x86-64\\cwebp';
-    }
-    if (Platform.isLinux) {
-      return '$packageRootPath\\linux-x86-64\\cwebp';
-    }
-    return null;
-  }
-
-  Future<Directory> _resolveWebpTempDir() async {
-    final dir = _webpTempDir;
-    if (dir != null && dir.existsSync()) {
-      return dir;
-    }
-
-    final created = await Directory.systemTemp.createTemp('cs2_webp_');
-    _webpTempDir = created;
-    return created;
+    return Directory(packageRootPath).uri.resolve(platform).toFilePath();
   }
 }

@@ -124,7 +124,9 @@ dart run tool/prune_generated_assets.dart
 
 ## Notes About Generated Assets
 
-- Existing generated assets are not overwritten during normal imports
+- Sticker raster images use WebP quality 90 with lossless alpha and their original dimensions; PNG and WebP source images are both optimized
+- Other asset categories keep their existing compression behavior
+- Existing generated assets are not overwritten or repeatedly re-encoded during normal imports
 - The importer stores the actual generated extension, including `.webp` where applicable
 - Collection-type source images are stored alongside regular container images in `assets/containers/`
 - Container dates are resolved locally instead of trusting API sale dates

@@ -17,6 +17,7 @@ import '../widgets/major_summary_card.dart';
 import 'player_list_screen.dart';
 import 'team_list_screen.dart';
 import 'player_details_screen.dart';
+import 'sticker_glossary_screen.dart';
 import 'team_details_screen.dart';
 
 class TournamentDetailsScreen extends StatelessWidget {
@@ -95,6 +96,20 @@ class TournamentDetailsScreen extends StatelessWidget {
                   DetailTag(text: tournament.eraLabel),
                 ],
                 infoRows: [
+                  if (tournament.hasMajorStickerShop)
+                    OutlinedButton.icon(
+                      icon: const Icon(Icons.style_outlined),
+                      label: const Text('Browse Stickers'),
+                      onPressed: () {
+                        AppNavigationHelper.pushScreen(
+                          context,
+                          StickerGlossaryScreen(
+                            repository: repository,
+                            tournament: tournament,
+                          ),
+                        );
+                      },
+                    ),
                   DetailInfoRow(
                     title: 'Organizer',
                     value: tournament.organizer,
@@ -121,8 +136,12 @@ class TournamentDetailsScreen extends StatelessWidget {
                     value: data.souvenirPackages.length.toString(),
                   ),
                   DetailInfoRow(
-                    title: 'Sticker Sources',
-                    value: data.stickerSources.length.toString(),
+                    title: tournament.hasMajorStickerShop
+                        ? 'Stickers'
+                        : 'Sticker Sources',
+                    value: tournament.hasMajorStickerShop
+                        ? data.stickerCount.toString()
+                        : data.stickerSources.length.toString(),
                   ),
                 ],
               ),
@@ -183,13 +202,16 @@ class TournamentDetailsScreen extends StatelessWidget {
                 emptyText: 'No souvenir packages found for this tournament.',
                 itemBuilder: (item) => _buildContainerTile(context, item),
               ),
-              const SizedBox(height: 12),
-              DetailSourceSection<ContainerDto>(
-                title: 'Sticker and Autograph Capsules',
-                items: data.stickerSources,
-                emptyText: 'No sticker sources found for this tournament.',
-                itemBuilder: (item) => _buildContainerTile(context, item),
-              ),
+              if (!tournament.hasMajorStickerShop ||
+                  data.stickerSources.isNotEmpty) ...[
+                const SizedBox(height: 12),
+                DetailSourceSection<ContainerDto>(
+                  title: 'Sticker and Autograph Capsules',
+                  items: data.stickerSources,
+                  emptyText: 'No sticker sources found for this tournament.',
+                  itemBuilder: (item) => _buildContainerTile(context, item),
+                ),
+              ],
             ],
           );
         },
@@ -211,6 +233,9 @@ class TournamentDetailsScreen extends StatelessWidget {
       metadata: metadata,
       souvenirPackages: souvenirPackages,
       stickerSources: stickerSources,
+      stickerCount: tournament.hasMajorStickerShop
+          ? (await repository.loadStickersForTournament(tournament.name)).length
+          : 0,
     );
   }
 
@@ -884,11 +909,13 @@ class _TournamentDetailsData {
   final TournamentMetadataDto? metadata;
   final List<ContainerDto> souvenirPackages;
   final List<ContainerDto> stickerSources;
+  final int stickerCount;
 
   const _TournamentDetailsData({
     this.metadata,
     this.souvenirPackages = const [],
     this.stickerSources = const [],
+    this.stickerCount = 0,
   });
 }
 
