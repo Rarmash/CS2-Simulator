@@ -25,6 +25,9 @@ class TournamentDto {
     return int.tryParse(match.group(0)!);
   }
 
+  bool get hasMajorStickerShop =>
+      name == 'IEM Cologne 2026' || name == 'PGL Singapore 2026';
+
   bool get isCs2Era => (year ?? 0) >= 2024;
 
   String get eraLabel => isCs2Era ? 'CS2 Era' : 'CS:GO Era';

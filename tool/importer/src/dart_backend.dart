@@ -1680,6 +1680,18 @@ class DartImporterBackend implements ImporterBackend {
         'charmImage': charmImagePath,
         'rarity': rarity,
         'collection': charmCollection,
+        if (highlightEvent != null) ...{
+          for (final field in [
+            'video',
+            'thumbnail',
+            'description',
+            'map',
+            'stage',
+          ])
+            if (meta[field] != null) field: meta[field],
+          if (meta['tournament_player'] != null)
+            'player': meta['tournament_player'],
+        },
       };
       newCharms[charmId] = charmRecord;
       existingCharmByKey[key] = charmRecord;

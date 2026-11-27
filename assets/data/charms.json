@@ -550,426 +550,792 @@
     "name": "Cologne 2026 Highlight | kensizor ACE to Advance",
     "charmImage": "assets/charms/1086245955.png",
     "rarity": "HIGH_GRADE",
-    "collection": "Cologne 2026 Highlight"
+    "collection": "Cologne 2026 Highlight",
+    "video": "https://cdn.steamstatic.com/apps/csgo/videos/highlightreels/026/069v135_065/026_069v135_065_de_dust2_cologne2026_st2kensizordust2acetoadvance_ww_1080p.webm",
+    "thumbnail": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/refs/heads/main/static/highlightreels/ww/881.webp",
+    "description": "kensizor ends Dust II in style with an ace, sealing B8's series win and Stage 3 spot.",
+    "map": "de_dust2",
+    "stage": "Stage II",
+    "player": "kensizor"
   },
   {
     "id": "998831428",
     "name": "Cologne 2026 Highlight | koala ACE",
     "charmImage": "assets/charms/1086245955.png",
     "rarity": "HIGH_GRADE",
-    "collection": "Cologne 2026 Highlight"
+    "collection": "Cologne 2026 Highlight",
+    "video": "https://cdn.steamstatic.com/apps/csgo/videos/highlightreels/026/074v104_049/026_074v104_049_de_inferno_cologne2026_st1koalainfernoace_ww_1080p.webm",
+    "thumbnail": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/refs/heads/main/static/highlightreels/ww/868.webp",
+    "description": "koala opens Inferno perfectly, wiping all five TYLOO players with Dual Berettas in the pistol round.",
+    "map": "de_inferno",
+    "stage": "Stage I",
+    "player": "koala"
   },
   {
     "id": "999615929",
     "name": "Cologne 2026 Highlight | YEKINDAR Triple Kill",
     "charmImage": "assets/charms/1086245955.png",
     "rarity": "HIGH_GRADE",
-    "collection": "Cologne 2026 Highlight"
+    "collection": "Cologne 2026 Highlight",
+    "video": "https://cdn.steamstatic.com/apps/csgo/videos/highlightreels/026/085v135_083/026_085v135_083_de_mirage_cologne2026_st3yekindarmiragetriplekill_ww_1080p.webm",
+    "thumbnail": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/refs/heads/main/static/highlightreels/ww/890.webp",
+    "description": "YEKINDAR denies B8's B-site take on Mirage with a disciplined triple kill.",
+    "map": "de_mirage",
+    "stage": "Stage III",
+    "player": "YEKINDAR"
   },
   {
     "id": "999906818",
     "name": "Cologne 2026 Highlight | NertZ ACE",
     "charmImage": "assets/charms/1086245955.png",
     "rarity": "HIGH_GRADE",
-    "collection": "Cologne 2026 Highlight"
+    "collection": "Cologne 2026 Highlight",
+    "video": "https://cdn.steamstatic.com/apps/csgo/videos/highlightreels/026/059v069_065/026_059v069_065_de_inferno_cologne2026_st2nertzinfernoace_ww_1080p.webm",
+    "thumbnail": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/refs/heads/main/static/highlightreels/ww/876.webp",
+    "description": "NertZ takes over Banana on Inferno and aces BIG during G2's dominant map win.",
+    "map": "de_inferno",
+    "stage": "Stage II",
+    "player": "NertZ"
   },
   {
     "id": "1001183979",
     "name": "Cologne 2026 Highlight | mezii Molotov Kill",
     "charmImage": "assets/charms/1086245955.png",
     "rarity": "HIGH_GRADE",
-    "collection": "Cologne 2026 Highlight"
+    "collection": "Cologne 2026 Highlight",
+    "video": "https://cdn.steamstatic.com/apps/csgo/videos/highlightreels/026/089v139_006/026_089v139_006_de_dust2_cologne2026_qfmeziidust2molotovkill_ww_1080p.webm",
+    "thumbnail": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/refs/heads/main/static/highlightreels/ww/902.webp",
+    "description": "mezii takes out TeSeS on Dust II with a bizarre Molotov bottle impact kill.",
+    "map": "de_dust2",
+    "stage": "Quarterfinal",
+    "player": "mezii"
   },
   {
     "id": "1005272913",
     "name": "Cologne 2026 Highlight | kyousuke 3 Kills",
     "charmImage": "assets/charms/1086245955.png",
     "rarity": "HIGH_GRADE",
-    "collection": "Cologne 2026 Highlight"
+    "collection": "Cologne 2026 Highlight",
+    "video": "https://cdn.steamstatic.com/apps/csgo/videos/highlightreels/026/089v139_006/026_089v139_006_de_anubis_cologne2026_qfkyousukeanubis3kills_ww_1080p.webm",
+    "thumbnail": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/refs/heads/main/static/highlightreels/ww/901.webp",
+    "description": "kyousuke closes Anubis for Falcons with a three-kill B-site hold, shutting down Vitality.",
+    "map": "de_anubis",
+    "stage": "Quarterfinal",
+    "player": "kyousuke"
   },
   {
     "id": "1006676621",
     "name": "Cologne 2026 Highlight | beastik Quad Kill",
     "charmImage": "assets/charms/1086245955.png",
     "rarity": "HIGH_GRADE",
-    "collection": "Cologne 2026 Highlight"
+    "collection": "Cologne 2026 Highlight",
+    "video": "https://cdn.steamstatic.com/apps/csgo/videos/highlightreels/026/132v147_049/026_132v147_049_de_ancient_cologne2026_st1beastikancientquadkill_ww_1080p.webm",
+    "thumbnail": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/refs/heads/main/static/highlightreels/ww/873.webp",
+    "description": "beastik finds four kills against FlyQuest in Round 19 on Ancient to keep his team in contention.",
+    "map": "de_ancient",
+    "stage": "Stage I",
+    "player": "beastik"
   },
   {
     "id": "1008162850",
     "name": "Cologne 2026 Highlight | m0NESY 4 Kills",
     "charmImage": "assets/charms/1086245955.png",
     "rarity": "HIGH_GRADE",
-    "collection": "Cologne 2026 Highlight"
+    "collection": "Cologne 2026 Highlight",
+    "video": "https://cdn.steamstatic.com/apps/csgo/videos/highlightreels/026/085v139_097/026_085v139_097_de_anubis_cologne2026_gfm0nesyanubis4kills_ww_1080p.webm",
+    "thumbnail": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/refs/heads/main/static/highlightreels/ww/919.webp",
+    "description": "m0NESY opens Anubis with four Dual Elites kills on defense vs FURIA.",
+    "map": "de_anubis",
+    "stage": "Grand Final",
+    "player": "m0NESY"
   },
   {
     "id": "1008808503",
     "name": "Cologne 2026 Highlight | asap ACE",
     "charmImage": "assets/charms/1086245955.png",
     "rarity": "HIGH_GRADE",
-    "collection": "Cologne 2026 Highlight"
+    "collection": "Cologne 2026 Highlight",
+    "video": "https://cdn.steamstatic.com/apps/csgo/videos/highlightreels/026/080v148_049/026_080v148_049_de_inferno_cologne2026_st1asapinfernoace_ww_1080p.webm",
+    "thumbnail": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/refs/heads/main/static/highlightreels/ww/870.webp",
+    "description": "asap shuts down MIBR's force buy with a full ace on Inferno, powering THUNDERdOWNUNDER's upset.",
+    "map": "de_inferno",
+    "stage": "Stage I",
+    "player": "asap"
   },
   {
     "id": "1009902023",
     "name": "Cologne 2026 Highlight | donk 1v2 Clutch",
     "charmImage": "assets/charms/1086245955.png",
     "rarity": "HIGH_GRADE",
-    "collection": "Cologne 2026 Highlight"
+    "collection": "Cologne 2026 Highlight",
+    "video": "https://cdn.steamstatic.com/apps/csgo/videos/highlightreels/026/059v081_006/026_059v081_006_de_dust2_cologne2026_qfdonkdust21v2clutch_ww_1080p.webm",
+    "thumbnail": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/refs/heads/main/static/highlightreels/ww/900.webp",
+    "description": "donk wins the final Dust II clutch breaking G2's last retake attempt and closing the map in overtime.",
+    "map": "de_dust2",
+    "stage": "Quarterfinal",
+    "player": "donk"
   },
   {
     "id": "1010624047",
     "name": "Cologne 2026 Highlight | ZywOo ACE with 1v3 Clutch",
     "charmImage": "assets/charms/1086245955.png",
     "rarity": "HIGH_GRADE",
-    "collection": "Cologne 2026 Highlight"
+    "collection": "Cologne 2026 Highlight",
+    "video": "https://cdn.steamstatic.com/apps/csgo/videos/highlightreels/026/089v145_083/026_089v145_083_de_overpass_cologne2026_st3zywoooverpassacewith1v3clutch_ww_1080p.webm",
+    "thumbnail": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/refs/heads/main/static/highlightreels/ww/891.webp",
+    "description": "ZywOo turns a difficult round against FUT around with an ace and a 1v3 clutch on Overpass.",
+    "map": "de_overpass",
+    "stage": "Stage III",
+    "player": "ZywOo"
   },
   {
     "id": "1011036575",
     "name": "Cologne 2026 Highlight | karrigan 4 Kills",
     "charmImage": "assets/charms/1086245955.png",
     "rarity": "HIGH_GRADE",
-    "collection": "Cologne 2026 Highlight"
+    "collection": "Cologne 2026 Highlight",
+    "video": "https://cdn.steamstatic.com/apps/csgo/videos/highlightreels/026/081v139_008/026_081v139_008_de_mirage_cologne2026_sfkarriganmirage4kills_ww_1080p.webm",
+    "thumbnail": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/refs/heads/main/static/highlightreels/ww/914.webp",
+    "description": "karrigan holds Mirage B almost alone with four kills, buying enough time against Team Spirit's hit.",
+    "map": "de_mirage",
+    "stage": "Semifinal",
+    "player": "karrigan"
   },
   {
     "id": "1012708983",
     "name": "Cologne 2026 Highlight | AZUWU Deagle ACE",
     "charmImage": "assets/charms/1086245955.png",
     "rarity": "HIGH_GRADE",
-    "collection": "Cologne 2026 Highlight"
+    "collection": "Cologne 2026 Highlight",
+    "video": "https://cdn.steamstatic.com/apps/csgo/videos/highlightreels/026/102v119_065/026_102v119_065_de_dust2_cologne2026_st2azuwudust2deagleace_ww_1080p.webm",
+    "thumbnail": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/refs/heads/main/static/highlightreels/ww/885.webp",
+    "description": "AZUWU turns a low-buy round on Dust II into a full ace, powered by four Deagle kills.",
+    "map": "de_dust2",
+    "stage": "Stage II",
+    "player": "AZUWU"
   },
   {
     "id": "1013387936",
     "name": "Cologne 2026 Highlight | NiKo Quad Kill",
     "charmImage": "assets/charms/1086245955.png",
     "rarity": "HIGH_GRADE",
-    "collection": "Cologne 2026 Highlight"
+    "collection": "Cologne 2026 Highlight",
+    "video": "https://cdn.steamstatic.com/apps/csgo/videos/highlightreels/026/119v139_083/026_119v139_083_de_mirage_cologne2026_st3nikomiragequadkill_ww_1080p.webm",
+    "thumbnail": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/refs/heads/main/static/highlightreels/ww/894.webp",
+    "description": "NiKo holds A alone on Mirage, shredding Monte's hit with four quick AK kills to swing the round for Falcons.",
+    "map": "de_mirage",
+    "stage": "Stage III",
+    "player": "niko"
   },
   {
     "id": "1014235760",
     "name": "Cologne 2026 Highlight | Falcons Trophy-lifting Moment",
     "charmImage": "assets/charms/1086245955.png",
     "rarity": "HIGH_GRADE",
-    "collection": "Cologne 2026 Highlight"
+    "collection": "Cologne 2026 Highlight",
+    "video": "https://cdn.steamstatic.com/apps/csgo/videos/highlightreels/026/085v139_097/026_085v139_097_de_inferno_cologne2026_gffalconstrophyliftingmoment_ww_1080p.webm",
+    "thumbnail": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/refs/heads/main/static/highlightreels/ww/926.webp",
+    "description": "Falcons win IEM Cologne Major 2026.",
+    "map": "de_inferno",
+    "stage": "Grand Final",
+    "player": null
   },
   {
     "id": "1014527743",
     "name": "Cologne 2026 Highlight | NiKo Triple Kill",
     "charmImage": "assets/charms/1086245955.png",
     "rarity": "HIGH_GRADE",
-    "collection": "Cologne 2026 Highlight"
+    "collection": "Cologne 2026 Highlight",
+    "video": "https://cdn.steamstatic.com/apps/csgo/videos/highlightreels/026/085v139_097/026_085v139_097_de_inferno_cologne2026_gfnikoinfernotriplekill_ww_1080p.webm",
+    "thumbnail": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/refs/heads/main/static/highlightreels/ww/923.webp",
+    "description": "NiKo slips through Inferno apartments, catching FURIA with a three-kill lurk before the hit can settle.",
+    "map": "de_inferno",
+    "stage": "Grand Final",
+    "player": "niko"
   },
   {
     "id": "1015380506",
     "name": "Cologne 2026 Highlight | soulfly 1v2 Clutch",
     "charmImage": "assets/charms/1086245955.png",
     "rarity": "HIGH_GRADE",
-    "collection": "Cologne 2026 Highlight"
+    "collection": "Cologne 2026 Highlight",
+    "video": "https://cdn.steamstatic.com/apps/csgo/videos/highlightreels/026/134v137_006/026_134v137_006_de_nuke_cologne2026_qfsoulflynuke1v2clutch_ww_1080p.webm",
+    "thumbnail": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/refs/heads/main/static/highlightreels/ww/897.webp",
+    "description": "soulfly clutches a post-plant 1v2 on Nuke's B site, sealing Aurora's dominant map win.",
+    "map": "de_nuke",
+    "stage": "Quarterfinal",
+    "player": "soulfly"
   },
   {
     "id": "1016872434",
     "name": "Cologne 2026 Highlight | soulfly 3 Kills",
     "charmImage": "assets/charms/1086245955.png",
     "rarity": "HIGH_GRADE",
-    "collection": "Cologne 2026 Highlight"
+    "collection": "Cologne 2026 Highlight",
+    "video": "https://cdn.steamstatic.com/apps/csgo/videos/highlightreels/026/085v134_008/026_085v134_008_de_dust2_cologne2026_sfsoulflydust23kills_ww_1080p.webm",
+    "thumbnail": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/refs/heads/main/static/highlightreels/ww/906.webp",
+    "description": "soulfly catches FURIA exiting B tunnels on Dust II with an MP9 triple, giving Aurora an early round.",
+    "map": "de_dust2",
+    "stage": "Semifinal",
+    "player": "soulfly"
   },
   {
     "id": "1021015435",
     "name": "Cologne 2026 Highlight | sh1ro ACE",
     "charmImage": "assets/charms/1086245955.png",
     "rarity": "HIGH_GRADE",
-    "collection": "Cologne 2026 Highlight"
+    "collection": "Cologne 2026 Highlight",
+    "video": "https://cdn.steamstatic.com/apps/csgo/videos/highlightreels/026/059v081_006/026_059v081_006_de_mirage_cologne2026_qfsh1romirageace_ww_1080p.webm",
+    "thumbnail": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/refs/heads/main/static/highlightreels/ww/898.webp",
+    "description": "sh1ro kicks off second overtime on Mirage with an ACE, tearing through G2's mid and B attack.",
+    "map": "de_mirage",
+    "stage": "Quarterfinal",
+    "player": "sh1ro"
   },
   {
     "id": "1023772382",
     "name": "Cologne 2026 Highlight | HUASOPEEK ACE",
     "charmImage": "assets/charms/1086245955.png",
     "rarity": "HIGH_GRADE",
-    "collection": "Cologne 2026 Highlight"
+    "collection": "Cologne 2026 Highlight",
+    "video": "https://cdn.steamstatic.com/apps/csgo/videos/highlightreels/026/085v112_006/026_085v112_006_de_overpass_cologne2026_qfhuasopeekoverpassace_ww_1080p.webm",
+    "thumbnail": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/refs/heads/main/static/highlightreels/ww/904.webp",
+    "description": "HUASOPEEK shuts down FURIA's B hit on Overpass with an MP9 ace through Monster smoke.",
+    "map": "de_overpass",
+    "stage": "Quarterfinal",
+    "player": "HUASOPEEK"
   },
   {
     "id": "1023773998",
     "name": "Cologne 2026 Highlight | s1zzi 1v3 Clutch",
     "charmImage": "assets/charms/1086245955.png",
     "rarity": "HIGH_GRADE",
-    "collection": "Cologne 2026 Highlight"
+    "collection": "Cologne 2026 Highlight",
+    "video": "https://cdn.steamstatic.com/apps/csgo/videos/highlightreels/026/135v140_049/026_135v140_049_de_inferno_cologne2026_st1s1zziinferno1v3clutch_ww_1080p.webm",
+    "thumbnail": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/refs/heads/main/static/highlightreels/ww/874.webp",
+    "description": "s1zzi pulls off a 1v3 clutch without the bomb on Inferno, tying it at 14-14 to keep B8 alive.",
+    "map": "de_inferno",
+    "stage": "Stage I",
+    "player": "s1zzi"
   },
   {
     "id": "1027866259",
     "name": "Cologne 2026 Highlight | saffee Triple Kill",
     "charmImage": "assets/charms/1086245955.png",
     "rarity": "HIGH_GRADE",
-    "collection": "Cologne 2026 Highlight"
+    "collection": "Cologne 2026 Highlight",
+    "video": "https://cdn.steamstatic.com/apps/csgo/videos/highlightreels/026/060v102_065/026_060v102_065_de_nuke_cologne2026_st2saffeenuketriplekill_ww_1080p.webm",
+    "thumbnail": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/refs/heads/main/static/highlightreels/ww/879.webp",
+    "description": "saffee closes Nuke against Astralis with three AWP kills, sealing paiN Gaming's 13-11 comeback win.",
+    "map": "de_nuke",
+    "stage": "Stage II",
+    "player": "saffee"
   },
   {
     "id": "1028195683",
     "name": "Cologne 2026 Highlight | YEKINDAR 3 Kills",
     "charmImage": "assets/charms/1086245955.png",
     "rarity": "HIGH_GRADE",
-    "collection": "Cologne 2026 Highlight"
+    "collection": "Cologne 2026 Highlight",
+    "video": "https://cdn.steamstatic.com/apps/csgo/videos/highlightreels/026/085v134_008/026_085v134_008_de_nuke_cologne2026_sfyekindarnuketriplekill_ww_1080p.webm",
+    "thumbnail": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/refs/heads/main/static/highlightreels/ww/909.webp",
+    "description": "YEKINDAR deletes three Aurora players on Nuke, ripping open the round for FURIA.",
+    "map": "de_nuke",
+    "stage": "Semifinal",
+    "player": "YEKINDAR"
   },
   {
     "id": "1029803142",
     "name": "Cologne 2026 Highlight | KSCERATO Quad Kill",
     "charmImage": "assets/charms/1086245955.png",
     "rarity": "HIGH_GRADE",
-    "collection": "Cologne 2026 Highlight"
+    "collection": "Cologne 2026 Highlight",
+    "video": "https://cdn.steamstatic.com/apps/csgo/videos/highlightreels/026/085v134_008/026_085v134_008_de_nuke_cologne2026_sfksceratonukequadkill_ww_1080p.webm",
+    "thumbnail": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/refs/heads/main/static/highlightreels/ww/910.webp",
+    "description": "KSCERATO secures FURIA's match win on Nuke with four AK headshots, cutting down Aurora's final attack.",
+    "map": "de_nuke",
+    "stage": "Semifinal",
+    "player": "KSCERATO"
   },
   {
     "id": "1031367157",
     "name": "Cologne 2026 Highlight | YEKINDAR 2 Kills",
     "charmImage": "assets/charms/1086245955.png",
     "rarity": "HIGH_GRADE",
-    "collection": "Cologne 2026 Highlight"
+    "collection": "Cologne 2026 Highlight",
+    "video": "https://cdn.steamstatic.com/apps/csgo/videos/highlightreels/026/085v134_008/026_085v134_008_de_dust2_cologne2026_sfyekindardust22kills_ww_1080p.webm",
+    "thumbnail": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/refs/heads/main/static/highlightreels/ww/908.webp",
+    "description": "YEKINDAR closes Dust II for FURIA with two final kills on B, shutting down Aurora's last push from tunnels.",
+    "map": "de_dust2",
+    "stage": "Semifinal",
+    "player": "YEKINDAR"
   },
   {
     "id": "1033481245",
     "name": "Cologne 2026 Highlight | magixx 1v4 Clutch",
     "charmImage": "assets/charms/1086245955.png",
     "rarity": "HIGH_GRADE",
-    "collection": "Cologne 2026 Highlight"
+    "collection": "Cologne 2026 Highlight",
+    "video": "https://cdn.steamstatic.com/apps/csgo/videos/highlightreels/026/059v081_006/026_059v081_006_de_mirage_cologne2026_qfmagixxmirage1v4clutch_ww_1080p.webm",
+    "thumbnail": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/refs/heads/main/static/highlightreels/ww/899.webp",
+    "description": "magixx pulls off a wild 1v4 on Mirage, backing his aim through G2's final push and stealing the round.",
+    "map": "de_mirage",
+    "stage": "Quarterfinal",
+    "player": "magixx"
   },
   {
     "id": "1034212611",
     "name": "Cologne 2026 Highlight | woxic 1v4 Clutch",
     "charmImage": "assets/charms/1086245955.png",
     "rarity": "HIGH_GRADE",
-    "collection": "Cologne 2026 Highlight"
+    "collection": "Cologne 2026 Highlight",
+    "video": "https://cdn.steamstatic.com/apps/csgo/videos/highlightreels/026/112v134_083/026_112v134_083_de_dust2_cologne2026_st3woxicdust21v4clutch_ww_1080p.webm",
+    "thumbnail": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/refs/heads/main/static/highlightreels/ww/893.webp",
+    "description": "woxic wins a crazy 1v4 with the AWP against 9z Team on Dust II, including a stylish noscope.",
+    "map": "de_dust2",
+    "stage": "Stage III",
+    "player": "woxic"
   },
   {
     "id": "1034685130",
     "name": "Cologne 2026 Highlight | magixx Multi-weapon ACE",
     "charmImage": "assets/charms/1086245955.png",
     "rarity": "HIGH_GRADE",
-    "collection": "Cologne 2026 Highlight"
+    "collection": "Cologne 2026 Highlight",
+    "video": "https://cdn.steamstatic.com/apps/csgo/videos/highlightreels/026/081v134_083/026_081v134_083_de_anubis_cologne2026_st3magixxanubismultiweaponace_ww_1080p.webm",
+    "thumbnail": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/refs/heads/main/static/highlightreels/ww/888.webp",
+    "description": "magixx gets an ace against Aurora, switching weapons mid-round and finishing the last frags without slowing down.",
+    "map": "de_anubis",
+    "stage": "Stage III",
+    "player": "magixx"
   },
   {
     "id": "1034898867",
     "name": "Cologne 2026 Highlight | Falcons Team Entrance",
     "charmImage": "assets/charms/1086245955.png",
     "rarity": "HIGH_GRADE",
-    "collection": "Cologne 2026 Highlight"
+    "collection": "Cologne 2026 Highlight",
+    "video": "https://cdn.steamstatic.com/apps/csgo/videos/highlightreels/026/085v139_097/026_085v139_097_de_mirage_cologne2026_gffalconsteamentrance_ww_1080p.webm",
+    "thumbnail": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/refs/heads/main/static/highlightreels/ww/916.webp",
+    "description": "Falcons enter the Cathedral of Counter-Strike to face their final opponent, FURIA.",
+    "map": "de_mirage",
+    "stage": "Grand Final",
+    "player": null
   },
   {
     "id": "1036544467",
     "name": "Cologne 2026 Highlight | kyousuke 4 Kills",
     "charmImage": "assets/charms/1086245955.png",
     "rarity": "HIGH_GRADE",
-    "collection": "Cologne 2026 Highlight"
+    "collection": "Cologne 2026 Highlight",
+    "video": "https://cdn.steamstatic.com/apps/csgo/videos/highlightreels/026/085v139_097/026_085v139_097_de_inferno_cologne2026_gfkyousukeinferno4kills_ww_1080p.webm",
+    "thumbnail": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/refs/heads/main/static/highlightreels/ww/921.webp",
+    "description": "kyousuke shuts down FURIA's Inferno B hit with four kills.",
+    "map": "de_inferno",
+    "stage": "Grand Final",
+    "player": "kyousuke"
   },
   {
     "id": "1037820344",
     "name": "Cologne 2026 Highlight | Magnojez 1v3 Clutch",
     "charmImage": "assets/charms/1086245955.png",
     "rarity": "HIGH_GRADE",
-    "collection": "Cologne 2026 Highlight"
+    "collection": "Cologne 2026 Highlight",
+    "video": "https://cdn.steamstatic.com/apps/csgo/videos/highlightreels/026/137v146_049/026_137v146_049_de_dust2_cologne2026_st1magnojezdust21v3clutch_ww_1080p.webm",
+    "thumbnail": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/refs/heads/main/static/highlightreels/ww/875.webp",
+    "description": "Magnojez wins a 1v3 retake clutch on Dust II, clearing all three before defusing.",
+    "map": "de_dust2",
+    "stage": "Stage I",
+    "player": "Magnojez"
   },
   {
     "id": "1045217229",
     "name": "Cologne 2026 Highlight | w0nderful 2 HP 1v4 Clutch",
     "charmImage": "assets/charms/1086245955.png",
     "rarity": "HIGH_GRADE",
-    "collection": "Cologne 2026 Highlight"
+    "collection": "Cologne 2026 Highlight",
+    "video": "https://cdn.steamstatic.com/apps/csgo/videos/highlightreels/026/012v059_083/026_012v059_083_de_dust2_cologne2026_st3w0nderfuldust22hp1v4clutch_ww_1080p.webm",
+    "thumbnail": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/refs/heads/main/static/highlightreels/ww/886.webp",
+    "description": "w0nderful wins a 1v4 against G2 on Dust II with just 2 HP, basically saving the round for NAVI on his own.",
+    "map": "de_dust2",
+    "stage": "Stage III",
+    "player": "w0nderful"
   },
   {
     "id": "1046719946",
     "name": "Cologne 2026 Highlight | m0NESY Major-winning Kill",
     "charmImage": "assets/charms/1086245955.png",
     "rarity": "HIGH_GRADE",
-    "collection": "Cologne 2026 Highlight"
+    "collection": "Cologne 2026 Highlight",
+    "video": "https://cdn.steamstatic.com/apps/csgo/videos/highlightreels/026/085v139_097/026_085v139_097_de_inferno_cologne2026_gfm0nesyinfernomajorwinningkill_ww_1080p.webm",
+    "thumbnail": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/refs/heads/main/static/highlightreels/ww/925.webp",
+    "description": "m0NESY lands the final AWP shot as Falcons close out the last round of the grand final against FURIA.",
+    "map": "de_inferno",
+    "stage": "Grand Final",
+    "player": "m0NESY"
   },
   {
     "id": "1048414613",
     "name": "Cologne 2026 Highlight | dgt Pistol ACE",
     "charmImage": "assets/charms/1086245955.png",
     "rarity": "HIGH_GRADE",
-    "collection": "Cologne 2026 Highlight"
+    "collection": "Cologne 2026 Highlight",
+    "video": "https://cdn.steamstatic.com/apps/csgo/videos/highlightreels/026/112v122_083/026_112v122_083_de_overpass_cologne2026_st3dgtoverpasspistolace_ww_1080p.webm",
+    "thumbnail": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/refs/heads/main/static/highlightreels/ww/892.webp",
+    "description": "dgt opens Overpass against The Mongolz with a pistol ace, a clean highlight straight from the first round of the map.",
+    "map": "de_overpass",
+    "stage": "Stage III",
+    "player": "dgt"
   },
   {
     "id": "1050328156",
     "name": "Cologne 2026 Highlight | KSCERATO 1v3 Clutch",
     "charmImage": "assets/charms/1086245955.png",
     "rarity": "HIGH_GRADE",
-    "collection": "Cologne 2026 Highlight"
+    "collection": "Cologne 2026 Highlight",
+    "video": "https://cdn.steamstatic.com/apps/csgo/videos/highlightreels/026/085v135_083/026_085v135_083_de_inferno_cologne2026_st3ksceratoinferno1v3clutch_ww_1080p.webm",
+    "thumbnail": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/refs/heads/main/static/highlightreels/ww/889.webp",
+    "description": "KSCERATO wins a 1v3 against B8 on Inferno, stealing the second-half pistol and denying them a way back into the map.",
+    "map": "de_inferno",
+    "stage": "Stage III",
+    "player": "KSCERATO"
   },
   {
     "id": "1053041474",
     "name": "Cologne 2026 Highlight | venomzera 1v3 Clutch",
     "charmImage": "assets/charms/1086245955.png",
     "rarity": "HIGH_GRADE",
-    "collection": "Cologne 2026 Highlight"
+    "collection": "Cologne 2026 Highlight",
+    "video": "https://cdn.steamstatic.com/apps/csgo/videos/highlightreels/026/080v135_065/026_080v135_065_de_mirage_cologne2026_st2venomzeramirage1v3clutch_ww_1080p.webm",
+    "thumbnail": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/refs/heads/main/static/highlightreels/ww/883.webp",
+    "description": "venomzera barely survives the final duel of a 1v3 on Mirage, playing the clock to deny B8 the plant.",
+    "map": "de_mirage",
+    "stage": "Stage II",
+    "player": "venomzera"
   },
   {
     "id": "1053944490",
     "name": "Cologne 2026 Highlight | sh1ro Quad Kill",
     "charmImage": "assets/charms/1086245955.png",
     "rarity": "HIGH_GRADE",
-    "collection": "Cologne 2026 Highlight"
+    "collection": "Cologne 2026 Highlight",
+    "video": "https://cdn.steamstatic.com/apps/csgo/videos/highlightreels/026/081v139_008/026_081v139_008_de_anubis_cologne2026_sfsh1roanubisquadkill_ww_1080p.webm",
+    "thumbnail": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/refs/heads/main/static/highlightreels/ww/912.webp",
+    "description": "sh1ro turns a 2v4 on Anubis with four AWP kills, rescuing the post-plant after Falcons stack the site.",
+    "map": "de_anubis",
+    "stage": "Semifinal",
+    "player": "sh1ro"
   },
   {
     "id": "1054855184",
     "name": "Cologne 2026 Highlight | kyousuke Triple Kill",
     "charmImage": "assets/charms/1086245955.png",
     "rarity": "HIGH_GRADE",
-    "collection": "Cologne 2026 Highlight"
+    "collection": "Cologne 2026 Highlight",
+    "video": "https://cdn.steamstatic.com/apps/csgo/videos/highlightreels/026/081v139_008/026_081v139_008_de_anubis_cologne2026_sfkyousukeanubistriplekill_ww_1080p.webm",
+    "thumbnail": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/refs/heads/main/static/highlightreels/ww/911.webp",
+    "description": "kyousuke closes Anubis with a three-kill retake, boxing Team Spirit in and stealing the map in overtime.",
+    "map": "de_anubis",
+    "stage": "Semifinal",
+    "player": "kyousuke"
   },
   {
     "id": "1057578084",
     "name": "Cologne 2026 Highlight | KSCERATO ACE",
     "charmImage": "assets/charms/1086245955.png",
     "rarity": "HIGH_GRADE",
-    "collection": "Cologne 2026 Highlight"
+    "collection": "Cologne 2026 Highlight",
+    "video": "https://cdn.steamstatic.com/apps/csgo/videos/highlightreels/026/085v134_008/026_085v134_008_de_dust2_cologne2026_sfksceratodust2ace_ww_1080p.webm",
+    "thumbnail": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/refs/heads/main/static/highlightreels/ww/907.webp",
+    "description": "KSCERATO delivers an ACE against Aurora on Dust II, closing the first half in style for FURIA.",
+    "map": "de_dust2",
+    "stage": "Semifinal",
+    "player": "KSCERATO"
   },
   {
     "id": "1058129057",
     "name": "Cologne 2026 Highlight | hypex Smoke Kill",
     "charmImage": "assets/charms/1086245955.png",
     "rarity": "HIGH_GRADE",
-    "collection": "Cologne 2026 Highlight"
+    "collection": "Cologne 2026 Highlight",
+    "video": "https://cdn.steamstatic.com/apps/csgo/videos/highlightreels/026/087v115_049/026_087v115_049_de_inferno_cologne2026_st1hypexinfernosmokekill_ww_1080p.webm",
+    "thumbnail": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/refs/heads/main/static/highlightreels/ww/871.webp",
+    "description": "hypex opens Inferno in bizarre fashion, killing an NRG player with the impact of a smoke grenade.",
+    "map": "de_inferno",
+    "stage": "Stage I",
+    "player": "hypex"
   },
   {
     "id": "1058327612",
     "name": "Cologne 2026 Highlight | TeSeS 1v2 Clutch",
     "charmImage": "assets/charms/1086245955.png",
     "rarity": "HIGH_GRADE",
-    "collection": "Cologne 2026 Highlight"
+    "collection": "Cologne 2026 Highlight",
+    "video": "https://cdn.steamstatic.com/apps/csgo/videos/highlightreels/026/081v139_008/026_081v139_008_de_dust2_cologne2026_sftesesdust21v2clutch_ww_1080p.webm",
+    "thumbnail": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/refs/heads/main/static/highlightreels/ww/913.webp",
+    "description": "TeSeS wins a 1v2 on Dust2 for Falcons, reading the smoke perfectly and cutting down both Team Spirit players.",
+    "map": "de_dust2",
+    "stage": "Semifinal",
+    "player": "TeSeS"
   },
   {
     "id": "1061183580",
     "name": "Cologne 2026 Highlight | karrigan Double Kill",
     "charmImage": "assets/charms/1086245955.png",
     "rarity": "HIGH_GRADE",
-    "collection": "Cologne 2026 Highlight"
+    "collection": "Cologne 2026 Highlight",
+    "video": "https://cdn.steamstatic.com/apps/csgo/videos/highlightreels/026/085v139_097/026_085v139_097_de_inferno_cologne2026_gfkarriganinfernodoublekill_ww_1080p.webm",
+    "thumbnail": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/refs/heads/main/static/highlightreels/ww/924.webp",
+    "description": "karrigan resolves the 2v2 Inferno A retake with two M4A1-S kills to steal FURIA's post-plant.",
+    "map": "de_inferno",
+    "stage": "Grand Final",
+    "player": "karrigan"
   },
   {
     "id": "1063773665",
     "name": "Cologne 2026 Highlight | donk 4K with One Taps",
     "charmImage": "assets/charms/1086245955.png",
     "rarity": "HIGH_GRADE",
-    "collection": "Cologne 2026 Highlight"
+    "collection": "Cologne 2026 Highlight",
+    "video": "https://cdn.steamstatic.com/apps/csgo/videos/highlightreels/026/081v112_065/026_081v112_065_de_nuke_cologne2026_st2donknuke4kwithonetaps_ww_1080p.webm",
+    "thumbnail": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/refs/heads/main/static/highlightreels/ww/884.webp",
+    "description": "donk tears through 9z on Nuke with four kills, including two crisp one-taps that surprise even him.",
+    "map": "de_nuke",
+    "stage": "Stage II",
+    "player": "donk"
   },
   {
     "id": "1064070284",
     "name": "Cologne 2026 Highlight | Boombl4 1v3 Clutch",
     "charmImage": "assets/charms/1086245955.png",
     "rarity": "HIGH_GRADE",
-    "collection": "Cologne 2026 Highlight"
+    "collection": "Cologne 2026 Highlight",
+    "video": "https://cdn.steamstatic.com/apps/csgo/videos/highlightreels/026/134v137_006/026_134v137_006_de_nuke_cologne2026_qfboombl4nuke1v3clutch_ww_1080p.webm",
+    "thumbnail": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/refs/heads/main/static/highlightreels/ww/896.webp",
+    "description": "Boombl4 pulls off a 1v3 on Nuke, including a sharp 180 in the final duel, to drag BetBoom back into the round.",
+    "map": "de_nuke",
+    "stage": "Quarterfinal",
+    "player": "Boombl4"
   },
   {
     "id": "1064295636",
     "name": "Cologne 2026 Highlight | s1zzi ACE",
     "charmImage": "assets/charms/1086245955.png",
     "rarity": "HIGH_GRADE",
-    "collection": "Cologne 2026 Highlight"
+    "collection": "Cologne 2026 Highlight",
+    "video": "https://cdn.steamstatic.com/apps/csgo/videos/highlightreels/026/069v135_065/026_069v135_065_de_overpass_cologne2026_st2s1zzioverpassace_ww_1080p.webm",
+    "thumbnail": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/refs/heads/main/static/highlightreels/ww/882.webp",
+    "description": "s1zzi wipes out all five BIG players on Overpass, helping B8 build a dominant first half.",
+    "map": "de_overpass",
+    "stage": "Stage II",
+    "player": "s1zzi"
   },
   {
     "id": "1066846299",
     "name": "Cologne 2026 Highlight | sh1ro 4K with 1v2 Clutch",
     "charmImage": "assets/charms/1086245955.png",
     "rarity": "HIGH_GRADE",
-    "collection": "Cologne 2026 Highlight"
+    "collection": "Cologne 2026 Highlight",
+    "video": "https://cdn.steamstatic.com/apps/csgo/videos/highlightreels/026/081v112_083/026_081v112_083_de_dust2_cologne2026_st3sh1rodust24kwith1v2clutch_ww_1080p.webm",
+    "thumbnail": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/refs/heads/main/static/highlightreels/ww/887.webp",
+    "description": "sh1ro gets four kills against 9z on Dust II, including a 1v2 afterplant, and stops 9z from reaching match point.",
+    "map": "de_dust2",
+    "stage": "Stage III",
+    "player": "sh1ro"
   },
   {
     "id": "1069293417",
     "name": "Cologne 2026 Highlight | karrigan 3 Kills",
     "charmImage": "assets/charms/1086245955.png",
     "rarity": "HIGH_GRADE",
-    "collection": "Cologne 2026 Highlight"
+    "collection": "Cologne 2026 Highlight",
+    "video": "https://cdn.steamstatic.com/apps/csgo/videos/highlightreels/026/085v139_097/026_085v139_097_de_inferno_cologne2026_gfkarriganinferno3kills_ww_1080p.webm",
+    "thumbnail": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/refs/heads/main/static/highlightreels/ww/922.webp",
+    "description": "karrigan saves Falcons' Inferno B site with three quick USP-S kills vs FURIA's full buy.",
+    "map": "de_inferno",
+    "stage": "Grand Final",
+    "player": "karrigan"
   },
   {
     "id": "1070576393",
     "name": "Cologne 2026 Highlight | magixx 4 Kills",
     "charmImage": "assets/charms/1086245955.png",
     "rarity": "HIGH_GRADE",
-    "collection": "Cologne 2026 Highlight"
+    "collection": "Cologne 2026 Highlight",
+    "video": "https://cdn.steamstatic.com/apps/csgo/videos/highlightreels/026/081v139_008/026_081v139_008_de_mirage_cologne2026_sfmagixxmirage4kills_ww_1080p.webm",
+    "thumbnail": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/refs/heads/main/static/highlightreels/ww/915.webp",
+    "description": "magixx mows down Falcons at Mirage B with a four-kill hold, giving Team Spirit the last round of the map.",
+    "map": "de_mirage",
+    "stage": "Semifinal",
+    "player": "magixx"
   },
   {
     "id": "1072165157",
     "name": "Cologne 2026 Highlight | FURIA Team Entrance",
     "charmImage": "assets/charms/1086245955.png",
     "rarity": "HIGH_GRADE",
-    "collection": "Cologne 2026 Highlight"
+    "collection": "Cologne 2026 Highlight",
+    "video": "https://cdn.steamstatic.com/apps/csgo/videos/highlightreels/026/085v139_097/026_085v139_097_de_mirage_cologne2026_gffuriateamentrance_ww_1080p.webm",
+    "thumbnail": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/refs/heads/main/static/highlightreels/ww/917.webp",
+    "description": "FURIA makes their way onto the stage of Grand Final vs Falcons.",
+    "map": "de_mirage",
+    "stage": "Grand Final",
+    "player": null
   },
   {
     "id": "1072445653",
     "name": "Cologne 2026 Highlight | tabseN 1v2 Clutch",
     "charmImage": "assets/charms/1086245955.png",
     "rarity": "HIGH_GRADE",
-    "collection": "Cologne 2026 Highlight"
+    "collection": "Cologne 2026 Highlight",
+    "video": "https://cdn.steamstatic.com/apps/csgo/videos/highlightreels/026/069v087_049/026_069v087_049_de_mirage_cologne2026_st1tabsenmirage1v2clutch_ww_1080p.webm",
+    "thumbnail": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/refs/heads/main/static/highlightreels/ww/867.webp",
+    "description": "tabseN wins a quick 1v2 on Mirage, cutting the deficit to 8-12 and keeping BIG's comeback alive before their overtime win.",
+    "map": "de_mirage",
+    "stage": "Stage I",
+    "player": "tabseN"
   },
   {
     "id": "1076377469",
     "name": "Cologne 2026 Highlight | yuurih 1v4 Clutch",
     "charmImage": "assets/charms/1086245955.png",
     "rarity": "HIGH_GRADE",
-    "collection": "Cologne 2026 Highlight"
+    "collection": "Cologne 2026 Highlight",
+    "video": "https://cdn.steamstatic.com/apps/csgo/videos/highlightreels/026/085v112_006/026_085v112_006_de_mirage_cologne2026_qfyuurihmirage1v4clutch_ww_1080p.webm",
+    "thumbnail": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/refs/heads/main/static/highlightreels/ww/903.webp",
+    "description": "yuurih turns the Mirage pistol into an absurd 1v4, slipping from mid toward A and finishing the last 9z team player after the plant.",
+    "map": "de_mirage",
+    "stage": "Quarterfinal",
+    "player": "yuurih"
   },
   {
     "id": "1076424658",
     "name": "Cologne 2026 Highlight | Starry Quad Kill",
     "charmImage": "assets/charms/1086245955.png",
     "rarity": "HIGH_GRADE",
-    "collection": "Cologne 2026 Highlight"
+    "collection": "Cologne 2026 Highlight",
+    "video": "https://cdn.steamstatic.com/apps/csgo/videos/highlightreels/026/074v127_049/026_074v127_049_de_ancient_cologne2026_st1starryancientquadkill_ww_1080p.webm",
+    "thumbnail": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/refs/heads/main/static/highlightreels/ww/869.webp",
+    "description": "Starry drags Lynn Vision back into the round on Ancient, taking over the post-plant with four kills.",
+    "map": "de_ancient",
+    "stage": "Stage I",
+    "player": "Starry"
   },
   {
     "id": "1080003333",
     "name": "Cologne 2026 Highlight | MATYS ACE",
     "charmImage": "assets/charms/1086245955.png",
     "rarity": "HIGH_GRADE",
-    "collection": "Cologne 2026 Highlight"
+    "collection": "Cologne 2026 Highlight",
+    "video": "https://cdn.steamstatic.com/apps/csgo/videos/highlightreels/026/059v140_065/026_059v140_065_de_mirage_cologne2026_st2matysmirageace_ww_1080p.webm",
+    "thumbnail": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/refs/heads/main/static/highlightreels/ww/878.webp",
+    "description": "MATYS tears through M80 with an MP9 ace on Mirage, giving G2 early control of the map.",
+    "map": "de_mirage",
+    "stage": "Stage II",
+    "player": "MATYS"
   },
   {
     "id": "1081915316",
     "name": "Cologne 2026 Highlight | FalleN Quad Kill",
     "charmImage": "assets/charms/1086245955.png",
     "rarity": "HIGH_GRADE",
-    "collection": "Cologne 2026 Highlight"
+    "collection": "Cologne 2026 Highlight",
+    "video": "https://cdn.steamstatic.com/apps/csgo/videos/highlightreels/026/085v139_097/026_085v139_097_de_mirage_cologne2026_gffallenmiragequadkill_ww_1080p.webm",
+    "thumbnail": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/refs/heads/main/static/highlightreels/ww/918.webp",
+    "description": "FalleN shreds Falcons' Mirage B hit with four quick kills.",
+    "map": "de_mirage",
+    "stage": "Grand Final",
+    "player": "FalleN"
   },
   {
     "id": "1082638584",
     "name": "Cologne 2026 Highlight | gr1ks 1v3 AWP Clutch",
     "charmImage": "assets/charms/1086245955.png",
     "rarity": "HIGH_GRADE",
-    "collection": "Cologne 2026 Highlight"
+    "collection": "Cologne 2026 Highlight",
+    "video": "https://cdn.steamstatic.com/apps/csgo/videos/highlightreels/026/069v135_065/026_069v135_065_de_ancient_cologne2026_st2gr1ksancient1v3awpclutch_ww_1080p.webm",
+    "thumbnail": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/refs/heads/main/static/highlightreels/ww/880.webp",
+    "description": "gr1ks turns a 1v3 on Ancient with three AWP kills, including a collateral double, to deny B8 the plant.",
+    "map": "de_ancient",
+    "stage": "Stage II",
+    "player": "gr1ks"
   },
   {
     "id": "1084955717",
     "name": "Cologne 2026 Highlight | m0NESY 3 Kills with 1v2 Clutch",
     "charmImage": "assets/charms/1086245955.png",
     "rarity": "HIGH_GRADE",
-    "collection": "Cologne 2026 Highlight"
+    "collection": "Cologne 2026 Highlight",
+    "video": "https://cdn.steamstatic.com/apps/csgo/videos/highlightreels/026/085v139_097/026_085v139_097_de_anubis_cologne2026_gfm0nesyanubis3killswith1v2clutch_ww_1080p.webm",
+    "thumbnail": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/refs/heads/main/static/highlightreels/ww/920.webp",
+    "description": "m0NESY wins a 1v2 post-plant on Anubis, baiting FURIA's retake.",
+    "map": "de_anubis",
+    "stage": "Grand Final",
+    "player": "m0NESY"
   },
   {
     "id": "1085710875",
     "name": "Cologne 2026 Highlight | susp 1v3 Clutch",
     "charmImage": "assets/charms/1086245955.png",
     "rarity": "HIGH_GRADE",
-    "collection": "Cologne 2026 Highlight"
+    "collection": "Cologne 2026 Highlight",
+    "video": "https://cdn.steamstatic.com/apps/csgo/videos/highlightreels/026/095v146_049/026_095v146_049_de_inferno_cologne2026_st1suspinferno1v3clutch_ww_1080p.webm",
+    "thumbnail": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/refs/heads/main/static/highlightreels/ww/872.webp",
+    "description": "susp closes Inferno with a 1v3 against Gaimin Gladiators, sealing HEROIC's clean 2-0 series win.",
+    "map": "de_inferno",
+    "stage": "Stage I",
+    "player": "susp"
   },
   {
     "id": "1086245955",
     "name": "Cologne 2026 Highlight | ultimate Jump Kill",
     "charmImage": "assets/charms/1086245955.png",
     "rarity": "HIGH_GRADE",
-    "collection": "Cologne 2026 Highlight"
+    "collection": "Cologne 2026 Highlight",
+    "video": "https://cdn.steamstatic.com/apps/csgo/videos/highlightreels/026/048v069_049/026_048v069_049_de_nuke_cologne2026_st1ultimatenukejumpkill_ww_1080p.webm",
+    "thumbnail": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/refs/heads/main/static/highlightreels/ww/866.webp",
+    "description": "ultimate lands a ridiculous strafe-jumping Deagle headshot on Nuke against BIG.",
+    "map": "de_nuke",
+    "stage": "Stage I",
+    "player": "ultimate"
   },
   {
     "id": "1086260040",
     "name": "Cologne 2026 Highlight | max 1v2 Clutch",
     "charmImage": "assets/charms/1086245955.png",
     "rarity": "HIGH_GRADE",
-    "collection": "Cologne 2026 Highlight"
+    "collection": "Cologne 2026 Highlight",
+    "video": "https://cdn.steamstatic.com/apps/csgo/videos/highlightreels/026/085v112_006/026_085v112_006_de_dust2_cologne2026_qfmaxdust21v2clutch_ww_1080p.webm",
+    "thumbnail": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/refs/heads/main/static/highlightreels/ww/905.webp",
+    "description": "max clutches a post-plant 1v2 through the A-site smokes on Dust II, sealing the win vs FURIA.",
+    "map": "de_dust2",
+    "stage": "Quarterfinal",
+    "player": "max"
   },
   {
     "id": "1089300116",
     "name": "Cologne 2026 Highlight | Gizmy Knife Kill",
     "charmImage": "assets/charms/1086245955.png",
     "rarity": "HIGH_GRADE",
-    "collection": "Cologne 2026 Highlight"
+    "collection": "Cologne 2026 Highlight",
+    "video": "https://cdn.steamstatic.com/apps/csgo/videos/highlightreels/026/059v119_065/026_059v119_065_de_mirage_cologne2026_st2gizmymirageknifekill_ww_1080p.webm",
+    "thumbnail": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/refs/heads/main/static/highlightreels/ww/877.webp",
+    "description": "Gizmy seals the round on Mirage by knifing Heavygod, giving Monte match points in double overtime.",
+    "map": "de_mirage",
+    "stage": "Stage II",
+    "player": "Gizmy"
   },
   {
     "id": "1091512886",
     "name": "Cologne 2026 Highlight | Krabeni ACE",
     "charmImage": "assets/charms/1086245955.png",
     "rarity": "HIGH_GRADE",
-    "collection": "Cologne 2026 Highlight"
+    "collection": "Cologne 2026 Highlight",
+    "video": "https://cdn.steamstatic.com/apps/csgo/videos/highlightreels/026/137v145_083/026_137v145_083_de_mirage_cologne2026_st3krabenimirageace_ww_1080p.webm",
+    "thumbnail": "https://raw.githubusercontent.com/ByMykel/counter-strike-image-tracker/refs/heads/main/static/highlightreels/ww/895.webp",
+    "description": "Krabeni takes full control on Mirage, dismantling BetBoom's Tec-9 eco with an ace.",
+    "map": "de_mirage",
+    "stage": "Stage III",
+    "player": "Krabeni"
   }
 ]

@@ -393,6 +393,17 @@ mixin _LocalDataRepositoryQueries on _LocalDataRepositoryLoaders {
     return result;
   }
 
+  Future<List<StickerDto>> loadStickersForTournament(
+    String tournamentName,
+  ) async {
+    final name = _canonicalTournamentName(tournamentName);
+    final stickers = await loadStickers();
+    return stickers.where((sticker) {
+      final event = sticker.tournament;
+      return event != null && _canonicalTournamentName(event) == name;
+    }).toList();
+  }
+
   Future<List<ContainerDto>> loadStickerContainersForTournament(
     String tournamentName,
   ) async {

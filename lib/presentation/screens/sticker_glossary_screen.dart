@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../data/models/sticker_dto.dart';
+import '../../data/models/tournament_dto.dart';
 import '../../data/repositories/local_data_repository.dart';
 import '../helpers/app_navigation_helper.dart';
 import '../helpers/sticker_ui_helper.dart';
@@ -13,7 +14,13 @@ import 'sticker_details_screen.dart';
 class StickerGlossaryScreen extends StatefulWidget {
   final LocalDataRepository repository;
 
-  const StickerGlossaryScreen({super.key, required this.repository});
+  final TournamentDto? tournament;
+
+  const StickerGlossaryScreen({
+    super.key,
+    required this.repository,
+    this.tournament,
+  });
 
   @override
   State<StickerGlossaryScreen> createState() => _StickerGlossaryScreenState();
@@ -22,6 +29,28 @@ class StickerGlossaryScreen extends StatefulWidget {
 class _StickerGlossaryScreenState extends State<StickerGlossaryScreen> {
   String _rarityFilter = 'ALL';
   String _sourceFilter = 'ALL';
+  String _categoryFilter = 'ALL';
+  String _effectFilter = 'ALL';
+  String _seriesFilter = 'ALL';
+
+  static const _categories = [
+    GlossaryFilterOption('ALL', 'All stickers'),
+    GlossaryFilterOption('TEAM_OR_EVENT', 'Teams & Event'),
+    GlossaryFilterOption('AUTOGRAPH', 'Autographs'),
+  ];
+  static const _effects = [
+    GlossaryFilterOption('ALL', 'All effects'),
+    GlossaryFilterOption('OTHER', 'Paper'),
+    GlossaryFilterOption('FOIL', 'Foil'),
+    GlossaryFilterOption('HOLO', 'Holo'),
+    GlossaryFilterOption('GOLD', 'Gold'),
+  ];
+  static const _series = [
+    GlossaryFilterOption('ALL', 'All series'),
+    GlossaryFilterOption('RANKED', 'Ranked Series'),
+  ];
+
+  static final _rankedMarker = RegExp(r', Ranked\)');
 
   static const List<GlossaryFilterOption> _rarityOptions = [
     GlossaryFilterOption('ALL', 'All rarities'),
@@ -53,6 +82,17 @@ class _StickerGlossaryScreenState extends State<StickerGlossaryScreen> {
         return false;
       }
       if (_sourceFilter != 'ALL' && sticker.sourceLabel != _sourceFilter) {
+        return false;
+      }
+      final isAutograph = sticker.stickerType == 'AUTOGRAPH';
+      if ((_categoryFilter == 'AUTOGRAPH' && !isAutograph) ||
+          (_categoryFilter == 'TEAM_OR_EVENT' && isAutograph)) {
+        return false;
+      }
+      if (_effectFilter != 'ALL' && sticker.effect != _effectFilter) {
+        return false;
+      }
+      if (_seriesFilter == 'RANKED' && !_rankedMarker.hasMatch(sticker.name)) {
         return false;
       }
       if (query.isEmpty) return true;
@@ -95,45 +135,92 @@ class _StickerGlossaryScreenState extends State<StickerGlossaryScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final tournament = widget.tournament;
     return GenericGlossaryScreen<StickerDto>(
-      title: 'Sticker Glossary',
-      searchHint: 'Search by sticker, collection, tournament...',
-      future: widget.repository.loadStickers(),
+      title: tournament == null
+          ? 'Sticker Glossary'
+          : '${tournament.name} Stickers',
+      searchHint: tournament == null
+          ? 'Search by sticker, collection, tournament...'
+          : 'Search by team or player...',
+      future: tournament == null
+          ? widget.repository.loadStickers()
+          : widget.repository.loadStickersForTournament(tournament.name),
       filterAndSort: _filterAndSort,
-      countLabelBuilder: (count) => '$count stickers',
+      countLabelBuilder: (count) =>
+          count == 1 ? '1 sticker' : '$count stickers',
       emptyMessage: 'No stickers found.',
       errorPrefix: 'Failed to load stickers.',
-      headerControlsBuilder: (_, items) => [
-        Row(
-          children: [
-            Expanded(
-              child: GlossaryFilterDropdown(
-                label: 'Rarity',
-                value: _rarityFilter,
-                options: _rarityOptions,
-                onChanged: (value) {
-                  setState(() {
-                    _rarityFilter = value ?? 'ALL';
-                  });
-                },
+      headerControlsBuilder: (_, items) => tournament != null
+          ? [
+              Row(
+                children: [
+                  Expanded(
+                    child: GlossaryFilterDropdown(
+                      label: 'Category',
+                      value: _categoryFilter,
+                      options: _categories,
+                      onChanged: (value) =>
+                          setState(() => _categoryFilter = value ?? 'ALL'),
+                    ),
+                  ),
+                  const SizedBox(width: 10),
+                  Expanded(
+                    child: GlossaryFilterDropdown(
+                      label: 'Effect',
+                      value: _effectFilter,
+                      options: _effects,
+                      onChanged: (value) =>
+                          setState(() => _effectFilter = value ?? 'ALL'),
+                    ),
+                  ),
+                ],
               ),
-            ),
-            const SizedBox(width: 10),
-            Expanded(
-              child: GlossaryFilterDropdown(
-                label: 'Source',
-                value: _sourceFilter,
-                options: _sourceOptions(items),
-                onChanged: (value) {
-                  setState(() {
-                    _sourceFilter = value ?? 'ALL';
-                  });
-                },
+              if (tournament.name == 'IEM Cologne 2026' &&
+                  items.any(
+                    (sticker) => _rankedMarker.hasMatch(sticker.name),
+                  )) ...[
+                const SizedBox(height: 10),
+                GlossaryFilterDropdown(
+                  label: 'Series',
+                  value: _seriesFilter,
+                  options: _series,
+                  onChanged: (value) =>
+                      setState(() => _seriesFilter = value ?? 'ALL'),
+                ),
+              ],
+            ]
+          : [
+              Row(
+                children: [
+                  Expanded(
+                    child: GlossaryFilterDropdown(
+                      label: 'Rarity',
+                      value: _rarityFilter,
+                      options: _rarityOptions,
+                      onChanged: (value) {
+                        setState(() {
+                          _rarityFilter = value ?? 'ALL';
+                        });
+                      },
+                    ),
+                  ),
+                  const SizedBox(width: 10),
+                  Expanded(
+                    child: GlossaryFilterDropdown(
+                      label: 'Source',
+                      value: _sourceFilter,
+                      options: _sourceOptions(items),
+                      onChanged: (value) {
+                        setState(() {
+                          _sourceFilter = value ?? 'ALL';
+                        });
+                      },
+                    ),
+                  ),
+                ],
               ),
-            ),
-          ],
-        ),
-      ],
+            ],
       collectedCountBuilder: (sticker, collectedByItemId) =>
           collectedByItemId[sticker.id] ?? 0,
       itemBuilder: (context, sticker, collectedCount) {
@@ -150,7 +237,9 @@ class _StickerGlossaryScreenState extends State<StickerGlossaryScreen> {
             DetailTag(text: StickerUiHelper.rarityLabel(sticker), color: color),
             DetailTag(text: sticker.stickerTypeLabel),
             if (sticker.effect != 'OTHER')
-              DetailTag(text: StickerUiHelper.effectLabel(sticker.effect)),
+              DetailTag(text: StickerUiHelper.effectLabel(sticker.effect))
+            else if (tournament != null)
+              const DetailTag(text: 'Paper'),
           ],
           onTap: () {
             AppNavigationHelper.pushScreen(
