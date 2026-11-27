@@ -25,6 +25,11 @@ class GlossaryFilterDropdown extends StatelessWidget {
   Widget build(BuildContext context) {
     return DropdownButtonFormField<String>(
       initialValue: value,
+      isExpanded: true,
+      selectedItemBuilder: (context) => [
+        for (final option in options)
+          Text(option.label, maxLines: 1, overflow: TextOverflow.ellipsis),
+      ],
       decoration: InputDecoration(
         labelText: label,
         border: OutlineInputBorder(borderRadius: BorderRadius.circular(14)),

@@ -23,11 +23,13 @@ const _pageTitleOverrides = <String, String>{
   'ESL One Katowice 2015': 'ESL/One/2015/Katowice',
   'FACEIT London 2018': 'FACEIT/2018/Major',
   'IEM Katowice 2019': 'Intel_Extreme_Masters/Season_XIII/World_Championship',
+  'IEM Cologne 2026': 'Intel_Extreme_Masters/2026/Cologne',
   'IEM Rio 2022': 'Intel_Extreme_Masters/2022/Rio',
   'MLG Columbus 2016': 'MLG/2016/Columbus',
   'PGL Antwerp 2022': 'PGL/2022/Antwerp',
   'PGL Copenhagen 2024': 'PGL/2024/Copenhagen',
   'PGL Kraków 2017': 'PGL/2017/Krakow',
+  'PGL Singapore 2026': 'PGL/2026/Singapore',
   'PGL Stockholm 2021': 'PGL/2021/Stockholm',
   'Perfect World Shanghai 2024': 'Perfect_World/Major/2024/Shanghai',
   'StarLadder Berlin 2019': 'StarLadder/2019/Major',
@@ -65,14 +67,22 @@ Future<void> main() async {
       _canonicalTournamentName((entry['name'] ?? '').toString()): entry,
   };
 
-  final tournamentNames =
-      containers
-          .map((entry) => (entry['tournamentName'] ?? '').toString().trim())
-          .where((name) => name.isNotEmpty)
-          .map(_canonicalTournamentName)
-          .toSet()
-          .toList()
-        ..sort();
+  final stickersFile = File('assets/data/stickers.json');
+  final stickers = stickersFile.existsSync()
+      ? jsonDecode(await stickersFile.readAsString()) as List<dynamic>
+      : const <dynamic>[];
+  final tournamentNames = {
+    ...existingByName.keys.where((name) => name.isNotEmpty),
+    ...containers
+        .map((entry) => (entry['tournamentName'] ?? '').toString())
+        .map(_canonicalTournamentName)
+        .where((name) => name.isNotEmpty),
+    ...stickers
+        .whereType<Map>()
+        .map((entry) => (entry['tournament'] ?? '').toString())
+        .map(_canonicalTournamentName)
+        .where(_pageTitleOverrides.containsKey),
+  }.toList()..sort();
 
   final results = <Map<String, dynamic>>[];
 
@@ -91,6 +101,10 @@ Future<void> main() async {
             (existing?['tournamentLogo'] as String?),
       );
       final tournamentDates = _parseStartEndDates(renderedPage);
+      final rawDates = _parseHiddenDataBoxDates(rawPage);
+      final startDate =
+          tournamentDates.$1 ?? rawDates.$1 ?? existing?['startDate'];
+      final endDate = tournamentDates.$2 ?? rawDates.$2 ?? existing?['endDate'];
       final stagePages = _stagePagesForTournament(pageTitle, tournamentName);
 
       final importedPlacements = _parsePlacementsFromRenderedHtml(renderedPage);
@@ -135,10 +149,8 @@ Future<void> main() async {
         'name': tournamentName,
         'winner': winner,
         if ((tournamentLogo ?? '').isNotEmpty) 'tournamentLogo': tournamentLogo,
-        if ((tournamentDates.$1 ?? '').isNotEmpty)
-          'startDate': tournamentDates.$1,
-        if ((tournamentDates.$2 ?? '').isNotEmpty)
-          'endDate': tournamentDates.$2,
+        'startDate': ?startDate,
+        'endDate': ?endDate,
         'placements': placements,
         'teamRosters': teamRosters,
         'stageDates': stageDates,
@@ -246,7 +258,7 @@ List<Map<String, String>> _parsePlacementsFromRenderedHtml(
   }
 
   final placeCells = RegExp(
-    r'<div class="csstable-widget-cell prizepooltable-place"[^>]*>(.*?)</div>',
+    r'<(?:div class="csstable-widget-cell prizepooltable-place"|td class="prizepooltable-place")[^>]*>(.*?)</(?:div|td)>',
     dotAll: true,
   ).allMatches(section.substring(tableIndex)).toList();
 
@@ -300,9 +312,7 @@ List<Map<String, dynamic>> _parseTeamRostersFromRawPage(
       : afterStart.substring(0, resultsIndex);
 
   final rosterBlocks = _extractTemplateBlocks(section, '{{TeamCard');
-  if (rosterBlocks.isEmpty) {
-    return const [];
-  }
+  final opponentBlocks = _extractTemplateBlocks(section, '{{Opponent|');
 
   final placementLogoByTeam = <String, String?>{
     for (final placement in placements)
@@ -332,6 +342,47 @@ List<Map<String, dynamic>> _parseTeamRostersFromRawPage(
       'team': _cleanWikiValue(team),
       if ((placementLogoByTeam[_cleanWikiValue(team)] ?? '').isNotEmpty)
         'teamLogo': placementLogoByTeam[_cleanWikiValue(team)],
+      'players': players,
+    });
+  }
+
+  for (final block in opponentBlocks) {
+    final playersBlock = _extractTemplateBlocks(block, '{{Persons').firstOrNull;
+    if (playersBlock == null) {
+      continue;
+    }
+    final team = _cleanWikiValue(
+      block.substring('{{Opponent|'.length).split(RegExp(r'[|\n]')).first,
+    );
+    final players = <String>[];
+    for (final person in _extractTemplateBlocks(playersBlock, '{{Person|')) {
+      final fields = person
+          .substring('{{Person|'.length, person.length - 2)
+          .split('|')
+          .map((field) => field.trim())
+          .toList();
+      final didPlay = fields.contains('played=true');
+      if (fields.contains('role=coach') ||
+          fields.contains('played=false') ||
+          (!didPlay &&
+              (fields.contains('role=sub') || fields.contains('status=sub')))) {
+        continue;
+      }
+      final name = fields.firstWhere(
+        (field) => !field.contains('='),
+        orElse: () => '',
+      );
+      if (name.isNotEmpty) {
+        players.add(_cleanWikiValue(name));
+      }
+    }
+    if (team.isEmpty || players.isEmpty || !seenTeams.add(team)) {
+      continue;
+    }
+    rosters.add({
+      'team': team,
+      if ((placementLogoByTeam[team] ?? '').isNotEmpty)
+        'teamLogo': placementLogoByTeam[team],
       'players': players,
     });
   }
@@ -758,7 +809,7 @@ String _cleanWikiValue(String input) {
 
 List<(String, String?)> _parseTeamBlocks(String htmlChunk) {
   final blocks = RegExp(
-    r'<div class="block-team">(.*?)</div>\s*</div>',
+    r'<div class="block-team">(.*?)</div>\s*(?:</div>|</td>)',
     dotAll: true,
   ).allMatches(htmlChunk);
 

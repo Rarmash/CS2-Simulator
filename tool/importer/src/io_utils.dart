@@ -60,29 +60,6 @@ class IoUtils {
     }
   }
 
-  Future<void> resetCollectibleOutputs() async {
-    for (final file in [
-      File('${dataDir.path}/stickers.json'),
-      File('${dataDir.path}/sticker_contents.json'),
-      File('${dataDir.path}/pins.json'),
-      File('${dataDir.path}/pin_contents.json'),
-      File('${dataDir.path}/music_kits.json'),
-      File('${dataDir.path}/music_kit_contents.json'),
-      File('${dataDir.path}/agents.json'),
-      File('${dataDir.path}/agent_collection_contents.json'),
-      File('${dataDir.path}/graffiti.json'),
-      File('${dataDir.path}/graffiti_contents.json'),
-      File('${dataDir.path}/patches.json'),
-      File('${dataDir.path}/patch_contents.json'),
-      File('${dataDir.path}/charms.json'),
-      File('${dataDir.path}/charm_contents.json'),
-    ]) {
-      if (file.existsSync()) {
-        await file.delete();
-      }
-    }
-  }
-
   List<Map<String, dynamic>> loadJsonList(File file) {
     if (!file.existsSync()) {
       return <Map<String, dynamic>>[];

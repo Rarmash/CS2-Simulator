@@ -45,12 +45,12 @@ void main() {
   group('tournament DTOs', () {
     test('infers year and era from tournament name', () {
       const csGo = TournamentDto(
-        name: 'DreamHack Winter 2014',
-        imagePath: 'assets/tournament_logos/dhw2014.png',
-        releaseDate: '2014-11-27',
-        startDate: '2014-11-27',
-        endDate: '2014-11-29',
-        organizer: 'DreamHack',
+        name: 'BLAST.tv Paris 2023',
+        imagePath: 'assets/tournament_logos/blast_tv_paris_2023.png',
+        releaseDate: '2023-05-08',
+        startDate: '2023-05-08',
+        endDate: '2023-05-21',
+        organizer: 'BLAST',
         souvenirPackageCount: 1,
         stickerContainerCount: 0,
       );
@@ -65,7 +65,7 @@ void main() {
         stickerContainerCount: 2,
       );
 
-      expect(csGo.year, 2014);
+      expect(csGo.year, 2023);
       expect(csGo.eraLabel, 'CS:GO Era');
       expect(cs2.year, 2024);
       expect(cs2.eraLabel, 'CS2 Era');

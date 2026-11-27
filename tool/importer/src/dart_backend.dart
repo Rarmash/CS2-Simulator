@@ -13,7 +13,6 @@ class DartImporterBackend implements ImporterBackend {
   @override
   Future<void> run() async {
     await _io.ensureDirs();
-    await _io.resetCollectibleOutputs();
 
     final rewardSourceOverrides = _loadRewardOverrides();
     final operationCollectionOverrides = _loadOperationOverrides();
@@ -218,6 +217,10 @@ class DartImporterBackend implements ImporterBackend {
     final patchesData = _asJsonList(await _io.fetchJson(patchesUrl));
     _io.printInfo('Fetching keychains.json ...');
     final keychainsData = _asJsonList(await _io.fetchJson(keychainsUrl));
+    _io.printInfo('Fetching highlights.json ...');
+    final highlightCharms = _asJsonList(
+      await _io.fetchJson(highlightsUrl),
+    ).where((item) => highlightCharmEvents.contains(item['tournament_event']));
 
     var tournamentLogosCreated = 0;
     for (final entry in tournamentMetadata) {
@@ -1605,7 +1608,9 @@ class DartImporterBackend implements ImporterBackend {
           .add(agentId);
     }
 
-    for (final meta in keychainsData) {
+    final highlightImagePaths = <String, String>{};
+    for (final meta in [...keychainsData, ...highlightCharms]) {
+      final highlightEvent = meta['tournament_event'] as String?;
       final charmName = normalizeCharmName(
         (meta['name'] ?? '').toString().trim(),
       );
@@ -1614,7 +1619,9 @@ class DartImporterBackend implements ImporterBackend {
       }
 
       final collectionInfo = chooseCollectionNameAndImage(meta);
-      final charmCollection = collectionInfo.$1;
+      final charmCollection = highlightEvent == null
+          ? collectionInfo.$1
+          : '$highlightEvent Highlight';
       final rarity =
           charmRarityMap[((meta['rarity'] as Map?)?['name'] ?? '')
               .toString()] ??
@@ -1632,7 +1639,9 @@ class DartImporterBackend implements ImporterBackend {
         reusedCharmCount += 1;
       } else {
         final sourceCharmId = (meta['id'] ?? '').toString().trim();
-        final candidate = makeStableNumericId(sourceCharmId, 996000000);
+        final candidate = highlightEvent == null
+            ? makeStableNumericId(sourceCharmId, 996000000)
+            : makeHashedNumericId(sourceCharmId, 996000000);
         if (RegExp(r'^\d+$').hasMatch(candidate) &&
             !usedCharmIds.contains(int.parse(candidate)) &&
             !newCharms.containsKey(candidate)) {
@@ -1654,9 +1663,16 @@ class DartImporterBackend implements ImporterBackend {
         dirPath: charmsDir.path,
         relativeDir: 'assets/charms',
         id: charmId,
-        existingRelativePath: existingCharm?['charmImage']?.toString(),
+        existingRelativePath:
+            highlightImagePaths[imageUrl] ??
+            existingCharm?['charmImage']?.toString(),
         compressionModeOverride: CompressionMode.maxCompress,
       );
+      if (highlightEvent != null &&
+          imageUrl != null &&
+          File(charmImagePath).existsSync()) {
+        highlightImagePaths[imageUrl] = charmImagePath;
+      }
 
       final charmRecord = <String, dynamic>{
         'id': charmId,

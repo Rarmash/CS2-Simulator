@@ -198,6 +198,15 @@
     "hasStatTrak": true
   },
   {
+    "id": "987481791",
+    "name": "DJ DIESEL & Hairitage, BANG YOUR HEAD",
+    "musicKitImage": "assets/music_kits/987481791.png",
+    "rarity": "HIGH_GRADE",
+    "collection": "Monstercat",
+    "hasRegular": true,
+    "hasStatTrak": true
+  },
+  {
     "id": "988045417",
     "name": "Tree Adams and Ben Bromfield, M.U.D.D. FORCE",
     "musicKitImage": "assets/music_kits/988045417.webp",
@@ -257,6 +266,15 @@
     "musicKitImage": "assets/music_kits/996251847.webp",
     "rarity": "HIGH_GRADE",
     "collection": "Initiators",
+    "hasRegular": true,
+    "hasStatTrak": true
+  },
+  {
+    "id": "996772755",
+    "name": "ALLEYCVT & LEVEL UP, BELIEVE",
+    "musicKitImage": "assets/music_kits/996772755.png",
+    "rarity": "HIGH_GRADE",
+    "collection": "Monstercat",
     "hasRegular": true,
     "hasStatTrak": true
   },
@@ -333,6 +351,15 @@
     "hasStatTrak": true
   },
   {
+    "id": "1001763697",
+    "name": "Vicetone & Cozi Zuehlsdorff, Nevada",
+    "musicKitImage": "assets/music_kits/1001763697.png",
+    "rarity": "HIGH_GRADE",
+    "collection": "Monstercat",
+    "hasRegular": true,
+    "hasStatTrak": true
+  },
+  {
     "id": "1001873278",
     "name": "Beartooth, Disgusting",
     "musicKitImage": "assets/music_kits/1001873278.webp",
@@ -347,6 +374,24 @@
     "musicKitImage": "assets/music_kits/1002316011.webp",
     "rarity": "HIGH_GRADE",
     "collection": null,
+    "hasRegular": true,
+    "hasStatTrak": true
+  },
+  {
+    "id": "1002868526",
+    "name": "F.O.O.L, Criminals",
+    "musicKitImage": "assets/music_kits/1002868526.png",
+    "rarity": "HIGH_GRADE",
+    "collection": "Monstercat",
+    "hasRegular": true,
+    "hasStatTrak": true
+  },
+  {
+    "id": "1004672459",
+    "name": "Tristam & Braken, Flight",
+    "musicKitImage": "assets/music_kits/1004672459.png",
+    "rarity": "HIGH_GRADE",
+    "collection": "Monstercat",
     "hasRegular": true,
     "hasStatTrak": true
   },
@@ -576,6 +621,15 @@
     "hasStatTrak": true
   },
   {
+    "id": "1025436165",
+    "name": "Starjunk 95, Industrial Sunset Memories",
+    "musicKitImage": "assets/music_kits/1025436165.png",
+    "rarity": "HIGH_GRADE",
+    "collection": null,
+    "hasRegular": true,
+    "hasStatTrak": true
+  },
+  {
     "id": "1027126827",
     "name": "Austin Wintory, Mocha Petal",
     "musicKitImage": "assets/music_kits/1027126827.webp",
@@ -671,6 +725,15 @@
     "musicKitImage": "assets/music_kits/1038380485.webp",
     "rarity": "HIGH_GRADE",
     "collection": "Tacticians",
+    "hasRegular": true,
+    "hasStatTrak": true
+  },
+  {
+    "id": "1040388536",
+    "name": "Noisestorm, Crab Rave",
+    "musicKitImage": "assets/music_kits/1040388536.png",
+    "rarity": "HIGH_GRADE",
+    "collection": "Monstercat",
     "hasRegular": true,
     "hasStatTrak": true
   },
@@ -864,6 +927,15 @@
     "hasStatTrak": true
   },
   {
+    "id": "1062274345",
+    "name": "Arcando & Pirapus, Ultrasound",
+    "musicKitImage": "assets/music_kits/1062274345.png",
+    "rarity": "HIGH_GRADE",
+    "collection": "Monstercat",
+    "hasRegular": true,
+    "hasStatTrak": true
+  },
+  {
     "id": "1062814563",
     "name": "Valve, CS:GO",
     "musicKitImage": "assets/music_kits/1062814563.webp",
@@ -896,6 +968,15 @@
     "musicKitImage": "assets/music_kits/1063784694.webp",
     "rarity": "HIGH_GRADE",
     "collection": null,
+    "hasRegular": true,
+    "hasStatTrak": true
+  },
+  {
+    "id": "1063811421",
+    "name": "Pegboard Nerds, Disconnected",
+    "musicKitImage": "assets/music_kits/1063811421.png",
+    "rarity": "HIGH_GRADE",
+    "collection": "Monstercat",
     "hasRegular": true,
     "hasStatTrak": true
   }

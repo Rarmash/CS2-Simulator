@@ -25,7 +25,7 @@ class TournamentDto {
     return int.tryParse(match.group(0)!);
   }
 
-  bool get isCs2Era => (year ?? 0) >= 2023;
+  bool get isCs2Era => (year ?? 0) >= 2024;
 
   String get eraLabel => isCs2Era ? 'CS2 Era' : 'CS:GO Era';
 }

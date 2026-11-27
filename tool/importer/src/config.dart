@@ -11,6 +11,9 @@ const agentsUrl = '$baseUrl/agents.json';
 const graffitiUrl = '$baseUrl/graffiti.json';
 const patchesUrl = '$baseUrl/patches.json';
 const keychainsUrl = '$baseUrl/keychains.json';
+const highlightsUrl = '$baseUrl/highlights.json';
+
+const highlightCharmEvents = {'Cologne 2026'};
 
 const timeoutSeconds = 30;
 
@@ -231,12 +234,23 @@ const musicKitCollectionOverrides = <String, String>{
   'Pirapus, EVERYNITE': 'NIGHTMODE II',
   'Repiet & Julia Kleijn, On And On': 'NIGHTMODE II',
   'ShockOne, Voices': 'NIGHTMODE II',
+  'ALLEYCVT & LEVEL UP, BELIEVE': 'Monstercat',
+  'Arcando & Pirapus, Ultrasound': 'Monstercat',
+  'DJ DIESEL & Hairitage, BANG YOUR HEAD': 'Monstercat',
+  'F.O.O.L, Criminals': 'Monstercat',
+  'Noisestorm, Crab Rave': 'Monstercat',
+  'Pegboard Nerds, Disconnected': 'Monstercat',
+  'Tristam & Braken, Flight': 'Monstercat',
+  'Vicetone & Cozi Zuehlsdorff, Nevada': 'Monstercat',
 };
 
 const excludedContainerNames = <String>{
   'Cologne 2026 Autograph Capsule',
   'Cologne 2026 Sticker Capsule',
   'Cologne 2026 Team Sticker Capsule',
+  'Singapore 2026 Autograph Capsule',
+  'Singapore 2026 Sticker Capsule',
+  'Singapore 2026 Team Sticker Capsule',
 };
 
 const tournamentLogoUrlOverrides = <String, String>{
@@ -660,6 +674,7 @@ const tournamentNameAliases = <String, String>{
   'Austin 2025': 'BLAST.tv Austin 2025',
   'Budapest 2025': 'StarLadder Budapest 2025',
   'Cologne 2026': 'IEM Cologne 2026',
+  'Singapore 2026': 'PGL Singapore 2026',
   'Katowice 2019': 'IEM Katowice 2019',
   'Krakow 2017': 'PGL Kraków 2017',
   'London 2018': 'FACEIT London 2018',
@@ -681,6 +696,7 @@ const tournamentStartDates = <String, String>{
   'Austin 2025': '2025-06-03',
   'Budapest 2025': '2025-11-24',
   'Cologne 2026': '2026-06-02',
+  'Singapore 2026': '2026-11-24',
 };
 
 const tournamentContainerStartDates = <String, String>{

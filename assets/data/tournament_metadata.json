@@ -1,12 +1,526 @@
 [
   {
     "name": "IEM Cologne 2026",
-    "winner": "",
+    "winner": "Team Falcons",
     "tournamentLogo": "assets/tournament_logos/iem_cologne_2026.png",
     "startDate": "2026-06-02",
     "endDate": "2026-06-21",
-    "placements": [],
-    "teamRosters": [],
+    "placements": [
+      {
+        "place": "1st",
+        "team": "Team Falcons",
+        "teamLogo": "assets/tournament_logos/team_falcons_41px_team_falcons_2022_allmode_png.png"
+      },
+      {
+        "place": "2nd",
+        "team": "FURIA",
+        "teamLogo": "assets/tournament_logos/furia_51px_furia_esports_allmode_png.png"
+      },
+      {
+        "place": "3rd-4th",
+        "team": "Team Spirit",
+        "teamLogo": "assets/tournament_logos/team_spirit_43px_team_spirit_2022_lightmode_png.png"
+      },
+      {
+        "place": "3rd-4th",
+        "team": "Aurora Gaming",
+        "teamLogo": "assets/tournament_logos/aurora_gaming_50px_aurora_gaming_2025_allmode_png.png"
+      },
+      {
+        "place": "5th-8th",
+        "team": "G2 Esports",
+        "teamLogo": "assets/tournament_logos/g2_esports_43px_g2_esports_2020_lightmode_png.png"
+      },
+      {
+        "place": "5th-8th",
+        "team": "Team Vitality",
+        "teamLogo": "assets/tournament_logos/team_vitality_41px_team_vitality_2023_lightmode_png.png"
+      },
+      {
+        "place": "5th-8th",
+        "team": "BetBoom Team",
+        "teamLogo": "assets/tournament_logos/betboom_team_56px_betboom_team_2024_allmode_png.png"
+      },
+      {
+        "place": "5th-8th",
+        "team": "9z Team",
+        "teamLogo": "assets/tournament_logos/9z_team_60px_9z_team_2024_lightmode_png.png"
+      },
+      {
+        "place": "9th-11th",
+        "team": "Natus Vincere",
+        "teamLogo": "assets/tournament_logos/natus_vincere_57px_natus_vincere_2021_lightmode_png.png"
+      },
+      {
+        "place": "9th-11th",
+        "team": "FUT Esports",
+        "teamLogo": "assets/tournament_logos/fut_esports_26px_futbolist_2021_lightmode_png.png"
+      },
+      {
+        "place": "9th-11th",
+        "team": "The MongolZ",
+        "teamLogo": "assets/tournament_logos/the_mongolz_39px_the_mongolz_2024_03_allmode_png.png"
+      },
+      {
+        "place": "12th-14th",
+        "team": "MOUZ",
+        "teamLogo": "assets/tournament_logos/mouz_47px_mouz_2021_allmode_png.png"
+      },
+      {
+        "place": "12th-14th",
+        "team": "Monte",
+        "teamLogo": "assets/tournament_logos/monte_35px_monte_2022_allmode_png.png"
+      },
+      {
+        "place": "12th-14th",
+        "team": "Legacy",
+        "teamLogo": "assets/tournament_logos/legacy_49px_legacy_allmode_png.png"
+      },
+      {
+        "place": "15th-16th",
+        "team": "B8",
+        "teamLogo": "assets/tournament_logos/b8_41px_b8_lightmode_png.png"
+      },
+      {
+        "place": "15th-16th",
+        "team": "PARIVISION",
+        "teamLogo": "assets/tournament_logos/parivision_56px_parivision_allmode_png.png"
+      },
+      {
+        "place": "17th-19th",
+        "team": "TYLOO",
+        "teamLogo": "assets/tournament_logos/tyloo_56px_tyloo_2016_allmode_png.png"
+      },
+      {
+        "place": "17th-19th",
+        "team": "BIG",
+        "teamLogo": "assets/tournament_logos/big_35px_big_2020_lightmode_png.png"
+      },
+      {
+        "place": "17th-19th",
+        "team": "paiN Gaming",
+        "teamLogo": "assets/tournament_logos/pain_gaming_75px_pain_gaming_2023_lightmode_png.png"
+      },
+      {
+        "place": "20th-22nd",
+        "team": "M80",
+        "teamLogo": "assets/tournament_logos/m80_44px_m80_2023_allmode_png.png"
+      },
+      {
+        "place": "20th-22nd",
+        "team": "MIBR",
+        "teamLogo": "assets/tournament_logos/mibr_100px_mibr_2018_lightmode_png.png"
+      },
+      {
+        "place": "20th-22nd",
+        "team": "Astralis",
+        "teamLogo": "assets/tournament_logos/astralis_41px_astralis_2020_allmode_png.png"
+      },
+      {
+        "place": "23rd-24th",
+        "team": "FlyQuest",
+        "teamLogo": "assets/tournament_logos/flyquest_51px_flyquest_2021_allmode_png.png"
+      },
+      {
+        "place": "23rd-24th",
+        "team": "GamerLegion",
+        "teamLogo": "assets/tournament_logos/gamerlegion_49px_gamerlegion_2026_allmode_png.png"
+      },
+      {
+        "place": "25th-27th",
+        "team": "Team Liquid",
+        "teamLogo": "assets/tournament_logos/team_liquid_44px_team_liquid_2024_lightmode_png.png"
+      },
+      {
+        "place": "25th-27th",
+        "team": "NRG",
+        "teamLogo": "assets/tournament_logos/nrg_100px_nrg_2024_lightmode_png.png"
+      },
+      {
+        "place": "25th-27th",
+        "team": "Lynn Vision Gaming",
+        "teamLogo": "assets/tournament_logos/lynn_vision_gaming_74px_lynn_vision_gaming_2024_allmode_png.png"
+      },
+      {
+        "place": "28th-30th",
+        "team": "THUNDERdOWNUNDER",
+        "teamLogo": "assets/tournament_logos/thunderdownunder_50px_thunderdownunder_2026_allmode_png.png"
+      },
+      {
+        "place": "28th-30th",
+        "team": "Sharks Esports",
+        "teamLogo": "assets/tournament_logos/sharks_esports_100px_sharks_esports_2026_allmode_png.png"
+      },
+      {
+        "place": "28th-30th",
+        "team": "HEROIC",
+        "teamLogo": "assets/tournament_logos/heroic_57px_heroic_2024_allmode_png.png"
+      },
+      {
+        "place": "31st-32nd",
+        "team": "Gaimin Gladiators",
+        "teamLogo": "assets/tournament_logos/gaimin_gladiators_30px_gladiators_2022_allmode_png.png"
+      },
+      {
+        "place": "31st-32nd",
+        "team": "SINNERS Esports",
+        "teamLogo": "assets/tournament_logos/sinners_esports_39px_sinners_esports_allmode_png.png"
+      }
+    ],
+    "teamRosters": [
+      {
+        "team": "Team Vitality",
+        "teamLogo": "assets/tournament_logos/team_vitality_41px_team_vitality_2023_lightmode_png.png",
+        "players": [
+          "apEX",
+          "ZywOo",
+          "flameZ",
+          "mezii",
+          "ropz"
+        ]
+      },
+      {
+        "team": "Natus Vincere",
+        "teamLogo": "assets/tournament_logos/natus_vincere_57px_natus_vincere_2021_lightmode_png.png",
+        "players": [
+          "b1t",
+          "Aleksib",
+          "iM",
+          "w0nderful",
+          "makazze"
+        ]
+      },
+      {
+        "team": "Team Falcons",
+        "teamLogo": "assets/tournament_logos/team_falcons_41px_team_falcons_2022_allmode_png.png",
+        "players": [
+          "NiKo",
+          "TeSeS",
+          "m0NESY",
+          "kyousuke",
+          "karrigan"
+        ]
+      },
+      {
+        "team": "The MongolZ",
+        "teamLogo": "assets/tournament_logos/the_mongolz_39px_the_mongolz_2024_03_allmode_png.png",
+        "players": [
+          "bLitz",
+          "Techno4K",
+          "910",
+          "mzinho",
+          "cobrazera"
+        ]
+      },
+      {
+        "team": "PARIVISION",
+        "teamLogo": "assets/tournament_logos/parivision_56px_parivision_allmode_png.png",
+        "players": [
+          "BELCHONOKK",
+          "Jame",
+          "nota",
+          "xiELO",
+          "zweih"
+        ]
+      },
+      {
+        "team": "Aurora Gaming",
+        "teamLogo": "assets/tournament_logos/aurora_gaming_50px_aurora_gaming_2025_allmode_png.png",
+        "players": [
+          "XANTARES",
+          "MAJ3R",
+          "Wicadia",
+          "woxic",
+          "soulfly"
+        ]
+      },
+      {
+        "team": "FURIA",
+        "teamLogo": "assets/tournament_logos/furia_51px_furia_esports_allmode_png.png",
+        "players": [
+          "yuurih",
+          "KSCERATO",
+          "FalleN",
+          "molodoy",
+          "YEKINDAR"
+        ]
+      },
+      {
+        "team": "MOUZ",
+        "teamLogo": "assets/tournament_logos/mouz_47px_mouz_2021_allmode_png.png",
+        "players": [
+          "torzsi",
+          "xertioN",
+          "Brollan",
+          "Spinx",
+          "xelex"
+        ]
+      },
+      {
+        "team": "FUT Esports",
+        "teamLogo": "assets/tournament_logos/fut_esports_26px_futbolist_2021_lightmode_png.png",
+        "players": [
+          "dem0n",
+          "Krabeni",
+          "cmtry",
+          "dziugss",
+          "lauNX"
+        ]
+      },
+      {
+        "team": "Team Spirit",
+        "teamLogo": "assets/tournament_logos/team_spirit_43px_team_spirit_2022_lightmode_png.png",
+        "players": [
+          "magixx",
+          "zont1x",
+          "donk",
+          "sh1ro",
+          "tN1R"
+        ]
+      },
+      {
+        "team": "Astralis",
+        "teamLogo": "assets/tournament_logos/astralis_41px_astralis_2020_allmode_png.png",
+        "players": [
+          "Staehr",
+          "jabbi",
+          "HooXi",
+          "phzy",
+          "ryu"
+        ]
+      },
+      {
+        "team": "G2 Esports",
+        "teamLogo": "assets/tournament_logos/g2_esports_43px_g2_esports_2020_lightmode_png.png",
+        "players": [
+          "huNter-",
+          "HeavyGod",
+          "SunPayus",
+          "matys",
+          "NertZ"
+        ]
+      },
+      {
+        "team": "Legacy",
+        "teamLogo": "assets/tournament_logos/legacy_49px_legacy_allmode_png.png",
+        "players": [
+          "latto",
+          "dumau",
+          "saadzin",
+          "n1ssim",
+          "arT"
+        ]
+      },
+      {
+        "team": "paiN Gaming",
+        "teamLogo": "assets/tournament_logos/pain_gaming_75px_pain_gaming_2023_lightmode_png.png",
+        "players": [
+          "biguzera",
+          "snow",
+          "piriajr",
+          "v$m",
+          "saffee"
+        ]
+      },
+      {
+        "team": "Monte",
+        "teamLogo": "assets/tournament_logos/monte_35px_monte_2022_allmode_png.png",
+        "players": [
+          "Gizmy",
+          "afro",
+          "AZUWU",
+          "Bymas",
+          "Rainwaker"
+        ]
+      },
+      {
+        "team": "9z Team",
+        "teamLogo": "assets/tournament_logos/9z_team_60px_9z_team_2024_lightmode_png.png",
+        "players": [
+          "max",
+          "HUASOPEEK",
+          "luchov",
+          "meyern",
+          "dgt"
+        ]
+      },
+      {
+        "team": "GamerLegion",
+        "teamLogo": "assets/tournament_logos/gamerlegion_49px_gamerlegion_2026_allmode_png.png",
+        "players": [
+          "Tauson",
+          "PR",
+          "REZ",
+          "hypex",
+          "Snax"
+        ]
+      },
+      {
+        "team": "B8",
+        "teamLogo": "assets/tournament_logos/b8_41px_b8_lightmode_png.png",
+        "players": [
+          "npl",
+          "esenthial",
+          "alex666",
+          "kensizor",
+          "s1zzi"
+        ]
+      },
+      {
+        "team": "HEROIC",
+        "teamLogo": "assets/tournament_logos/heroic_57px_heroic_2024_allmode_png.png",
+        "players": [
+          "yxngstxr",
+          "xfl0ud",
+          "nilo",
+          "Chr1zN",
+          "susp"
+        ]
+      },
+      {
+        "team": "BetBoom Team",
+        "teamLogo": "assets/tournament_logos/betboom_team_56px_betboom_team_2024_allmode_png.png",
+        "players": [
+          "zorte",
+          "Magnojez",
+          "Boombl4",
+          "FL4MUS",
+          "d1Ledez"
+        ]
+      },
+      {
+        "team": "BIG",
+        "teamLogo": "assets/tournament_logos/big_35px_big_2020_lightmode_png.png",
+        "players": [
+          "tabseN",
+          "JDC",
+          "gr1ks",
+          "blameF",
+          "faveN"
+        ]
+      },
+      {
+        "team": "M80",
+        "teamLogo": "assets/tournament_logos/m80_44px_m80_2023_allmode_png.png",
+        "players": [
+          "Swisher",
+          "slaxz-",
+          "s1n",
+          "Lake",
+          "JBa"
+        ]
+      },
+      {
+        "team": "MIBR",
+        "teamLogo": "assets/tournament_logos/mibr_100px_mibr_2018_lightmode_png.png",
+        "players": [
+          "brnz4n",
+          "insani",
+          "kl1m",
+          "LNZ",
+          "venomzera"
+        ]
+      },
+      {
+        "team": "SINNERS Esports",
+        "teamLogo": "assets/tournament_logos/sinners_esports_39px_sinners_esports_allmode_png.png",
+        "players": [
+          "beastik",
+          "SHOCK",
+          "kisserek",
+          "stressarN",
+          "MoDo"
+        ]
+      },
+      {
+        "team": "NRG",
+        "teamLogo": "assets/tournament_logos/nrg_100px_nrg_2024_lightmode_png.png",
+        "players": [
+          "oSee",
+          "nitr0",
+          "br0",
+          "Sonic",
+          "Grim"
+        ]
+      },
+      {
+        "team": "TYLOO",
+        "teamLogo": "assets/tournament_logos/tyloo_56px_tyloo_2016_allmode_png.png",
+        "players": [
+          "JamYoung",
+          "Moseyuh",
+          "Mercury",
+          "Jee",
+          "Zero"
+        ]
+      },
+      {
+        "team": "Sharks Esports",
+        "teamLogo": "assets/tournament_logos/sharks_esports_100px_sharks_esports_2026_allmode_png.png",
+        "players": [
+          "gafolo",
+          "rdnzao",
+          "doc",
+          "koala",
+          "maxxkor"
+        ]
+      },
+      {
+        "team": "Gaimin Gladiators",
+        "teamLogo": "assets/tournament_logos/gaimin_gladiators_30px_gladiators_2022_allmode_png.png",
+        "players": [
+          "JOTA",
+          "NEKIZ",
+          "HEN1",
+          "Luken",
+          "fer"
+        ]
+      },
+      {
+        "team": "Team Liquid",
+        "teamLogo": "assets/tournament_logos/team_liquid_44px_team_liquid_2024_lightmode_png.png",
+        "players": [
+          "NAF",
+          "ultimate",
+          "siuhy",
+          "EliGE",
+          "malbsMd"
+        ]
+      },
+      {
+        "team": "Lynn Vision Gaming",
+        "teamLogo": "assets/tournament_logos/lynn_vision_gaming_74px_lynn_vision_gaming_2024_allmode_png.png",
+        "players": [
+          "westmelon",
+          "z4kr",
+          "EmiliaQAQ",
+          "Starry",
+          "C4LLM3SU3"
+        ]
+      },
+      {
+        "team": "THUNDERdOWNUNDER",
+        "teamLogo": "assets/tournament_logos/thunderdownunder_50px_thunderdownunder_2026_allmode_png.png",
+        "players": [
+          "asap",
+          "TjP",
+          "aliStair",
+          "dexter",
+          "Liazz"
+        ]
+      },
+      {
+        "team": "FlyQuest",
+        "teamLogo": "assets/tournament_logos/flyquest_51px_flyquest_2021_allmode_png.png",
+        "players": [
+          "INS",
+          "Vexite",
+          "nettik",
+          "jks",
+          "story"
+        ]
+      }
+    ],
     "stageDates": [
       {
         "phase": "Stage 1",
@@ -29,7 +543,78 @@
         "endDate": "2026-06-21"
       }
     ],
-    "playoffMatches": []
+    "playoffMatches": [
+      {
+        "round": "Quarterfinals",
+        "team1": "Team Spirit",
+        "team2": "G2 Esports",
+        "team1Logo": "assets/tournament_logos/team_spirit_43px_team_spirit_2022_lightmode_png.png",
+        "team2Logo": "assets/tournament_logos/g2_esports_43px_g2_esports_2020_lightmode_png.png",
+        "score1": "2",
+        "score2": "1",
+        "date": "June 19, 2026 - 15:45 CEST"
+      },
+      {
+        "round": "Quarterfinals",
+        "team1": "Team Falcons",
+        "team2": "Team Vitality",
+        "team1Logo": "assets/tournament_logos/team_falcons_41px_team_falcons_2022_allmode_png.png",
+        "team2Logo": "assets/tournament_logos/team_vitality_41px_team_vitality_2023_lightmode_png.png",
+        "score1": "2",
+        "score2": "1",
+        "date": "June 19, 2026 - 21:25 CEST"
+      },
+      {
+        "round": "Semifinals",
+        "team1": "Team Spirit",
+        "team2": "Team Falcons",
+        "team1Logo": "assets/tournament_logos/team_spirit_43px_team_spirit_2022_lightmode_png.png",
+        "team2Logo": "assets/tournament_logos/team_falcons_41px_team_falcons_2022_allmode_png.png",
+        "score1": "1",
+        "score2": "2",
+        "date": "June 20, 2026 - 19:00 CEST"
+      },
+      {
+        "round": "Quarterfinals",
+        "team1": "Aurora Gaming",
+        "team2": "BetBoom Team",
+        "team1Logo": "assets/tournament_logos/aurora_gaming_50px_aurora_gaming_2025_allmode_png.png",
+        "team2Logo": "assets/tournament_logos/betboom_team_56px_betboom_team_2024_allmode_png.png",
+        "score1": "2",
+        "score2": "0",
+        "date": "June 18, 2026 - 15:45 CEST"
+      },
+      {
+        "round": "Quarterfinals",
+        "team1": "9z Team",
+        "team2": "FURIA",
+        "team1Logo": "assets/tournament_logos/9z_team_60px_9z_team_2024_lightmode_png.png",
+        "team2Logo": "assets/tournament_logos/furia_51px_furia_esports_allmode_png.png",
+        "score1": "1",
+        "score2": "2",
+        "date": "June 18, 2026 - 19:00 CEST"
+      },
+      {
+        "round": "Semifinals",
+        "team1": "Aurora Gaming",
+        "team2": "FURIA",
+        "team1Logo": "assets/tournament_logos/aurora_gaming_50px_aurora_gaming_2025_allmode_png.png",
+        "team2Logo": "assets/tournament_logos/furia_51px_furia_esports_allmode_png.png",
+        "score1": "0",
+        "score2": "2",
+        "date": "June 20, 2026 - 15:45 CEST"
+      },
+      {
+        "round": "Grand Final",
+        "team1": "Team Falcons",
+        "team2": "FURIA",
+        "team1Logo": "assets/tournament_logos/team_falcons_41px_team_falcons_2022_allmode_png.png",
+        "team2Logo": "assets/tournament_logos/furia_51px_furia_esports_allmode_png.png",
+        "score1": "3",
+        "score2": "0",
+        "date": "June 21, 2026 - 17:00 CEST"
+      }
+    ]
   },
   {
     "name": "BLAST.tv Austin 2025",
@@ -10050,5 +10635,358 @@
         "date": "December 14, 2025 - 18:00 CET"
       }
     ]
+  },
+  {
+    "name": "PGL Singapore 2026",
+    "winner": "",
+    "tournamentLogo": "assets/tournament_logos/pgl_singapore_2026.png",
+    "startDate": "2026-11-24",
+    "endDate": "2026-12-13",
+    "placements": [],
+    "teamRosters": [
+      {
+        "team": "MOUZ",
+        "players": [
+          "torzsi",
+          "xertioN",
+          "Spinx",
+          "xelex",
+          "PR"
+        ]
+      },
+      {
+        "team": "Team Vitality",
+        "players": [
+          "ZywOo",
+          "flameZ",
+          "mezii",
+          "ropz",
+          "apEX"
+        ]
+      },
+      {
+        "team": "FURIA",
+        "players": [
+          "yuurih",
+          "KSCERATO",
+          "FalleN",
+          "molodoy",
+          "YEKINDAR"
+        ]
+      },
+      {
+        "team": "Aurora Gaming",
+        "players": [
+          "XANTARES",
+          "Wicadia",
+          "woxic",
+          "Jimpphat",
+          "kyxsan"
+        ]
+      },
+      {
+        "team": "Team Spirit",
+        "players": [
+          "magixx",
+          "zont1x",
+          "donk",
+          "sh1ro",
+          "tN1R"
+        ]
+      },
+      {
+        "team": "BB Team",
+        "players": [
+          "s1ren",
+          "zorte",
+          "Magnojez",
+          "Boombl4",
+          "d1Ledez"
+        ]
+      },
+      {
+        "team": "Team Falcons",
+        "players": [
+          "NiKo",
+          "TeSeS",
+          "m0NESY",
+          "kyousuke",
+          "karrigan"
+        ]
+      },
+      {
+        "team": "Legacy",
+        "players": [
+          "latto",
+          "dumau",
+          "arT",
+          "try",
+          "ksloks"
+        ]
+      },
+      {
+        "team": "FUT Esports",
+        "players": [
+          "dem0n",
+          "Krabeni",
+          "dziugss",
+          "xfl0ud",
+          "SunPayus"
+        ]
+      },
+      {
+        "team": "Nemiga Gaming",
+        "players": [
+          "khaN",
+          "SYPH0",
+          "KaiR0N-",
+          "robo",
+          "Xant3r"
+        ]
+      },
+      {
+        "team": "G2 Esports",
+        "players": [
+          "huNter-",
+          "HeavyGod",
+          "matys",
+          "NertZ",
+          "r1nkle"
+        ]
+      },
+      {
+        "team": "The One",
+        "players": [
+          "nafany",
+          "Ax1Le",
+          "ArtFr0st",
+          "fame",
+          "BELCHONOKK"
+        ]
+      },
+      {
+        "team": "Natus Vincere",
+        "players": [
+          "b1t",
+          "Aleksib",
+          "iM",
+          "w0nderful",
+          "makazze"
+        ]
+      },
+      {
+        "team": "Astralis",
+        "players": [
+          "Staehr",
+          "phzy",
+          "ryu",
+          "siuhy",
+          "Anlelele"
+        ]
+      },
+      {
+        "team": "The MongolZ",
+        "players": [
+          "bLitz",
+          "Techno4K",
+          "910",
+          "cobrazera",
+          "nin9"
+        ]
+      },
+      {
+        "team": "MIBR",
+        "players": [
+          "insani",
+          "LNZ",
+          "venomzera",
+          "nqz",
+          "tomaszin"
+        ]
+      },
+      {
+        "team": "Ninjas in Pyjamas",
+        "players": [
+          "sjuush",
+          "xKacpersky",
+          "stavn",
+          "Krimbo",
+          "adamb"
+        ]
+      },
+      {
+        "team": "PVISION",
+        "players": [
+          "Jame",
+          "xiELO",
+          "zweih",
+          "FL1T",
+          "HObbit"
+        ]
+      },
+      {
+        "team": "HEROIC",
+        "players": [
+          "nilo",
+          "Chr1zN",
+          "susp",
+          "Martinez",
+          "Brollan"
+        ]
+      },
+      {
+        "team": "FaZe Clan",
+        "players": [
+          "frozen",
+          "jcobbb",
+          "Twistzz",
+          "JBOEN",
+          "Neityu"
+        ]
+      },
+      {
+        "team": "Team Liquid",
+        "players": [
+          "NAF",
+          "EliGE",
+          "malbsMd",
+          "Jorko",
+          "JT"
+        ]
+      },
+      {
+        "team": "Eternal Fire",
+        "players": [
+          "jottAAA",
+          "regali",
+          "MisteM",
+          "Kvem",
+          "soulfly"
+        ]
+      },
+      {
+        "team": "100 Thieves",
+        "players": [
+          "rain",
+          "poiii",
+          "sirah",
+          "dev1ce",
+          "Gizmy"
+        ]
+      },
+      {
+        "team": "9z Team",
+        "players": [
+          "max",
+          "HUASOPEEK",
+          "luchov",
+          "dgt",
+          "history"
+        ]
+      },
+      {
+        "team": "M80",
+        "players": [
+          "Swisher",
+          "slaxz-",
+          "s1n",
+          "Lake",
+          "JBa"
+        ]
+      },
+      {
+        "team": "DENDELE CS",
+        "players": [
+          "gafolo",
+          "rdnzao",
+          "doc",
+          "koala",
+          "maxxkor"
+        ]
+      },
+      {
+        "team": "Imperial Esports",
+        "players": [
+          "VINI",
+          "noway",
+          "chelo",
+          "decenty",
+          "saadzin"
+        ]
+      },
+      {
+        "team": "Wildcard",
+        "players": [
+          "reck",
+          "HexT",
+          "nEMANHA",
+          "Cxzi",
+          "fr3nd"
+        ]
+      },
+      {
+        "team": "GOSH",
+        "players": [
+          "s1mple",
+          "Senzu",
+          "Magisk",
+          "mzinho",
+          "asap"
+        ]
+      },
+      {
+        "team": "FlyQuest",
+        "players": [
+          "INS",
+          "Vexite",
+          "nettik",
+          "jks",
+          "aliStair"
+        ]
+      },
+      {
+        "team": "Chinggis Warriors",
+        "players": [
+          "ROUX",
+          "cool4st",
+          "sk0R",
+          "fury5k",
+          "tikuak"
+        ]
+      },
+      {
+        "team": "Lynn Vision Gaming",
+        "players": [
+          "westmelon",
+          "z4kr",
+          "EmiliaQAQ",
+          "Starry",
+          "C4LLM3SU3"
+        ]
+      }
+    ],
+    "stageDates": [
+      {
+        "phase": "Stage 1",
+        "startDate": "2026-11-24",
+        "endDate": "2026-11-27"
+      },
+      {
+        "phase": "Stage 2",
+        "startDate": "2026-11-28",
+        "endDate": "2026-12-01"
+      },
+      {
+        "phase": "Stage 3",
+        "startDate": "2026-12-02",
+        "endDate": "2026-12-06"
+      },
+      {
+        "phase": "Playoffs",
+        "startDate": "2026-12-10",
+        "endDate": "2026-12-13"
+      }
+    ],
+    "playoffMatches": []
   }
 ]

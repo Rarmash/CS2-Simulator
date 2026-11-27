@@ -593,7 +593,7 @@ String normalizePatchName(String name) {
 }
 
 String normalizeCharmName(String name) {
-  return name.replaceFirst(RegExp(r'^Charm\s+\|\s+'), '').trim();
+  return name.replaceFirst(RegExp(r'^(?:Souvenir )?Charm\s+\|\s+'), '').trim();
 }
 
 Map<String, String?> resolveAgentCollectionSource(String? collectionName) {

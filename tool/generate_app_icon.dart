@@ -34,7 +34,20 @@ void main() async {
             (item['tournamentLogo'] as String).trim(),
   };
 
-  final candidates = <_IconCandidate>[];
+  final candidates = <_IconCandidate>[
+    for (final item in tournamentMetadata)
+      if (tournamentLogoByName[_canonicalTournamentName(
+            (item['name'] as String?) ?? '',
+          )]
+          case final logo?)
+        _IconCandidate(
+          name: (item['name'] as String).trim(),
+          kind: 'TOURNAMENT',
+          sourceType: 'TOURNAMENT',
+          releaseDate: (item['startDate'] as String?)?.trim(),
+          imageRelPath: logo,
+        ),
+  ];
 
   for (final item in containers) {
     final name = (item['name'] as String?)?.trim() ?? '';
@@ -105,6 +118,10 @@ void main() async {
   final croppedSource = _trimTransparentOrSolidBackground(sourceImage);
 
   const canvasSize = 1024;
+  final hasOpaqueBackground = latest.kind == 'TOURNAMENT';
+  final backgroundColor = hasOpaqueBackground
+      ? img.ColorRgba8(20, 24, 35, 255)
+      : img.ColorRgba8(0, 0, 0, 0);
   final outDir = Directory('${root.path}/assets/app_icon');
   if (!outDir.existsSync()) {
     outDir.createSync(recursive: true);
@@ -113,9 +130,9 @@ void main() async {
   final standardCanvas = img.Image(
     width: canvasSize,
     height: canvasSize,
-    numChannels: 4,
+    numChannels: hasOpaqueBackground ? 3 : 4,
   );
-  img.fill(standardCanvas, color: img.ColorRgba8(0, 0, 0, 0));
+  img.fill(standardCanvas, color: backgroundColor);
 
   final standardFitted = _resizeToFit(
     croppedSource,
@@ -186,9 +203,9 @@ void main() async {
   final iosDarkCanvas = img.Image(
     width: canvasSize,
     height: canvasSize,
-    numChannels: 4,
+    numChannels: hasOpaqueBackground ? 3 : 4,
   );
-  img.fill(iosDarkCanvas, color: img.ColorRgba8(0, 0, 0, 0));
+  img.fill(iosDarkCanvas, color: backgroundColor);
 
   final iosDarkFitted = _resizeToFit(
     croppedSource,
@@ -233,16 +250,16 @@ void main() async {
     '${outDir.path}/latest_container_ios_tinted.png',
   ).writeAsBytes(img.encodePng(tintedCanvas));
 
-  final transparentBg = img.Image(
+  final adaptiveBackground = img.Image(
     width: canvasSize,
     height: canvasSize,
     numChannels: 4,
   );
-  img.fill(transparentBg, color: img.ColorRgba8(0, 0, 0, 0));
+  img.fill(adaptiveBackground, color: backgroundColor);
 
   await File(
-    '${outDir.path}/transparent_bg.png',
-  ).writeAsBytes(img.encodePng(transparentBg));
+    '${outDir.path}/adaptive_background.png',
+  ).writeAsBytes(img.encodePng(adaptiveBackground));
 
   stdout.writeln('Latest item: ${latest.name}');
   stdout.writeln('Kind: ${latest.kind}');
@@ -253,7 +270,7 @@ void main() async {
   stdout.writeln('Generated: assets/app_icon/latest_container_monochrome.png');
   stdout.writeln('Generated: assets/app_icon/latest_container_ios_dark.png');
   stdout.writeln('Generated: assets/app_icon/latest_container_ios_tinted.png');
-  stdout.writeln('Generated: assets/app_icon/transparent_bg.png');
+  stdout.writeln('Generated: assets/app_icon/adaptive_background.png');
 }
 
 String _canonicalTournamentName(String rawTournamentName) {

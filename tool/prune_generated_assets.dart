@@ -6,22 +6,29 @@ final _root = Directory.current;
 Future<void> main() async {
   final referenced = <String>{};
 
-  void collectFromJsonArray(String relativePath, List<String> imageKeys) {
-    final file = File('${_root.path}/$relativePath');
-    if (!file.existsSync()) {
-      return;
-    }
-    final decoded = jsonDecode(file.readAsStringSync());
-    if (decoded is! List) {
-      return;
-    }
-    for (final item in decoded.whereType<Map>()) {
-      for (final key in imageKeys) {
-        final value = item[key];
-        if (value is String && value.trim().isNotEmpty) {
-          referenced.add(_normalize(value));
+  void collectImagePaths(Object? value, Set<String> imageKeys) {
+    if (value is List) {
+      for (final item in value) {
+        collectImagePaths(item, imageKeys);
+      }
+    } else if (value is Map) {
+      for (final entry in value.entries) {
+        final imagePath = entry.value;
+        if (imageKeys.contains(entry.key) &&
+            imagePath is String &&
+            imagePath.trim().isNotEmpty) {
+          referenced.add(_normalize(imagePath));
+        } else {
+          collectImagePaths(imagePath, imageKeys);
         }
       }
+    }
+  }
+
+  void collectFromJsonArray(String relativePath, List<String> imageKeys) {
+    final file = File('${_root.path}/$relativePath');
+    if (file.existsSync()) {
+      collectImagePaths(jsonDecode(file.readAsStringSync()), imageKeys.toSet());
     }
   }
 
@@ -33,6 +40,13 @@ Future<void> main() async {
   collectFromJsonArray('assets/data/stickers.json', ['stickerImage']);
   collectFromJsonArray('assets/data/pins.json', ['pinImage']);
   collectFromJsonArray('assets/data/music_kits.json', ['musicKitImage']);
+
+  collectFromJsonArray('assets/data/tournament_metadata.json', [
+    'tournamentLogo',
+    'teamLogo',
+    'team1Logo',
+    'team2Logo',
+  ]);
 
   final dirs = <String>[
     'assets/containers',
